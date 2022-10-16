@@ -15,8 +15,15 @@ import Ultimo from '../assets/icons/ultimo.png'
 import Search from '../assets/icons/search.svg'
 import Bag from '../assets/icons/shopping-bag.svg'
 import Team from '../assets/images/temnacontemp.png'
+import Product1 from '../assets/images/bateria.png'
 import Image from 'next/image';
 import { Typewriter } from 'react-simple-typewriter'
+import CardProduct from '../components/CardProduct'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+
+import { Autoplay } from "swiper";
 
 const Home = () => {
   return (
@@ -168,11 +175,12 @@ const Home = () => {
           <Flex
             alignItems="center"
             marginBottom="87px"
+            minH="100px"
           >
             <Text
               color="white"
               textAlign="center"
-              fontSize="45"
+              fontSize={['1.3rem', '1.3rem', '2.3rem']}
               fontWeight="bold"
             >
               Excelência em produtos:
@@ -230,6 +238,53 @@ const Home = () => {
 
         </Container>
       </Flex>
+      <Container maxW='6xl' p="12px 0 31px" >
+        <Text color="white" fontSize="40px" fontWeight="bold" textAlign="center" mt="80px">
+          Confira nossos destaques
+        </Text>
+        <Text color="white" fontSize="20px" textAlign="center" mt="15px" mb="40px">
+          Essa é a seleção que a equipe da Contemp escolheu como os destaques do mês
+        </Text>
+
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste2" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste3" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste4" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste5" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste6" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CardProduct img={Product1} text="teste7" />
+          </SwiperSlide>
+        </Swiper>
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+        >
+
+        </Flex>
+      </Container>
     </>
   )
 }
