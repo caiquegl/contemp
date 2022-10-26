@@ -12,6 +12,7 @@ export const Catalog = () => {
       width="100%"
       bg="black.800"
       minH="400px"
+      p={["123px 20px", "123px 20px", "123px 20px", "123px 20px", "123px 0"]}
     >
       <Box>
         <Text

@@ -29,8 +29,20 @@ interface IProps {
 export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
-      <ContainerChakra maxW="6xl" p="12px 0 31px">
-        <Grid templateColumns="repeat(2, 1fr)" w="100%">
+      <ContainerChakra
+        maxW="6xl"
+        p={["12px 20px", "12px 20px", "12px 20px", "12px 20px", "12px 0 31px"]}
+      >
+        <Grid
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(2, 1fr)",
+          ]}
+          w="100%"
+        >
           <GridItem w="100%">
             <Text color="red.600" fontWeight="bold" fontSize="40px" mb="15px">
               {title}
@@ -65,7 +77,11 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
               ></iframe>
             </Box>
           </GridItem>
-          <GridItem w="100%" ml="56px">
+          <GridItem
+            w="100%"
+            ml={["0", "0", "0", "0", "56px"]}
+            mt={["50px", "50px", "50px", "50px", "50px"]}
+          >
             <Box
               border="2px solid"
               borderColor="black.800"

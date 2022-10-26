@@ -36,7 +36,7 @@ export const Banner = () => {
         <Box marginTop="157px" marginBottom="35px">
           <Image src={Team} width="200px" height="52" />
         </Box>
-        <Flex alignItems="center" marginBottom="87px" minH="100px">
+        <Flex alignItems="center" marginBottom="87px" minH="150px">
           <Text
             color="white"
             textAlign="center"

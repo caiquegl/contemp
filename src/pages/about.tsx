@@ -7,19 +7,10 @@ import {
   Button,
   Image as ImageChakra,
   Icon,
-  Grid as GridChakra,
 } from "@chakra-ui/react";
 import Iso from "../assets/images/iso.png";
-import Mapa from "../assets/images/MAPA.png";
 import Image from "next/image";
-import { BiPhone } from "react-icons/bi";
-import { AiOutlineMail } from "react-icons/ai";
-import ReactPlayer from "react-player";
-import { CardBlog } from "../components/CardBlog";
-import { Catalog } from "../components/Catalog";
 import { Header } from "../components/Header";
-import { Banner } from "../components/Banner";
-import { Favorite } from "../components/Favorite";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Player } from "../components/Player";
@@ -44,9 +35,25 @@ const Home = () => {
           Sobre nós
         </Text>
       </Flex>
-      <Flex w="100%" alignItems="center" bg="white" pb="256px">
+      <Flex
+        w="100%"
+        alignItems="center"
+        bg="white"
+        p={[
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0px 0 256px",
+        ]}
+      >
         <Container maxW="7xl" p="12px 0 31px">
-          <Flex alignItems="center" justifyContent="space-between" mb="60px">
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            mb="60px"
+            flexDirection={["column", "column", "row", "row", "row"]}
+          >
             <Text
               fontSize="20px"
               maxW="535px"
@@ -64,11 +71,15 @@ const Home = () => {
               src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
               w="100%"
               maxW="788px"
-              h="426px"
             />
           </Flex>
-          <Flex alignItems="center" justifyContent="space-between" mb="60px">
-            <Box>
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            mb="60px"
+            flexDirection={["column", "column", "row", "row", "row"]}
+          >
+            <Box mb={["20px", "20px", "0", "0", "0"]}>
               <Text
                 fontSize="20px"
                 maxW="931px"
@@ -130,15 +141,29 @@ const Home = () => {
           </Flex>
         </Container>
       </Flex>
-      <Flex w="100%" alignItems="center" bg="red.600">
+      <Flex
+        w="100%"
+        p={[
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0 20px 256px 20px",
+          "0px 0 256px",
+        ]}
+        alignItems="center"
+        bg="red.600"
+      >
         <Container maxW="7xl" p="12px 0 31px">
-          <Flex justifyContent="space-between" mb="60px">
+          <Flex
+            justifyContent="space-between"
+            mb="60px"
+            flexDirection={["column", "column", "row", "row", "row"]}
+          >
             <Box w="100%" maxW="788px">
               <ImageChakra
                 src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                 w="100%"
                 maxW="788px"
-                h="426px"
                 mt="-213px"
               />
             </Box>
@@ -151,7 +176,11 @@ const Home = () => {
               </Text>
             </Box>
           </Flex>
-          <Flex justifyContent="space-between" mb="60px">
+          <Flex
+            justifyContent="space-between"
+            mb="60px"
+            flexDirection={["column", "column", "column", "row", "row"]}
+          >
             <Box>
               <Flex alignItems="flex-start" mb="43px">
                 <Flex
@@ -164,11 +193,18 @@ const Home = () => {
                 >
                   <Icon as={BiTargetLock} fontSize="28px" color="red.600" />
                 </Flex>
-                <Box ml="20px">
+                <Box
+                  ml="20px"
+                  w="100%"
+                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     MISSÃO
                   </Text>
-                  <Text fontSize="20px" maxW="530px">
+                  <Text
+                    fontSize="20px"
+                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                  >
                     Garantir a melhor solução para medição e controle de
                     temperatura em processos industriais, com excelência técnica
                     em produtos e atendimento.
@@ -186,11 +222,18 @@ const Home = () => {
                 >
                   <Icon as={AiOutlineLike} fontSize="28px" color="red.600" />
                 </Flex>
-                <Box ml="20px">
+                <Box
+                  ml="20px"
+                  w="100%"
+                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     VALORES
                   </Text>
-                  <Text fontSize="20px" maxW="530px">
+                  <Text
+                    fontSize="20px"
+                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                  >
                     Conhecimento técnico, experiência na indústria, sabe ouvir,
                     ética e transparência nas atitudes, engajamento para
                     entregar o combinado, comprometimento e persistência para
@@ -215,11 +258,18 @@ const Home = () => {
                     color="red.600"
                   />
                 </Flex>
-                <Box ml="20px">
+                <Box
+                  ml="20px"
+                  w="100%"
+                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     ESTRUTURA EFICIENTE
                   </Text>
-                  <Text fontSize="20px" maxW="530px">
+                  <Text
+                    fontSize="20px"
+                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                  >
                     É notável o cumprimento de metas da Contemp. Sua eficiência
                     corresponde a uma estrutura com forte capacidade de resposta
                     ao setor.
@@ -237,11 +287,18 @@ const Home = () => {
                 >
                   <Icon as={CgTrees} fontSize="28px" color="red.600" />
                 </Flex>
-                <Box ml="20px">
+                <Box
+                  ml="20px"
+                  w="100%"
+                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     RESPONSABILIDADE AMBIENTAL
                   </Text>
-                  <Text fontSize="20px" maxW="530px">
+                  <Text
+                    fontSize="20px"
+                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                  >
                     Todo o descarte de lixo eletrônico feito pela Contemp é
                     através de empresa especializada que atua na reciclagem de
                     eletrônicos, os quais, se entrarem em decomposição no meio

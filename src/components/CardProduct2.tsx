@@ -5,20 +5,9 @@ interface IProps {
   img: any;
   text: string;
   description?: string;
-  bg?: string;
-  borderColor?: string;
   alt?: string;
-  notHover?: boolean;
 }
-const CardProduct2 = ({
-  img,
-  text,
-  alt,
-  description,
-  bg,
-  borderColor,
-  notHover,
-}: IProps) => {
+const CardProduct2 = ({ img, text, alt, description }: IProps) => {
   const [isHovering, setHovering] = useState(false);
 
   const handleMouseEnter = () => setHovering(true);

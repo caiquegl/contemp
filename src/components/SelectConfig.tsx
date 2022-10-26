@@ -8,7 +8,11 @@ export const SelectConfig = () => {
     index: 0,
   });
   return (
-    <Flex w="100%" justifyContent="center">
+    <Flex
+      w="100%"
+      justifyContent="center"
+      flexDirection={["column", "column", "row", "row", "row"]}
+    >
       <Box>
         <Flex
           p="16px 20px"
@@ -17,7 +21,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color={text.index == 1 ? "red.600" : "black.800"}
-          w="367px"
+          maxW="367px"
+          w="100%"
           bg={text.index == 1 ? "white.500" : "white"}
           minH="57px"
           fontWeight={text.index == 1 ? "bold" : "normal"}
@@ -48,7 +53,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{
@@ -67,7 +73,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{
@@ -86,7 +93,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{
@@ -105,7 +113,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{
@@ -124,7 +133,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{
@@ -143,7 +153,8 @@ export const SelectConfig = () => {
           borderLeftRadius="5px"
           textAlign="end"
           color="black.800"
-          w="367px"
+          maxW="367px"
+          w="100%"
           minH="57px"
           alignItems="center"
           _hover={{

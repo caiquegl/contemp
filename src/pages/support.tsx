@@ -20,7 +20,12 @@ const Support = () => {
           Suporte Técnico
         </Text>
       </Flex>
-      <Flex w="100%" alignItems="center" bg="white">
+      <Flex
+        w="100%"
+        alignItems="center"
+        bg="white"
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+      >
         <Container maxW="7xl" p="12px 0 77px">
           <Text fontSize="20px" color="black.900" mt="50px" lineHeight="34px">
             Nós da Contemp nos dedicamos continuamente à melhoria de nossos
@@ -56,7 +61,12 @@ const Support = () => {
           <SelectConfig />
         </Container>
       </Flex>
-      <Flex w="100%" alignItems="center" bg="red.600">
+      <Flex
+        w="100%"
+        alignItems="center"
+        bg="red.600"
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+      >
         <Container maxW="7xl" p="72px 0">
           <Text fontSize="45px" fontWeight="bold" textAlign="center" mb="50px">
             GARANTIA CONTEMP

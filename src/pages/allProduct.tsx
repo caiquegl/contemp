@@ -2,11 +2,11 @@ import {
   Box,
   Container,
   Flex,
-  GridItem,
   HStack,
   Image,
   Text,
   Grid,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
@@ -20,6 +20,14 @@ import CardProduct2 from "../components/CardProduct2";
 import CardCatalog from "../components/CardCatalog";
 
 const AllProduct = () => {
+  const isTablet = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
   return (
     <>
       <Header />
@@ -28,19 +36,25 @@ const AllProduct = () => {
         alignItems="center"
         justifyContent="center"
         direction="column"
-        h="250px"
+        h={["350px", "350px", "250px", "250px", "250px", "250px"]}
       >
         <Text
-          fontSize="40px"
+          fontSize={["30px", "30px", "40px", "40px", "40px", "40px"]}
           fontWeight="bold"
           textAlign="center"
           maxW="1037px"
+          p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
           Soluções para medição, controle e monitoramento para os mais variados
           processos industriais.
         </Text>
       </Flex>
-      <Flex w="100%" alignItems="center" bg="white">
+      <Flex
+        w="100%"
+        alignItems="center"
+        bg="white"
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+      >
         <Container maxW="7xl" p="80px 0">
           <Flex alignItems="center">
             <Box w="70px" h="70px" bg="black.900" borderRadius="5px" />
@@ -50,7 +64,7 @@ const AllProduct = () => {
           </Flex>
           <Box h="650px" mt="31px">
             <Swiper
-              slidesPerView={3}
+              slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
               spaceBetween={30}
               autoplay={{
                 delay: 2000,
@@ -65,9 +79,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -75,9 +86,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -85,9 +93,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -95,9 +100,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -105,9 +107,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -115,9 +114,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -125,9 +121,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -135,9 +128,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -145,9 +135,6 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
               <SwiperSlide>
@@ -155,31 +142,52 @@ const AllProduct = () => {
                   img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
                   text="teste"
                   description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                  bg="white"
-                  borderColor="black.800"
-                  notHover={true}
                 />
               </SwiperSlide>
             </Swiper>
           </Box>
-          <HStack mt="61px" justifyContent="center" spacing="48px">
+          <Flex
+            mt="61px"
+            justifyContent="center"
+            direction={["column", "column", "column", "row", "row"]}
+          >
             <Image
               src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
               alt="bateri"
+              mr={["0", "0", "0", "48px", "48px"]}
+              mb={["40px", "40px", "40px", "0", "0"]}
+              maxH={["228px", "228px", "328px", "425px", "425px"]}
             />
             <Image
               src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
               alt="bateri"
+              maxH={["228px", "228px", "328px", "425px", "425px"]}
             />
-          </HStack>
+          </Flex>
         </Container>
       </Flex>
       <Flex w="100%" alignItems="center" bg="white.500">
         <Container maxW="7xl" p="80px 0">
-          <Text color="black.800" fontSize="45px" fontWeight="bold" mb="31px">
+          <Text
+            color="black.800"
+            fontSize="45px"
+            fontWeight="bold"
+            mb="31px"
+            p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+          >
             Navegue por Categoria
           </Text>
-          <Grid templateColumns="repeat(4, 1fr)" gap="15px">
+          <Grid
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(1, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(3, 1fr)",
+              "repeat(4, 1fr)",
+              "repeat(4, 1fr)",
+            ]}
+            gap={["0", "0", "15px", "15px", "15px", "15px"]}
+          >
             <CardCatalog
               bg="black.800"
               color="white"

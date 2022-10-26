@@ -2,13 +2,22 @@ import {
   Box,
   Button,
   Container,
+  Divider,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   HStack,
+  Icon,
   Input,
   InputGroup,
   InputRightElement,
   Link,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
@@ -27,8 +36,186 @@ import Bag from "../assets/icons/shopping-bag.svg";
 import Controls from "../assets/icons/Controladores.png";
 import Pirometro from "../assets/icons/Pirometro-certo.png";
 import Search from "../assets/icons/search.svg";
-
+import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
+import {
+  AiFillLinkedin,
+  AiFillYoutube,
+  AiOutlineInstagram,
+} from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
 export const Header = () => {
+  const { isOpen, onClose, onOpen } = useSidebarDrawer();
+  const isDrawerSiderbar = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+
+  if (isDrawerSiderbar) {
+    return (
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
+        h="69px"
+      >
+        <Link href="/">
+          <Image src={Logo} width={160} height={41} />
+        </Link>
+        <HStack spacing="27px">
+          <Image src={Bag} width={30} height={30} />
+          <Flex
+            borderRadius="5px"
+            w="40px"
+            h="40px"
+            alignItems="center"
+            justifyContent="center"
+            bg="red.600"
+            color="white"
+            cursor="pointer"
+            onClick={onOpen}
+            _hover={{
+              transition: "all 0.4s",
+              opacity: 0.6,
+            }}
+          >
+            <Icon as={BsThreeDotsVertical} fontSize="20px" />
+          </Flex>
+        </HStack>
+        <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="md">
+          <DrawerOverlay />
+          <DrawerContent bg="black.900" p="12px">
+            <DrawerHeader>
+              <Flex
+                alignItems="center"
+                justifyContent="space-between"
+                width="100%"
+              >
+                <Link href="/">
+                  <Image src={Logo} width={160} height={41} />
+                </Link>
+                <Flex
+                  borderRadius="5px"
+                  w="40px"
+                  h="40px"
+                  alignItems="center"
+                  justifyContent="center"
+                  bg="red.600"
+                  color="white"
+                  cursor="pointer"
+                  onClick={onClose}
+                  _hover={{
+                    transition: "all 0.4s",
+                    opacity: 0.6,
+                  }}
+                >
+                  <Icon as={AiOutlineClose} fontSize="20px" />
+                </Flex>
+              </Flex>
+              <Divider bg="white" mt="10px" />
+            </DrawerHeader>
+
+            <DrawerBody>
+              <Box mb="60px">
+                <Text m="22px 0" fontSize="20px" fontWeight="bold">
+                  Produtos
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 1
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 2
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 3
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 4
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 5
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Categoria 6
+                </Text>
+              </Box>
+              <Box>
+                <Text m="22px 0" fontSize="20px" fontWeight="bold">
+                  Institucional
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  A Contemp
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Blog
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Contato
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Trabalhe Conosco
+                </Text>
+                <Text mb="15px" fontSize="18px">
+                  Política de Privacidade
+                </Text>
+              </Box>
+            </DrawerBody>
+
+            <DrawerFooter>
+              <HStack justifyContent="center" w="100%">
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  w="50px"
+                  h="50px"
+                  borderRadius="full"
+                  bg="white.500"
+                >
+                  <Icon as={AiFillLinkedin} fontSize="35px" color="black.200" />
+                </Flex>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  w="50px"
+                  h="50px"
+                  borderRadius="full"
+                  bg="white.500"
+                >
+                  <Icon as={AiFillYoutube} fontSize="35px" color="black.200" />
+                </Flex>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  w="50px"
+                  h="50px"
+                  borderRadius="full"
+                  bg="white.500"
+                >
+                  <Icon
+                    as={AiOutlineInstagram}
+                    fontSize="35px"
+                    color="black.200"
+                  />
+                </Flex>
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  w="50px"
+                  h="50px"
+                  borderRadius="full"
+                  bg="white.500"
+                >
+                  <Icon as={FaFacebookF} fontSize="35px" color="black.200" />
+                </Flex>
+              </HStack>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </Flex>
+    );
+  }
+
   return (
     <Container maxW="7xl" p="12px 0 31px">
       <Flex

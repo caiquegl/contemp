@@ -23,13 +23,28 @@ import {
 import { FaFacebookF } from "react-icons/fa";
 export const Footer = () => {
   return (
-    <Container maxW="7xl" p="40px 0 31px">
+    <Container
+      maxW="7xl"
+      p={[
+        "40px 20px 31px",
+        "40px 20px 31px",
+        "40px 20px 31px",
+        "40px 20px 31px",
+        "40px 0 31px",
+      ]}
+    >
       <Flex
         alignItems="center"
         justifyContent="space-between"
         marginBottom="32px"
+        flexDirection={["column", "column", "row", "row", "row"]}
       >
-        <Flex w="100%" justifyContent="space-between" alignItems="center">
+        <Flex
+          w="100%"
+          justifyContent="space-between"
+          alignItems="center"
+          flexDirection={["column", "column", "row", "row", "row"]}
+        >
           <Box>
             <Text fontWeight="bold" fontSize="30px" mb="15px">
               Procure o produto que deseja aqui
@@ -47,7 +62,7 @@ export const Footer = () => {
             h="42px"
             maxW="594px"
             outline="none"
-            ml="20px"
+            ml={["0", "0", "20px", "20px", "20px"]}
           >
             <Input
               w="100%"
@@ -66,7 +81,16 @@ export const Footer = () => {
         </Flex>
       </Flex>
       <Divider mb="100px" />
-      <Grid templateColumns="repeat(3, 1fr)" w="100%">
+      <Grid
+        templateColumns={[
+          "repeat(1, 1fr)",
+          "repeat(1, 1fr)",
+          "repeat(2, 1fr)",
+          "repeat(2, 1fr)",
+          "repeat(3, 1fr)",
+        ]}
+        w="100%"
+      >
         <GridItem w="100%">
           <Text fontWeight="bold" fontSize="25px" mb="20px">
             Instrumentos
