@@ -7,3 +7,7 @@ body {
 * {
   font-family: 'Nunito';
 }
+
+.swiper-pagination-bullet-active {
+  background-color: #B60005 !important;
+}
