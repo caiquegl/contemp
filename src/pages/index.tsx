@@ -159,14 +159,14 @@ const Home = () => {
         w="100%"
         alignItems="center"
         justifyContent="center"
-        p={["70px 20px", "70px 20px", "70px 20px", "70px 20px", "70px 0"]}
+        p={["70px 20px", "70px 20px", "70px 20px", "70px 20px", "70px 20px"]}
         bg="white.500"
       >
         <Flex
           alignItems="flex-end"
           textAlign="end"
           maxW="693px"
-          flexDirection={["column", "column", "row", "row", "row"]}
+          flexDirection="column"
         >
           <Text
             color="red.600"

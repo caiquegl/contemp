@@ -144,18 +144,24 @@ export const Header = () => {
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
                   Institucional
                 </Text>
-                <Text mb="15px" fontSize="18px">
-                  A Contemp
-                </Text>
+                <Link href="/about">
+                  <Text mb="15px" fontSize="18px">
+                    A Contemp
+                  </Text>
+                </Link>
                 <Text mb="15px" fontSize="18px">
                   Blog
                 </Text>
-                <Text mb="15px" fontSize="18px">
-                  Contato
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Trabalhe Conosco
-                </Text>
+                <Link href="/support">
+                  <Text mb="15px" fontSize="18px">
+                    Contato
+                  </Text>
+                </Link>
+                <Link href="/work">
+                  <Text mb="15px" fontSize="18px">
+                    Trabalhe Conosco
+                  </Text>
+                </Link>
                 <Text mb="15px" fontSize="18px">
                   Política de Privacidade
                 </Text>
@@ -217,7 +223,7 @@ export const Header = () => {
   }
 
   return (
-    <Container maxW="7xl" p="12px 0 31px">
+    <Container maxW="7xl" p="12px 15px 31px 15px">
       <Flex
         alignItems="center"
         justifyContent="space-between"
@@ -319,6 +325,12 @@ export const Header = () => {
             }}
           >
             Todos os produtos
+            <Icon
+              as={BsThreeDotsVertical}
+              ml="10px"
+              color="white"
+              fontSize="20px"
+            />
           </Button>
         </Link>
         <HStack>
