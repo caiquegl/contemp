@@ -2,7 +2,6 @@ import {
   Container,
   Flex,
   Text,
-  Image as ImageChakra,
   Box,
   HStack,
   Button,
@@ -13,20 +12,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper";
 import CardProduct from "./CardProduct";
+import { pxToRem } from "../utils/pxToRem";
+import { Image } from './Image'
 
 export const Favorite = () => {
-  const isTablet = useBreakpointValue({
-    base: true,
-    lg: false,
-  });
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
 
+  const isTablet = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+
+  const isDesktop = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
+  const isLargeDesktop = useBreakpointValue({
+    base: false,
+    xl: true,
+  });
+
+
   return (
     <Container
-      maxW="6xl"
+      maxW="8xl"
       p={[
         "12px 20px 31px 20px",
         "12px 20px 31px 20px",
@@ -54,59 +67,24 @@ export const Favorite = () => {
         Essa é a seleção que a equipe da Contemp escolheu como os destaques do
         mês
       </Text>
-      <Box h="250px">
+      <Box h={pxToRem(250)}>
         <Swiper
-          slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
-          spaceBetween={30}
+          slidesPerView={isMobile ? 1 : isTablet ? 2 : isDesktop ? 3 : isLargeDesktop ? 5 : 4}
+          spaceBetween={20}
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
           }}
-          modules={[Autoplay]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste2"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste3"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste4"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste5"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste6"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardProduct
-              img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              text="teste7"
-            />
-          </SwiperSlide>
+          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
+            <SwiperSlide>
+              <CardProduct
+                img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+                text={`Teste ${item}`}
+              />
+            </SwiperSlide>
+          ))}          
         </Swiper>
       </Box>
       <Flex
@@ -116,13 +94,19 @@ export const Favorite = () => {
         mb="53px"
         flexDirection={["column", "column", "row", "row", "row"]}
       >
-        <ImageChakra
+        <Image
+          flex={1}
           src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
           alt="bateria"
-          w={["290px", "290px", "290px", "451px", "451px"]}
-          mb={["20px", "20px", "0", "0", "0"]}
+          minH={pxToRem(500)}
+          bgSize="70%"
+          marginBottom={{
+            base: pxToRem(20),
+            lg: 0
+          }}
         />
-        <Box w="100%" ml={["20px", "20px", "20px", "100px", "100px"]}>
+        
+        <Box w="100%" ml={["20px", "20px", "20px", "100px", "100px"]} flex={1}>
           <Flex alignItems="center" justifyContent="space-between">
             <Text fontWeight="bold" fontSize="60px" mr="10px">
               C714
