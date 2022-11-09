@@ -2,23 +2,21 @@ import {
   Box,
   Container,
   Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
   Text,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
-import Search from "../assets/icons/search.svg";
 import Team from "../assets/images/temnacontemp.png";
 import { Typewriter } from "react-simple-typewriter";
+import { pxToRem } from "../utils/pxToRem";
+import { SearchBar } from './SearchBar'
 
 export const Banner = () => {
   return (
     <Flex
       w="full"
       bg="black.900"
-      h="702px"
+      h={pxToRem(702)}
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
@@ -33,10 +31,10 @@ export const Banner = () => {
         alignItems="center"
         height="100%"
       >
-        <Box marginTop="157px" marginBottom="35px">
-          <Image src={Team} width="200px" height="52" />
+        <Box marginTop={pxToRem(157)} marginBottom={pxToRem(35)}>
+          <Image src={Team} width={pxToRem(200)} height={pxToRem(52)} />
         </Box>
-        <Flex alignItems="center" marginBottom="87px" minH="150px">
+        <Flex alignItems="center" marginBottom={pxToRem(87)} minH={pxToRem(150)}>
           <Text
             color="white"
             textAlign="center"
@@ -45,41 +43,27 @@ export const Banner = () => {
           >
             Excelência em produtos:
             <Typewriter
-              words={[" Indicadores de Temperatura e Processo"]}
+              words={["Indicadores de Temperatura e Processo"]}
               loop={0}
               cursor={true}
             />
           </Text>
         </Flex>
         <Flex w="100%" alignItems="center" flexDirection="column">
-          <InputGroup
-            borderRadius="21px"
-            bg="red.600"
-            p="3px 7px"
-            w="100%"
-            h="42px"
-            maxW="594px"
-            outline="none"
-          >
-            <Input
-              w="100%"
-              height="100%"
-              border="none"
-              borderRadius="21px"
-              placeholder="Procure aqui seu produto"
-              _focusVisible={{
-                outline: "none",
-              }}
-            />
-            <InputRightElement
-              children={<Image src={Search} width="22px" height="22px" />}
-            />
-          </InputGroup>
+          <SearchBar
+            inputProps={{
+              placeholder: 'Procure aqui seu produto...'
+            }}
+            containerProps={{
+              bg: 'red.600'
+            }}
+          />
+
           <Text
             fontSize="20px"
             color="white"
             textAlign="center"
-            marginTop="15px"
+            marginTop={pxToRem(15)}
           >
             Pesquise aqui o produto que precisa.
           </Text>
