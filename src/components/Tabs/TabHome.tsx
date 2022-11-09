@@ -1,24 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  InputGroup,
-  Input,
-  Link,
-  Container,
-  Avatar,
-  Divider,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  HStack,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import { useState } from "react";
-import Logo from "../../assets/icons/logo.png";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import ContainerHome from "../ContainerHome";
 
 const TabHome = () => {

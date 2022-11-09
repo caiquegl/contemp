@@ -31,7 +31,7 @@ const ContainerHome = () => {
           <InputsHome name="Foto do Produto" typeInput="file" />
           <InputsHome name="Foto Icone da Categoria" typeInput="file" />
         </HStack>
-        <InputsHome name="Descrição" typeInput="textArea" />
+        <InputsHome name="Descrição" typeInput="textarea" />
         <Box w="100%">
           <Checkbox
             colorScheme="red"

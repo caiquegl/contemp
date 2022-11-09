@@ -16,12 +16,20 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import Logo from "../../assets/icons/logo.png";
+import TabCategory from "../../components/Tabs/TabCategory";
 import TabHome from "../../components/Tabs/TabHome";
+import TabProduct from "../../components/Tabs/TabProduct";
+import TabSeo from "../../components/Tabs/TabSeo";
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(1);
 
-  const componentsTab = [<></>, <TabHome />];
+  const componentsTab = [
+    <TabSeo />,
+    <TabHome />,
+    <TabCategory />,
+    <TabProduct />,
+  ];
   return (
     <>
       <Container maxW="7xl" p="12px 60px 12px 60px">

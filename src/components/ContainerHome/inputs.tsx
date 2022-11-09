@@ -25,7 +25,7 @@ const InputsHome = ({ name, typeInput, options }: any) => {
         bg="white.500"
         p="3px 7px"
         w="100%"
-        h={typeInput == "textArea" ? "186px" : "50px"}
+        h={typeInput == "textarea" ? "196px" : "50px"}
         outline="none"
         border="1px solid"
         borderColor="black.800"
