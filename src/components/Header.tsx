@@ -45,6 +45,8 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
+import { SearchBar } from "./SearchBar";
+import { pxToRem } from "../utils/pxToRem";
 export const Header = () => {
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
   const isDrawerSiderbar = useBreakpointValue({
@@ -383,18 +385,13 @@ export const Header = () => {
             <Image src={Ultimo} width={41} height={41} />
           </Box>
         </HStack>
-        <InputGroup
-          borderRadius="21px"
-          bg="black.200"
-          p="3px 7px"
-          w="191px"
-          h="42px"
-        >
-          <Input w="100%" height="100%" border="none" borderRadius="21px" />
-          <InputRightElement
-            children={<Image src={Search} width="22px" height="22px" />}
-          />
-        </InputGroup>
+        <SearchBar
+          containerProps={{
+            w: pxToRem(191),
+            h: pxToRem(42)
+          }}
+        />
+        
         <Image src={Bag} width={30} height={30} />
       </Flex>
     </Container>
