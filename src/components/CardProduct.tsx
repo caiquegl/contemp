@@ -1,17 +1,14 @@
-import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { pxToRem } from "../utils/pxToRem";
+import { Image } from './Image'
 
 interface IProps {
   img: any;
   text: string;
   alt?: string;
 }
+
 const CardProduct = ({ img, text, alt }: IProps) => {
-  const [isHovering, setHovering] = useState(false);
-
-  const handleMouseEnter = () => setHovering(true);
-  const handleMouseLeave = () => setHovering(false);
-
   return (
     <Flex
       alignItems="center"
@@ -26,30 +23,36 @@ const CardProduct = ({ img, text, alt }: IProps) => {
         flexDirection="column"
         borderRadius="8px"
         border="2px solid white"
-        w="253px"
-        h={isHovering ? "342px" : "253px"}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        bg={isHovering ? "white" : "none"}
+        w={pxToRem(253)}
+        h={pxToRem(253)}
+        bg="none"
+        _hover={{
+          h: pxToRem(342),
+          bg: 'white.700',
+          '.see-more-text': {
+            display: 'block'
+          }
+        }}
+        transition="all 0.3s"
+        cursor="pointer"
       >
         <Image src={img} alt={alt} />
-        {isHovering && (
-          <>
-            <Text
-              fontSize="20px"
-              fontWeight="bold"
-              color="black"
-              textTransform="uppercase"
-            >
-              {text}
+        
+        <Box className="see-more-text" display="none" flex={0.3} textAlign="center">
+          <Text
+            fontSize="20px"
+            fontWeight="bold"
+            color="black"
+            textTransform="uppercase"
+          >
+            {text}
+          </Text>
+          <Link>
+            <Text fontSize="20px" color="black">
+              Veja mais +
             </Text>
-            <Link>
-              <Text fontSize="20px" color="black">
-                Veja mais +
-              </Text>
-            </Link>
-          </>
-        )}
+          </Link>
+        </Box>
       </Box>
     </Flex>
   );
