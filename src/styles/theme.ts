@@ -18,8 +18,8 @@ export const theme = extendTheme({
     }
   },
   fonts: {
-    heading: 'Nunito',
-    body: 'Nunito'
+    heading: 'PT Sans',
+    body: 'PT Sans'
   },
   styles: {
     global: {

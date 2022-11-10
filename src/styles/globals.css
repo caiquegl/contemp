@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
 html,
 body {
   padding: 0;
@@ -5,9 +6,13 @@ body {
 }
 
 * {
-  font-family: 'Nunito';
+  font-family: 'PT Sans', sans-serif !important;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #B60005 !important;
+}
+
+.ck-editor__editable_inline {
+  min-height: 200px;
 }
