@@ -21,6 +21,7 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
+import { SearchBar } from "./SearchBar";
 export const Footer = () => {
   return (
     <Container
@@ -54,30 +55,11 @@ export const Footer = () => {
               digitar ao lado.
             </Text>
           </Box>
-          <InputGroup
-            borderRadius="21px"
-            bg="black.200"
-            p="3px 7px"
-            w="100%"
-            h="42px"
-            maxW="594px"
-            outline="none"
-            ml={["0", "0", "20px", "20px", "20px"]}
-          >
-            <Input
-              w="100%"
-              height="100%"
-              border="none"
-              borderRadius="21px"
-              placeholder="Procure aqui seu produto"
-              _focusVisible={{
-                outline: "none",
-              }}
-            />
-            <InputRightElement
-              children={<Image src={Search} width="22px" height="22px" />}
-            />
-          </InputGroup>
+          <SearchBar 
+            inputProps={{
+              placeholder: 'Procure aqui seu produto...'
+            }}
+          />
         </Flex>
       </Flex>
       <Divider mb="100px" />
