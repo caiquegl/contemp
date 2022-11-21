@@ -12,14 +12,11 @@ import {
   Flex,
   HStack,
   Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
   Link,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import { Image } from "./Image";
 import React from "react";
 import Phone from "../assets/icons/phone.svg";
 import Email from "../assets/icons/envelope.svg";
@@ -35,7 +32,6 @@ import Ultimo from "../assets/icons/ultimo.png";
 import Bag from "../assets/icons/shopping-bag.svg";
 import Controls from "../assets/icons/Controladores.png";
 import Pirometro from "../assets/icons/Pirometro-certo.png";
-import Search from "../assets/icons/search.svg";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
@@ -47,6 +43,7 @@ import {
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
+import { StaticImageData } from "next/image";
 export const Header = () => {
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
   const isDrawerSiderbar = useBreakpointValue({
@@ -60,13 +57,16 @@ export const Header = () => {
         alignItems="center"
         justifyContent="space-between"
         width="100%"
-        h="69px"
+        h={pxToRem(70)}
+        padding={`0 ${pxToRem(10)}`}
       >
         <Link href="/">
-          <Image src={Logo} width={160} height={41} />
+          <Image src={Logo} width={160} height={41} bgSize="contain" />
         </Link>
+
         <HStack spacing="27px">
-          <Image src={Bag} width={30} height={30} />
+          <Image src={Bag} width={30} height={30} bgSize="contain" flex="auto" />
+
           <Flex
             borderRadius="5px"
             w="40px"
@@ -228,18 +228,20 @@ export const Header = () => {
     <Container maxW="7xl" p="12px 15px 31px 15px">
       <Flex
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="space-evenly"
         marginBottom="32px"
       >
-        <Box display="flex">
-          <Flex>
-            <Image src={Phone} width={20} height={20} />
+        <Box display="flex" flex={0.7}>
+          <Flex alignItems="center" w="max-content" mr={3}>
+            <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
+
             <Text fontSize="18px" color="white" ml="10px">
               (11) 4223-5140
             </Text>
           </Flex>
-          <Flex ml="30px">
-            <Image src={Email} width={20} height={20} />
+
+          <Flex alignItems="center">
+            <Image src={Email} width={20} minHeight={15} flex={0.3} />
             <Text fontSize="18px" color="white" ml="10px">
               vendas@contemp.com.br
             </Text>
@@ -247,19 +249,23 @@ export const Header = () => {
         </Box>
 
         <HStack
-          divider={<Box borderRadius="full" bg="white" w="5px" h="5px" />}
+          divider={
+            <Box borderRadius="full" bg="white" w="5px" h="5px" />
+          }
+          flex={1}
         >
           <Link href="/about">
-            <Text>A Contemp</Text>
+            <Text w="max-content">A Contemp</Text>
           </Link>
           <Text>Blog</Text>
           <Link href="/work">
-            <Text>Trabalhe Conosco</Text>
+            <Text w="max-content">Trabalhe Conosco</Text>
           </Link>
           <Link href="/support">
-            <Text>Suporte Técnico</Text>
+            <Text w="max-content">Suporte Técnico</Text>
           </Link>
         </HStack>
+
         <HStack>
           <Link href="https://www.linkedin.com/company/contemp/" isExternal>
             <Box
@@ -313,10 +319,16 @@ export const Header = () => {
           </Link>
         </HStack>
       </Flex>
-      <Flex alignItems="center" justifyContent="space-between">
+
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        h={70}
+      >
         <Link href="/">
           <Image src={Logo} width={160} height={41} />
         </Link>
+
         <Link href="/allProduct">
           <Button
             borderRadius="5px"
@@ -335,65 +347,49 @@ export const Header = () => {
             />
           </Button>
         </Link>
+
         <HStack>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={Controls} width={41} height={41} />
-          </Box>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={Potenci} width={41} height={41} />
-          </Box>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={Camera} width={41} height={41} />
-          </Box>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={Pirometro} width={41} height={41} />
-          </Box>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={DeNovo} width={41} height={41} />
-          </Box>
-          <Box
-            w="50px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Image src={Ultimo} width={41} height={41} />
-          </Box>
+          <HeaderIcon src={Controls} />
+          <HeaderIcon src={Potenci} />
+          <HeaderIcon src={Camera} />
+          <HeaderIcon src={Pirometro} />
+          <HeaderIcon src={DeNovo} />
+          <HeaderIcon src={Ultimo} />
         </HStack>
-        <SearchBar
-          containerProps={{
-            w: pxToRem(191),
-            h: pxToRem(42)
-          }}
-        />
-        
-        <Image src={Bag} width={30} height={30} />
+
+        <Flex alignItems="center">
+          <SearchBar
+            containerProps={{
+              w: pxToRem(191),
+              h: pxToRem(42),
+              marginRight: 5
+            }}
+          />
+
+          <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
+        </Flex>
       </Flex>
     </Container>
   );
 };
+
+type HeaderIconSrc = string | StaticImageData
+
+const HeaderIcon = ({ src }: { src: HeaderIconSrc }) => {
+  const imageSrc = typeof src === 'string' ? src : src.src
+
+  return (
+    <Box
+      w={{
+        base: pxToRem(30),
+        lg: pxToRem(40),
+        xl: pxToRem(50)
+      }}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Image src={imageSrc} width={41} height={41} />
+    </Box>
+  )
+}
