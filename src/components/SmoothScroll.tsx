@@ -16,7 +16,7 @@ export const SmoothScroll = ({ children }: any) => {
   
   useEffect(() => {
     setBodyHeight();
-  }, [windowSize.height]);
+  }, [windowSize?.height]);
 
   const setBodyHeight = () => {
     if (scrollingContainerRef.current) {
@@ -50,7 +50,9 @@ export const SmoothScroll = ({ children }: any) => {
       height="100%"
       overflow="hidden"
     >
-      <Box ref={scrollingContainerRef}>{children}</Box>
+      <Box ref={scrollingContainerRef}>
+        {children}
+      </Box>
     </Box>
   );
 };
