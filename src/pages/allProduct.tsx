@@ -18,6 +18,7 @@ import CardProductWithDescription from "../components/CardProductWithDescription
 import CardCatalog from "../components/CardCatalog";
 import { Image } from '../components/Image'
 import { pxToRem } from "../utils/pxToRem";
+import { SmoothScroll } from "../components/SmoothScroll";
 
 const products = [] as number[]
 
@@ -37,7 +38,7 @@ const AllProduct = () => {
   });
 
   return (
-    <>
+    <SmoothScroll>
       <Header />
       <Flex
         w="100%"
@@ -300,7 +301,7 @@ const AllProduct = () => {
         ]}
       />
       <Footer />
-    </>
+    </SmoothScroll>
   );
 };
 
