@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Grid,
   Icon,
   Text,
   useBreakpointValue,
@@ -10,6 +11,7 @@ import {
 import React from "react";
 import dynamic from "next/dynamic";
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import { pxToRem } from '../utils/pxToRem'
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -27,29 +29,29 @@ export const Player = () => {
       p={["123px 20px", "123px 20px", "123px 20px", "123px 20px", "123px 0"]}
     >
       {!isMobile && (
-        <Box w="100%" maxW={"700px"} mr="40px">
+        <Box w="100%" maxW={pxToRem(700)} mr="40px">
           <ReactPlayer
             url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            height="533px"
+            height={pxToRem(533)}
             width="100%"
           />
         </Box>
       )}
-      <Box maxW="359px">
-        <Text fontSize="40px" fontWeight="bold" mb="50px">
+      <Grid maxW={pxToRem(359)} templateRows="1fr 0.73fr 1fr">
+        <Text fontSize={pxToRem(40)} fontWeight="bold">
           Nova Linha de Controles e Indicadores
         </Text>
-        <Text fontSize="20px" mb="57px">
+        <Text fontSize={pxToRem(20)}>
           Logo abaixo nosso vídeo sobre Contemp C504 – Controlador de Processos.
         </Text>
         {isMobile ? (
-          <VStack spacing="20px" alignItems="center">
+          <VStack spacing={pxToRem(20)} alignItems="center">
             <Button
               w="179px"
               h="50px"
               borderRadius="25px"
               bg="red.600"
-              fontSize="20px"
+              fontSize={pxToRem(20)}
               _hover={{ transition: "all 0.5s", opacity: 0.7 }}
             >
               <Icon as={AiOutlinePlayCircle} mr="10px" />
@@ -60,7 +62,7 @@ export const Player = () => {
               h="50px"
               borderRadius="25px"
               bg="red.600"
-              fontSize="20px"
+              fontSize={pxToRem(20)}
               _hover={{ transition: "all 0.5s", opacity: 0.7 }}
             >
               <Icon as={AiOutlinePlayCircle} mr="10px" />
@@ -76,7 +78,7 @@ export const Player = () => {
             />
           </Box>
         )}
-      </Box>
+      </Grid>
     </Flex>
   );
 };
