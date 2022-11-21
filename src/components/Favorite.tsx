@@ -10,10 +10,18 @@ import {
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Autoplay } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import CardProduct from "./CardProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
+import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
+import Pirometro from "../assets/icons/Pirometro-certo.png";
+
+const products = [] as number[]
+
+for (let i = 0; i < 10; i++) {
+  products.push(i + 1)
+}
 
 export const Favorite = () => {
   const isMobile = useBreakpointValue({
@@ -22,20 +30,59 @@ export const Favorite = () => {
   });
 
   const isTablet = useBreakpointValue({
-    base: true,
+    md: true,
     lg: false,
   });
 
   const isDesktop = useBreakpointValue({
-    base: false,
     lg: true,
+    xl: false,
   });
 
   const isLargeDesktop = useBreakpointValue({
-    base: false,
     xl: true,
+    '2xl': false
   });
 
+  const swiperWidth = () => {
+    if (isMobile) {
+      return pxToRem(253)
+    }
+
+    if (isTablet) {
+      return pxToRem(600)
+    }
+
+    if (isDesktop) {
+      return pxToRem(780)
+    }
+
+    if (isLargeDesktop) {
+      return pxToRem(1200)
+    }
+
+    return 'auto'
+  }
+
+  const slidesPerView = (): number => {
+    if (isMobile) {
+      return 1
+    }
+
+    if (isTablet) {
+      return 2
+    }
+
+    if (isDesktop) {
+      return 3
+    }
+
+    if (isLargeDesktop) {
+      return 4
+    }
+
+    return 5
+  }
 
   return (
     <Container
@@ -47,6 +94,7 @@ export const Favorite = () => {
         "12px 0 31px",
         "12px 0 31px",
       ]}
+      position="relative"
     >
       <Text
         color="white"
@@ -67,17 +115,23 @@ export const Favorite = () => {
         Essa é a seleção que a equipe da Contemp escolheu como os destaques do
         mês
       </Text>
-      <Box h={pxToRem(250)}>
+      <Flex h={pxToRem(250)}>
         <Swiper
-          slidesPerView={isMobile ? 1 : isTablet ? 2 : isDesktop ? 3 : isLargeDesktop ? 5 : 4}
-          spaceBetween={20}
+          slidesPerView={slidesPerView()}
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
           }}
+          spaceBetween={isTablet ? 20 : 30}
+          pagination       
+          modules={[Autoplay, Pagination]}
           className="mySwiper"
+          style={{
+            margin: 'auto',
+            width: swiperWidth()
+          }}
         >
-          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
+          {products.map((item) => (
             <SwiperSlide>
               <CardProduct
                 img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
@@ -86,10 +140,9 @@ export const Favorite = () => {
             </SwiperSlide>
           ))}          
         </Swiper>
-      </Box>
+      </Flex>
       <Flex
         alignItems="center"
-        justifyContent="space-between"
         mt="200px"
         mb="53px"
         flexDirection={["column", "column", "row", "row", "row"]}
@@ -98,37 +151,59 @@ export const Favorite = () => {
           flex={1}
           src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
           alt="bateria"
-          minH={pxToRem(500)}
-          bgSize="70%"
+          minH={pxToRem(320)}
+          bgSize={{
+            base: '95%',
+            md: '90%',
+            lg: '76%',
+            xl: '55%'
+          }}
           marginBottom={{
             base: pxToRem(20),
             lg: 0
           }}
         />
         
-        <Box w="100%" ml={["20px", "20px", "20px", "100px", "100px"]} flex={1}>
-          <Flex alignItems="center" justifyContent="space-between">
-            <Text fontWeight="bold" fontSize="60px" mr="10px">
+        <Box w="100%" flex={1}>
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            flexWrap="wrap"
+            w={{
+              base: '100%',
+              xl: '80%',
+              '2xl': '98%'
+            }}
+          >
+            <Text fontWeight="bold" fontSize={pxToRem(60)}>
               C714
             </Text>
-            <HStack
-              p="10px 5px"
-              border="2px solid"
-              borderColor="red.600"
-              borderRadius="4px"
-              spacing="5px"
-            >
-              <Text fontSize="18px">
-                Controladores de Temperatura e Processos
-              </Text>
-            </HStack>
+            
+            <ProductCategoryWithIcon
+              title="Controladores de Temperatura e Processos"
+              icon={Pirometro}
+              containerProps={{
+                borderColor: 'red.600',
+              }}
+            />
           </Flex>
-          <Text textAlign="justify" mt="27px" mb="28px" fontSize="20px">
+          <Text
+            textAlign="justify"
+            mt="27px"
+            mb="28px"
+            fontSize={pxToRem(20)}
+            w={{
+              base: '95%',
+              xl: '80%',
+              '2xl': '98%'
+            }}
+          >
             Os Controladores de Temperatura e Processos C714 – Linha Avançada,
             foram projetados com tecnologia nacional de ponta para serem
             versáteis, robustos e de fácil uso.
           </Text>
-          <Flex alignItems="center">
+
+          <Flex alignItems="center" w="80%" maxW={pxToRem(220)}>
             <Button
               border="2px solid white"
               borderRadius="25px"
@@ -137,12 +212,19 @@ export const Favorite = () => {
               mr="15px"
               bg="transparent"
               _hover={{
-                bg: "red.600",
-                transition: "all 0.4s",
+                bg: "white",
+                color: "black.800",
+                transition: "all 0.3s",
               }}
             >
               Veja mais
             </Button>
+
+            <Image
+              src={Pirometro}
+              bgSize={pxToRem(40)}
+              minH={pxToRem(40)}
+            />
           </Flex>
         </Box>
       </Flex>
