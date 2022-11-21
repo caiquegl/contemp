@@ -2,8 +2,6 @@ import {
   Box,
   Container,
   Flex,
-  HStack,
-  Image,
   Text,
   Grid,
   useBreakpointValue,
@@ -16,18 +14,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
-import CardProduct2 from "../components/CardProduct2";
+import CardProductWithDescription from "../components/CardProductWithDescription";
 import CardCatalog from "../components/CardCatalog";
+import { Image } from '../components/Image'
+import { pxToRem } from "../utils/pxToRem";
+
+const products = [] as number[]
+
+for (let i = 0; i < 10; i++) {
+  products.push(i + 1)
+}
 
 const AllProduct = () => {
   const isTablet = useBreakpointValue({
     base: true,
     lg: false,
   });
+
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
   });
+
   return (
     <>
       <Header />
@@ -62,108 +70,40 @@ const AllProduct = () => {
               Categoria de Destaque
             </Text>
           </Flex>
-          <Box h="650px" mt="31px">
+          <Box h={pxToRem(650)} mt="31px">
             <Swiper
               slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
               spaceBetween={30}
               autoplay={{
                 delay: 2000,
-                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
               }}
               pagination={true}
               modules={[Autoplay, Pagination]}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardProduct2
-                  img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                  text="teste"
-                  description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
-                />
-              </SwiperSlide>
+              {products.map((item) => (
+                <SwiperSlide>
+                  <CardProductWithDescription
+                    img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+                    text={`Teste ${item}`}
+                    description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
+                  />
+                </SwiperSlide>
+              ))}               
             </Swiper>
           </Box>
+
           <Flex
-            mt="61px"
-            justifyContent="center"
+            mt={pxToRem(61)}
+            alignItems="center"
+            justifyContent="space-between"
             direction={["column", "column", "column", "row", "row"]}
           >
-            <Image
-              src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              alt="bateri"
-              mr={["0", "0", "0", "48px", "48px"]}
-              mb={["40px", "40px", "40px", "0", "0"]}
-              maxH={["228px", "228px", "328px", "425px", "425px"]}
-            />
-            <Image
-              src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-              alt="bateri"
-              maxH={["228px", "228px", "328px", "425px", "425px"]}
-            />
+            <AdBanner />
+            <AdBanner />
           </Flex>
+
         </Container>
       </Flex>
       <Flex w="100%" alignItems="center" bg="white.500">
@@ -363,5 +303,21 @@ const AllProduct = () => {
     </>
   );
 };
+
+const AdBanner = () => {
+  return (
+    <Image
+      src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+      alt="bateria"
+      bgSize="contain"
+      minH={{
+        base: pxToRem(228),
+        md: pxToRem(330),
+        lg: pxToRem(425)
+      }}
+      flex={0.8}
+    />
+  )
+}
 
 export default AllProduct;
