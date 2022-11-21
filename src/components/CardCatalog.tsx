@@ -1,5 +1,6 @@
-import { Box, Button, Flex, GridItem, Image, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
+import { pxToRem } from "../utils/pxToRem";
+import { Image } from './Image'
 
 interface IProps {
   bg: string;
@@ -18,15 +19,21 @@ const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
       borderRadius="8px"
       p="27px 17px"
     >
-      <Box h="100%" boxSizing="content-box">
-        <Image src={img} mb="15px" />
-        <Box w="41px" h="41px" borderRadius="5px" bg={color} mb="7px" />
-        <Text color={color} fontSize="35px" fontWeight="bold" mb="20px">
-          {title}
-        </Text>
-        <Text color={color} fontSize="20px" mb="30px">
+      <Grid h="100%" templateRows="1.5fr 1.5fr 1fr 0.5fr">
+        <Image src={img} />
+
+        <Box mb={pxToRem(15)}>
+          <Box w="41px" h="41px" borderRadius="5px" bg={color} mb={pxToRem(10)}/>
+
+          <Text color={color} fontSize={pxToRem(35)} lineHeight={1.2} fontWeight="bold">
+            {title}
+          </Text>
+        </Box>
+
+        <Text color={color} fontSize="20px">
           {text}
         </Text>
+
         <Flex w="100%" alignItems="center" justifyContent="center">
           <Button
             color={color}
@@ -38,14 +45,15 @@ const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
             bg="tranparent"
             fontSize="20px"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.6,
+              bg: color,
+              color: bg,
+              transition: "all 0.3s",
             }}
           >
             Solicitar orçamento
           </Button>
         </Flex>
-      </Box>
+      </Grid>
     </GridItem>
   );
 };
