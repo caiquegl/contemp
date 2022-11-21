@@ -1,17 +1,21 @@
-import { Box, Button, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Link, Text } from "@chakra-ui/react";
+import { StaticImageData } from "next/image";
 import { useState } from "react";
+import { pxToRem } from "../utils/pxToRem";
+import { Image } from './Image'
 
 interface IProps {
-  img: any;
+  img: string | StaticImageData;
   text: string;
   description?: string;
   alt?: string;
 }
-const CardProduct2 = ({ img, text, alt, description }: IProps) => {
-  const [isHovering, setHovering] = useState(false);
 
-  const handleMouseEnter = () => setHovering(true);
-  const handleMouseLeave = () => setHovering(false);
+const CardProductWithDescription = ({ img, text, alt, description }: IProps) => {
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleIsHovering = () =>
+    setIsHovering((isHovering) => !isHovering)
 
   return (
     <Box
@@ -20,16 +24,16 @@ const CardProduct2 = ({ img, text, alt, description }: IProps) => {
       justifyContent="center"
       flexDirection="column"
       borderRadius="8px"
-      border={isHovering ? "2px solid" : "none"}
+      border={isHovering ? '2px solid' : 'none'}
       borderColor="black.800"
-      p="45px 23px"
-      w="346px"
-      h="677px"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      p={`${pxToRem(45)} ${pxToRem(23)}`}
+      w={pxToRem(346)}
+      h={pxToRem(677)}
+      onMouseOver={handleIsHovering}
+      onMouseOut={handleIsHovering}
     >
       <Text
-        fontSize="60px"
+        fontSize={pxToRem(60)}
         fontWeight="bold"
         color="black"
         textTransform="uppercase"
@@ -38,9 +42,10 @@ const CardProduct2 = ({ img, text, alt, description }: IProps) => {
       >
         {text}
       </Text>
-      <Text fontSize="20px" color="black" mb="20px">
+      <Text fontSize={pxToRem(20)} color="black" mb="20px">
         {description}
       </Text>
+
       <Image src={img} alt={alt} mb="20px" />
 
       <Button
@@ -57,4 +62,4 @@ const CardProduct2 = ({ img, text, alt, description }: IProps) => {
   );
 };
 
-export default CardProduct2;
+export default CardProductWithDescription;
