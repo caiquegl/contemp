@@ -24,10 +24,11 @@ import DescriptionProduct from "../components/DescriptionProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
 import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
+import { SmoothScroll } from '../components/SmoothScroll'
 
 const Home = () => {
   return (
-    <Box position="relative">
+    <SmoothScroll position="relative">
       <HomeBackgroundDetails />
 
       <Header />
@@ -394,7 +395,7 @@ const Home = () => {
         ]}
       />
       <Footer />
-    </Box>
+    </SmoothScroll>
   );
 };
 
