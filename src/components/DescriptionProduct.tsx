@@ -1,100 +1,131 @@
 import {
-  Box,
   Button,
   Flex,
-  HStack,
-  Image as ImageChakra,
+  FlexProps,
   Text,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import { Image } from "../components/Image";
 import Pirometro from "../assets/icons/Pirometro-certo.png";
+import { pxToRem } from "../utils/pxToRem";
+import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 
 interface IProps {
   bg: string;
   borderColor: string;
   borderColorButton: string;
   color: string;
+  containerProps?: FlexProps
 }
 const DescriptionProduct = ({
   bg,
   borderColor,
   color,
   borderColorButton,
+  containerProps
 }: IProps) => {
   return (
     <Flex
-      w="50%"
-      minH="616px"
+      w="100%"
+      minH={pxToRem(630)}
       alignItems="center"
       justifyContent="center"
       bg={bg}
       color={color}
+      margin="auto"
     >
       <Flex
-        direction={["column", "column", "column", "column", "row"]}
+        direction={{
+          base: 'column',
+          xl: 'row'
+        }}
         alignItems="center"
         justifyContent="space-between"
+        h="100%"
+        w="95%"
+        {...containerProps}
       >
-        <ImageChakra
-          src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+        <Image
+          src={"https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"}
           alt="bateria"
-          w="50%"
-          maxW="451px"
-          mr={["0px", "0px", "0px", "0px", "40px"]}
+          flex={1}
+          minH={pxToRem(300)}
+          bgSize={{
+            base: '70%',
+            md: '90%',
+            lg: '70%',
+            xl: '85%',
+            '2xl': '70%'
+          }}
         />
+
         <Flex
           flexDirection="column"
-          alignItems={["center", "center", "center", "center", "initial"]}
-          pr={["0px", "0px", "0px", "0px", "40px"]}
+          alignItems="initial"
+          flex={1.3}
+          paddingLeft={3}
+          mb={5}
         >
-          <Text fontWeight="bold" fontSize="60px">
-            P501
-          </Text>
-          <HStack
-            p="10px 5px"
-            border="2px solid"
-            borderColor={borderColor}
-            borderRadius="4px"
-            spacing="5px"
-            mb="27px"
-            maxW="277px"
-          >
-            <Text fontSize="18px">
-              Controladores de Temperatura e Processos
-            </Text>
-            <Box
-              w="40px"
-              h="40px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={Pirometro} width={41} height={41} />
-            </Box>
-          </HStack>
           <Text
-            fontSize="20px"
-            mb="41px"
-            textAlign={["center", "center", "center", "center", "initial"]}
+            fontWeight="bold"
+            textTransform="uppercase"
+            fontSize={{
+              base: pxToRem(30),
+              lg: pxToRem(35),
+              xl: pxToRem(40),
+            }}
+          >
+            Nome do produto
+          </Text>
+
+          <ProductCategoryWithIcon
+            title="Controladores de Temperatura e Processos"
+            icon={Pirometro}
+            containerProps={{
+              bg,
+              color,
+              borderColor,
+              margin: `${pxToRem(10)} 0`
+            }}
+          />
+
+          <Text
+            fontSize={pxToRem(20)}
+            w="100%"
+            margin={`${pxToRem(10)} 0`}
           >
             Desenvolvido para monitorar, controlar e registrar potência,
             corrente e tensão de cargas resistivas e transformadores-monofásicos
             e trifásicos.
           </Text>
-          <Button
-            borderRadius="25px"
-            border="2px solid"
-            borderColor={borderColorButton}
-            bg="transparent"
-            w="157px"
-            h="50px"
-            _hover={{
-              bg: "red.600",
-              transition: "all 0.4s",
-            }}
-          >
-            Veja mais
-          </Button>
+
+          <Flex w="75%" maxW={pxToRem(220)} alignItems="center">
+            <Button
+              borderRadius="25px"
+              border="2px solid"
+              borderColor={borderColorButton}
+              bg="transparent"
+              m={`${pxToRem(20)} 0`}
+              maxW={pxToRem(157)}
+              h={pxToRem(50)}
+              flex={6}
+              _hover={{
+                bg: color,
+                color: bg,
+                transition: "all 0.3s",
+              }}
+            >
+              Veja mais
+            </Button>
+
+            <Image
+              src={Pirometro}
+              bgSize={pxToRem(40)}
+              minH={pxToRem(40)}
+              filter={
+                color ? color.includes('white') ? 'invert(0)' : 'invert(1)' : 'auto'
+              }
+            />
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
