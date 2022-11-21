@@ -1,9 +1,10 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { StaticImageData } from "next/image";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
 
 interface IProps {
-  img: any;
+  img: string | StaticImageData;
   text: string;
   alt?: string;
 }
