@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Pirometro from "../assets/icons/Pirometro-certo.png";
 import Mapa from "../assets/images/MAPA.png";
-import Image from "next/image";
+import { Image } from '../components/Image'
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { CardBlog } from "../components/CardBlog";
@@ -21,14 +21,27 @@ import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Player } from "../components/Player";
 import DescriptionProduct from "../components/DescriptionProduct";
+import { pxToRem } from "../utils/pxToRem";
+import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
+import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
 
 const Home = () => {
   return (
-    <>
+    <Box position="relative">
+      <HomeBackgroundDetails />
+
       <Header />
+
       <Banner />
+
       <Favorite />
-      <Flex w="100%" alignItems="center" justifyContent="space-between">
+
+      <GridChakra
+        templateColumns={{
+          base: '1fr',
+          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
+        }}
+      >
         <DescriptionProduct
           color="white"
           bg="red.600"
@@ -41,21 +54,32 @@ const Home = () => {
           borderColor="red.600"
           borderColorButton="black.800"
         />
-      </Flex>
-      <Flex w="100%" alignItems="center" justifyContent="space-between">
         <DescriptionProduct
           color="black.800"
           bg="white"
           borderColor="red.600"
           borderColorButton="black.800"
+          containerProps={{
+            direction: {
+              base: 'column',
+              xl: 'row-reverse'
+            }
+          }}
         />
         <DescriptionProduct
           color="white"
           bg="red.600"
           borderColor="white"
           borderColorButton="white"
+          containerProps={{
+            direction: {
+              base: 'column',
+              xl: 'row-reverse'
+            }
+          }}
         />
-      </Flex>
+      </GridChakra>
+
       <Container
         maxW="6xl"
         p={[
@@ -71,38 +95,76 @@ const Home = () => {
           justifyContent="space-between"
           flexDirection={["column", "column", "row", "row", "row"]}
         >
-          <Text fontSize="110px" w="259px">
-            CALIBRAÇÃO
-          </Text>
-          <Box>
-            <Flex
-              p="10px 5px"
-              border="2px solid"
-              borderColor="red.600"
-              borderRadius="4px"
-              alignItems="center"
-              w="100%"
-              maxW="416px"
+          <Box
+            flex={{
+              base: 'none',
+              md: 1
+            }}
+            textAlign="center"
+          >
+            <Text
+              margin={{
+                base: `${pxToRem(40)} auto 0`,
+                md: 'auto'
+              }}
+              fontWeight="bold"
+              fontSize={{
+                base: pxToRem(50),
+                md: pxToRem(80),
+                lg: pxToRem(110),
+              }}
+              maxW={{
+                base: '100%',
+                md: pxToRem(210),
+                lg: pxToRem(259)
+              }}
+              lineHeight={1.05}
+              letterSpacing={{
+                base: pxToRem(5),
+                lg: pxToRem(9.6)
+              }}
+              textTransform="uppercase"
+              zIndex={999}
             >
-              <Text fontSize="18px" mr="5px">
-                Controladores de Temperatura e Processos
-              </Text>
-              <Box
-                w="40px"
-                h="40px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Image src={Pirometro} width={41} height={41} />
-              </Box>
-            </Flex>
-            <Text mt="27px" mb="41px" fontSize="20px" maxW="791px">
+              Calibração
+            </Text>
+          </Box>
+
+          <Flex
+            flex={1}
+            alignItems={{
+              base: 'center',
+              md: 'initial'
+            }}
+            flexDirection="column"
+            padding={`0 ${pxToRem(15)}`}
+          >
+            <ProductCategoryWithIcon
+              title="Controladores de Temperatura e Processos"
+              icon={Pirometro}
+              containerProps={{
+                borderColor: 'red.600',
+                marginTop: 10,
+                width: '100%'
+              }}
+            />
+
+            <Text
+              mt="27px"
+              mb="41px"
+              fontSize={pxToRem(20)}
+              maxW={pxToRem(791)}
+              textAlign={{
+                base: 'center',
+                md: 'initial'
+              }}
+            >
               Nossos laboratórios possuem equipamentos e padrões que garantem a
               qualidade e confiabilidade das medições. Podem ser realizadas na
               Contemp ou em sua empresa. Nossas calibrações são efetuadas com
               símbolo de acreditação – RBC e rastreabilidade ao Inmetro.
             </Text>
+
             <Button
               border="2px solid white"
               borderRadius="25px"
@@ -111,16 +173,22 @@ const Home = () => {
               mr="15px"
               bg="transparent"
               _hover={{
-                bg: "red.600",
+                bg: "white",
+                color: "black.800",
                 transition: "all 0.4s",
               }}
             >
               Veja mais
             </Button>
-          </Box>
+          </Flex>
         </Flex>
       </Container>
-      <Flex w="100%" alignItems="center" justifyContent="space-between">
+      <GridChakra
+        templateColumns={{
+          base: '1fr',
+          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`
+        }}
+      >
         <DescriptionProduct
           color="white"
           bg="black.800"
@@ -133,7 +201,7 @@ const Home = () => {
           borderColor="red.600"
           borderColorButton="black.800"
         />
-      </Flex>
+      </GridChakra>
       <Flex
         w="100%"
         alignItems="center"
@@ -154,30 +222,46 @@ const Home = () => {
           Veja todos os produtos
         </Button>
       </Flex>
+
       <Player />
+
       <Flex
         w="100%"
         alignItems="center"
         justifyContent="center"
-        p={["70px 20px", "70px 20px", "70px 20px", "70px 20px", "70px 20px"]}
+        p={`${pxToRem(70)} ${pxToRem(20)}`}
         bg="white.500"
+        flexDirection={{
+          base: 'column',
+          md: 'row'
+        }}
       >
         <Flex
           alignItems="flex-end"
           textAlign="end"
-          maxW="693px"
+          maxW={pxToRem(693)}
           flexDirection="column"
         >
           <Text
             color="red.600"
             fontWeight="bold"
             mb="18px"
-            fontSize={["30px", "30px", "45px", "45px", "45px"]}
+            fontSize={{
+              base: pxToRem(30),
+              md: pxToRem(45)
+            }}
+            textAlign={{
+              base: 'center',
+              md: 'right'
+            }}
           >
             ATENDEMOS O BRASIL E A AMÉRICA LATINA
           </Text>
           <Text
-            fontSize={["17px", "17px", "24px", "24px", "24px"]}
+            fontSize={{
+              base: pxToRem(17),
+              md: pxToRem(24)
+            }}
             color="black.800"
             mb="104px"
             maxW="425px"
@@ -185,30 +269,45 @@ const Home = () => {
             Temos uma equipe de vendedores-técnicos de prontidão para te
             atender.
           </Text>
+
           <Flex
             alignItems="center"
-            justifyContent="flex-end"
-            flexDirection={["column", "column", "row", "row", "row"]}
+            justifyContent="space-between"
+            flexWrap="wrap"
+            w="100%"
+            maxW={pxToRem(400)}
+            h={{
+              base: 120
+            }}
+            flexDirection={{
+              base: 'column',
+              md: 'row'
+            }}
           >
             <Button
-              w="179px"
+              width={{
+                base: pxToRem(279),
+                md: pxToRem(179),
+              }}
               h="50px"
               borderRadius="25px"
-              mr={["0", "0", "24px", "24px", "24px"]}
-              mb={["20px", "20px", "0", "0", "0"]}
               bg="red.600"
-              fontSize="20px"
+              fontSize={pxToRem(20)}
               _hover={{ transition: "all 0.5s", opacity: 0.7 }}
             >
               <Icon as={BiPhone} mr="10px" />
               Telefonar
             </Button>
+
             <Button
-              w="179px"
+              width={{
+                base: pxToRem(279),
+                md: pxToRem(179),
+              }}
               h="50px"
               borderRadius="25px"
               bg="red.600"
-              fontSize="20px"
+              fontSize={pxToRem(20)}
               _hover={{ transition: "all 0.5s", opacity: 0.7 }}
             >
               <Icon as={AiOutlineMail} mr="10px" />
@@ -216,8 +315,17 @@ const Home = () => {
             </Button>
           </Flex>
         </Flex>
-        <Box w="100%" maxW="513px" ml={["20px", "50px", "180px"]}>
-          <Image src={Mapa} />
+
+        <Box
+          w="100%"
+          maxW={pxToRem(513)}
+          ml={{
+            base: 0,
+            md: pxToRem(50),
+            lg: pxToRem(180)
+          }}
+        >
+          <Image src={Mapa} minH={500} bgSize="100%" />
         </Box>
       </Flex>
       <Flex w="100%" p="80px 0" bg="white">
@@ -286,7 +394,7 @@ const Home = () => {
         ]}
       />
       <Footer />
-    </>
+    </Box>
   );
 };
 
