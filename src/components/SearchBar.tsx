@@ -2,7 +2,7 @@ import { InputGroup, Input, InputRightElement, InputGroupProps, InputProps } fro
 import { pxToRem } from "../utils/pxToRem"
 import Search from "../assets/icons/search.svg";
 
-import Image from "next/image";
+import { Image } from './Image';
 
 type SearchBarProps = {
   containerProps?: InputGroupProps
@@ -42,7 +42,7 @@ export const SearchBar = ({
         position="absolute"
         right={3}
         top={2.5}
-        children={<Image src={Search} width="100%" height="100%" />}
+        children={<Image src={Search} width="100%" height="100%" bgSize="contain" />}
       />
     </InputGroup>
   )
