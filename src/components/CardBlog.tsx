@@ -1,5 +1,7 @@
-import { Box, Button, GridItem, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import { Box, Button, GridItem, Text } from "@chakra-ui/react";
+import { Image } from './Image'
+import { pxToRem } from "../utils/pxToRem";
 
 interface IProps {
   bg: string;
@@ -22,21 +24,24 @@ export const CardBlog = ({ bg, color, title, text, img }: IProps) => {
     >
       <Box
         w="100%"
-        maxW="474px"
-        minH="590px"
+        maxW={pxToRem(474)}
+        minH={pxToRem(590)}
         borderRadius="8px"
         border="2px solid"
         borderColor={color}
-        p="20px"
+        p={pxToRem(20)}
         margin="auto"
       >
-        <Image src={img} alt="bateria" w="100%" maxH="300px" />
-        <Text fontWeight="bold" fontSize="25px" mt="20px" color={color}>
+        <Image src={img} alt="bateria" w="100%" h={pxToRem(300)} />
+        
+        <Text fontWeight="bold" fontSize={pxToRem(25)} mt="20px" color={color}>
           {title}
         </Text>
+
         <Text fontSize="18px" mt="20px" color={color}>
           {text}
         </Text>
+        
         <Button
           borderRadius="30px"
           w="200px"
@@ -48,9 +53,9 @@ export const CardBlog = ({ bg, color, title, text, img }: IProps) => {
           borderColor={color}
           color={color}
           _hover={{
-            transition: "all 0.4s",
-            bg: "none",
-            opacity: 0.7,
+            bg: color,
+            color: bg,
+            transition: "all 0.3s",
           }}
         >
           Veja mais
