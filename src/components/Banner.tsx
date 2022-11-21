@@ -4,7 +4,7 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import { Image } from "./Image";
 import React from "react";
 import Team from "../assets/images/temnacontemp.png";
 import { Typewriter } from "react-simple-typewriter";
@@ -41,7 +41,7 @@ export const Banner = () => {
             fontSize={["1.3rem", "1.3rem", "2.3rem"]}
             fontWeight="bold"
           >
-            Excelência em produtos:
+            Excelência em produtos:{' '}
             <Typewriter
               words={["Indicadores de Temperatura e Processo"]}
               loop={0}
