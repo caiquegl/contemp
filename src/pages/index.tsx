@@ -28,7 +28,7 @@ import { SmoothScroll } from '../components/SmoothScroll'
 
 const Home = () => {
   return (
-    <SmoothScroll position="relative">
+    <SmoothScroll>
       <HomeBackgroundDetails />
 
       <Header />
