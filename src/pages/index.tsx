@@ -24,27 +24,11 @@ import DescriptionProduct from "../components/DescriptionProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
 import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
-import { useEffect } from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { app } from "../utils/db";
+import { SmoothScroll } from "../components/SmoothScroll";
 
 const Home = () => {
-  // const teste = async () => {
-  //   try {
-  //     const dbInstance = collection(database, "notes", "caique", "lima");
-
-  //     addDoc(dbInstance, {
-  //       noteTitle: "inserido",
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  // useEffect(() => {
-  //   teste();
-  // }, []);
   return (
-    <Box position="relative">
+    <SmoothScroll>
       <HomeBackgroundDetails />
 
       <Header />
@@ -411,7 +395,7 @@ const Home = () => {
         ]}
       />
       <Footer />
-    </Box>
+    </SmoothScroll>
   );
 };
 
