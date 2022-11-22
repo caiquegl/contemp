@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="16.9029mm" height="16.9548mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 154939 155415"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:3880.15}
+    .str1 {stroke:white;stroke-width:2327.36}
+    .fil1 {fill:none}
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0" cx="146959" cy="147434" r="7981"/>
+  <path class="fil1 str0" d="M134927 153400l-116027 4c-8426,0 -16959,-9306 -16959,-17953l0 -112726c0,-10943 8513,-20784 17257,-20784l115043 0c10878,-13 18621,9884 18619,20517l-2 112875"/>
+  <circle class="fil0" cx="77476" cy="117002" r="10443"/>
+  <circle class="fil1 str0" cx="56350" cy="68621" r="10639"/>
+  <line class="fil1 str0" x1="56476" y1="32145" x2="56478" y2= "57981" />
+  <line class="fil1 str0" x1="99624" y1="32167" x2="99624" y2= "58004" />
+  <polyline class="fil1 str0" points="56475,79280 56451,100383 69975,113253 "/>
+  <polyline class="fil1 str0" points="99626,79260 99598,100397 85571,113264 "/>
+  <line class="fil1 str1" x1="93958" y1="68621" x2="104181" y2= "68621" />
+  <path class="fil1 str1" d="M56349 73731l0 -10222m-5111 5112l10223 0"/>
+  <circle class="fil1 str0" cx="99070" cy="68621" r="10639"/>
+ </g>
+</svg>

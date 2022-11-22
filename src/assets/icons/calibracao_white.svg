@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="16.9029mm" height="16.9548mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 154939 155415"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:3880.15}
+    .str1 {stroke:white;stroke-width:2716.01}
+    .str2 {stroke:white;stroke-width:1551.88}
+    .fil1 {fill:none}
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0" cx="146959" cy="147434" r="7981"/>
+  <path class="fil1 str0" d="M134927 153400l-116027 4c-8426,0 -16959,-9306 -16959,-17953l0 -112726c0,-10943 8513,-20784 17257,-20784l115043 0c10878,-13 18621,9884 18619,20517l-2 112875"/>
+  <g id="_2251789781376">
+   <path class="fil1 str1" d="M45136 89163c-3049,7 -6099,14 -9149,20 538,-57803 79797,-56339 82827,62 -3369,8 -6740,15 -10110,22"/>
+   <line class="fil1 str1" x1="98785" y1="68058" x2="106329" y2= "58912" />
+   <line class="fil1 str1" x1="53930" y1="68157" x2="46347" y2= "59044" />
+   <line class="fil1 str1" x1="76804" y1="46393" x2="76831" y2= "56815" />
+   <polygon class="fil0" points="37438,94356 43731,94343 43744,100721 37452,100735 "/>
+   <polygon class="fil0" points="110131,94163 116424,94149 116438,100526 110145,100540 "/>
+   <path class="fil0 str2" d="M83592 54359l-2480 11370c-1719,8505 -2840,15415 -7537,23415l2632 12433 6262 -11004c-2025,-9080 -982,-16002 -21,-24630l1144 -11584zm-4788 27453l930 150 -813 5200 121 3996 -1708 3099 -779 -3472 1462 -3947 787 -5026z"/>
+   <path class="fil0" d="M76915 96936c3275,-7 5936,2677 5943,5998 7,3319 -2643,6015 -5918,6023 -3275,7 -5936,-2679 -5943,-5998 -7,-3319 2642,-6016 5918,-6023z"/>
+  </g>
+ </g>
+</svg>

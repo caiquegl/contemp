@@ -6,11 +6,52 @@ import {
   InputGroup,
   Input,
   Link,
+  useToast,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import { useState } from "react";
 import Logo from "../../assets/icons/logo.png";
+import { app, initFirebase } from "../../utils/db/index";
+import "firebase/compat/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useAuth } from "../../contextAuth/authContext";
 
 const Adm = () => {
+  const router = useRouter();
+  const { setUser } = useAuth();
+  const toast = useToast();
+  initFirebase();
+  const auth = getAuth();
+  const [loading, setLoading] = useState(false);
+  const [body, setBody] = useState({ email: "", password: "" });
+
+  const signIn = async () => {
+    try {
+      setLoading(true);
+      const result = await signInWithEmailAndPassword(
+        auth,
+        body.email,
+        body.password
+      );
+
+      setUser(result.user);
+      router.push("/adm/home");
+    } catch (error: any) {
+      toast({
+        title: "Erro",
+        description:
+          error.message === "EMAIL_NOT_FOUND"
+            ? "Email não cadastrado"
+            : "Senha inválida",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Flex
       alignItems="center"
@@ -54,6 +95,9 @@ const Adm = () => {
             border="none"
             borderRadius="21px"
             placeholder="Email"
+            onChange={(value) =>
+              setBody({ ...body, email: value.target.value })
+            }
             _focusVisible={{
               outline: "none",
             }}
@@ -78,6 +122,9 @@ const Adm = () => {
             borderRadius="21px"
             placeholder="Senha"
             type="password"
+            onChange={(value) =>
+              setBody({ ...body, password: value.target.value })
+            }
             _focusVisible={{
               outline: "none",
             }}
@@ -103,6 +150,8 @@ const Adm = () => {
             bg="red.600"
             color="white"
             textAlign="center"
+            isLoading={loading}
+            onClick={signIn}
             _hover={{
               transition: "all 0.4s",
               opacity: 0.7,

@@ -4,15 +4,32 @@ import {
   InputGroup,
   Input,
   Select,
-  InputLeftElement,
   Icon,
   InputRightElement,
   Textarea,
+  InputProps,
+  SelectProps,
+  TextareaProps,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FiFile } from "react-icons/fi";
 
-const InputsHome = ({ name, typeInput, options }: any) => {
+interface IProps extends InputProps {
+  name: string;
+  typeInput: string;
+  options?: any;
+  selectProps?: SelectProps;
+  textareaProps?: TextareaProps;
+}
+
+const InputsHome = ({
+  name,
+  typeInput,
+  options,
+  selectProps,
+  textareaProps,
+  ...rest
+}: IProps) => {
   const ref = useRef<any>();
 
   return (
@@ -40,9 +57,11 @@ const InputsHome = ({ name, typeInput, options }: any) => {
             border="none"
             borderRadius="21px"
             placeholder={name}
+            color="black.800"
             _focusVisible={{
               outline: "none",
             }}
+            {...rest}
           />
         )}
 
@@ -60,6 +79,7 @@ const InputsHome = ({ name, typeInput, options }: any) => {
             _focusVisible={{
               outline: "none",
             }}
+            {...selectProps}
           >
             {options &&
               options.length > 0 &&
@@ -83,6 +103,7 @@ const InputsHome = ({ name, typeInput, options }: any) => {
               placeholder={name || "Your file ..."}
               border="none"
               onClick={() => ref.current.click()}
+              {...rest}
             />
           </>
         )}
@@ -101,6 +122,7 @@ const InputsHome = ({ name, typeInput, options }: any) => {
             _focusVisible={{
               outline: "none",
             }}
+            {...textareaProps}
           />
         )}
       </InputGroup>

@@ -25,13 +25,13 @@ import Instagram from "../assets/icons/instagram.svg";
 import Facebook from "../assets/icons/facebook-f.svg";
 import Youtube from "../assets/icons/youtube.svg";
 import Logo from "../assets/icons/logo.png";
-import Potenci from "../assets/icons/potencia.png";
-import Camera from "../assets/icons/cameras.png";
-import DeNovo from "../assets/icons/de-novo.png";
-import Ultimo from "../assets/icons/ultimo.png";
+import Potenci from "../assets/icons/potencia_white.svg";
+import Camera from "../assets/icons/cameras_white.svg";
+import DeNovo from "../assets/icons/termopar_white.svg";
+import Ultimo from "../assets/icons/calibracao_white.svg";
 import Bag from "../assets/icons/shopping-bag.svg";
-import Controls from "../assets/icons/Controladores.png";
-import Pirometro from "../assets/icons/Pirometro-certo.png";
+import Controls from "../assets/icons/controladores_white.svg";
+import Pirometro from "../assets/icons/pritometro_white.svg";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
@@ -65,7 +65,13 @@ export const Header = () => {
         </Link>
 
         <HStack spacing="27px">
-          <Image src={Bag} width={30} height={30} bgSize="contain" flex="auto" />
+          <Image
+            src={Bag}
+            width={30}
+            height={30}
+            bgSize="contain"
+            flex="auto"
+          />
 
           <Flex
             borderRadius="5px"
@@ -249,9 +255,7 @@ export const Header = () => {
         </Box>
 
         <HStack
-          divider={
-            <Box borderRadius="full" bg="white" w="5px" h="5px" />
-          }
+          divider={<Box borderRadius="full" bg="white" w="5px" h="5px" />}
           flex={1}
         >
           <Link href="/about">
@@ -320,11 +324,7 @@ export const Header = () => {
         </HStack>
       </Flex>
 
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        h={70}
-      >
+      <Flex alignItems="center" justifyContent="space-between" h={70}>
         <Link href="/">
           <Image src={Logo} width={160} height={41} />
         </Link>
@@ -362,7 +362,7 @@ export const Header = () => {
             containerProps={{
               w: pxToRem(191),
               h: pxToRem(42),
-              marginRight: 5
+              marginRight: 5,
             }}
           />
 
@@ -373,17 +373,17 @@ export const Header = () => {
   );
 };
 
-type HeaderIconSrc = string | StaticImageData
+type HeaderIconSrc = string | StaticImageData;
 
 const HeaderIcon = ({ src }: { src: HeaderIconSrc }) => {
-  const imageSrc = typeof src === 'string' ? src : src.src
+  const imageSrc = typeof src === "string" ? src : src.src;
 
   return (
     <Box
       w={{
         base: pxToRem(30),
         lg: pxToRem(40),
-        xl: pxToRem(50)
+        xl: pxToRem(50),
       }}
       display="flex"
       alignItems="center"
@@ -391,5 +391,5 @@ const HeaderIcon = ({ src }: { src: HeaderIconSrc }) => {
     >
       <Image src={imageSrc} width={41} height={41} />
     </Box>
-  )
-}
+  );
+};

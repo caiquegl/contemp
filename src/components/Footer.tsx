@@ -31,7 +31,7 @@ export const Footer = () => {
         "40px 20px 31px",
         "40px 20px 31px",
         "40px 20px 31px",
-        "40px 0 31px",
+        "40px 10px 31px",
       ]}
     >
       <Flex
@@ -55,9 +55,9 @@ export const Footer = () => {
               digitar ao lado.
             </Text>
           </Box>
-          <SearchBar 
+          <SearchBar
             inputProps={{
-              placeholder: 'Procure aqui seu produto...'
+              placeholder: "Procure aqui seu produto...",
             }}
           />
         </Flex>

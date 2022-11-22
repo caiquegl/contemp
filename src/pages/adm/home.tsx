@@ -2,9 +2,6 @@ import {
   Box,
   Flex,
   Text,
-  Button,
-  InputGroup,
-  Input,
   Link,
   Container,
   Avatar,
@@ -14,15 +11,33 @@ import {
   Tab,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../assets/icons/logo.png";
 import TabCategory from "../../components/Tabs/TabCategory";
 import TabHome from "../../components/Tabs/TabHome";
 import TabProduct from "../../components/Tabs/TabProduct";
 import TabSeo from "../../components/Tabs/TabSeo";
+import { useRouter } from "next/router";
+import { useAuth } from "../../contextAuth/authContext";
+import Cookies from "js-cookie";
 
 const Adm = () => {
+  const router = useRouter();
+  const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(1);
+
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const userCookies = Cookies.get("SET_USER");
+      if (userCookies) {
+        setUser(JSON.parse(userCookies));
+      }
+      if (Object.keys(user).length === 0) {
+        router.push("/adm");
+      }
+    }
+    loadUserFromCookies();
+  }, []);
 
   const componentsTab = [
     <TabSeo />,

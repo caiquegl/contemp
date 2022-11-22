@@ -7,9 +7,9 @@ import {
   Icon,
   Grid as GridChakra,
 } from "@chakra-ui/react";
-import Pirometro from "../assets/icons/Pirometro-certo.png";
+import Pirometro from "../assets/icons/pritometro_white.svg";
 import Mapa from "../assets/images/MAPA.png";
-import { Image } from '../components/Image'
+import { Image } from "../components/Image";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { CardBlog } from "../components/CardBlog";
@@ -24,8 +24,25 @@ import DescriptionProduct from "../components/DescriptionProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
 import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
+import { useEffect } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { app } from "../utils/db";
 
 const Home = () => {
+  // const teste = async () => {
+  //   try {
+  //     const dbInstance = collection(database, "notes", "caique", "lima");
+
+  //     addDoc(dbInstance, {
+  //       noteTitle: "inserido",
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useEffect(() => {
+  //   teste();
+  // }, []);
   return (
     <Box position="relative">
       <HomeBackgroundDetails />
@@ -38,7 +55,7 @@ const Home = () => {
 
       <GridChakra
         templateColumns={{
-          base: '1fr',
+          base: "1fr",
           md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
         }}
       >
@@ -61,9 +78,9 @@ const Home = () => {
           borderColorButton="black.800"
           containerProps={{
             direction: {
-              base: 'column',
-              xl: 'row-reverse'
-            }
+              base: "column",
+              xl: "row-reverse",
+            },
           }}
         />
         <DescriptionProduct
@@ -73,9 +90,9 @@ const Home = () => {
           borderColorButton="white"
           containerProps={{
             direction: {
-              base: 'column',
-              xl: 'row-reverse'
-            }
+              base: "column",
+              xl: "row-reverse",
+            },
           }}
         />
       </GridChakra>
@@ -97,15 +114,15 @@ const Home = () => {
         >
           <Box
             flex={{
-              base: 'none',
-              md: 1
+              base: "none",
+              md: 1,
             }}
             textAlign="center"
           >
             <Text
               margin={{
                 base: `${pxToRem(40)} auto 0`,
-                md: 'auto'
+                md: "auto",
               }}
               fontWeight="bold"
               fontSize={{
@@ -114,14 +131,14 @@ const Home = () => {
                 lg: pxToRem(110),
               }}
               maxW={{
-                base: '100%',
+                base: "100%",
                 md: pxToRem(210),
-                lg: pxToRem(259)
+                lg: pxToRem(259),
               }}
               lineHeight={1.05}
               letterSpacing={{
                 base: pxToRem(5),
-                lg: pxToRem(9.6)
+                lg: pxToRem(9.6),
               }}
               textTransform="uppercase"
               zIndex={999}
@@ -133,8 +150,8 @@ const Home = () => {
           <Flex
             flex={1}
             alignItems={{
-              base: 'center',
-              md: 'initial'
+              base: "center",
+              md: "initial",
             }}
             flexDirection="column"
             padding={`0 ${pxToRem(15)}`}
@@ -143,9 +160,9 @@ const Home = () => {
               title="Controladores de Temperatura e Processos"
               icon={Pirometro}
               containerProps={{
-                borderColor: 'red.600',
+                borderColor: "red.600",
                 marginTop: 10,
-                width: '100%'
+                width: "100%",
               }}
             />
 
@@ -155,8 +172,8 @@ const Home = () => {
               fontSize={pxToRem(20)}
               maxW={pxToRem(791)}
               textAlign={{
-                base: 'center',
-                md: 'initial'
+                base: "center",
+                md: "initial",
               }}
             >
               Nossos laboratórios possuem equipamentos e padrões que garantem a
@@ -185,8 +202,8 @@ const Home = () => {
       </Container>
       <GridChakra
         templateColumns={{
-          base: '1fr',
-          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`
+          base: "1fr",
+          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
         }}
       >
         <DescriptionProduct
@@ -232,8 +249,8 @@ const Home = () => {
         p={`${pxToRem(70)} ${pxToRem(20)}`}
         bg="white.500"
         flexDirection={{
-          base: 'column',
-          md: 'row'
+          base: "column",
+          md: "row",
         }}
       >
         <Flex
@@ -248,11 +265,11 @@ const Home = () => {
             mb="18px"
             fontSize={{
               base: pxToRem(30),
-              md: pxToRem(45)
+              md: pxToRem(45),
             }}
             textAlign={{
-              base: 'center',
-              md: 'right'
+              base: "center",
+              md: "right",
             }}
           >
             ATENDEMOS O BRASIL E A AMÉRICA LATINA
@@ -260,7 +277,7 @@ const Home = () => {
           <Text
             fontSize={{
               base: pxToRem(17),
-              md: pxToRem(24)
+              md: pxToRem(24),
             }}
             color="black.800"
             mb="104px"
@@ -277,11 +294,11 @@ const Home = () => {
             w="100%"
             maxW={pxToRem(400)}
             h={{
-              base: 120
+              base: 120,
             }}
             flexDirection={{
-              base: 'column',
-              md: 'row'
+              base: "column",
+              md: "row",
             }}
           >
             <Button
@@ -322,7 +339,7 @@ const Home = () => {
           ml={{
             base: 0,
             md: pxToRem(50),
-            lg: pxToRem(180)
+            lg: pxToRem(180),
           }}
         >
           <Image src={Mapa} minH={500} bgSize="100%" />

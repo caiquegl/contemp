@@ -1,11 +1,6 @@
-import {
-  Button,
-  Flex,
-  FlexProps,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Flex, FlexProps, Text } from "@chakra-ui/react";
 import { Image } from "../components/Image";
-import Pirometro from "../assets/icons/Pirometro-certo.png";
+import Pirometro from "../assets/icons/pritometro_white.svg";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 
@@ -14,14 +9,14 @@ interface IProps {
   borderColor: string;
   borderColorButton: string;
   color: string;
-  containerProps?: FlexProps
+  containerProps?: FlexProps;
 }
 const DescriptionProduct = ({
   bg,
   borderColor,
   color,
   borderColorButton,
-  containerProps
+  containerProps,
 }: IProps) => {
   return (
     <Flex
@@ -35,8 +30,8 @@ const DescriptionProduct = ({
     >
       <Flex
         direction={{
-          base: 'column',
-          xl: 'row'
+          base: "column",
+          xl: "row",
         }}
         alignItems="center"
         justifyContent="space-between"
@@ -45,16 +40,18 @@ const DescriptionProduct = ({
         {...containerProps}
       >
         <Image
-          src={"https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"}
+          src={
+            "https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+          }
           alt="bateria"
           flex={1}
           minH={pxToRem(300)}
           bgSize={{
-            base: '70%',
-            md: '90%',
-            lg: '70%',
-            xl: '85%',
-            '2xl': '70%'
+            base: "70%",
+            md: "90%",
+            lg: "70%",
+            xl: "85%",
+            "2xl": "70%",
           }}
         />
 
@@ -84,15 +81,11 @@ const DescriptionProduct = ({
               bg,
               color,
               borderColor,
-              margin: `${pxToRem(10)} 0`
+              margin: `${pxToRem(10)} 0`,
             }}
           />
 
-          <Text
-            fontSize={pxToRem(20)}
-            w="100%"
-            margin={`${pxToRem(10)} 0`}
-          >
+          <Text fontSize={pxToRem(20)} w="100%" margin={`${pxToRem(10)} 0`}>
             Desenvolvido para monitorar, controlar e registrar potência,
             corrente e tensão de cargas resistivas e transformadores-monofásicos
             e trifásicos.
@@ -122,7 +115,11 @@ const DescriptionProduct = ({
               bgSize={pxToRem(40)}
               minH={pxToRem(40)}
               filter={
-                color ? color.includes('white') ? 'invert(0)' : 'invert(1)' : 'auto'
+                color
+                  ? color.includes("white")
+                    ? "invert(0)"
+                    : "invert(1)"
+                  : "auto"
               }
             />
           </Flex>

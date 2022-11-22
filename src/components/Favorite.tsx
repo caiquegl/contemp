@@ -13,14 +13,14 @@ import "swiper/css";
 import { Autoplay, Pagination } from "swiper";
 import CardProduct from "./CardProduct";
 import { pxToRem } from "../utils/pxToRem";
-import { Image } from './Image'
+import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
-import Pirometro from "../assets/icons/Pirometro-certo.png";
+import Pirometro from "../assets/icons/pritometro_white.svg";
 
-const products = [] as number[]
+const products = [] as number[];
 
 for (let i = 0; i < 10; i++) {
-  products.push(i + 1)
+  products.push(i + 1);
 }
 
 export const Favorite = () => {
@@ -41,48 +41,48 @@ export const Favorite = () => {
 
   const isLargeDesktop = useBreakpointValue({
     xl: true,
-    '2xl': false
+    "2xl": false,
   });
 
   const swiperWidth = () => {
     if (isMobile) {
-      return pxToRem(253)
+      return pxToRem(253);
     }
 
     if (isTablet) {
-      return pxToRem(600)
+      return pxToRem(600);
     }
 
     if (isDesktop) {
-      return pxToRem(780)
+      return pxToRem(780);
     }
 
     if (isLargeDesktop) {
-      return pxToRem(1200)
+      return pxToRem(1200);
     }
 
-    return 'auto'
-  }
+    return "auto";
+  };
 
   const slidesPerView = (): number => {
     if (isMobile) {
-      return 1
+      return 1;
     }
 
     if (isTablet) {
-      return 2
+      return 2;
     }
 
     if (isDesktop) {
-      return 3
+      return 3;
     }
 
     if (isLargeDesktop) {
-      return 4
+      return 4;
     }
 
-    return 5
-  }
+    return 5;
+  };
 
   return (
     <Container
@@ -123,12 +123,12 @@ export const Favorite = () => {
             disableOnInteraction: false,
           }}
           spaceBetween={isTablet ? 20 : 30}
-          pagination       
+          pagination
           modules={[Autoplay, Pagination]}
           className="mySwiper"
           style={{
-            margin: 'auto',
-            width: swiperWidth()
+            margin: "auto",
+            width: swiperWidth(),
           }}
         >
           {products.map((item) => (
@@ -138,7 +138,7 @@ export const Favorite = () => {
                 text={`Teste ${item}`}
               />
             </SwiperSlide>
-          ))}          
+          ))}
         </Swiper>
       </Flex>
       <Flex
@@ -153,37 +153,37 @@ export const Favorite = () => {
           alt="bateria"
           minH={pxToRem(320)}
           bgSize={{
-            base: '95%',
-            md: '90%',
-            lg: '76%',
-            xl: '55%'
+            base: "95%",
+            md: "90%",
+            lg: "76%",
+            xl: "55%",
           }}
           marginBottom={{
             base: pxToRem(20),
-            lg: 0
+            lg: 0,
           }}
         />
-        
+
         <Box w="100%" flex={1}>
           <Flex
             alignItems="center"
             justifyContent="space-between"
             flexWrap="wrap"
             w={{
-              base: '100%',
-              xl: '80%',
-              '2xl': '98%'
+              base: "100%",
+              xl: "80%",
+              "2xl": "98%",
             }}
           >
             <Text fontWeight="bold" fontSize={pxToRem(60)}>
               C714
             </Text>
-            
+
             <ProductCategoryWithIcon
               title="Controladores de Temperatura e Processos"
               icon={Pirometro}
               containerProps={{
-                borderColor: 'red.600',
+                borderColor: "red.600",
               }}
             />
           </Flex>
@@ -193,9 +193,9 @@ export const Favorite = () => {
             mb="28px"
             fontSize={pxToRem(20)}
             w={{
-              base: '95%',
-              xl: '80%',
-              '2xl': '98%'
+              base: "95%",
+              xl: "80%",
+              "2xl": "98%",
             }}
           >
             Os Controladores de Temperatura e Processos C714 – Linha Avançada,
@@ -220,11 +220,7 @@ export const Favorite = () => {
               Veja mais
             </Button>
 
-            <Image
-              src={Pirometro}
-              bgSize={pxToRem(40)}
-              minH={pxToRem(40)}
-            />
+            <Image src={Pirometro} bgSize={pxToRem(40)} minH={pxToRem(40)} />
           </Flex>
         </Box>
       </Flex>
