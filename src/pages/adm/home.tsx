@@ -33,7 +33,7 @@ const Adm = () => {
         setUser(JSON.parse(userCookies));
       }
       if (Object.keys(user).length === 0) {
-        router.push("/adm");
+        // router.push("/adm");
       }
     }
     loadUserFromCookies();

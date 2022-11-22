@@ -15,15 +15,76 @@ import {
   InputGroup,
   Input,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import {
+  collection,
+  getDocs,
+  deleteDoc
+} from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
+import { database, initFirebase } from "../../utils/db";
 
 const TabProduct = () => {
+  initFirebase();
+  const toast = useToast();
+
   const [step, setStep] = useState(1);
+  const [list, setList] = useState<any>([])
+  const [body, setBody] = useState({})
+
+  const listProduct = async () => {
+    try {
+      const dbInstance = collection(database, "products");
+      let newList: any = [];
+      await getDocs(dbInstance).then((data) => {
+        data.docs.forEach((doc) => {
+          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
+        });
+      });
+
+      setList(newList);
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Erro ao listar produtos",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const deleteProduct = async (product: any) => {
+    try {
+      await deleteDoc(product.ref);
+      toast({
+        title: "Sucesso",
+        description: "Produto deletada com sucesso.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      listProduct();
+    } catch (err) {
+      toast({
+        title: "Erro",
+        description: "Erro ao deletar produto",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    listProduct()
+  }, [])
+
   return (
     <>
       {step == 1 && (
@@ -93,46 +154,30 @@ const TabProduct = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>Nome Completo do produto</Td>
-                    <Td>Nome Completo da Categoria</Td>
-                    <Td>url</Td>
-                    <Td>
-                      <HStack spacing="20px">
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineEdit}
-                          fontSize="17px"
-                        />
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineClose}
-                          fontSize="17px"
-                          color="red.500"
-                        />
-                      </HStack>
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Nome Completo do produto</Td>
-                    <Td>Nome Completo da Categoria</Td>
-                    <Td>url</Td>
-                    <Td>
-                      <HStack spacing="20px">
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineEdit}
-                          fontSize="17px"
-                        />
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineClose}
-                          fontSize="17px"
-                          color="red.500"
-                        />
-                      </HStack>
-                    </Td>
-                  </Tr>
+                  {list.length > 0 && list.map((table: any) => (
+                    <Tr>
+                      <Td>{table.name}</Td>
+                      <Td>{table.nameCategory}</Td>
+                      <Td>url</Td>
+                      <Td>
+                        <HStack spacing="20px">
+                          <Icon
+                            cursor="pointer"
+                            as={AiOutlineEdit}
+                            fontSize="17px"
+                          />
+                          <Icon
+                            cursor="pointer"
+                            as={AiOutlineClose}
+                            fontSize="17px"
+                            color="red.500"
+                            onClick={() => deleteProduct(table)}
+                          />
+                        </HStack>
+                      </Td>
+                    </Tr>
+                  ))}
+
                 </Tbody>
               </Table>
             </TableContainer>
@@ -162,7 +207,10 @@ const TabProduct = () => {
               Voltar
             </Button>
           </Flex>
-          <ContainerAddProduct nextStep={() => setStep(3)} />
+          <ContainerAddProduct defaultValues={body} nextStep={(data: any) => {
+            setBody({ ...body, ...data })
+            setStep(3)
+          }} />
         </>
       )}
       {step == 3 && (
@@ -188,7 +236,9 @@ const TabProduct = () => {
               Voltar
             </Button>
           </Flex>
-          <ContainerAddProductDescription />
+          <ContainerAddProductDescription values={body} reset={() => {
+            setStep(1)
+          }} />
         </>
       )}
     </>

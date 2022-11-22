@@ -35,7 +35,6 @@ import { InputDefault } from "../Form/Input";
 import { useForm } from "react-hook-form";
 import { SelectDefault } from "../Form/Select";
 import { TextareaDefault } from "../Form/Textarea";
-import { CheckboxDefault } from "../Form/Checkbox";
 import { EditOrder } from "../EditOrder";
 interface IBody {
   name: string;
@@ -131,7 +130,6 @@ const TabCategory = () => {
 
       const dbInstance = collection(database, "categories");
       let exist = false;
-      const q = query(dbInstance, orderBy("order", "desc"), limit(1));
       const qExist = query(
         dbInstance,
         where("name", "==", bodyForm.name),
@@ -139,7 +137,6 @@ const TabCategory = () => {
       );
 
       await getDocs(qExist).then((data) => {
-        console.log(data.docs[0]?.data().order, update.order);
         if (data.docs.length > 0 && data.docs[0]?.data().order != update.order)
           exist = true;
       });
@@ -172,7 +169,6 @@ const TabCategory = () => {
         });
       }
     } catch (error) {
-      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao atualizar categoria",

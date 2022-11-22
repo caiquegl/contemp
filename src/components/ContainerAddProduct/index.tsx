@@ -1,38 +1,148 @@
 import {
   Box,
-  Text,
-  InputGroup,
-  Input,
   HStack,
   VStack,
   Checkbox,
   Button,
   Flex,
   Divider,
-  Icon,
-  Select,
+  useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InputsHome from "../ContainerHome/inputs";
-import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import { useForm } from "react-hook-form";
+import { InputDefault } from "../Form/Input";
+import { database, initFirebase } from "../../utils/db/index";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { SelectDefault } from "../Form/Select";
+import { TextareaDefault } from "../Form/Textarea";
+import Variation from "./Variantion";
 
-const ContainerAddProduct = ({ nextStep }: any) => {
-  const [hasVariation, setHasVariation] = useState(false);
+const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
+  initFirebase();
+  const toast = useToast();
+  const formRef = useRef<any>();
+  const [hasVariation, setHasVariation] = useState<any>(false);
   const [listVariation, setListVariation] = useState<any>([{ id: 1 }]);
+  const [list, setList] = useState<any>([]);
+
+  const { register, handleSubmit, formState, setValue, reset } = useForm({});
+
+  const { errors } = formState;
+
+  const saveProduct = async (bodyForm: any) => {
+    let body = { ...bodyForm, hasVariation };
+    if (hasVariation) {
+      let falt = false;
+      let more = false;
+      listVariation.forEach((list: any) => {
+        if(!list.name) falt = true
+        if(!list.opt || list.opt.length === 0) more = true
+      })
+
+
+      if(falt || more) {
+        toast({
+          title: "Erro",
+          description: falt ? "Preencha todos os nome de variações" : "Adicione ao menos uma opção",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return
+      }
+
+      body = { ...body, listVariation };
+    }
+
+    let nameCategory = ''
+
+    list.forEach((category: any) => {
+      if(category.id == body.category) nameCategory = category.name
+    })
+
+    body.nameCategory = nameCategory
+
+    nextStep(body);
+    reset()
+  };
+
+  const listCategory = async () => {
+    try {
+      const dbInstance = collection(database, "categories");
+      let newList: any = [];
+      const q = query(dbInstance, orderBy("order", "asc"));
+      await getDocs(q).then((data) => {
+        data.docs.forEach((doc) => {
+          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
+        });
+      });
+
+      setList(newList);
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Erro ao listar categoria",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    listCategory();
+  }, []);
+
+  useEffect(() => {
+    setValue("name", defaultValues?.name);
+    setValue("category", defaultValues?.category);
+    setValue("description", defaultValues?.description);
+    setHasVariation(defaultValues && defaultValues.hasVariation ? true : false);
+  }, [defaultValues]);
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
-      <VStack spacing="20px" w="100%">
+      <VStack
+        spacing="20px"
+        w="100%"
+        as="form"
+        onSubmit={handleSubmit(saveProduct)}
+        ref={formRef}
+      >
         <HStack w="100%" spacing="20px">
-          <InputsHome name="Nome do produto" typeInput="text" />
-          <InputsHome
-            name="Categoria"
-            typeInput="select"
-            options={["p1", "p2"]}
+          <InputDefault
+            label="Nome do produto"
+            type="text"
+            placeholder="nome do produto"
+            error={errors.name}
+            {...register("name", { required: "Nome é obrigatório" })}
+          />
+          <SelectDefault
+            label="Categoria"
+            error={errors.category}
+            opt={list.map((value: any) => {
+              return {
+                name: value.name,
+                value: value.id,
+              };
+            })}
+            {...register("category", { required: "Campo obrigatório" })}
           />
         </HStack>
         <InputsHome name="Foto e vídeo do produto" typeInput="file" />
-        <InputsHome name="Descrição curta" typeInput="textarea" />
+        <TextareaDefault
+          label="Descrição curta"
+          error={errors.description}
+          {...register("description", {
+            required: "Descrição é obrigatório",
+          })}
+        />
         <Box w="100%">
           <Checkbox
             colorScheme="red"
@@ -51,122 +161,36 @@ const ContainerAddProduct = ({ nextStep }: any) => {
       <VStack spacing="30px" divider={<Divider />} w="100%">
         {hasVariation &&
           listVariation.map((list: any, index: number) => (
-            <Box w="100%">
-              <Flex
-                mb="20px"
-                alignItems="center"
-                justifyContent="space-between"
-                w="100%"
-              >
-                <Flex alignItems="center" w="100%" maxW="636px">
-                  <Box w="100%" maxW="636px">
-                    <Text color="black.800" fontSize="20px" mb="10px">
-                      Nome da variação {index + 1}
-                    </Text>
-                    <InputGroup
-                      borderRadius="6px"
-                      bg="white.500"
-                      p="3px 7px"
-                      w="100%"
-                      maxW="636px"
-                      h="50px"
-                      outline="none"
-                      border="1px solid"
-                      borderColor="black.800"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Input
-                        w="100%"
-                        maxW="636px"
-                        height="100%"
-                        border="none"
-                        borderRadius="21px"
-                        placeholder="nome completo"
-                        _focusVisible={{
-                          outline: "none",
-                        }}
-                      />
-                    </InputGroup>
-                  </Box>
-                  <Flex
-                    ml="10px"
-                    h="100%"
-                    alignItems="center"
-                    justifyContent="center"
-                    pt="30px"
-                  >
-                    <Checkbox
-                      colorScheme="red"
-                      color="black.800"
-                      fontSize="20px"
-                      height="17px"
-                    >
-                      Ativar
-                    </Checkbox>
-                  </Flex>
-                </Flex>
-                <HStack spacing="20px">
-                  <Icon
-                    as={GrAddCircle}
-                    fontSize="30px"
-                    cursor="pointer"
-                    onClick={() =>
-                      setListVariation([
-                        ...listVariation,
-                        { id: listVariation.length + 1 },
-                      ])
-                    }
-                  />
-                  <Icon
-                    as={GrSubtractCircle}
-                    fontSize="30px"
-                    cursor="pointer"
-                    onClick={() => {
-                      let newList: any = [];
-                      listVariation.forEach(
-                        (list: any, indexRemove: number) => {
-                          if (index != indexRemove) newList.push(list);
-                        }
-                      );
-                      setListVariation(newList);
-                    }}
-                  />
-                </HStack>
-              </Flex>
-              <InputGroup
-                borderRadius="6px"
-                bg="white.500"
-                p="3px 7px"
-                w="100%"
-                h="50"
-                outline="none"
-                border="1px solid"
-                borderColor="black.800"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Select
-                  w="100%"
-                  height="100%"
-                  border="none"
-                  borderRadius="21px"
-                  placeholder="Opções de variação"
-                  color="black.800"
-                  _placeholder={{
-                    color: "black.50",
-                  }}
-                  _focusVisible={{
-                    outline: "none",
-                  }}
-                >
-                  <option>opt 1</option>
-                  <option>opt 2</option>
-                </Select>
-              </InputGroup>
-            </Box>
+            <Variation
+              newVariation={() => {
+                setListVariation([
+                  ...listVariation,
+                  { id: listVariation.length + 1 },
+                ]);
+              }}
+              removeVariation={() => {
+                let newList: any = [];
+                listVariation.forEach((list: any, indexRemove: number) => {
+                  if (index != indexRemove) newList.push(list);
+                });
+                setListVariation(newList);
+              }}
+              index={index}
+              key={index}
+              addVariation={(variation: any) => {
+                let newList = listVariation;
+                newList[index].name = variation.name
+
+                if (newList[index].opt) {
+                  newList[index].opt.push(variation.addOpt);
+                } else {
+                  newList[index].opt = [variation.addOpt];
+                }
+
+                setListVariation(newList);
+              }}
+              defaultValues={listVariation[index]}
+            />
           ))}
       </VStack>
       <Flex alignItems="center" justifyContent="flex-end" mt="53px" w="100%">
@@ -179,7 +203,8 @@ const ContainerAddProduct = ({ nextStep }: any) => {
           w="128px"
           h="47px"
           _hover={{ transition: "all 0.4s", opacity: 0.7 }}
-          onClick={() => nextStep()}
+          type="button"
+          onClick={() => formRef.current?.requestSubmit()}
         >
           Avançar
         </Button>
