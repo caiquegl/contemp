@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   Flex,
   HStack,
   Icon,
@@ -49,7 +50,7 @@ const TabCategory = () => {
   initFirebase();
   const [update, setUpdate] = useState<any>({});
   const [loading, setLoading] = useState(false);
-  const [editOrder, setEditOrder] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [list, setList] = useState<any>([]);
   const formRef = useRef<any>();
 
@@ -61,6 +62,10 @@ const TabCategory = () => {
 
   const saveCategory = async (bodyForm: any) => {
     try {
+      if (Object.keys(update).length > 0) {
+        updateCategory(bodyForm);
+        return;
+      }
       setLoading(false);
 
       const dbInstance = collection(database, "categories");
@@ -82,13 +87,12 @@ const TabCategory = () => {
       });
 
       if (!exist) {
-        if (Object.keys(update).length > 0) {
-          const dbInstanceUpdate = doc(database, "categories", update.id);
-          await updateDoc(dbInstanceUpdate, bodyForm);
-          setUpdate({});
-        } else {
-          await addDoc(dbInstance, { ...bodyForm, order: order + 1 });
-        }
+        await addDoc(dbInstance, {
+          ...bodyForm,
+          favorite: isFavorite,
+          order: order + 1,
+        });
+
         toast({
           title: "Sucesso",
           description: "Categoria cadastradado com sucesso.",
@@ -112,6 +116,66 @@ const TabCategory = () => {
       toast({
         title: "Erro",
         description: "Erro ao salvar categoria",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateCategory = async (bodyForm: any) => {
+    try {
+      setLoading(false);
+
+      const dbInstance = collection(database, "categories");
+      let exist = false;
+      const q = query(dbInstance, orderBy("order", "desc"), limit(1));
+      const qExist = query(
+        dbInstance,
+        where("name", "==", bodyForm.name),
+        limit(1)
+      );
+
+      await getDocs(qExist).then((data) => {
+        console.log(data.docs[0]?.data().order, update.order);
+        if (data.docs.length > 0 && data.docs[0]?.data().order != update.order)
+          exist = true;
+      });
+
+      if (!exist) {
+        const dbInstanceUpdate = doc(database, "categories", update.id);
+        await updateDoc(dbInstanceUpdate, {
+          ...bodyForm,
+          favorite: isFavorite,
+        });
+        setUpdate({});
+
+        toast({
+          title: "Sucesso",
+          description: "Categoria cadastradado com sucesso.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        reset();
+        setUpdate({} as IBody);
+        listCategory();
+      } else {
+        toast({
+          title: "Erro",
+          description: "Categoria já existe",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Erro",
+        description: "Erro ao atualizar categoria",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -246,6 +310,7 @@ const TabCategory = () => {
                             setValue("is_main", value.is_main);
                             setValue("description", value.description);
                             setValue("favorite", value.favorite);
+                            setIsFavorite(value.favorite);
                             setUpdate(value);
                             if (value.sub_categorie)
                               setValue("sub_categorie", value.sub_categorie);
@@ -295,10 +360,12 @@ const TabCategory = () => {
             <SelectDefault
               label="Selecione a categoria"
               error={errors.sub_categorie}
-              opt={[
-                { name: "SIM", value: "true" },
-                { name: "NÃO", value: "false" },
-              ]}
+              opt={list.map((value: any) => {
+                return {
+                  name: value.name,
+                  value: value.name,
+                };
+              })}
               {...register("sub_categorie", { required: "Campo obrigatório" })}
             />
           )}
@@ -309,12 +376,26 @@ const TabCategory = () => {
               required: "Descrição é obrigatório",
             })}
           />
+          <Box w="100%">
+            <Checkbox
+              colorScheme="red"
+              color="black.800"
+              mr="auto"
+              fontSize="20px"
+              height="17px"
+              isChecked={isFavorite}
+              onChange={(evt) => setIsFavorite(evt.target.checked)}
+            >
+              Categoria destaque
+            </Checkbox>
+          </Box>
 
-          <CheckboxDefault
+          {/* <CheckboxDefault
             label="Categoria destaque"
             error={errors.favorite}
+            defaultCheck={update.favorite}
             {...register("favorite")}
-          />
+          /> */}
         </VStack>
         <Flex
           alignItems="center"

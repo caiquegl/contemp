@@ -4,18 +4,29 @@ import {
   Checkbox as Inpt,
   CheckboxProps as ChakraInputProps,
 } from "@chakra-ui/react";
-import { forwardRef, ForwardRefRenderFunction } from "react";
+import {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useEffect,
+  useState,
+} from "react";
 import { FieldError } from "react-hook-form";
 
 interface InpuptProps extends ChakraInputProps {
   name: string;
   label?: string;
   error: FieldError;
+  defaultCheck?: any;
 }
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InpuptProps> = (
-  { name, label, error, ...rest },
+  { name, label, error, defaultCheck = false, ...rest },
   ref
 ) => {
+  const [value, setValue] = useState<any>(defaultCheck);
+  useEffect(() => {
+    setValue(defaultCheck);
+  }, [defaultCheck]);
+
   return (
     <FormControl isInvalid={!!error}>
       <Inpt
@@ -27,6 +38,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InpuptProps> = (
         id={name}
         name={name}
         ref={ref}
+        isChecked={value}
+        onChange={(evt) => setValue(evt.target.checked)}
         {...rest}
       >
         {label}
