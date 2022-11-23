@@ -16,7 +16,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { database, initFirebase } from "../../utils/db/index";
 import {
@@ -265,7 +265,7 @@ const TabCategory = () => {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     listCategory();
   }, []);
 
