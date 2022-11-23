@@ -26,13 +26,14 @@ import {
   orderBy,
   query,
   where,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 
-const ContainerAddProductDescription = ({ values, reset }: any) => {
+const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
-  const [listVariation, setListVariation] = useState([{ id: 1 }]);
   const [editorLoaded, setEditorLoaded] = useState<any>(false);
   const [loading, setLoading] = useState(false);
   const [tabs, setTabs] = useState<any>([{ id: 1 }]);
@@ -43,26 +44,39 @@ const ContainerAddProductDescription = ({ values, reset }: any) => {
 
   const add = () => {
     setEditorLoaded(false);
-    setListVariation([...listVariation, { id: listVariation.length + 1 }]);
+    setTabs([...tabs, { id: tabs.length + 1 }]);
     setTimeout(() => {
       setEditorLoaded(true);
     }, 500);
   };
 
+  useEffect(() => {
+    if (values.tab) {
+      setEditorLoaded(false);
+      setTabs(values.tab);
+      setTimeout(() => {
+        setEditorLoaded(true);
+      }, 500);
+    }
+  }, [values]);
+
   const remove = (index: number) => {
     let newList: any = [];
-    listVariation.forEach((list, indexRemove) => {
+    tabs.forEach((list: any, indexRemove: number) => {
       if (index != indexRemove) newList.push(list);
     });
-    setListVariation(newList);
+    setTabs(newList);
   };
 
   const saveProduct = async () => {
     try {
-      // if (Object.keys(update).length > 0) {
-      //   updateCategory()bodyForm);
-      //   return;
-      // }
+      if (isUpdate) {
+        updateProduct({
+          ...values,
+          tab: tabs,
+        });
+        return;
+      }
 
       let falt = false;
       tabs.forEach((key: any) => {
@@ -108,8 +122,7 @@ const ContainerAddProductDescription = ({ values, reset }: any) => {
           duration: 3000,
           isClosable: true,
         });
-        reset()
-
+        reset();
       } else {
         toast({
           title: "Erro",
@@ -119,7 +132,6 @@ const ContainerAddProductDescription = ({ values, reset }: any) => {
           isClosable: true,
         });
       }
-
     } catch (error) {
       toast({
         title: "Erro",
@@ -133,10 +145,60 @@ const ContainerAddProductDescription = ({ values, reset }: any) => {
     }
   };
 
+  const updateProduct = async (bodyForm: any) => {
+    try {
+      setLoading(true);
+
+      const dbInstance = collection(database, "products");
+      let exist = false;
+      const qExist = query(
+        dbInstance,
+        where("name", "==", bodyForm.name),
+        limit(1)
+      );
+
+      await getDocs(qExist).then((data) => {
+        if (data.docs.length > 0 && data.docs[0].id != bodyForm.id)
+          exist = true;
+      });
+
+      if (!exist) {
+        const dbInstanceUpdate = doc(database, "products", bodyForm.id);
+        await updateDoc(dbInstanceUpdate, bodyForm);
+        toast({
+          title: "Sucesso",
+          description: "Produto atualizado com sucesso.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        reset();
+      } else {
+        toast({
+          title: "Erro",
+          description: "Produto já existe",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Erro ao atualizar produto",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
       <VStack spacing="30px" divider={<Divider />} w="100%">
-        {listVariation.map((list, index) => (
+        {tabs.map((list: any, index: number) => (
           <Box w="100%" key={index}>
             <Flex
               mb="20px"
@@ -210,7 +272,7 @@ const ContainerAddProductDescription = ({ values, reset }: any) => {
                   newList[index].text = evt;
                   setTabs(newList);
                 }}
-                value={tabs[index]?.text}
+                value={tabs[index]?.text ? tabs[index]?.text : ""}
                 editorLoaded={editorLoaded}
               />
             </Box>

@@ -5,7 +5,12 @@ import {
   InputGroup,
   Select as Inpt,
 } from "@chakra-ui/react";
-import { forwardRef, ForwardRefRenderFunction, useState } from "react";
+import {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useEffect,
+  useState,
+} from "react";
 import { FieldError } from "react-hook-form";
 
 interface InpuptProps {
@@ -13,11 +18,17 @@ interface InpuptProps {
   label?: string;
   error: FieldError;
   opt: any;
+  defaultValue?: any;
 }
 const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
-  { name, label, opt, error, ...rest }: any,
+  { name, label, opt, error, defaultValue, ...rest }: any,
   ref: any
 ) => {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, [defaultValue, opt]);
   return (
     <FormControl isInvalid={!!error}>
       {!!label && (
@@ -48,8 +59,11 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
           borderRadius="21px"
           color="black.800"
           options={opt}
-          // value={value}
-          // onChange={(evt) => setValue(evt.target.value)}
+          defaultValue={defaultValue}
+          value={value}
+          onChangeCapture={(evt: any) => {
+            setValue(evt.target.value);
+          }}
           placeholder="Selecione uma opção"
           {...rest}
         >

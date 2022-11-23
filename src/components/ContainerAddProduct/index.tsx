@@ -13,12 +13,7 @@ import InputsHome from "../ContainerHome/inputs";
 import { useForm } from "react-hook-form";
 import { InputDefault } from "../Form/Input";
 import { database, initFirebase } from "../../utils/db/index";
-import {
-  collection,
-  getDocs,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { SelectDefault } from "../Form/Select";
 import { TextareaDefault } from "../Form/Textarea";
 import Variation from "./Variantion";
@@ -35,41 +30,49 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
   const { errors } = formState;
 
+  useEffect(() => {
+    if (defaultValues.listVariation) {
+      setListVariation(defaultValues.listVariation);
+    }
+    if (defaultValues.hasVariation) setHasVariation(defaultValues.hasVariation);
+  }, []);
+
   const saveProduct = async (bodyForm: any) => {
     let body = { ...bodyForm, hasVariation };
     if (hasVariation) {
       let falt = false;
       let more = false;
       listVariation.forEach((list: any) => {
-        if(!list.name) falt = true
-        if(!list.opt || list.opt.length === 0) more = true
-      })
+        if (!list.name) falt = true;
+        if (!list.opt || list.opt.length === 0) more = true;
+      });
 
-
-      if(falt || more) {
+      if (falt || more) {
         toast({
           title: "Erro",
-          description: falt ? "Preencha todos os nome de variações" : "Adicione ao menos uma opção",
+          description: falt
+            ? "Preencha todos os nome de variações"
+            : "Adicione ao menos uma opção",
           status: "error",
           duration: 3000,
           isClosable: true,
         });
-        return
+        return;
       }
 
       body = { ...body, listVariation };
     }
 
-    let nameCategory = ''
+    let nameCategory = "";
 
     list.forEach((category: any) => {
-      if(category.id == body.category) nameCategory = category.name
-    })
+      if (category.id == body.category) nameCategory = category.name;
+    });
 
-    body.nameCategory = nameCategory
+    body.nameCategory = nameCategory;
 
     nextStep(body);
-    reset()
+    reset();
   };
 
   const listCategory = async () => {
@@ -126,6 +129,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           <SelectDefault
             label="Categoria"
             error={errors.category}
+            defaultValue={defaultValues.category}
             opt={list.map((value: any) => {
               return {
                 name: value.name,
@@ -150,7 +154,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             mr="auto"
             fontSize="20px"
             height="17px"
-            defaultChecked={hasVariation}
+            checked={hasVariation}
             onChange={(check) => setHasVariation(check.target.checked)}
           >
             Produto tem variações ?
@@ -179,7 +183,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               key={index}
               addVariation={(variation: any) => {
                 let newList = listVariation;
-                newList[index].name = variation.name
+                newList[index].name = variation.name;
 
                 if (newList[index].opt) {
                   newList[index].opt.push(variation.addOpt);

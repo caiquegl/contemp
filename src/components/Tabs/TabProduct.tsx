@@ -20,11 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import {
-  collection,
-  getDocs,
-  deleteDoc
-} from "firebase/firestore";
+import { collection, getDocs, deleteDoc } from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
 import { database, initFirebase } from "../../utils/db";
@@ -34,8 +30,9 @@ const TabProduct = () => {
   const toast = useToast();
 
   const [step, setStep] = useState(1);
-  const [list, setList] = useState<any>([])
-  const [body, setBody] = useState({})
+  const [list, setList] = useState<any>([]);
+  const [body, setBody] = useState({});
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const listProduct = async () => {
     try {
@@ -82,8 +79,8 @@ const TabProduct = () => {
   };
 
   useEffect(() => {
-    listProduct()
-  }, [])
+    listProduct();
+  }, []);
 
   return (
     <>
@@ -154,30 +151,35 @@ const TabProduct = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {list.length > 0 && list.map((table: any) => (
-                    <Tr>
-                      <Td>{table.name}</Td>
-                      <Td>{table.nameCategory}</Td>
-                      <Td>url</Td>
-                      <Td>
-                        <HStack spacing="20px">
-                          <Icon
-                            cursor="pointer"
-                            as={AiOutlineEdit}
-                            fontSize="17px"
-                          />
-                          <Icon
-                            cursor="pointer"
-                            as={AiOutlineClose}
-                            fontSize="17px"
-                            color="red.500"
-                            onClick={() => deleteProduct(table)}
-                          />
-                        </HStack>
-                      </Td>
-                    </Tr>
-                  ))}
-
+                  {list.length > 0 &&
+                    list.map((table: any) => (
+                      <Tr>
+                        <Td>{table.name}</Td>
+                        <Td>{table.nameCategory}</Td>
+                        <Td>url</Td>
+                        <Td>
+                          <HStack spacing="20px">
+                            <Icon
+                              cursor="pointer"
+                              as={AiOutlineEdit}
+                              fontSize="17px"
+                              onClick={() => {
+                                setBody(table);
+                                setIsUpdate(true);
+                                setStep(2);
+                              }}
+                            />
+                            <Icon
+                              cursor="pointer"
+                              as={AiOutlineClose}
+                              fontSize="17px"
+                              color="red.500"
+                              onClick={() => deleteProduct(table)}
+                            />
+                          </HStack>
+                        </Td>
+                      </Tr>
+                    ))}
                 </Tbody>
               </Table>
             </TableContainer>
@@ -207,10 +209,13 @@ const TabProduct = () => {
               Voltar
             </Button>
           </Flex>
-          <ContainerAddProduct defaultValues={body} nextStep={(data: any) => {
-            setBody({ ...body, ...data })
-            setStep(3)
-          }} />
+          <ContainerAddProduct
+            defaultValues={body}
+            nextStep={(data: any) => {
+              setBody({ ...body, ...data });
+              setStep(3);
+            }}
+          />
         </>
       )}
       {step == 3 && (
@@ -236,9 +241,16 @@ const TabProduct = () => {
               Voltar
             </Button>
           </Flex>
-          <ContainerAddProductDescription values={body} reset={() => {
-            setStep(1)
-          }} />
+          <ContainerAddProductDescription
+            values={body}
+            isUpdate={isUpdate}
+            reset={() => {
+              setStep(1);
+              listProduct();
+              setIsUpdate(false);
+              setBody({});
+            }}
+          />
         </>
       )}
     </>

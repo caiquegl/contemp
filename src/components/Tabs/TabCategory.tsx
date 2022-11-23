@@ -65,7 +65,7 @@ const TabCategory = () => {
         updateCategory(bodyForm);
         return;
       }
-      setLoading(false);
+      setLoading(true);
 
       const dbInstance = collection(database, "categories");
       let exist = false;
@@ -126,7 +126,7 @@ const TabCategory = () => {
 
   const updateCategory = async (bodyForm: any) => {
     try {
-      setLoading(false);
+      setLoading(true);
 
       const dbInstance = collection(database, "categories");
       let exist = false;
