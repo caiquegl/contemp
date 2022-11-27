@@ -31,6 +31,7 @@ const TabProduct = () => {
 
   const [step, setStep] = useState(1);
   const [list, setList] = useState<any>([]);
+  const [listClone, setListClone] = useState<any>([]);
   const [body, setBody] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -45,6 +46,7 @@ const TabProduct = () => {
       });
 
       setList(newList);
+      setListClone(newList);
     } catch (error) {
       toast({
         title: "Erro",
@@ -124,6 +126,14 @@ const TabProduct = () => {
                 borderRadius="21px"
                 placeholder="Digite o produto..."
                 type="text"
+                onChange={(evt) => {
+                  let newList = listClone.filter((item: any) =>
+                    item.name
+                      .toLowerCase()
+                      .includes(evt.target.value.toLowerCase())
+                  );
+                  setList(newList);
+                }}
                 _focusVisible={{
                   outline: "none",
                 }}
@@ -204,7 +214,10 @@ const TabProduct = () => {
               border="2px solid"
               borderColor="black.800"
               _hover={{ transition: "all 0.4s", opacity: 0.7 }}
-              onClick={() => setStep(1)}
+              onClick={() => {
+                setBody({});
+                setStep(1);
+              }}
             >
               Voltar
             </Button>
@@ -213,6 +226,7 @@ const TabProduct = () => {
             defaultValues={body}
             nextStep={(data: any) => {
               setBody({ ...body, ...data });
+              console.log(data);
               setStep(3);
             }}
           />

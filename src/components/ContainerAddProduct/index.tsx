@@ -17,28 +17,24 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { SelectDefault } from "../Form/Select";
 import { TextareaDefault } from "../Form/Textarea";
 import Variation from "./Variantion";
+import { ViewImage } from "./ViewImage";
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
   const [hasVariation, setHasVariation] = useState<any>(false);
+  const [destaque, setDestaque] = useState<any>(false);
   const [listVariation, setListVariation] = useState<any>([{ id: 1 }]);
   const [list, setList] = useState<any>([]);
+  const [urls, setUrls] = useState<any>([]);
 
   const { register, handleSubmit, formState, setValue, reset } = useForm({});
 
   const { errors } = formState;
 
-  useEffect(() => {
-    if (defaultValues.listVariation) {
-      setListVariation(defaultValues.listVariation);
-    }
-    if (defaultValues.hasVariation) setHasVariation(defaultValues.hasVariation);
-  }, []);
-
   const saveProduct = async (bodyForm: any) => {
-    let body = { ...bodyForm, hasVariation };
+    let body = { ...bodyForm, hasVariation, urls, destaque };
     if (hasVariation) {
       let falt = false;
       let more = false;
@@ -71,6 +67,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
     body.nameCategory = nameCategory;
 
+    setListVariation([{ id: 1 }]);
+    setUrls([]);
     nextStep(body);
     reset();
   };
@@ -107,6 +105,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setValue("category", defaultValues?.category);
     setValue("description", defaultValues?.description);
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false);
+    setDestaque(defaultValues && defaultValues.destaque ? true : false);
+    if (defaultValues.listVariation) {
+      setListVariation(defaultValues.listVariation);
+    }
+    if (defaultValues.urls) setUrls(defaultValues.urls);
   }, [defaultValues]);
 
   return (
@@ -139,7 +142,27 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             {...register("category", { required: "Campo obrigatório" })}
           />
         </HStack>
-        <InputsHome name="Foto e vídeo do produto" typeInput="file" />
+        <InputsHome
+          name="Foto e vídeo do produto"
+          typeInput="file"
+          getUrls={(values: any) => setUrls([...urls, ...values])}
+        />
+        <HStack spacing="20px" flexWrap="wrap" w="100%">
+          {urls &&
+            urls.length > 0 &&
+            urls.map((value: any, index: number) => (
+              <ViewImage
+                url={value}
+                remove={() => {
+                  let newList: any = [];
+                  urls.forEach((value: any, indexRemove: number) => {
+                    if (index != indexRemove) newList.push(value);
+                  });
+                  setUrls(newList);
+                }}
+              />
+            ))}
+        </HStack>
         <TextareaDefault
           label="Descrição curta"
           error={errors.description}
@@ -147,7 +170,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             required: "Descrição é obrigatório",
           })}
         />
-        <Box w="100%">
+        <Flex w="100%">
           <Checkbox
             colorScheme="red"
             color="black.800"
@@ -155,11 +178,25 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             fontSize="20px"
             height="17px"
             checked={hasVariation}
+            isChecked={hasVariation}
             onChange={(check) => setHasVariation(check.target.checked)}
           >
             Produto tem variações ?
           </Checkbox>
-        </Box>
+          <Checkbox
+            colorScheme="red"
+            color="black.800"
+            mr="auto"
+            fontSize="20px"
+            height="17px"
+            ml="50px"
+            checked={destaque}
+            isChecked={destaque}
+            onChange={(check) => setDestaque(check.target.checked)}
+          >
+            Adicionar ao corrocel de destaque ?
+          </Checkbox>
+        </Flex>
       </VStack>
       <Divider m="20px 0px" />
       <VStack spacing="30px" divider={<Divider />} w="100%">

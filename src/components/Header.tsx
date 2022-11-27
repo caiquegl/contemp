@@ -21,7 +21,7 @@ import {
   MenuButton,
 } from "@chakra-ui/react";
 import { Image } from "./Image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Phone from "../assets/icons/phone.svg";
 import Email from "../assets/icons/envelope.svg";
 import Linkedin from "../assets/icons/linkedin.svg";
@@ -34,8 +34,7 @@ import Camera from "../assets/icons/cameras_white.svg";
 import DeNovo from "../assets/icons/termopar_white.svg";
 import Ultimo from "../assets/icons/calibracao_white.svg";
 import Bag from "../assets/icons/shopping-bag.svg";
-import Controls from "../assets/icons/controladores_white.svg";
-import Pirometro from "../assets/icons/pritometro_white.svg";
+import ImageNext from "next/image";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
@@ -48,15 +47,92 @@ import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { HeaderMenu, MenuItemProps } from "./HeaderMenu";
+import { HeaderMenu } from "./HeaderMenu";
 import { StaticImageData } from "next/image";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { database, initFirebase } from "../utils/db";
+import { useRouter } from "next/router";
 
 export const Header = () => {
+  initFirebase();
+  const router = useRouter();
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
+  const [list, setList] = useState([]);
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
   });
+
+  const listCategory = async () => {
+    try {
+      const dbInstance = collection(database, "categories");
+      let categories: any = [];
+      const q = query(dbInstance, where("is_main", "==", "true"));
+      await getDocs(q).then((data) => {
+        data.docs.forEach((doc) => {
+          categories.push({
+            ...doc.data(),
+            id: doc.id,
+            ref: doc.ref,
+          });
+        });
+      });
+
+      const getSubCategory = async (name: any) => {
+        let newCategory: any = [];
+
+        const q = query(dbInstance, where("sub_categorie", "==", name));
+
+        let doc: any = [];
+        await getDocs(q).then((data) => {
+          if (data.docs.length === 0) return;
+          data.docs.forEach((docs, index: number) => {
+            doc.push({
+              ...docs.data(),
+              id: data.docs[index].id,
+              ref: data.docs[index].ref,
+            });
+          });
+        });
+
+        if (doc.length > 0) {
+          for await (let el of doc) {
+            if (el.sub_categorie) {
+              el.list_sub_category = await getSubCategory(el.name);
+            }
+            if (Object.keys(el).length === 0) return;
+
+            newCategory.push(el);
+          }
+        }
+
+        return newCategory;
+      };
+
+      let newList: any = [];
+
+      for await (let categ of categories) {
+        newList.push({
+          ...categ,
+          list_sub_category: await getSubCategory(categ.name),
+        });
+      }
+      setList(newList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    listCategory();
+  }, []);
 
   if (isDrawerSiderbar) {
     return (
@@ -260,21 +336,6 @@ export const Header = () => {
             </Text>
           </Flex>
         </Box>
-        <HStack
-          divider={<Box borderRadius="full" bg="white" w="5px" h="5px" />}
-          flex={1}
-        >
-          <Link href="/about">
-            <Text w="max-content">A Contemp</Text>
-          </Link>
-          <Text>Blog</Text>
-          <Link href="/work">
-            <Text w="max-content">Trabalhe Conosco</Text>
-          </Link>
-          <Link href="/support">
-            <Text w="max-content">Suporte Técnico</Text>
-          </Link>
-        </HStack>
 
         <HStack>
           <Link href="https://www.linkedin.com/company/contemp/" isExternal>
@@ -330,10 +391,15 @@ export const Header = () => {
         </HStack>
       </Flex>
 
-      <Flex alignItems="center" justifyContent="space-between" h={70}>
-        <Link href="/">
-          <Image src={Logo} width={160} height={41} />
-        </Link>
+      <Flex alignItems="center" justifyContent="space-between" h={70} mb="30px">
+        <Box
+          onClick={() => router.push("/")}
+          cursor="pointer"
+          height={41}
+          mr="20px"
+        >
+          <ImageNext width={160} height={41} src={Logo} />
+        </Box>
 
         <Box flex={1}>
           <Link href="/allProduct">
@@ -399,59 +465,7 @@ export const Header = () => {
         </Flex>
       </Flex>
 
-      <HStack flexWrap="wrap" justifyContent="space-between">
-        <HeaderMenu
-          title={"Controladores de Temperatura e Processo"}
-          menuItems={menuItems}
-        />
-        <HeaderMenu title={"Controle de Potência"} menuItems={menuItems} />
-        <HeaderMenu
-          title={"Câmeras Termográficas Optris"}
-          menuItems={menuItems}
-        />
-        <HeaderMenu title={"Pirômetros Fixos Optris"} menuItems={menuItems} />
-        <HeaderMenu title={"Sensor"} menuItems={menuItems} />
-        <HeaderMenu title={"Softwares"} menuItems={menuItems} />
-      </HStack>
+      <HeaderMenu menuItems={list} />
     </Container>
   );
 };
-
-type HeaderIconSrc = string | StaticImageData;
-
-const HeaderIcon = ({ src }: { src: HeaderIconSrc }) => {
-  const imageSrc = typeof src === "string" ? src : src.src;
-
-  return (
-    <Box
-      w={{
-        base: pxToRem(30),
-        lg: pxToRem(40),
-        xl: pxToRem(50),
-      }}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Image src={imageSrc} width={41} height={41} />
-    </Box>
-  );
-};
-const menuItems: MenuItemProps[] = [
-  {
-    label: "Item 1",
-    link: "",
-  },
-  {
-    label: "Item 2",
-    link: "",
-  },
-  {
-    label: "Item 3",
-    link: "",
-  },
-  {
-    label: "Item 4",
-    link: "",
-  },
-];

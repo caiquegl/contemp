@@ -11,8 +11,15 @@ import {
   SelectProps,
   TextareaProps,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FiFile } from "react-icons/fi";
+import {
+  getDownloadURL,
+  getStorage,
+  ref as refStorage,
+  uploadBytes,
+} from "firebase/storage";
+import { app, initFirebase } from "../../utils/db";
 
 interface IProps extends InputProps {
   name: string;
@@ -20,6 +27,8 @@ interface IProps extends InputProps {
   options?: any;
   selectProps?: SelectProps;
   textareaProps?: TextareaProps;
+  fileProps?: TextareaProps;
+  getUrls?: any;
 }
 
 const InputsHome = ({
@@ -28,9 +37,13 @@ const InputsHome = ({
   options,
   selectProps,
   textareaProps,
+  fileProps,
+  getUrls,
   ...rest
 }: IProps) => {
+  initFirebase();
   const ref = useRef<any>();
+  const refSingle = useRef<any>();
 
   return (
     <Box w="100%">
@@ -98,11 +111,71 @@ const InputsHome = ({
               name={name}
               style={{ display: "none" }}
               ref={ref}
+              multiple={true}
+              onChange={async (evt) => {
+                let file = getStorage(app, "gs://contemp-1e58c.appspot.com");
+                let files: any = evt.target.files;
+                let urls: any = [];
+
+                for await (let el of files) {
+                  const storageRef = refStorage(
+                    file,
+                    `${el.name}-${new Date()}`
+                  );
+
+                  const uploadTask = uploadBytes(storageRef, el).then(
+                    (snapshot) => {
+                      getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        urls.push(downloadURL);
+                        getUrls(urls);
+                      });
+                    }
+                  );
+                }
+              }}
             />
             <Input
               placeholder={name || "Your file ..."}
               border="none"
               onClick={() => ref.current.click()}
+              {...rest}
+            />
+          </>
+        )}
+        {typeInput == "fileSingle" && (
+          <>
+            <InputRightElement
+              pointerEvents="none"
+              children={<Icon as={FiFile} color="black.800" />}
+            />
+            <input
+              type="file"
+              name={name}
+              style={{ display: "none" }}
+              ref={refSingle}
+              multiple={false}
+              onChange={async (evt) => {
+                console.log(evt);
+                let file = getStorage(app, "gs://contemp-1e58c.appspot.com");
+                let files: any = evt.target.files;
+                console.log(files[0].name);
+                const storageRef = refStorage(
+                  file,
+                  `${files[0].name}-${new Date()}`
+                );
+                console.log(storageRef);
+                await uploadBytes(storageRef, files[0]).then((snapshot) => {
+                  getDownloadURL(snapshot.ref).then((downloadURL) => {
+                    console.log(downloadURL);
+                    getUrls(downloadURL);
+                  });
+                });
+              }}
+            />
+            <Input
+              placeholder={name || "Your file ..."}
+              border="none"
+              onClick={() => refSingle.current.click()}
               {...rest}
             />
           </>

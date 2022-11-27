@@ -36,6 +36,8 @@ import { useForm } from "react-hook-form";
 import { SelectDefault } from "../Form/Select";
 import { TextareaDefault } from "../Form/Textarea";
 import { EditOrder } from "../EditOrder";
+import InputsHome from "../ContainerHome/inputs";
+import { ViewImage } from "../ContainerAddProduct/ViewImage";
 interface IBody {
   name: string;
   is_main?: string;
@@ -50,6 +52,7 @@ const TabCategory = () => {
   const [update, setUpdate] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [url, setUrl] = useState("");
   const [list, setList] = useState<any>([]);
   const formRef = useRef<any>();
 
@@ -61,6 +64,7 @@ const TabCategory = () => {
 
   const saveCategory = async (bodyForm: any) => {
     try {
+      bodyForm = { ...bodyForm, url };
       if (Object.keys(update).length > 0) {
         updateCategory(bodyForm);
         return;
@@ -78,6 +82,7 @@ const TabCategory = () => {
       );
 
       await getDocs(q).then((data) => {
+        if (data.docs.length === 0) return;
         order = data.docs[0].data().order;
       });
 
@@ -100,6 +105,7 @@ const TabCategory = () => {
           isClosable: true,
         });
         reset();
+        setUrl("");
         setUpdate({} as IBody);
         listCategory();
       } else {
@@ -112,6 +118,7 @@ const TabCategory = () => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao salvar categoria",
@@ -127,7 +134,6 @@ const TabCategory = () => {
   const updateCategory = async (bodyForm: any) => {
     try {
       setLoading(true);
-
       const dbInstance = collection(database, "categories");
       let exist = false;
       const qExist = query(
@@ -157,6 +163,7 @@ const TabCategory = () => {
           isClosable: true,
         });
         reset();
+        setUrl("");
         setUpdate({} as IBody);
         listCategory();
       } else {
@@ -308,6 +315,7 @@ const TabCategory = () => {
                             setValue("favorite", value.favorite);
                             setIsFavorite(value.favorite);
                             setUpdate(value);
+                            setUrl(value.url ? value.url : "");
                             if (value.sub_categorie)
                               setValue("sub_categorie", value.sub_categorie);
                           }}
@@ -346,6 +354,7 @@ const TabCategory = () => {
           <SelectDefault
             label="É principal?"
             error={errors.is_main}
+            defaultValue={update.is_main}
             opt={[
               { name: "SIM", value: "true" },
               { name: "NÃO", value: "false" },
@@ -356,6 +365,7 @@ const TabCategory = () => {
             <SelectDefault
               label="Selecione a categoria"
               error={errors.sub_categorie}
+              defaultValue={update.sub_categorie}
               opt={list.map((value: any) => {
                 return {
                   name: value.name,
@@ -372,6 +382,21 @@ const TabCategory = () => {
               required: "Descrição é obrigatório",
             })}
           />
+          <InputsHome
+            name="Foto do icone"
+            typeInput="fileSingle"
+            getUrls={(values: any) => setUrl(values)}
+          />
+          <HStack spacing="20px" flexWrap="wrap" w="100%">
+            {url && (
+              <ViewImage
+                url={url}
+                remove={() => {
+                  setUrl("");
+                }}
+              />
+            )}
+          </HStack>
           <Box w="100%">
             <Checkbox
               colorScheme="red"
@@ -416,6 +441,7 @@ const TabCategory = () => {
               _hover={{ transition: "all 0.4s", opacity: 0.7 }}
               onClick={() => {
                 setUpdate({});
+                setUrl("");
                 reset();
               }}
               type="button"

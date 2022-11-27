@@ -5,7 +5,6 @@ import {
   Input,
   HStack,
   VStack,
-  Checkbox,
   Button,
   Flex,
   Divider,
@@ -13,11 +12,9 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { database, initFirebase } from "../../utils/db";
 import CKeditor from "../CKEditor";
-import { InputDefault } from "../Form/Input";
 import {
   addDoc,
   collection,
@@ -33,7 +30,6 @@ import {
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   initFirebase();
   const toast = useToast();
-  const formRef = useRef<any>();
   const [editorLoaded, setEditorLoaded] = useState<any>(false);
   const [loading, setLoading] = useState(false);
   const [tabs, setTabs] = useState<any>([{ id: 1 }]);
@@ -110,6 +106,10 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
       });
 
       if (!exist) {
+        console.log({
+          ...values,
+          tab: tabs,
+        });
         await addDoc(dbInstance, {
           ...values,
           tab: tabs,
@@ -133,6 +133,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao salvar produto",
@@ -164,6 +165,9 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
       if (!exist) {
         const dbInstanceUpdate = doc(database, "products", bodyForm.id);
+        console.log(bodyForm);
+        delete bodyForm.id;
+        delete bodyForm.ref;
         await updateDoc(dbInstanceUpdate, bodyForm);
         toast({
           title: "Sucesso",
@@ -183,6 +187,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao atualizar produto",
