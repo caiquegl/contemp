@@ -5,6 +5,7 @@ import {
   Text,
   Grid,
   useBreakpointValue,
+  Center,
 } from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
@@ -19,6 +20,9 @@ import CardCatalog from "../components/CardCatalog";
 import { Image } from '../components/Image'
 import { pxToRem } from "../utils/pxToRem";
 import { SmoothScroll } from "../components/SmoothScroll";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { database } from "../utils/db";
 
 const products = [] as number[]
 
@@ -27,6 +31,8 @@ for (let i = 0; i < 10; i++) {
 }
 
 const AllProduct = () => {
+  const [favorites, setFavorites] = useState<any>([])
+
   const isTablet = useBreakpointValue({
     base: true,
     lg: false,
@@ -36,6 +42,59 @@ const AllProduct = () => {
     base: true,
     md: false,
   });
+
+
+  const getFavorites = async () => {
+    try {
+      const dbInstanceHome = collection(database, "categories");
+      const qFavorite = query(dbInstanceHome, where("favorite", "==", true))
+      let listFavorite: any = []
+
+      await getDocs(qFavorite).then(async (data) => {
+        if (data.docs.length === 0) return
+
+        data.docs.forEach((fv: any, index: number) => {
+          listFavorite.push({ ...fv.data(), idCategorie: data.docs[index].id, products: [] });
+        })
+
+      });
+
+      if (listFavorite.length === 0) return
+
+      let index = 0
+      for await (let categories of listFavorite) {
+
+        const dbInstanceProduct = collection(database, "products");
+        const qProduct = query(dbInstanceProduct, where("category", "==", categories.idCategorie))
+
+        await getDocs(qProduct).then(async (data) => {
+          if (data.docs.length === 0) return
+          data.docs.forEach((pd: any) => {
+            listFavorite[index].products.push(pd.data());
+          })
+        })
+
+        const dbInstanceHome = collection(database, "home");
+        const qHome = query(dbInstanceHome, where("category", "==", categories.idCategorie))
+        await getDocs(qHome).then(async (data) => {
+          if (data.docs.length === 0) return
+          data.docs.forEach((pd: any) => {
+            listFavorite[index].products.push(pd.data());
+          })
+        });
+
+        index = index + 1
+      }
+      console.log(listFavorite)
+      setFavorites(listFavorite)
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
+  useEffect(() => {
+    getFavorites()
+  }, [])
 
   return (
     <SmoothScroll>
@@ -58,55 +117,74 @@ const AllProduct = () => {
           processos industriais.
         </Text>
       </Flex>
-      <Flex
-        w="100%"
-        alignItems="center"
-        bg="white"
-        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
-      >
-        <Container maxW="7xl" p="80px 0">
-          <Flex alignItems="center">
-            <Box w="70px" h="70px" bg="black.900" borderRadius="5px" />
-            <Text color="black.800" fontSize="45px" fontWeight="bold" ml="15px">
-              Categoria de Destaque
-            </Text>
-          </Flex>
-          <Box h={pxToRem(650)} mt="31px">
-            <Swiper
-              slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
-              spaceBetween={30}
-              autoplay={{
-                delay: 2000,
-                pauseOnMouseEnter: true,
-              }}
-              pagination={true}
-              modules={[Autoplay, Pagination]}
-              className="mySwiper"
-            >
-              {products.map((item) => (
-                <SwiperSlide>
-                  <CardProductWithDescription
-                    img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                    text={`Teste ${item}`}
-                    description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
+      {favorites && favorites.length > 0 && favorites.map((fv: any) => (
+        <Flex
+          w="100%"
+          alignItems="center"
+          bg="white"
+          p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+        >
+          <Container maxW="7xl" p="80px 0">
+            <Flex alignItems="center">
+              {fv.url ?
+                <Center w="70px" h="70px" borderRadius="5px" >
+                  <Image
+                    src={fv.url}
+                    alt={fv.name}
+                    bgSize="contain"
+                    minH={{
+                      base: pxToRem(228),
+                      md: pxToRem(330),
+                      lg: pxToRem(425)
+                    }}
+                    flex={0.8}
                   />
-                </SwiperSlide>
-              ))}               
-            </Swiper>
-          </Box>
+                </Center>
 
-          <Flex
-            mt={pxToRem(61)}
-            alignItems="center"
-            justifyContent="space-between"
-            direction={["column", "column", "column", "row", "row"]}
-          >
-            <AdBanner />
-            <AdBanner />
-          </Flex>
+                :
+                <Box w="55px" h="55px" borderRadius="5px" bg="black.800" />
+              }
+              <Text color="black.800" fontSize="45px" fontWeight="bold" ml="15px">
+                {fv.name}
+              </Text>
+            </Flex>
+            <Box h={pxToRem(650)} mt="31px">
+              <Swiper
+                slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
+                spaceBetween={30}
+                autoplay={{
+                  delay: 2000,
+                  pauseOnMouseEnter: true,
+                }}
+                pagination={true}
+                modules={[Autoplay, Pagination]}
+                className="mySwiper"
+              >
+                {fv.products && fv.products.length > 0 && fv.products.map((item: any) => (
+                  <SwiperSlide>
+                    <CardProductWithDescription
+                      img={item.urls[0]}
+                      text={item.name}
+                      description={item.description}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          </Container>
+        </Flex>
+      ))}
 
-        </Container>
+      <Flex
+        mt={pxToRem(61)}
+        alignItems="center"
+        justifyContent="space-between"
+        direction={["column", "column", "column", "row", "row"]}
+      >
+        <AdBanner />
+        <AdBanner />
       </Flex>
+
       <Flex w="100%" alignItems="center" bg="white.500">
         <Container maxW="7xl" p="80px 0">
           <Text

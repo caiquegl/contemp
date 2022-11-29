@@ -213,7 +213,63 @@ const TabCategory = () => {
 
   const deleteCategory = async (category: any) => {
     try {
-      await deleteDoc(category.ref);
+      let exist = false;
+      let existSubCategory = false;
+
+      const dbInstance = collection(database, "products");
+      const qExist = query(
+        dbInstance,
+        where("category", "==", category.id),
+        limit(1)
+      );
+
+      const dbInstanceHome = collection(database, "home");
+      const qExistHome = query(
+        dbInstanceHome,
+        where("category", "==", category.id),
+        limit(1)
+      );
+
+      await getDocs(qExist).then((data) => {
+        if(data.docs.length > 0) exist = true
+      });
+
+      await getDocs(qExistHome).then((data) => {
+        if(data.docs.length > 0) exist = true
+      });
+
+      const dbInstanceCategory = collection(database, "categories");
+      const qExistCategory = query(
+        dbInstanceCategory,
+        where("sub_categorie", "==", category.id),
+        limit(1)
+      );
+
+      await getDocs(qExistCategory).then((data) => {
+        if(data.docs.length > 0) existSubCategory = true
+      });
+
+      if(exist) {
+        toast({
+          title: "Erro",
+          description: "Categoria vinculada a produto",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return
+      }
+      if(existSubCategory) {
+        toast({
+          title: "Erro",
+          description: "Existe uma subcategoria vinculada a está categoria",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return
+      }
+      // await deleteDoc(category.ref);
       toast({
         title: "Sucesso",
         description: "Categoria deletada com sucesso.",
@@ -369,7 +425,7 @@ const TabCategory = () => {
               opt={list.map((value: any) => {
                 return {
                   name: value.name,
-                  value: value.name,
+                  value: value.id,
                 };
               })}
               {...register("sub_categorie", { required: "Campo obrigatório" })}

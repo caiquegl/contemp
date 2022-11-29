@@ -7,9 +7,10 @@ interface IProps {
   img: string | StaticImageData;
   text: string;
   alt?: string;
+  categoryName?: string;
 }
 
-const CardProduct = ({ img, text, alt }: IProps) => {
+const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
   return (
     <Flex
       alignItems="center"
@@ -48,7 +49,7 @@ const CardProduct = ({ img, text, alt }: IProps) => {
           >
             {text}
           </Text>
-          <Link>
+          <Link href={text ? `product/${text}` : ''}>
             <Text fontSize="20px" color="black">
               Veja mais +
             </Text>

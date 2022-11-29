@@ -20,7 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { collection, getDocs, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, getDoc } from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
 import { database, initFirebase } from "../../utils/db";
@@ -39,10 +39,16 @@ const TabProduct = () => {
     try {
       const dbInstance = collection(database, "products");
       let newList: any = [];
-      await getDocs(dbInstance).then((data) => {
-        data.docs.forEach((doc) => {
-          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
-        });
+      await getDocs(dbInstance).then(async (data) => {
+
+        for await (let pd of data.docs) {
+          const docRef = doc(database, 'categories', pd.data().category);          
+          const docSnap = await getDoc(docRef);
+          if(docSnap.exists()) {
+            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
+          }
+
+        }
       });
 
       setList(newList);
@@ -226,7 +232,6 @@ const TabProduct = () => {
             defaultValues={body}
             nextStep={(data: any) => {
               setBody({ ...body, ...data });
-              console.log(data);
               setStep(3);
             }}
           />

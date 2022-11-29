@@ -1,5 +1,6 @@
 import { Box, Button, Link, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
@@ -9,9 +10,12 @@ interface IProps {
   text: string;
   description?: string;
   alt?: string;
+  color?: string;
+  buttomBottom?: string
 }
 
-const CardProductWithDescription = ({ img, text, alt, description }: IProps) => {
+const CardProductWithDescription = ({ img, text, alt, description, color, buttomBottom }: IProps) => {
+  const router = useRouter()
   const [isHovering, setIsHovering] = useState(false)
 
   const handleIsHovering = () =>
@@ -25,7 +29,7 @@ const CardProductWithDescription = ({ img, text, alt, description }: IProps) => 
       flexDirection="column"
       borderRadius="8px"
       border={isHovering ? '2px solid' : 'none'}
-      borderColor="black.800"
+      borderColor={color ? color : "black.800"}
       p={`${pxToRem(45)} ${pxToRem(23)}`}
       w={pxToRem(346)}
       h={pxToRem(677)}
@@ -35,14 +39,15 @@ const CardProductWithDescription = ({ img, text, alt, description }: IProps) => 
       <Text
         fontSize={pxToRem(60)}
         fontWeight="bold"
-        color="black"
+        color={color ? color : "black"}
         textTransform="uppercase"
         mb="20px"
         width="100%"
+        
       >
         {text}
       </Text>
-      <Text fontSize={pxToRem(20)} color="black" mb="20px">
+      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px">
         {description}
       </Text>
 
@@ -54,7 +59,10 @@ const CardProductWithDescription = ({ img, text, alt, description }: IProps) => 
         borderRadius="25px"
         bg="red.600"
         fontSize="20px"
+        borderColor={buttomBottom ? buttomBottom : 'transpares'}
+        borderWidth={buttomBottom ? "2px" : '0'}
         _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+        onClick={() => router.push(`/product/${text}`)}
       >
         Solicitar orçamento
       </Button>

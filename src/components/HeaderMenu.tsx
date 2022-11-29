@@ -1,7 +1,8 @@
 import { Icon, Image, Link, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
-import { AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 export type MenuProps = {
   menuItems: any;
@@ -36,8 +37,8 @@ export type MenuProps = {
 // };
 
 export const HeaderMenu = ({ menuItems }: MenuProps) => {
-  const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
+  const router = useRouter();
 
   const amountList = async (amount: any, name?: any) => {
     try {
@@ -47,13 +48,13 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           ...el,
           label: el.name,
           key: el.name.replaceAll(" ", ""),
+          onClick: (item: any) => router.push(`/category/${el.name}`)
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
-          // console.log(name);
           newObj.children = await amountList(el.list_sub_category, el.name);
           newObj.icon = (
-            <Icon as={AiFillCaretDown} fontSize="20px" color="#fff" />
+            <Icon as={name ? AiFillCaretRight : AiFillCaretDown} fontSize="20px" color="#fff" />
           );
         }
 
@@ -68,7 +69,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   const getList = async () => {
     let amount = await amountList(menuItems);
-    console.log(amount);
     setList(amount);
   };
 

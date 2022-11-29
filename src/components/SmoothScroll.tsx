@@ -34,25 +34,28 @@ export const SmoothScroll = ({ children }: any) => {
     data.current = window.scrollY;
     data.previous += (data.current - data.previous) * data.ease;
     data.rounded = Math.round(data.previous * 80) / 80;
-
-    scrollingContainerRef.current.style.transform = `translateY(-${data.previous}px)`;
+    if(scrollingContainerRef && scrollingContainerRef.current) scrollingContainerRef.current.style.transform = `translateY(-${data.previous}px)`;
+    
 
     // Recursive call
     requestAnimationFrame(() => smoothScrollingHandler());
   };
 
   return (
-    <Box
-      position="fixed"
-      top={0}
-      left={0}
-      width="100%"
-      height="100%"
-      overflow="hidden"
-    >
-      <Box ref={scrollingContainerRef}>
-        {children}
-      </Box>
+    // <Box
+    //   position="fixed"
+    //   top={0}
+    //   left={0}
+    //   width="100%"
+    //   height="100%"
+    //   overflow="hidden"
+    // >
+    //   <Box ref={scrollingContainerRef}>
+    //     {children}
+    //   </Box>
+    // </Box>
+    <Box>
+      {children}
     </Box>
   );
 };

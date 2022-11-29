@@ -155,18 +155,14 @@ const InputsHome = ({
               ref={refSingle}
               multiple={false}
               onChange={async (evt) => {
-                console.log(evt);
                 let file = getStorage(app, "gs://contemp-1e58c.appspot.com");
                 let files: any = evt.target.files;
-                console.log(files[0].name);
                 const storageRef = refStorage(
                   file,
                   `${files[0].name}-${new Date()}`
                 );
-                console.log(storageRef);
                 await uploadBytes(storageRef, files[0]).then((snapshot) => {
                   getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    console.log(downloadURL);
                     getUrls(downloadURL);
                   });
                 });

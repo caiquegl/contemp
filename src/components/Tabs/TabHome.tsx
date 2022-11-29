@@ -27,7 +27,6 @@ const TabHome = () => {
           newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
         });
       });
-      console.log(newList);
       setList(newList);
     } catch (error) {
       toast({

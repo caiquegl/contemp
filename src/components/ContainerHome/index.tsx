@@ -37,7 +37,7 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
   const [loading, setLoading] = useState(false);
   const [hasCarrocel, setHasCarrocel] = useState(false);
   const [list, setList] = useState<any>([]);
-  const [img, setImg] = useState<any>("");
+  const [urls, setUrls] = useState<any>([]);
   const [icon, setIcon] = useState<any>("");
   const { register, handleSubmit, formState, setValue } = useForm({});
 
@@ -45,7 +45,7 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
 
   const saveProduct = async (body: any) => {
     try {
-      if (!!!img || !!!icon) {
+      if (urls.length === 0 || !!!icon) {
         toast({
           title: "Erro",
           description: "Foto da imagem e icone são obrigatórios",
@@ -81,8 +81,8 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
         await addDoc(dbInstance, {
           ...body,
           indexProduct,
-          hasCarrocel: hasCarrocel.toString(),
-          img,
+          destaque: hasCarrocel,
+          urls,
           icon,
         });
 
@@ -99,8 +99,8 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
         await updateDoc(dbInstanceUpdate, {
           ...body,
           indexProduct,
-          hasCarrocel: hasCarrocel.toString(),
-          img,
+          destaque: hasCarrocel,
+          urls,
           icon,
         });
         toast({
@@ -158,18 +158,14 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
     setValue("link_name", defaultValues?.link_name);
     setHasCarrocel(
       defaultValues &&
-        defaultValues.hasCarrocel &&
-        defaultValues.hasCarrocel === "true"
+        defaultValues.hasCarrocel 
         ? true
         : false
     );
-    setImg(defaultValues && defaultValues.img ? defaultValues.img : "");
+    setUrls(defaultValues && defaultValues.urls ? defaultValues.urls : []);
     setIcon(defaultValues && defaultValues.icon ? defaultValues.icon : "");
   }, [defaultValues]);
 
-  useEffect(() => {
-    console.log(hasCarrocel, "hasCarrocel");
-  }, [hasCarrocel]);
   return (
     <Box
       mt="30px"
@@ -216,12 +212,25 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
           <Box w="100%">
             <InputsHome
               name="Foto do Produto"
-              typeInput="fileSingle"
-              getUrls={(link: any) => setImg(link)}
-            />
-            <Box mt="20px" w="200px">
-              {img && <ViewImage url={img} remove={() => setImg("")} />}
-            </Box>
+              typeInput="file"
+              getUrls={(values: any) => setUrls([...urls, ...values])}
+              />
+             <HStack spacing="20px" flexWrap="wrap" w="100%">
+          {urls &&
+            urls.length > 0 &&
+            urls.map((value: any, index: number) => (
+              <ViewImage
+                url={value}
+                remove={() => {
+                  let newList: any = [];
+                  urls.forEach((value: any, indexRemove: number) => {
+                    if (index != indexRemove) newList.push(value);
+                  });
+                  setUrls(newList);
+                }}
+              />
+            ))}
+        </HStack>
           </Box>
           <Box w="100%">
             <InputsHome

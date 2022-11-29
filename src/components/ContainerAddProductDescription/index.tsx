@@ -106,10 +106,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
       });
 
       if (!exist) {
-        console.log({
-          ...values,
-          tab: tabs,
-        });
         await addDoc(dbInstance, {
           ...values,
           tab: tabs,
@@ -165,7 +161,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
       if (!exist) {
         const dbInstanceUpdate = doc(database, "products", bodyForm.id);
-        console.log(bodyForm);
         delete bodyForm.id;
         delete bodyForm.ref;
         await updateDoc(dbInstanceUpdate, bodyForm);

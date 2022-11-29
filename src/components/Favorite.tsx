@@ -6,8 +6,9 @@ import {
   HStack,
   Button,
   useBreakpointValue,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper";
@@ -16,14 +17,16 @@ import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import Pirometro from "../assets/icons/pritometro_white.svg";
-
-const products = [] as number[];
-
-for (let i = 0; i < 10; i++) {
-  products.push(i + 1);
-}
+import { database, initFirebase } from "../utils/db";
+import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 export const Favorite = () => {
+  initFirebase();
+  const router = useRouter();
+  const toast = useToast();
+  const [products, setProducts] = useState<any>([])
+  const [homeTabs, setHomeTabs] = useState<any>({})
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -84,6 +87,85 @@ export const Favorite = () => {
     return 5;
   };
 
+  const listProductDestaque = async () => {
+    try {
+      const dbInstance = collection(database, "products");
+      const dbInstanceHome = collection(database, "home");
+      let newList: any = [];
+      const q = query(dbInstance, where("destaque", "==", true));
+      const qHome = query(dbInstanceHome, where("destaque", "==", true));
+
+      await getDocs(q).then(async (data) => {
+
+        for await (let pd of data.docs) {
+          const docRef = doc(database, 'categories', pd.data().category);          
+          const docSnap = await getDoc(docRef);
+          if(docSnap.exists()) {
+            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
+          }
+
+        }
+
+      });
+
+      await getDocs(qHome).then(async (data) => {
+        for await (let pd of data.docs) {
+          const docRef = doc(database, 'categories', pd.data().category);          
+          const docSnap = await getDoc(docRef);
+          if(docSnap.exists()) {
+            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
+          }
+
+        }
+      });
+      setProducts(newList)
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: "Erro",
+        description: "Erro ao listar destaques",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const getHomeTab1 = async () => {
+    try {
+      const dbInstanceHome = collection(database, "home");
+      let tab1:any = {}
+      const qHome = query(dbInstanceHome, where("indexProduct", "==", 0), limit(1))
+
+      await getDocs(qHome).then(async (data) => {
+        if(data.docs.length === 0) return
+        tab1 = data.docs[0].data()
+        const docRef = doc(database, 'categories', data.docs[0].data().category);          
+          const docSnap = await getDoc(docRef);
+          if(docSnap.exists()) {
+            tab1 = { ...tab1, nameCategory: docSnap.data().name };
+          }
+      });
+
+      if(Object.keys(tab1).length === 0) return
+      setHomeTabs({...homeTabs, tab1})
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: "Erro",
+        description: "Erro ao listar destaques",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }
+
+  useEffect(() => {
+    listProductDestaque()
+    getHomeTab1()
+  }, [])
+
   return (
     <Container
       maxW="8xl"
@@ -131,17 +213,20 @@ export const Favorite = () => {
             width: swiperWidth(),
           }}
         >
-          {products.map((item) => (
+          {products.map((item: any) => (
             <SwiperSlide>
               <CardProduct
-                img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                text={`Teste ${item}`}
+                img={item.urls && item.urls.length > 0 && item.urls[0]}
+                text={item.name}
+                categoryName={item.nameCategory}
               />
             </SwiperSlide>
           ))}
         </Swiper>
       </Flex>
-      <Flex
+      {
+        homeTabs.tab1 && (
+<Flex
         alignItems="center"
         mt="200px"
         mb="53px"
@@ -149,8 +234,8 @@ export const Favorite = () => {
       >
         <Image
           flex={1}
-          src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-          alt="bateria"
+          src={homeTabs.tab1.urls[0]}
+          alt={homeTabs.tab1.name}
           minH={pxToRem(320)}
           bgSize={{
             base: "95%",
@@ -176,12 +261,12 @@ export const Favorite = () => {
             }}
           >
             <Text fontWeight="bold" fontSize={pxToRem(60)}>
-              C714
+              {homeTabs.tab1.name}
             </Text>
 
             <ProductCategoryWithIcon
-              title="Controladores de Temperatura e Processos"
-              icon={Pirometro}
+              title={homeTabs.tab1.nameCategory}
+              icon={homeTabs.tab1.icon}
               containerProps={{
                 borderColor: "red.600",
               }}
@@ -198,9 +283,7 @@ export const Favorite = () => {
               "2xl": "98%",
             }}
           >
-            Os Controladores de Temperatura e Processos C714 – Linha Avançada,
-            foram projetados com tecnologia nacional de ponta para serem
-            versáteis, robustos e de fácil uso.
+            {homeTabs.tab1.description}
           </Text>
 
           <Flex alignItems="center" w="80%" maxW={pxToRem(220)}>
@@ -216,14 +299,18 @@ export const Favorite = () => {
                 color: "black.800",
                 transition: "all 0.3s",
               }}
+              onClick={() => router.push(`/product/${homeTabs.tab1.name}`)}
             >
               Veja mais
             </Button>
 
-            <Image src={Pirometro} bgSize={pxToRem(40)} minH={pxToRem(40)} />
+            <Image src={homeTabs.tab1.icon} bgSize={pxToRem(40)} minH={pxToRem(40)} />
           </Flex>
         </Box>
       </Flex>
+        )
+      }
+      
     </Container>
   );
 };

@@ -147,7 +147,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           typeInput="file"
           getUrls={(values: any) => setUrls([...urls, ...values])}
         />
-        <HStack spacing="20px" flexWrap="wrap" w="100%">
+        <HStack spacing="20px" flexWrap="wrap" w="100%" mt="20px">
           {urls &&
             urls.length > 0 &&
             urls.map((value: any, index: number) => (

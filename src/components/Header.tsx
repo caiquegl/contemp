@@ -85,27 +85,45 @@ export const Header = () => {
         });
       });
 
-      const getSubCategory = async (name: any) => {
+      const getSubCategory = async (id: any) => {
         let newCategory: any = [];
 
-        const q = query(dbInstance, where("sub_categorie", "==", name));
-
+        const q = query(dbInstance, where("sub_categorie", "==", id));
         let doc: any = [];
         await getDocs(q).then((data) => {
           if (data.docs.length === 0) return;
           data.docs.forEach((docs, index: number) => {
-            doc.push({
+            let obj: any = {
               ...docs.data(),
               id: data.docs[index].id,
               ref: data.docs[index].ref,
-            });
+            }
+
+            doc.push(obj);
           });
         });
-
         if (doc.length > 0) {
           for await (let el of doc) {
-            if (el.sub_categorie) {
-              el.list_sub_category = await getSubCategory(el.name);
+
+            const q = query(dbInstance, where("sub_categorie", "==", el.id), limit(1));
+            let docExist: any = [];
+            await getDocs(q).then((data) => {
+              if (data.docs.length === 0) return;
+              data.docs.forEach((docs, index: number) => {
+                let obj: any = {
+                  ...docs.data(),
+                  id: data.docs[index].id,
+                  ref: data.docs[index].ref,
+                }
+    
+                if(obj.sub_categorie == id) delete obj.sub_categorie
+                docExist.push(obj);
+              });
+            });
+
+
+            if (docExist.length > 0) {
+              el.list_sub_category = await getSubCategory(el.id);
             }
             if (Object.keys(el).length === 0) return;
 
@@ -121,7 +139,7 @@ export const Header = () => {
       for await (let categ of categories) {
         newList.push({
           ...categ,
-          list_sub_category: await getSubCategory(categ.name),
+          list_sub_category: await getSubCategory(categ.id),
         });
       }
       setList(newList);
