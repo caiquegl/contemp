@@ -59,14 +59,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       body = { ...body, listVariation };
     }
 
-    let nameCategory = "";
-
-    list.forEach((category: any) => {
-      if (category.id == body.category) nameCategory = category.name;
-    });
-
-    body.nameCategory = nameCategory;
-
     setListVariation([{ id: 1 }]);
     setUrls([]);
     nextStep(body);
