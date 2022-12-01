@@ -16,7 +16,6 @@ import CardProduct from "./CardProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
-import Pirometro from "../assets/icons/pritometro_white.svg";
 import { database, initFirebase } from "../utils/db";
 import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
 import { useRouter } from "next/router";

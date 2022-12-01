@@ -65,6 +65,7 @@ export const Header = () => {
   const router = useRouter();
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
   const [list, setList] = useState([]);
+  const [cart, setCart] = useState([]);
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
@@ -115,8 +116,8 @@ export const Header = () => {
                   id: data.docs[index].id,
                   ref: data.docs[index].ref,
                 }
-    
-                if(obj.sub_categorie == id) delete obj.sub_categorie
+
+                if (obj.sub_categorie == id) delete obj.sub_categorie
                 docExist.push(obj);
               });
             });
@@ -150,7 +151,18 @@ export const Header = () => {
 
   useEffect(() => {
     listCategory();
+    getItem()
   }, []);
+
+  const getItem = () => {
+    let getItem = window.localStorage.getItem('CART-CONTEMP')
+
+    if (getItem) {
+      let convert = JSON.parse(getItem)
+      setCart(convert)
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
+    }
+  }
 
   if (isDrawerSiderbar) {
     return (
@@ -253,7 +265,7 @@ export const Header = () => {
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
                   Institucional
                 </Text>
-                <Link href="/about">
+                <Link href="/sobre">
                   <Text mb="15px" fontSize="18px">
                     A Contemp
                   </Text>
@@ -261,7 +273,7 @@ export const Header = () => {
                 <Text mb="15px" fontSize="18px">
                   Blog
                 </Text>
-                <Link href="/support">
+                <Link href="/suporte">
                   <Text mb="15px" fontSize="18px">
                     Contato
                   </Text>
@@ -420,7 +432,7 @@ export const Header = () => {
         </Box>
 
         <Box flex={1}>
-          <Link href="/allProduct">
+          <Link href="/todosProdutos">
             <Button
               borderRadius="5px"
               bg="red.600"
@@ -441,14 +453,14 @@ export const Header = () => {
         </Box>
 
         <HStack alignSelf="center" flex={1}>
-          <Link href="/about">
+          <Link href="/sobre">
             <Text w="max-content">A Contemp</Text>
           </Link>
           <Text>Blog</Text>
           <Link href="/work">
             <Text w="max-content">Trabalhe Conosco</Text>
           </Link>
-          <Link href="/support">
+          <Link href="/suporte">
             <Text w="max-content">Suporte Técnico</Text>
           </Link>
         </HStack>
@@ -462,22 +474,24 @@ export const Header = () => {
             }}
           />
 
-          <Box position="relative" cursor="pointer">
-            <Flex
-              p={`${pxToRem(2)} ${pxToRem(5)}`}
-              bg="red.600"
-              borderRadius={50}
-              alignItems="center"
-              justifyContent="center"
-              fontWeight="bold"
-              fontSize={pxToRem(14)}
-              position="absolute"
-              bottom={4}
-              left={4}
-            >
-              99
-            </Flex>
+          <Box position="relative" cursor="pointer" onClick={() => router.push('orcamento')}>
 
+            {cart.length > 0 &&
+              <Flex
+                p={`${pxToRem(2)} ${pxToRem(5)}`}
+                bg="red.600"
+                borderRadius={50}
+                alignItems="center"
+                justifyContent="center"
+                fontWeight="bold"
+                fontSize={pxToRem(14)}
+                position="absolute"
+                bottom={4}
+                left={4}
+              >
+                {cart.length}
+              </Flex>
+            }
             <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
           </Box>
         </Flex>

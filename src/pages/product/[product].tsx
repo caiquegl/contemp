@@ -37,17 +37,14 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
 
-const products = [] as number[];
-
-for (let i = 0; i < 10; i++) {
-  products.push(i + 1);
-}
-
 const Product = () => {
   const router = useRouter()
   initFirebase();
   const { product } = router.query
   const [detail, setDetail] = useState<any>({})
+  const [variation, setVariation] = useState<any>({})
+  const [products, setProducts] = useState<any>([])
+  const [qtd, setQtd] = useState(1)
   const isTablet = useBreakpointValue({
     base: true,
     lg: false,
@@ -71,18 +68,34 @@ const Product = () => {
         if (data.docs.length > 0) {
           exist = true
         }
-        console.log(data.docs[0].data())
-        setDetail(data.docs[0].data())
+        setDetail({...data.docs[0].data(), id: data.docs[0].id})
       });
 
       if (!exist) {
         await getDocs(qHome).then(async (data) => {
           if (data.docs.length == 0) return
-          console.log(data.docs[0].data())
-          setDetail(data.docs[0].data())
+          setDetail({...data.docs[0].data(), id: data.docs[0].id})
+
+          const qProductCategory = query(dbInstanceProducts, where("category", "==", data.docs[0].data().category), limit(1))
+          const qHomeCategory = query(dbInstanceHome, where("category", "==", data.docs[0].data().category), limit(1))
+
+          let listProducts: any = []
+          await getDocs(qHomeCategory).then(async (dataCategory) => {
+            if (dataCategory.docs.length == 0) return
+            dataCategory.docs.forEach((dt) => {
+              listProducts.push(dt.data())
+            })
+          });
+
+          await getDocs(qProductCategory).then(async (dataCategory) => {
+            if (dataCategory.docs.length == 0) return
+            dataCategory.docs.forEach((dt) => {
+              listProducts.push(dt.data())
+            })
+          });
+          setProducts(listProducts)
         });
       }
-
     } catch (error) {
       console.log(error)
     }
@@ -95,6 +108,25 @@ const Product = () => {
     }
   }, [product])
 
+  const saveCart = () => {
+    let getItem = window.localStorage.getItem('CART-CONTEMP')
+
+    if(getItem) {
+      let convert = JSON.parse(getItem)
+      convert.push({
+        product_id: detail.id,
+        variation: variation,
+        qtd
+      })
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
+    } else {
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify([{
+        product_id: detail.id,
+        variation: variation,
+        qtd
+      }]))
+    }
+  }
 
   return (
     <>
@@ -169,6 +201,7 @@ const Product = () => {
                     borderRadius="21px"
                     placeholder="Selecione uma opção"
                     color="black.800"
+                    onChange={(evt) => setVariation({...variation, [vr.name]: evt.target.value})}
                     _placeholder={{
                       color: "black.50",
                     }}
@@ -197,6 +230,8 @@ const Product = () => {
                   borderColor="black.800"
                   borderRadius="25px"
                   maxW="89px"
+                  value={qtd}
+                  onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
                 />
                 <Button
                   h="50px"
@@ -205,6 +240,7 @@ const Product = () => {
                   color="#fff"
                   borderRadius="25px"
                   w="279px"
+                  onClick={() => saveCart()}
                 >
                   <Center>Adicionar ao orçamento</Center>
                 </Button>
@@ -273,12 +309,12 @@ const Product = () => {
               modules={[Autoplay, Pagination]}
               className="mySwiper"
             >
-              {products.map((item) => (
+              {products.map((item: any) => (
                 <SwiperSlide>
                   <CardProductWithDescription
-                    img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                    text={`Teste ${item}`}
-                    description="Use o NFC do seu smartphone para configurar seu Controlador de Temperatura C719!"
+                    img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
+                    text={item.name}
+                    description={item.description}
                   />
                 </SwiperSlide>
               ))}

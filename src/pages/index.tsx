@@ -396,7 +396,7 @@ const Home = () => {
             transition: "all 0.4s",
             opacity: 0.7,
           }}
-          onClick={() => router.push('allProduct')}
+          onClick={() => router.push('todosProdutos')}
         >
           Veja todos os produtos
         </Button>
