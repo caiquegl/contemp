@@ -152,6 +152,24 @@ const TabHome = () => {
             defaultValues={list[activeTab] ? list[activeTab] : []}
           />
         </TabPanel>
+        <TabPanel>
+          <ContainerHome
+            indexProduct={activeTab}
+            defaultValues={list[activeTab] ? list[activeTab] : []}
+          />
+        </TabPanel>
+        <TabPanel>
+          <ContainerHome
+            indexProduct={activeTab}
+            defaultValues={list[activeTab] ? list[activeTab] : []}
+          />
+        </TabPanel>
+        <TabPanel>
+          <ContainerHome
+            indexProduct={activeTab}
+            defaultValues={list[activeTab] ? list[activeTab] : []}
+          />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );
