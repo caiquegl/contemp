@@ -28,6 +28,7 @@ const TabHome = () => {
         });
       });
       setList(newList);
+      console.log(newList)
     } catch (error) {
       toast({
         title: "Erro",
@@ -130,44 +131,51 @@ const TabHome = () => {
       <TabPanels>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={0}
+            defaultValues={list.filter((el: any) => el.indexProduct == 0)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={1}
+            defaultValues={list.filter((el: any) => el.indexProduct == 1)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={2}
+            defaultValues={list.filter((el: any) => el.indexProduct == 2)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={3}
+            defaultValues={list.filter((el: any) => el.indexProduct == 3)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={4}
+            defaultValues={list.filter((el: any) => el.indexProduct == 4)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={5}
+            defaultValues={list.filter((el: any) => el.indexProduct == 5)[0]}
           />
         </TabPanel>
         <TabPanel>
           <ContainerHome
-            indexProduct={activeTab}
-            defaultValues={list[activeTab] ? list[activeTab] : []}
+            reset={() => listHome()}
+            indexProduct={6}
+            defaultValues={list.filter((el: any) => el.indexProduct == 6)[0]}
           />
         </TabPanel>
       </TabPanels>

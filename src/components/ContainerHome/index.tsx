@@ -30,7 +30,7 @@ import { TextareaDefault } from "../Form/Textarea";
 import { useForm } from "react-hook-form";
 import { ViewImage } from "../ContainerAddProduct/ViewImage";
 
-const ContainerHome = ({ indexProduct, defaultValues }: any) => {
+const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
@@ -45,6 +45,8 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
 
   const saveProduct = async (body: any) => {
     try {
+
+      console.log(indexProduct)
       if (urls.length === 0 || !!!icon) {
         toast({
           title: "Erro",
@@ -96,6 +98,13 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
       } else {
         const dbInstanceUpdate = doc(database, "home", bodyExist.id);
 
+        console.log({
+          ...body,
+          indexProduct,
+          destaque: hasCarrocel,
+          urls,
+          icon,
+        }, bodyExist.id, indexProduct)
         await updateDoc(dbInstanceUpdate, {
           ...body,
           indexProduct,
@@ -121,6 +130,7 @@ const ContainerHome = ({ indexProduct, defaultValues }: any) => {
       });
     } finally {
       setLoading(false);
+      reset()
     }
   };
 
