@@ -81,3 +81,15 @@ body {
 .swiper {
   width: 100% !important;
 }
+
+::-webkit-scrollbar-track {
+  background-color: #232323;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: #2d04e6;
+}
+::-webkit-scrollbar-thumb {
+  background: #B60005;
+  border-radius: 3px;
+}
