@@ -1,8 +1,9 @@
-import { Icon, Image, Link, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useRouter } from "next/router";
+import Icon from "./Icon";
 
 export type MenuProps = {
   menuItems: any;
@@ -40,23 +41,38 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const [list, setList] = useState([]);
   const router = useRouter();
 
-  const amountList = async (amount: any, name?: any) => {
+  const truncateText = (text: string) => {
+    const textLength = text.length;
+    const maxTextLength = 35;
+
+    if (textLength > maxTextLength) {
+      return text.substring(0, maxTextLength) + "...";
+    }
+
+    return text;
+  };
+
+  const amountList = async (amount: any, hasIcon = true) => {
     try {
       let obj: any = [];
+
       for await (let el of amount) {
         let newObj = {
           ...el,
-          label: el.name,
-          key: el.name.replaceAll(" ", "")
+          label: truncateText(el.name),
+          key: el.name.replaceAll(" ", ""),
+          onClick: (item: any) => router.push(`/category/${el.name}`),
+          icon: hasIcon ? (
+            <Icon
+              icon={AiFillCaretDown}
+              size={17}
+              iconStyle={{ gridRow: 1, gridColumn: 2 }}
+            />
+          ) : null,
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, el.name);
-          newObj.icon = (
-            <Icon as={name ? AiFillCaretRight : AiFillCaretDown} fontSize="20px" color="#fff" />
-          );
-        } else {
-          newObj.onClick = (item: any) => router.push(`/category/${el.name}`)
+          newObj.children = await amountList(el.list_sub_category, false);
         }
 
         obj.push(newObj);
@@ -77,26 +93,58 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
     getList();
   }, [menuItems]);
 
-  const items = [
-    { label: "item 1", key: "item-1" }, // remember to pass the key prop
-    { label: "item 2", key: "item-2" }, // which is required
-    {
-      label: "sub menu",
-      key: "submenu",
-      children: [{ label: "item 3", key: "submenu-item-1" }],
-    },
-  ];
   return (
-    <Menu
-      onClick={(avt) => console.log(avt)}
-      mode="horizontal"
-      items={list}
-      style={{
-        background: "#242424",
-        border: "none",
-        color: "#fff",
-        fontSize: 18,
-      }}
-    />
+    <>
+      <style lang="css" scoped>{`
+        .ant-menu-submenu-title {
+          display: grid;
+          grid-template-columns: 1fr 1rem;
+          grid-column-gap: 0.5rem;
+          align-items: center;
+        }
+
+        .ant-menu-submenu-title > ::-webkit-scrollbar {
+          width: 0.6rem;
+        }
+        
+        /* Track */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-track {
+          background: red;
+        }
+        
+        /* Handle */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb {
+          background: blue;
+          border-radius: 5px;
+        }
+        
+        /* Handle on hover */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb:hover {
+          background: gray;
+        }
+      `}</style>
+
+      <Menu
+        onClick={(evt) => console.log(evt)}
+        mode="horizontal"
+        items={list}
+        expandIcon={
+          <Icon
+            icon={AiFillCaretRight}
+            size={17}
+            iconStyle={{ position: "absolute", right: 10 }}
+          />
+        }
+        style={{
+          background: "#242424",
+          border: "none",
+          fontSize: 18,
+          position: "relative",
+          alignItems: "center",
+          width: "100%",
+        }}
+        disabledOverflow
+      />
+    </>
   );
 };
