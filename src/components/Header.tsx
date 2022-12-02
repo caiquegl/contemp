@@ -50,6 +50,7 @@ export const Header = () => {
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
   const { setListHeader, cart } = useAuth();
   const [list, setList] = useState([]);
+
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
@@ -142,6 +143,7 @@ export const Header = () => {
             <Icon as={BsThreeDotsVertical} fontSize="20px" />
           </Flex>
         </HStack>
+
         <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="md">
           <DrawerOverlay />
           <DrawerContent bg="black.900" p="12px">
