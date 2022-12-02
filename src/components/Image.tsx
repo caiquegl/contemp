@@ -8,7 +8,7 @@ type ImageProps = {
 } & BoxProps
 
 export const Image = ({ src, alt, ...props }: ImageProps) => {
-  const bgImage = typeof src === 'string' ? `url('${src}')` : src.src
+  const bgImage = typeof src === 'string' ? `url('${src}')` : src?.src ? src.src : ''
 
   return (
     <Box

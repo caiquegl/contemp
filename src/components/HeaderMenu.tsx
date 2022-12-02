@@ -47,8 +47,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         let newObj = {
           ...el,
           label: el.name,
-          key: el.name.replaceAll(" ", ""),
-          onClick: (item: any) => router.push(`/category/${el.name}`)
+          key: el.name.replaceAll(" ", "")
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
@@ -56,6 +55,8 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           newObj.icon = (
             <Icon as={name ? AiFillCaretRight : AiFillCaretDown} fontSize="20px" color="#fff" />
           );
+        } else {
+          newObj.onClick = (item: any) => router.push(`/category/${el.name}`)
         }
 
         obj.push(newObj);

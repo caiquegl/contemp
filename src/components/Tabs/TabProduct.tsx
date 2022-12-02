@@ -180,6 +180,7 @@ const TabProduct = () => {
                               as={AiOutlineEdit}
                               fontSize="17px"
                               onClick={() => {
+                                console.log(JSON.stringify(table, null, 2))
                                 setBody(table);
                                 setIsUpdate(true);
                                 setStep(2);

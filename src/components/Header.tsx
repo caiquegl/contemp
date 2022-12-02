@@ -74,73 +74,36 @@ export const Header = () => {
   const listCategory = async () => {
     try {
       const dbInstance = collection(database, "categories");
-      let categories: any = [];
+      const {docs: allCategories} = await getDocs(dbInstance)
+
+
       const q = query(dbInstance, where("is_main", "==", "true"));
-      await getDocs(q).then((data) => {
-        data.docs.forEach((doc) => {
-          categories.push({
-            ...doc.data(),
-            id: doc.id,
-            ref: doc.ref,
-          });
-        });
-      });
-
-      const getSubCategory = async (id: any) => {
-        let newCategory: any = [];
-
-        const q = query(dbInstance, where("sub_categorie", "==", id));
-        let doc: any = [];
-        await getDocs(q).then((data) => {
-          if (data.docs.length === 0) return;
-          data.docs.forEach((docs, index: number) => {
-            let obj: any = {
-              ...docs.data(),
-              id: data.docs[index].id,
-              ref: data.docs[index].ref,
-            }
-
-            doc.push(obj);
-          });
-        });
-        if (doc.length > 0) {
-          for await (let el of doc) {
-
-            const q = query(dbInstance, where("sub_categorie", "==", el.id), limit(1));
-            let docExist: any = [];
-            await getDocs(q).then((data) => {
-              if (data.docs.length === 0) return;
-              data.docs.forEach((docs, index: number) => {
-                let obj: any = {
-                  ...docs.data(),
-                  id: data.docs[index].id,
-                  ref: data.docs[index].ref,
-                }
-
-                if (obj.sub_categorie == id) delete obj.sub_categorie
-                docExist.push(obj);
-              });
-            });
-
-
-            if (docExist.length > 0) {
-              el.list_sub_category = await getSubCategory(el.id);
-            }
-            if (Object.keys(el).length === 0) return;
-
-            newCategory.push(el);
-          }
-        }
-
-        return newCategory;
-      };
+      let {docs: categories} = await getDocs(q);
 
       let newList: any = [];
 
       for await (let categ of categories) {
+        let list_sub_category: any = []
+        
+        allCategories.forEach((el) => {
+          if(el.data().sub_categorie == categ.id) list_sub_category.push({...el.data(), id: el.id})
+        })
+
+        let filter: any = []
+
+        list_sub_category.forEach((el: any) => {
+          let list_sub_category2: any = []
+
+          allCategories.forEach((c) => {
+            if(c.data().sub_categorie ==  el.id) list_sub_category2.push({...c.data(), id: c.id})
+          })
+          filter.push({...el, list_sub_category: list_sub_category2})
+        })
+
         newList.push({
-          ...categ,
-          list_sub_category: await getSubCategory(categ.id),
+          ...categ.data(),
+          id: categ.id,
+          list_sub_category: filter,
         });
       }
       setList(newList);

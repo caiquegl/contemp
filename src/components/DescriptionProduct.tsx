@@ -23,7 +23,7 @@ const DescriptionProduct = ({
 }: IProps) => {
   const router = useRouter();
 
-  if(Object.keys(dataTab).length === 0) return <Box/>
+  if(!dataTab || Object.keys(dataTab).length === 0) return <Box/>
   
   return (
     <Flex

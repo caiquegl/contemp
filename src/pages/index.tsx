@@ -33,157 +33,28 @@ import { useRouter } from "next/router";
 const Home = () => {
   initFirebase();
   const router = useRouter();
-  const [tab2, setTab2] = useState<any>({})
-  const [tab3, setTab3] = useState<any>({})
-  const [tab4, setTab4] = useState<any>({})
-  const [tab5, setTab5] = useState<any>({})
-  const [tab6, setTab6] = useState<any>({})
-  const [tab7, setTab7] = useState<any>({})
+  const [listTab, setListtAB] = useState<any>([])
 
-  const getHomeTab2 = async () => {
+  const getHomeTab = async () => {
     try {
       const dbInstanceHome = collection(database, "home");
-      let tab2:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 1), limit(1))
+      let find = await getDocs(dbInstanceHome)
 
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab2 = data.docs[0].data()
+      let organize: any = [] 
 
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab2 = { ...tab2, nameCategory: docSnap.data().name };
-          }
-      });
+      for await (let el of find.docs) {
+        const docRef = doc(database, 'categories', el.data().category);          
+        const docSnap = await getDoc(docRef);
+        let nameCategory = ''
+        if(docSnap.exists()) nameCategory = docSnap.data().name 
 
-      if(Object.keys(tab2).length === 0) return
-      setTab2(tab2)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
+        organize.push({
+          ...el.data(),
+          nameCategory
+        })
+      }
 
-  const getHomeTab3 = async () => {
-    try {
-      const dbInstanceHome = collection(database, "home");
-      let tab3:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 2), limit(1))
-
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab3 = data.docs[0].data()
-
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab3 = { ...tab3, nameCategory: docSnap.data().name };
-          }
-      });
-
-      if(Object.keys(tab3).length === 0) return
-      setTab3(tab3)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
-
-  const getHomeTab4 = async () => {
-    try {
-      const dbInstanceHome = collection(database, "home");
-      let tab4:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 3), limit(1))
-
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab4 = data.docs[0].data()
-
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab4 = { ...tab4, nameCategory: docSnap.data().name };
-          }
-      });
-
-      if(Object.keys(tab4).length === 0) return
-      setTab4(tab4)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
-
-  const getHomeTab5 = async () => {
-    try {
-      const dbInstanceHome = collection(database, "home");
-      let tab5:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 4), limit(1))
-
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab5 = data.docs[0].data()
-
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab5 = { ...tab5, nameCategory: docSnap.data().name };
-          }
-      });
-
-      if(Object.keys(tab5).length === 0) return
-      setTab5(tab5)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
-
-  const getHomeTab6 = async () => {
-    try {
-      const dbInstanceHome = collection(database, "home");
-      let tab6:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 5), limit(1))
-
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab6 = data.docs[0].data()
-
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab6 = { ...tab6, nameCategory: docSnap.data().name };
-          }
-      });
-
-      if(Object.keys(tab6).length === 0) return
-      setTab6(tab6)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
-
-  const getHomeTab7 = async () => {
-    try {
-      const dbInstanceHome = collection(database, "home");
-      let tab7:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 6), limit(1))
-
-      await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab7 = data.docs[0].data()
-
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab7 = { ...tab7, nameCategory: docSnap.data().name };
-          }
-      });
-
-      if(Object.keys(tab7).length === 0) return
-      setTab7(tab7)
+      setListtAB(organize)
     } catch (error) {
       console.log(error)
       
@@ -191,12 +62,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    getHomeTab2()
-    getHomeTab3()
-    getHomeTab4()
-    getHomeTab5()
-    getHomeTab6()
-    getHomeTab7()
+    getHomeTab()
   }, [])
   return (
     <SmoothScroll>
@@ -219,14 +85,14 @@ const Home = () => {
           bg="red.600"
           borderColor="white"
           borderColorButton="white"
-          dataTab={tab2}
+          dataTab={listTab.find((el: any) => el.indexProduct == 1)}
           />
         <DescriptionProduct
           color="black.800"
           bg="white"
           borderColor="red.600"
           borderColorButton="black.800"
-          dataTab={tab3}
+          dataTab={listTab.find((el: any) => el.indexProduct == 2)}
         />
         <DescriptionProduct
           color="black.800"
@@ -239,7 +105,7 @@ const Home = () => {
               xl: "row-reverse",
             },
           }}
-          dataTab={tab4}
+          dataTab={listTab.find((el: any) => el.indexProduct == 3)}
         />
         <DescriptionProduct
           color="white"
@@ -252,7 +118,7 @@ const Home = () => {
               xl: "row-reverse",
             },
           }}
-          dataTab={tab5}
+          dataTab={listTab.find((el: any) => el.indexProduct == 4)}
         />
       </GridChakra>
 
@@ -370,14 +236,14 @@ const Home = () => {
           bg="black.800"
           borderColor="white"
           borderColorButton="white"
-          dataTab={tab6}
+          dataTab={listTab.find((el: any) => el.indexProduct == 5)}
         />
         <DescriptionProduct
           color="black.800"
           bg="white"
           borderColor="red.600"
           borderColorButton="black.800"
-          dataTab={tab7}
+          dataTab={listTab.find((el: any) => el.indexProduct == 6)}
         />
       </GridChakra>
       <Flex

@@ -47,8 +47,8 @@ const AllProduct = () => {
 
   const getFavorites = async () => {
     try {
-      const dbInstanceHome = collection(database, "categories");
-      const qFavorite = query(dbInstanceHome, where("favorite", "==", true))
+      const dbInstanceCategory = collection(database, "categories");
+      const qFavorite = query(dbInstanceCategory, where("favorite", "==", true))
       let listFavorite: any = []
 
       await getDocs(qFavorite).then(async (data) => {
@@ -63,26 +63,40 @@ const AllProduct = () => {
       if (listFavorite.length === 0) return
 
       let index = 0
+      const dbInstanceProduct = collection(database, "products");
+      const {docs: allProducts} = await getDocs(dbInstanceProduct)
+
+      const dbInstanceHome = collection(database, "home");
+      const {docs: allHome} = await getDocs(dbInstanceHome)
+
       for await (let categories of listFavorite) {
 
-        const dbInstanceProduct = collection(database, "products");
-        const qProduct = query(dbInstanceProduct, where("category", "==", categories.idCategorie))
+        // const dbInstanceProduct = collection(database, "products");
+        // const qProduct = query(dbInstanceProduct, where("category", "==", categories.idCategorie))
 
-        await getDocs(qProduct).then(async (data) => {
-          if (data.docs.length === 0) return
-          data.docs.forEach((pd: any) => {
-            listFavorite[index].products.push(pd.data());
-          })
+        // await getDocs(qProduct).then(async (data) => {
+        //   if (data.docs.length === 0) return
+        //   data.docs.forEach((pd: any) => {
+        //     listFavorite[index].products.push(pd.data());
+        //   })
+        // })
+
+        allProducts.filter((el) => {
+          if(el.data().category == categories.idCategorie) listFavorite[index].products.push(el.data());
         })
 
-        const dbInstanceHome = collection(database, "home");
-        const qHome = query(dbInstanceHome, where("category", "==", categories.idCategorie))
-        await getDocs(qHome).then(async (data) => {
-          if (data.docs.length === 0) return
-          data.docs.forEach((pd: any) => {
-            listFavorite[index].products.push(pd.data());
-          })
-        });
+        allHome.filter((el) => {
+          if(el.data().category == categories.idCategorie) listFavorite[index].products.push(el.data());
+        })
+
+        // const dbInstanceHome = collection(database, "home");
+        // const qHome = query(dbInstanceHome, where("category", "==", categories.idCategorie))
+        // await getDocs(qHome).then(async (data) => {
+        //   if (data.docs.length === 0) return
+        //   data.docs.forEach((pd: any) => {
+        //     listFavorite[index].products.push(pd.data());
+        //   })
+        // });
 
         index = index + 1
       }
