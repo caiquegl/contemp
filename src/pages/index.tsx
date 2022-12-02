@@ -26,49 +26,59 @@ import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
 import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
-import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
+import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
 
 const Home = () => {
   initFirebase();
   const router = useRouter();
-  const [listTab, setListtAB] = useState<any>([])
+  const [listTab, setListtAB] = useState<any>([]);
 
   const getHomeTab = async () => {
     try {
       const dbInstanceHome = collection(database, "home");
-      let find = await getDocs(dbInstanceHome)
+      let find = await getDocs(dbInstanceHome);
 
-      let organize: any = [] 
+      let organize: any = [];
 
       for await (let el of find.docs) {
-        const docRef = doc(database, 'categories', el.data().category);          
+        const docRef = doc(database, "categories", el.data().category);
         const docSnap = await getDoc(docRef);
-        let nameCategory = ''
-        if(docSnap.exists()) nameCategory = docSnap.data().name 
+        let nameCategory = "";
+        if (docSnap.exists()) nameCategory = docSnap.data().name;
 
         organize.push({
           ...el.data(),
-          nameCategory
-        })
+          nameCategory,
+        });
       }
 
-      setListtAB(organize)
+      setListtAB(organize);
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getHomeTab()
-  }, [])
+    getHomeTab();
+  }, []);
   return (
     <SmoothScroll>
       <HomeBackgroundDetails />
 
-      <Header />
+      <SidebarDrawerProvider>
+        <Header />
+      </SidebarDrawerProvider>
 
       <Banner />
 
@@ -85,14 +95,14 @@ const Home = () => {
           bg="red.600"
           borderColor="white"
           borderColorButton="white"
-          dataTab={listTab.find((el: any) => el.indexProduct == 1)}
-          />
+          dataTab={listTab.find((el: any) => el.indexProduct === 1)}
+        />
         <DescriptionProduct
           color="black.800"
           bg="white"
           borderColor="red.600"
           borderColorButton="black.800"
-          dataTab={listTab.find((el: any) => el.indexProduct == 2)}
+          dataTab={listTab.find((el: any) => el.indexProduct === 2)}
         />
         <DescriptionProduct
           color="black.800"
@@ -105,7 +115,7 @@ const Home = () => {
               xl: "row-reverse",
             },
           }}
-          dataTab={listTab.find((el: any) => el.indexProduct == 3)}
+          dataTab={listTab.find((el: any) => el.indexProduct === 3)}
         />
         <DescriptionProduct
           color="white"
@@ -118,7 +128,7 @@ const Home = () => {
               xl: "row-reverse",
             },
           }}
-          dataTab={listTab.find((el: any) => el.indexProduct == 4)}
+          dataTab={listTab.find((el: any) => el.indexProduct === 4)}
         />
       </GridChakra>
 
@@ -236,14 +246,14 @@ const Home = () => {
           bg="black.800"
           borderColor="white"
           borderColorButton="white"
-          dataTab={listTab.find((el: any) => el.indexProduct == 5)}
+          dataTab={listTab.find((el: any) => el.indexProduct === 5)}
         />
         <DescriptionProduct
           color="black.800"
           bg="white"
           borderColor="red.600"
           borderColorButton="black.800"
-          dataTab={listTab.find((el: any) => el.indexProduct == 6)}
+          dataTab={listTab.find((el: any) => el.indexProduct === 6)}
         />
       </GridChakra>
       <Flex
@@ -262,7 +272,7 @@ const Home = () => {
             transition: "all 0.4s",
             opacity: 0.7,
           }}
-          onClick={() => router.push('todosProdutos')}
+          onClick={() => router.push("todosProdutos")}
         >
           Veja todos os produtos
         </Button>
