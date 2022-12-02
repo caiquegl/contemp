@@ -2,6 +2,7 @@ import { Box, Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
+import { FiDownload } from "react-icons/fi";
 import { pxToRem } from "../utils/pxToRem";
 
 export const Catalog = () => {
@@ -41,47 +42,40 @@ export const Catalog = () => {
           justifyContent="space-between"
           flexWrap="wrap"
           w="100%"
-          maxW={pxToRem(380)}
+          maxW={pxToRem(580)}
           margin="auto"
           h={{
-            base: 120
+            base: 200,
           }}
           flexDirection={{
-            base: 'column',
-            md: 'row'
+            base: "column",
+            md: "row",
           }}
         >
-          <Button
-            width={{
-              base: pxToRem(279),
-              md: pxToRem(179),
-            }}
-            h="50px"
-            borderRadius="25px"
-            bg="red.600"
-            fontSize={pxToRem(20)}
-            _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-          >
-            <Icon as={BiPhone} mr="10px" />
-            Telefonar
-          </Button>
-
-          <Button
-            width={{
-              base: pxToRem(279),
-              md: pxToRem(179),
-            }}
-            h="50px"
-            borderRadius="25px"
-            bg="red.600"
-            fontSize={pxToRem(20)}
-            _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-          >
-            <Icon as={AiOutlineMail} mr="10px" />
-            Enviar e-mail
-          </Button>
+          <ActionButton label={"Telefonar"} icon={BiPhone} />
+          <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
+          <ActionButton label={"Download"} icon={FiDownload} />
         </Flex>
       </Box>
     </Flex>
   );
 };
+
+function ActionButton({ label, icon }: any) {
+  return (
+    <Button
+      width={{
+        base: pxToRem(279),
+        md: pxToRem(179),
+      }}
+      h="50px"
+      borderRadius="25px"
+      bg="red.600"
+      fontSize={pxToRem(20)}
+      _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+    >
+      <Icon as={icon} mr="10px" />
+      {label}
+    </Button>
+  );
+}
