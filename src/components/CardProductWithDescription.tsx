@@ -1,4 +1,4 @@
-import { Box, Button, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -62,7 +62,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
         borderColor={buttomBottom ? buttomBottom : 'transpares'}
         borderWidth={buttomBottom ? "2px" : '0'}
         _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-        onClick={() => router.push(`/product/${text}`)}
+        onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
       >
         Solicitar orçamento
       </Button>

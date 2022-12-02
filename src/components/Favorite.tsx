@@ -298,7 +298,7 @@ export const Favorite = () => {
                 color: "black.800",
                 transition: "all 0.3s",
               }}
-              onClick={() => router.push(`/product/${homeTabs.tab1.name}`)}
+              onClick={() => router.push(`/produto/${homeTabs.tab1.name.replaceAll(' ', '_')}`)}
             >
               Veja mais
             </Button>

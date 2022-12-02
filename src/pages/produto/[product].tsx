@@ -57,10 +57,12 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
+      let produto = '' 
+      if(product && typeof product == 'string') produto = product.replaceAll('_', ' ')
       const dbInstanceProducts = collection(database, "products");
       const dbInstanceHome = collection(database, "home");
-      const qProduct = query(dbInstanceProducts, where("name", "==", product), limit(1))
-      const qHome = query(dbInstanceHome, where("name", "==", product), limit(1))
+      const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
+      const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
 
       let exist = false
       await getDocs(qProduct).then(async (data) => {

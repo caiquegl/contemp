@@ -43,6 +43,7 @@ import {
   AiFillYoutube,
   AiOutlineInstagram,
 } from "react-icons/ai";
+import {useAuth} from "../contextAuth/authContext"
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
@@ -64,6 +65,7 @@ export const Header = () => {
   initFirebase();
   const router = useRouter();
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
+  const { setListHeader } = useAuth();
   const [list, setList] = useState([]);
   const [cart, setCart] = useState([]);
   const isDrawerSiderbar = useBreakpointValue({
@@ -107,6 +109,7 @@ export const Header = () => {
         });
       }
       setList(newList);
+      setListHeader(newList)
     } catch (error) {
       console.log(error);
     }

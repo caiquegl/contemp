@@ -14,11 +14,17 @@ interface AuthProviderProps {
 type UserAuthContextData = {
   user: any;
   setUser: any;
+  listHeader: any;
+  setListHeader: any;
+  setAllProducts: any;
+  allProducts: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUserContext] = useState({});
+  const [listHeader, setListHeader] = useState<any>([]);
+  const [allProducts, setAllProducts] = useState<any>([]);
 
   const setUser = (body: any) => {
     setUserContext(body);
@@ -36,7 +42,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   return (
-    <UserAuthContext.Provider value={{ user, setUser }}>
+    <UserAuthContext.Provider value={{ user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

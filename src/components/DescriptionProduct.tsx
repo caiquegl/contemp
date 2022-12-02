@@ -106,7 +106,7 @@ const DescriptionProduct = ({
               maxW={pxToRem(157)}
               h={pxToRem(50)}
               flex={6}
-              onClick={() => router.push(`/product/${dataTab?.name}`)}
+              onClick={() => router.push(`/produto/${dataTab?.name}`)}
               _hover={{
                 bg: color,
                 color: bg,
