@@ -43,7 +43,7 @@ import {
   AiFillYoutube,
   AiOutlineInstagram,
 } from "react-icons/ai";
-import {useAuth} from "../contextAuth/authContext"
+import {AuthProvider, useAuth} from "../contextAuth/authContext"
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
@@ -65,9 +65,8 @@ export const Header = () => {
   initFirebase();
   const router = useRouter();
   const { isOpen, onClose, onOpen } = useSidebarDrawer();
-  const { setListHeader } = useAuth();
+  const { setListHeader, cart } = useAuth();
   const [list, setList] = useState([]);
-  const [cart, setCart] = useState([]);
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
@@ -117,18 +116,9 @@ export const Header = () => {
 
   useEffect(() => {
     listCategory();
-    getItem()
   }, []);
 
-  const getItem = () => {
-    let getItem = window.localStorage.getItem('CART-CONTEMP')
-
-    if (getItem) {
-      let convert = JSON.parse(getItem)
-      setCart(convert)
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
-    }
-  }
+  
 
   if (isDrawerSiderbar) {
     return (
@@ -418,15 +408,24 @@ export const Header = () => {
           </Link>
         </Box>
 
-        <HStack alignSelf="center" flex={1}>
-          <Link href="/sobre">
-            <Text w="max-content">A Contemp</Text>
+        <HStack alignSelf="center" flex={1} spacing="10px">
+          <Link href="/sobre" _hover={{
+            textDecoration: 'none',
+            color: 'red.600'
+          }}>
+            <Text w="max-content">A Contempp</Text>
           </Link>
           <Text>Blog</Text>
-          <Link href="/work">
+          <Link _hover={{
+            textDecoration: 'none',
+            color: 'red.600'
+          }} href="/work">
             <Text w="max-content">Trabalhe Conosco</Text>
           </Link>
-          <Link href="/suporte">
+          <Link _hover={{
+            textDecoration: 'none',
+            color: 'red.600'
+          }} href="/suporte">
             <Text w="max-content">Suporte Técnico</Text>
           </Link>
         </HStack>

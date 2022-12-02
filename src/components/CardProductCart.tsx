@@ -8,14 +8,15 @@ import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
 
 
-const CardProductCart = ({ data, changeQtd }: any) => {
+const CardProductCart = ({ data, changeQtd, removeCart }: any) => {
   initFirebase();
   const [products, setProduct] = useState<any>({})
+
   const getProduct = async () => {
     const docRef = doc(database, 'products', data.product_id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setProduct({...docSnap.data(), qtd: data.td})
+      setProduct({...docSnap.data(), qtd: data.qtd})
     }
   }
 
@@ -75,7 +76,7 @@ const CardProductCart = ({ data, changeQtd }: any) => {
           </VStack>
         ))}
         <Flex alignItems="center" justifyContent="space-between">
-          <Icon as={AiFillDelete} fontSize="20px" cursor="pointer" />
+          <Icon as={AiFillDelete} fontSize="20px" cursor="pointer" onClick={() => removeCart()} />
           <HStack>
           <Text
               fontSize="19px"
@@ -84,7 +85,8 @@ const CardProductCart = ({ data, changeQtd }: any) => {
             >
               Quantidade:
             </Text>
-            <Input type="number" value={products.qtd} borderWidth="2px" borderRadius="20px" maxW="80px" onChange={(evt) => changeQtd(evt.target.value)}/>
+            {console.log(data)}
+            <Input type="number" value={data.qtd} borderWidth="2px" borderRadius="20px" maxW="80px" onChange={(evt) => changeQtd(evt.target.value)}/>
           </HStack>
         </Flex>
       </Box>

@@ -36,10 +36,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
+import { useAuth } from "../../contextAuth/authContext";
 
 const Product = () => {
   const router = useRouter()
   initFirebase();
+  const { addCart } = useAuth();
+
   const { product } = router.query
   const [detail, setDetail] = useState<any>({})
   const [variation, setVariation] = useState<any>({})
@@ -109,26 +112,6 @@ const Product = () => {
       getProduct()
     }
   }, [product])
-
-  const saveCart = () => {
-    let getItem = window.localStorage.getItem('CART-CONTEMP')
-
-    if(getItem) {
-      let convert = JSON.parse(getItem)
-      convert.push({
-        product_id: detail.id,
-        variation: variation,
-        qtd
-      })
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
-    } else {
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify([{
-        product_id: detail.id,
-        variation: variation,
-        qtd
-      }]))
-    }
-  }
 
   return (
     <>
@@ -242,7 +225,11 @@ const Product = () => {
                   color="#fff"
                   borderRadius="25px"
                   w="279px"
-                  onClick={() => saveCart()}
+                  onClick={() => addCart({
+                    product_id: detail.id,
+                    variation: variation,
+                    qtd
+                  })}
                 >
                   <Center>Adicionar ao orçamento</Center>
                 </Button>

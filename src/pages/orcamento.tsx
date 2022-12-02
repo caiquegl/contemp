@@ -26,11 +26,13 @@ import { TextareaDefault } from "../components/Form/Textarea";
 import CardProductCart from "../components/CardProductCart";
 import { addDoc, collection } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
+import { useAuth } from "../contextAuth/authContext";
 
 const Orcamento = () => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
+  const {clearCart, removeCart} = useAuth()
   const [loading, setLoading] = useState(false)
   const [isAprove, setIsAprove] = useState(false)
   const [cart, setCart] = useState<any>([])
@@ -60,6 +62,7 @@ const Orcamento = () => {
         });
         reset();
         window.localStorage.removeItem('CART-CONTEMP')
+        clearCart()
     } catch (error) {
       toast({
         title: "Erro",
@@ -83,7 +86,6 @@ const Orcamento = () => {
     if (getItem) {
       let convert = JSON.parse(getItem)
       setCart(convert)
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
     }
   }
   return (
@@ -241,11 +243,18 @@ const Orcamento = () => {
           <VStack spacing="20px" divider={<Divider />}>
             {
               cart && cart.length > 0 && cart.map((product: any, index: number) => (
-                <CardProductCart data={product} changeQtd={(value: any) => {
+                <CardProductCart 
+                data={product} 
+                changeQtd={(value: any) => {
                   let newList = cart
                   newList[index].qtd = parseFloat(value)
                   setCart([...newList])
-                }}/>
+                }}
+                removeCart={() => {
+                  removeCart(cart, index)
+                  getItem()
+                }}
+                />
               ))
             }
           </VStack>
