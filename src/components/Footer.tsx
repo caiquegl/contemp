@@ -16,7 +16,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../assets/icons/search.svg";
 import {
   AiFillLinkedin,
@@ -31,7 +31,39 @@ import { useRouter } from "next/router";
 export const Footer = () => {
   const { listHeader } = useAuth();
   const router = useRouter();
+  const [list, setList] = useState<any>(listHeader)
 
+  useEffect(() => {
+    let newList: any = []
+    let first: any = {}
+    let second: any = {}
+    let thrid: any = {}
+    let four: any = {}
+    let five: any = {}
+    let six: any = {}
+    let seven: any = {}
+
+    listHeader.forEach((el: any) => {
+      if (el.name == 'SENSOR') first = el
+      if (el.name == 'SOFTWARES') second = el
+      if (el.name == 'PIRÔMETROS PORTÁTEIS') thrid = el
+      if (el.name == 'CÂMERAS TERMOGRÁFICAS FIXAS') four = el
+      if (el.name == 'PIRÔMETROS FIXOS OPTRIS') five = el
+      if (el.name == 'CONTROLADORES DE POTÊNCIA') six = el
+      if (el.name == 'INSTRUMENTOS E CONTROLE') seven = el
+
+
+    })
+
+    newList.push(first)
+    newList.push(second)
+    newList.push(thrid)
+    newList.push(four)
+    newList.push(five)
+    newList.push(six)
+    newList.push(seven)
+    setList(newList)
+  }, [listHeader])
   return (
     <Container
       maxW="7xl"
@@ -82,8 +114,8 @@ export const Footer = () => {
         ]}
         w="100%"
       >
-        {listHeader && listHeader.length > 0 && listHeader.map((el: any, index: number) => (
-          <GridItem w="100%">
+        {list && list.length > 0 && list.map((el: any, index: number) => (
+          <GridItem w="100%" gap={6}>
             {index === 2 &&
               <HStack spacing="20px" mb="40px">
                 <Link href="https://www.linkedin.com/company/contemp/" isExternal>
@@ -159,14 +191,14 @@ export const Footer = () => {
           </GridItem>
         ))}
       </Grid>
-      <Divider mb="100px" />
+      <Divider m="50px 0" />
       <Flex alignItems="center" justifyContent="space-between" fontSize="18px" flexWrap="wrap">
         <Text color="white" fontSize="18px">
           Copyright © 2022 Contemp. Todos os direitos reservados.
         </Text>
         <UnorderedList color="white" fontSize="18px" display="flex">
           <ListItem>Lista de Todos os Produtos</ListItem>
-          <ListItem>Política de Privacidade</ListItem>
+          <ListItem m="0 30px">Política de Privacidade</ListItem>
           <ListItem>Site Mapa</ListItem>
         </UnorderedList>
       </Flex>

@@ -29,7 +29,7 @@ import Logo from "../assets/icons/logo.png";
 import Bag from "../assets/icons/shopping-bag.svg";
 import ImageNext from "next/image";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical, BsBag } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import {
   AiFillLinkedin,
@@ -140,7 +140,7 @@ export const Header = () => {
                 {cart.length}
               </Flex>
             )}
-            <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
+            <Icon as={BsBag} w={30} minHeight={30} bgSize={30} flex={1} />
           </Box>
 
           <Flex
@@ -421,7 +421,7 @@ export const Header = () => {
                 {cart.length}
               </Flex>
             )}
-            <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
+            <Icon as={BsBag} width={30} height={30} />
           </Box>
         </Flex>
       </Flex>
