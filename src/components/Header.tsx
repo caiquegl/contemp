@@ -180,7 +180,7 @@ export const Header = () => {
 
             <DrawerBody>
               <Box mb="60px">
-                <HeaderMenuVertical menuItems={list} type="inline" />
+                <HeaderMenuVertical menuItems={list} />
               </Box>
               <Box>
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
@@ -439,7 +439,7 @@ export const Header = () => {
         </Flex>
       </Flex>
 
-      <HeaderMenu menuItems={list} type="horizontal" />
+      <HeaderMenu menuItems={list} />
     </Container>
   );
 };

@@ -7,7 +7,6 @@ import { Icon } from "@chakra-ui/react";
 
 export type MenuProps = {
   menuItems: any;
-  type: any
 };
 
 // const CustomMenuItem = ({ menu }: any) => {
@@ -38,7 +37,7 @@ export type MenuProps = {
 //   );
 // };
 
-export const HeaderMenu = ({ menuItems, type }: MenuProps) => {
+export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const [list, setList] = useState([]);
   const router = useRouter();
 
@@ -92,13 +91,6 @@ export const HeaderMenu = ({ menuItems, type }: MenuProps) => {
   return (
     <>
       <style lang="css" scoped>{`
-        .ant-menu-submenu-title {
-          display: grid;
-          grid-template-columns: 1fr 1rem;
-          grid-column-gap: 0.5rem;
-          align-items: center;
-        }
-
         .ant-menu-submenu-title > ::-webkit-scrollbar {
           width: 0.6rem;
         }
@@ -122,7 +114,7 @@ export const HeaderMenu = ({ menuItems, type }: MenuProps) => {
 
       <Menu
         onClick={(evt) => console.log(evt)}
-        mode={type}
+        mode={'horizontal'}
         items={list}
         expandIcon={
           <Icon
