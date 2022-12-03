@@ -15,10 +15,6 @@ import {
   Link,
   Text,
   useBreakpointValue,
-  Menu as ChakraMenu,
-  MenuItem,
-  MenuList,
-  MenuButton,
 } from "@chakra-ui/react";
 import { Image } from "./Image";
 import React, { useEffect, useState } from "react";
@@ -29,10 +25,6 @@ import Instagram from "../assets/icons/instagram.svg";
 import Facebook from "../assets/icons/facebook-f.svg";
 import Youtube from "../assets/icons/youtube.svg";
 import Logo from "../assets/icons/logo.png";
-import Potenci from "../assets/icons/potencia_white.svg";
-import Camera from "../assets/icons/cameras_white.svg";
-import DeNovo from "../assets/icons/termopar_white.svg";
-import Ultimo from "../assets/icons/calibracao_white.svg";
 import Bag from "../assets/icons/shopping-bag.svg";
 import ImageNext from "next/image";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
@@ -43,34 +35,22 @@ import {
   AiFillYoutube,
   AiOutlineInstagram,
 } from "react-icons/ai";
-import {
-  DownOutlined
-} from '@ant-design/icons';
-import { AuthProvider, useAuth } from "../contextAuth/authContext"
+import { AuthProvider, useAuth } from "../contextAuth/authContext";
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
-import { TriangleDownIcon } from "@chakra-ui/icons";
 import { HeaderMenu, HeaderMenuVertical } from "./HeaderMenu";
-import { StaticImageData } from "next/image";
-import {
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
-import { Dropdown, Space } from "antd";
 
 export const Header = () => {
   initFirebase();
   const router = useRouter();
-  const { isOpen, onClose, onOpen } = useSidebarDrawer();
-  const { setListHeader, cart } = useAuth();
+  // const { isOpen, onClose, onOpen } = useSidebarDrawer();
+  const { setListHeader, cart, isOpen, onClose, onOpen } = useAuth();
   const [list, setList] = useState([]);
+
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
@@ -88,22 +68,24 @@ export const Header = () => {
       let newList: any = [];
 
       for await (let categ of categories) {
-        let list_sub_category: any = []
+        let list_sub_category: any = [];
 
         allCategories.forEach((el) => {
-          if (el.data().sub_categorie == categ.id) list_sub_category.push({ ...el.data(), id: el.id })
-        })
+          if (el.data().sub_categorie == categ.id)
+            list_sub_category.push({ ...el.data(), id: el.id });
+        });
 
-        let filter: any = []
+        let filter: any = [];
 
         list_sub_category.forEach((el: any) => {
-          let list_sub_category2: any = []
+          let list_sub_category2: any = [];
 
           allCategories.forEach((c) => {
-            if (c.data().sub_categorie == el.id) list_sub_category2.push({ ...c.data(), id: c.id })
-          })
-          filter.push({ ...el, list_sub_category: list_sub_category2 })
-        })
+            if (c.data().sub_categorie == el.id)
+              list_sub_category2.push({ ...c.data(), id: c.id });
+          });
+          filter.push({ ...el, list_sub_category: list_sub_category2 });
+        });
 
         newList.push({
           ...categ.data(),
@@ -112,7 +94,7 @@ export const Header = () => {
         });
       }
       setList(newList);
-      setListHeader(newList)
+      setListHeader(newList);
     } catch (error) {
       console.log(error);
     }
@@ -121,8 +103,6 @@ export const Header = () => {
   useEffect(() => {
     listCategory();
   }, []);
-
-
 
   if (isDrawerSiderbar) {
     return (
@@ -164,6 +144,7 @@ export const Header = () => {
             <Icon as={BsThreeDotsVertical} fontSize="20px" />
           </Flex>
         </HStack>
+
         <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="md">
           <DrawerOverlay />
           <DrawerContent bg="black.900" p="12px">
@@ -174,7 +155,7 @@ export const Header = () => {
                 width="100%"
               >
                 <Link href="/">
-                  <Image src={Logo} width={160} height={41} />
+                  <ImageNext src={Logo} width={120} height={41} />
                 </Link>
                 <Flex
                   borderRadius="5px"
@@ -199,7 +180,7 @@ export const Header = () => {
 
             <DrawerBody>
               <Box mb="60px">
-                <HeaderMenuVertical menuItems={list} />
+                <HeaderMenuVertical menuItems={list} type="inline" />
               </Box>
               <Box>
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
@@ -393,23 +374,32 @@ export const Header = () => {
         </Box>
 
         <HStack alignSelf="center" flex={1} spacing="10px">
-          <Link href="/sobre" _hover={{
-            textDecoration: 'none',
-            color: 'red.600'
-          }}>
+          <Link
+            href="/sobre"
+            _hover={{
+              textDecoration: "none",
+              color: "red.600",
+            }}
+          >
             <Text w="max-content">A Contempp</Text>
           </Link>
           <Text>Blog</Text>
-          <Link _hover={{
-            textDecoration: 'none',
-            color: 'red.600'
-          }} href="/work">
+          <Link
+            _hover={{
+              textDecoration: "none",
+              color: "red.600",
+            }}
+            href="/work"
+          >
             <Text w="max-content">Trabalhe Conosco</Text>
           </Link>
-          <Link _hover={{
-            textDecoration: 'none',
-            color: 'red.600'
-          }} href="/suporte">
+          <Link
+            _hover={{
+              textDecoration: "none",
+              color: "red.600",
+            }}
+            href="/suporte"
+          >
             <Text w="max-content">Suporte Técnico</Text>
           </Link>
         </HStack>
@@ -423,9 +413,12 @@ export const Header = () => {
             }}
           />
 
-          <Box position="relative" cursor="pointer" onClick={() => router.push('/orcamento')}>
-
-            {cart.length > 0 &&
+          <Box
+            position="relative"
+            cursor="pointer"
+            onClick={() => router.push("orcamento")}
+          >
+            {cart.length > 0 && (
               <Flex
                 p={`${pxToRem(2)} ${pxToRem(5)}`}
                 bg="red.600"
@@ -440,13 +433,13 @@ export const Header = () => {
               >
                 {cart.length}
               </Flex>
-            }
+            )}
             <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
           </Box>
         </Flex>
       </Flex>
 
-      <HeaderMenu menuItems={list} />
+      <HeaderMenu menuItems={list} type="horizontal" />
     </Container>
   );
 };

@@ -6,8 +6,9 @@ import {
   useState,
 } from "react";
 import Cookies from "js-cookie";
-import {onAuthStateChanged} from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from "../utils/db";
+import { useDisclosure } from "@chakra-ui/react";
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -24,6 +25,9 @@ type UserAuthContextData = {
   addCart: any
   clearCart: any
   removeCart: any
+  isOpen: any
+  onClose: any
+  onOpen: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -51,9 +55,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const au = onAuthStateChanged(auth, (use) => {
-      if(use) {
+      if (use) {
         setUser(use)
-      }else {
+      } else {
         setUser({})
       }
     })
@@ -73,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const addCart = (body: any) => {
     let getItem = window.localStorage.getItem('CART-CONTEMP')
 
-    if(getItem) {
+    if (getItem) {
       let convert = JSON.parse(getItem)
       convert.push(body)
       window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
@@ -88,9 +92,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     let newList: any = []
 
     body.forEach((el: any, indexremove: number) => {
-      if(indexremove != index) newList.push(el)
+      if (indexremove != index) newList.push(el)
     })
-    
+
     window.localStorage.setItem('CART-CONTEMP', JSON.stringify(newList))
     getItemLocal()
   }
@@ -100,11 +104,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setCart([])
   }
 
+  const disclosure = useDisclosure();
+
+  const { isOpen, onClose, onOpen } = disclosure;
+
   useEffect(() => {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

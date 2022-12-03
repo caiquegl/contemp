@@ -93,3 +93,7 @@ body {
   background: #B60005;
   border-radius: 3px;
 }
+
+.ant-menu-sub.ant-menu-inline {
+  background: #232323 !important;
+}
