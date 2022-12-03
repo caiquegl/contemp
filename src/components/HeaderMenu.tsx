@@ -52,18 +52,25 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           label: el.name,
           title: el.name,
           key: el.name.replaceAll(" ", ""),
-          onClick: (item: any) => router.push(`/category/${el.name}`),
-          icon: hasIcon ? (
+          icon: (
             <Icon
-              icon={AiFillCaretDown}
+              icon={AiOutlineEye}
               size={20}
               color="#fff"
-              iconStyle={{
-                gridColumn: 2,
-                gridRow: 1,
-              }}
+              onClick={(item: any) => router.push(`/category/${el.name}`)}
             />
-          ) : null,
+          ),
+          // icon: hasIcon ? (
+          //   <Icon
+          //     icon={AiFillCaretDown}
+          //     size={20}
+          //     color="#fff"
+          //     iconStyle={{
+          //       gridColumn: 2,
+          //       gridRow: 1,
+          //     }}
+          //   />
+          // ) : null,
           style: {
             marginRight: 0,
             padding: `0 ${pxToRem(5)}`,
@@ -93,14 +100,14 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
-      <style lang="css" scoped>{`
+      {/* <style lang="css" scoped>{`
         .ant-menu-submenu-title {
           display: grid;
           grid-template-columns: 1fr 1rem;
           grid-column-gap: 0.5rem;
           align-items: center;
         }
-      `}</style>
+      `}</style> */}
 
       <Menu
         onClick={(evt) => console.log(evt)}

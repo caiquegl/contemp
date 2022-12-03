@@ -328,12 +328,12 @@ export const Favorite = () => {
               >
                 Veja mais
               </Button>
-
+              {/* 
               <Image
                 src={homeTabs.tab1.icon}
                 bgSize={pxToRem(40)}
                 minH={pxToRem(40)}
-              />
+              /> */}
             </Flex>
           </Box>
         </Flex>
