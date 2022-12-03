@@ -17,15 +17,23 @@ import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { database, initFirebase } from "../utils/db";
-import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 
 export const Favorite = () => {
   initFirebase();
   const router = useRouter();
   const toast = useToast();
-  const [products, setProducts] = useState<any>([])
-  const [homeTabs, setHomeTabs] = useState<any>({})
+  const [products, setProducts] = useState<any>([]);
+  const [homeTabs, setHomeTabs] = useState<any>({});
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -95,31 +103,37 @@ export const Favorite = () => {
       const qHome = query(dbInstanceHome, where("destaque", "==", true));
 
       await getDocs(q).then(async (data) => {
-
         for await (let pd of data.docs) {
-          const docRef = doc(database, 'categories', pd.data().category);          
+          const docRef = doc(database, "categories", pd.data().category);
           const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
+          if (docSnap.exists()) {
+            newList.push({
+              ...pd.data(),
+              id: pd.id,
+              ref: pd.ref,
+              nameCategory: docSnap.data().name,
+            });
           }
-
         }
-
       });
 
       await getDocs(qHome).then(async (data) => {
         for await (let pd of data.docs) {
-          const docRef = doc(database, 'categories', pd.data().category);          
+          const docRef = doc(database, "categories", pd.data().category);
           const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
+          if (docSnap.exists()) {
+            newList.push({
+              ...pd.data(),
+              id: pd.id,
+              ref: pd.ref,
+              nameCategory: docSnap.data().name,
+            });
           }
-
         }
       });
-      setProducts(newList)
+      setProducts(newList);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao listar destaques",
@@ -133,23 +147,31 @@ export const Favorite = () => {
   const getHomeTab1 = async () => {
     try {
       const dbInstanceHome = collection(database, "home");
-      let tab1:any = {}
-      const qHome = query(dbInstanceHome, where("indexProduct", "==", 0), limit(1))
+      let tab1: any = {};
+      const qHome = query(
+        dbInstanceHome,
+        where("indexProduct", "==", 0),
+        limit(1)
+      );
 
       await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
-        tab1 = data.docs[0].data()
-        const docRef = doc(database, 'categories', data.docs[0].data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            tab1 = { ...tab1, nameCategory: docSnap.data().name };
-          }
+        if (data.docs.length === 0) return;
+        tab1 = data.docs[0].data();
+        const docRef = doc(
+          database,
+          "categories",
+          data.docs[0].data().category
+        );
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          tab1 = { ...tab1, nameCategory: docSnap.data().name };
+        }
       });
 
-      if(Object.keys(tab1).length === 0) return
-      setHomeTabs({...homeTabs, tab1})
+      if (Object.keys(tab1).length === 0) return;
+      setHomeTabs({ ...homeTabs, tab1 });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao listar destaques",
@@ -158,12 +180,12 @@ export const Favorite = () => {
         isClosable: true,
       });
     }
-  }
+  };
 
   useEffect(() => {
-    listProductDestaque()
-    getHomeTab1()
-  }, [])
+    listProductDestaque();
+    getHomeTab1();
+  }, []);
 
   return (
     <Container
@@ -209,7 +231,8 @@ export const Favorite = () => {
           className="mySwiper"
           style={{
             margin: "auto",
-            width: swiperWidth(),
+            width: "100%",
+            maxWidth: swiperWidth(),
           }}
         >
           {products.map((item: any) => (
@@ -223,93 +246,98 @@ export const Favorite = () => {
           ))}
         </Swiper>
       </Flex>
-      {
-        homeTabs.tab1 && (
-<Flex
-        alignItems="center"
-        mt="200px"
-        mb="53px"
-        flexDirection={["column", "column", "row", "row", "row"]}
-      >
-        <Image
-          flex={1}
-          src={homeTabs.tab1.urls[0]}
-          alt={homeTabs.tab1.name}
-          minH={pxToRem(320)}
-          bgSize={{
-            base: "95%",
-            md: "90%",
-            lg: "76%",
-            xl: "55%",
-          }}
-          marginBottom={{
-            base: pxToRem(20),
-            lg: 0,
-          }}
-        />
-
-        <Box w="100%" flex={1}>
-          <Flex
-            alignItems="center"
-            justifyContent="space-between"
-            flexWrap="wrap"
-            w={{
-              base: "100%",
-              xl: "80%",
-              "2xl": "98%",
+      {homeTabs.tab1 && (
+        <Flex
+          alignItems="center"
+          mt="200px"
+          mb="53px"
+          flexDirection={["column", "column", "row", "row", "row"]}
+        >
+          <Image
+            flex={1}
+            src={homeTabs.tab1.urls[0]}
+            alt={homeTabs.tab1.name}
+            minH={pxToRem(320)}
+            bgSize={{
+              base: "95%",
+              md: "90%",
+              lg: "76%",
+              xl: "55%",
             }}
-          >
-            <Text fontWeight="bold" fontSize={pxToRem(60)}>
-              {homeTabs.tab1.name}
+            marginBottom={{
+              base: pxToRem(20),
+              lg: 0,
+            }}
+          />
+
+          <Box w="100%" flex={1}>
+            <Flex
+              alignItems="center"
+              justifyContent="space-between"
+              flexWrap="wrap"
+              w={{
+                base: "100%",
+                xl: "80%",
+                "2xl": "98%",
+              }}
+            >
+              <Text fontWeight="bold" fontSize={pxToRem(60)}>
+                {homeTabs.tab1.name}
+              </Text>
+
+              <ProductCategoryWithIcon
+                title={homeTabs.tab1.nameCategory}
+                icon={homeTabs.tab1.icon}
+                containerProps={{
+                  borderColor: "red.600",
+                }}
+              />
+            </Flex>
+            <Text
+              textAlign="justify"
+              mt="27px"
+              mb="28px"
+              fontSize={pxToRem(20)}
+              w={{
+                base: "95%",
+                xl: "80%",
+                "2xl": "98%",
+              }}
+            >
+              {homeTabs.tab1.description}
             </Text>
 
-            <ProductCategoryWithIcon
-              title={homeTabs.tab1.nameCategory}
-              icon={homeTabs.tab1.icon}
-              containerProps={{
-                borderColor: "red.600",
-              }}
-            />
-          </Flex>
-          <Text
-            textAlign="justify"
-            mt="27px"
-            mb="28px"
-            fontSize={pxToRem(20)}
-            w={{
-              base: "95%",
-              xl: "80%",
-              "2xl": "98%",
-            }}
-          >
-            {homeTabs.tab1.description}
-          </Text>
+            <Flex alignItems="center" w="80%" maxW={pxToRem(220)}>
+              <Button
+                border="2px solid white"
+                borderRadius="25px"
+                width="157px"
+                height="50px"
+                mr="15px"
+                bg="transparent"
+                _hover={{
+                  bg: "white",
+                  color: "black.800",
+                  transition: "all 0.3s",
+                }}
+                onClick={() =>
+                  router.push(
+                    `/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`
+                  )
+                }
+              >
+                Veja mais
+              </Button>
 
-          <Flex alignItems="center" w="80%" maxW={pxToRem(220)}>
-            <Button
-              border="2px solid white"
-              borderRadius="25px"
-              width="157px"
-              height="50px"
-              mr="15px"
-              bg="transparent"
-              _hover={{
-                bg: "white",
-                color: "black.800",
-                transition: "all 0.3s",
-              }}
-              onClick={() => router.push(`/produto/${homeTabs.tab1.name.replaceAll(' ', '_')}`)}
-            >
-              Veja mais
-            </Button>
-
-            <Image src={homeTabs.tab1.icon} bgSize={pxToRem(40)} minH={pxToRem(40)} />
-          </Flex>
-        </Box>
-      </Flex>
-        )
-      }
-      
+              <Image
+                src={homeTabs.tab1.icon}
+                bgSize={pxToRem(40)}
+                minH={pxToRem(40)}
+              />
+            </Flex>
+          </Box>
+        </Flex>
+      )}
     </Container>
   );
 };

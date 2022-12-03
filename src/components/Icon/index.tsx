@@ -1,31 +1,32 @@
 import { CSSProperties, FunctionComponent } from "react";
-import { IconContext } from "react-icons";
+import { IconBaseProps, IconContext } from "react-icons";
 import { pxToRem } from "../../utils/pxToRem";
 
 export type IconProps = {
   icon: FunctionComponent<any>;
-  size: number;
+  size?: number;
   color?: string;
   iconStyle?: CSSProperties;
-};
+} & IconBaseProps;
 
 export default function Icon({
   icon: Icon,
   size,
   color,
   iconStyle,
+  ...props
 }: IconProps) {
   return (
     <IconContext.Provider
       value={{
         color: color ? color : `#F7F7F7`,
-        size: pxToRem(size),
+        size: pxToRem(size ?? 20),
         style: {
           ...iconStyle,
         },
       }}
     >
-      <Icon />
+      <Icon {...props} />
     </IconContext.Provider>
   );
 }

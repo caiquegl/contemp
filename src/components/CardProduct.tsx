@@ -1,7 +1,7 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import { pxToRem } from "../utils/pxToRem";
-import { Image } from './Image'
+import { Image } from "./Image";
 
 interface IProps {
   img: string | StaticImageData;
@@ -25,22 +25,28 @@ const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
         flexDirection="column"
         borderRadius="8px"
         border="2px solid white"
+        margin="auto"
         w={pxToRem(253)}
         h={pxToRem(253)}
         bg="none"
         _hover={{
           h: pxToRem(342),
-          bg: 'white.700',
-          '.see-more-text': {
-            display: 'block'
-          }
+          bg: "white.700",
+          ".see-more-text": {
+            display: "block",
+          },
         }}
         transition="all 0.3s"
         cursor="pointer"
       >
         <Image src={img} alt={alt} />
-        
-        <Box className="see-more-text" display="none" flex={0.3} textAlign="center">
+
+        <Box
+          className="see-more-text"
+          display="none"
+          flex={0.3}
+          textAlign="center"
+        >
           <Text
             fontSize="20px"
             fontWeight="bold"
@@ -49,7 +55,7 @@ const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
           >
             {text}
           </Text>
-          <Link href={text ? `/produto/${text}` : ''}>
+          <Link href={text ? `/produto/${text}` : ""}>
             <Text fontSize="20px" color="black">
               Veja mais +
             </Text>

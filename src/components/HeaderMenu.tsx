@@ -3,7 +3,8 @@ import { Menu } from "antd";
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { Icon } from "@chakra-ui/react";
+import Icon from "./Icon";
+import { pxToRem } from "../utils/pxToRem";
 
 export type MenuProps = {
   menuItems: any;
@@ -41,17 +42,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const [list, setList] = useState([]);
   const router = useRouter();
 
-  const truncateText = (text: string) => {
-    const textLength = text.length;
-    const maxTextLength = 35;
-
-    if (textLength > maxTextLength) {
-      return text.substring(0, maxTextLength) + "...";
-    }
-
-    return text;
-  };
-
   const amountList = async (amount: any, hasIcon = true) => {
     try {
       let obj: any = [];
@@ -60,15 +50,28 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         let newObj = {
           ...el,
           label: el.name,
+          title: el.name,
           key: el.name.replaceAll(" ", ""),
-          onClick: (item: any) => router.push(`/category/${el.name}`)
+          onClick: (item: any) => router.push(`/category/${el.name}`),
+          icon: hasIcon ? (
+            <Icon
+              icon={AiFillCaretDown}
+              size={20}
+              color="#fff"
+              iconStyle={{
+                gridColumn: 2,
+                gridRow: 1,
+              }}
+            />
+          ) : null,
+          style: {
+            marginRight: 0,
+            padding: `0 ${pxToRem(5)}`,
+          },
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, el.name);
-          newObj.icon = (
-            <Icon as={AiFillCaretDown} fontSize="20px" color="#fff" fill="#fff" />
-          );
+          newObj.children = await amountList(el.list_sub_category, false);
         }
         obj.push(newObj);
       }
@@ -91,42 +94,23 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   return (
     <>
       <style lang="css" scoped>{`
-        .ant-menu-submenu-title > ::-webkit-scrollbar {
-          width: 0.6rem;
-        }
-        
-        /* Track */
-        .ant-menu-submenu-title > ::-webkit-scrollbar-track {
-          background: red;
-        }
-        
-        /* Handle */
-        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb {
-          background: blue;
-          border-radius: 5px;
-        }
-        
-        /* Handle on hover */
-        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb:hover {
-          background: gray;
+        .ant-menu-submenu-title {
+          display: grid;
+          grid-template-columns: 1fr 1rem;
+          grid-column-gap: 0.5rem;
+          align-items: center;
         }
       `}</style>
 
       <Menu
         onClick={(evt) => console.log(evt)}
-        mode={'horizontal'}
+        mode={"horizontal"}
         items={list}
-        expandIcon={
-          <Icon
-            as={AiFillCaretRight}
-            size={17}
-
-          />
-        }
+        expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
           background: "#242424",
           border: "none",
-          fontSize: 18,
+          fontSize: 16,
           position: "relative",
           alignItems: "center",
           width: "100%",
@@ -150,13 +134,17 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
           label: el.name,
           key: el.name.replaceAll(" ", ""),
           icon: (
-            <Icon as={AiOutlineEye} fontSize="40px" color="#fff" fill="#fff" onClick={(item: any) => router.push(`/category/${el.name}`)} />
-          )
+            <Icon
+              icon={AiOutlineEye}
+              size={20}
+              color="#fff"
+              onClick={(item: any) => router.push(`/category/${el.name}`)}
+            />
+          ),
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
           newObj.children = await amountList(el.list_sub_category, el.name);
-
         }
         obj.push(newObj);
       }
@@ -187,6 +175,8 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
         color: "#fff",
         fontSize: 18,
       }}
+      theme="dark"
+      expandIcon={<Icon icon={AiFillCaretRight} size={30} />}
     />
   );
 };
