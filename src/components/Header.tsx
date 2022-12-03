@@ -43,12 +43,15 @@ import {
   AiFillYoutube,
   AiOutlineInstagram,
 } from "react-icons/ai";
-import {AuthProvider, useAuth} from "../contextAuth/authContext"
+import {
+  DownOutlined
+} from '@ant-design/icons';
+import { AuthProvider, useAuth } from "../contextAuth/authContext"
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
 import { TriangleDownIcon } from "@chakra-ui/icons";
-import { HeaderMenu } from "./HeaderMenu";
+import { HeaderMenu, HeaderMenuVertical } from "./HeaderMenu";
 import { StaticImageData } from "next/image";
 import {
   collection,
@@ -60,6 +63,7 @@ import {
 } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
+import { Dropdown, Space } from "antd";
 
 export const Header = () => {
   initFirebase();
@@ -75,19 +79,19 @@ export const Header = () => {
   const listCategory = async () => {
     try {
       const dbInstance = collection(database, "categories");
-      const {docs: allCategories} = await getDocs(dbInstance)
+      const { docs: allCategories } = await getDocs(dbInstance)
 
 
       const q = query(dbInstance, where("is_main", "==", "true"));
-      let {docs: categories} = await getDocs(q);
+      let { docs: categories } = await getDocs(q);
 
       let newList: any = [];
 
       for await (let categ of categories) {
         let list_sub_category: any = []
-        
+
         allCategories.forEach((el) => {
-          if(el.data().sub_categorie == categ.id) list_sub_category.push({...el.data(), id: el.id})
+          if (el.data().sub_categorie == categ.id) list_sub_category.push({ ...el.data(), id: el.id })
         })
 
         let filter: any = []
@@ -96,9 +100,9 @@ export const Header = () => {
           let list_sub_category2: any = []
 
           allCategories.forEach((c) => {
-            if(c.data().sub_categorie ==  el.id) list_sub_category2.push({...c.data(), id: c.id})
+            if (c.data().sub_categorie == el.id) list_sub_category2.push({ ...c.data(), id: c.id })
           })
-          filter.push({...el, list_sub_category: list_sub_category2})
+          filter.push({ ...el, list_sub_category: list_sub_category2 })
         })
 
         newList.push({
@@ -118,7 +122,7 @@ export const Header = () => {
     listCategory();
   }, []);
 
-  
+
 
   if (isDrawerSiderbar) {
     return (
@@ -195,27 +199,7 @@ export const Header = () => {
 
             <DrawerBody>
               <Box mb="60px">
-                <Text m="22px 0" fontSize="20px" fontWeight="bold">
-                  Produtos
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 1
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 2
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 3
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 4
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 5
-                </Text>
-                <Text mb="15px" fontSize="18px">
-                  Categoria 6
-                </Text>
+                <HeaderMenuVertical menuItems={list} />
               </Box>
               <Box>
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">

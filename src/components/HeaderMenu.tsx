@@ -98,3 +98,66 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
     />
   );
 };
+
+export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
+  const [list, setList] = useState([]);
+  const router = useRouter();
+
+  const amountList = async (amount: any, name?: any) => {
+    try {
+      let obj: any = [];
+      for await (let el of amount) {
+        let newObj = {
+          ...el,
+          label: el.name,
+          key: el.name.replaceAll(" ", ""),
+          onClick: (item: any) => router.push(`/category/${el.name}`)
+        };
+
+        if (el.list_sub_category && el.list_sub_category.length > 0) {
+          newObj.children = await amountList(el.list_sub_category, el.name);
+          newObj.icon = (
+            <Icon as={name ? AiFillCaretRight : AiFillCaretDown} fontSize="20px" color="#fff" />
+          );
+        }
+        obj.push(newObj);
+      }
+
+      return obj;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
+  const getList = async () => {
+    let amount = await amountList(menuItems);
+    setList(amount);
+  };
+
+  useEffect(() => {
+    getList();
+  }, [menuItems]);
+
+  const items = [
+    { label: "item 1", key: "item-1" }, // remember to pass the key prop
+    { label: "item 2", key: "item-2" }, // which is required
+    {
+      label: "sub menu",
+      key: "submenu",
+      children: [{ label: "item 3", key: "submenu-item-1" }],
+    },
+  ];
+  return (
+    <Menu
+      onClick={(avt) => console.log(avt)}
+      mode="inline"
+      items={list}
+      style={{
+        background: "#242424",
+        border: "none",
+        color: "#fff",
+        fontSize: 18,
+      }}
+    />
+  );
+};
