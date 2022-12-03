@@ -115,7 +115,7 @@ const Category = () => {
           maxW="1037px"
           p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
-          {category}
+          {category ? category : ''}
         </Text>
       </Flex>
       {list && list.length > 0 && list.map((categ: any, index: number) => {

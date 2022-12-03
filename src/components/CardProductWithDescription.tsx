@@ -1,12 +1,11 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { pxToRem } from "../utils/pxToRem";
-import { Image } from './Image'
 
 interface IProps {
-  img: string | StaticImageData;
+  img: string;
   text: string;
   description?: string;
   alt?: string;
@@ -43,7 +42,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
         textTransform="uppercase"
         mb="20px"
         width="100%"
-        
+
       >
         {text}
       </Text>
