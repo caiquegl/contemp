@@ -100,14 +100,16 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
-      {/* <style lang="css" scoped>{`
+      <style lang="css" scoped>{`
         .ant-menu-submenu-title {
-          display: grid;
-          grid-template-columns: 1fr 1rem;
-          grid-column-gap: 0.5rem;
-          align-items: center;
+          display: flex;
+          flex-direction: row-reverse;
         }
-      `}</style> */}
+
+        .ant-menu-submenu-title svg {
+          margin-left: 5px;
+        }
+      `}</style>
 
       <Menu
         onClick={(evt) => console.log(evt)}

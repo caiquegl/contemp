@@ -218,7 +218,7 @@ export const Favorite = () => {
         Essa é a seleção que a equipe da Contemp escolheu como os destaques do
         mês
       </Text>
-      <Flex h={pxToRem(250)}>
+      <Flex h={pxToRem(250)} w="100%">
         <Swiper
           slidesPerView={slidesPerView()}
           autoplay={{
@@ -232,11 +232,11 @@ export const Favorite = () => {
           style={{
             margin: "auto",
             width: "100%",
-            maxWidth: swiperWidth(),
+            // maxWidth: swiperWidth(),
           }}
         >
           {products.map((item: any) => (
-            <SwiperSlide>
+            <SwiperSlide style={{ width: '100%' }}>
               <CardProduct
                 img={item.urls && item.urls.length > 0 && item.urls[0]}
                 text={item.name}
