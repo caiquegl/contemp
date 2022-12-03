@@ -381,7 +381,7 @@ export const Header = () => {
               color: "red.600",
             }}
           >
-            <Text w="max-content">A Contempp</Text>
+            <Text w="max-content">A Contemp</Text>
           </Link>
           <Text>Blog</Text>
           <Link
