@@ -36,6 +36,7 @@ const Orcamento = () => {
   const [loading, setLoading] = useState(false)
   const [isAprove, setIsAprove] = useState(false)
   const [cart, setCart] = useState<any>([])
+  const [product, setProduct] = useState<any>([])
   const { register, handleSubmit, formState, reset } = useForm(
     {}
   );
@@ -44,13 +45,13 @@ const Orcamento = () => {
 
   const saveCart = async (bodyForm: any) => {
     try {
-      bodyForm = { ...bodyForm, isAprove, products: cart };
+      bodyForm = { ...bodyForm, isAprove };
 
       setLoading(true);
 
       const dbInstance = collection(database, "orcamento");
 
-
+      console.log(bodyForm)
       await addDoc(dbInstance, bodyForm);
 
       toast({
@@ -62,12 +63,13 @@ const Orcamento = () => {
       });
       await fetch(`${process.env.NEXT_PUBLIC_URL}api/mail`, {
         method: 'POST',
-        body: JSON.stringify(bodyForm)
+        body: JSON.stringify({ ...bodyForm, product: product })
       });
       // reset();
       // window.localStorage.removeItem('CART-CONTEMP')
       // clearCart()
     } catch (error) {
+      console.log(error)
       toast({
         title: "Erro",
         description: "Erro ao salvar categoria",
@@ -90,6 +92,7 @@ const Orcamento = () => {
     if (getItem) {
       let convert = JSON.parse(getItem)
       setCart(convert)
+      setProduct(convert)
     }
   }
   return (
@@ -257,6 +260,12 @@ const Orcamento = () => {
                   removeCart={() => {
                     removeCart(cart, index)
                     getItem()
+                  }}
+
+                  getItem={(pd: any) => {
+                    let newList = cart
+                    newList[index] = { ...newList[index], ...pd }
+                    setProduct(newList)
                   }}
                 />
               ))

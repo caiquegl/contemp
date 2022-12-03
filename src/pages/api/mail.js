@@ -2,10 +2,20 @@ const mail = require('@sendgrid/mail');
 
 // mail.setApiKey(process.env.SENDGRID_API_KEY);
 mail.setApiKey("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")
+
 export default async (req, response) => {
     try {
         const body = JSON.parse(req.body);
 
+        let products = ""
+        body.product.forEach(el => {
+            products = products + `Nome: ${el.name}rn`
+            if(Object.keys(el.variation).length > 0) {
+                Object.keys(el.variation).forEach(obj => {
+                    products = products + `Variação: ${obj} -> ${el.variation[obj]}rn`
+                })
+            }
+        });
         const message = `
             Nome: ${body.name}rn
             Sobrenome: ${body.lastName}rn
@@ -13,10 +23,13 @@ export default async (req, response) => {
             Telefone: ${body.telephone}rn
             Descrição: ${body.description}rn
             Aprova contato: ${body.isAprove}rn
-            Produto: ${JSON.stringify(body.products)}
+            Produto: ${products}
         `;
 
-        await mail.send({
+        console.log(message)
+
+        console.log('aquiiii')
+        mail.send({
             // to: 'vendas@contemp.com.br',
             to: 'arq.caique@hotmail.com',
             from: 'kemelin@3hub.co',

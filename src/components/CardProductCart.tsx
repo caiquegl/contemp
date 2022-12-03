@@ -8,7 +8,7 @@ import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
 
 
-const CardProductCart = ({ data, changeQtd, removeCart }: any) => {
+const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
   initFirebase();
   const [products, setProduct] = useState<any>({})
 
@@ -16,7 +16,7 @@ const CardProductCart = ({ data, changeQtd, removeCart }: any) => {
     const docRef = doc(database, 'products', data.product_id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setProduct({...docSnap.data(), qtd: data.qtd})
+      setProduct({ ...docSnap.data(), qtd: data.qtd })
     }
   }
 
@@ -24,9 +24,13 @@ const CardProductCart = ({ data, changeQtd, removeCart }: any) => {
     const docRef = doc(database, 'home', data.product_id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setProduct({...docSnap.data(), qtd: data.td})
+      setProduct({ ...docSnap.data(), qtd: data.td })
     }
   }
+
+  useEffect(() => {
+    getItem(products)
+  }, [products])
 
   useEffect(() => {
     getProduct()
@@ -78,14 +82,14 @@ const CardProductCart = ({ data, changeQtd, removeCart }: any) => {
         <Flex alignItems="center" justifyContent="space-between">
           <Icon as={AiFillDelete} fontSize="20px" cursor="pointer" onClick={() => removeCart()} />
           <HStack>
-          <Text
+            <Text
               fontSize="19px"
               color="black.800"
               fontWeight="bold"
             >
               Quantidade:
             </Text>
-            <Input type="number" value={data.qtd} borderWidth="2px" borderRadius="20px" maxW="80px" onChange={(evt) => changeQtd(evt.target.value)}/>
+            <Input type="number" value={data.qtd} borderWidth="2px" borderRadius="20px" maxW="80px" onChange={(evt) => changeQtd(evt.target.value)} />
           </HStack>
         </Flex>
       </Box>
