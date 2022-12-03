@@ -42,6 +42,10 @@ export const SmoothScroll = ({ children }: any) => {
     requestAnimationFrame(() => smoothScrollingHandler());
   };
 
-  // return <Box ref={scrollingContainerRef}>{children}</Box>;
-  return <Box >{children}</Box>;
+  return (
+    <Box maxH="100vh" ref={scrollingContainerRef}>
+      {children}
+    </Box>
+  );
+  // return <Box >{children}</Box>;
 };
