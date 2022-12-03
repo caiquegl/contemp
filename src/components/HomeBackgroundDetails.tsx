@@ -14,9 +14,9 @@ export const HomeBackgroundDetails = () => {
         src={PlusDetail}
         top={pxToRem(1440)}
         left={{
-          lg: '10%',
-          xl: '7%',
-          '2xl': '15%'
+          lg: "10%",
+          xl: "7%",
+          "2xl": "15%",
         }}
         w={20}
         maxH={110}
@@ -52,12 +52,12 @@ export const HomeBackgroundDetails = () => {
         src={CriclesDetail}
         top={{
           lg: pxToRem(3220),
-          xl: pxToRem(3177)
+          xl: pxToRem(3177),
         }}
         left={{
-          lg: '10%',
-          xl: '7%',
-          '2xl': '10%'
+          lg: "10%",
+          xl: "7%",
+          "2xl": "10%",
         }}
         w={70}
         maxH={100}
@@ -77,9 +77,9 @@ export const HomeBackgroundDetails = () => {
         src={CriclesDetail}
         top={pxToRem(4417)}
         left={{
-          lg: '10%',
-          xl: '7%',
-          '2xl': '10%'
+          lg: "10%",
+          xl: "7%",
+          "2xl": "10%",
         }}
         w={70}
         maxH={100}
@@ -104,7 +104,7 @@ export const HomeBackgroundDetails = () => {
         zIndex={10}
       />
 
-<BackgroundDetail
+      <BackgroundDetail
         src={PlusDetail}
         top={pxToRem(7255)}
         left="15%"
@@ -113,5 +113,5 @@ export const HomeBackgroundDetails = () => {
         zIndex={10}
       />
     </>
-  )
-}
+  );
+};

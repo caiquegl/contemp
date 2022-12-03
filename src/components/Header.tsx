@@ -10,6 +10,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Grid,
   HStack,
   Icon,
   Link,
@@ -210,53 +211,19 @@ export const Header = () => {
               </Box>
             </DrawerBody>
 
-            <DrawerFooter>
-              <HStack justifyContent="center" w="100%">
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={AiFillLinkedin} fontSize="35px" color="black.200" />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={AiFillYoutube} fontSize="35px" color="black.200" />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon
-                    as={AiOutlineInstagram}
-                    fontSize="35px"
-                    color="black.200"
-                  />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={FaFacebookF} fontSize="35px" color="black.200" />
-                </Flex>
-              </HStack>
+            <DrawerFooter w="100%">
+              <Grid
+                templateColumns="repeat(4, 1fr)"
+                w="100%"
+                maxW={pxToRem(260)}
+                margin="auto"
+                gridColumnGap={pxToRem(10)}
+              >
+                <CustomIcon icon={AiFillLinkedin} />
+                <CustomIcon icon={AiFillYoutube} />
+                <CustomIcon icon={AiOutlineInstagram} />
+                <CustomIcon icon={FaFacebookF} />
+              </Grid>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
@@ -373,7 +340,11 @@ export const Header = () => {
           </Link>
         </Box>
 
-        <HStack alignSelf="center" flex={1} spacing="10px">
+        <HStack
+          alignSelf="center"
+          flex={{ base: 1, lg: 1.6, xl: 1 }}
+          spacing="10px"
+        >
           <Link
             href="/sobre"
             _hover={{
@@ -443,3 +414,18 @@ export const Header = () => {
     </Container>
   );
 };
+
+function CustomIcon({ icon }: any) {
+  return (
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      w={pxToRem(50)}
+      h={pxToRem(50)}
+      borderRadius="full"
+      bg="white.500"
+    >
+      <Icon as={icon} fontSize={pxToRem(35)} color="black.200" />
+    </Flex>
+  );
+}

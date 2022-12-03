@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { pxToRem } from "../utils/pxToRem";
-import { Image } from './Image'
 
 interface IProps {
   bg: string;
@@ -13,19 +12,23 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
   const router = useRouter();
 
   return (
-    <GridItem
-      w={["100%", "100%", "300px", "300px", "300px", "335px"]}
-      mb={["50px", "50px", "0", "0", "0", "0"]}
-      maxH={["860px", "860px", "760px", "760px", "760px", "760px"]}
-      bg={bg}
-      borderRadius="8px"
-      p="27px 17px"
-    >
-      <Grid h="100%" templateRows="1.5fr 1.5fr 1fr 0.5fr">
+    <GridItem w={"100%"} bg={bg} borderRadius="8px" p="27px 17px">
+      <Grid h="100%" templateRows="1.5fr 1fr 0.5fr">
         <Box mb={pxToRem(15)}>
-          <Box w="41px" h="41px" borderRadius="5px" bg={color} mb={pxToRem(10)}/>
+          <Box
+            w="41px"
+            h="41px"
+            borderRadius="5px"
+            bg={color}
+            mb={pxToRem(10)}
+          />
 
-          <Text color={color} fontSize={pxToRem(35)} lineHeight={1.2} fontWeight="bold">
+          <Text
+            color={color}
+            fontSize={pxToRem(35)}
+            lineHeight={1.2}
+            fontWeight="bold"
+          >
             {title}
           </Text>
         </Box>
