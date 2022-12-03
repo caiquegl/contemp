@@ -45,11 +45,11 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       >
         {text}
       </Text>
-      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px">
+      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px" noOfLines={10}>
         {description}
       </Text>
 
-      <Image src={img} alt={alt} mb="20px" />
+      <Image src={img} alt={alt} mb="20px" h="200px" />
 
       <Button
         w="243px"

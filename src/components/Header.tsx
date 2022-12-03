@@ -119,13 +119,29 @@ export const Header = () => {
         </Link>
 
         <HStack spacing="27px">
-          <Image
-            src={Bag}
-            width={30}
-            height={30}
-            bgSize="contain"
-            flex="auto"
-          />
+          <Box
+            position="relative"
+            cursor="pointer"
+            onClick={() => router.push("/orcamento")}
+          >
+            {cart.length > 0 && (
+              <Flex
+                p={`${pxToRem(2)} ${pxToRem(5)}`}
+                bg="red.600"
+                borderRadius={50}
+                alignItems="center"
+                justifyContent="center"
+                fontWeight="bold"
+                fontSize={pxToRem(14)}
+                position="absolute"
+                bottom={4}
+                left={4}
+              >
+                {cart.length}
+              </Flex>
+            )}
+            <Image src={Bag} w={30} minHeight={30} bgSize={30} flex={1} />
+          </Box>
 
           <Flex
             borderRadius="5px"
@@ -187,7 +203,7 @@ export const Header = () => {
                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
                   Institucional
                 </Text>
-                <Link href="/sobre">
+                <Link href="/a-contemp">
                   <Text mb="15px" fontSize="18px">
                     A Contemp
                   </Text>
@@ -195,12 +211,12 @@ export const Header = () => {
                 <Text mb="15px" fontSize="18px">
                   Blog
                 </Text>
-                <Link href="/suporte">
+                <Link href="/suporte-tecnico">
                   <Text mb="15px" fontSize="18px">
                     Contato
                   </Text>
                 </Link>
-                <Link href="/work">
+                <Link href="/trabalhe-conosco">
                   <Text mb="15px" fontSize="18px">
                     Trabalhe Conosco
                   </Text>
@@ -255,7 +271,7 @@ export const Header = () => {
           </Flex>
         </Box>
 
-        <HStack>
+        <HStack spacing="20px">
           <Link href="https://www.linkedin.com/company/contemp/" isExternal>
             <Box
               w="28px"
@@ -346,7 +362,7 @@ export const Header = () => {
           spacing="10px"
         >
           <Link
-            href="/sobre"
+            href="/a-contemp"
             _hover={{
               textDecoration: "none",
               color: "red.600",
@@ -360,7 +376,7 @@ export const Header = () => {
               textDecoration: "none",
               color: "red.600",
             }}
-            href="/work"
+            href="/trabalhe-conosco"
           >
             <Text w="max-content">Trabalhe Conosco</Text>
           </Link>
@@ -369,7 +385,7 @@ export const Header = () => {
               textDecoration: "none",
               color: "red.600",
             }}
-            href="/suporte"
+            href="/suporte-tecnico"
           >
             <Text w="max-content">Suporte Técnico</Text>
           </Link>

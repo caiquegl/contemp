@@ -10,7 +10,10 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
+  ListItem,
   Text,
+  UnorderedList,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
@@ -24,8 +27,10 @@ import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { useAuth } from "../contextAuth/authContext";
+import { useRouter } from "next/router";
 export const Footer = () => {
   const { listHeader } = useAuth();
+  const router = useRouter();
 
   return (
     <Container
@@ -81,59 +86,70 @@ export const Footer = () => {
           <GridItem w="100%">
             {index === 2 &&
               <HStack spacing="20px" mb="40px">
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
+                <Link href="https://www.linkedin.com/company/contemp/" isExternal>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    w="50px"
+                    h="50px"
+                    borderRadius="full"
+                    bg="white.500"
+                  >
+                    <Icon as={AiFillLinkedin} fontSize="35px" color="black.200" />
+                  </Flex>
+                </Link>
+                <Link href="https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ" isExternal>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    w="50px"
+                    h="50px"
+                    borderRadius="full"
+                    bg="white.500"
+                  >
+                    <Icon as={AiFillYoutube} fontSize="35px" color="black.200" />
+                  </Flex>
+                </Link>
+                <Link href="https://www.instagram.com/contemp.industria/" isExternal>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    w="50px"
+                    h="50px"
+                    borderRadius="full"
+                    bg="white.500"
+                  >
+                    <Icon as={AiOutlineInstagram} fontSize="35px" color="black.200" />
+                  </Flex>
+                </Link>
+                <Link
+                  href="https://www.facebook.com/Contemp-1001000803330302/"
+                  isExternal
                 >
-                  <Icon as={AiFillLinkedin} fontSize="35px" color="black.200" />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={AiFillYoutube} fontSize="35px" color="black.200" />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={AiOutlineInstagram} fontSize="35px" color="black.200" />
-                </Flex>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  w="50px"
-                  h="50px"
-                  borderRadius="full"
-                  bg="white.500"
-                >
-                  <Icon as={FaFacebookF} fontSize="35px" color="black.200" />
-                </Flex>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    w="50px"
+                    h="50px"
+                    borderRadius="full"
+                    bg="white.500"
+                  >
+                    <Icon as={FaFacebookF} fontSize="35px" color="black.200" />
+                  </Flex>
+                </Link>
               </HStack>
             }
-            <Text fontWeight="bold" fontSize="25px" mb="20px">
+            <Text fontWeight="bold" fontSize="25px" mb="20px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
               {el.name}
             </Text>
             {el.list_sub_category && el.list_sub_category.length > 0 && el.list_sub_category.map((el2: any) => (
               <>
-                <Text fontWeight="bold" fontSize="20px" mb="15px">
+                <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
                   {el.name}
                 </Text>
                 <Box mb="20px">
                   {el2.list_sub_category && el2.list_sub_category.length > 0 && el2.list_sub_category.map((el3: any) => (
-                    <Text fontSize="20px">
+                    <Text fontSize="20px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
                       {el3.name}
                     </Text>
                   ))}
@@ -143,6 +159,18 @@ export const Footer = () => {
           </GridItem>
         ))}
       </Grid>
+      <Divider mb="100px" />
+      <Flex alignItems="center" justifyContent="space-between" fontSize="18px" flexWrap="wrap">
+        <Text color="white" fontSize="18px">
+          Copyright © 2022 Contemp. Todos os direitos reservados.
+        </Text>
+        <UnorderedList color="white" fontSize="18px" display="flex">
+          <ListItem>Lista de Todos os Produtos</ListItem>
+          <ListItem>Política de Privacidade</ListItem>
+          <ListItem>Site Mapa</ListItem>
+        </UnorderedList>
+      </Flex>
+
     </Container>
   );
 };

@@ -9,6 +9,7 @@ import {
   HStack,
   Input,
   InputGroup,
+  Link,
   Select,
   Tab,
   TabList,
@@ -60,8 +61,8 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
-      let produto = '' 
-      if(product && typeof product == 'string') produto = product.replaceAll('_', ' ')
+      let produto = ''
+      if (product && typeof product == 'string') produto = product.replaceAll('_', ' ')
       const dbInstanceProducts = collection(database, "products");
       const dbInstanceHome = collection(database, "home");
       const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
@@ -73,13 +74,13 @@ const Product = () => {
         if (data.docs.length > 0) {
           exist = true
         }
-        setDetail({...data.docs[0].data(), id: data.docs[0].id})
+        setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
       });
 
       if (!exist) {
         await getDocs(qHome).then(async (data) => {
           if (data.docs.length == 0) return
-          setDetail({...data.docs[0].data(), id: data.docs[0].id})
+          setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
 
           const qProductCategory = query(dbInstanceProducts, where("category", "==", data.docs[0].data().category), limit(1))
           const qHomeCategory = query(dbInstanceHome, where("category", "==", data.docs[0].data().category), limit(1))
@@ -125,7 +126,7 @@ const Product = () => {
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
       >
-        <Center bg="white.500" w="100%" maxW="564px" h="764px">
+        <Center bg="white.500" w="40%" h="764px">
           <Swiper
             loop={true}
             pagination={{
@@ -155,10 +156,14 @@ const Product = () => {
             {detail.name ? detail.name : ''}
           </Text>
           <Text color="black.800" fontSize="20px" maxW="829px" mb="30px">
-            {detail.description ? detail.description : ''}{" "}
-            <Text as="span" color="red.600" cursor="pointer">
-              veja descrição completa +
-            </Text>
+            <Text as="span" noOfLines={4}>{detail.description ? detail.description : ''}{" "}</Text>
+            {detail.description ? detail.description.length > 300 : '...'}{" "}
+            <Link href="#description" _hover={{ textDecoration: 'none' }}>
+              <Text as="span" color="red.600" cursor="pointer">
+                veja descrição completa +
+              </Text>
+            </Link>
+
           </Text>
           <VStack spacing="30px">
             {detail.hasVariation && detail.listVariation && detail.listVariation.length > 0 && detail.listVariation.map((vr: any) => (
@@ -186,7 +191,7 @@ const Product = () => {
                     borderRadius="21px"
                     placeholder="Selecione uma opção"
                     color="black.800"
-                    onChange={(evt) => setVariation({...variation, [vr.name]: evt.target.value})}
+                    onChange={(evt) => setVariation({ ...variation, [vr.name]: evt.target.value })}
                     _placeholder={{
                       color: "black.50",
                     }}
@@ -238,7 +243,7 @@ const Product = () => {
           </VStack>
         </Box>
       </Flex>
-      <Flex justifyContent="center" w="100%" bg="white" pt="111px" px="10px">
+      <Flex justifyContent="center" w="100%" bg="white" pt="111px" px="10px" id="description">
         <Tabs variant="enclosed" maxW="1386px" w="100%">
           <TabList>
             {detail.tab && detail.tab.length > 0 && detail.tab.map((tab: any) => (
