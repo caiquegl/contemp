@@ -1,5 +1,4 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
-import { StaticImageData } from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { pxToRem } from "../utils/pxToRem";

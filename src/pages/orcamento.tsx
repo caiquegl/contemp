@@ -32,11 +32,11 @@ const Orcamento = () => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
-  const {clearCart, removeCart} = useAuth()
+  const { clearCart, removeCart } = useAuth()
   const [loading, setLoading] = useState(false)
   const [isAprove, setIsAprove] = useState(false)
   const [cart, setCart] = useState<any>([])
-  const { register, handleSubmit, formState, reset} = useForm(
+  const { register, handleSubmit, formState, reset } = useForm(
     {}
   );
 
@@ -45,24 +45,28 @@ const Orcamento = () => {
   const saveCart = async (bodyForm: any) => {
     try {
       bodyForm = { ...bodyForm, isAprove, products: cart };
-      
+
       setLoading(true);
 
       const dbInstance = collection(database, "orcamento");
 
-      
-        await addDoc(dbInstance, bodyForm);
 
-        toast({
-          title: "Sucesso",
-          description: "Orçamento solicitado com sucesso.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-        reset();
-        window.localStorage.removeItem('CART-CONTEMP')
-        clearCart()
+      await addDoc(dbInstance, bodyForm);
+
+      toast({
+        title: "Sucesso",
+        description: "Orçamento solicitado com sucesso.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      await fetch('/api/mail', {
+        method: 'POST',
+        body: bodyForm
+      });
+      // reset();
+      // window.localStorage.removeItem('CART-CONTEMP')
+      // clearCart()
     } catch (error) {
       toast({
         title: "Erro",
@@ -172,24 +176,24 @@ const Orcamento = () => {
                 />
               </HStack>
               <InputDefault
-                  label="E-mail"
-                  type="text"
-                  error={errors.email}
-                  {...register("email", { required: "Email é obrigatório" })}
-                />
-              
+                label="E-mail"
+                type="text"
+                error={errors.email}
+                {...register("email", { required: "Email é obrigatório" })}
+              />
+
               <InputDefault
-                  label="Telefone"
-                  type="text"
-                  error={errors.telephone}
-                  {...register("telephone", { required: "Telefone é obrigatório" })}
-                />
+                label="Telefone"
+                type="text"
+                error={errors.telephone}
+                {...register("telephone", { required: "Telefone é obrigatório" })}
+              />
               <TextareaDefault
                 label="Observaçao"
                 error={errors.description}
                 {...register("description")}
               />
-              
+
               <Box w="100%">
                 <Checkbox
                   colorScheme="red"
@@ -243,17 +247,17 @@ const Orcamento = () => {
           <VStack spacing="20px" divider={<Divider />}>
             {
               cart && cart.length > 0 && cart.map((product: any, index: number) => (
-                <CardProductCart 
-                data={product} 
-                changeQtd={(value: any) => {
-                  let newList = cart
-                  newList[index].qtd = parseFloat(value)
-                  setCart([...newList])
-                }}
-                removeCart={() => {
-                  removeCart(cart, index)
-                  getItem()
-                }}
+                <CardProductCart
+                  data={product}
+                  changeQtd={(value: any) => {
+                    let newList = cart
+                    newList[index].qtd = parseFloat(value)
+                    setCart([...newList])
+                  }}
+                  removeCart={() => {
+                    removeCart(cart, index)
+                    getItem()
+                  }}
                 />
               ))
             }

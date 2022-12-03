@@ -61,18 +61,13 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           ...el,
           label: el.name,
           key: el.name.replaceAll(" ", ""),
-          onClick: (item: any) => router.push(`/category/${el.name}`),
+          onClick: (item: any) => router.push(`/category/${el.name}`)
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
           newObj.children = await amountList(el.list_sub_category, el.name);
           newObj.icon = (
-            <Icon
-              as={AiFillCaretDown}
-              fontSize="20px"
-              color="#fff"
-              fill="#fff"
-            />
+            <Icon as={AiFillCaretDown} fontSize="20px" color="#fff" fill="#fff" />
           );
         }
         obj.push(newObj);
@@ -96,19 +91,38 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   return (
     <>
       <style lang="css" scoped>{`
-        .ant-menu-submenu-title {
-          display: grid;
-          grid-template-columns: 1fr 1rem;
-          grid-column-gap: 0.5rem;
-          align-items: center;
+        .ant-menu-submenu-title > ::-webkit-scrollbar {
+          width: 0.6rem;
+        }
+        
+        /* Track */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-track {
+          background: red;
+        }
+        
+        /* Handle */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb {
+          background: blue;
+          border-radius: 5px;
+        }
+        
+        /* Handle on hover */
+        .ant-menu-submenu-title > ::-webkit-scrollbar-thumb:hover {
+          background: gray;
         }
       `}</style>
 
       <Menu
         onClick={(evt) => console.log(evt)}
-        mode={"horizontal"}
+        mode={'horizontal'}
         items={list}
-        expandIcon={<Icon as={AiFillCaretRight} size={17} />}
+        expandIcon={
+          <Icon
+            as={AiFillCaretRight}
+            size={17}
+
+          />
+        }
         style={{
           background: "#242424",
           border: "none",
@@ -117,6 +131,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           alignItems: "center",
           width: "100%",
         }}
+        disabledOverflow
       />
     </>
   );
@@ -135,18 +150,13 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
           label: el.name,
           key: el.name.replaceAll(" ", ""),
           icon: (
-            <Icon
-              as={AiOutlineEye}
-              fontSize="40px"
-              color="#fff"
-              fill="#fff"
-              onClick={(item: any) => router.push(`/category/${el.name}`)}
-            />
-          ),
+            <Icon as={AiOutlineEye} fontSize="40px" color="#fff" fill="#fff" onClick={(item: any) => router.push(`/category/${el.name}`)} />
+          )
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
           newObj.children = await amountList(el.list_sub_category, el.name);
+
         }
         obj.push(newObj);
       }
