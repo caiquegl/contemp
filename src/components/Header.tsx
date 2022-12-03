@@ -387,7 +387,7 @@ export const Header = () => {
           <Box
             position="relative"
             cursor="pointer"
-            onClick={() => router.push("orcamento")}
+            onClick={() => router.push("/orcamento")}
           >
             {cart.length > 0 && (
               <Flex

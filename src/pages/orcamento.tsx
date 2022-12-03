@@ -60,9 +60,9 @@ const Orcamento = () => {
         duration: 3000,
         isClosable: true,
       });
-      await fetch('/api/mail', {
+      await fetch(`${process.env.NEXT_PUBLIC_URL}api/mail`, {
         method: 'POST',
-        body: bodyForm
+        body: JSON.stringify(bodyForm)
       });
       // reset();
       // window.localStorage.removeItem('CART-CONTEMP')
