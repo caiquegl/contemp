@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState } from "react";
-import Logo from "../../assets/icons/logo.png";
-import { app, initFirebase } from "../../utils/db/index";
+import Logo from "../../assets/images/170x41.png";
+import { initFirebase } from "../../utils/db/index";
 import "firebase/compat/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";

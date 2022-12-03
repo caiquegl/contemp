@@ -26,28 +26,28 @@ for (let i = 0; i < 56; i++) {
 const Category = () => {
   const router = useRouter()
   initFirebase();
-  const {category} = router.query
+  const { category } = router.query
   const [list, setList] = useState<any>([])
 
   const dividerList = (listProduct: any) => {
-    let list:any = []
+    let list: any = []
 
     let insert = 0
     let insertIndex = 0
 
     listProduct.forEach((pd: any) => {
-      if(insert === 0) {
+      if (insert === 0) {
         list.push([])
       }
-      
+
       list[insertIndex].push(pd)
       insert = insert + 1
-      if(insert == 4) insert = 0
-      if(insert === 0) {
+      if (insert == 4) insert = 0
+      if (insert === 0) {
         insertIndex = insertIndex + 1
       }
-    })  
-    
+    })
+
     setList(list)
 
   }
@@ -61,23 +61,23 @@ const Category = () => {
       let idCategory = ''
 
       await getDocs(qCategory).then(async (data) => {
-        if(data.docs.length === 0) return
+        if (data.docs.length === 0) return
         idCategory = data.docs[0].id
       });
 
       let list: any = []
-      const qProducts = query(dbInstanceProducts, where("category", "==", idCategory)) 
+      const qProducts = query(dbInstanceProducts, where("category", "==", idCategory))
       await getDocs(qProducts).then(async (data) => {
-        if(data.docs.length === 0) return
+        if (data.docs.length === 0) return
 
         data.docs.forEach((pd: any) => {
           list.push(pd.data())
         })
       });
 
-      const qHome = query(dbInstanceHome, where("category", "==", idCategory)) 
+      const qHome = query(dbInstanceHome, where("category", "==", idCategory))
       await getDocs(qHome).then(async (data) => {
-        if(data.docs.length === 0) return
+        if (data.docs.length === 0) return
         data.docs.forEach((pd: any) => {
           list.push(pd.data())
         })
@@ -86,18 +86,18 @@ const Category = () => {
       dividerList(list)
     } catch (error) {
       console.log(error)
-      
+
     }
   }
 
 
   useEffect(() => {
-    if(category) {
+    if (category) {
       getCategoryList()
     }
 
   }, [category])
-  
+
   return (
     <SmoothScroll>
       <Header />
@@ -122,10 +122,10 @@ const Category = () => {
         index = index + 1
         let bg = "white"
 
-        if(index%2 == 0) bg = 'white.500'
-        if(index%3 == 0) bg = 'black.800'
-        if(index%4 == 0) bg = 'red.600'
-        return (<ListCategory bg={bg} data={categ}/>)
+        if (index % 2 == 0) bg = 'white.500'
+        if (index % 3 == 0) bg = 'black.800'
+        if (index % 4 == 0) bg = 'red.600'
+        return (<ListCategory bg={bg} data={categ} />)
       })}
       <Flex
         w="100%"
@@ -134,7 +134,7 @@ const Category = () => {
         bg="white"
       >
         <Container maxW="7xl" p="80px 0">
-        <Flex
+          <Flex
             mt={pxToRem(61)}
             alignItems="center"
             justifyContent="space-between"
