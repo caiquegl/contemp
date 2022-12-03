@@ -7,6 +7,7 @@ import {
   Button,
   Image as ImageChakra,
   Icon,
+  Link,
 } from "@chakra-ui/react";
 import Iso from "../assets/images/iso.png";
 import Image from "next/image";
@@ -126,17 +127,19 @@ const Home = () => {
                   Sistema de Gestão da Qualidade Certificado ISO 9001
                 </Text>
               </HStack>
-              <Button
-                w="263px"
-                h="50px"
-                borderRadius="25px"
-                mr="24px"
-                bg="red.600"
-                fontSize="20px"
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-              >
-                Certificado ISO 9001
-              </Button>
+              <Link target="_blank" href="https://drive.google.com/drive/folders/1WTPUVvj-51JjRUgEgQ8Q6tnMDFmpZWjs?usp=sharing">
+                <Button
+                  w="263px"
+                  h="50px"
+                  borderRadius="25px"
+                  mr="24px"
+                  bg="red.600"
+                  fontSize="20px"
+                  _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                >
+                  Certificado ISO 9001
+                </Button>
+              </Link>
             </Box>
           </Flex>
         </Container>
