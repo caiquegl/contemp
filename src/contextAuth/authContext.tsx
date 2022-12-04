@@ -7,8 +7,9 @@ import {
 } from "react";
 import Cookies from "js-cookie";
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from "../utils/db";
+import { auth, database } from "../utils/db";
 import { useDisclosure } from "@chakra-ui/react";
+import { collection, getDocs } from "firebase/firestore";
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -29,6 +30,7 @@ type UserAuthContextData = {
   onClose: any
   onOpen: any
   totalCart: any
+  allCategory: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -36,6 +38,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUserContext] = useState({});
   const [listHeader, setListHeader] = useState<any>([]);
   const [allProducts, setAllProducts] = useState<any>([]);
+  const [allCategory, setAllCategory] = useState<any>([]);
   const [cart, setCart] = useState<any>([]);
   const [totalCart, setTotalCart] = useState<any>(0);
 
@@ -64,6 +67,53 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     })
     return () => au()
+  }, [])
+
+  const getCategory = async () => {
+    try {
+      const dbInstanceCategory = collection(database, "categories");
+
+      let list: any = []
+      await getDocs(dbInstanceCategory).then(async (data) => {
+        data.docs.map((el: any, index: number) => {
+          list.push({ ...el.data(), id: data.docs[index].id })
+        })
+      });
+
+      setAllCategory(list)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getAllProducts = async () => {
+    try {
+      const dbInstanceProduct = collection(database, "products");
+      const dbInstanceHome = collection(database, "home");
+
+      let list: any = []
+      await getDocs(dbInstanceProduct).then(async (data) => {
+        data.docs.map((el: any, index: number) => {
+          list.push({ ...el.data(), id: data.docs[index].id })
+        })
+      });
+
+      await getDocs(dbInstanceHome).then(async (data) => {
+        data.docs.map((el: any, index: number) => {
+          list.push({ ...el.data(), id: data.docs[index].id })
+        })
+      });
+
+
+      setAllProducts(list)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getCategory()
+    getAllProducts()
   }, [])
 
   const getItemLocal = () => {
@@ -120,7 +170,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{ totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

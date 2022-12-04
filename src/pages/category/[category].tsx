@@ -16,6 +16,7 @@ import { useRouter } from 'next/router'
 import { ListCategory } from "../../components/ListCategory";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
+import { useAuth } from "../../contextAuth/authContext";
 
 const products = [] as number[]
 
@@ -26,6 +27,8 @@ for (let i = 0; i < 56; i++) {
 const Category = () => {
   const router = useRouter()
   initFirebase();
+  const { allCategory, allProducts } = useAuth();
+
   const { category } = router.query
   const [list, setList] = useState<any>([])
 
@@ -54,35 +57,60 @@ const Category = () => {
 
   const getCategoryList = async () => {
     try {
-      const dbInstanceCategory = collection(database, "categories");
-      const dbInstanceProducts = collection(database, "products");
-      const dbInstanceHome = collection(database, "home");
-      const qCategory = query(dbInstanceCategory, where("name", "==", category), limit(1))
-      let idCategory = ''
+      // const dbInstanceCategory = collection(database, "categories");
+      // const dbInstanceProducts = collection(database, "products");
+      // const dbInstanceHome = collection(database, "home");
+      // const qCategory = query(dbInstanceCategory, where("name", "==", category), limit(1))
 
-      await getDocs(qCategory).then(async (data) => {
-        if (data.docs.length === 0) return
-        idCategory = data.docs[0].id
-      });
+      // await getDocs(qCategory).then(async (data) => {
+      //   if (data.docs.length === 0) return
+      //   idCategory = data.docs[0].id
+      // });
+      let idCategory: any = []
+
+      allCategory.forEach((el: any) => {
+        if (el.name == category) {
+          idCategory.push(el.id)
+          allCategory.forEach((el2: any) => {
+            if (el2.sub_categorie && el2.sub_categorie == el.id) {
+              idCategory.push(el2.id)
+              allCategory.forEach((el3: any) => {
+                if (el3.sub_categorie && el3.sub_categorie == el2.id) {
+                  idCategory.push(el3.id)
+                }
+              })
+            }
+
+          })
+
+        }
+      })
 
       let list: any = []
-      const qProducts = query(dbInstanceProducts, where("category", "==", idCategory))
-      await getDocs(qProducts).then(async (data) => {
-        if (data.docs.length === 0) return
 
-        data.docs.forEach((pd: any) => {
-          list.push(pd.data())
+      allProducts.forEach((el: any) => {
+        idCategory.forEach((ct: any) => {
+          if (el.category == ct) list.push(el)
         })
-      });
+      })
+      // const qProducts = query(dbInstanceProducts, where("category", "==", idCategory))
+      // await getDocs(qProducts).then(async (data) => {
+      //   if (data.docs.length === 0) return
 
-      const qHome = query(dbInstanceHome, where("category", "==", idCategory))
-      await getDocs(qHome).then(async (data) => {
-        if (data.docs.length === 0) return
-        data.docs.forEach((pd: any) => {
-          list.push(pd.data())
-        })
-      });
+      //   data.docs.forEach((pd: any) => {
+      //     list.push(pd.data())
+      //   })
+      // });
 
+      // const qHome = query(dbInstanceHome, where("category", "==", idCategory))
+      // await getDocs(qHome).then(async (data) => {
+      //   if (data.docs.length === 0) return
+      //   data.docs.forEach((pd: any) => {
+      //     list.push(pd.data())
+      //   })
+      // });
+
+      console.log(list)
       dividerList(list)
     } catch (error) {
       console.log(error)
@@ -96,7 +124,7 @@ const Category = () => {
       getCategoryList()
     }
 
-  }, [category])
+  }, [category, allCategory, allProducts])
 
   return (
     <SmoothScroll>
