@@ -4,13 +4,14 @@ import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiDownload } from "react-icons/fi";
 import { pxToRem } from "../utils/pxToRem";
-
+import Image from "next/image";
+import CatalogImg from '../assets/images/catalogo-936x1024.png.webp'
 export const Catalog = () => {
   return (
     <Flex
       alignItems="center"
       justifyContent="center"
-      direction="column"
+      direction="row"
       width="100%"
       bg="black.800"
       minH="400px"

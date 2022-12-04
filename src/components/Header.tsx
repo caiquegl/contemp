@@ -336,7 +336,7 @@ export const Header = () => {
         </Box>
 
         <Box flex={1}>
-          <Link href="/todosProdutos">
+          <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
             <Button
               borderRadius="5px"
               bg="red.600"
