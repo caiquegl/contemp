@@ -134,3 +134,7 @@ body {
 .swiper-wrapper {
   width: 100% !important;
 }
+
+.ant-menu-vertical .ant-menu-item{
+  margin-left: 13px;
+}
