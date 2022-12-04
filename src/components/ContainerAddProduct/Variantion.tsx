@@ -88,9 +88,7 @@ const Variation = ({
               label="Adicionar opção"
               type="text"
               error={errors.addOpt}
-              {...register("addOpt", {
-                required: "Nome da opção é obrigatório",
-              })}
+              {...register("addOpt")}
             />
           </Box>
           <Icon

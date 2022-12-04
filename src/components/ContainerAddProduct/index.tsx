@@ -213,7 +213,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               addVariation={(variation: any) => {
                 let newList = listVariation;
                 newList[index].name = variation.name;
-
+                if (!variation.addOpt) return
                 if (newList[index].opt) {
                   newList[index].opt.push(variation.addOpt);
                 } else {
