@@ -206,41 +206,42 @@ const Product = () => {
                 </InputGroup>
               </Flex>
             ))}
-            <Flex bg="white.500" borderRadius="8px" p="15px" ml="auto">
-              <HStack spacing="20px">
-                <Text color="black.800" fontWeight="bold" fontSize="20px">
-                  Quantidade
-                </Text>
-                <Input
-                  type="number"
-                  w="auto"
-                  color="black.800"
-                  defaultValue="1"
-                  border="1px solid"
-                  borderColor="black.800"
-                  borderRadius="25px"
-                  maxW="89px"
-                  value={qtd}
-                  onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
-                />
-                <Button
-                  h="50px"
-                  bg="red.600"
-                  border="none"
-                  color="#fff"
-                  borderRadius="25px"
-                  w="279px"
-                  onClick={() => addCart({
-                    product_id: detail.id,
-                    variation: variation,
-                    qtd
-                  })}
-                >
-                  <Center>Adicionar ao orçamento</Center>
-                </Button>
-              </HStack>
-            </Flex>
+
           </VStack>
+          <Flex bg="white.500" maxW="536px" borderRadius="8px" p="15px" ml="auto" mt="30px">
+            <HStack spacing="20px">
+              <Text color="black.800" fontWeight="bold" fontSize="20px">
+                Quantidade
+              </Text>
+              <Input
+                type="number"
+                w="auto"
+                color="black.800"
+                defaultValue="1"
+                border="1px solid"
+                borderColor="black.800"
+                borderRadius="25px"
+                maxW="89px"
+                value={qtd}
+                onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
+              />
+              <Button
+                h="50px"
+                bg="red.600"
+                border="none"
+                color="#fff"
+                borderRadius="25px"
+                w="279px"
+                onClick={() => addCart({
+                  product_id: detail.id,
+                  variation: variation,
+                  qtd
+                })}
+              >
+                <Center>Adicionar ao orçamento</Center>
+              </Button>
+            </HStack>
+          </Flex>
         </Box>
       </Flex>
       <Flex justifyContent="center" w="100%" bg="white" pt="111px" px="10px" id="description">
