@@ -135,6 +135,6 @@ body {
   width: 100% !important;
 }
 
-.ant-menu-vertical .ant-menu-item{
+.ant-menu-vertical.ant-menu-sub .ant-menu-item {
   margin-left: 13px;
 }
