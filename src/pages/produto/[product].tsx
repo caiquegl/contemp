@@ -206,7 +206,7 @@ const Product = () => {
                 </InputGroup>
               </Flex>
             ))}
-            <Center bg="white.500" borderRadius="8px" p="15px">
+            <Flex bg="white.500" borderRadius="8px" p="15px">
               <HStack spacing="20px">
                 <Text color="black.800" fontWeight="bold" fontSize="20px">
                   Quantidade
@@ -239,7 +239,7 @@ const Product = () => {
                   <Center>Adicionar ao orçamento</Center>
                 </Button>
               </HStack>
-            </Center>
+            </Flex>
           </VStack>
         </Box>
       </Flex>

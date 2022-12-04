@@ -176,12 +176,12 @@ export const Footer = () => {
             </Text>
             {el.list_sub_category && el.list_sub_category.length > 0 && el.list_sub_category.map((el2: any) => (
               <>
-                <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
+                <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el2.name}`)}>
                   {el.name}
                 </Text>
                 <Box mb="20px">
                   {el2.list_sub_category && el2.list_sub_category.length > 0 && el2.list_sub_category.map((el3: any) => (
-                    <Text fontSize="20px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
+                    <Text fontSize="20px" cursor="pointer" onClick={() => router.push(`/category/${el3.name}`)}>
                       {el3.name}
                     </Text>
                   ))}
