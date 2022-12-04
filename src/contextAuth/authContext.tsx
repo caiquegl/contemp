@@ -28,6 +28,7 @@ type UserAuthContextData = {
   isOpen: any
   onClose: any
   onOpen: any
+  totalCart: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -36,6 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [listHeader, setListHeader] = useState<any>([]);
   const [allProducts, setAllProducts] = useState<any>([]);
   const [cart, setCart] = useState<any>([]);
+  const [totalCart, setTotalCart] = useState<any>(0);
 
   const setUser = (body: any) => {
     setUserContext(body);
@@ -71,6 +73,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       let convert = JSON.parse(getItem)
       setCart(convert)
       window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
+
+      let total = 0
+      convert.forEach((el: any) => {
+        total = total + el.qtd
+      })
+      setTotalCart(total)
     }
   }
 
@@ -112,7 +120,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{ isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

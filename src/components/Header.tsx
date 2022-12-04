@@ -49,7 +49,7 @@ export const Header = () => {
   initFirebase();
   const router = useRouter();
   // const { isOpen, onClose, onOpen } = useSidebarDrawer();
-  const { setListHeader, cart, isOpen, onClose, onOpen } = useAuth();
+  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart } = useAuth();
   const [list, setList] = useState([]);
 
   const isDrawerSiderbar = useBreakpointValue({
@@ -137,7 +137,7 @@ export const Header = () => {
                 bottom={4}
                 left={4}
               >
-                {cart.length}
+                {totalCart}
               </Flex>
             )}
             <Icon as={BsBag} w={30} minHeight={30} bgSize={30} flex={1} />
@@ -418,7 +418,7 @@ export const Header = () => {
                 bottom={4}
                 left={4}
               >
-                {cart.length}
+                {totalCart}
               </Flex>
             )}
             <Icon as={BsBag} width={30} height={30} />

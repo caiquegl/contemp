@@ -1,8 +1,9 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Typography } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { pxToRem } from "../utils/pxToRem";
-
+const { Paragraph, Text: TextAntd } = Typography;
 interface IProps {
   img: string;
   text: string;
@@ -30,7 +31,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       borderColor={color ? color : "black.800"}
       p={`${pxToRem(45)} ${pxToRem(23)}`}
       w={pxToRem(346)}
-      h={pxToRem(677)}
+      minH={pxToRem(677)}
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
     >
@@ -45,11 +46,20 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       >
         {text}
       </Text>
-      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px" noOfLines={10}>
+      {/* <TextAntd
+        style={{ fontSize: 20, marginBottom: 20, color: '#000' }}
+        ellipsis={{ tooltip: description }}
+      >
         {description}
+      </TextAntd> */}
+      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px">
+        {description && description.split('').length > 0 && description.split('').map((el: any, index: number) => <>
+          {index < 300 ? el : ''}
+        </>)}
+        {description && description.split('').length > 300 ? '...' : ''}
       </Text>
 
-      <Image src={img} alt={alt} mb="20px" h="200px" />
+      <Image src={img} alt={alt} mb="20px" h="150px" />
 
       <Button
         w="243px"
