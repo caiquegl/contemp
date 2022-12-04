@@ -235,10 +235,24 @@ export const Header = () => {
                 margin="auto"
                 gridColumnGap={pxToRem(10)}
               >
-                <CustomIcon icon={AiFillLinkedin} />
-                <CustomIcon icon={AiFillYoutube} />
-                <CustomIcon icon={AiOutlineInstagram} />
-                <CustomIcon icon={FaFacebookF} />
+                <Link href="https://www.linkedin.com/company/contemp/" isExternal>
+                  <CustomIcon icon={AiFillLinkedin} />
+                </Link>
+                <Link
+                  href="https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ"
+                  isExternal
+                >
+                  <CustomIcon icon={AiFillYoutube} />
+                </Link>
+                <Link href="https://www.instagram.com/contemp.industria/" isExternal>
+                  <CustomIcon icon={AiOutlineInstagram} />
+                </Link>
+                <Link
+                  href="https://www.facebook.com/Contemp-1001000803330302/"
+                  isExternal
+                >
+                  <CustomIcon icon={FaFacebookF} />
+                </Link>
               </Grid>
             </DrawerFooter>
           </DrawerContent>
@@ -255,20 +269,23 @@ export const Header = () => {
         marginBottom="32px"
       >
         <Box display="flex" flex={1}>
-          <Flex alignItems="center" w="max-content" mr={3}>
-            <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
+          <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Flex alignItems="center" w="max-content" mr={3}>
+              <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
+              <Text fontSize="18px" color="white" ml={pxToRem(10)}>
+                (11) 4223-5140
+              </Text>
+            </Flex>
+          </Link>
+          <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
 
-            <Text fontSize="18px" color="white" ml={pxToRem(10)}>
-              (11) 4223-5140
-            </Text>
-          </Flex>
-
-          <Flex alignItems="center">
-            <Image src={Email} width={20} minHeight={15} flex={0.3} />
-            <Text fontSize="18px" color="white" ml={pxToRem(10)}>
-              vendas@contemp.com.br
-            </Text>
-          </Flex>
+            <Flex alignItems="center">
+              <Image src={Email} width={20} minHeight={15} flex={0.3} />
+              <Text fontSize="18px" color="white" ml={pxToRem(10)}>
+                vendas@contemp.com.br
+              </Text>
+            </Flex>
+          </Link>
         </Box>
 
         <HStack spacing="20px">
