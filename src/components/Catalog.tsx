@@ -24,21 +24,33 @@ export const Catalog = () => {
         base: "1fr",
         lg: "repeat(2, 1fr)",
       }}
+      h={{
+        base: pxToRem(600),
+        md: pxToRem(400),
+        lg: pxToRem(450),
+        xl: "max-content",
+      }}
       width={{
         base: "100%",
         xl: "95%",
-        "2xl": "65%",
+        "2xl": "75%",
       }}
       margin="auto"
       maxH={{
-        base: "auto",
-        lg: pxToRem(600),
+        base: "max-content",
+        lg: pxToRem(650),
       }}
       p={{
-        base: "123px 10px",
-        xl: "123px 0",
+        base: "70px 10px",
+        lg: "75px 15px",
+        xl: "120px 0",
+        "2xl": "110px 0",
       }}
       position="relative"
+      gridGap={{
+        lg: 10,
+        xl: 0,
+      }}
     >
       <Image
         src={CatalogImg}
@@ -50,14 +62,17 @@ export const Catalog = () => {
           base: pxToRem(400),
           lg: pxToRem(500),
           xl: pxToRem(700),
+          "2xl": pxToRem(750),
         }}
         height={{
-          lg: pxToRem(1000),
+          lg: pxToRem(700),
+          xl: pxToRem(680),
+          "2xl": pxToRem(700),
         }}
         gridColumn={1}
         bgSize={{
           base: 0,
-          lg: "80%",
+          lg: "100%",
           xl: "contain",
         }}
         zIndex={99}
@@ -68,41 +83,63 @@ export const Catalog = () => {
         gridColumn={{ base: 1, lg: 2 }}
         flexDirection="column"
         alignItems="center"
+        maxH={{
+          base: "auto",
+          lg: pxToRem(300),
+        }}
       >
         <Text
           textAlign="center"
-          fontSize="45px"
+          fontSize={{
+            base: pxToRem(35),
+            xl: pxToRem(45),
+          }}
           fontWeight="bold"
           color="white"
         >
           CATÁLOGO
         </Text>
         <Text
-          mt="40px"
-          maxW="1000px"
+          mt={{
+            base: 10,
+            lg: 5,
+            xl: 10,
+          }}
+          mb={{
+            base: pxToRem(20),
+            lg: pxToRem(30),
+          }}
+          maxW={pxToRem(1000)}
           textAlign="center"
-          fontSize={pxToRem(24)}
-          mb="30px"
+          fontSize={{
+            base: pxToRem(18),
+            xl: pxToRem(20),
+            "2xl": pxToRem(24),
+          }}
         >
           Quer baixar gratuitamente nosso catalogo digital de produtos? Basta
           entrar em contato e solicitar para um de nossos representantes.
           Através do número (11) 4223-5140 ou pelo e-mail vendas@contemp.com.br
         </Text>
 
-        <Flex
+        <Grid
           alignItems="center"
-          justifyContent="space-between"
-          flexWrap="wrap"
+          justifyContent="center"
           w="100%"
-          maxW={pxToRem(600)}
+          maxW={{
+            lg: pxToRem(550),
+            xl: pxToRem(720),
+          }}
           margin="auto"
           h={{
             base: pxToRem(200),
           }}
-          flexDirection={{
-            base: "column",
-            md: "row",
+          templateColumns={{
+            base: "repeat(auto-fit, minmax(220px, 1fr))",
+            xl: "repeat(auto-fit, minmax(200px, 1fr))",
           }}
+          autoRows={pxToRem(65)}
+          gridGap={2}
         >
           <Link
             href="tel:1142235140"
@@ -119,7 +156,7 @@ export const Catalog = () => {
           </Link>
 
           <ActionButton label={"Download"} icon={FiDownload} />
-        </Flex>
+        </Grid>
       </Flex>
     </Grid>
   );
@@ -128,13 +165,7 @@ export const Catalog = () => {
 function ActionButton({ label, icon, ...props }: any & ButtonProps) {
   return (
     <Button
-      w={{
-        lg: "100%",
-      }}
-      maxW={{
-        base: pxToRem(279),
-        md: pxToRem(179),
-      }}
+      w="100%"
       h="50px"
       borderRadius="25px"
       bg="red.600"

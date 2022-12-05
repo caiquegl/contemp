@@ -42,7 +42,7 @@ export const HomeBackgroundDetails = () => {
       <BackgroundDetail
         src={PlusDetailDark}
         top={pxToRem(2545)}
-        right="15%"
+        right="10%"
         w={70}
         maxH={100}
         zIndex={10}
@@ -107,7 +107,7 @@ export const HomeBackgroundDetails = () => {
       <BackgroundDetail
         src={PlusDetail}
         top={pxToRem(7255)}
-        left="15%"
+        left="10%"
         w={70}
         maxH={100}
         zIndex={10}

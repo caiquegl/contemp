@@ -5,13 +5,25 @@ import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
 
+type DataTabProps = {
+  category: string;
+  description: string;
+  destaque: boolean;
+  icon: string;
+  indexProduct: number;
+  link_name: string;
+  name: string;
+  nameCategory: string;
+  urls: string[];
+};
+
 interface IProps {
   bg: string;
   borderColor: string;
   borderColorButton: string;
   color: string;
   containerProps?: FlexProps;
-  dataTab?: any;
+  dataTab?: DataTabProps;
 }
 
 const DescriptionProduct = ({
@@ -44,34 +56,28 @@ const DescriptionProduct = ({
         justifyContent="space-between"
         h="100%"
         w="95%"
+        padding={`${pxToRem(15)}`}
         {...containerProps}
       >
-
         <Image
           src={dataTab?.urls ? dataTab.urls[0] : ""}
-          alt="bateria"
-          // flex={1}
+          alt={dataTab?.name}
+          flex={1.15}
           minH={pxToRem(300)}
-          // bgSize={{
-          //   base: "70%",
-          //   md: "90%",
-          //   lg: "60%",
-          //   xl: "100%",
-          //   "2xl": "contain",
-          // }}
+          bgSize={{
+            base: "70%",
+            md: "80%",
+            lg: "60%",
+            xl: "100%",
+            "2xl": "contain",
+          }}
           onClick={() =>
             router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
           }
           cursor="pointer"
         />
 
-        <Flex
-          flexDirection="column"
-          alignItems="initial"
-          flex={1.3}
-          paddingLeft={3}
-          mb={5}
-        >
+        <Flex flexDirection="column" alignItems="initial" flex={1.07}>
           <Text
             fontWeight="bold"
             textTransform="uppercase"
@@ -92,11 +98,17 @@ const DescriptionProduct = ({
               color,
               borderColor,
               margin: `${pxToRem(10)} 0`,
-              w: "100%",
             }}
           />
 
-          <Text fontSize={pxToRem(20)} w="100%" margin={`${pxToRem(10)} 0`}>
+          <Text
+            fontSize={pxToRem(20)}
+            w="100%"
+            margin={`${pxToRem(10)} 0`}
+            zIndex={90}
+            flex={1}
+            bg={bg}
+          >
             {dataTab?.description}
           </Text>
 

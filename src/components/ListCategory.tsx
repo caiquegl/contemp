@@ -26,7 +26,6 @@ export const ListCategory = ({ bg, data }: any) => {
                 }
                 buttomBottom={bg === "red.600" ? "white" : undefined}
                 containerProps={{
-                  p: `0 ${pxToRem(20)}`,
                   margin: "auto",
                 }}
               />

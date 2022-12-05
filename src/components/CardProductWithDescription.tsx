@@ -50,6 +50,7 @@ const CardProductWithDescription = ({
         border: "2px solid",
         borderColor: color ?? "black.800",
       }}
+      padding={`${pxToRem(25)} ${pxToRem(20)}`}
       {...containerProps}
     >
       <Tooltip label={text} placement="top">
@@ -83,9 +84,12 @@ const CardProductWithDescription = ({
       <Image
         src={img}
         alt={alt}
-        h={pxToRem(230)}
+        h={{
+          base: pxToRem(260),
+          xl: pxToRem(280),
+        }}
         gridRow={3}
-        bgSize={{ base: "90%", xl: "80%" }}
+        bgSize="contain"
       />
 
       <Button
@@ -96,7 +100,7 @@ const CardProductWithDescription = ({
         margin="auto"
         bg="red.600"
         fontSize={pxToRem(20)}
-        borderColor={buttomBottom ? buttomBottom : "transpares"}
+        borderColor={buttomBottom ? buttomBottom : "transparent"}
         borderWidth={buttomBottom ? "2px" : "0"}
         _hover={{ transition: "all 0.5s", opacity: 0.7 }}
         onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)}
