@@ -271,65 +271,65 @@ const Product = () => {
                 </Flex>
               ))}
           </VStack>
-
-          <Flex
-            bg="white.500"
-            w="100%"
-            borderRadius="8px"
-            p="15px"
-            m="auto"
-            mt="30px"
-          >
+          <Flex alignItems="center" justifyContent="flex-end">
             <Flex
-              gap={pxToRem(20)}
+              bg="white.500"
               maxW="536px"
-              flexWrap={{
-                base: "wrap",
-                lg: "nowrap",
-              }}
-              justifyContent={{ base: "center", lg: "auto" }}
+              borderRadius="8px"
+              p="15px"
+              mt="30px"
             >
-              <Text
-                color="black.800"
-                fontWeight="bold"
-                fontSize={pxToRem(20)}
-                margin="auto"
+              <Flex
+                gap={pxToRem(20)}
+                flexWrap={{
+                  base: "wrap",
+                  lg: "nowrap",
+                }}
+                justifyContent={{ base: "center", lg: "auto" }}
               >
-                Quantidade
-              </Text>
-              <Input
-                type="number"
-                w="auto"
-                margin="auto"
-                color="black.800"
-                defaultValue="1"
-                border="1px solid"
-                borderColor="black.800"
-                borderRadius="25px"
-                maxW="89px"
-                value={qtd}
-                onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
-              />
-              <Button
-                h="50px"
-                bg="red.600"
-                border="none"
-                color="#fff"
-                borderRadius="25px"
-                maxW={pxToRem(279)}
-                w="100%"
-                onClick={() =>
-                  addCart({
-                    product_id: detail.id,
-                    variation: variation,
-                    qtd,
-                  })
-                }
-              >
-                <Center>Adicionar ao orçamento</Center>
-              </Button>
+                <Text
+                  color="black.800"
+                  fontWeight="bold"
+                  fontSize={pxToRem(20)}
+                  margin="auto"
+                >
+                  Quantidade
+                </Text>
+                <Input
+                  type="number"
+                  w="auto"
+                  margin="auto"
+                  color="black.800"
+                  defaultValue="1"
+                  border="1px solid"
+                  borderColor="black.800"
+                  borderRadius="25px"
+                  maxW="89px"
+                  value={qtd}
+                  onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
+                />
+                <Button
+                  h="50px"
+                  bg="red.600"
+                  border="none"
+                  color="#fff"
+                  borderRadius="25px"
+                  maxW={pxToRem(279)}
+                  w="100%"
+                  onClick={() =>
+                    addCart({
+                      product_id: detail.id,
+                      variation: variation,
+                      qtd,
+                    })
+                  }
+                >
+                  <Center>Adicionar ao orçamento</Center>
+                </Button>
+              </Flex>
             </Flex>
           </Flex>
+
         </Box>
       </Flex>
       <Flex
