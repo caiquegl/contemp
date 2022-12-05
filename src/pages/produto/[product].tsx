@@ -185,7 +185,7 @@ const Product = () => {
       <Header />
       <Flex
         p="10px"
-        pt="30px"
+        pt="60px"
         bg="white"
         w="100%"
         h="100%"
@@ -193,19 +193,6 @@ const Product = () => {
         flexDirection={["column", "column", "column", "row", "row"]}
         flexWrap="wrap"
       >
-        <Box w="100%" mb="50px">
-          <Breadcrumb>
-            {bradName.map((el: any, index: number) => (
-              <>
-                {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
-                {index != bradName.length - 1 && <Breadcrumb.Item>
-                  <a href={`/category/${el.replaceAll(' ', '_')}`}>{el}</a>
-                </Breadcrumb.Item>}
-              </>
-            ))}
-
-          </Breadcrumb>
-        </Box>
         <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h="764px">
           <Swiper
             loop={true}
@@ -234,6 +221,19 @@ const Product = () => {
         </Center>
 
         <Box m={`${pxToRem(10)} auto`} ml={{ lg: 20 }}>
+          <Box w="100%" mb="30px">
+            <Breadcrumb>
+              {bradName.map((el: any, index: number) => (
+                <>
+                  {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
+                  {index != bradName.length - 1 && <Breadcrumb.Item>
+                    <a href={`/category/${el.replaceAll(' ', '_')}`}>{el}</a>
+                  </Breadcrumb.Item>}
+                </>
+              ))}
+
+            </Breadcrumb>
+          </Box>
           <Text fontWeight="bold" fontSize="35px" color="black.800" mb="30px">
             {detail.name ? detail.name : ""}
           </Text>
