@@ -192,11 +192,11 @@ export const Footer = () => {
         ))}
       </Grid>
       <Divider m="50px 0" />
-      <Flex alignItems="center" justifyContent="space-between" fontSize="18px" flexWrap="wrap">
+      <Flex direction={['column-reverse', 'row']} alignItems={['flex-start', 'center']} justifyContent="space-between" fontSize="18px" flexWrap="wrap">
         <Text color="white" fontSize="18px">
           Copyright © 2022 Contemp. Todos os direitos reservados.
         </Text>
-        <UnorderedList color="white" fontSize="18px" display="flex" mt={['20px', 0]} flexDirection={['column', 'row']}>
+        <UnorderedList color="white" fontSize="18px" display="flex" mb={['20px', 0]} flexDirection={['column', 'row']}>
           <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Lista de Todos os Produtos</ListItem>
           </Link>
