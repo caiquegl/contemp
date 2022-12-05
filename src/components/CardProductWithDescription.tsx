@@ -1,47 +1,55 @@
-import { Box, Button, Image, Text, Tooltip } from "@chakra-ui/react";
-import { Typography } from "antd";
+import { Button, Grid, GridProps, Text, Tooltip } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { pxToRem } from "../utils/pxToRem";
-const { Paragraph, Text: TextAntd } = Typography;
+import { Image } from "./Image";
+
 interface IProps {
   img: string;
   text: string;
   description?: string;
   alt?: string;
   color?: string;
-  buttomBottom?: string
+  buttomBottom?: string;
+  containerProps?: GridProps;
 }
 
-const CardProductWithDescription = ({ img, text, alt, description, color, buttomBottom }: IProps) => {
-  const router = useRouter()
-  const [isHovering, setIsHovering] = useState(false)
+const CardProductWithDescription = ({
+  img,
+  text,
+  alt,
+  description,
+  color,
+  buttomBottom,
+  containerProps,
+}: IProps) => {
+  const router = useRouter();
+  const [isHovering, setIsHovering] = useState(false);
 
-  const handleIsHovering = () =>
-    setIsHovering((isHovering) => !isHovering)
+  const handleIsHovering = () => setIsHovering((isHovering) => !isHovering);
 
   return (
-    <Box
-      display="flex"
+    <Grid
       alignItems="center"
-      justifyContent="space-between"
-      flexDirection="column"
+      gridTemplateRows="max-content 0.7fr 2fr 0.5fr"
+      rowGap={pxToRem(10)}
       borderRadius="8px"
       // border={isHovering ? '2px solid' : 'none'}
       // borderColor={color ? color : "black.800"}
       // border={'2px solid'}
       // borderColor={"black.800"}
-      p={`${pxToRem(45)} ${pxToRem(23)}`}
-      w={pxToRem(346)}
+      maxW={pxToRem(350)}
+      w="100%"
       h={pxToRem(700)}
       mt="20px"
       // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
       _hover={{
-        border: '2px solid',
-        borderColor: 'black.800'
+        border: "2px solid",
+        borderColor: color ?? "black.800",
       }}
+      {...containerProps}
     >
       <Tooltip label={text} placement="top">
         <Text
@@ -49,9 +57,10 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
           fontWeight="bold"
           color={color ? color : "black"}
           textTransform="uppercase"
-          mb="20px"
           width="100%"
           lineHeight="2.7rem"
+          noOfLines={1}
+          gridRow={1}
         >
           {text}
         </Text>
@@ -62,29 +71,39 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       >
         {description}
       </TextAntd> */}
-      <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px">
-        {description && description.split('').length > 0 && description.split('').map((el: any, index: number) => <>
-          {index < 100 ? el : ''}
-        </>)}
-        {description && description.split('').length > 100 ? '...' : ''}
+      <Text fontSize={pxToRem(20)} color={color ? color : "black"} gridRow={2}>
+        {description &&
+          description.split("").length > 0 &&
+          description
+            .split("")
+            .map((el: any, index: number) => <>{index < 100 ? el : ""}</>)}
+        {description && description.split("").length > 100 ? "..." : ""}
       </Text>
 
-      <Image src={img} alt={alt} mb="20px" h="230px" />
+      <Image
+        src={img}
+        alt={alt}
+        h={pxToRem(230)}
+        gridRow={3}
+        bgSize={{ base: "90%", xl: "80%" }}
+      />
 
       <Button
-        w="243px"
-        h="50px"
+        w={pxToRem(243)}
+        h={pxToRem(50)}
+        gridRow={4}
         borderRadius="25px"
+        margin="auto"
         bg="red.600"
-        fontSize="20px"
-        borderColor={buttomBottom ? buttomBottom : 'transpares'}
-        borderWidth={buttomBottom ? "2px" : '0'}
+        fontSize={pxToRem(20)}
+        borderColor={buttomBottom ? buttomBottom : "transpares"}
+        borderWidth={buttomBottom ? "2px" : "0"}
         _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-        onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
+        onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)}
       >
         Solicitar orçamento
       </Button>
-    </Box>
+    </Grid>
   );
 };
 

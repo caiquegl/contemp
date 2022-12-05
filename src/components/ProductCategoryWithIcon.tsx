@@ -14,7 +14,11 @@ export const ProductCategoryWithIcon = ({
   icon,
   containerProps,
 }: ProductCategoryWithIconProps) => {
-  const containerColor = (containerProps?.color || "") as string;
+  const containerColor = containerProps?.color as string;
+  const bgColor = containerProps?.bg as string;
+  const hasWhiteColor =
+    (containerColor && containerColor.includes("white")) ||
+    (bgColor && bgColor.includes("white"));
 
   return (
     <Flex
@@ -29,8 +33,8 @@ export const ProductCategoryWithIcon = ({
       // }}
       minW={pxToRem(150)}
       maxW={pxToRem(345)}
-      w="max-content"
-      maxH={pxToRem(70)}
+      w="100%"
+      maxH={pxToRem(80)}
       {...containerProps}
     >
       <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
@@ -43,13 +47,7 @@ export const ProductCategoryWithIcon = ({
         minH={pxToRem(35)}
         minW={pxToRem(35)}
         flex={1}
-        filter={
-          containerColor
-            ? containerColor.includes("white")
-              ? "invert(0)"
-              : "invert(1)"
-            : "auto"
-        }
+        filter={hasWhiteColor ? "invert(0)" : "invert(1)"}
       />
     </Flex>
   );

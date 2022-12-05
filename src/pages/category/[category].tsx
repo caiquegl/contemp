@@ -1,56 +1,50 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Text } from "@chakra-ui/react";
 import { Header } from "../../components/Header";
 import { Contact } from "../../components/Contact";
 import { Footer } from "../../components/Footer";
 import { Player } from "../../components/Player";
-import { Image } from '../../components/Image'
+import { Image } from "../../components/Image";
 import { pxToRem } from "../../utils/pxToRem";
 import { SmoothScroll } from "../../components/SmoothScroll";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { ListCategory } from "../../components/ListCategory";
 import { useAuth } from "../../contextAuth/authContext";
 
-const products = [] as number[]
+const products = [] as number[];
 
 for (let i = 0; i < 56; i++) {
-  products.push(i + 1)
+  products.push(i + 1);
 }
 
 const Category = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { allCategory, allProducts } = useAuth();
 
-  const { category } = router.query
-  const [list, setList] = useState<any>([])
+  const { category } = router.query;
+  const [list, setList] = useState<any>([]);
 
   const dividerList = (listProduct: any) => {
-    let list: any = []
+    let list: any = [];
 
-    let insert = 0
-    let insertIndex = 0
+    let insert = 0;
+    let insertIndex = 0;
 
     listProduct.forEach((pd: any) => {
       if (insert === 0) {
-        list.push([])
+        list.push([]);
       }
 
-      list[insertIndex].push(pd)
-      insert = insert + 1
-      if (insert == 4) insert = 0
+      list[insertIndex].push(pd);
+      insert = insert + 1;
+      if (insert == 4) insert = 0;
       if (insert === 0) {
-        insertIndex = insertIndex + 1
+        insertIndex = insertIndex + 1;
       }
-    })
+    });
 
-    setList(list)
-
-  }
+    setList(list);
+  };
 
   const getCategoryList = async () => {
     try {
@@ -63,50 +57,46 @@ const Category = () => {
       //   if (data.docs.length === 0) return
       //   idCategory = data.docs[0].id
       // });
-      let idCategory: any = []
-      let nameCategory = ''
-      if (category && typeof category == 'string') nameCategory = category.replaceAll('_', ' ')
+      let idCategory: any = [];
+      let nameCategory = "";
+      if (category && typeof category == "string")
+        nameCategory = category.replaceAll("_", " ");
       allCategory.forEach((el: any) => {
         if (el.name == nameCategory) {
-          idCategory.push(el.id)
+          idCategory.push(el.id);
           allCategory.forEach((el2: any) => {
             if (el2.sub_categorie && el2.sub_categorie == el.id) {
-              idCategory.push(el2.id)
+              idCategory.push(el2.id);
               allCategory.forEach((el3: any) => {
                 if (el3.sub_categorie && el3.sub_categorie == el2.id) {
-                  idCategory.push(el3.id)
+                  idCategory.push(el3.id);
                 }
-              })
+              });
             }
-
-          })
-
+          });
         }
-      })
+      });
 
-      let list: any = []
+      let list: any = [];
 
       allProducts.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el)
-        })
-      })
+          if (el.category == ct) list.push(el);
+        });
+      });
 
-      console.log(list)
-      dividerList(list)
+      console.log(list);
+      dividerList(list);
     } catch (error) {
-      console.log(error)
-
+      console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
     if (category) {
-      getCategoryList()
+      getCategoryList();
     }
-
-  }, [category, allCategory, allProducts])
+  }, [category, allCategory, allProducts]);
 
   return (
     <SmoothScroll>
@@ -125,18 +115,22 @@ const Category = () => {
           maxW="1037px"
           p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
-          {category && typeof category == 'string' ? category.replaceAll('_', ' ') : ''}
+          {category && typeof category == "string"
+            ? category.replaceAll("_", " ")
+            : ""}
         </Text>
       </Flex>
-      {list && list.length > 0 && list.map((categ: any, index: number) => {
-        index = index + 1
-        let bg = "white"
+      {list &&
+        list.length > 0 &&
+        list.map((categ: any, index: number) => {
+          index = index + 1;
+          let bg = "white";
 
-        if (index % 2 == 0) bg = 'white.500'
-        if (index % 3 == 0) bg = 'black.800'
-        if (index % 4 == 0) bg = 'red.600'
-        return (<ListCategory bg={bg} data={categ} />)
-      })}
+          if (index % 2 == 0) bg = "white.500";
+          if (index % 3 == 0) bg = "black.800";
+          if (index % 4 == 0) bg = "red.600";
+          return <ListCategory bg={bg} data={categ} />;
+        })}
       <Flex
         w="100%"
         alignItems="center"
@@ -197,11 +191,11 @@ const AdBanner = () => {
       minH={{
         base: pxToRem(228),
         md: pxToRem(330),
-        lg: pxToRem(425)
+        lg: pxToRem(425),
       }}
       flex={0.8}
     />
-  )
-}
+  );
+};
 
 export default Category;
