@@ -70,7 +70,6 @@ const Product = () => {
 
 
       let ex = allProducts.filter((el: any) => el.name == produto)
-      console.log(ex)
       // await getDocs(qProduct).then(async (data) => {
       //   if (data.docs.length == 0) return
       //   if (data.docs.length > 0) {
@@ -88,10 +87,12 @@ const Product = () => {
         if (el.id == ex[0].category) {
           idCategory.push(el.id)
           allCategory.forEach((el2: any) => {
-            if (el2.sub_categorie && el2.sub_categorie == el.id) {
+            if ((el2.sub_categorie && el2.sub_categorie == el.id) || (el2.sub_categorie && el2.sub_categorie == el.sub_categorie)) {
+              if (idCategory.indexOf(el2.id) > -1) return
               idCategory.push(el2.id)
               allCategory.forEach((el3: any) => {
-                if (el3.sub_categorie && el3.sub_categorie == el2.id) {
+                if ((el3.sub_categorie && el3.sub_categorie == el2.id) || (el3.sub_categorie && el3.sub_categorie == el2.sub_categorie)) {
+                  if (idCategory.indexOf(el2.id) > -1) return
                   idCategory.push(el3.id)
                 }
               })
@@ -110,7 +111,6 @@ const Product = () => {
         })
       })
 
-      console.log(list)
       setProducts(list)
 
       // if (!exist) {
@@ -323,7 +323,7 @@ const Product = () => {
         p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
       >
         <Container maxW="7xl" p="80px 0">
-          <Flex alignItems="center">
+          <Flex alignItems="center" mb="10px">
             <Text color="black.800" fontSize="45px" fontWeight="bold" ml="15px">
               #temnacontemp
             </Text>
