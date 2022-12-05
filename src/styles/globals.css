@@ -167,6 +167,6 @@ body {
   color: #fff !important;
 }
 
-.ant-menu-submenu .ant-menu-submenu-horizontal .ant-menu-submenu-active {
+.ant-menu-submenu  {
   padding: 0px 1rem !important;
 }
