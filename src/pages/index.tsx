@@ -306,6 +306,7 @@ const Home = () => {
           textAlign="end"
           maxW={pxToRem(693)}
           flexDirection="column"
+          zIndex={20}
         >
           <Text
             color="red.600"

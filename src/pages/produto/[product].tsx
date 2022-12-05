@@ -39,6 +39,7 @@ import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
 import { SmoothScroll } from "../../components/SmoothScroll";
+import { Image } from "../../components/Image";
 import Head from "next/head";
 
 const Product = () => {
@@ -157,14 +158,14 @@ const Product = () => {
 
   return (
     <SmoothScroll>
-      {detail &&
+      {detail && (
         <Head>
           <meta name="description" content={detail.description_seo} />
           <meta name="keywords" content={detail.key_word_seo} />
           <title>Contemp</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-      }
+      )}
       <Header />
       <Flex
         p="10px"
@@ -175,7 +176,7 @@ const Product = () => {
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
       >
-        <Center bg="white.500" w="40%" h="764px">
+        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h="764px">
           <Swiper
             loop={true}
             pagination={{
@@ -189,11 +190,11 @@ const Product = () => {
               detail.urls.map((photo: any) => (
                 <SwiperSlide>
                   <Zoom>
-                    <Center h="764px">
-                      <img
+                    <Center h={pxToRem(765)} width="100%">
+                      <Image
                         alt={detail.name ? detail.name : ""}
                         src={photo}
-                        width="500"
+                        bgSize="contain"
                       />
                     </Center>
                   </Zoom>
@@ -201,7 +202,8 @@ const Product = () => {
               ))}
           </Swiper>
         </Center>
-        <Box ml={[0, 0, 0, "60px", "60px"]}>
+
+        <Box m={`${pxToRem(10)} auto`} ml={{ lg: 20 }}>
           <Text fontWeight="bold" fontSize="35px" color="black.800" mb="30px">
             {detail.name ? detail.name : ""}
           </Text>
@@ -272,21 +274,35 @@ const Product = () => {
                 </Flex>
               ))}
           </VStack>
+
           <Flex
             bg="white.500"
             maxW="536px"
             borderRadius="8px"
             p="15px"
-            ml="auto"
+            m="auto"
             mt="30px"
           >
-            <HStack spacing="20px">
-              <Text color="black.800" fontWeight="bold" fontSize="20px">
+            <Flex
+              gap={pxToRem(20)}
+              flexWrap={{
+                base: "wrap",
+                lg: "nowrap",
+              }}
+              justifyContent={{ base: "center", lg: "auto" }}
+            >
+              <Text
+                color="black.800"
+                fontWeight="bold"
+                fontSize={pxToRem(20)}
+                margin="auto"
+              >
                 Quantidade
               </Text>
               <Input
                 type="number"
                 w="auto"
+                margin="auto"
                 color="black.800"
                 defaultValue="1"
                 border="1px solid"
@@ -302,7 +318,8 @@ const Product = () => {
                 border="none"
                 color="#fff"
                 borderRadius="25px"
-                w="279px"
+                maxW={pxToRem(279)}
+                w="100%"
                 onClick={() =>
                   addCart({
                     product_id: detail.id,
@@ -313,7 +330,7 @@ const Product = () => {
               >
                 <Center>Adicionar ao orçamento</Center>
               </Button>
-            </HStack>
+            </Flex>
           </Flex>
         </Box>
       </Flex>
@@ -325,7 +342,7 @@ const Product = () => {
         px="10px"
         id="description"
       >
-        <Tabs variant="enclosed" maxW="1386px" w="100%">
+        <Tabs variant="enclosed" maxW="1386px" w="100%" overflowX="auto">
           <TabList>
             {detail.tab &&
               detail.tab.length > 0 &&
@@ -369,7 +386,12 @@ const Product = () => {
       >
         <Container maxW="7xl" p="80px 0">
           <Flex alignItems="center" mb="40px">
-            <Text color="black.800" fontSize="45px" fontWeight="bold" ml="15px">
+            <Text
+              color="black.800"
+              fontSize={{ base: pxToRem(35), lg: pxToRem(45) }}
+              fontWeight="bold"
+              ml="15px"
+            >
               #temnacontemp
             </Text>
           </Flex>

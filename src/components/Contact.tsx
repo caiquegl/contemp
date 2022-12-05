@@ -86,7 +86,10 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
               border="2px solid"
               borderColor="black.800"
               borderRadius="8px"
-              p="30px"
+              p={{
+                base: "15px",
+                md: "30px",
+              }}
               width="100%"
               height="100%"
             >
