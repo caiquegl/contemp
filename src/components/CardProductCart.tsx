@@ -70,6 +70,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
                 textTransform="uppercase"
                 fontWeight="bold"
                 noOfLines={1}
+                w="100%"
               >
                 {key}:
               </Text>
@@ -78,7 +79,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
               fontSize="17px"
               color="black.800"
               textTransform="uppercase"
-              w="40%"
+              w="100%"
               mt="5px"
             >
               {data.variation[key]}
