@@ -31,6 +31,7 @@ type UserAuthContextData = {
   onOpen: any
   totalCart: any
   allCategory: any
+  reload: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -111,6 +112,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  const reload = async () => {
+    await getCategory()
+    await getAllProducts()
+  }
+
   useEffect(() => {
     getCategory()
     getAllProducts()
@@ -170,7 +176,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{ allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

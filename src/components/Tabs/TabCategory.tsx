@@ -50,7 +50,7 @@ interface IBody {
 const TabCategory = () => {
   const toast = useToast();
   initFirebase();
-  const { allCategory } = useAuth();
+  const { allCategory, reload } = useAuth();
 
   const [update, setUpdate] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -120,6 +120,7 @@ const TabCategory = () => {
           isClosable: true,
         });
       }
+      reload()
     } catch (error) {
       console.log(error);
       toast({
@@ -178,6 +179,7 @@ const TabCategory = () => {
           isClosable: true,
         });
       }
+      reload()
     } catch (error) {
       toast({
         title: "Erro",

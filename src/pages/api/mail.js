@@ -1,7 +1,7 @@
 const mail = require('@sendgrid/mail');
 
-// mail.setApiKey(process.env.SENDGRID_API_KEY);
-mail.setApiKey("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")
+mail.setApiKey(process.env.SENDGRID_API_KEY);
+// mail.setApiKey("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")
 
 export default async (req, response) => {
     try {
@@ -29,20 +29,18 @@ export default async (req, response) => {
         console.log(message)
 
         console.log('aquiiii')
-        mail.send({
+        let mailSned = await mail.send({
+            bcc: 'arq.caique@hotmail.com',
             to: 'kemelin@3hub.co',
             // to: 'arq.caique@hotmail.com',
             from: 'kemelin@3hub.co',
             subject: 'Novo orçamento',
             text: message,
             html: message.replace(/rn/g, '<br>'),
-          }).then((e) => {
-            console.log('aquiiii', e)
-            return response.status(200).json({ status: 'Ok' });
-          }).catch((e) => console.log("é", e));
+          })
   
-  
-      // return response.json({ status: true });
+        console.log(mailSned)
+      return response.json({ status: true });
     } catch (error) {
       console.log(error);
       return response.json({ status: false });

@@ -22,7 +22,7 @@ import { Table } from "antd";
 const TabProduct = () => {
   initFirebase();
   const toast = useToast();
-  const { allCategory, allProducts } = useAuth();
+  const { allCategory, allProducts, reload } = useAuth();
 
   const [step, setStep] = useState(1);
   const [list, setList] = useState<any>([]);
@@ -119,6 +119,7 @@ const TabProduct = () => {
   };
 
   useEffect(() => {
+    reload()
     listProduct();
   }, [allProducts, allCategory]);
 
