@@ -130,6 +130,7 @@ const Adm = () => {
         </Flex>
         <Divider mt="20px" mb="20px" bg="black.800" />
         {componentsTab[activeTab]}
+
       </Box>
       <Flex alignItems="center" justifyContent="flex-end" bg="white.500" w="100%" >
         <Link mr="50px" isExternal href="https://3hub.com/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
