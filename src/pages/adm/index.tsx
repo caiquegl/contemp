@@ -161,7 +161,7 @@ const Adm = () => {
           </Button>
         </Flex>
       </Box>
-      <Link isExternal href="https://3hub.com/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
+      <Link isExternal href="https://3hub.co/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
         <Text fontSize="20px" color="black.800">
           Desenvolvido por{" "}
           <Text as="span" color="red.600" fontWeight="bold">

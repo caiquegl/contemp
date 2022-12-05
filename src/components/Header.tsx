@@ -213,7 +213,7 @@ export const Header = () => {
                 </Text>
                 <Link href="/suporte-tecnico">
                   <Text mb="15px" fontSize="18px">
-                    Contato
+                    Suporte Técnico
                   </Text>
                 </Link>
                 <Link href="/trabalhe-conosco">

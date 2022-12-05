@@ -142,3 +142,7 @@ body {
 .swiper-wrapper {
   padding-bottom: 50px !important;
 }
+
+.ant-table-thead > tr > th {
+  background: #fff !important;
+}

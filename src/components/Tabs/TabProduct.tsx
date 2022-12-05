@@ -1,13 +1,5 @@
 import {
   Box,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Text,
-  Tbody,
-  Td,
   HStack,
   Icon,
   Flex,
@@ -20,14 +12,17 @@ import {
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { collection, getDocs, deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteDoc } from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
 import { database, initFirebase } from "../../utils/db";
+import { useAuth } from "../../contextAuth/authContext";
+import { Table } from "antd";
 
 const TabProduct = () => {
   initFirebase();
   const toast = useToast();
+  const { allCategory, allProducts } = useAuth();
 
   const [step, setStep] = useState(1);
   const [list, setList] = useState<any>([]);
@@ -35,24 +30,61 @@ const TabProduct = () => {
   const [body, setBody] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
 
+  const column = [
+    {
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
+    },
+    {
+      title: 'Categoria',
+      dataIndex: 'nameCategory',
+      key: 'nameCategory',
+      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory)
+    },
+    {
+      title: 'Url',
+      dataIndex: 'url',
+      key: 'url',
+    },
+    {
+      title: 'Ação',
+      render: (a: any) => (
+        <HStack spacing="20px">
+          <Icon
+            cursor="pointer"
+            as={AiOutlineEdit}
+            fontSize="17px"
+            onClick={() => {
+              console.log(JSON.stringify(a, null, 2))
+              setBody(a);
+              setIsUpdate(true);
+              setStep(2);
+            }}
+          />
+          <Icon
+            cursor="pointer"
+            as={AiOutlineClose}
+            fontSize="17px"
+            color="red.500"
+            onClick={() => deleteProduct(a)}
+          />
+        </HStack>
+      )
+    }
+  ]
   const listProduct = async () => {
     try {
-      const dbInstance = collection(database, "products");
       let newList: any = [];
-      await getDocs(dbInstance).then(async (data) => {
 
-        for await (let pd of data.docs) {
-          const docRef = doc(database, 'categories', pd.data().category);          
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()) {
-            newList.push({ ...pd.data(), id: pd.id, ref: pd.ref, nameCategory: docSnap.data().name });
-          }
+      allProducts.forEach((el: any) => {
+        newList.push({ ...el, nameCategory: allCategory.find((cg: any) => cg.id == el.category).name })
+      })
 
-        }
-      });
-
-      setList(newList);
-      setListClone(newList);
+      let sortList = newList.sort((a: any, b: any) => a.name.localeCompare(b.name))
+      setList(sortList);
+      setListClone(sortList);
     } catch (error) {
       toast({
         title: "Erro",
@@ -88,7 +120,7 @@ const TabProduct = () => {
 
   useEffect(() => {
     listProduct();
-  }, []);
+  }, [allProducts, allCategory]);
 
   return (
     <>
@@ -150,7 +182,8 @@ const TabProduct = () => {
             </InputGroup>
           </Flex>
           <Box borderRadius="8px" bg="white" p="30px" w="100%">
-            <TableContainer>
+            <Table dataSource={list} columns={column} />
+            {/* <TableContainer>
               <Table color="black.800">
                 <Thead>
                   <Tr>
@@ -199,7 +232,7 @@ const TabProduct = () => {
                     ))}
                 </Tbody>
               </Table>
-            </TableContainer>
+            </TableContainer> */}
           </Box>
         </>
       )}
