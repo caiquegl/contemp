@@ -1,23 +1,74 @@
-import { Box, Button, Flex, HStack, Icon, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Flex,
+  Grid,
+  Icon,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiDownload } from "react-icons/fi";
 import { pxToRem } from "../utils/pxToRem";
-import Image from "next/image";
-import CatalogImg from '../assets/images/catalogo-936x1024.png.webp'
+import CatalogImg from "../assets/images/catalogo-936x1024.png.webp";
+import { Image } from "./Image";
+
 export const Catalog = () => {
   return (
-    <Flex
+    <Grid
       alignItems="center"
-      justifyContent="center"
-      direction="row"
-      width="100%"
-      bg="black.800"
-      minH="400px"
-      p={["123px 20px", "123px 20px", "123px 20px", "123px 20px", "123px 0"]}
+      templateColumns={{
+        base: "1fr",
+        lg: "repeat(2, 1fr)",
+      }}
+      width={{
+        base: "100%",
+        xl: "95%",
+        "2xl": "65%",
+      }}
+      margin="auto"
+      maxH={{
+        base: "auto",
+        lg: pxToRem(600),
+      }}
+      p={{
+        base: "123px 10px",
+        xl: "123px 0",
+      }}
+      position="relative"
     >
-      <Box>
+      <Image
+        src={CatalogImg}
+        display={{
+          base: "none",
+          lg: "flex",
+        }}
+        width={{
+          base: pxToRem(400),
+          lg: pxToRem(500),
+          xl: pxToRem(700),
+        }}
+        height={{
+          lg: pxToRem(1000),
+        }}
+        gridColumn={1}
+        bgSize={{
+          base: 0,
+          lg: "80%",
+          xl: "contain",
+        }}
+        zIndex={99}
+        position="absolute"
+      />
+
+      <Flex
+        gridColumn={{ base: 1, lg: 2 }}
+        flexDirection="column"
+        alignItems="center"
+      >
         <Text
           textAlign="center"
           fontSize="45px"
@@ -30,7 +81,7 @@ export const Catalog = () => {
           mt="40px"
           maxW="1000px"
           textAlign="center"
-          fontSize="24px"
+          fontSize={pxToRem(24)}
           mb="30px"
         >
           Quer baixar gratuitamente nosso catalogo digital de produtos? Basta
@@ -43,33 +94,44 @@ export const Catalog = () => {
           justifyContent="space-between"
           flexWrap="wrap"
           w="100%"
-          maxW={pxToRem(580)}
+          maxW={pxToRem(600)}
           margin="auto"
           h={{
-            base: 200,
+            base: pxToRem(200),
           }}
           flexDirection={{
             base: "column",
             md: "row",
           }}
         >
-          <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+          <Link
+            href="tel:1142235140"
+            _hover={{ textDecoration: "none", color: "#fff" }}
+          >
             <ActionButton label={"Telefonar"} icon={BiPhone} />
           </Link>
-          <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
+
+          <Link
+            href="mailto:vendas@contemp.com.br"
+            _hover={{ textDecoration: "none", color: "#fff" }}
+          >
             <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
           </Link>
+
           <ActionButton label={"Download"} icon={FiDownload} />
         </Flex>
-      </Box>
-    </Flex>
+      </Flex>
+    </Grid>
   );
 };
 
-function ActionButton({ label, icon }: any) {
+function ActionButton({ label, icon, ...props }: any & ButtonProps) {
   return (
     <Button
-      width={{
+      w={{
+        lg: "100%",
+      }}
+      maxW={{
         base: pxToRem(279),
         md: pxToRem(179),
       }}
@@ -78,6 +140,7 @@ function ActionButton({ label, icon }: any) {
       bg="red.600"
       fontSize={pxToRem(20)}
       _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+      {...props}
     >
       <Icon as={icon} mr="10px" />
       {label}

@@ -1,33 +1,37 @@
-import { Box, Container, Flex, HStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Grid } from "@chakra-ui/react";
 import React from "react";
-import Category from "../pages/category/[category]";
 import { pxToRem } from "../utils/pxToRem";
 import CardProductWithDescription from "./CardProductWithDescription";
 
-
 export const ListCategory = ({ bg, data }: any) => {
-
   return (
-    <Flex
-      w="100%"
-      alignItems="center"
-      bg={bg}
-      p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
-    >
-      <Container maxW="8xl" p="80px 0">
-        <HStack spacing="20px">
-          {data && data.length > 0 && data.map((catg: any) => (
-            <Box h={pxToRem(700)} mt="31px">
+    <Flex w="100%" alignItems="center" bg={bg}>
+      <Container maxW="8xl" p="80px 0" margin="auto" w="100%">
+        <Grid
+          templateColumns={`repeat(auto-fit, minmax(${pxToRem(320)}, 1fr))`}
+          columnGap={pxToRem(30)}
+          p={{
+            xl: "0 20px",
+          }}
+        >
+          {data &&
+            data.length > 0 &&
+            data.map((catg: any) => (
               <CardProductWithDescription
-                img={catg.urls && catg.urls[0] ? catg.urls[0] : ''}
+                img={catg.urls && catg.urls[0] ? catg.urls[0] : ""}
                 text={catg?.name}
                 description={catg?.description}
-                color={bg == 'red.600' || bg == 'black.800' ? 'white' : undefined}
-                buttomBottom={bg == 'red.600' ? 'white' : undefined}
+                color={
+                  bg === "red.600" || bg === "black.800" ? "white" : undefined
+                }
+                buttomBottom={bg === "red.600" ? "white" : undefined}
+                containerProps={{
+                  p: `0 ${pxToRem(20)}`,
+                  margin: "auto",
+                }}
               />
-            </Box>
-          ))}
-        </HStack>
+            ))}
+        </Grid>
       </Container>
     </Flex>
   );

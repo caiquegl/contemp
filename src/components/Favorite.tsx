@@ -236,7 +236,7 @@ export const Favorite = () => {
           }}
         >
           {products.map((item: any) => (
-            <SwiperSlide style={{ width: '100%' }}>
+            <SwiperSlide style={{ width: "100%" }}>
               <CardProduct
                 img={item.urls && item.urls.length > 0 && item.urls[0]}
                 text={item.name}
@@ -270,9 +270,7 @@ export const Favorite = () => {
             }}
             cursor="pointer"
             onClick={() =>
-              router.push(
-                `/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`
-              )
+              router.push(`/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`)
             }
           />
 
@@ -296,6 +294,7 @@ export const Favorite = () => {
                 icon={homeTabs.tab1.icon}
                 containerProps={{
                   borderColor: "red.600",
+                  color: "white",
                 }}
               />
             </Flex>

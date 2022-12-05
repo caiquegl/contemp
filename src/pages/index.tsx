@@ -39,6 +39,7 @@ import {
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
+import { findOverflowingElements } from "../utils/findOverflowingElements";
 
 const Home = () => {
   initFirebase();
@@ -73,6 +74,11 @@ const Home = () => {
   useEffect(() => {
     getHomeTab();
   }, []);
+
+  useEffect(() => {
+    findOverflowingElements();
+  }, []);
+
   return (
     <SmoothScroll>
       <HomeBackgroundDetails />
@@ -85,7 +91,7 @@ const Home = () => {
 
       <GridChakra
         templateColumns={{
-          base: "1fr",
+          base: "100%",
           md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
         }}
       >
@@ -160,7 +166,7 @@ const Home = () => {
               }}
               fontWeight="bold"
               fontSize={{
-                base: pxToRem(50),
+                base: pxToRem(45),
                 md: pxToRem(80),
                 lg: pxToRem(110),
               }}
@@ -195,6 +201,7 @@ const Home = () => {
               icon={Pirometro}
               containerProps={{
                 borderColor: "red.600",
+                color: "white",
                 marginTop: 10,
                 width: "100%",
               }}
@@ -234,11 +241,13 @@ const Home = () => {
           </Flex>
         </Flex>
       </Container>
+
       <GridChakra
         templateColumns={{
           base: "1fr",
           md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
         }}
+        w="100%"
       >
         <DescriptionProduct
           color="white"
@@ -338,7 +347,10 @@ const Home = () => {
               md: "row",
             }}
           >
-            <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link
+              href="tel:1142235140"
+              _hover={{ textDecoration: "none", color: "#fff" }}
+            >
               <Button
                 width={{
                   base: pxToRem(279),
@@ -354,7 +366,10 @@ const Home = () => {
                 Telefonar
               </Button>
             </Link>
-            <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link
+              href="mailto:vendas@contemp.com.br"
+              _hover={{ textDecoration: "none", color: "#fff" }}
+            >
               <Button
                 width={{
                   base: pxToRem(279),
@@ -422,7 +437,9 @@ const Home = () => {
           />
         </GridChakra>
       </Flex>
+
       <Catalog />
+
       <Contact
         title="DÚVIDAS E ORÇAMENTOS"
         description="Essa é a seleção que a equipe da Contemp escolheu como os

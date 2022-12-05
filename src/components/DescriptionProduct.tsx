@@ -11,19 +11,20 @@ interface IProps {
   borderColorButton: string;
   color: string;
   containerProps?: FlexProps;
-  dataTab?: any
+  dataTab?: any;
 }
+
 const DescriptionProduct = ({
   bg,
   borderColor,
   color,
   borderColorButton,
   containerProps,
-  dataTab
+  dataTab,
 }: IProps) => {
   const router = useRouter();
 
-  if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
+  if (!dataTab || Object.keys(dataTab).length === 0) return <Box />;
 
   return (
     <Flex
@@ -33,7 +34,6 @@ const DescriptionProduct = ({
       justifyContent="center"
       bg={bg}
       color={color}
-      margin="auto"
     >
       <Flex
         direction={{
@@ -47,20 +47,20 @@ const DescriptionProduct = ({
         {...containerProps}
       >
         <Image
-          src={
-            dataTab?.urls ? dataTab.urls[0] : ''
-          }
+          src={dataTab?.urls ? dataTab.urls[0] : ""}
           alt="bateria"
           flex={1}
           minH={pxToRem(300)}
           bgSize={{
             base: "70%",
             md: "90%",
-            lg: "70%",
+            lg: "60%",
             xl: "85%",
-            "2xl": "70%",
+            "2xl": "contain",
           }}
-          onClick={() => router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)}
+          onClick={() =>
+            router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
+          }
           cursor="pointer"
         />
 
@@ -91,6 +91,7 @@ const DescriptionProduct = ({
               color,
               borderColor,
               margin: `${pxToRem(10)} 0`,
+              w: "100%",
             }}
           />
 
@@ -108,7 +109,9 @@ const DescriptionProduct = ({
               maxW={pxToRem(157)}
               h={pxToRem(50)}
               flex={6}
-              onClick={() => router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)}
+              onClick={() =>
+                router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
+              }
               _hover={{
                 bg: color,
                 color: bg,

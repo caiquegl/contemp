@@ -38,17 +38,18 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
+import { SmoothScroll } from "../../components/SmoothScroll";
 
 const Product = () => {
-  const router = useRouter()
+  const router = useRouter();
   initFirebase();
   const { allCategory, allProducts, addCart } = useAuth();
 
-  const { product } = router.query
-  const [detail, setDetail] = useState<any>({})
-  const [variation, setVariation] = useState<any>({})
-  const [products, setProducts] = useState<any>([])
-  const [qtd, setQtd] = useState(1)
+  const { product } = router.query;
+  const [detail, setDetail] = useState<any>({});
+  const [variation, setVariation] = useState<any>({});
+  const [products, setProducts] = useState<any>([]);
+  const [qtd, setQtd] = useState(1);
   const isTablet = useBreakpointValue({
     base: true,
     lg: false,
@@ -61,15 +62,15 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
-      let produto = ''
-      if (product && typeof product == 'string') produto = product.replaceAll('_', ' ')
+      let produto = "";
+      if (product && typeof product == "string")
+        produto = product.replaceAll("_", " ");
       // const dbInstanceProducts = collection(database, "products");
       // const dbInstanceHome = collection(database, "home");
       // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
 
-
-      let ex = allProducts.filter((el: any) => el.name == produto)
+      let ex = allProducts.filter((el: any) => el.name == produto);
       // await getDocs(qProduct).then(async (data) => {
       //   if (data.docs.length == 0) return
       //   if (data.docs.length > 0) {
@@ -77,41 +78,45 @@ const Product = () => {
       //   }
       //   setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
       // });
-      if (ex.length == 0) return
+      if (ex.length == 0) return;
 
-      setDetail(ex[0])
+      setDetail(ex[0]);
 
-      let idCategory: any = []
+      let idCategory: any = [];
 
       allCategory.forEach((el: any) => {
         if (el.id == ex[0].category) {
-          idCategory.push(el.id)
+          idCategory.push(el.id);
           allCategory.forEach((el2: any) => {
-            if ((el2.sub_categorie && el2.sub_categorie == el.id) || (el2.sub_categorie && el2.sub_categorie == el.sub_categorie)) {
-              if (idCategory.indexOf(el2.id) > -1) return
-              idCategory.push(el2.id)
+            if (
+              (el2.sub_categorie && el2.sub_categorie == el.id) ||
+              (el2.sub_categorie && el2.sub_categorie == el.sub_categorie)
+            ) {
+              if (idCategory.indexOf(el2.id) > -1) return;
+              idCategory.push(el2.id);
               allCategory.forEach((el3: any) => {
-                if ((el3.sub_categorie && el3.sub_categorie == el2.id) || (el3.sub_categorie && el3.sub_categorie == el2.sub_categorie)) {
-                  if (idCategory.indexOf(el2.id) > -1) return
-                  idCategory.push(el3.id)
+                if (
+                  (el3.sub_categorie && el3.sub_categorie == el2.id) ||
+                  (el3.sub_categorie && el3.sub_categorie == el2.sub_categorie)
+                ) {
+                  if (idCategory.indexOf(el2.id) > -1) return;
+                  idCategory.push(el3.id);
                 }
-              })
+              });
             }
-
-          })
-
+          });
         }
-      })
+      });
 
-      let list: any = []
+      let list: any = [];
 
       allProducts.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el)
-        })
-      })
+          if (el.category == ct) list.push(el);
+        });
+      });
 
-      setProducts(list)
+      setProducts(list);
 
       // if (!exist) {
       //   await getDocs(qHome).then(async (data) => {
@@ -139,19 +144,18 @@ const Product = () => {
       //   });
       // }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
     if (product) {
-      getProduct()
+      getProduct();
     }
-  }, [product])
+  }, [product]);
 
   return (
-    <>
+    <SmoothScroll>
       <Header />
       <Flex
         p="10px"
@@ -171,80 +175,102 @@ const Product = () => {
             modules={[Pagination]}
             className="mySwiper"
           >
-            {detail.urls && detail.urls.length > 0 && detail.urls.map((photo: any) => (
-              <SwiperSlide>
-                <Zoom>
-
-                  <Center h="764px">
-                    <img
-                      alt={detail.name ? detail.name : ''}
-                      src={photo}
-                      width="500"
-                    />
-                  </Center>
-                </Zoom>
-              </SwiperSlide>
-            ))}
+            {detail.urls &&
+              detail.urls.length > 0 &&
+              detail.urls.map((photo: any) => (
+                <SwiperSlide>
+                  <Zoom>
+                    <Center h="764px">
+                      <img
+                        alt={detail.name ? detail.name : ""}
+                        src={photo}
+                        width="500"
+                      />
+                    </Center>
+                  </Zoom>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </Center>
         <Box ml={[0, 0, 0, "60px", "60px"]}>
           <Text fontWeight="bold" fontSize="35px" color="black.800" mb="30px">
-            {detail.name ? detail.name : ''}
+            {detail.name ? detail.name : ""}
           </Text>
           <Text color="black.800" fontSize="20px" maxW="829px" mb="30px">
-            <Text as="span" noOfLines={4}>{detail.description ? detail.description : ''}{" "}</Text>
-            {detail.description ? detail.description.length > 300 : '...'}{" "}
-            <Link href="#description" _hover={{ textDecoration: 'none' }}>
+            <Text as="span" noOfLines={4}>
+              {detail.description ? detail.description : ""}{" "}
+            </Text>
+            {detail.description ? detail.description.length > 300 : "..."}{" "}
+            <Link href="#description" _hover={{ textDecoration: "none" }}>
               <Text as="span" color="red.600" cursor="pointer">
                 veja descrição completa +
               </Text>
             </Link>
-
           </Text>
           <VStack spacing="30px">
-            {detail.hasVariation && detail.listVariation && detail.listVariation.length > 0 && detail.listVariation.map((vr: any) => (
-              <Flex w="100%" alignItems="center" justifyContent="space-between">
-                <Text fontWeight="bold" fontSize="20px" color="black.800">
-                  {vr.name}
-                </Text>
-                <InputGroup
-                  borderRadius="6px"
-                  bg="white.500"
-                  p="3px 7px"
+            {detail.hasVariation &&
+              detail.listVariation &&
+              detail.listVariation.length > 0 &&
+              detail.listVariation.map((vr: any) => (
+                <Flex
                   w="100%"
-                  maxW="358px"
-                  h="50"
-                  outline="none"
-                  border="none"
-                  display="flex"
                   alignItems="center"
-                  justifyContent="center"
+                  justifyContent="space-between"
                 >
-                  <Select
+                  <Text fontWeight="bold" fontSize="20px" color="black.800">
+                    {vr.name}
+                  </Text>
+                  <InputGroup
+                    borderRadius="6px"
+                    bg="white.500"
+                    p="3px 7px"
                     w="100%"
-                    height="100%"
+                    maxW="358px"
+                    h="50"
+                    outline="none"
                     border="none"
-                    borderRadius="21px"
-                    placeholder="Selecione uma opção"
-                    color="black.800"
-                    onChange={(evt) => setVariation({ ...variation, [vr.name]: evt.target.value })}
-                    _placeholder={{
-                      color: "black.50",
-                    }}
-                    _focusVisible={{
-                      outline: "none",
-                    }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    {vr.opt && vr.opt.length > 0 && vr.opt.map((opt: any) => (
-                      <option value={opt}>{opt}</option>
-                    ))}
-                  </Select>
-                </InputGroup>
-              </Flex>
-            ))}
-
+                    <Select
+                      w="100%"
+                      height="100%"
+                      border="none"
+                      borderRadius="21px"
+                      placeholder="Selecione uma opção"
+                      color="black.800"
+                      onChange={(evt) =>
+                        setVariation({
+                          ...variation,
+                          [vr.name]: evt.target.value,
+                        })
+                      }
+                      _placeholder={{
+                        color: "black.50",
+                      }}
+                      _focusVisible={{
+                        outline: "none",
+                      }}
+                    >
+                      {vr.opt &&
+                        vr.opt.length > 0 &&
+                        vr.opt.map((opt: any) => (
+                          <option value={opt}>{opt}</option>
+                        ))}
+                    </Select>
+                  </InputGroup>
+                </Flex>
+              ))}
           </VStack>
-          <Flex bg="white.500" maxW="536px" borderRadius="8px" p="15px" ml="auto" mt="30px">
+          <Flex
+            bg="white.500"
+            maxW="536px"
+            borderRadius="8px"
+            p="15px"
+            ml="auto"
+            mt="30px"
+          >
             <HStack spacing="20px">
               <Text color="black.800" fontWeight="bold" fontSize="20px">
                 Quantidade
@@ -268,11 +294,13 @@ const Product = () => {
                 color="#fff"
                 borderRadius="25px"
                 w="279px"
-                onClick={() => addCart({
-                  product_id: detail.id,
-                  variation: variation,
-                  qtd
-                })}
+                onClick={() =>
+                  addCart({
+                    product_id: detail.id,
+                    variation: variation,
+                    qtd,
+                  })
+                }
               >
                 <Center>Adicionar ao orçamento</Center>
               </Button>
@@ -280,39 +308,47 @@ const Product = () => {
           </Flex>
         </Box>
       </Flex>
-      <Flex justifyContent="center" w="100%" bg="white" pt="111px" px="10px" id="description">
+      <Flex
+        justifyContent="center"
+        w="100%"
+        bg="white"
+        pt="111px"
+        px="10px"
+        id="description"
+      >
         <Tabs variant="enclosed" maxW="1386px" w="100%">
           <TabList>
-            {detail.tab && detail.tab.length > 0 && detail.tab.map((tab: any) => (
-
-
-              <Tab
-                _selected={{
-                  bg: "white.500",
-                  color: "red.600",
-                  fontWeight: "bold",
-                }}
-                w="100%"
-                maxW="211px"
-                color="black.800"
-              >
-                {tab.name}
-              </Tab>
-            ))}
+            {detail.tab &&
+              detail.tab.length > 0 &&
+              detail.tab.map((tab: any) => (
+                <Tab
+                  _selected={{
+                    bg: "white.500",
+                    color: "red.600",
+                    fontWeight: "bold",
+                  }}
+                  w="100%"
+                  maxW="211px"
+                  color="black.800"
+                >
+                  {tab.name}
+                </Tab>
+              ))}
           </TabList>
           <TabPanels>
-            {detail.tab && detail.tab.length > 0 && detail.tab.map((tab: any) => (
-
-              <TabPanel
-                bg="white.500"
-                color="black.800"
-                p="40px"
-                borderBottomRadius="8px"
-                borderTopRightRadius="8px"
-              >
-                {ReactHtmlParser(tab.text)}
-              </TabPanel>
-            ))}
+            {detail.tab &&
+              detail.tab.length > 0 &&
+              detail.tab.map((tab: any) => (
+                <TabPanel
+                  bg="white.500"
+                  color="black.800"
+                  p="40px"
+                  borderBottomRadius="8px"
+                  borderTopRightRadius="8px"
+                >
+                  {ReactHtmlParser(tab.text)}
+                </TabPanel>
+              ))}
           </TabPanels>
         </Tabs>
       </Flex>
@@ -343,7 +379,7 @@ const Product = () => {
               {products.map((item: any) => (
                 <SwiperSlide>
                   <CardProductWithDescription
-                    img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
+                    img={item.urls && item.urls.length > 0 ? item.urls[0] : ""}
                     text={item.name}
                     description={item.description}
                   />
@@ -382,7 +418,7 @@ const Product = () => {
         ]}
       />
       <Footer />
-    </>
+    </SmoothScroll>
   );
 };
 
