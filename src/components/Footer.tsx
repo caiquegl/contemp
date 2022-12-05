@@ -200,7 +200,7 @@ export const Footer = () => {
           <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Lista de Todos os Produtos</ListItem>
           </Link>
-          <ListItem>Calibração</ListItem>
+          <ListItem m={[0, "0 30px"]}>Calibração</ListItem>
           <ListItem m={[0, "0 30px"]}>Política de Privacidade</ListItem>
           <ListItem>Site Mapa</ListItem>
         </UnorderedList>
