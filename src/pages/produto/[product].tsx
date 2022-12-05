@@ -100,7 +100,11 @@ const Product = () => {
       }
       if (ex.length == 0) return;
 
-      setBradeName(names)
+      let revertNames: any = []
+
+      names.forEach((el: any) => revertNames.push(el))
+
+      setBradeName(revertNames)
       setDetail(ex[0]);
 
       let idCategory: any = [];
