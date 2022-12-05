@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ListCategory } from "../../components/ListCategory";
 import { useAuth } from "../../contextAuth/authContext";
+import Head from "next/head";
 
 const products = [] as number[];
 
@@ -23,6 +24,7 @@ const Category = () => {
 
   const { category } = router.query;
   const [list, setList] = useState<any>([]);
+  const [categ, setCateg] = useState<any>({});
 
   const dividerList = (listProduct: any) => {
     let list: any = [];
@@ -77,6 +79,8 @@ const Category = () => {
         }
       });
 
+      let categFind = allCategory.find((el: any) => el.name == nameCategory)
+      setCateg(categFind)
       let list: any = [];
 
       allProducts.forEach((el: any) => {
@@ -100,6 +104,12 @@ const Category = () => {
 
   return (
     <SmoothScroll>
+      {categ &&
+        <Head>
+          <meta name="description" content={categ.description_seo} />
+          <meta name="keywords" content={categ.key_word_seo} />
+        </Head>
+      }
       <Header />
       <Flex
         w="100%"

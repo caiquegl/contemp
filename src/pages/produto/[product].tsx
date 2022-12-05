@@ -39,6 +39,7 @@ import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
 import { SmoothScroll } from "../../components/SmoothScroll";
+import Head from "next/head";
 
 const Product = () => {
   const router = useRouter();
@@ -156,6 +157,12 @@ const Product = () => {
 
   return (
     <SmoothScroll>
+      {detail &&
+        <Head>
+          <meta name="description" content={detail.description_seo} />
+          <meta name="keywords" content={detail.key_word_seo} />
+        </Head>
+      }
       <Header />
       <Flex
         p="10px"
