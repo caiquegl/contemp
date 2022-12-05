@@ -268,6 +268,12 @@ export const Favorite = () => {
               base: pxToRem(20),
               lg: 0,
             }}
+            cursor="pointer"
+            onClick={() =>
+              router.push(
+                `/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`
+              )
+            }
           />
 
           <Box w="100%" flex={1}>

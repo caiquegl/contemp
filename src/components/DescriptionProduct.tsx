@@ -23,8 +23,8 @@ const DescriptionProduct = ({
 }: IProps) => {
   const router = useRouter();
 
-  if(!dataTab || Object.keys(dataTab).length === 0) return <Box/>
-  
+  if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
+
   return (
     <Flex
       w="100%"
@@ -60,6 +60,8 @@ const DescriptionProduct = ({
             xl: "85%",
             "2xl": "70%",
           }}
+          onClick={() => router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)}
+          cursor="pointer"
         />
 
         <Flex
@@ -106,7 +108,7 @@ const DescriptionProduct = ({
               maxW={pxToRem(157)}
               h={pxToRem(50)}
               flex={6}
-              onClick={() => router.push(`/produto/${dataTab?.name}`)}
+              onClick={() => router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)}
               _hover={{
                 bg: color,
                 color: bg,

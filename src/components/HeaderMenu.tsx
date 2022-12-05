@@ -57,7 +57,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
               icon={AiOutlineEye}
               size={20}
               color="#fff"
-              onClick={(item: any) => router.push(`/category/${el.name}`)}
+              onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
             />
           ),
           // icon: hasIcon ? (
@@ -120,9 +120,12 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           background: "#242424",
           border: "none",
           fontSize: 16,
+          display: 'flex',
+          flexWrap: 'wrap',
           position: "relative",
           alignItems: "center",
           width: "100%",
+          justifyContent: 'center'
         }}
         disabledOverflow
       />
@@ -147,7 +150,7 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
               icon={AiOutlineEye}
               size={20}
               color="#fff"
-              onClick={(item: any) => router.push(`/category/${el.name}`)}
+              onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
             />
           ),
         };

@@ -6,6 +6,7 @@ import {
   Button,
   Icon,
   Grid as GridChakra,
+  Link,
 } from "@chakra-ui/react";
 import Pirometro from "../assets/icons/pritometro_white.svg";
 import Mapa from "../assets/images/MAPA.png";
@@ -75,11 +76,9 @@ const Home = () => {
   return (
     <SmoothScroll>
       <HomeBackgroundDetails />
-
       <SidebarDrawerProvider>
         <Header />
       </SidebarDrawerProvider>
-
       <Banner />
 
       <Favorite />
@@ -339,35 +338,38 @@ const Home = () => {
               md: "row",
             }}
           >
-            <Button
-              width={{
-                base: pxToRem(279),
-                md: pxToRem(179),
-              }}
-              h="50px"
-              borderRadius="25px"
-              bg="red.600"
-              fontSize={pxToRem(20)}
-              _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-            >
-              <Icon as={BiPhone} mr="10px" />
-              Telefonar
-            </Button>
-
-            <Button
-              width={{
-                base: pxToRem(279),
-                md: pxToRem(179),
-              }}
-              h="50px"
-              borderRadius="25px"
-              bg="red.600"
-              fontSize={pxToRem(20)}
-              _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-            >
-              <Icon as={AiOutlineMail} mr="10px" />
-              Enviar e-mail
-            </Button>
+            <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+              <Button
+                width={{
+                  base: pxToRem(279),
+                  md: pxToRem(179),
+                }}
+                h="50px"
+                borderRadius="25px"
+                bg="red.600"
+                fontSize={pxToRem(20)}
+                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+              >
+                <Icon as={BiPhone} mr="10px" />
+                Telefonar
+              </Button>
+            </Link>
+            <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
+              <Button
+                width={{
+                  base: pxToRem(279),
+                  md: pxToRem(179),
+                }}
+                h="50px"
+                borderRadius="25px"
+                bg="red.600"
+                fontSize={pxToRem(20)}
+                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+              >
+                <Icon as={AiOutlineMail} mr="10px" />
+                Enviar e-mail
+              </Button>
+            </Link>
           </Flex>
         </Flex>
 

@@ -42,7 +42,7 @@ import { useAuth } from "../../contextAuth/authContext";
 const Product = () => {
   const router = useRouter()
   initFirebase();
-  const { addCart } = useAuth();
+  const { allCategory, allProducts, addCart } = useAuth();
 
   const { product } = router.query
   const [detail, setDetail] = useState<any>({})
@@ -63,45 +63,81 @@ const Product = () => {
     try {
       let produto = ''
       if (product && typeof product == 'string') produto = product.replaceAll('_', ' ')
-      const dbInstanceProducts = collection(database, "products");
-      const dbInstanceHome = collection(database, "home");
-      const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
-      const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
+      // const dbInstanceProducts = collection(database, "products");
+      // const dbInstanceHome = collection(database, "home");
+      // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
+      // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
 
-      let exist = false
-      await getDocs(qProduct).then(async (data) => {
-        if (data.docs.length == 0) return
-        if (data.docs.length > 0) {
-          exist = true
+
+      let ex = allProducts.filter((el: any) => el.name == produto)
+      console.log(ex)
+      // await getDocs(qProduct).then(async (data) => {
+      //   if (data.docs.length == 0) return
+      //   if (data.docs.length > 0) {
+      //     exist = true
+      //   }
+      //   setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
+      // });
+      if (ex.length == 0) return
+
+      setDetail(ex[0])
+
+      let idCategory: any = []
+
+      allCategory.forEach((el: any) => {
+        if (el.id == ex[0].category) {
+          idCategory.push(el.id)
+          allCategory.forEach((el2: any) => {
+            if (el2.sub_categorie && el2.sub_categorie == el.id) {
+              idCategory.push(el2.id)
+              allCategory.forEach((el3: any) => {
+                if (el3.sub_categorie && el3.sub_categorie == el2.id) {
+                  idCategory.push(el3.id)
+                }
+              })
+            }
+
+          })
+
         }
-        setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
-      });
+      })
 
-      if (!exist) {
-        await getDocs(qHome).then(async (data) => {
-          if (data.docs.length == 0) return
-          setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
+      let list: any = []
 
-          const qProductCategory = query(dbInstanceProducts, where("category", "==", data.docs[0].data().category), limit(1))
-          const qHomeCategory = query(dbInstanceHome, where("category", "==", data.docs[0].data().category), limit(1))
+      allProducts.forEach((el: any) => {
+        idCategory.forEach((ct: any) => {
+          if (el.category == ct) list.push(el)
+        })
+      })
 
-          let listProducts: any = []
-          await getDocs(qHomeCategory).then(async (dataCategory) => {
-            if (dataCategory.docs.length == 0) return
-            dataCategory.docs.forEach((dt) => {
-              listProducts.push(dt.data())
-            })
-          });
+      console.log(list)
+      setProducts(list)
 
-          await getDocs(qProductCategory).then(async (dataCategory) => {
-            if (dataCategory.docs.length == 0) return
-            dataCategory.docs.forEach((dt) => {
-              listProducts.push(dt.data())
-            })
-          });
-          setProducts(listProducts)
-        });
-      }
+      // if (!exist) {
+      //   await getDocs(qHome).then(async (data) => {
+      //     if (data.docs.length == 0) return
+      //     setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
+
+      //     const qProductCategory = query(dbInstanceProducts, where("category", "==", data.docs[0].data().category), limit(1))
+      //     const qHomeCategory = query(dbInstanceHome, where("category", "==", data.docs[0].data().category), limit(1))
+
+      //     let listProducts: any = []
+      //     await getDocs(qHomeCategory).then(async (dataCategory) => {
+      //       if (dataCategory.docs.length == 0) return
+      //       dataCategory.docs.forEach((dt) => {
+      //         listProducts.push(dt.data())
+      //       })
+      //     });
+
+      //     await getDocs(qProductCategory).then(async (dataCategory) => {
+      //       if (dataCategory.docs.length == 0) return
+      //       dataCategory.docs.forEach((dt) => {
+      //         listProducts.push(dt.data())
+      //       })
+      //     });
+      //     setProducts(listProducts)
+      //   });
+      // }
     } catch (error) {
       console.log(error)
     }
@@ -292,7 +328,7 @@ const Product = () => {
               #temnacontemp
             </Text>
           </Flex>
-          <Box h={pxToRem(650)} mt="31px">
+          <Flex alignItems="center" h={pxToRem(670)} mt="31px">
             <Swiper
               slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
               spaceBetween={30}
@@ -314,7 +350,7 @@ const Product = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </Box>
+          </Flex>
         </Container>
       </Flex>
       <Player />

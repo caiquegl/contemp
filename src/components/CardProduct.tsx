@@ -55,7 +55,7 @@ const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
           >
             {text}
           </Text>
-          <Link href={text ? `/produto/${text}` : ""}>
+          <Link href={text ? `/produto/${text.replaceAll(' ', '_')}` : ""}>
             <Text fontSize="20px" color="black">
               Veja mais +
             </Text>

@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Text, Tooltip } from "@chakra-ui/react";
 import { Typography } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -27,28 +27,34 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       justifyContent="space-between"
       flexDirection="column"
       borderRadius="8px"
-      border={isHovering ? '2px solid' : 'none'}
-      borderColor={color ? color : "black.800"}
+      // border={isHovering ? '2px solid' : 'none'}
+      // borderColor={color ? color : "black.800"}
       // border={'2px solid'}
       // borderColor={"black.800"}
       p={`${pxToRem(45)} ${pxToRem(23)}`}
       w={pxToRem(346)}
-      // minH={pxToRem(700)}
-      h="100%"
+      h={pxToRem(700)}
+      // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
+      _hover={{
+        border: '2px solid',
+        borderColor: 'black.800'
+      }}
     >
-      <Text
-        fontSize={pxToRem(50)}
-        fontWeight="bold"
-        color={color ? color : "black"}
-        textTransform="uppercase"
-        mb="20px"
-        width="100%"
-
-      >
-        {text}
-      </Text>
+      <Tooltip label={text} placement="top">
+        <Text
+          fontSize={pxToRem(50)}
+          fontWeight="bold"
+          color={color ? color : "black"}
+          textTransform="uppercase"
+          mb="20px"
+          width="100%"
+          noOfLines={1}
+        >
+          {text}
+        </Text>
+      </Tooltip>
       {/* <TextAntd
         style={{ fontSize: 20, marginBottom: 20, color: '#000' }}
         ellipsis={{ tooltip: description }}
@@ -57,12 +63,12 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       </TextAntd> */}
       <Text fontSize={pxToRem(20)} color={color ? color : "black"} mb="20px">
         {description && description.split('').length > 0 && description.split('').map((el: any, index: number) => <>
-          {index < 200 ? el : ''}
+          {index < 100 ? el : ''}
         </>)}
-        {description && description.split('').length > 300 ? '...' : ''}
+        {description && description.split('').length > 100 ? '...' : ''}
       </Text>
 
-      <Image src={img} alt={alt} mb="20px" h="130px" />
+      <Image src={img} alt={alt} mb="20px" h="230px" />
 
       <Button
         w="243px"

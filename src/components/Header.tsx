@@ -115,7 +115,7 @@ export const Header = () => {
         padding={`0 ${pxToRem(10)}`}
       >
         <Link href="/">
-          <Image src={Logo} width={160} height={41} bgSize="contain" />
+          <ImageNext src={Logo} width={160} />
         </Link>
 
         <HStack spacing="27px">
@@ -172,7 +172,7 @@ export const Header = () => {
                 width="100%"
               >
                 <Link href="/">
-                  <ImageNext src={Logo} width={120} height={41} />
+                  <ImageNext src={Logo} width={160} />
                 </Link>
                 <Flex
                   borderRadius="5px"

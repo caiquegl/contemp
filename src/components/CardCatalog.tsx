@@ -47,7 +47,7 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
             h="50px"
             bg="tranparent"
             fontSize="20px"
-            onClick={() => router.push(`/category/${title}`)}
+            onClick={() => router.push(`/category/${title.replaceAll(' ', '_')}`)}
             _hover={{
               bg: color,
               color: bg,

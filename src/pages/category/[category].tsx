@@ -14,8 +14,6 @@ import { SmoothScroll } from "../../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { ListCategory } from "../../components/ListCategory";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import { database, initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
 
 const products = [] as number[]
@@ -26,7 +24,6 @@ for (let i = 0; i < 56; i++) {
 
 const Category = () => {
   const router = useRouter()
-  initFirebase();
   const { allCategory, allProducts } = useAuth();
 
   const { category } = router.query
@@ -67,9 +64,10 @@ const Category = () => {
       //   idCategory = data.docs[0].id
       // });
       let idCategory: any = []
-
+      let nameCategory = ''
+      if (category && typeof category == 'string') nameCategory = category.replaceAll('_', ' ')
       allCategory.forEach((el: any) => {
-        if (el.name == category) {
+        if (el.name == nameCategory) {
           idCategory.push(el.id)
           allCategory.forEach((el2: any) => {
             if (el2.sub_categorie && el2.sub_categorie == el.id) {
@@ -93,22 +91,6 @@ const Category = () => {
           if (el.category == ct) list.push(el)
         })
       })
-      // const qProducts = query(dbInstanceProducts, where("category", "==", idCategory))
-      // await getDocs(qProducts).then(async (data) => {
-      //   if (data.docs.length === 0) return
-
-      //   data.docs.forEach((pd: any) => {
-      //     list.push(pd.data())
-      //   })
-      // });
-
-      // const qHome = query(dbInstanceHome, where("category", "==", idCategory))
-      // await getDocs(qHome).then(async (data) => {
-      //   if (data.docs.length === 0) return
-      //   data.docs.forEach((pd: any) => {
-      //     list.push(pd.data())
-      //   })
-      // });
 
       console.log(list)
       dividerList(list)
@@ -143,7 +125,7 @@ const Category = () => {
           maxW="1037px"
           p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
-          {category ? category : ''}
+          {category && typeof category == 'string' ? category.replaceAll('_', ' ') : ''}
         </Text>
       </Flex>
       {list && list.length > 0 && list.map((categ: any, index: number) => {

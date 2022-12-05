@@ -136,5 +136,9 @@ body {
 }
 
 .ant-menu-vertical.ant-menu-sub .ant-menu-item {
-  margin-left: 13px;
+  margin-left: 13px !important;
+}
+
+.swiper-wrapper {
+  padding-bottom: 50px !important;
 }

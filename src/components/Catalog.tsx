@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Icon, Link, Text } from "@chakra-ui/react";
 import React from "react";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
@@ -53,8 +53,12 @@ export const Catalog = () => {
             md: "row",
           }}
         >
-          <ActionButton label={"Telefonar"} icon={BiPhone} />
-          <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
+          <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <ActionButton label={"Telefonar"} icon={BiPhone} />
+          </Link>
+          <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
+          </Link>
           <ActionButton label={"Download"} icon={FiDownload} />
         </Flex>
       </Box>

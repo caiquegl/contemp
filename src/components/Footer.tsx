@@ -171,17 +171,17 @@ export const Footer = () => {
                 </Link>
               </HStack>
             }
-            <Text fontWeight="bold" fontSize="25px" mb="20px" cursor="pointer" onClick={() => router.push(`/category/${el.name}`)}>
+            <Text fontWeight="bold" fontSize="25px" mb="20px" cursor="pointer" onClick={() => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}>
               {el.name}
             </Text>
             {el.list_sub_category && el.list_sub_category.length > 0 && el.list_sub_category.map((el2: any) => (
               <>
-                <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el2.name}`)}>
+                <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el2.name.replaceAll(' ', '_')}`)}>
                   {el.name}
                 </Text>
                 <Box mb="20px">
                   {el2.list_sub_category && el2.list_sub_category.length > 0 && el2.list_sub_category.map((el3: any) => (
-                    <Text fontSize="20px" cursor="pointer" onClick={() => router.push(`/category/${el3.name}`)}>
+                    <Text fontSize="20px" cursor="pointer" onClick={() => router.push(`/category/${el3.name.replaceAll(' ', '_')}`)}>
                       {el3.name}
                     </Text>
                   ))}
@@ -196,10 +196,13 @@ export const Footer = () => {
         <Text color="white" fontSize="18px">
           Copyright © 2022 Contemp. Todos os direitos reservados.
         </Text>
-        <UnorderedList color="white" fontSize="18px" display="flex">
-          <ListItem>Lista de Todos os Produtos</ListItem>
-          <ListItem m="0 30px">Política de Privacidade</ListItem>
+        <UnorderedList color="white" fontSize="18px" display="flex" mt={['20px', 0]} flexDirection={['column', 'row']}>
+          <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
+            <ListItem>Lista de Todos os Produtos</ListItem>
+          </Link>
+          <ListItem m={[0, "0 30px"]}>Política de Privacidade</ListItem>
           <ListItem>Site Mapa</ListItem>
+
         </UnorderedList>
       </Flex>
 

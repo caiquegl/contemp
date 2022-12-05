@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Icon, Input, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, Input, Link, Text, Tooltip, VStack } from "@chakra-ui/react";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
   }, [data])
   return (
     <Flex
-      alignItems="center"
+      alignItems="flex-start"
       width="100%"
     >
       <Box
@@ -62,22 +62,28 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
           {products.name}
         </Text>
         {data.variation && Object.keys(data.variation).length > 0 && Object.keys(data.variation).map((key: any) => (
-          <VStack spacing="10px">
+          <Flex alignItems="center" m="5px 0">
+            <Tooltip label={key} placement="top">
+              <Text
+                fontSize="17px"
+                color="black.800"
+                textTransform="uppercase"
+                fontWeight="bold"
+                noOfLines={1}
+              >
+                {key}:
+              </Text>
+            </Tooltip>
             <Text
-              fontSize="19px"
+              fontSize="17px"
               color="black.800"
               textTransform="uppercase"
-            >
-              {key}:
-            </Text>
-            <Text
-              fontSize="19px"
-              color="black.800"
-              textTransform="uppercase"
+              ml="10px"
+              w="40%"
             >
               {data.variation[key]}
             </Text>
-          </VStack>
+          </Flex>
         ))}
         <Flex alignItems="center" justifyContent="space-between">
           <Icon as={AiFillDelete} fontSize="20px" cursor="pointer" onClick={() => removeCart()} />
