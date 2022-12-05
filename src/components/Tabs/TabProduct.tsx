@@ -119,9 +119,12 @@ const TabProduct = () => {
   };
 
   useEffect(() => {
-    reload()
     listProduct();
   }, [allProducts, allCategory]);
+
+  useEffect(() => {
+    reload()
+  }, [step])
 
   return (
     <>

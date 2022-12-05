@@ -96,6 +96,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setValue("name", defaultValues?.name);
     setValue("category", defaultValues?.category);
     setValue("description", defaultValues?.description);
+    setValue("key_word_seo", defaultValues?.key_word_seo);
+    setValue("description_seo", defaultValues?.description_seo);
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false);
     setDestaque(defaultValues && defaultValues.destaque ? true : false);
     if (defaultValues.listVariation) {
