@@ -1,5 +1,5 @@
-import { Box, Button, Flex, FlexProps, Text } from "@chakra-ui/react";
-import { Image } from "../components/Image";
+import { Box, Button, Flex, FlexProps, Image, Text } from "@chakra-ui/react";
+// import { Image } from "../components/Image";
 import Pirometro from "../assets/icons/pritometro_white.svg";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
@@ -46,18 +46,19 @@ const DescriptionProduct = ({
         w="95%"
         {...containerProps}
       >
+
         <Image
           src={dataTab?.urls ? dataTab.urls[0] : ""}
           alt="bateria"
-          flex={1}
+          // flex={1}
           minH={pxToRem(300)}
-          bgSize={{
-            base: "70%",
-            md: "90%",
-            lg: "60%",
-            xl: "100%",
-            "2xl": "contain",
-          }}
+          // bgSize={{
+          //   base: "70%",
+          //   md: "90%",
+          //   lg: "60%",
+          //   xl: "100%",
+          //   "2xl": "contain",
+          // }}
           onClick={() =>
             router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
           }

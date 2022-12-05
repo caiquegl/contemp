@@ -4,10 +4,15 @@ import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Player } from "../components/Player";
 import { SelectConfig } from "../components/SelectConfig";
+import { Head } from "next/document";
 
 const Support = () => {
   return (
     <>
+      <Head>
+        <meta name="description" content="Conte com o suporte técnico da Contemp para tirar dúvidas sobre os produtos que comercializamos. Acesse!" />
+        <meta name="keywords" content="suporte técnico, Contemp, pós-venda" />
+      </Head>
       <Header />
       <Flex
         w="100%"

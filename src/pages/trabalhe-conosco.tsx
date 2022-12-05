@@ -2,10 +2,15 @@ import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Flex, Text } from "@chakra-ui/react";
+import { Head } from "next/document";
 
 const Home = () => {
   return (
     <>
+      <Head>
+        <meta name="description" content="Trabalhe na Contemp. Preencha nosso formulário online e faça parte da indústria que é pioneira no Brasil." />
+        <meta name="keywords" content="Contemp, Trabalhe conosco, currículo" />
+      </Head>
       <Header />
       <Flex
         w="100%"

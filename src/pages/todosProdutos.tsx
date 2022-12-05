@@ -23,6 +23,7 @@ import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../utils/db";
+import { Head } from "next/document";
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([]);
@@ -135,6 +136,10 @@ const AllProduct = () => {
 
   return (
     <SmoothScroll>
+      <Head>
+        <meta name="description" content="Encontre tudo em soluções para medição, controle e monitoramento para os mais variados processos industrais." />
+        <meta name="keywords" content="soluções para medição, medição, controle de temperatura, monitoramento, processos industriais" />
+      </Head>
       <Header />
       <Flex
         w="100%"

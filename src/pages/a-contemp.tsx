@@ -20,10 +20,15 @@ import { AiOutlineLike } from "react-icons/ai";
 import { CiMedal } from "react-icons/ci";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { CgTrees } from "react-icons/cg";
+import { Head } from "next/document";
 
 const Home = () => {
   return (
     <>
+      <Head>
+        <meta name="description" content="Procurando medição e controle de temperatura em processos industrais? A Contemp é pioneiro no Brasil. Confira!" />
+        <meta name="keywords" content="controle de temperatura, Contemp, processos industriais" />
+      </Head>
       <Header />
       <Flex
         w="100%"
