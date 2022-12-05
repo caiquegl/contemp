@@ -177,7 +177,7 @@ export const Footer = () => {
             {el.list_sub_category && el.list_sub_category.length > 0 && el.list_sub_category.map((el2: any) => (
               <>
                 <Text fontWeight="bold" fontSize="20px" mb="15px" cursor="pointer" onClick={() => router.push(`/category/${el2.name.replaceAll(' ', '_')}`)}>
-                  {el.name}
+                  {el2.name}
                 </Text>
                 <Box mb="20px">
                   {el2.list_sub_category && el2.list_sub_category.length > 0 && el2.list_sub_category.map((el3: any) => (
