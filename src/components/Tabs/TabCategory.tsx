@@ -5,7 +5,6 @@ import {
   Flex,
   HStack,
   Icon,
-  Table,
   TableContainer,
   Tbody,
   Td,
@@ -38,6 +37,8 @@ import { TextareaDefault } from "../Form/Textarea";
 import { EditOrder } from "../EditOrder";
 import InputsHome from "../ContainerHome/inputs";
 import { ViewImage } from "../ContainerAddProduct/ViewImage";
+import { useAuth } from "../../contextAuth/authContext";
+import { Table } from "antd";
 interface IBody {
   name: string;
   is_main?: string;
@@ -49,6 +50,8 @@ interface IBody {
 const TabCategory = () => {
   const toast = useToast();
   initFirebase();
+  const { allCategory } = useAuth();
+
   const [update, setUpdate] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -190,14 +193,16 @@ const TabCategory = () => {
 
   const listCategory = async () => {
     try {
-      const dbInstance = collection(database, "categories");
-      let newList: any = [];
-      const q = query(dbInstance, orderBy("order", "asc"));
-      await getDocs(q).then((data) => {
-        data.docs.forEach((doc) => {
-          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
-        });
-      });
+      // const dbInstance = collection(database, "categories");
+      // let newList: any = [];
+      // const q = query(dbInstance, orderBy("order", "asc"));
+      // await getDocs(q).then((data) => {
+      //   data.docs.forEach((doc) => {
+      //     newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
+      //   });
+      // });
+
+      let newList = allCategory.sort((a: any, b: any) => a.order < b.order)
 
       setList(newList);
     } catch (error) {
@@ -231,11 +236,11 @@ const TabCategory = () => {
       );
 
       await getDocs(qExist).then((data) => {
-        if(data.docs.length > 0) exist = true
+        if (data.docs.length > 0) exist = true
       });
 
       await getDocs(qExistHome).then((data) => {
-        if(data.docs.length > 0) exist = true
+        if (data.docs.length > 0) exist = true
       });
 
       const dbInstanceCategory = collection(database, "categories");
@@ -246,10 +251,10 @@ const TabCategory = () => {
       );
 
       await getDocs(qExistCategory).then((data) => {
-        if(data.docs.length > 0) existSubCategory = true
+        if (data.docs.length > 0) existSubCategory = true
       });
 
-      if(exist) {
+      if (exist) {
         toast({
           title: "Erro",
           description: "Categoria vinculada a produto",
@@ -259,7 +264,7 @@ const TabCategory = () => {
         });
         return
       }
-      if(existSubCategory) {
+      if (existSubCategory) {
         toast({
           title: "Erro",
           description: "Existe uma subcategoria vinculada a está categoria",
@@ -330,12 +335,54 @@ const TabCategory = () => {
 
   useEffect(() => {
     listCategory();
-  }, []);
+  }, [allCategory]);
 
+  const column = [
+    {
+      title: 'Order',
+      render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />
+    },
+    {
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
+    },
+    {
+      title: 'Ações',
+      render: (a: any) => (
+        <HStack spacing="20px">
+          <Icon
+            cursor="pointer"
+            as={AiOutlineEdit}
+            fontSize="17px"
+            onClick={() => {
+              setValue("name", a.name);
+              setValue("is_main", a.is_main);
+              setValue("description", a.description);
+              setValue("favorite", a.favorite);
+              setIsFavorite(a.favorite);
+              setUpdate(a);
+              setUrl(a.url ? a.url : "");
+              if (a.sub_categorie)
+                setValue("sub_categorie", a.sub_categorie);
+            }}
+          />
+          <Icon
+            cursor="pointer"
+            as={AiOutlineClose}
+            fontSize="17px"
+            color="red.500"
+            onClick={() => deleteCategory(a)}
+          />
+        </HStack>
+      )
+    }
+  ]
   return (
     <HStack spacing="20px" alignItems="flex-start">
       <Box borderRadius="8px" bg="white" p="30px" w="100%">
-        <TableContainer>
+        {/* <TableContainer>
           <Table color="black.800">
             <Thead>
               <Tr>
@@ -389,7 +436,8 @@ const TabCategory = () => {
                 ))}
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
+        <Table dataSource={list} columns={column} />
       </Box>
       <Box
         borderRadius="8px"
