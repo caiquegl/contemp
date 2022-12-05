@@ -20,11 +20,12 @@ import TabSeo from "../../components/Tabs/TabSeo";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contextAuth/authContext";
 import Cookies from "js-cookie";
+import moment from "moment";
 
 const Adm = () => {
   const router = useRouter();
   const { user, setUser } = useAuth();
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   // useEffect(() => {
   //   async function loadUserFromCookies() {
@@ -40,7 +41,7 @@ const Adm = () => {
   // }, []);
 
   const componentsTab = [
-    <TabSeo />,
+    // <TabSeo />,
     <TabHome />,
     <TabCategory />,
     <TabProduct />,
@@ -55,9 +56,9 @@ const Adm = () => {
           <Flex alignItems="center">
             <Box mr="16px">
               <Text fontWeight="bold" fontSize="20px" textAlign="right">
-                Olá, Caique
+                Olá
               </Text>
-              <Text fontSize="20px">05 de setembro de 2022 - 00:45</Text>
+              <Text fontSize="20px">{moment().format('DD/MM/YYYY - HH:mm')}</Text>
             </Box>
             <Avatar
               bg="white"
@@ -81,7 +82,7 @@ const Adm = () => {
             onChange={(indexTab) => setActiveTab(indexTab)}
           >
             <TabList>
-              <Tab
+              {/* <Tab
                 _selected={{
                   bg: "red.600",
                   color: "white",
@@ -91,7 +92,7 @@ const Adm = () => {
                 color="black.800"
               >
                 SEO
-              </Tab>
+              </Tab> */}
               <Tab
                 _selected={{
                   bg: "red.600",

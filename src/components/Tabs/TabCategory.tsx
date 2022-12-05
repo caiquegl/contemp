@@ -361,6 +361,8 @@ const TabCategory = () => {
               setValue("is_main", a.is_main);
               setValue("description", a.description);
               setValue("favorite", a.favorite);
+              setValue("key_word_seo", a.key_word_seo);
+              setValue("description_seo", a.description_seo);
               setIsFavorite(a.favorite);
               setUpdate(a);
               setUrl(a.url ? a.url : "");
@@ -484,6 +486,20 @@ const TabCategory = () => {
             error={errors.description}
             {...register("description", {
               required: "Descrição é obrigatório",
+            })}
+          />
+          <TextareaDefault
+            label="Descrição SEO"
+            error={errors.description_seo}
+            {...register("description_seo", {
+              required: "Descrição é obrigatório",
+            })}
+          />
+          <TextareaDefault
+            label="Key Word SEO"
+            error={errors.key_word_seo}
+            {...register("key_word_seo", {
+              required: "Key Word Seo é obrigatório",
             })}
           />
           <InputsHome
