@@ -20,7 +20,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { CiMedal } from "react-icons/ci";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { CgTrees } from "react-icons/cg";
-import { Head } from "next/document";
+import Head from "next/head";
 
 const Home = () => {
   return (

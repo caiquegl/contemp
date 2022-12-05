@@ -4,7 +4,7 @@ import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Player } from "../components/Player";
 import { SelectConfig } from "../components/SelectConfig";
-import { Head } from "next/document";
+import Head from "next/head";
 
 const Support = () => {
   return (

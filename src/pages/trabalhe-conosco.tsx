@@ -2,7 +2,7 @@ import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 import { Flex, Text } from "@chakra-ui/react";
-import { Head } from "next/document";
+import Head from "next/head";
 
 const Home = () => {
   return (

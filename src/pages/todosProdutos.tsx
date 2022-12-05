@@ -23,7 +23,7 @@ import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../utils/db";
-import { Head } from "next/document";
+import Head from "next/head";
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([]);
