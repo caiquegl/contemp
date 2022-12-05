@@ -161,3 +161,8 @@ body {
   background-color: #810104;
   color: #fff !important;
 }
+
+.ant-menu-item-selected {
+  background-color: #232323 !important;
+  color: #fff !important;
+}

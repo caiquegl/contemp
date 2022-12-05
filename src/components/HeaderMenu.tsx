@@ -52,14 +52,19 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           label: el.name,
           title: el.name,
           key: el.name.replaceAll(" ", ""),
-          icon: (
-            <Icon
-              icon={AiOutlineEye}
-              size={20}
-              color="#fff"
-              onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
-            />
-          ),
+          onTitleClick: (value: any) => router.push(`/category/${value.key.replaceAll(' ', '_')}`),
+          onclick: (value: any) => router.push(`/category/${value.key.replaceAll(' ', '_')}`),
+          // onclick: (a: any) => console.log('aquii', a),
+          // onclick: (item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`),
+          // onClick: (item: any) => console.log(item),
+          // icon: (
+          //   <Icon
+          //     icon={AiOutlineEye}
+          //     size={20}
+          //     color="#fff"
+          //     onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
+          //   />
+          // ),
           // icon: hasIcon ? (
           //   <Icon
           //     icon={AiFillCaretDown}
@@ -112,7 +117,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
       `}</style>
 
       <Menu
-        onClick={(evt) => console.log(evt)}
+        onClick={(evt) => router.push(`/category/${evt.key.replaceAll(' ', '_')}`)}
         mode={"horizontal"}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
@@ -127,6 +132,8 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           width: "100%",
           justifyContent: 'center'
         }}
+        defaultOpenKeys={["P20LT"]}
+        defaultSelectedKeys={["P20LT"]}
         disabledOverflow
       />
     </>
