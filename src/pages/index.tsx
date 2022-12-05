@@ -39,6 +39,7 @@ import {
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
+import Head from "next/head";
 
 const Home = () => {
   initFirebase();
@@ -76,6 +77,12 @@ const Home = () => {
 
   return (
     <SmoothScroll>
+      <Head>
+        <meta name="description" content="Procurando medição e controle de temperatura em processos industriais? A Contemp é pioneira. Confira!" />
+        <meta name="keywords" content="controle de temperatura, processos industriais, contemp, medição de temperatura" />
+        <title>Contemp</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <HomeBackgroundDetails />
       <SidebarDrawerProvider>
         <Header />

@@ -35,6 +35,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useAuth } from "../contextAuth/authContext";
 import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2"
+import Head from "next/head";
 
 const Orcamento = () => {
   initFirebase();
@@ -109,6 +110,12 @@ const Orcamento = () => {
   return (
     <SmoothScroll>
       <Header />
+      <Head>
+        <meta name="description" content="Faça seu orçamento na Contemp de forma ágil e online. Acesse!" />
+        <meta name="keywords" content="contemp, orçamento online, orçamento, faça seu pedido" />
+        <title>Contemp</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Flex
         w="100%"
         alignItems="center"
