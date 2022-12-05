@@ -151,7 +151,7 @@ const Product = () => {
     if (product) {
       getProduct();
     }
-  }, [product]);
+  }, [allCategory, allProducts]);
 
   return (
     <SmoothScroll>
