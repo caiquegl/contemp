@@ -74,9 +74,9 @@ const Product = () => {
 
       let ex = allProducts.filter((el: any) => el.name == produto);
       let cg1 = allCategory.filter((el: any) => el.id == ex[0].category);
-      let cg2 = allCategory.filter((el: any) => el.id == cg1[0].sub_categorie);
-      let cg3 = allCategory.filter((el: any) => el.id == cg2[0].sub_categorie);
-      let cg4 = allCategory.filter((el: any) => el.id == cg3[0].sub_categorie);
+      let cg2 = allCategory.filter((el: any) => el.id == cg1[0]?.sub_categorie);
+      let cg3 = allCategory.filter((el: any) => el.id == cg2[0]?.sub_categorie);
+      let cg4 = allCategory.filter((el: any) => el.id == cg3[0]?.sub_categorie);
 
       let id = ''
 
