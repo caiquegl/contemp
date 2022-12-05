@@ -357,6 +357,7 @@ const TabCategory = () => {
             as={AiOutlineEdit}
             fontSize="17px"
             onClick={() => {
+              console.log(a)
               setValue("name", a.name);
               setValue("is_main", a.is_main);
               setValue("description", a.description);

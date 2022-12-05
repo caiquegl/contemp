@@ -45,6 +45,7 @@ const CardProductWithDescription = ({
       // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
+      p="20px"
       _hover={{
         border: "2px solid",
         borderColor: color ?? "black.800",
@@ -59,7 +60,6 @@ const CardProductWithDescription = ({
           textTransform="uppercase"
           width="100%"
           lineHeight="2.7rem"
-          noOfLines={1}
           gridRow={1}
         >
           {text}

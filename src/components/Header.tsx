@@ -124,7 +124,7 @@ export const Header = () => {
             cursor="pointer"
             onClick={() => router.push("/orcamento")}
           >
-            {cart.length > 0 && (
+            {cart && cart.length > 0 && (
               <Flex
                 p={`${pxToRem(2)} ${pxToRem(5)}`}
                 bg="red.600"
@@ -425,7 +425,7 @@ export const Header = () => {
             cursor="pointer"
             onClick={() => router.push("/orcamento")}
           >
-            {cart.length > 0 && (
+            {cart && cart.length > 0 && (
               <Flex
                 p={`${pxToRem(2)} ${pxToRem(5)}`}
                 bg="red.600"

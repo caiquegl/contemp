@@ -162,7 +162,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             required: "Descrição é obrigatório",
           })}
         />
-        <VStack spacing="20px">
+        <HStack spacing="20px">
           <TextareaDefault
             label="Descrição SEO"
             error={errors.description_seo}
@@ -177,7 +177,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               required: "Key word seo é obrigatório",
             })}
           />
-        </VStack>
+        </HStack>
         <Flex w="100%">
           <Checkbox
             colorScheme="red"
