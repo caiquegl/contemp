@@ -146,3 +146,18 @@ body {
 .ant-table-thead > tr > th {
   background: #fff !important;
 }
+
+.editor_button {
+  background-color: #B60005;
+  padding: 10px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50px;
+  color: #fff;
+}
+
+.editor_button:hover {
+  transition: all 0.3s;
+  background-color: #810104;
+  color: #fff !important;
+}

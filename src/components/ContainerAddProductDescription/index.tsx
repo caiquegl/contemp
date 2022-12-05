@@ -26,6 +26,8 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { AiFillEye } from 'react-icons/ai'
+import EditTab from "./editTab";
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   initFirebase();
@@ -45,6 +47,13 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
       setEditorLoaded(true);
     }, 500);
   };
+
+  const load = () => {
+    setEditorLoaded(false);
+    setTimeout(() => {
+      setEditorLoaded(true);
+    }, 500);
+  }
 
   useEffect(() => {
     if (values.tab) {
@@ -261,9 +270,13 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                 />
               </HStack>
             </Flex>
-            <Text color="black.800" fontSize="20px" mb="10px">
-              Conteúdo da tab
-            </Text>
+            {/* <Flex>
+              <Text color="black.800" fontSize="20px" mb="10px">
+                Conteúdo da tab
+              </Text>
+              <Icon as={AiFillEye} color="black.800" fontSize="20px" />
+            </Flex>
+
             <Box color="black.800">
               <CKeditor
                 name="description"
@@ -275,7 +288,9 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                 value={tabs[index]?.text ? tabs[index]?.text : ""}
                 editorLoaded={editorLoaded}
               />
-            </Box>
+            </Box> */}
+
+            <EditTab load={() => load()} editorLoaded={editorLoaded} setTabs={setTabs} index={index} tabs={tabs} />
           </Box>
         ))}
       </VStack>
