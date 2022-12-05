@@ -11,6 +11,12 @@ import {
   Checkbox,
   Divider,
   Link,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import Mapa from "../assets/images/MAPA.png";
@@ -28,12 +34,14 @@ import CardProductCart from "../components/CardProductCart";
 import { addDoc, collection } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useAuth } from "../contextAuth/authContext";
+import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2"
 
 const Orcamento = () => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
   const { clearCart, removeCart } = useAuth()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [loading, setLoading] = useState(false)
   const [isAprove, setIsAprove] = useState(false)
   const [cart, setCart] = useState<any>([])
@@ -43,6 +51,7 @@ const Orcamento = () => {
   );
 
   const { errors } = formState;
+  const finalRef = useRef(null)
 
   const saveCart = async (bodyForm: any) => {
     try {
@@ -66,9 +75,10 @@ const Orcamento = () => {
         method: 'POST',
         body: JSON.stringify({ ...bodyForm, product: product })
       });
-      // reset();
-      // window.localStorage.removeItem('CART-CONTEMP')
-      // clearCart()
+      reset();
+      window.localStorage.removeItem('CART-CONTEMP')
+      onOpen()
+      clearCart()
     } catch (error) {
       console.log(error)
       toast({
@@ -384,6 +394,38 @@ const Orcamento = () => {
         </Box>
       </Flex>
       <Footer />
+      <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton color="red" />
+          <ModalBody p="20px" mt="20px">
+            <Flex alignItems="center">
+              <Flex mr="20px" alignItems="center" justifyContent="center" h="60px" w="60px" borderRadius="30px" bg="red.100">
+                <Icon as={HiOutlineClipboardDocumentCheck} color="red.700" fontSize="30px" />
+              </Flex>
+              <Box>
+                <Text
+                  fontWeight="bold"
+                  fontSize="25px"
+                  color="black.800"
+                >
+                  Enivado com sucesso!
+                </Text>
+                <Text
+                  fontSize="16px"
+                  color="black.800"
+                  mt="10px"
+                  maxW="350px"
+                >
+                  Sua solicitação de orçamento foi enviada com sucesso. Basta aguardar e a equipe de vendas da Contemp entrará em contato.
+                </Text>
+              </Box>
+            </Flex>
+          </ModalBody>
+
+
+        </ModalContent>
+      </Modal>
     </SmoothScroll>
   );
 };
