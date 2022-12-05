@@ -62,7 +62,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
           {products.name}
         </Text>
         {data.variation && Object.keys(data.variation).length > 0 && Object.keys(data.variation).map((key: any) => (
-          <Flex alignItems="center" m="5px 0">
+          <Flex alignItems="flex-start" m="5px 0" flexDirection="column">
             <Tooltip label={key} placement="top">
               <Text
                 fontSize="17px"
@@ -78,8 +78,8 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
               fontSize="17px"
               color="black.800"
               textTransform="uppercase"
-              ml="10px"
               w="40%"
+              mt="5px"
             >
               {data.variation[key]}
             </Text>
