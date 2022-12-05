@@ -161,6 +161,8 @@ const Product = () => {
         <Head>
           <meta name="description" content={detail.description_seo} />
           <meta name="keywords" content={detail.key_word_seo} />
+          <title>Contemp</title>
+          <link rel="icon" href="/favicon.ico" />
         </Head>
       }
       <Header />

@@ -10,6 +10,8 @@ const Home = () => {
       <Head>
         <meta name="description" content="Trabalhe na Contemp. Preencha nosso formulário online e faça parte da indústria que é pioneira no Brasil." />
         <meta name="keywords" content="Contemp, Trabalhe conosco, currículo" />
+        <title>Contemp</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
       <Flex

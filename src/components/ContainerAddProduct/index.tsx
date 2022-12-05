@@ -162,7 +162,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             required: "Descrição é obrigatório",
           })}
         />
-        <HStack spacing="20px">
+        <HStack spacing="20px" w="100%">
           <TextareaDefault
             label="Descrição SEO"
             error={errors.description_seo}
