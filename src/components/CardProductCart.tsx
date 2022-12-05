@@ -38,8 +38,9 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
   }, [data])
   return (
     <Flex
-      alignItems="flex-start"
+      alignItems={["center", "flex-start"]}
       width="100%"
+      flexDirection={['column', 'row']}
     >
       <Box
         display="flex"
@@ -52,7 +53,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
       >
         <Image src={products.urls && products.urls.length > 0 ? products.urls[0] : ''} alt={products.name} />
       </Box>
-      <Box ml="10px" w="calc(100% - 118px)">
+      <Box ml="10px" w={["100%", "calc(100% - 118px)"]}>
         <Text
           fontSize="20px"
           fontWeight="bold"

@@ -202,7 +202,6 @@ export const Footer = () => {
           </Link>
           <ListItem m={[0, "0 30px"]}>Política de Privacidade</ListItem>
           <ListItem>Site Mapa</ListItem>
-
         </UnorderedList>
       </Flex>
 

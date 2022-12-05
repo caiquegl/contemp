@@ -172,12 +172,15 @@ const Orcamento = () => {
                   error={errors.name}
                   {...register("name", { required: "Nome é obrigatório" })}
                 />
-                <InputDefault
-                  label="Sobrenome"
-                  type="text"
-                  error={errors.lastName}
-                  {...register("lastName", { required: "Sobrenome é obrigatório" })}
-                />
+                <Box pt={["20px", 0]} w="100%">
+                  <InputDefault
+                    label="Sobrenome"
+                    type="text"
+                    error={errors.lastName}
+                    {...register("lastName", { required: "Sobrenome é obrigatório" })}
+                  />
+                </Box>
+
               </HStack>
               <InputDefault
                 label="E-mail"
