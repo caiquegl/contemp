@@ -30,18 +30,19 @@ export default async (req, response) => {
 
         console.log('aquiiii')
         mail.send({
-            // to: 'vendas@contemp.com.br',
-            to: 'arq.caique@hotmail.com',
+            to: 'kemelin@3hub.co',
+            // to: 'arq.caique@hotmail.com',
             from: 'kemelin@3hub.co',
             subject: 'Novo orçamento',
             text: message,
             html: message.replace(/rn/g, '<br>'),
-          }).then(() => {
+          }).then((e) => {
+            console.log('aquiiii', e)
             return response.status(200).json({ status: 'Ok' });
           }).catch((e) => console.log("é", e));
   
   
-      return response.json({ status: true });
+      // return response.json({ status: true });
     } catch (error) {
       console.log(error);
       return response.json({ status: false });

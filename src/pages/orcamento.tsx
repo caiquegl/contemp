@@ -56,7 +56,7 @@ const Orcamento = () => {
 
   const saveCart = async (bodyForm: any) => {
     try {
-      bodyForm = { ...bodyForm, isAprove };
+      bodyForm = { ...bodyForm, isAprove, products: cart };
 
       setLoading(true);
 
@@ -72,7 +72,7 @@ const Orcamento = () => {
         duration: 3000,
         isClosable: true,
       });
-      await fetch(`${process.env.NEXT_PUBLIC_URL}api/mail`, {
+      await fetch(`api/mail`, {
         method: 'POST',
         body: JSON.stringify({ ...bodyForm, product: product })
       });
