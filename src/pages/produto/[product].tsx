@@ -274,7 +274,7 @@ const Product = () => {
 
           <Flex
             bg="white.500"
-            maxW="536px"
+            w="100%"
             borderRadius="8px"
             p="15px"
             m="auto"
@@ -282,6 +282,7 @@ const Product = () => {
           >
             <Flex
               gap={pxToRem(20)}
+              maxW="536px"
               flexWrap={{
                 base: "wrap",
                 lg: "nowrap",
