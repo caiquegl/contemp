@@ -102,7 +102,7 @@ const Product = () => {
 
       let revertNames: any = []
 
-      names.forEach((el: any) => revertNames.push(el))
+      names.forEach((el: any) => revertNames.unshift(el))
 
       setBradeName(revertNames)
       setDetail(ex[0]);
