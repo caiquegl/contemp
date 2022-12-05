@@ -45,13 +45,13 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
     >
       <Tooltip label={text} placement="top">
         <Text
-          fontSize={pxToRem(50)}
+          fontSize={"2.5rem"}
           fontWeight="bold"
           color={color ? color : "black"}
           textTransform="uppercase"
           mb="20px"
           width="100%"
-          noOfLines={1}
+          lineHeight="2.7rem"
         >
           {text}
         </Text>
