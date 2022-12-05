@@ -323,7 +323,7 @@ const Product = () => {
         p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
       >
         <Container maxW="7xl" p="80px 0">
-          <Flex alignItems="center" mb="10px">
+          <Flex alignItems="center" mb="40px">
             <Text color="black.800" fontSize="45px" fontWeight="bold" ml="15px">
               #temnacontemp
             </Text>

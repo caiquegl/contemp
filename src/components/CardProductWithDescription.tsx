@@ -34,6 +34,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       p={`${pxToRem(45)} ${pxToRem(23)}`}
       w={pxToRem(346)}
       h={pxToRem(700)}
+      mt="20px"
       // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
