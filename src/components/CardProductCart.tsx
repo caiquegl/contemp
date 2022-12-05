@@ -96,7 +96,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
             >
               Quantidade:
             </Text>
-            <Input type="number" value={data.qtd} borderWidth="2px" borderRadius="20px" maxW="80px" onChange={(evt) => changeQtd(evt.target.value)} />
+            <Input type="number" value={data.qtd} borderRadius="20px" maxW="80px" border="2px solid" borderColor="black" textAlign="center" onChange={(evt) => changeQtd(evt.target.value)} />
           </HStack>
         </Flex>
       </Box>
