@@ -166,3 +166,7 @@ body {
   background-color: #232323 !important;
   color: #fff !important;
 }
+
+.ant-menu-submenu .ant-menu-submenu-horizontal .ant-menu-submenu-active {
+  padding: 0px 1rem !important;
+}

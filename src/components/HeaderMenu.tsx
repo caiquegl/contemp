@@ -132,8 +132,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           width: "100%",
           justifyContent: 'center'
         }}
-        defaultOpenKeys={["P20LT"]}
-        defaultSelectedKeys={["P20LT"]}
         disabledOverflow
       />
     </>
