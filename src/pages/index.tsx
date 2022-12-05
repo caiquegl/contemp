@@ -39,7 +39,6 @@ import {
 import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
-import { findOverflowingElements } from "../utils/findOverflowingElements";
 
 const Home = () => {
   initFirebase();
@@ -73,10 +72,6 @@ const Home = () => {
 
   useEffect(() => {
     getHomeTab();
-  }, []);
-
-  useEffect(() => {
-    findOverflowingElements();
   }, []);
 
   return (

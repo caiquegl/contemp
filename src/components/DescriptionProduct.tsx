@@ -55,7 +55,7 @@ const DescriptionProduct = ({
             base: "70%",
             md: "90%",
             lg: "60%",
-            xl: "85%",
+            xl: "100%",
             "2xl": "contain",
           }}
           onClick={() =>
