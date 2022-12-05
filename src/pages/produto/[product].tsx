@@ -73,35 +73,32 @@ const Product = () => {
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
 
       let ex = allProducts.filter((el: any) => el.name == produto);
-      // await getDocs(qProduct).then(async (data) => {
-      //   if (data.docs.length == 0) return
-      //   if (data.docs.length > 0) {
-      //     exist = true
-      //   }
-      //   setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
-      // });
+      let cg1 = allCategory.filter((el: any) => el.id == ex[0].category);
+      let cg2 = allCategory.filter((el: any) => el.id == cg1[0].sub_categorie);
+      let cg3 = allCategory.filter((el: any) => el.id == cg2[0].sub_categorie);
+      let cg4 = allCategory.filter((el: any) => el.id == cg3[0].sub_categorie);
+
+      let id = ''
+
+      if (cg1.length > 0) id = cg1[0].id
+      if (cg2.length > 0) id = cg2[0].id
+      if (cg3.length > 0) id = cg3[0].id
+      if (cg4.length > 0) id = cg4[0].id
       if (ex.length == 0) return;
 
       setDetail(ex[0]);
 
       let idCategory: any = [];
 
+
       allCategory.forEach((el: any) => {
-        if (el.id == ex[0].category) {
+        if (el.id == id) {
           idCategory.push(el.id);
           allCategory.forEach((el2: any) => {
-            if (
-              (el2.sub_categorie && el2.sub_categorie == el.id) ||
-              (el2.sub_categorie && el2.sub_categorie == el.sub_categorie)
-            ) {
-              if (idCategory.indexOf(el2.id) > -1) return;
+            if (el2.sub_categorie && el2.sub_categorie == el.id) {
               idCategory.push(el2.id);
               allCategory.forEach((el3: any) => {
-                if (
-                  (el3.sub_categorie && el3.sub_categorie == el2.id) ||
-                  (el3.sub_categorie && el3.sub_categorie == el2.sub_categorie)
-                ) {
-                  if (idCategory.indexOf(el2.id) > -1) return;
+                if (el3.sub_categorie && el3.sub_categorie == el2.id) {
                   idCategory.push(el3.id);
                 }
               });
