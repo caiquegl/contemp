@@ -352,7 +352,7 @@ export const Header = () => {
           <ImageNext width={160} height={41} src={Logo} />
         </Box>
 
-        <Box flex={1}>
+        <Box>
           <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
             <Button
               borderRadius="5px"
@@ -376,7 +376,10 @@ export const Header = () => {
         <HStack
           alignSelf="center"
           flex={{ base: 1, lg: 1.6, xl: 1 }}
-          spacing="10px"
+          spacing="20px"
+          w="100%"
+          alignItems="center"
+          justifyContent="center"
         >
           <Link
             href="/a-contemp"
@@ -385,9 +388,9 @@ export const Header = () => {
               color: "red.600",
             }}
           >
-            <Text w="max-content">A Contemp</Text>
+            <Text w="max-content" fontSize="18px">A Contemp</Text>
           </Link>
-          <Text>Blog</Text>
+          <Text fontSize="18px">Blog</Text>
           <Link
             _hover={{
               textDecoration: "none",
@@ -395,7 +398,7 @@ export const Header = () => {
             }}
             href="/trabalhe-conosco"
           >
-            <Text w="max-content">Trabalhe Conosco</Text>
+            <Text w="max-content" fontSize="18px">Trabalhe Conosco</Text>
           </Link>
           <Link
             _hover={{
@@ -404,7 +407,7 @@ export const Header = () => {
             }}
             href="/suporte-tecnico"
           >
-            <Text w="max-content">Suporte Técnico</Text>
+            <Text w="max-content" fontSize="18px">Suporte Técnico</Text>
           </Link>
         </HStack>
 
