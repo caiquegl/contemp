@@ -41,6 +41,7 @@ import { useAuth } from "../../contextAuth/authContext";
 import { SmoothScroll } from "../../components/SmoothScroll";
 import { Image } from "../../components/Image";
 import Head from "next/head";
+import { Breadcrumb } from "antd";
 
 const Product = () => {
   const router = useRouter();
@@ -50,6 +51,7 @@ const Product = () => {
   const { product } = router.query;
   const [detail, setDetail] = useState<any>({});
   const [variation, setVariation] = useState<any>({});
+  const [bradName, setBradeName] = useState<any>([]);
   const [products, setProducts] = useState<any>([]);
   const [qtd, setQtd] = useState(1);
   const isTablet = useBreakpointValue({
@@ -79,13 +81,26 @@ const Product = () => {
       let cg4 = allCategory.filter((el: any) => el.id == cg3[0]?.sub_categorie);
 
       let id = ''
-
-      if (cg1.length > 0) id = cg1[0].id
-      if (cg2.length > 0) id = cg2[0].id
-      if (cg3.length > 0) id = cg3[0].id
-      if (cg4.length > 0) id = cg4[0].id
+      let names: any = []
+      if (cg1.length > 0) {
+        id = cg1[0].id
+        names.push(cg1[0].name)
+      }
+      if (cg2.length > 0) {
+        id = cg2[0].id
+        names.push(cg2[0].name)
+      }
+      if (cg3.length > 0) {
+        id = cg3[0].id
+        names.push(cg3[0].name)
+      }
+      if (cg4.length > 0) {
+        id = cg4[0].id
+        names.push(cg4[0].name)
+      }
       if (ex.length == 0) return;
 
+      setBradeName(names)
       setDetail(ex[0]);
 
       let idCategory: any = [];
@@ -166,13 +181,27 @@ const Product = () => {
       <Header />
       <Flex
         p="10px"
-        pt="60px"
+        pt="30px"
         bg="white"
         w="100%"
         h="100%"
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
+        flexWrap="wrap"
       >
+        <Box w="100%" mb="50px">
+          <Breadcrumb>
+            {bradName.map((el: any, index: number) => (
+              <>
+                {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
+                {index != bradName.length - 1 && <Breadcrumb.Item>
+                  <a href={`/category/${el.replaceAll(' ', '_')}`}>{el}</a>
+                </Breadcrumb.Item>}
+              </>
+            ))}
+
+          </Breadcrumb>
+        </Box>
         <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h="764px">
           <Swiper
             loop={true}
