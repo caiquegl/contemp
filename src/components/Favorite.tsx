@@ -221,15 +221,10 @@ export const Favorite = () => {
       </Text>
       <Flex h={pxToRem(250)} w="100%">
         <Swiper
+          loop={true}
           slidesPerView={slidesPerView()}
           autoplay={{
             delay: 2000,
-            disableOnInteraction: true,
-          }}
-          pagination={{
-            clickable: true,
-            enabled: true,
-            renderBullet: customSwiperBullets,
           }}
           speed={1000}
           spaceBetween={isTablet ? 20 : 30}
@@ -238,7 +233,7 @@ export const Favorite = () => {
           style={{
             margin: "auto",
             width: "100%",
-            // maxWidth: swiperWidth(),
+            alignItems: "center",
           }}
         >
           {products.map((item: any) => (

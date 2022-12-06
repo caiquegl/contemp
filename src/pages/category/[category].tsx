@@ -114,6 +114,7 @@ const Category = () => {
         </Head>
       )}
       <Header />
+
       <Flex
         w="100%"
         alignItems="center"
@@ -142,6 +143,7 @@ const Category = () => {
           if (index % 2 == 0) bg = "white.500";
           if (index % 3 == 0) bg = "black.800";
           if (index % 4 == 0) bg = "red.600";
+
           return <ListCategory bg={bg} data={categ} />;
         })}
       <Flex

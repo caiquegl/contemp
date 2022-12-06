@@ -22,7 +22,8 @@ export const Catalog = () => {
       alignItems="center"
       templateColumns={{
         base: "1fr",
-        lg: "repeat(2, 1fr)",
+        lg: "2fr 1fr",
+        "2xl": "repeat(2, 1fr)",
       }}
       h={{
         base: pxToRem(600),
@@ -30,11 +31,8 @@ export const Catalog = () => {
         lg: pxToRem(450),
         xl: "max-content",
       }}
-      width={{
-        base: "100%",
-        xl: "95%",
-        "2xl": "75%",
-      }}
+      width="90%"
+      maxW={pxToRem(1600)}
       margin="auto"
       maxH={{
         base: "max-content",
@@ -43,7 +41,7 @@ export const Catalog = () => {
       p={{
         base: "70px 10px",
         lg: "75px 15px",
-        xl: "120px 0",
+        xl: "90px 0",
         "2xl": "110px 0",
       }}
       position="relative"
@@ -58,11 +56,11 @@ export const Catalog = () => {
           base: "none",
           lg: "flex",
         }}
-        width={{
+        width="100%"
+        maxWidth={{
           base: pxToRem(400),
           lg: pxToRem(500),
           xl: pxToRem(700),
-          "2xl": pxToRem(750),
         }}
         height={{
           lg: pxToRem(700),
@@ -92,7 +90,7 @@ export const Catalog = () => {
           textAlign="center"
           fontSize={{
             base: pxToRem(35),
-            xl: pxToRem(45),
+            xl: pxToRem(40),
           }}
           fontWeight="bold"
           color="white"
@@ -112,9 +110,9 @@ export const Catalog = () => {
           maxW={pxToRem(1000)}
           textAlign="center"
           fontSize={{
-            base: pxToRem(18),
-            xl: pxToRem(20),
-            "2xl": pxToRem(24),
+            base: pxToRem(16),
+            xl: pxToRem(18),
+            "2xl": pxToRem(22),
           }}
         >
           Quer baixar gratuitamente nosso catalogo digital de produtos? Basta

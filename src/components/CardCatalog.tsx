@@ -45,7 +45,7 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
             borderRadius="25px"
             w="243px"
             h="50px"
-            bg="tranparent"
+            bg={bg}
             fontSize="20px"
             onClick={() =>
               router.push(`/category/${title.replaceAll(" ", "_")}`)
