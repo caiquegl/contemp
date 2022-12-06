@@ -33,6 +33,7 @@ export const SmoothScroll = ({ children }: any) => {
 
   const smoothScrollingHandler = () => {
     data.current = window.scrollY;
+
     data.previous += (data.current - data.previous) * data.ease;
     data.rounded = Math.round(data.previous * 80) / 80;
     if (scrollingContainerRef && scrollingContainerRef.current)

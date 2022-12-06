@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { ListCategory } from "../../components/ListCategory";
 import { useAuth } from "../../contextAuth/authContext";
 import Head from "next/head";
+import { AdBanners } from "../../components/AdBanners";
 
 const products = [] as number[];
 
@@ -79,8 +80,8 @@ const Category = () => {
         }
       });
 
-      let categFind = allCategory.find((el: any) => el.name == nameCategory)
-      setCateg(categFind)
+      let categFind = allCategory.find((el: any) => el.name == nameCategory);
+      setCateg(categFind);
       let list: any = [];
 
       allProducts.forEach((el: any) => {
@@ -104,14 +105,14 @@ const Category = () => {
 
   return (
     <SmoothScroll>
-      {categ &&
+      {categ && (
         <Head>
           <meta name="description" content={categ.description_seo} />
           <meta name="keywords" content={categ.key_word_seo} />
           <title>Contemp</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-      }
+      )}
       <Header />
       <Flex
         w="100%"
@@ -150,15 +151,7 @@ const Category = () => {
         bg="white"
       >
         <Container maxW="7xl" p="80px 0">
-          <Flex
-            mt={pxToRem(61)}
-            alignItems="center"
-            justifyContent="space-between"
-            direction={["column", "column", "column", "row", "row"]}
-          >
-            <AdBanner />
-            <AdBanner />
-          </Flex>
+          <AdBanners />
         </Container>
       </Flex>
       <Player />
@@ -191,22 +184,6 @@ const Category = () => {
       />
       <Footer />
     </SmoothScroll>
-  );
-};
-
-const AdBanner = () => {
-  return (
-    <Image
-      src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-      alt="bateria"
-      bgSize="contain"
-      minH={{
-        base: pxToRem(228),
-        md: pxToRem(330),
-        lg: pxToRem(425),
-      }}
-      flex={0.8}
-    />
   );
 };
 

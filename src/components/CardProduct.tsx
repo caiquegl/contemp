@@ -1,22 +1,23 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, Link, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 
-interface IProps {
+interface IProps extends FlexProps {
   img: string | StaticImageData;
   text: string;
   alt?: string;
   categoryName?: string;
 }
 
-const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
+const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
       width="100%"
       height="100%"
+      {...props}
     >
       <Box
         display="flex"
@@ -55,7 +56,7 @@ const CardProduct = ({ img, text, alt, categoryName }: IProps) => {
           >
             {text}
           </Text>
-          <Link href={text ? `/produto/${text.replaceAll(' ', '_')}` : ""}>
+          <Link href={text ? `/produto/${text.replaceAll(" ", "_")}` : ""}>
             <Text fontSize="20px" color="black">
               Veja mais +
             </Text>

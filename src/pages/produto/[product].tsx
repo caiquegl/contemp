@@ -42,6 +42,8 @@ import { SmoothScroll } from "../../components/SmoothScroll";
 import { Image } from "../../components/Image";
 import Head from "next/head";
 import { Breadcrumb } from "antd";
+import { theme } from "../../styles/theme";
+import { customSwiperBullets } from "../../utils/customSwiperBullets";
 
 const Product = () => {
   const router = useRouter();
@@ -80,35 +82,34 @@ const Product = () => {
       let cg3 = allCategory.filter((el: any) => el.id == cg2[0]?.sub_categorie);
       let cg4 = allCategory.filter((el: any) => el.id == cg3[0]?.sub_categorie);
 
-      let id = ''
-      let names: any = []
+      let id = "";
+      let names: any = [];
       if (cg1.length > 0) {
-        id = cg1[0].id
-        names.push(cg1[0].name)
+        id = cg1[0].id;
+        names.push(cg1[0].name);
       }
       if (cg2.length > 0) {
-        id = cg2[0].id
-        names.push(cg2[0].name)
+        id = cg2[0].id;
+        names.push(cg2[0].name);
       }
       if (cg3.length > 0) {
-        id = cg3[0].id
-        names.push(cg3[0].name)
+        id = cg3[0].id;
+        names.push(cg3[0].name);
       }
       if (cg4.length > 0) {
-        id = cg4[0].id
-        names.push(cg4[0].name)
+        id = cg4[0].id;
+        names.push(cg4[0].name);
       }
       if (ex.length == 0) return;
 
-      let revertNames: any = []
+      let revertNames: any = [];
 
-      names.forEach((el: any) => revertNames.unshift(el))
+      names.forEach((el: any) => revertNames.unshift(el));
 
-      setBradeName(revertNames)
+      setBradeName(revertNames);
       setDetail(ex[0]);
 
       let idCategory: any = [];
-
 
       allCategory.forEach((el: any) => {
         if (el.id == id) {
@@ -183,6 +184,7 @@ const Product = () => {
         </Head>
       )}
       <Header />
+
       <Flex
         p="10px"
         pt="60px"
@@ -198,16 +200,19 @@ const Product = () => {
             loop={true}
             pagination={{
               clickable: true,
+              enabled: true,
+              renderBullet: customSwiperBullets,
             }}
             modules={[Pagination]}
             className="mySwiper"
+            speed={1000}
           >
             {detail.urls &&
               detail.urls.length > 0 &&
               detail.urls.map((photo: any) => (
                 <SwiperSlide>
                   <Zoom>
-                    <Center h={pxToRem(765)} width="100%">
+                    <Center h={pxToRem(765)} width="100%" paddingBottom={4}>
                       <Image
                         alt={detail.name ? detail.name : ""}
                         src={photo}
@@ -225,13 +230,16 @@ const Product = () => {
             <Breadcrumb>
               {bradName.map((el: any, index: number) => (
                 <>
-                  {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
-                  {index != bradName.length - 1 && <Breadcrumb.Item>
-                    <a href={`/category/${el.replaceAll(' ', '_')}`}>{el}</a>
-                  </Breadcrumb.Item>}
+                  {index == bradName.length - 1 && (
+                    <Breadcrumb.Item>{el}</Breadcrumb.Item>
+                  )}
+                  {index != bradName.length - 1 && (
+                    <Breadcrumb.Item>
+                      <a href={`/category/${el.replaceAll(" ", "_")}`}>{el}</a>
+                    </Breadcrumb.Item>
+                  )}
                 </>
               ))}
-
             </Breadcrumb>
           </Box>
           <Text fontWeight="bold" fontSize="35px" color="black.800" mb="30px">
@@ -362,7 +370,6 @@ const Product = () => {
               </Flex>
             </Flex>
           </Flex>
-
         </Box>
       </Flex>
       <Flex

@@ -23,7 +23,7 @@ import Mapa from "../assets/images/MAPA.png";
 import { Footer } from "../components/Footer";
 import { BiPhone } from "react-icons/bi";
 import { AiOutlineMail } from "react-icons/ai";
-import { Image } from '../components/Image'
+import { Image } from "../components/Image";
 import { pxToRem } from "../utils/pxToRem";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useRef, useState } from "react";
@@ -34,25 +34,23 @@ import CardProductCart from "../components/CardProductCart";
 import { addDoc, collection } from "firebase/firestore";
 import { database, initFirebase } from "../utils/db";
 import { useAuth } from "../contextAuth/authContext";
-import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2"
+import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2";
 import Head from "next/head";
 
 const Orcamento = () => {
   initFirebase();
   const toast = useToast();
   const formRef = useRef<any>();
-  const { clearCart, removeCart } = useAuth()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [loading, setLoading] = useState(false)
-  const [isAprove, setIsAprove] = useState(false)
-  const [cart, setCart] = useState<any>([])
-  const [product, setProduct] = useState<any>([])
-  const { register, handleSubmit, formState, reset } = useForm(
-    {}
-  );
+  const { clearCart, removeCart } = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loading, setLoading] = useState(false);
+  const [isAprove, setIsAprove] = useState(false);
+  const [cart, setCart] = useState<any>([]);
+  const [product, setProduct] = useState<any>([]);
+  const { register, handleSubmit, formState, reset } = useForm({});
 
   const { errors } = formState;
-  const finalRef = useRef(null)
+  const finalRef = useRef(null);
 
   const saveCart = async (bodyForm: any) => {
     try {
@@ -62,7 +60,7 @@ const Orcamento = () => {
 
       const dbInstance = collection(database, "orcamento");
 
-      console.log(bodyForm)
+      console.log(bodyForm);
       await addDoc(dbInstance, bodyForm);
 
       toast({
@@ -73,15 +71,15 @@ const Orcamento = () => {
         isClosable: true,
       });
       await fetch(`api/mail`, {
-        method: 'POST',
-        body: JSON.stringify({ ...bodyForm, product: product })
+        method: "POST",
+        body: JSON.stringify({ ...bodyForm, product: product }),
       });
       reset();
-      window.localStorage.removeItem('CART-CONTEMP')
-      onOpen()
-      clearCart()
+      window.localStorage.removeItem("CART-CONTEMP");
+      onOpen();
+      clearCart();
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast({
         title: "Erro",
         description: "Erro ao salvar categoria",
@@ -95,24 +93,31 @@ const Orcamento = () => {
   };
 
   useEffect(() => {
-    getItem()
+    getItem();
   }, []);
 
   const getItem = () => {
-    let getItem = window.localStorage.getItem('CART-CONTEMP')
+    let getItem = window.localStorage.getItem("CART-CONTEMP");
 
     if (getItem) {
-      let convert = JSON.parse(getItem)
-      setCart(convert)
-      setProduct(convert)
+      let convert = JSON.parse(getItem);
+      setCart(convert);
+      setProduct(convert);
     }
-  }
+  };
+
   return (
     <SmoothScroll>
       <Header />
       <Head>
-        <meta name="description" content="Faça seu orçamento na Contemp de forma ágil e online. Acesse!" />
-        <meta name="keywords" content="contemp, orçamento online, orçamento, faça seu pedido" />
+        <meta
+          name="description"
+          content="Faça seu orçamento na Contemp de forma ágil e online. Acesse!"
+        />
+        <meta
+          name="keywords"
+          content="contemp, orçamento online, orçamento, faça seu pedido"
+        />
         <title>Contemp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -139,7 +144,10 @@ const Orcamento = () => {
           maxW="1037px"
           p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
-          Peça seu orçamento de forma facilitada. Basta adicionar ou excluir os produtos que precisa, preencher seus dados de contato no formulário abaixo e pronto. Um dos especialistas da Contemp irá entrar em contato para passar valores e mais informações.
+          Peça seu orçamento de forma facilitada. Basta adicionar ou excluir os
+          produtos que precisa, preencher seus dados de contato no formulário
+          abaixo e pronto. Um dos especialistas da Contemp irá entrar em contato
+          para passar valores e mais informações.
         </Text>
       </Flex>
 
@@ -159,30 +167,26 @@ const Orcamento = () => {
           borderRadius="8px"
           p="30px"
           w={{
-            base: 'row',
-            md: "861px"
+            base: "row",
+            md: "861px",
           }}
         >
-          <Text
-            fontSize="30px"
-            fontWeight="bold"
-          >
+          <Text fontSize="30px" fontWeight="bold">
             Dados para Contato
           </Text>
-          <Text
-            fontSize="20px"
-            margin="20px 0 40px 0"
-          >
-            Para enviar sua solicitação basta conferir os produtos do carrinho e preencher o formulário e logo você será notificado por e-mail do recebimento.
+          <Text fontSize="20px" margin="20px 0 40px 0">
+            Para enviar sua solicitação basta conferir os produtos do carrinho e
+            preencher o formulário e logo você será notificado por e-mail do
+            recebimento.
           </Text>
 
-          <Box
-            as="form"
-            onSubmit={handleSubmit(saveCart)}
-            ref={formRef}
-          >
+          <Box as="form" onSubmit={handleSubmit(saveCart)} ref={formRef}>
             <VStack spacing="20px" w="100%">
-              <HStack spacing={[0, "20px"]} w="100%" flexDirection={['column', 'row']}>
+              <HStack
+                spacing={[0, "20px"]}
+                w="100%"
+                flexDirection={["column", "row"]}
+              >
                 <InputDefault
                   label="Nome"
                   type="text"
@@ -194,10 +198,11 @@ const Orcamento = () => {
                     label="Sobrenome"
                     type="text"
                     error={errors.lastName}
-                    {...register("lastName", { required: "Sobrenome é obrigatório" })}
+                    {...register("lastName", {
+                      required: "Sobrenome é obrigatório",
+                    })}
                   />
                 </Box>
-
               </HStack>
               <InputDefault
                 label="E-mail"
@@ -210,7 +215,9 @@ const Orcamento = () => {
                 label="Telefone"
                 type="text"
                 error={errors.telephone}
-                {...register("telephone", { required: "Telefone é obrigatório" })}
+                {...register("telephone", {
+                  required: "Telefone é obrigatório",
+                })}
               />
               <TextareaDefault
                 label="Observaçao"
@@ -228,7 +235,8 @@ const Orcamento = () => {
                   isChecked={isAprove}
                   onChange={(evt) => setIsAprove(evt.target.checked)}
                 >
-                  Eu aceito que e a Contemp entre em contato comigo pelos canais de contato preenchidos nesse formulário.
+                  Eu aceito que e a Contemp entre em contato comigo pelos canais
+                  de contato preenchidos nesse formulário.
                 </Checkbox>
               </Box>
             </VStack>
@@ -267,30 +275,31 @@ const Orcamento = () => {
             md: pxToRem(30),
           }}
         >
-          <Text fontSize="30px" fontWeight="bold">Produtos selecionados</Text>
+          <Text fontSize="30px" fontWeight="bold">
+            Produtos selecionados
+          </Text>
           <VStack spacing="20px" divider={<Divider />}>
-            {
-              cart && cart.length > 0 && cart.map((product: any, index: number) => (
+            {cart &&
+              cart.length > 0 &&
+              cart.map((product: any, index: number) => (
                 <CardProductCart
                   data={product}
                   changeQtd={(value: any) => {
-                    let newList = cart
-                    newList[index].qtd = parseFloat(value)
-                    setCart([...newList])
+                    let newList = cart;
+                    newList[index].qtd = parseFloat(value);
+                    setCart([...newList]);
                   }}
                   removeCart={() => {
-                    removeCart(cart, index)
-                    getItem()
+                    removeCart(cart, index);
+                    getItem();
                   }}
-
                   getItem={(pd: any) => {
-                    let newList = cart
-                    newList[index] = { ...newList[index], ...pd }
-                    setProduct(newList)
+                    let newList = cart;
+                    newList[index] = { ...newList[index], ...pd };
+                    setProduct(newList);
                   }}
                 />
-              ))
-            }
+              ))}
           </VStack>
         </Box>
       </Flex>
@@ -353,7 +362,10 @@ const Orcamento = () => {
               md: "row",
             }}
           >
-            <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link
+              href="tel:1142235140"
+              _hover={{ textDecoration: "none", color: "#fff" }}
+            >
               <Button
                 width={{
                   base: pxToRem(279),
@@ -369,7 +381,10 @@ const Orcamento = () => {
                 Telefonar
               </Button>
             </Link>
-            <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link
+              href="mailto:vendas@contemp.com.br"
+              _hover={{ textDecoration: "none", color: "#fff" }}
+            >
               <Button
                 width={{
                   base: pxToRem(279),
@@ -407,50 +422,36 @@ const Orcamento = () => {
           <ModalCloseButton color="red" />
           <ModalBody p="20px" mt="20px">
             <Flex alignItems="center">
-              <Flex mr="20px" alignItems="center" justifyContent="center" h="60px" w="60px" borderRadius="30px" bg="red.100">
-                <Icon as={HiOutlineClipboardDocumentCheck} color="red.700" fontSize="30px" />
+              <Flex
+                mr="20px"
+                alignItems="center"
+                justifyContent="center"
+                h="60px"
+                w="60px"
+                borderRadius="30px"
+                bg="red.100"
+              >
+                <Icon
+                  as={HiOutlineClipboardDocumentCheck}
+                  color="red.700"
+                  fontSize="30px"
+                />
               </Flex>
               <Box>
-                <Text
-                  fontWeight="bold"
-                  fontSize="25px"
-                  color="black.800"
-                >
+                <Text fontWeight="bold" fontSize="25px" color="black.800">
                   Enivado com sucesso!
                 </Text>
-                <Text
-                  fontSize="16px"
-                  color="black.800"
-                  mt="10px"
-                  maxW="350px"
-                >
-                  Sua solicitação de orçamento foi enviada com sucesso. Basta aguardar e a equipe de vendas da Contemp entrará em contato.
+                <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
+                  Sua solicitação de orçamento foi enviada com sucesso. Basta
+                  aguardar e a equipe de vendas da Contemp entrará em contato.
                 </Text>
               </Box>
             </Flex>
           </ModalBody>
-
-
         </ModalContent>
       </Modal>
     </SmoothScroll>
   );
 };
-
-const AdBanner = () => {
-  return (
-    <Image
-      src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-      alt="bateria"
-      bgSize="contain"
-      minH={{
-        base: pxToRem(228),
-        md: pxToRem(330),
-        lg: pxToRem(425)
-      }}
-      flex={0.8}
-    />
-  )
-}
 
 export default Orcamento;

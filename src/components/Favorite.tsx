@@ -27,6 +27,7 @@ import {
   where,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { customSwiperBullets } from "../utils/customSwiperBullets";
 
 export const Favorite = () => {
   initFirebase();
@@ -223,10 +224,15 @@ export const Favorite = () => {
           slidesPerView={slidesPerView()}
           autoplay={{
             delay: 2000,
-            disableOnInteraction: false,
+            disableOnInteraction: true,
           }}
+          pagination={{
+            clickable: true,
+            enabled: true,
+            renderBullet: customSwiperBullets,
+          }}
+          speed={1000}
           spaceBetween={isTablet ? 20 : 30}
-          pagination
           modules={[Autoplay, Pagination]}
           className="mySwiper"
           style={{
