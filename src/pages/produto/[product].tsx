@@ -171,7 +171,7 @@ const Product = () => {
     if (product) {
       getProduct();
     }
-  }, [allCategory, allProducts]);
+  }, [allCategory, allProducts, product]);
 
   return (
     <SmoothScroll>

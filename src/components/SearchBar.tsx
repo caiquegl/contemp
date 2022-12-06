@@ -8,6 +8,7 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { database } from "../utils/db";
 import { useAuth } from "../contextAuth/authContext";
 import { ContainerSearch } from "./ContainerSearch";
+import { useRouter } from "next/router";
 
 type SearchBarProps = {
   containerProps?: InputGroupProps
@@ -56,6 +57,7 @@ export const SearchBar = ({
   useEffect(() => {
     getProducts()
   }, [])
+  const router = useRouter()
   return (
     <InputGroup
       borderRadius="21px"
@@ -78,7 +80,7 @@ export const SearchBar = ({
         }}
         onChange={(evt) => {
           let value = evt.target.value.toLowerCase()
-          if(value == '') {
+          if (value == '') {
             setListProducts([])
             return
           }
@@ -89,8 +91,11 @@ export const SearchBar = ({
         {...inputProps}
       />
       {listProducts.length > 0 &&
-        <ContainerSearch list={listProducts} searchCard={searchCard}/>
-        
+        <ContainerSearch list={listProducts} searchCard={searchCard} click={(product: any) => {
+          router.push(`/produto/${product.replaceAll(' ', '_')}`)
+          setListProducts([])
+        }} />
+
       }
       <InputRightElement
         width={pxToRem(22)}
