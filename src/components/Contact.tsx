@@ -42,6 +42,7 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
             "repeat(2, 1fr)",
           ]}
           w="100%"
+          gap="40px"
         >
           <GridItem w="100%">
             <Text color="red.600" fontWeight="bold" fontSize="40px" mb="15px">
@@ -79,8 +80,8 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
           </GridItem>
           <GridItem
             w="100%"
-            ml={["0", "0", "0", "0", "56px"]}
-            mt={["50px", "50px", "50px", "50px", "50px"]}
+          // ml={["0", "0", "0", "0", "56px"]}
+          // mt={["50px", "50px", "50px", "50px", "50px"]}
           >
             <Box
               border="2px solid"

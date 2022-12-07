@@ -20,7 +20,7 @@ export const Banner = () => {
     <Flex
       w="100%"
       bg="black.900"
-      h={pxToRem(702)}
+      h="auto"
       alignItems="center"
       justifyContent="center"
       flexDirection="column"

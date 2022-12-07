@@ -62,15 +62,14 @@ const DescriptionProduct = ({
         <Image
           src={dataTab?.urls ? dataTab.urls[0] : ""}
           alt={dataTab?.name}
-          flex={1.15}
+          // flex={1}
           zIndex={30}
-          minH={pxToRem(300)}
-          bgSize={{
-            base: "70%",
-            md: "80%",
-            lg: "60%",
-            xl: "100%",
-            "2xl": "contain",
+          minH="auto"
+          w={{
+            base: "55%",
+            md: "45%",
+            lg: "45%",
+            xl: "55%",
           }}
           onClick={() =>
             router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)

@@ -45,6 +45,8 @@ const CardProductWithDescription = ({
       // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
+      border="2px solid"
+      borderColor="transparent"
       p="20px"
       _hover={{
         border: "2px solid",
