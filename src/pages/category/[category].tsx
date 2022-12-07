@@ -110,7 +110,7 @@ const Category = () => {
           <meta name="description" content={categ.description_seo} />
           <meta name="keywords" content={categ.key_word_seo} />
           <title>Contemp</title>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.png" />
         </Head>
       )}
       <Header />

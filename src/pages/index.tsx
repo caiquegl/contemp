@@ -64,7 +64,7 @@ const Home = () => {
         <meta name="description" content="Procurando medição e controle de temperatura em processos industriais? A Contemp é pioneira. Confira!" />
         <meta name="keywords" content="controle de temperatura, processos industriais, contemp, medição de temperatura" />
         <title>Contemp</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <HomeBackgroundDetails />
       <SidebarDrawerProvider>

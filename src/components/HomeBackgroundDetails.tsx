@@ -7,11 +7,41 @@ import TrianglesDetail from "../assets/background-details/detail-triangle.svg";
 import PlusDetailDark from "../assets/background-details/detail-plus-dark.svg";
 import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
-
+import Image from "next/image";
+import { ParallaxProvider } from 'react-scroll-parallax'
 export const HomeBackgroundDetails = () => {
   return (
     <Box zIndex={-10}>
-      <BackgroundDetail
+      {/* <ParallaxProvider scrollAxis="vertical"> */}
+      <Box
+        bgImage={PlusDetail}
+        top={pxToRem(1440)}
+        left={{
+          lg: "10%",
+          xl: "7%",
+          "2xl": "15%",
+        }}
+        w={20}
+        maxH={110}
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
+        zIndex={-10}
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={pxToRem(200)}
+        flex={1}
+      >
+        <Image src={PlusDetail} alt={'lt'} />
+      </Box>
+      {/* </ParallaxProvider> */}
+      {/* <BackgroundDetail
         src={PlusDetail}
         top={pxToRem(1440)}
         left={{
@@ -21,7 +51,7 @@ export const HomeBackgroundDetails = () => {
         }}
         w={20}
         maxH={110}
-      />
+      /> */}
 
       <BackgroundDetail
         src={CirclesHorizontalDetail}
@@ -113,6 +143,6 @@ export const HomeBackgroundDetails = () => {
         maxH={100}
         zIndex={10}
       />
-    </Box>
+    </Box >
   );
 };

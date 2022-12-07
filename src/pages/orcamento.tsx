@@ -129,7 +129,7 @@ const Orcamento = () => {
           content="contemp, orçamento online, orçamento, faça seu pedido"
         />
         <title>Contemp</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Flex
         w="100%"

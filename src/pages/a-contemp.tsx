@@ -29,7 +29,7 @@ const Home = () => {
         <meta name="description" content="Procurando medição e controle de temperatura em processos industrais? A Contemp é pioneiro no Brasil. Confira!" />
         <meta name="keywords" content="controle de temperatura, Contemp, processos industriais" />
         <title>Contemp</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Header />
       <Flex

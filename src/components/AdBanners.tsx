@@ -3,11 +3,12 @@ import { StaticImageData } from "next/image";
 import Image from "next/image";
 import { pxToRem } from "../utils/pxToRem";
 import InovacaoContemp from "../assets/banners/inovacao-contemp.png";
-import Upgrade from "../assets/banners/upgrade-nova-p501.png";
+import Upgrade from "../assets/images/banner-p501.jpg";
+import { useRouter } from "next/router";
 
 export function AdBanners() {
-  const bgImage1 = `url('${Upgrade}')`
-  const bgImage2 = `url('${InovacaoContemp}')`
+  const router = useRouter();
+
 
   return (
     <Grid
@@ -17,12 +18,12 @@ export function AdBanners() {
       margin="auto"
       gap="20px"
     >
-      <Box position="unset" w="90%">
+      <Box position="unset" w="90%" cursor="pointer" onClick={() => router.push(`/produto/${'P501'.replaceAll(" ", "_")}`)}>
         <Image style={{ height: 'unset', position: 'relative', objectFit: 'contain' }} src={Upgrade} alt={'banne'} />
       </Box>
 
 
-      <Box h="unset" w="90%">
+      <Box h="unset" w="90%" onClick={() => router.push(`/produto/${'P501'.replaceAll(" ", "_")}`)}>
         <Image style={{ height: 'unset', position: 'relative', objectFit: 'contain' }} src={InovacaoContemp} alt={'banner'} />
       </Box>
     </Grid>

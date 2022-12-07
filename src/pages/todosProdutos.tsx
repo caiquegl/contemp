@@ -128,7 +128,7 @@ const AllProduct = () => {
           content="soluções para medição, medição, controle de temperatura, monitoramento, processos industriais"
         />
         <title>Contemp</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Header />
       <Flex
