@@ -245,6 +245,11 @@ export const Header = () => {
                     Trabalhe Conosco
                   </Text>
                 </Link>
+                <Link href="/calibracao">
+                  <Text mb="15px" fontSize="18px">
+                    Calibração
+                  </Text>
+                </Link>
                 <Text mb="15px" fontSize="18px">
                   Política de Privacidade
                 </Text>

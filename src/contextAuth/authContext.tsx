@@ -8,7 +8,7 @@ import {
 import Cookies from "js-cookie";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, database } from "../utils/db";
-import { useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Text, useDisclosure } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 interface AuthProviderProps {
   children: ReactNode;
@@ -50,6 +50,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [cart, setCart] = useState<any>([]);
   const [totalCart, setTotalCart] = useState<any>(0);
   const [loading, setLoading] = useState<any>(false);
+  const [hasCookie, setHasCookie] = useState<any>(false);
 
   const setUser = (body: any) => {
     setUserContext(body);
@@ -65,6 +66,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
     loadUserFromCookies();
   }, []);
+
+  const acepetCookie = () => {
+    localStorage.setItem('acepetCookie', JSON.stringify(true))
+    getCookie()
+  }
 
 
   useEffect(() => {
@@ -196,11 +202,59 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const { isOpen, onClose, onOpen } = disclosure;
 
+  const getCookie = () => {
+    let has = localStorage.getItem('acepetCookie')
+    if (!has) {
+      setHasCookie(true)
+    } else {
+      setHasCookie(false)
+    }
+  }
   useEffect(() => {
     getItemLocal()
+    getCookie()
   }, [])
   return (
     <UserAuthContext.Provider value={{ allCategoryActive, allProductsActive, loading, allProductsHome, reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+      {hasCookie &&
+        <Flex
+          w="100%"
+          maxW="400px"
+          h="280px"
+          borderRadius="10px"
+          position="fixed"
+          bg="red.600"
+          bottom="20px"
+          left="20px"
+          p="20px 10px"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          <Text fontWeight="bold" color="white" fontSize="20px" mb="10px">
+            Valorizamos sua privacidade
+          </Text>
+          <Text color="white" fontSize="18px" mb="10px">
+            Utilizamos cookies para aprimorar sua experiência de navegação, exibir anúncios ou conteúdos personalizado e analisar nosso tráfego. Ao clicar em "Aceitar todos", você concorda com nosso uso de cookies.
+          </Text>
+          <HStack spacing="20px">
+            <Button
+              onClick={() => acepetCookie()}
+              _hover={{
+                opacity: 0.7
+              }} bg="transparent" border="2px solid white" textAlign="center" borderRadius="20px" height="40px" p="10px" color="white">
+              Rejeitar
+            </Button>
+            <Button
+              w="130px"
+              onClick={() => acepetCookie()}
+              _hover={{
+                opacity: 0.7
+              }} bg="transparent" border="2px solid white" textAlign="center" borderRadius="20px" height="40px" p="10px" color="white">
+              Aceitar
+            </Button>
+          </HStack>
+        </Flex>
+      }
       {children}
     </UserAuthContext.Provider>
   );

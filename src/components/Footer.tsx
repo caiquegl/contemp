@@ -7,17 +7,12 @@ import {
   GridItem,
   HStack,
   Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
   Link,
   ListItem,
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Search from "../assets/icons/search.svg";
 import {
   AiFillLinkedin,
   AiFillYoutube,
@@ -200,7 +195,9 @@ export const Footer = () => {
           <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Lista de Todos os Produtos</ListItem>
           </Link>
-          <ListItem m={[0, "0 0 0 30px"]}>Calibração</ListItem>
+          <Link href="/calibracao" _hover={{ color: '#fff', textDecoration: 'none' }}>
+            <ListItem m={[0, "0 0 0 30px"]}>Calibração</ListItem>
+          </Link>
           <ListItem m={[0, "0 30px"]}>Política de Privacidade</ListItem>
           <ListItem>Site Mapa</ListItem>
         </UnorderedList>
