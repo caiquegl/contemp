@@ -177,6 +177,7 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
                           alignItems="center"
                           justifyContent="center"
                           flexDirection="column"
+                          p="10px"
                         >
                           <Icon
                             as={AiOutlineCloudUpload}
