@@ -19,6 +19,7 @@ export const HomeBackgroundDetails = () => {
   const [top5, setTop5] = useState(4417)
   const [top6, setTop6] = useState(4417)
   const [top7, setTop7] = useState(6655)
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -38,7 +39,6 @@ export const HomeBackgroundDetails = () => {
   }, []);
 
   useEffect(() => {
-    console.log(scrollY)
     if (scrollY > 610 && scrollY < 670) {
       setTop1(scrollY * 2.3)
     }

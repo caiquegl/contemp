@@ -21,7 +21,8 @@ import { CiMedal } from "react-icons/ci";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { CgTrees } from "react-icons/cg";
 import Head from "next/head";
-
+import Banner1 from '../assets/images/contemp-fachada.webp'
+import Banner2 from '../assets/images/contemp-sobre.webp'
 const Home = () => {
   return (
     <>
@@ -75,11 +76,12 @@ const Home = () => {
               fabricando soluções para medição, controle e monitoramento para os
               mais variados processos industriais.
             </Text>
-            <ImageChakra
-              src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+            <Box
               w="100%"
               maxW="788px"
-            />
+            >
+              <Image src={Banner1} />
+            </Box>
           </Flex>
           <Flex
             alignItems="center"
@@ -169,13 +171,8 @@ const Home = () => {
             mb="60px"
             flexDirection={["column", "column", "row", "row", "row"]}
           >
-            <Box w="100%" maxW="788px">
-              <ImageChakra
-                src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-                w="100%"
-                maxW="788px"
-                mt="-213px"
-              />
+            <Box w="100%" maxW="588px" mt="-113px">
+              <Image src={Banner2} />
             </Box>
             <Box mt="83px">
               <Text maxW="535px" fontSize="20px">
