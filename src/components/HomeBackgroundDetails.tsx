@@ -8,39 +8,41 @@ import PlusDetailDark from "../assets/background-details/detail-plus-dark.svg";
 import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
-import { ParallaxProvider } from 'react-scroll-parallax'
+import { Parallax } from 'react-scroll-parallax';
 export const HomeBackgroundDetails = () => {
+
   return (
     <Box zIndex={-10}>
-      {/* <ParallaxProvider scrollAxis="vertical"> */}
-      <Box
-        bgImage={PlusDetail}
-        top={pxToRem(1440)}
-        left={{
-          lg: "10%",
-          xl: "7%",
-          "2xl": "15%",
-        }}
-        w={20}
-        maxH={110}
-        display={{
-          base: 'none',
-          lg: 'block'
-        }}
-        zIndex={-10}
-        position="absolute"
-        minH={0}
-        bgSize="85%"
-        bgRepeat="no-repeat"
-        bgPosition="center"
-        // w="100%"
-        h="100%"
-        // minH={pxToRem(200)}
-        flex={1}
-      >
-        <Image src={PlusDetail} alt={'lt'} />
-      </Box>
-      {/* </ParallaxProvider> */}
+      <Parallax translateY={[-20, 20]}>
+
+        <Box
+          bgImage={PlusDetail}
+          top={pxToRem(1440)}
+          left={{
+            lg: "10%",
+            xl: "7%",
+            "2xl": "15%",
+          }}
+          w={20}
+          maxH={110}
+          display={{
+            base: 'none',
+            lg: 'block'
+          }}
+          zIndex={-10}
+          position="absolute"
+          minH={0}
+          bgSize="85%"
+          bgRepeat="no-repeat"
+          bgPosition="center"
+          // w="100%"
+          h="100%"
+          // minH={pxToRem(200)}
+          flex={1}
+        >
+          <Image src={PlusDetail} alt={'lt'} />
+        </Box>
+      </Parallax>
       {/* <BackgroundDetail
         src={PlusDetail}
         top={pxToRem(1440)}

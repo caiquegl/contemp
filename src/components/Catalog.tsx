@@ -172,7 +172,9 @@ export const Catalog = () => {
                 <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
               </Link>
 
-              <ActionButton label={"Download"} icon={FiDownload} />
+              <Link href="https://contemp.com.br/wp-content/uploads/temnacontemp.pdf" isExternal _hover={{ textDecoration: 'none', color: '#fff' }}>
+                <ActionButton label={"Download"} icon={FiDownload} />
+              </Link>
             </Grid>
           </Flex>
         </Col>
