@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
   Box,
-  HStack,
   Button,
   useBreakpointValue,
   useToast,
@@ -16,21 +15,10 @@ import CardProduct from "./CardProduct";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
-import { database, initFirebase } from "../utils/db";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
 import { useRouter } from "next/router";
-import { customSwiperBullets } from "../utils/customSwiperBullets";
-
+import { useAuth } from '../contextAuth/authContext'
 export const Favorite = () => {
-  initFirebase();
+  const { allProducts, allProductsHome, allCategory } = useAuth()
   const router = useRouter();
   const toast = useToast();
   const [products, setProducts] = useState<any>([]);
@@ -55,26 +43,6 @@ export const Favorite = () => {
     "2xl": false,
   });
 
-  const swiperWidth = () => {
-    if (isMobile) {
-      return pxToRem(253);
-    }
-
-    if (isTablet) {
-      return pxToRem(600);
-    }
-
-    if (isDesktop) {
-      return pxToRem(780);
-    }
-
-    if (isLargeDesktop) {
-      return pxToRem(1200);
-    }
-
-    return "auto";
-  };
-
   const slidesPerView = (): number => {
     if (isMobile) {
       return 1;
@@ -97,41 +65,25 @@ export const Favorite = () => {
 
   const listProductDestaque = async () => {
     try {
-      const dbInstance = collection(database, "products");
-      const dbInstanceHome = collection(database, "home");
       let newList: any = [];
-      const q = query(dbInstance, where("destaque", "==", true));
-      const qHome = query(dbInstanceHome, where("destaque", "==", true));
 
-      await getDocs(q).then(async (data) => {
-        for await (let pd of data.docs) {
-          const docRef = doc(database, "categories", pd.data().category);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            newList.push({
-              ...pd.data(),
-              id: pd.id,
-              ref: pd.ref,
-              nameCategory: docSnap.data().name,
-            });
-          }
+      allProducts.forEach((el: any) => {
+        if (el.destaque) {
+          newList.push({
+            ...el,
+            nameCategory: allCategory.find((ec: any) => ec.id == el.category).name
+          })
         }
-      });
+      })
 
-      await getDocs(qHome).then(async (data) => {
-        for await (let pd of data.docs) {
-          const docRef = doc(database, "categories", pd.data().category);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            newList.push({
-              ...pd.data(),
-              id: pd.id,
-              ref: pd.ref,
-              nameCategory: docSnap.data().name,
-            });
-          }
+      allProductsHome.forEach((el: any) => {
+        if (el.destaque) {
+          newList.push({
+            ...el,
+            nameCategory: allCategory.find((ec: any) => ec.id == el.category).name
+          })
         }
-      });
+      })
       setProducts(newList);
     } catch (error) {
       console.log(error);
@@ -147,27 +99,8 @@ export const Favorite = () => {
 
   const getHomeTab1 = async () => {
     try {
-      const dbInstanceHome = collection(database, "home");
-      let tab1: any = {};
-      const qHome = query(
-        dbInstanceHome,
-        where("indexProduct", "==", 0),
-        limit(1)
-      );
-
-      await getDocs(qHome).then(async (data) => {
-        if (data.docs.length === 0) return;
-        tab1 = data.docs[0].data();
-        const docRef = doc(
-          database,
-          "categories",
-          data.docs[0].data().category
-        );
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          tab1 = { ...tab1, nameCategory: docSnap.data().name };
-        }
-      });
+      let find = allProductsHome.find((el: any) => el.indexProduct == 0)
+      let tab1 = { ...find, nameCategory: allCategory.find((el: any) => el.id == find.category).name };
 
       if (Object.keys(tab1).length === 0) return;
       setHomeTabs({ ...homeTabs, tab1 });
@@ -184,9 +117,11 @@ export const Favorite = () => {
   };
 
   useEffect(() => {
-    listProductDestaque();
-    getHomeTab1();
-  }, []);
+    if (allCategory.length > 0 && allProducts.length > 0 && allProductsHome.length > 0) {
+      listProductDestaque();
+      getHomeTab1();
+    }
+  }, [allCategory, allProducts, allProductsHome]);
 
   return (
     <Container

@@ -194,13 +194,18 @@ const Product = () => {
         <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["350px", "764px"]}>
           <Swiper
             loop={true}
-            pagination={{
-              renderBullet: customSwiperBullets,
-              clickable: true,
+            slidesPerView={1}
+            autoplay={{
+              delay: 2000,
             }}
-            modules={[Pagination]}
-            className="mySwiper"
             speed={1000}
+            modules={[Autoplay, Pagination]}
+            className="mySwiper"
+            style={{
+              margin: "auto",
+              width: "100%",
+              alignItems: "center",
+            }}
           >
             {detail.urls &&
               detail.urls.length > 0 &&

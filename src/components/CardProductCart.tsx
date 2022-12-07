@@ -1,31 +1,20 @@
-import { Box, Flex, HStack, Icon, Input, Link, Text, Tooltip, VStack } from "@chakra-ui/react";
-import { collection, doc, getDoc } from "firebase/firestore";
-import { StaticImageData } from "next/image";
+import { Box, Flex, HStack, Icon, Input, Text, Tooltip } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
-import { database, initFirebase } from "../utils/db";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from './Image'
-
+import DefaultImg from '../assets/images/image-default.webp'
+import { useAuth } from '../contextAuth/authContext'
 
 const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
-  initFirebase();
+  const { allProducts } = useAuth()
+  const router = useRouter();
   const [products, setProduct] = useState<any>({})
 
   const getProduct = async () => {
-    const docRef = doc(database, 'products', data.product_id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setProduct({ ...docSnap.data(), qtd: data.qtd })
-    }
-  }
-
-  const getHome = async () => {
-    const docRef = doc(database, 'home', data.product_id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setProduct({ ...docSnap.data(), qtd: data.td })
-    }
+    let find = allProducts.find((el: any) => el.id == data.product_id)
+    setProduct(find)
   }
 
   useEffect(() => {
@@ -34,8 +23,8 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
 
   useEffect(() => {
     getProduct()
-    getHome()
-  }, [data])
+  }, [data, allProducts])
+  if (products == undefined) return (<Box />)
   return (
     <Flex
       alignItems={["center", "flex-start"]}
@@ -50,8 +39,10 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
         w={pxToRem(118)}
         h={pxToRem(118)}
         bg="none"
+        cursor="pointer"
+        onClick={() => router.push(`/produto/${products.name.replaceAll(" ", "_")}`)}
       >
-        <Image src={products.urls && products.urls.length > 0 ? products.urls[0] : ''} alt={products.name} />
+        <Image src={products.urls && products.urls.length > 0 ? products.urls[0] : DefaultImg} alt={products.name} />
       </Box>
       <Box ml="10px" w={["100%", "calc(100% - 118px)"]}>
         <Text

@@ -26,9 +26,7 @@ import Instagram from "../assets/icons/instagram.svg";
 import Facebook from "../assets/icons/facebook-f.svg";
 import Youtube from "../assets/icons/youtube.svg";
 import Logo from "../assets/icons/logo.png";
-import Bag from "../assets/icons/shopping-bag.svg";
 import ImageNext from "next/image";
-import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { BsThreeDotsVertical, BsBag } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import {
@@ -36,20 +34,16 @@ import {
   AiFillYoutube,
   AiOutlineInstagram,
 } from "react-icons/ai";
-import { AuthProvider, useAuth } from "../contextAuth/authContext";
+import { useAuth } from "../contextAuth/authContext";
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
 import { HeaderMenu, HeaderMenuVertical } from "./HeaderMenu";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
 
 export const Header = () => {
-  initFirebase();
   const router = useRouter();
-  // const { isOpen, onClose, onOpen } = useSidebarDrawer();
-  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart } = useAuth();
+  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategory } = useAuth();
   const [list, setList] = useState([]);
 
   const isDrawerSiderbar = useBreakpointValue({
@@ -59,21 +53,16 @@ export const Header = () => {
 
   const listCategory = async () => {
     try {
-      const dbInstance = collection(database, "categories");
-      const { docs: allCategories } = await getDocs(dbInstance)
 
-
-      const q = query(dbInstance, where("is_main", "==", "true"));
-      let { docs: categories } = await getDocs(q);
-
+      let categories: any = allCategory.filter((el: any) => el.is_main == "true")
       let newList: any = [];
 
       for await (let categ of categories) {
         let list_sub_category: any = [];
 
-        allCategories.forEach((el) => {
-          if (el.data().sub_categorie == categ.id)
-            list_sub_category.push({ ...el.data(), id: el.id });
+        allCategory.forEach((el: any) => {
+          if (el.sub_categorie == categ.id)
+            list_sub_category.push({ ...el, id: el.id });
         });
 
         let filter: any = [];
@@ -81,15 +70,15 @@ export const Header = () => {
         list_sub_category.forEach((el: any) => {
           let list_sub_category2: any = [];
 
-          allCategories.forEach((c) => {
-            if (c.data().sub_categorie == el.id)
-              list_sub_category2.push({ ...c.data(), id: c.id });
+          allCategory.forEach((c: any) => {
+            if (c.sub_categorie == el.id)
+              list_sub_category2.push({ ...c, id: c.id });
           });
           filter.push({ ...el, list_sub_category: list_sub_category2 });
         });
 
         newList.push({
-          ...categ.data(),
+          ...categ,
           id: categ.id,
           list_sub_category: filter,
         });
@@ -102,8 +91,8 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    listCategory();
-  }, []);
+    if (allCategory.length > 0) listCategory();
+  }, [allCategory]);
 
   if (isDrawerSiderbar) {
     return (

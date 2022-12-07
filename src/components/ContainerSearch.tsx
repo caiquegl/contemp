@@ -1,6 +1,7 @@
 import { Box, VStack, Divider, Flex, Image, Text } from "@chakra-ui/react"
 import { useRouter } from "next/router";
-
+import DefaultImg from '../assets/images/image-default.webp'
+import ImageNext from 'next/image'
 export const ContainerSearch = ({
   list,
   searchCard,
@@ -13,7 +14,11 @@ export const ContainerSearch = ({
       <VStack spacing="10px" divider={<Divider />}>
         {list && list.length > 0 && list.map((el: any) => (
           <Flex cursor="pointer" _hover={{ opacity: 0.8, transition: 'all 0.4s' }} alignItems="center" justifyContent="flex-start" w="100%" onClick={() => click(el.name)}>
-            <Image src={el.urls && el.urls.length > 0 ? el.urls[0] : ''} w="60px" h="60px" alt={el.name} />
+            {el.urls && el.urls.length > 0 ?
+              <Image src={el.urls && el.urls.length > 0 ? el.urls[0] : ''} w="60px" h="60px" alt={el.name} />
+              :
+              <ImageNext src={DefaultImg} width={60} height={60} alt={el.name} />
+            }
             <Text
               fontSize="20px"
               fontWeight="bold"

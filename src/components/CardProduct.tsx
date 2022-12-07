@@ -1,8 +1,9 @@
 import { Box, Flex, FlexProps, Link, Text } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
+import { useRouter } from "next/router";
 import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
-
+import DefaultImg from '../assets/images/image-default.webp'
 interface IProps extends FlexProps {
   img: string | StaticImageData;
   text: string;
@@ -11,6 +12,8 @@ interface IProps extends FlexProps {
 }
 
 const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
+  const router = useRouter();
+  console.log(img)
   return (
     <Flex
       alignItems="center"
@@ -40,7 +43,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
         transition="all 0.3s"
         cursor="pointer"
       >
-        <Image src={img} alt={alt} />
+        <Image src={img ? img : DefaultImg} alt={alt} onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)} />
 
         <Box
           className="see-more-text"
@@ -56,7 +59,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
           >
             {text}
           </Text>
-          <Link href={text ? `/produto/${text.replaceAll(" ", "_")}` : ""}>
+          <Link href={text ? `/produto/${text.replaceAll(" ", "_")}` : ""} _hover={{ color: 'black', textDecoration: 'none' }}>
             <Text fontSize="20px" color="black">
               Veja mais +
             </Text>

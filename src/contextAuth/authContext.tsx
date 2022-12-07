@@ -32,6 +32,8 @@ type UserAuthContextData = {
   totalCart: any
   allCategory: any
   reload: any
+  allProductsHome: any
+  loading: any
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -39,9 +41,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUserContext] = useState({});
   const [listHeader, setListHeader] = useState<any>([]);
   const [allProducts, setAllProducts] = useState<any>([]);
+  const [allProductsHome, setAllProductsHome] = useState<any>([]);
   const [allCategory, setAllCategory] = useState<any>([]);
   const [cart, setCart] = useState<any>([]);
   const [totalCart, setTotalCart] = useState<any>(0);
+  const [loading, setLoading] = useState<any>(false);
 
   const setUser = (body: any) => {
     setUserContext(body);
@@ -112,14 +116,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  const getAllProductsHome = async () => {
+    try {
+      const dbInstanceHome = collection(database, "home");
+
+      let list: any = []
+      await getDocs(dbInstanceHome).then(async (data) => {
+        data.docs.map((el: any, index: number) => {
+          list.push({ ...el.data(), id: data.docs[index].id })
+        })
+      });
+
+      setAllProductsHome(list)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const reload = async () => {
+    setLoading(true)
     await getCategory()
     await getAllProducts()
+    await getAllProductsHome()
+    setLoading(false)
+
   }
 
   useEffect(() => {
-    getCategory()
-    getAllProducts()
+    reload()
   }, [])
 
   const getItemLocal = () => {
@@ -176,7 +200,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{ reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ loading, allProductsHome, reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

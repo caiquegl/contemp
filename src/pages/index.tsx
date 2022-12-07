@@ -27,43 +27,26 @@ import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
 import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
-import { database, initFirebase } from "../utils/db";
 import { useRouter } from "next/router";
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
 import Head from "next/head";
+import { useAuth } from '../contextAuth/authContext'
 
 const Home = () => {
-  initFirebase();
+  const { allProductsHome, allCategory } = useAuth()
   const router = useRouter();
   const [listTab, setListtAB] = useState<any>([]);
 
   const getHomeTab = async () => {
     try {
-      const dbInstanceHome = collection(database, "home");
-      let find = await getDocs(dbInstanceHome);
-
       let organize: any = [];
 
-      for await (let el of find.docs) {
-        const docRef = doc(database, "categories", el.data().category);
-        const docSnap = await getDoc(docRef);
-        let nameCategory = "";
-        if (docSnap.exists()) nameCategory = docSnap.data().name;
-
+      allProductsHome.forEach((el: any) => {
         organize.push({
-          ...el.data(),
-          nameCategory,
-        });
-      }
+          ...el,
+          nameCategory: allCategory.find((ce: any) => ce.id == el.category).name,
+        })
+      })
 
       setListtAB(organize);
     } catch (error) {
@@ -72,8 +55,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getHomeTab();
-  }, []);
+    if (allCategory.length > 0 && allProductsHome.length > 0) getHomeTab();
+  }, [allCategory, allProductsHome]);
 
   return (
     <SmoothScroll>

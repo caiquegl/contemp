@@ -1,11 +1,9 @@
-import { InputGroup, Input, InputRightElement, InputGroupProps, InputProps, Portal, ModalOverlay, Box } from "@chakra-ui/react"
+import { InputGroup, Input, InputRightElement, InputGroupProps, InputProps } from "@chakra-ui/react"
 import { pxToRem } from "../utils/pxToRem"
 import Search from "../assets/icons/search.svg";
 
 import { Image } from './Image';
-import { useEffect, useState } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
-import { database } from "../utils/db";
+import { useState } from "react";
 import { useAuth } from "../contextAuth/authContext";
 import { ContainerSearch } from "./ContainerSearch";
 import { useRouter } from "next/router";
@@ -21,42 +19,8 @@ export const SearchBar = ({
   inputProps,
   searchCard
 }: SearchBarProps) => {
-  const { allProducts, setAllProducts } = useAuth()
+  const { allProducts } = useAuth()
   const [listProducts, setListProducts] = useState<any>([])
-
-  const getProducts = async () => {
-    try {
-      const dbInstanceProducts = collection(database, "products");
-      let products = await getDocs(dbInstanceProducts)
-
-      const dbInstanceHome = collection(database, "home");
-      let home = await getDocs(dbInstanceHome)
-
-
-
-      let newList2: any = []
-
-      products.docs.forEach((el) => {
-        newList2.push({
-          id: el.id,
-          ...el.data()
-        })
-      })
-      home.docs.forEach((el) => {
-        newList2.push({
-          id: el.id,
-          ...el.data()
-        })
-      })
-      setAllProducts(newList2)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getProducts()
-  }, [])
   const router = useRouter()
   return (
     <InputGroup

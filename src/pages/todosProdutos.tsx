@@ -21,13 +21,13 @@ import { Image } from "../components/Image";
 import { pxToRem } from "../utils/pxToRem";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { database } from "../utils/db";
 import Head from "next/head";
 import { AdBanners } from "../components/AdBanners";
 import { customSwiperBullets } from "../utils/customSwiperBullets";
+import { useAuth } from '../contextAuth/authContext'
 
 const AllProduct = () => {
+  const { allCategory, allProducts, allProductsHome } = useAuth()
   const [favorites, setFavorites] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
 
@@ -43,67 +43,33 @@ const AllProduct = () => {
 
   const getFavorites = async () => {
     try {
-      const dbInstanceCategory = collection(database, "categories");
-      const qFavorite = query(
-        dbInstanceCategory,
-        where("favorite", "==", true)
-      );
       let listFavorite: any = [];
 
-      await getDocs(qFavorite).then(async (data) => {
-        if (data.docs.length === 0) return;
-
-        data.docs.forEach((fv: any, index: number) => {
+      allCategory.forEach((el: any) => {
+        if (el.favorite) {
           listFavorite.push({
-            ...fv.data(),
-            idCategorie: data.docs[index].id,
-            products: [],
-          });
-        });
-      });
+            ...el,
+            idCategorie: el.id,
+            products: []
+          })
+        }
+      })
 
       if (listFavorite.length === 0) return;
-
       let index = 0;
-      const dbInstanceProduct = collection(database, "products");
-      const { docs: allProducts } = await getDocs(dbInstanceProduct);
-
-      const dbInstanceHome = collection(database, "home");
-      const { docs: allHome } = await getDocs(dbInstanceHome);
-
       for await (let categories of listFavorite) {
-        // const dbInstanceProduct = collection(database, "products");
-        // const qProduct = query(dbInstanceProduct, where("category", "==", categories.idCategorie))
-
-        // await getDocs(qProduct).then(async (data) => {
-        //   if (data.docs.length === 0) return
-        //   data.docs.forEach((pd: any) => {
-        //     listFavorite[index].products.push(pd.data());
-        //   })
-        // })
-
-        allProducts.filter((el) => {
-          if (el.data().category == categories.idCategorie)
-            listFavorite[index].products.push(el.data());
+        allProducts.filter((el: any) => {
+          if (el.category == categories.idCategorie)
+            listFavorite[index].products.push(el);
         });
 
-        allHome.filter((el) => {
-          if (el.data().category == categories.idCategorie)
-            listFavorite[index].products.push(el.data());
+        allProductsHome.filter((el: any) => {
+          if (el.category == categories.idCategorie)
+            listFavorite[index].products.push(el);
         });
-
-        // const dbInstanceHome = collection(database, "home");
-        // const qHome = query(dbInstanceHome, where("category", "==", categories.idCategorie))
-        // await getDocs(qHome).then(async (data) => {
-        //   if (data.docs.length === 0) return
-        //   data.docs.forEach((pd: any) => {
-        //     listFavorite[index].products.push(pd.data());
-        //   })
-        // });
 
         index = index + 1;
       }
-      console.log(listFavorite);
       setFavorites(listFavorite);
     } catch (error) {
       console.log(error);
@@ -112,16 +78,14 @@ const AllProduct = () => {
 
   const getCategories = async () => {
     try {
-      const dbInstanceHome = collection(database, "categories");
       let list: any = [];
 
-      await getDocs(dbInstanceHome).then(async (data) => {
-        if (data.docs.length === 0) return;
-
-        data.docs.forEach((cg: any, index: number) => {
-          list.push({ ...cg.data(), idCategorie: data.docs[index].id });
-        });
-      });
+      allProducts.forEach((el: any) => {
+        list.push({
+          ...el,
+          idCategorie: el.id
+        })
+      })
 
       if (list.length === 0) return;
 
@@ -132,8 +96,10 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    getFavorites();
-    getCategories();
+    if (allCategory.length > 0 && allProductsHome.length > 0 && allProducts.length > 0) {
+      getFavorites();
+      getCategories();
+    }
 
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth;
@@ -148,7 +114,7 @@ const AllProduct = () => {
       );
     }
     findOverflowingElements();
-  }, []);
+  }, [allCategory, allProducts, allProductsHome]);
 
   return (
     <SmoothScroll>
@@ -275,7 +241,7 @@ const AllProduct = () => {
           </Text>
           <Grid
             templateColumns="repeat(auto-fit, minmax(260px, 1fr))"
-            gridAutoRows={pxToRem(360)}
+            // gridAutoRows={pxToRem(360)}
             gap={pxToRem(15)}
             padding={`0 ${pxToRem(10)}`}
           >

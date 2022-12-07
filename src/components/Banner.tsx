@@ -5,14 +5,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Image } from "./Image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Team from "../assets/images/temnacontemp.png";
 import { Typewriter } from "react-simple-typewriter";
 import { pxToRem } from "../utils/pxToRem";
 import { SearchBar } from './SearchBar'
-import { useAuth } from "../contextAuth/authContext";
-import { collection, getDocs } from "firebase/firestore";
-import { database } from "../utils/db";
 
 export const Banner = () => {
 

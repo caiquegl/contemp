@@ -138,7 +138,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           width: "100%",
           justifyContent: 'center'
         }}
-        disabledOverflow
+        overflowedIndicator={<p>Outros</p>}
       />
     </>
   );
