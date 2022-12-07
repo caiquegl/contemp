@@ -274,7 +274,7 @@ const AllProduct = () => {
             Navegue por Categoria
           </Text>
           <Grid
-            templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+            templateColumns="repeat(auto-fit, minmax(260px, 1fr))"
             gridAutoRows={pxToRem(360)}
             gap={pxToRem(15)}
             padding={`0 ${pxToRem(10)}`}
