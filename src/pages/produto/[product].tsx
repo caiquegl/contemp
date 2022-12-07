@@ -205,14 +205,14 @@ const Product = () => {
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
-          // cssMode={true}
+            cssMode={true}
           >
             {detail.urls &&
               detail.urls.length > 0 &&
               detail.urls.map((photo: any) => (
                 <SwiperSlide>
                   <Zoom>
-                    <Center h={pxToRem(765)} width="100%">
+                    <Center h="100%" maxH={pxToRem(765)} width="100%">
                       <img
                         alt={detail.name ? detail.name : ""}
                         src={photo}

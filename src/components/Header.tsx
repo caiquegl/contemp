@@ -121,6 +121,7 @@ export const Header = () => {
             position="relative"
             cursor="pointer"
             onClick={() => {
+              console.log('aquiii')
               if (totalCart == 0 && !totalCart) {
                 oOpen()
                 return
