@@ -213,7 +213,10 @@ const AllProduct = () => {
                 )}
                 <Text
                   color="black.800"
-                  fontSize="45px"
+                  fontSize={[
+                    "35px",
+                    "45px",
+                  ]}
                   fontWeight="bold"
                   ml="15px"
                 >

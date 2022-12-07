@@ -25,7 +25,7 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
 
           <Text
             color={color}
-            fontSize={pxToRem(35)}
+            fontSize={pxToRem(30)}
             lineHeight={1.2}
             fontWeight="bold"
           >
