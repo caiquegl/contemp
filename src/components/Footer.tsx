@@ -44,13 +44,13 @@ export const Footer = () => {
     let seven: any = {}
 
     listHeader.forEach((el: any) => {
-      if (el.name == 'SENSOR') first = el
-      if (el.name == 'SOFTWARES') second = el
-      if (el.name == 'PIRÔMETROS PORTÁTEIS') thrid = el
-      if (el.name == 'CÂMERAS TERMOGRÁFICAS FIXAS') four = el
-      if (el.name == 'PIRÔMETROS FIXOS OPTRIS') five = el
-      if (el.name == 'CONTROLADORES DE POTÊNCIA') six = el
-      if (el.name == 'INSTRUMENTOS E CONTROLE') seven = el
+      if (el.name.toLowerCase() == 'SENSOR'.toLowerCase()) first = el
+      if (el.name.toLowerCase() == 'SOFTWARES'.toLowerCase()) second = el
+      if (el.name.toLowerCase() == 'PIRÔMETROS PORTÁTEIS'.toLowerCase()) thrid = el
+      if (el.name.toLowerCase() == 'CÂMERAS TERMOGRÁFICAS OPTRIS'.toLowerCase()) four = el
+      if (el.name.toLowerCase() == 'PIRÔMETROS FIXOS OPTRIS'.toLowerCase()) five = el
+      if (el.name.toLowerCase() == 'CONTROLADORES DE POTÊNCIA'.toLowerCase()) six = el
+      if (el.name.toLowerCase() == 'INSTRUMENTOS E CONTROLE'.toLowerCase()) seven = el
 
 
     })
