@@ -14,11 +14,17 @@ import {
   HStack,
   Icon,
   Link,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
   Text,
   useBreakpointValue,
+  useDisclosure,
+  Modal
 } from "@chakra-ui/react";
 import { Image } from "./Image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Phone from "../assets/icons/phone.svg";
 import Email from "../assets/icons/envelope.svg";
 import Linkedin from "../assets/icons/linkedin.svg";
@@ -40,11 +46,14 @@ import { SearchBar } from "./SearchBar";
 import { pxToRem } from "../utils/pxToRem";
 import { HeaderMenu, HeaderMenuVertical } from "./HeaderMenu";
 import { useRouter } from "next/router";
+import { FiAlertTriangle } from "react-icons/fi";
 
 export const Header = () => {
   const router = useRouter();
   const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategoryActive } = useAuth();
   const [list, setList] = useState([]);
+  const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure();
+  const finalRef = useRef(null);
 
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
@@ -111,7 +120,13 @@ export const Header = () => {
           <Box
             position="relative"
             cursor="pointer"
-            onClick={() => router.push("/orcamento")}
+            onClick={() => {
+              if (totalCart == 0 && !totalCart) {
+                oOpen()
+                return
+              }
+              router.push("/orcamento")
+            }}
           >
             {cart && cart.length > 0 && (
               <Flex
@@ -246,6 +261,39 @@ export const Header = () => {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
+        <Modal isOpen={open} onClose={oClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton color="red" />
+            <ModalBody p="20px" mt="20px">
+              <Flex alignItems="center">
+                <Flex
+                  mr="20px"
+                  alignItems="center"
+                  justifyContent="center"
+                  h="60px"
+                  w="60px"
+                  borderRadius="30px"
+                  bg="red.100"
+                >
+                  <Icon
+                    as={FiAlertTriangle}
+                    color="red.700"
+                    fontSize="30px"
+                  />
+                </Flex>
+                <Box>
+                  <Text fontWeight="bold" fontSize="25px" color="black.800">
+                    Atenção!
+                  </Text>
+                  <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
+                    Para poder continuar, é necessário adicionar ao menos um produto no carrinho.
+                  </Text>
+                </Box>
+              </Flex>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Flex>
     );
   }
@@ -412,7 +460,13 @@ export const Header = () => {
           <Box
             position="relative"
             cursor="pointer"
-            onClick={() => router.push("/orcamento")}
+            onClick={() => {
+              if (totalCart == 0 && !totalCart) {
+                oOpen()
+                return
+              }
+              router.push("/orcamento")
+            }}
           >
             {cart && cart.length > 0 && (
               <Flex
@@ -436,6 +490,40 @@ export const Header = () => {
       </Flex>
 
       <HeaderMenu menuItems={list} />
+      <Modal isOpen={open} onClose={oClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton color="red" />
+          <ModalBody p="20px" mt="20px">
+            <Flex alignItems="center">
+              <Flex
+                mr="20px"
+                alignItems="center"
+                justifyContent="center"
+                h="60px"
+                w="60px"
+                borderRadius="30px"
+                bg="red.100"
+              >
+                <Icon
+                  as={FiAlertTriangle}
+                  color="red.700"
+                  fontSize="30px"
+                />
+              </Flex>
+              <Box>
+                <Text fontWeight="bold" fontSize="25px" color="black.800">
+                  Atenção!
+                </Text>
+                <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
+                  Para poder continuar, é necessário adicionar ao menos um produto no carrinho.
+
+                </Text>
+              </Box>
+            </Flex>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };

@@ -54,6 +54,16 @@ const Orcamento = () => {
 
   const saveCart = async (bodyForm: any) => {
     try {
+      if (cart.length === 0) {
+        toast({
+          title: "Atenção",
+          description: "Para solicitar orçamento é necessário adicionar ao menos um produto.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return
+      }
       bodyForm = { ...bodyForm, isAprove, products: cart };
 
       setLoading(true);

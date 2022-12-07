@@ -72,8 +72,9 @@ const Product = () => {
       // const dbInstanceHome = collection(database, "home");
       // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
-
       let ex = allProductsActive.filter((el: any) => el.name == produto);
+      console.log(produto, allProductsActive, ex)
+
       let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category);
       let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie);
       let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie);
