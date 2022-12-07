@@ -188,14 +188,14 @@ const AllProduct = () => {
         favorites.map((fv: any) => (
           <Flex
             w="100%"
-            alignItems="center"
+            alignItems={"center"}
             bg="white"
             p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
           >
             <Container maxW="7xl" p="80px 0">
-              <Flex alignItems="center" flexDirection={['column', 'row']}>
+              <Flex alignItems={['flex-start', "center"]} flexDirection={['column', 'row']}>
                 {fv.url ? (
-                  <Center w="70px" h="70px" borderRadius="5px">
+                  <Center w="70px" h="70px" borderRadius="5px" mb={["20px", 0]}>
                     <Image
                       src={fv.url}
                       alt={fv.name}
@@ -209,7 +209,7 @@ const AllProduct = () => {
                     />
                   </Center>
                 ) : (
-                  <Box w="55px" h="55px" borderRadius="5px" bg="black.800" />
+                  <Box w="55px" h="55px" borderRadius="5px" bg="black.800" mb={["20px", 0]} />
                 )}
                 <Text
                   color="black.800"
@@ -219,6 +219,7 @@ const AllProduct = () => {
                   ]}
                   fontWeight="bold"
                   ml="15px"
+                  lineHeight={['40px']}
                 >
                   {fv.name}
                 </Text>

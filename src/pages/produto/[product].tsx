@@ -414,7 +414,7 @@ const Product = () => {
         w="100%"
         alignItems="center"
         bg="white"
-        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
       >
         <Container maxW="7xl" p="80px 0">
           <Flex alignItems="center" mb="40px">
