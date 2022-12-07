@@ -8,32 +8,78 @@ import PlusDetailDark from "../assets/background-details/detail-plus-dark.svg";
 import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 export const HomeBackgroundDetails = () => {
-  const square = useRef(null)
-  var container = document.getElementById('container');
-  var windowHeight = window.innerHeight;
-  var windowWidth = window.innerWidth;
-  var scrollArea = 1000 - windowHeight;
-  var square1 = document.getElementsByClassName('square')[0];
-  var square2 = document.getElementsByClassName('square')[1];
+  const [scrollY, setScrollY] = useState(0);
+  const [top1, setTop1] = useState(1440)
+  const [top2, setTop2] = useState(1930)
+  const [top3, setTop3] = useState(2545)
+  const [top4, setTop4] = useState(3555)
+  const [top5, setTop5] = useState(4417)
+  const [top6, setTop6] = useState(4417)
+  const [top7, setTop7] = useState(6655)
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
 
-  window.addEventListener('scroll', function () {
-    var scrollTop = window.pageYOffset || window.scrollTo;
-    console.log(square)
-    // var scrollPercent = scrollTop / scrollArea || 0;
+    // just trigger this so that the initial state 
+    // is updated as soon as the component is mounted
+    // related: https://stackoverflow.com/a/63408216
+    handleScroll();
 
-    // square1.style.left = scrollPercent * window.innerWidth + 'px';
-    // square2.style.left = 800 - scrollPercent * window.innerWidth * 0.6 + 'px';
-  });
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log(scrollY)
+    if (scrollY > 610 && scrollY < 670) {
+      setTop1(scrollY * 2.3)
+    }
+
+    if (scrollY > 820 && scrollY < 920) {
+      setTop2(scrollY * 2.3)
+    }
+
+    if (scrollY > 1050 && scrollY < 1150) {
+      setTop3(scrollY * 2.3)
+    }
+
+    if (scrollY > 1716 && scrollY < 1716) {
+      setTop4(scrollY * 2.3)
+    }
+
+    if (scrollY > 2000 && scrollY < 2200) {
+      setTop5(scrollY * 2)
+    }
+
+    if (scrollY > 2500 && scrollY < 2700) {
+      setTop6(scrollY * 2)
+    }
+
+    if (scrollY > 2500 && scrollY < 2700) {
+      setTop6(scrollY * 2)
+    }
+
+    if (scrollY > 3400 && scrollY < 3500) {
+      setTop7(scrollY * 2)
+    }
+
+
+  }, [scrollY])
+
   return (
     <Box zIndex={-10}>
-
       <Box
         className="square"
         bgImage={PlusDetail}
-        top={pxToRem(1440)}
+        top={scrollY > 610 && scrollY < 670 ? scrollY * 2.3 : top1}
         left={{
           lg: "10%",
           xl: "7%",
@@ -53,56 +99,87 @@ export const HomeBackgroundDetails = () => {
         bgPosition="center"
         // w="100%"
         h="100%"
-        // minH={pxToRem(200)}
+        // minH={200}
         flex={1}
-        ref={square}
       >
         <Image src={PlusDetail} alt={'lt'} />
       </Box>
-      {/* <BackgroundDetail
-        src={PlusDetail}
-        top={pxToRem(1440)}
-        left={{
-          lg: "10%",
-          xl: "7%",
-          "2xl": "15%",
-        }}
-        w={20}
-        maxH={110}
-      /> */}
-
-      <BackgroundDetail
-        src={CirclesHorizontalDetail}
-        top={pxToRem(1830)}
+      <Box
+        bgImage={CirclesHorizontalDetail}
+        top={scrollY > 820 && scrollY < 920 ? scrollY * 2.3 : top2}
         left={-20}
+        maxH={100}
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
+        zIndex={10}
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={200}
+        flex={1}
+        right="10%"
         w={300}
-        maxH={50}
-      />
+      >
+        <Image src={CirclesHorizontalDetail} alt={'lt'} />
+      </Box>
 
-      <BackgroundDetail
-        src={TrianglesDetail}
-        top={pxToRem(1915)}
+      <Box
+        bgImage={TrianglesDetail}
+        top={top2}
         right="10%"
-        w={70}
         maxH={100}
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
         zIndex={10}
-      />
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={200}
+        flex={1}
+        w={70}
+      >
+        <Image src={TrianglesDetail} alt={'lt'} />
+      </Box>
 
-      <BackgroundDetail
-        src={PlusDetailDark}
-        top={pxToRem(2545)}
+      <Box
+        bgImage={PlusDetailDark}
+        top={top3}
         right="10%"
-        w={70}
         maxH={100}
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
         zIndex={10}
-      />
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={200}
+        flex={1}
+        w={70}
+      >
+        <Image src={PlusDetailDark} alt={'lt'} />
+      </Box>
 
       <BackgroundDetail
         src={CriclesDetail}
-        top={{
-          lg: pxToRem(3220),
-          xl: pxToRem(3177),
-        }}
+        top={3220}
         left={{
           lg: "10%",
           xl: "7%",
@@ -113,49 +190,67 @@ export const HomeBackgroundDetails = () => {
         zIndex={10}
       />
 
-      <BackgroundDetail
-        src={CirclesHorizontalDetail}
-        top={pxToRem(3555)}
-        left={-20}
-        w={300}
+      <Box
+        bgImage={CirclesHorizontalDetail}
+        top={top4}
+        // right="10%"
         maxH={50}
-        zIndex={0}
-      />
-
-      <BackgroundDetail
-        src={CriclesDetail}
-        top={pxToRem(4417)}
-        left={{
-          lg: "10%",
-          xl: "7%",
-          "2xl": "10%",
+        display={{
+          base: 'none',
+          lg: 'block'
         }}
-        w={70}
-        maxH={100}
-        zIndex={10}
-      />
+        zIndex={0}
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={200}
+        flex={1}
+        w={300}
+        left={-20}
+      >
+        <Image src={CirclesHorizontalDetail} alt={'lt'} />
+      </Box>
 
+      <Box
+        bgImage={CriclesDetail}
+        top={top5}
+        // right="10%"
+        maxH={100}
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
+        zIndex={0}
+        position="absolute"
+        minH={0}
+        bgSize="85%"
+        bgRepeat="no-repeat"
+        bgPosition="center"
+        // w="100%"
+        h="100%"
+        // minH={200}
+        flex={1}
+        w={70}
+        left={"7%"}
+      >
+        <Image src={CriclesDetail} alt={'lt'} />
+      </Box>
       <BackgroundDetail
         src={CirclesHorizontalDetail}
-        top={pxToRem(5070)}
+        top={top6}
         left={-20}
         w={300}
         maxH={50}
         zIndex={0}
-      />
-
-      <BackgroundDetail
-        src={PlusDetailDark}
-        top={pxToRem(5835)}
-        left="15%"
-        w={70}
-        maxH={100}
-        zIndex={10}
       />
 
       <BackgroundDetail
         src={PlusDetail}
-        top={pxToRem(7255)}
+        top={top7}
         left="10%"
         w={70}
         maxH={100}
