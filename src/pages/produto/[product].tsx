@@ -189,7 +189,7 @@ const Product = () => {
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
       >
-        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["auto", "764px"]}>
+        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["350px", "764px"]}>
           <Swiper
             loop={true}
             pagination={{
