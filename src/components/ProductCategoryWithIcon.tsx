@@ -18,6 +18,8 @@ export const ProductCategoryWithIcon = ({
     <Flex
       p={`${pxToRem(10)}`}
       border="2px solid"
+      bg={containerProps?.bg}
+      zIndex={20}
       borderRadius="4px"
       alignItems="center"
       justifyContent="space-between"

@@ -63,6 +63,7 @@ const DescriptionProduct = ({
           src={dataTab?.urls ? dataTab.urls[0] : ""}
           alt={dataTab?.name}
           flex={1.15}
+          zIndex={30}
           minH={pxToRem(300)}
           bgSize={{
             base: "70%",
@@ -117,7 +118,7 @@ const DescriptionProduct = ({
               borderRadius="25px"
               border="2px solid"
               borderColor={borderColorButton}
-              bg="transparent"
+              bg={bg}
               m={`${pxToRem(20)} 0`}
               maxW={pxToRem(157)}
               h={pxToRem(50)}

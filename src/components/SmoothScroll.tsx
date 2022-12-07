@@ -44,7 +44,7 @@ export const SmoothScroll = ({ children }: any) => {
   };
 
   return (
-    <Box maxH="100vh" ref={scrollingContainerRef}>
+    <Box maxH="100vh" scrollBehavior="smooth" ref={scrollingContainerRef}>
       {children}
     </Box>
   );

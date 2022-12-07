@@ -63,13 +63,13 @@ const Orcamento = () => {
       console.log(bodyForm);
       await addDoc(dbInstance, bodyForm);
 
-      toast({
-        title: "Sucesso",
-        description: "Orçamento solicitado com sucesso.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      // toast({
+      //   title: "Sucesso",
+      //   description: "Orçamento solicitado com sucesso.",
+      //   status: "success",
+      //   duration: 3000,
+      //   isClosable: true,
+      // });
       await fetch(`api/mail`, {
         method: "POST",
         body: JSON.stringify({ ...bodyForm, product: product }),

@@ -90,7 +90,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const getAllProducts = async () => {
     try {
       const dbInstanceProduct = collection(database, "products");
-      const dbInstanceHome = collection(database, "home");
+      // const dbInstanceHome = collection(database, "home");
 
       let list: any = []
       await getDocs(dbInstanceProduct).then(async (data) => {
@@ -99,11 +99,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       });
 
-      await getDocs(dbInstanceHome).then(async (data) => {
-        data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id })
-        })
-      });
+      // await getDocs(dbInstanceHome).then(async (data) => {
+      //   data.docs.map((el: any, index: number) => {
+      //     list.push({ ...el.data(), id: data.docs[index].id })
+      //   })
+      // });
 
 
       setAllProducts(list)

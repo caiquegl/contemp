@@ -6,7 +6,6 @@ import {
   Center,
   Container,
   Flex,
-  HStack,
   Input,
   InputGroup,
   Link,
@@ -35,14 +34,10 @@ import { pxToRem } from "../../utils/pxToRem";
 import CardProductWithDescription from "../../components/CardProductWithDescription";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
-import { database, initFirebase } from "../../utils/db";
+import { initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
-import { SmoothScroll } from "../../components/SmoothScroll";
-import { Image } from "../../components/Image";
 import Head from "next/head";
 import { Breadcrumb } from "antd";
-import { theme } from "../../styles/theme";
 import { customSwiperBullets } from "../../utils/customSwiperBullets";
 
 const Product = () => {
@@ -174,7 +169,7 @@ const Product = () => {
   }, [allCategory, allProducts, product]);
 
   return (
-    <SmoothScroll>
+    <>
       {detail && (
         <Head>
           <meta name="description" content={detail.description_seo} />
@@ -199,9 +194,8 @@ const Product = () => {
           <Swiper
             loop={true}
             pagination={{
-              clickable: true,
-              enabled: true,
               renderBullet: customSwiperBullets,
+              clickable: true,
             }}
             modules={[Pagination]}
             className="mySwiper"
@@ -212,11 +206,11 @@ const Product = () => {
               detail.urls.map((photo: any) => (
                 <SwiperSlide>
                   <Zoom>
-                    <Center h={pxToRem(765)} width="100%" paddingBottom={4}>
-                      <Image
+                    <Center h={pxToRem(765)} width="100%">
+                      <img
                         alt={detail.name ? detail.name : ""}
                         src={photo}
-                        bgSize="contain"
+                        width="600"
                       />
                     </Center>
                   </Zoom>
@@ -372,13 +366,14 @@ const Product = () => {
           </Flex>
         </Box>
       </Flex>
+
       <Flex
+        id="description"
         justifyContent="center"
         w="100%"
         bg="white"
         pt="111px"
         px="10px"
-        id="description"
       >
         <Tabs variant="enclosed" maxW="1386px" w="100%" overflowX="auto">
           <TabList>
@@ -441,9 +436,14 @@ const Product = () => {
                 delay: 2000,
                 pauseOnMouseEnter: true,
               }}
-              pagination={true}
+              pagination={{
+                enabled: true,
+                clickable: true,
+                renderBullet: customSwiperBullets,
+              }}
               modules={[Autoplay, Pagination]}
               className="mySwiper"
+              speed={1000}
             >
               {products.map((item: any) => (
                 <SwiperSlide>
@@ -487,7 +487,7 @@ const Product = () => {
         ]}
       />
       <Footer />
-    </SmoothScroll>
+    </>
   );
 };
 

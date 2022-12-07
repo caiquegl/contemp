@@ -18,7 +18,7 @@ export const Banner = () => {
 
   return (
     <Flex
-      w="full"
+      w="100%"
       bg="black.900"
       h={pxToRem(702)}
       alignItems="center"
@@ -35,10 +35,10 @@ export const Banner = () => {
         alignItems="center"
         height="100%"
       >
-        <Box marginTop={pxToRem(157)} marginBottom={pxToRem(35)}>
+        <Box marginTop={"5%"} >
           <Image src={Team} width={pxToRem(200)} height={pxToRem(52)} />
         </Box>
-        <Flex alignItems="center" marginBottom={pxToRem(87)} minH={pxToRem(150)}>
+        <Flex w="100%" maxW="650px" flexDirection="column" marginBottom={pxToRem(87)} minH={pxToRem(150)}>
           <Text
             color="white"
             textAlign="center"
@@ -46,12 +46,19 @@ export const Banner = () => {
             fontWeight="bold"
           >
             Excelência em produtos:{' '}
+          </Text>
+
+          <Text color="white"
+            textAlign="left"
+            fontSize={["1.3rem", "1.3rem", "2.3rem"]}
+            fontWeight="bold">
             <Typewriter
               words={["Indicadores de Temperatura e Processo"]}
               loop={0}
               cursor={true}
             />
           </Text>
+
         </Flex>
         <Flex w="100%" alignItems="center" flexDirection="column">
           <SearchBar
