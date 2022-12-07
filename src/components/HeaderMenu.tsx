@@ -53,7 +53,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           title: el.name,
           key: el.name,
           onTitleClick: (value: any) => {
-            console.log(value, 'value')
             router.push(`/category/${el.name.replaceAll(' ', '_')}`)
           },
           // onclick: (value: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`),
@@ -121,7 +120,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
       <Menu
         onClick={(evt) => {
-          console.log(evt, `/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
           router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
         }}
         mode={"horizontal"}

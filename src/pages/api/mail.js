@@ -25,9 +25,6 @@ export default async (req, response) => {
             Produto: ${products}
         `;
 
-        console.log(message)
-
-        console.log('aquiiii')
         let mailSned = await mail.send({
             // to: 'kemelin@3hub.co',
             to: 'arq.caique@hotmail.com',
@@ -39,7 +36,6 @@ export default async (req, response) => {
   
       return response.json({ status: true });
     } catch (error) {
-      console.log(error.response.body, 'error');
       return response.json({ status: false });
     }
   };

@@ -8,7 +8,6 @@ export const ContainerSearch = ({
   click
 }: any) => {
   const router = useRouter()
-  console.log(searchCard)
   return (
     <Box p="10px" maxH="300px" minW={searchCard ? searchCard : "300px"} maxW={searchCard ? searchCard : "400px"} bg="black.900" position="absolute" top="50px" left={searchCard ? "0" : "-120px"} zIndex="9999999999999999999" borderRadius="10px" borderColor="white" borderWidth="2px" overflowX="auto">
       <VStack spacing="10px" divider={<Divider />}>

@@ -90,7 +90,6 @@ const Category = () => {
         });
       });
 
-      console.log(list.length);
       dividerList(list);
     } catch (error) {
       console.log(error);

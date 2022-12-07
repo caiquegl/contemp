@@ -8,13 +8,30 @@ import PlusDetailDark from "../assets/background-details/detail-plus-dark.svg";
 import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
+import { useRef } from "react";
 
 export const HomeBackgroundDetails = () => {
+  const square = useRef(null)
+  var container = document.getElementById('container');
+  var windowHeight = window.innerHeight;
+  var windowWidth = window.innerWidth;
+  var scrollArea = 1000 - windowHeight;
+  var square1 = document.getElementsByClassName('square')[0];
+  var square2 = document.getElementsByClassName('square')[1];
 
+  window.addEventListener('scroll', function () {
+    var scrollTop = window.pageYOffset || window.scrollTo;
+    console.log(square)
+    // var scrollPercent = scrollTop / scrollArea || 0;
+
+    // square1.style.left = scrollPercent * window.innerWidth + 'px';
+    // square2.style.left = 800 - scrollPercent * window.innerWidth * 0.6 + 'px';
+  });
   return (
     <Box zIndex={-10}>
 
       <Box
+        className="square"
         bgImage={PlusDetail}
         top={pxToRem(1440)}
         left={{
@@ -38,6 +55,7 @@ export const HomeBackgroundDetails = () => {
         h="100%"
         // minH={pxToRem(200)}
         flex={1}
+        ref={square}
       >
         <Image src={PlusDetail} alt={'lt'} />
       </Box>

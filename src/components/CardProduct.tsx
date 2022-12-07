@@ -13,7 +13,6 @@ interface IProps extends FlexProps {
 
 const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
   const router = useRouter();
-  console.log(img)
   return (
     <Flex
       alignItems="center"

@@ -46,7 +46,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   const saveProduct = async (body: any) => {
     try {
 
-      console.log(indexProduct)
       if (urls.length === 0 || !!!icon) {
         toast({
           title: "Erro",
@@ -98,13 +97,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
       } else {
         const dbInstanceUpdate = doc(database, "home", bodyExist.id);
 
-        console.log({
-          ...body,
-          indexProduct,
-          destaque: hasCarrocel,
-          urls,
-          icon,
-        }, bodyExist.id, indexProduct)
         await updateDoc(dbInstanceUpdate, {
           ...body,
           indexProduct,
@@ -168,7 +160,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
     setValue("link_name", defaultValues?.link_name);
     setHasCarrocel(
       defaultValues &&
-        defaultValues.hasCarrocel 
+        defaultValues.hasCarrocel
         ? true
         : false
     );
@@ -224,23 +216,23 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
               name="Foto do Produto"
               typeInput="file"
               getUrls={(values: any) => setUrls([...urls, ...values])}
-              />
-             <HStack spacing="20px" flexWrap="wrap" w="100%">
-          {urls &&
-            urls.length > 0 &&
-            urls.map((value: any, index: number) => (
-              <ViewImage
-                url={value}
-                remove={() => {
-                  let newList: any = [];
-                  urls.forEach((value: any, indexRemove: number) => {
-                    if (index != indexRemove) newList.push(value);
-                  });
-                  setUrls(newList);
-                }}
-              />
-            ))}
-        </HStack>
+            />
+            <HStack spacing="20px" flexWrap="wrap" w="100%">
+              {urls &&
+                urls.length > 0 &&
+                urls.map((value: any, index: number) => (
+                  <ViewImage
+                    url={value}
+                    remove={() => {
+                      let newList: any = [];
+                      urls.forEach((value: any, indexRemove: number) => {
+                        if (index != indexRemove) newList.push(value);
+                      });
+                      setUrls(newList);
+                    }}
+                  />
+                ))}
+            </HStack>
           </Box>
           <Box w="100%">
             <InputsHome

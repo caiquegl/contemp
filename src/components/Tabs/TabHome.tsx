@@ -28,7 +28,6 @@ const TabHome = () => {
         });
       });
       setList(newList);
-      console.log(newList)
     } catch (error) {
       toast({
         title: "Erro",

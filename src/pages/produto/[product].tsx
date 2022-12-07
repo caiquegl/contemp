@@ -27,7 +27,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper";
+import { Pagination, Autoplay, Navigation } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import { Contact } from "../../components/Contact";
 import { Player } from "../../components/Player";
@@ -73,7 +73,6 @@ const Product = () => {
       // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
       let ex = allProductsActive.filter((el: any) => el.name == produto);
-      console.log(produto, allProductsActive, ex)
 
       let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category);
       let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie);
@@ -202,14 +201,11 @@ const Product = () => {
               waitForTransition: true,
             }}
             speed={1000}
-            pagination={{
-              clickable: true,
-              enabled: true,
-              renderBullet: customSwiperBullets,
-            }}
-            modules={[Autoplay, Pagination]}
+            pagination={true}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
-            cssMode={true}
+          // cssMode={true}
           >
             {detail.urls &&
               detail.urls.length > 0 &&
