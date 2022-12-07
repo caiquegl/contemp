@@ -17,6 +17,7 @@ import {
   Tabs,
   Text,
   useBreakpointValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import Zoom from "react-medium-image-zoom";
@@ -43,6 +44,7 @@ import { customSwiperBullets } from "../../utils/customSwiperBullets";
 const Product = () => {
   const router = useRouter();
   initFirebase();
+  const toast = useToast();
   const { allCategory, allProducts, addCart } = useAuth();
 
   const { product } = router.query;
@@ -350,13 +352,20 @@ const Product = () => {
                   borderRadius="25px"
                   maxW={pxToRem(279)}
                   w="100%"
-                  onClick={() =>
+                  onClick={() => {
                     addCart({
                       product_id: detail.id,
                       variation: variation,
                       qtd,
                     })
-                  }
+                    toast({
+                      title: "Sucesso",
+                      description: "Produto adicionado com sucesso.",
+                      status: "success",
+                      duration: 3000,
+                      isClosable: true,
+                    })
+                  }}
                 >
                   <Center>Adicionar ao orçamento</Center>
                 </Button>

@@ -31,7 +31,7 @@ const Support = () => {
         w="100%"
         alignItems="center"
         bg="white"
-        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
       >
         <Container maxW="7xl" p="12px 0 77px">
           <Text fontSize="20px" color="black.900" mt="50px" lineHeight="34px">
@@ -72,7 +72,7 @@ const Support = () => {
         w="100%"
         alignItems="center"
         bg="red.600"
-        p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+        p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
       >
         <Container maxW="7xl" p="72px 0">
           <Text fontSize="45px" fontWeight="bold" textAlign="center" mb="50px">

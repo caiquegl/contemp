@@ -52,7 +52,7 @@ const Home = () => {
           "0 20px 256px 20px",
           "0 20px 256px 20px",
           "0 20px 256px 20px",
-          "0px 0 256px",
+          "0px 20px 256px 20px",
         ]}
       >
         <Container maxW="7xl" p="12px 0 31px">
@@ -154,11 +154,11 @@ const Home = () => {
       <Flex
         w="100%"
         p={[
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0px 0 256px",
+          "0 20px 0 20px",
+          "0 20px 0 20px",
+          "0 20px 0 20px",
+          "0 20px 0 20px",
+          "0px 20px 0 20px",
         ]}
         alignItems="center"
         bg="red.600"
@@ -193,16 +193,19 @@ const Home = () => {
           >
             <Box>
               <Flex alignItems="flex-start" mb="43px">
-                <Flex
-                  borderRadius="full"
-                  bg="white"
-                  w="56px"
-                  h="56px"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon as={BiTargetLock} fontSize="28px" color="red.600" />
-                </Flex>
+                <Box w="60px">
+                  <Flex
+                    borderRadius="full"
+                    bg="white"
+                    w="56px"
+                    h="56px"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon as={BiTargetLock} fontSize="28px" color="red.600" />
+                  </Flex>
+                </Box>
+
                 <Box
                   ml="20px"
                   w="100%"
@@ -222,16 +225,18 @@ const Home = () => {
                 </Box>
               </Flex>
               <Flex alignItems="flex-start" mb="43px">
-                <Flex
-                  borderRadius="full"
-                  bg="white"
-                  w="56px"
-                  h="56px"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon as={AiOutlineLike} fontSize="28px" color="red.600" />
-                </Flex>
+                <Box w="60px">
+                  <Flex
+                    borderRadius="full"
+                    bg="white"
+                    w="56px"
+                    h="56px"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon as={AiOutlineLike} fontSize="28px" color="red.600" />
+                  </Flex>
+                </Box>
                 <Box
                   ml="20px"
                   w="100%"
@@ -254,20 +259,22 @@ const Home = () => {
             </Box>
             <Box>
               <Flex alignItems="flex-start" mb="43px">
-                <Flex
-                  borderRadius="full"
-                  bg="white"
-                  w="56px"
-                  h="56px"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon
-                    as={HiOutlineDocumentText}
-                    fontSize="28px"
-                    color="red.600"
-                  />
-                </Flex>
+                <Box w="60px">
+                  <Flex
+                    borderRadius="full"
+                    bg="white"
+                    w="56px"
+                    h="56px"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon
+                      as={HiOutlineDocumentText}
+                      fontSize="28px"
+                      color="red.600"
+                    />
+                  </Flex>
+                </Box>
                 <Box
                   ml="20px"
                   w="100%"
@@ -287,16 +294,18 @@ const Home = () => {
                 </Box>
               </Flex>
               <Flex alignItems="flex-start" mb="43px">
-                <Flex
-                  borderRadius="full"
-                  bg="white"
-                  w="56px"
-                  h="56px"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon as={CgTrees} fontSize="28px" color="red.600" />
-                </Flex>
+                <Box w="60px">
+                  <Flex
+                    borderRadius="full"
+                    bg="white"
+                    w="56px"
+                    h="56px"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon as={CgTrees} fontSize="28px" color="red.600" />
+                  </Flex>
+                </Box>
                 <Box
                   ml="20px"
                   w="100%"
@@ -320,16 +329,18 @@ const Home = () => {
           </Flex>
 
           <Flex alignItems="flex-start" mb="43px" w="100%">
-            <Flex
-              borderRadius="full"
-              bg="white"
-              w="56px"
-              h="56px"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Icon as={CiMedal} fontSize="28px" color="red.600" />
-            </Flex>
+            <Box w="60px">
+              <Flex
+                borderRadius="full"
+                bg="white"
+                w="56px"
+                h="56px"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Icon as={CiMedal} fontSize="28px" color="red.600" />
+              </Flex>
+            </Box>
             <Box ml="20px" w="calc(100% - 76px)">
               <Text fontWeight="bold" fontSize="20px" mb="10px">
                 POLÍTICA DA QUALIDADE
