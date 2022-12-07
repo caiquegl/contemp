@@ -188,7 +188,6 @@ const Product = () => {
         h="100%"
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
-        flexWrap="wrap"
       >
         <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h="764px">
           <Swiper
