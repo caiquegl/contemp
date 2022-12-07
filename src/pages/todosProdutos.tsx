@@ -27,7 +27,7 @@ import { customSwiperBullets } from "../utils/customSwiperBullets";
 import { useAuth } from '../contextAuth/authContext'
 
 const AllProduct = () => {
-  const { allCategory, allProducts, allProductsHome } = useAuth()
+  const { allCategoryActive, allProductsActive, allProductsHome } = useAuth()
   const [favorites, setFavorites] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
 
@@ -45,7 +45,7 @@ const AllProduct = () => {
     try {
       let listFavorite: any = [];
 
-      allCategory.forEach((el: any) => {
+      allCategoryActive.forEach((el: any) => {
         if (el.favorite) {
           listFavorite.push({
             ...el,
@@ -58,7 +58,7 @@ const AllProduct = () => {
       if (listFavorite.length === 0) return;
       let index = 0;
       for await (let categories of listFavorite) {
-        allProducts.filter((el: any) => {
+        allProductsActive.filter((el: any) => {
           if (el.category == categories.idCategorie)
             listFavorite[index].products.push(el);
         });
@@ -80,7 +80,7 @@ const AllProduct = () => {
     try {
       let list: any = [];
 
-      allProducts.forEach((el: any) => {
+      allProductsActive.forEach((el: any) => {
         list.push({
           ...el,
           idCategorie: el.id
@@ -96,7 +96,7 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    if (allCategory.length > 0 && allProductsHome.length > 0 && allProducts.length > 0) {
+    if (allCategoryActive.length > 0 && allProductsHome.length > 0 && allProductsActive.length > 0) {
       getFavorites();
       getCategories();
     }
@@ -114,7 +114,7 @@ const AllProduct = () => {
       );
     }
     findOverflowingElements();
-  }, [allCategory, allProducts, allProductsHome]);
+  }, [allCategoryActive, allProductsActive, allProductsHome]);
 
   return (
     <SmoothScroll>

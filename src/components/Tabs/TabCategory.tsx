@@ -5,6 +5,9 @@ import {
   Flex,
   HStack,
   Icon,
+  Input,
+  InputGroup,
+  InputRightElement,
   TableContainer,
   Tbody,
   Td,
@@ -39,6 +42,7 @@ import InputsHome from "../ContainerHome/inputs";
 import { ViewImage } from "../ContainerAddProduct/ViewImage";
 import { useAuth } from "../../contextAuth/authContext";
 import { Table } from "antd";
+import { BsSearch } from "react-icons/bs";
 interface IBody {
   name: string;
   is_main?: string;
@@ -55,8 +59,10 @@ const TabCategory = () => {
   const [update, setUpdate] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [url, setUrl] = useState("");
   const [list, setList] = useState<any>([]);
+  const [listClone, setListClone] = useState<any>([]);
   const formRef = useRef<any>();
 
   const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
@@ -97,6 +103,7 @@ const TabCategory = () => {
         await addDoc(dbInstance, {
           ...bodyForm,
           favorite: isFavorite,
+          is_active: isActive,
           order: order + 1,
         });
 
@@ -156,6 +163,7 @@ const TabCategory = () => {
         await updateDoc(dbInstanceUpdate, {
           ...bodyForm,
           favorite: isFavorite,
+          is_active: isActive,
         });
         setUpdate({});
 
@@ -195,17 +203,9 @@ const TabCategory = () => {
 
   const listCategory = async () => {
     try {
-      // const dbInstance = collection(database, "categories");
-      // let newList: any = [];
-      // const q = query(dbInstance, orderBy("order", "asc"));
-      // await getDocs(q).then((data) => {
-      //   data.docs.forEach((doc) => {
-      //     newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
-      //   });
-      // });
 
       let newList = allCategory.sort((a: any, b: any) => a.order < b.order)
-
+      setListClone(newList)
       setList(newList);
     } catch (error) {
       toast({
@@ -348,7 +348,7 @@ const TabCategory = () => {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
       title: 'Ações',
@@ -367,6 +367,7 @@ const TabCategory = () => {
               setValue("key_word_seo", a.key_word_seo);
               setValue("description_seo", a.description_seo);
               setIsFavorite(a.favorite);
+              setIsActive(a.is_active);
               setUpdate(a);
               setUrl(a.url ? a.url : "");
               if (a.sub_categorie)
@@ -385,210 +386,215 @@ const TabCategory = () => {
     }
   ]
   return (
-    <HStack spacing="20px" alignItems="flex-start">
-      <Box borderRadius="8px" bg="white" p="30px" w="100%">
-        {/* <TableContainer>
-          <Table color="black.800">
-            <Thead>
-              <Tr>
-                <Th>
-                  <Text fontWeight="bold">Ordem</Text>
-                </Th>
-                <Th>
-                  <Text fontWeight="bold">Nome</Text>
-                </Th>
-                <Th>
-                  <Text fontWeight="bold">Ações</Text>
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {list.length > 0 &&
-                list.map((value: any) => (
-                  <Tr>
-                    <Td>
-                      <EditOrder value={value} changerOrder={changerOrder} />
-                    </Td>
-                    <Td>{value.name}</Td>
-                    <Td>
-                      <HStack spacing="20px">
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineEdit}
-                          fontSize="17px"
-                          onClick={() => {
-                            setValue("name", value.name);
-                            setValue("is_main", value.is_main);
-                            setValue("description", value.description);
-                            setValue("favorite", value.favorite);
-                            setIsFavorite(value.favorite);
-                            setUpdate(value);
-                            setUrl(value.url ? value.url : "");
-                            if (value.sub_categorie)
-                              setValue("sub_categorie", value.sub_categorie);
-                          }}
-                        />
-                        <Icon
-                          cursor="pointer"
-                          as={AiOutlineClose}
-                          fontSize="17px"
-                          color="red.500"
-                          onClick={() => deleteCategory(value)}
-                        />
-                      </HStack>
-                    </Td>
-                  </Tr>
-                ))}
-            </Tbody>
-          </Table>
-        </TableContainer> */}
-        <Table dataSource={list} columns={column} />
-      </Box>
-      <Box
-        borderRadius="8px"
-        bg="white"
-        p="30px"
-        w="379px"
-        as="form"
-        onSubmit={handleSubmit(saveCategory)}
-        ref={formRef}
+    <>
+      <Flex
+        w="100%"
+        alignItems="center"
+        justifyContent="flex-end"
+        mb="18px"
       >
-        <VStack spacing="20px" w="100%">
-          <InputDefault
-            label="Nome da categoria"
+        <InputGroup
+          borderRadius="25px"
+          bg="white.500"
+          p="3px 7px"
+          w="100%"
+          h="50px"
+          maxW="288px"
+          outline="none"
+          border="1px solid"
+          borderColor="black.800"
+          color="black.800"
+          mb="20px"
+        >
+          <Input
+            w="100%"
+            height="100%"
+            border="none"
+            borderRadius="21px"
+            placeholder="Digite a categoria..."
             type="text"
-            error={errors.name}
-            {...register("name", { required: "Nome é obrigatório" })}
+            onChange={(evt) => {
+              let newList = listClone.filter((item: any) =>
+                item.name
+                  .toLowerCase()
+                  .includes(evt.target.value.toLowerCase())
+              );
+              setList(newList);
+            }}
+            _focusVisible={{
+              outline: "none",
+            }}
           />
-          <SelectDefault
-            label="É principal?"
-            error={errors.is_main}
-            defaultValue={update.is_main}
-            opt={[
-              { name: "SIM", value: "true" },
-              { name: "NÃO", value: "false" },
-            ]}
-            {...register("is_main", { required: "Campo obrigatório" })}
+          <InputRightElement
+            children={<Icon as={BsSearch} fontSize="20px" />}
           />
-          {watch().is_main == "false" && (
-            <SelectDefault
-              label="Selecione a categoria"
-              error={errors.sub_categorie}
-              defaultValue={update.sub_categorie}
-              opt={list.map((value: any) => {
-                return {
-                  name: value.name,
-                  value: value.id,
-                };
-              })}
-              {...register("sub_categorie", { required: "Campo obrigatório" })}
+        </InputGroup>
+      </Flex>
+      <HStack spacing="20px" alignItems="flex-start">
+        <Box borderRadius="8px" bg="white" p="30px" w="100%">
+          <Table dataSource={list} columns={column} />
+        </Box>
+        <Box
+          borderRadius="8px"
+          bg="white"
+          p="30px"
+          w="379px"
+          as="form"
+          onSubmit={handleSubmit(saveCategory)}
+          ref={formRef}
+        >
+          <VStack spacing="20px" w="100%">
+            <InputDefault
+              label="Nome da categoria"
+              type="text"
+              error={errors.name}
+              {...register("name", { required: "Nome é obrigatório" })}
             />
-          )}
-          <TextareaDefault
-            label="Descrição"
-            error={errors.description}
-            {...register("description", {
-              required: "Descrição é obrigatório",
-            })}
-          />
-          <TextareaDefault
-            label="Descrição SEO"
-            error={errors.description_seo}
-            {...register("description_seo", {
-              required: "Descrição é obrigatório",
-            })}
-          />
-          <TextareaDefault
-            label="Key Word SEO"
-            error={errors.key_word_seo}
-            {...register("key_word_seo", {
-              required: "Key Word Seo é obrigatório",
-            })}
-          />
-          <InputsHome
-            name="Foto do icone"
-            typeInput="fileSingle"
-            getUrls={(values: any) => setUrl(values)}
-          />
-          <HStack spacing="20px" flexWrap="wrap" w="100%">
-            {url && (
-              <ViewImage
-                url={url}
-                remove={() => {
-                  setUrl("");
-                }}
+            <SelectDefault
+              label="É principal?"
+              error={errors.is_main}
+              defaultValue={update.is_main}
+              opt={[
+                { name: "SIM", value: "true" },
+                { name: "NÃO", value: "false" },
+              ]}
+              {...register("is_main", { required: "Campo obrigatório" })}
+            />
+            {watch().is_main == "false" && (
+              <SelectDefault
+                label="Selecione a categoria"
+                error={errors.sub_categorie}
+                defaultValue={update.sub_categorie}
+                opt={list.map((value: any) => {
+                  return {
+                    name: value.name,
+                    value: value.id,
+                  };
+                })}
+                {...register("sub_categorie", { required: "Campo obrigatório" })}
               />
             )}
-          </HStack>
-          <Box w="100%">
-            <Checkbox
-              colorScheme="red"
-              color="black.800"
-              mr="auto"
-              fontSize="20px"
-              height="17px"
-              isChecked={isFavorite}
-              onChange={(evt) => setIsFavorite(evt.target.checked)}
-            >
-              Categoria destaque
-            </Checkbox>
-          </Box>
+            <TextareaDefault
+              label="Descrição"
+              error={errors.description}
+              {...register("description", {
+                required: "Descrição é obrigatório",
+              })}
+            />
+            <TextareaDefault
+              label="Descrição SEO"
+              error={errors.description_seo}
+              {...register("description_seo", {
+                required: "Descrição é obrigatório",
+              })}
+            />
+            <TextareaDefault
+              label="Key Word SEO"
+              error={errors.key_word_seo}
+              {...register("key_word_seo", {
+                required: "Key Word Seo é obrigatório",
+              })}
+            />
+            <InputsHome
+              name="Foto do icone"
+              typeInput="fileSingle"
+              getUrls={(values: any) => setUrl(values)}
+            />
+            <HStack spacing="20px" flexWrap="wrap" w="100%">
+              {url && (
+                <ViewImage
+                  url={url}
+                  remove={() => {
+                    setUrl("");
+                  }}
+                />
+              )}
+            </HStack>
+            <Box w="100%">
+              <Checkbox
+                colorScheme="red"
+                color="black.800"
+                mr="auto"
+                fontSize="20px"
+                height="17px"
+                isChecked={isFavorite}
+                onChange={(evt) => setIsFavorite(evt.target.checked)}
+              >
+                Categoria destaque
+              </Checkbox>
+            </Box>
 
-          {/* <CheckboxDefault
+            <Box w="100%" mt="10px">
+              <Checkbox
+                colorScheme="red"
+                color="black.800"
+                mr="auto"
+                fontSize="20px"
+                height="17px"
+                isChecked={isActive}
+                onChange={(evt) => setIsActive(evt.target.checked)}
+              >
+                Ativo
+              </Checkbox>
+            </Box>
+
+            {/* <CheckboxDefault
             label="Categoria destaque"
             error={errors.favorite}
             defaultCheck={update.favorite}
             {...register("favorite")}
           /> */}
-        </VStack>
-        <Flex
-          alignItems="center"
-          justifyContent={
-            Object.keys(update).length > 0 ? "space-between" : "flex-end"
-          }
-          mt="53px"
-          w="100%"
-        >
-          {Object.keys(update).length > 0 && (
+          </VStack>
+          <Flex
+            alignItems="center"
+            justifyContent={
+              Object.keys(update).length > 0 ? "space-between" : "flex-end"
+            }
+            mt="53px"
+            w="100%"
+          >
+            {Object.keys(update).length > 0 && (
+              <Button
+                ml="auto"
+                bg="transparent"
+                color="black.800"
+                fontSize="20px"
+                borderRadius="4px"
+                borderColor="black.800"
+                borderWidth="1px"
+                w="88px"
+                h="47px"
+                isLoading={loading}
+                _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+                onClick={() => {
+                  setUpdate({});
+                  setUrl("");
+                  reset();
+                }}
+                type="button"
+              >
+                Cancelar
+              </Button>
+            )}
             <Button
               ml="auto"
-              bg="transparent"
-              color="black.800"
+              bg="red.600"
+              color="white"
               fontSize="20px"
               borderRadius="4px"
-              borderColor="black.800"
-              borderWidth="1px"
-              w="88px"
+              w="128px"
               h="47px"
               isLoading={loading}
               _hover={{ transition: "all 0.4s", opacity: 0.7 }}
-              onClick={() => {
-                setUpdate({});
-                setUrl("");
-                reset();
-              }}
-              type="button"
+              type="submit"
             >
-              Cancelar
+              Salvar
             </Button>
-          )}
-          <Button
-            ml="auto"
-            bg="red.600"
-            color="white"
-            fontSize="20px"
-            borderRadius="4px"
-            w="128px"
-            h="47px"
-            isLoading={loading}
-            _hover={{ transition: "all 0.4s", opacity: 0.7 }}
-            type="submit"
-          >
-            Salvar
-          </Button>
-        </Flex>
-      </Box>
-    </HStack>
+          </Flex>
+        </Box>
+      </HStack>
+    </>
+
   );
 };
 

@@ -19,7 +19,7 @@ export const SearchBar = ({
   inputProps,
   searchCard
 }: SearchBarProps) => {
-  const { allProducts } = useAuth()
+  const { allProductsActive } = useAuth()
   const [listProducts, setListProducts] = useState<any>([])
   const router = useRouter()
   return (
@@ -48,7 +48,7 @@ export const SearchBar = ({
             setListProducts([])
             return
           }
-          let list = allProducts.filter((el: any) => el.name.toLowerCase().includes(value))
+          let list = allProductsActive.filter((el: any) => el.name.toLowerCase().includes(value))
           setListProducts(list)
         }}
         _placeholder={{ color: 'white.500', opacity: '50%' }}

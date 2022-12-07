@@ -33,7 +33,7 @@ import Head from "next/head";
 import { useAuth } from '../contextAuth/authContext'
 
 const Home = () => {
-  const { allProductsHome, allCategory } = useAuth()
+  const { allProductsHome, allCategoryActive } = useAuth()
   const router = useRouter();
   const [listTab, setListtAB] = useState<any>([]);
 
@@ -44,7 +44,7 @@ const Home = () => {
       allProductsHome.forEach((el: any) => {
         organize.push({
           ...el,
-          nameCategory: allCategory.find((ce: any) => ce.id == el.category).name,
+          nameCategory: allCategoryActive.find((ce: any) => ce.id == el.category).name,
         })
       })
 
@@ -55,8 +55,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (allCategory.length > 0 && allProductsHome.length > 0) getHomeTab();
-  }, [allCategory, allProductsHome]);
+    if (allCategoryActive.length > 0 && allProductsHome.length > 0) getHomeTab();
+  }, [allCategoryActive, allProductsHome]);
 
   return (
     <SmoothScroll>

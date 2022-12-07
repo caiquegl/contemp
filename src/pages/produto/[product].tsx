@@ -45,7 +45,7 @@ const Product = () => {
   const router = useRouter();
   initFirebase();
   const toast = useToast();
-  const { allCategory, allProducts, addCart } = useAuth();
+  const { allCategoryActive, allProductsActive, addCart } = useAuth();
 
   const { product } = router.query;
   const [detail, setDetail] = useState<any>({});
@@ -73,11 +73,11 @@ const Product = () => {
       // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
 
-      let ex = allProducts.filter((el: any) => el.name == produto);
-      let cg1 = allCategory.filter((el: any) => el.id == ex[0].category);
-      let cg2 = allCategory.filter((el: any) => el.id == cg1[0]?.sub_categorie);
-      let cg3 = allCategory.filter((el: any) => el.id == cg2[0]?.sub_categorie);
-      let cg4 = allCategory.filter((el: any) => el.id == cg3[0]?.sub_categorie);
+      let ex = allProductsActive.filter((el: any) => el.name == produto);
+      let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category);
+      let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie);
+      let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie);
+      let cg4 = allCategoryActive.filter((el: any) => el.id == cg3[0]?.sub_categorie);
 
       let id = "";
       let names: any = [];
@@ -108,13 +108,13 @@ const Product = () => {
 
       let idCategory: any = [];
 
-      allCategory.forEach((el: any) => {
+      allCategoryActive.forEach((el: any) => {
         if (el.id == id) {
           idCategory.push(el.id);
-          allCategory.forEach((el2: any) => {
+          allCategoryActive.forEach((el2: any) => {
             if (el2.sub_categorie && el2.sub_categorie == el.id) {
               idCategory.push(el2.id);
-              allCategory.forEach((el3: any) => {
+              allCategoryActive.forEach((el3: any) => {
                 if (el3.sub_categorie && el3.sub_categorie == el2.id) {
                   idCategory.push(el3.id);
                 }
@@ -126,7 +126,7 @@ const Product = () => {
 
       let list: any = [];
 
-      allProducts.forEach((el: any) => {
+      allProductsActive.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
           if (el.category == ct) list.push(el);
         });
@@ -168,7 +168,7 @@ const Product = () => {
     if (product) {
       getProduct();
     }
-  }, [allCategory, allProducts, product]);
+  }, [allCategoryActive, allProductsActive, product]);
 
   return (
     <>

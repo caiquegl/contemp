@@ -8,12 +8,12 @@ import DefaultImg from '../assets/images/image-default.webp'
 import { useAuth } from '../contextAuth/authContext'
 
 const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
-  const { allProducts } = useAuth()
+  const { allProductsActive } = useAuth()
   const router = useRouter();
   const [products, setProduct] = useState<any>({})
 
   const getProduct = async () => {
-    let find = allProducts.find((el: any) => el.id == data.product_id)
+    let find = allProductsActive.find((el: any) => el.id == data.product_id)
     setProduct(find)
   }
 
@@ -23,7 +23,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
 
   useEffect(() => {
     getProduct()
-  }, [data, allProducts])
+  }, [data, allProductsActive])
   if (products == undefined) return (<Box />)
   return (
     <Flex

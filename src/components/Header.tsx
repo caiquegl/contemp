@@ -43,7 +43,7 @@ import { useRouter } from "next/router";
 
 export const Header = () => {
   const router = useRouter();
-  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategory } = useAuth();
+  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategoryActive } = useAuth();
   const [list, setList] = useState([]);
 
   const isDrawerSiderbar = useBreakpointValue({
@@ -54,13 +54,13 @@ export const Header = () => {
   const listCategory = async () => {
     try {
 
-      let categories: any = allCategory.filter((el: any) => el.is_main == "true")
+      let categories: any = allCategoryActive.filter((el: any) => el.is_main == "true")
       let newList: any = [];
 
       for await (let categ of categories) {
         let list_sub_category: any = [];
 
-        allCategory.forEach((el: any) => {
+        allCategoryActive.forEach((el: any) => {
           if (el.sub_categorie == categ.id)
             list_sub_category.push({ ...el, id: el.id });
         });
@@ -70,7 +70,7 @@ export const Header = () => {
         list_sub_category.forEach((el: any) => {
           let list_sub_category2: any = [];
 
-          allCategory.forEach((c: any) => {
+          allCategoryActive.forEach((c: any) => {
             if (c.sub_categorie == el.id)
               list_sub_category2.push({ ...c, id: c.id });
           });
@@ -91,8 +91,8 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    if (allCategory.length > 0) listCategory();
-  }, [allCategory]);
+    if (allCategoryActive.length > 0) listCategory();
+  }, [allCategoryActive]);
 
   if (isDrawerSiderbar) {
     return (

@@ -24,6 +24,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const toast = useToast();
   const formRef = useRef<any>();
   const [hasVariation, setHasVariation] = useState<any>(false);
+  const [isActive, setIsActive] = useState<any>(false);
   const [destaque, setDestaque] = useState<any>(false);
   const [listVariation, setListVariation] = useState<any>([{ id: 1 }]);
   const [list, setList] = useState<any>([]);
@@ -34,7 +35,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const { errors } = formState;
 
   const saveProduct = async (bodyForm: any) => {
-    let body = { ...bodyForm, hasVariation, urls, destaque };
+    let body = { ...bodyForm, hasVariation, urls, destaque, is_active: isActive };
     if (hasVariation) {
       let falt = false;
       let more = false;
@@ -100,6 +101,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setValue("description_seo", defaultValues?.description_seo);
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false);
     setDestaque(defaultValues && defaultValues.destaque ? true : false);
+    setIsActive(defaultValues && defaultValues.is_active ? true : false);
     if (defaultValues.listVariation) {
       setListVariation(defaultValues.listVariation);
     }
@@ -205,6 +207,18 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             onChange={(check) => setDestaque(check.target.checked)}
           >
             Adicionar ao corrocel de destaque ?
+          </Checkbox>
+          <Checkbox
+            colorScheme="red"
+            color="black.800"
+            mr="auto"
+            fontSize="20px"
+            height="17px"
+            checked={isActive}
+            isChecked={isActive}
+            onChange={(check) => setIsActive(check.target.checked)}
+          >
+            Ativo
           </Checkbox>
         </Flex>
       </VStack>

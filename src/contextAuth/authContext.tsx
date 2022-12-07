@@ -21,6 +21,7 @@ type UserAuthContextData = {
   setListHeader: any;
   setAllProducts: any;
   allProducts: any
+  allProductsActive: any
   cart: any
   setCart: any
   addCart: any
@@ -31,6 +32,7 @@ type UserAuthContextData = {
   onOpen: any
   totalCart: any
   allCategory: any
+  allCategoryActive: any
   reload: any
   allProductsHome: any
   loading: any
@@ -41,8 +43,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUserContext] = useState({});
   const [listHeader, setListHeader] = useState<any>([]);
   const [allProducts, setAllProducts] = useState<any>([]);
+  const [allProductsActive, setAllProductsActive] = useState<any>([]);
   const [allProductsHome, setAllProductsHome] = useState<any>([]);
   const [allCategory, setAllCategory] = useState<any>([]);
+  const [allCategoryActive, setAllCategoryActive] = useState<any>([]);
   const [cart, setCart] = useState<any>([]);
   const [totalCart, setTotalCart] = useState<any>(0);
   const [loading, setLoading] = useState<any>(false);
@@ -85,6 +89,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       });
 
+      let active = list.filter((el: any) => el.is_active == true)
+      setAllCategoryActive(active)
       setAllCategory(list)
     } catch (error) {
       console.log(error)
@@ -94,7 +100,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const getAllProducts = async () => {
     try {
       const dbInstanceProduct = collection(database, "products");
-      // const dbInstanceHome = collection(database, "home");
 
       let list: any = []
       await getDocs(dbInstanceProduct).then(async (data) => {
@@ -103,13 +108,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       });
 
-      // await getDocs(dbInstanceHome).then(async (data) => {
-      //   data.docs.map((el: any, index: number) => {
-      //     list.push({ ...el.data(), id: data.docs[index].id })
-      //   })
-      // });
-
-
+      let active = list.filter((el: any) => el.is_active == true)
+      setAllProductsActive(active)
       setAllProducts(list)
     } catch (error) {
       console.log(error)
@@ -200,7 +200,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getItemLocal()
   }, [])
   return (
-    <UserAuthContext.Provider value={{ loading, allProductsHome, reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
+    <UserAuthContext.Provider value={{ allCategoryActive, allProductsActive, loading, allProductsHome, reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
       {children}
     </UserAuthContext.Provider>
   );

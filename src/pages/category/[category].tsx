@@ -21,7 +21,7 @@ for (let i = 0; i < 56; i++) {
 
 const Category = () => {
   const router = useRouter();
-  const { allCategory, allProducts } = useAuth();
+  const { allCategoryActive, allProductsActive } = useAuth();
 
   const { category } = router.query;
   const [list, setList] = useState<any>([]);
@@ -64,13 +64,13 @@ const Category = () => {
       let nameCategory = "";
       if (category && typeof category == "string")
         nameCategory = category.replaceAll("_", " ");
-      allCategory.forEach((el: any) => {
+      allCategoryActive.forEach((el: any) => {
         if (el.name == nameCategory) {
           idCategory.push(el.id);
-          allCategory.forEach((el2: any) => {
+          allCategoryActive.forEach((el2: any) => {
             if (el2.sub_categorie && el2.sub_categorie == el.id) {
               idCategory.push(el2.id);
-              allCategory.forEach((el3: any) => {
+              allCategoryActive.forEach((el3: any) => {
                 if (el3.sub_categorie && el3.sub_categorie == el2.id) {
                   idCategory.push(el3.id);
                 }
@@ -80,11 +80,11 @@ const Category = () => {
         }
       });
 
-      let categFind = allCategory.find((el: any) => el.name == nameCategory);
+      let categFind = allCategoryActive.find((el: any) => el.name == nameCategory);
       setCateg(categFind);
       let list: any = [];
 
-      allProducts.forEach((el: any) => {
+      allProductsActive.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
           if (el.category == ct) list.push(el);
         });
@@ -101,7 +101,7 @@ const Category = () => {
     if (category) {
       getCategoryList();
     }
-  }, [category, allCategory, allProducts]);
+  }, [category, allCategoryActive, allProductsActive]);
 
   return (
     <SmoothScroll>

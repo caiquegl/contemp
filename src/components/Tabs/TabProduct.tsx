@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { deleteDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
 import { database, initFirebase } from "../../utils/db";
@@ -187,56 +187,6 @@ const TabProduct = () => {
           </Flex>
           <Box borderRadius="8px" bg="white" p="30px" w="100%">
             <Table dataSource={list} columns={column} />
-            {/* <TableContainer>
-              <Table color="black.800">
-                <Thead>
-                  <Tr>
-                    <Th>
-                      <Text fontWeight="bold">Nome</Text>
-                    </Th>
-                    <Th>
-                      <Text fontWeight="bold">Categoria</Text>
-                    </Th>
-                    <Th>
-                      <Text fontWeight="bold">Url</Text>
-                    </Th>
-                    <Th />
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {list.length > 0 &&
-                    list.map((table: any) => (
-                      <Tr>
-                        <Td>{table.name}</Td>
-                        <Td>{table.nameCategory}</Td>
-                        <Td>url</Td>
-                        <Td>
-                          <HStack spacing="20px">
-                            <Icon
-                              cursor="pointer"
-                              as={AiOutlineEdit}
-                              fontSize="17px"
-                              onClick={() => {
-                                console.log(JSON.stringify(table, null, 2))
-                                setBody(table);
-                                setIsUpdate(true);
-                                setStep(2);
-                              }}
-                            />
-                            <Icon
-                              cursor="pointer"
-                              as={AiOutlineClose}
-                              fontSize="17px"
-                              color="red.500"
-                              onClick={() => deleteProduct(table)}
-                            />
-                          </HStack>
-                        </Td>
-                      </Tr>
-                    ))}
-                </Tbody>
-              </Table>
-            </TableContainer> */}
           </Box>
         </>
       )}

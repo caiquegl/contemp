@@ -18,7 +18,7 @@ import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
 import { useAuth } from '../contextAuth/authContext'
 export const Favorite = () => {
-  const { allProducts, allProductsHome, allCategory } = useAuth()
+  const { allProductsActive, allProductsHome, allCategoryActive } = useAuth()
   const router = useRouter();
   const toast = useToast();
   const [products, setProducts] = useState<any>([]);
@@ -67,11 +67,11 @@ export const Favorite = () => {
     try {
       let newList: any = [];
 
-      allProducts.forEach((el: any) => {
+      allProductsActive.forEach((el: any) => {
         if (el.destaque) {
           newList.push({
             ...el,
-            nameCategory: allCategory.find((ec: any) => ec.id == el.category).name
+            nameCategory: allCategoryActive.find((ec: any) => ec.id == el.category).name
           })
         }
       })
@@ -80,7 +80,7 @@ export const Favorite = () => {
         if (el.destaque) {
           newList.push({
             ...el,
-            nameCategory: allCategory.find((ec: any) => ec.id == el.category).name
+            nameCategory: allCategoryActive.find((ec: any) => ec.id == el.category).name
           })
         }
       })
@@ -100,7 +100,7 @@ export const Favorite = () => {
   const getHomeTab1 = async () => {
     try {
       let find = allProductsHome.find((el: any) => el.indexProduct == 0)
-      let tab1 = { ...find, nameCategory: allCategory.find((el: any) => el.id == find.category).name };
+      let tab1 = { ...find, nameCategory: allCategoryActive.find((el: any) => el.id == find.category).name };
 
       if (Object.keys(tab1).length === 0) return;
       setHomeTabs({ ...homeTabs, tab1 });
@@ -117,11 +117,11 @@ export const Favorite = () => {
   };
 
   useEffect(() => {
-    if (allCategory.length > 0 && allProducts.length > 0 && allProductsHome.length > 0) {
+    if (allCategoryActive.length > 0 && allProductsActive.length > 0 && allProductsHome.length > 0) {
       listProductDestaque();
       getHomeTab1();
     }
-  }, [allCategory, allProducts, allProductsHome]);
+  }, [allCategoryActive, allProductsActive, allProductsHome]);
 
   return (
     <Container
