@@ -190,10 +190,10 @@ const AllProduct = () => {
             w="100%"
             alignItems="center"
             bg="white"
-            p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
+            p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
           >
             <Container maxW="7xl" p="80px 0">
-              <Flex alignItems="center">
+              <Flex alignItems="center" flexDirection={['column', 'row']}>
                 {fv.url ? (
                   <Center w="70px" h="70px" borderRadius="5px">
                     <Image
@@ -261,7 +261,7 @@ const AllProduct = () => {
       <Box bg="white" w="100%" p="20px">
         <AdBanners />
       </Box>
-      <Flex w="100%" alignItems="center" bg="white.500">
+      <Flex w="100%" alignItems="center" bg="white.500" p="0 20px">
         <Container maxW="7xl" p="80px 0">
           <Text
             color="black.800"
