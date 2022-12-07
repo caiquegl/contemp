@@ -49,7 +49,7 @@ export const Banner = () => {
           </Text>
 
           <Text color="white"
-            textAlign="left"
+            textAlign={['center', "left"]}
             fontSize={["1.3rem", "1.3rem", "2.3rem"]}
             fontWeight="bold">
             <Typewriter

@@ -106,7 +106,6 @@ const DescriptionProduct = ({
             w="100%"
             margin={`${pxToRem(10)} 0`}
             zIndex={90}
-            flex={1}
             bg={bg}
           >
             {dataTab?.description}
