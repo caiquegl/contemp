@@ -116,6 +116,7 @@ const AllProduct = () => {
     findOverflowingElements();
   }, [allCategoryActive, allProductsActive, allProductsHome]);
 
+
   return (
     <SmoothScroll>
       <Head>

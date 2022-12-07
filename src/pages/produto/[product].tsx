@@ -192,21 +192,24 @@ const Product = () => {
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
       >
-        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["350px", "764px"]}>
+        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["350px", "804px"]}>
           <Swiper
-            loop={true}
             slidesPerView={1}
+            spaceBetween={30}
             autoplay={{
               delay: 2000,
+              pauseOnMouseEnter: true,
+              waitForTransition: true,
             }}
             speed={1000}
+            pagination={{
+              clickable: true,
+              enabled: true,
+              renderBullet: customSwiperBullets,
+            }}
             modules={[Autoplay, Pagination]}
             className="mySwiper"
-            style={{
-              margin: "auto",
-              width: "100%",
-              alignItems: "center",
-            }}
+            cssMode={true}
           >
             {detail.urls &&
               detail.urls.length > 0 &&
