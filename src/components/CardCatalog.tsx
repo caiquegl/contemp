@@ -43,7 +43,8 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
             border="2px solid"
             borderColor={color}
             borderRadius="25px"
-            w="243px"
+            w="100%"
+            maxW="243px"
             h="50px"
             bg={bg}
             fontSize="20px"
