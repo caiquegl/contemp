@@ -258,9 +258,9 @@ const AllProduct = () => {
             </Container>
           </Flex>
         ))}
-
-      <AdBanners />
-
+      <Box bg="white" w="100%" p="20px">
+        <AdBanners />
+      </Box>
       <Flex w="100%" alignItems="center" bg="white.500">
         <Container maxW="7xl" p="80px 0">
           <Text
