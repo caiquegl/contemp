@@ -172,7 +172,9 @@ const Calibracao = () => {
               </Center>
 
             </Box>
-            <Box>
+            <Box
+              mt={["10px", 0]}
+            >
               <Flex alignItems="center">
                 <Box w="115px" h="115px" mr="35px">
                   <Image src={Imetro} width="115px" height="115px" />

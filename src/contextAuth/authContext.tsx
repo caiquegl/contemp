@@ -8,7 +8,7 @@ import {
 import Cookies from "js-cookie";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, database } from "../utils/db";
-import { Box, Button, Flex, HStack, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, HStack, Link, Text, useDisclosure } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 interface AuthProviderProps {
   children: ReactNode;
@@ -219,40 +219,60 @@ export function AuthProvider({ children }: AuthProviderProps) {
       {hasCookie &&
         <Flex
           w="100%"
-          maxW="400px"
+          maxW="440px"
           h="280px"
-          borderRadius="10px"
+          borderRadius="6px"
           position="fixed"
           bg="red.600"
-          bottom="20px"
+          bottom="10px"
           left="20px"
-          p="20px 10px"
+          p="20px 26px"
           flexDirection="column"
           justifyContent="space-between"
+          boxShadow="0 -1px 10px 0 #acabab4d;"
+          zIndex={999999}
         >
           <Text fontWeight="bold" color="white" fontSize="20px" mb="10px">
             Valorizamos sua privacidade
           </Text>
           <Text color="white" fontSize="18px" mb="10px">
             Utilizamos cookies para aprimorar sua experiência de navegação, exibir anúncios ou conteúdos personalizado e analisar nosso tráfego. Ao clicar em "Aceitar todos", você concorda com nosso uso de cookies.
+            <Link as="span" ml="5px" isExternal href="https://contemp.com.br/blog/politica-de-privacidade">
+              Leia mais
+            </Link>
           </Text>
-          <HStack spacing="20px">
-            <Button
-              onClick={() => acepetCookie()}
-              _hover={{
-                opacity: 0.7
-              }} bg="transparent" border="2px solid white" textAlign="center" borderRadius="20px" height="40px" p="10px" color="white">
-              Rejeitar
-            </Button>
-            <Button
-              w="130px"
-              onClick={() => acepetCookie()}
-              _hover={{
-                opacity: 0.7
-              }} bg="transparent" border="2px solid white" textAlign="center" borderRadius="20px" height="40px" p="10px" color="white">
-              Aceitar
-            </Button>
-          </HStack>
+          <Flex alignItems="center" justifyContent="flex-end">
+            <HStack spacing="10px">
+              <Button
+                onClick={() => acepetCookie()}
+                _hover={{
+                  opacity: 0.7
+                }}
+                bg="transparent"
+                border="2px solid white"
+                textAlign="center"
+                borderRadius="20px"
+                height="40px"
+                p="10px 20px"
+                color="white"
+              >
+                Rejeitar
+              </Button>
+              <Button
+                w="130px"
+                bg="white"
+                border="none"
+                onClick={() => acepetCookie()}
+                _hover={{
+                  opacity: 0.7
+                }}
+                color="black.800"
+                textAlign="center" borderRadius="20px" height="40px" p="10px">
+                Aceitar
+              </Button>
+            </HStack>
+          </Flex>
+
         </Flex>
       }
       {children}
