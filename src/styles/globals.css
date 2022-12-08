@@ -170,3 +170,7 @@ body {
 .ant-menu-submenu  {
   padding: 0px 1rem !important;
 }
+
+.ant-menu-item-only-child {
+  padding-left: 16px !important;
+}
