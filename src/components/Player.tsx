@@ -31,7 +31,7 @@ export const Player = () => {
       {!isMobile && (
         <Box w="100%" maxW={pxToRem(700)} mr="40px">
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
             height={pxToRem(533)}
             width="100%"
           />
@@ -72,7 +72,7 @@ export const Player = () => {
         ) : (
           <Box w="100%" maxW="359px" h="195px">
             <ReactPlayer
-              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+              url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
               width="300px"
               height="195px"
             />
