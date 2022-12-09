@@ -16,5 +16,5 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/ContainerAddProductDescription/index.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "u614611595"]
 }
