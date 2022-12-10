@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-            <Script src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js" />
+          <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js" ></script>
         </body>
       </Html>
     );
