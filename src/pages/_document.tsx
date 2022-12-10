@@ -1,3 +1,4 @@
+import Script from "next/script";
 import Document, {
   Html,
   Main,
@@ -6,6 +7,7 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
+
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -30,6 +32,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+            <Script src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js" />
         </body>
       </Html>
     );
