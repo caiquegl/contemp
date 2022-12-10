@@ -95,7 +95,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
               width="100%"
               height="100%"
             >
-              <form id={id} method="POST" onSubmit={(e) => e.preventDefault()}>
+              <form id={id} method="POST">
                 <VStack spacing="18px">
                   {form &&
                     form.length > 0 &&
