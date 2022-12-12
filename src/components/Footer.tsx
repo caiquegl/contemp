@@ -20,7 +20,6 @@ import {
 } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
-import { useSidebarDrawer } from "../contexts/SidebarDrawerContexts";
 import { useAuth } from "../contextAuth/authContext";
 import { useRouter } from "next/router";
 export const Footer = () => {
