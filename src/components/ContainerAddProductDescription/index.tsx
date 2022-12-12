@@ -11,22 +11,19 @@ import {
   Icon,
   useToast,
 } from "@chakra-ui/react";
-import { BaseSyntheticEvent, useEffect, useRef, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { database, initFirebase } from "../../utils/db";
-import CKeditor from "../CKEditor";
 import {
   addDoc,
   collection,
   getDocs,
   limit,
-  orderBy,
   query,
   where,
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { AiFillEye } from "react-icons/ai";
 import EditTab from "./editTab";
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
@@ -103,7 +100,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
       const dbInstance = collection(database, "products");
       let exist = false;
-      const q = query(dbInstance, orderBy("order", "desc"), limit(1));
+      // const q = query(dbInstance, orderBy("order", "desc"), limit(1));
       const qExist = query(
         dbInstance,
         where("name", "==", values.name),
