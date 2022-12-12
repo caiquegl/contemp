@@ -13,6 +13,7 @@ import {
   Text,
   Textarea,
   VStack,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsTelephone } from "react-icons/bs";
@@ -56,16 +57,20 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
               <>
                 <HStack spacing="20px" mb="22px">
                   <Icon as={BsTelephone} fontSize="20px" color="red.600" />
+                  <Link href="tel:1142265140" _hover={{ textDecoration: 'none' }} target="_blank">
                   <Text fontSize="20px" color="black.800">
                     (11) 4223-5140
                   </Text>
+                  </Link>
                 </HStack>
                 <HStack spacing="20px" mb="22px">
                   <Icon as={BiMap} fontSize="20px" color="red.600" />
+                  <Link href="https://goo.gl/maps/6C1R41LG79c9FWyRA" _hover={{ textDecoration: 'none' }} target="_blank">
                   <Text fontSize="20px" color="black.800">
                     Alameda Araguaia, 204 - Santa Maria, São Caetano do Sul -
                     SP, 09560-580
                   </Text>
+                  </Link>
                 </HStack>
               </>
             )}

@@ -237,7 +237,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           </Text>
           <Text color="white" fontSize="18px" mb="10px">
             Utilizamos cookies para aprimorar sua experiência de navegação, exibir anúncios ou conteúdos personalizado e analisar nosso tráfego. Ao clicar em "Aceitar todos", você concorda com nosso uso de cookies.
-            <Link as="span" ml="5px" isExternal href="https://contemp.com.br/blog/politica-de-privacidade">
+            <Link as="span" ml="5px" isExternal href="https://blog.contemp.com.br/politica-de-privacidade" target="_blank">
               Leia mais
             </Link>
           </Text>

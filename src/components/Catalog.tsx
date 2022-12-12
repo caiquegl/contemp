@@ -34,43 +34,9 @@ export const Catalog = () => {
       }}
     >
 
-
-      {/* <Grid
-          alignItems="center"
-          templateColumns={{
-            base: "1fr",
-            lg: "repeat(2, 1fr)",
-          }}
-          h={{
-            base: pxToRem(600),
-            md: pxToRem(400),
-            lg: pxToRem(450),
-            xl: "max-content",
-          }}
-          width={{
-            base: "100%",
-            xl: "95%",
-            "2xl": "75%",
-          }}
-          margin="auto"
-          maxH={{
-            base: "max-content",
-            lg: pxToRem(650),
-          }}
-          p={{
-            base: "70px 10px",
-            lg: "75px 15px",
-            xl: "120px 0",
-            "2xl": "110px 0",
-          }}
-          position="relative"
-          gridGap={{
-            lg: 10,
-            xl: 0,
-          }}
-        > */}
       <Row style={{ height: '100%' }}>
         <Col xs={24} sm={24} md={12} lg={12}>
+          <Link href="https://contemp.com.br/temnacontemp.pdf" target={"_blank"}>
           <Image
             src={CatalogImg}
             display={{
@@ -98,6 +64,7 @@ export const Catalog = () => {
             position="absolute"
             top="-100px"
           />
+          </Link>
 
         </Col>
         <Col xs={24} sm={24} md={12} lg={12}>
@@ -139,7 +106,7 @@ export const Catalog = () => {
             >
               Quer baixar gratuitamente nosso catalogo digital de produtos? Basta
               entrar em contato e solicitar para um de nossos representantes.
-              Através do número (11) 4223-5140 ou pelo e-mail vendas@contemp.com.br
+              Através do número <Link href="tel:551142235140" _hover={{ color: '#fff', textDecoration: 'none' }}>(11) 4223-5140</Link>  ou pelo <Link href="mailto:vendas@contemp.com.br" _hover={{ color: '#fff', textDecoration: 'none' }}> e-mail vendas@contemp.com.br</Link>
             </Text>
 
             <Grid
@@ -172,7 +139,7 @@ export const Catalog = () => {
                 <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
               </Link>
 
-              <Link href="https://contemp.com.br/wp-content/uploads/temnacontemp.pdf" isExternal _hover={{ textDecoration: 'none', color: '#fff' }}>
+              <Link href="https://contemp.com.br/temnacontemp.pdf" isExternal _hover={{ textDecoration: 'none', color: '#fff' }} target="_blank">
                 <ActionButton label={"Download"} icon={FiDownload} />
               </Link>
             </Grid>

@@ -561,7 +561,24 @@ export const Header = () => {
           >
             <Text w="max-content" fontSize="18px">A Contemp</Text>
           </Link>
-          <Text fontSize="18px">Blog</Text>
+          <Link
+            _hover={{
+              textDecoration: "none",
+              color: "red.600",
+            }}
+            href="/calibracao"
+          >
+            <Text w="max-content" fontSize="18px">Calibração</Text>
+          </Link>
+          <Link
+            _hover={{
+              textDecoration: "none",
+              color: "red.600",
+            }}
+            href="/suporte-tecnico"
+          >
+            <Text w="max-content" fontSize="18px">Suporte Técnico</Text>
+          </Link>
           <Link
             _hover={{
               textDecoration: "none",
@@ -576,9 +593,9 @@ export const Header = () => {
               textDecoration: "none",
               color: "red.600",
             }}
-            href="/suporte-tecnico"
+            href="https://blog.contemp.com.br"
           >
-            <Text w="max-content" fontSize="18px">Suporte Técnico</Text>
+            <Text w="max-content" fontSize="18px">Blog</Text>
           </Link>
         </HStack>
 

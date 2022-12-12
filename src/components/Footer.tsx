@@ -193,13 +193,15 @@ export const Footer = () => {
         </Text>
         <UnorderedList color="white" fontSize="18px" display="flex" mb={['20px', 0]} flexDirection={['column', 'row']}>
           <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
-            <ListItem>Lista de Todos os Produtos</ListItem>
+            <ListItem>Todos os Produtos</ListItem>
           </Link>
-          <Link href="/calibracao" _hover={{ color: '#fff', textDecoration: 'none' }}>
-            <ListItem m={[0, "0 0 0 30px"]}>Calibração</ListItem>
+          <Link href="https://blog.contemp.com.br/politica-de-privacidade" _hover={{ color: '#fff', textDecoration: 'none' }}>
+            <ListItem m={[0, "0 0 0 30px"]}>Politica de Privacidade</ListItem>
           </Link>
-          <ListItem m={[0, "0 30px"]}>Política de Privacidade</ListItem>
-          <ListItem>Site Mapa</ListItem>
+          <Link href="/trabalhe-conosco" _hover={{ color: '#fff', textDecoration: 'none' }}>
+            <ListItem m={[0, "0 30px"]}>Trabalhe Conosco</ListItem>
+          </Link>
+          <ListItem>Mapa do Site</ListItem>
         </UnorderedList>
       </Flex>
 

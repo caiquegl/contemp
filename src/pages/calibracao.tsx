@@ -1,4 +1,12 @@
-import { Box, Button, Center, Container, Flex, Link, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  Link,
+  ListItem,
+  Text,
+  UnorderedList,} from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
@@ -155,7 +163,7 @@ const Calibracao = () => {
                 </Text>
               </Flex>
               <Center>
-                <Link target="_blank" href="https://drive.google.com/drive/folders/1WTPUVvj-51JjRUgEgQ8Q6tnMDFmpZWjs?usp=sharing" _hover={{ textDecoration: 'none', color: 'white' }}>
+                <Link target="_blank" href="/Certificado-ISO-9001-OUT24.pdf" _hover={{ textDecoration: 'none', color: 'white' }}>
                   <Button
                     w="100%"
                     maxW="263px"
@@ -214,10 +222,10 @@ const Calibracao = () => {
             ACESSO AOS PADRÕES DO LABORATÓRIO
           </Text>
           <Text fontSize="20px" textAlign="center" m="50px 0 25px">
-            Lista de arquivos para consulta.
+            Possui produtos Contemp? Nós temos uma base com todos os padrões de laboratório para consulta. Se preferir pode entrar em contato com nossa equipe técnica. Para consultar basta acessar o botão abaixo.
           </Text>
           <Center>
-            <Link href="https://laboratorio.contemp.com.br/" isExternal>
+            <Link href="https://laboratorio.contemp.com.br/" isExternal target={"_blank"} _hover={{ color: '#fff', textDecoration: 'none' }}>
               <Button
                 mb="70px"
                 border="none"
@@ -228,7 +236,7 @@ const Calibracao = () => {
                 h="50px"
                 textAlign="center"
               >
-                Solicitar orçamento
+                Acessar padrões
               </Button>
             </Link>
           </Center>
