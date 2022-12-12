@@ -595,7 +595,7 @@ export const Header = () => {
             }}
             href="https://blog.contemp.com.br"
           >
-            <Text w="max-content" fontSize="18px">Blog</Text>
+            <Text w="max-content" fontSize="18px">Blog </Text>
           </Link>
         </HStack>
 
