@@ -21,7 +21,7 @@ import {
   Text,
   useBreakpointValue,
   useDisclosure,
-  Modal
+  Modal,
 } from "@chakra-ui/react";
 import { Image } from "./Image";
 import React, { useEffect, useRef, useState } from "react";
@@ -50,7 +50,15 @@ import { FiAlertTriangle } from "react-icons/fi";
 
 export const Header = () => {
   const router = useRouter();
-  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategoryActive } = useAuth();
+  const {
+    setListHeader,
+    cart,
+    isOpen,
+    onClose,
+    onOpen,
+    totalCart,
+    allCategoryActive,
+  } = useAuth();
   const [list, setList] = useState([]);
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure();
   const [scrollY, setScrollY] = useState(0);
@@ -62,8 +70,9 @@ export const Header = () => {
 
   const listCategory = async () => {
     try {
-
-      let categories: any = allCategoryActive.filter((el: any) => el.is_main == "true")
+      let categories: any = allCategoryActive.filter(
+        (el: any) => el.is_main == "true"
+      );
       let newList: any = [];
 
       for await (let categ of categories) {
@@ -105,11 +114,10 @@ export const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY)
       setScrollY(window.scrollY);
     };
 
-    // just trigger this so that the initial state 
+    // just trigger this so that the initial state
     // is updated as soon as the component is mounted
     // related: https://stackoverflow.com/a/63408216
     handleScroll();
@@ -140,12 +148,12 @@ export const Header = () => {
             position="relative"
             cursor="pointer"
             onClick={() => {
-              console.log('aquiii')
+              console.log("aquiii");
               if (totalCart == 0 && !totalCart) {
-                oOpen()
-                return
+                oOpen();
+                return;
               }
-              router.push("/orcamento")
+              router.push("/orcamento");
             }}
           >
             {cart && cart.length > 0 && (
@@ -264,7 +272,10 @@ export const Header = () => {
                 margin="auto"
                 gridColumnGap={pxToRem(10)}
               >
-                <Link href="https://www.linkedin.com/company/contemp/" isExternal>
+                <Link
+                  href="https://www.linkedin.com/company/contemp/"
+                  isExternal
+                >
                   <CustomIcon icon={AiFillLinkedin} />
                 </Link>
                 <Link
@@ -273,7 +284,10 @@ export const Header = () => {
                 >
                   <CustomIcon icon={AiFillYoutube} />
                 </Link>
-                <Link href="https://www.instagram.com/contemp.industria/" isExternal>
+                <Link
+                  href="https://www.instagram.com/contemp.industria/"
+                  isExternal
+                >
                   <CustomIcon icon={AiOutlineInstagram} />
                 </Link>
                 <Link
@@ -301,18 +315,20 @@ export const Header = () => {
                   borderRadius="30px"
                   bg="red.100"
                 >
-                  <Icon
-                    as={FiAlertTriangle}
-                    color="red.700"
-                    fontSize="30px"
-                  />
+                  <Icon as={FiAlertTriangle} color="red.700" fontSize="30px" />
                 </Flex>
                 <Box>
                   <Text fontWeight="bold" fontSize="25px" color="black.800">
                     Atenção!
                   </Text>
-                  <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
-                    Para poder continuar, é necessário adicionar ao menos um produto no carrinho.
+                  <Text
+                    fontSize="16px"
+                    color="black.800"
+                    mt="10px"
+                    maxW="350px"
+                  >
+                    Para poder continuar, é necessário adicionar ao menos um
+                    produto no carrinho.
                   </Text>
                 </Box>
               </Flex>
@@ -326,8 +342,17 @@ export const Header = () => {
   if (scrollY > 200) {
     return (
       <Box h="250px">
-        <Box display="flex" alignItems="center" position="fixed" top="0" w="100%" h="120px" bg="black.800" zIndex={999999999}>
-          <Container maxW="7xl" p="12px 15px 15px 15px" >
+        <Box
+          display="flex"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          w="100%"
+          h="120px"
+          bg="black.800"
+          zIndex={999999999}
+        >
+          <Container maxW="7xl" p="12px 15px 15px 15px">
             <Flex alignItems="center" justifyContent="space-between" h={70}>
               <Box
                 onClick={() => router.push("/")}
@@ -339,7 +364,10 @@ export const Header = () => {
               </Box>
 
               <Box>
-                <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
+                <Link
+                  href="/todosProdutos"
+                  _hover={{ color: "#fff", textDecoration: "none" }}
+                >
                   <Button
                     borderRadius="5px"
                     bg="red.600"
@@ -359,16 +387,15 @@ export const Header = () => {
 
               <HeaderMenu menuItems={list} />
 
-
               <Box
                 position="relative"
                 cursor="pointer"
                 onClick={() => {
                   if (totalCart == 0 && !totalCart) {
-                    oOpen()
-                    return
+                    oOpen();
+                    return;
                   }
-                  router.push("/orcamento")
+                  router.push("/orcamento");
                 }}
               >
                 {cart && cart.length > 0 && (
@@ -415,9 +442,14 @@ export const Header = () => {
                       <Text fontWeight="bold" fontSize="25px" color="black.800">
                         Atenção!
                       </Text>
-                      <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
-                        Para poder continuar, é necessário adicionar ao menos um produto no carrinho.
-
+                      <Text
+                        fontSize="16px"
+                        color="black.800"
+                        mt="10px"
+                        maxW="350px"
+                      >
+                        Para poder continuar, é necessário adicionar ao menos um
+                        produto no carrinho.
                       </Text>
                     </Box>
                   </Flex>
@@ -427,9 +459,7 @@ export const Header = () => {
           </Container>
         </Box>
       </Box>
-
-
-    )
+    );
   }
 
   return (
@@ -440,7 +470,10 @@ export const Header = () => {
         marginBottom="32px"
       >
         <Box display="flex" flex={1}>
-          <Link href="tel:1142235140" _hover={{ textDecoration: 'none', color: '#fff' }}>
+          <Link
+            href="tel:1142235140"
+            _hover={{ textDecoration: "none", color: "#fff" }}
+          >
             <Flex alignItems="center" w="max-content" mr={3}>
               <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
               <Text fontSize="18px" color="white" ml={pxToRem(10)}>
@@ -448,8 +481,10 @@ export const Header = () => {
               </Text>
             </Flex>
           </Link>
-          <Link href="mailto:vendas@contemp.com.br" _hover={{ textDecoration: 'none', color: '#fff' }}>
-
+          <Link
+            href="mailto:vendas@contemp.com.br"
+            _hover={{ textDecoration: "none", color: "#fff" }}
+          >
             <Flex alignItems="center">
               <Image src={Email} width={20} minHeight={15} flex={0.3} />
               <Text fontSize="18px" color="white" ml={pxToRem(10)}>
@@ -524,7 +559,10 @@ export const Header = () => {
         </Box>
 
         <Box>
-          <Link href="/todosProdutos" _hover={{ color: '#fff', textDecoration: 'none' }}>
+          <Link
+            href="/todosProdutos"
+            _hover={{ color: "#fff", textDecoration: "none" }}
+          >
             <Button
               borderRadius="5px"
               bg="red.600"
@@ -559,7 +597,9 @@ export const Header = () => {
               color: "red.600",
             }}
           >
-            <Text w="max-content" fontSize="18px">A Contemp</Text>
+            <Text w="max-content" fontSize="18px">
+              A Contemp
+            </Text>
           </Link>
           <Link
             _hover={{
@@ -568,7 +608,9 @@ export const Header = () => {
             }}
             href="/calibracao"
           >
-            <Text w="max-content" fontSize="18px">Calibração</Text>
+            <Text w="max-content" fontSize="18px">
+              Calibração
+            </Text>
           </Link>
           <Link
             _hover={{
@@ -577,7 +619,9 @@ export const Header = () => {
             }}
             href="/suporte-tecnico"
           >
-            <Text w="max-content" fontSize="18px">Suporte Técnico</Text>
+            <Text w="max-content" fontSize="18px">
+              Suporte Técnico
+            </Text>
           </Link>
           <Link
             _hover={{
@@ -586,7 +630,9 @@ export const Header = () => {
             }}
             href="/trabalhe-conosco"
           >
-            <Text w="max-content" fontSize="18px">Trabalhe Conosco</Text>
+            <Text w="max-content" fontSize="18px">
+              Trabalhe Conosco
+            </Text>
           </Link>
           <Link
             _hover={{
@@ -595,7 +641,9 @@ export const Header = () => {
             }}
             href="https://blog.contemp.com.br"
           >
-            <Text w="max-content" fontSize="18px">Blog</Text>
+            <Text w="max-content" fontSize="18px">
+              Suporte Técnico
+            </Text>
           </Link>
         </HStack>
 
@@ -613,10 +661,10 @@ export const Header = () => {
             cursor="pointer"
             onClick={() => {
               if (totalCart == 0 && !totalCart) {
-                oOpen()
-                return
+                oOpen();
+                return;
               }
-              router.push("/orcamento")
+              router.push("/orcamento");
             }}
           >
             {cart && cart.length > 0 && (
@@ -656,19 +704,15 @@ export const Header = () => {
                 borderRadius="30px"
                 bg="red.100"
               >
-                <Icon
-                  as={FiAlertTriangle}
-                  color="red.700"
-                  fontSize="30px"
-                />
+                <Icon as={FiAlertTriangle} color="red.700" fontSize="30px" />
               </Flex>
               <Box>
                 <Text fontWeight="bold" fontSize="25px" color="black.800">
                   Atenção!
                 </Text>
                 <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
-                  Para poder continuar, é necessário adicionar ao menos um produto no carrinho.
-
+                  Para poder continuar, é necessário adicionar ao menos um
+                  produto no carrinho.
                 </Text>
               </Box>
             </Flex>
