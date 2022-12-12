@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Textarea as Inpt,
   InputGroup,
   TextareaProps as ChakraInputProps,
