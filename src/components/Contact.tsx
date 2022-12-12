@@ -115,6 +115,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                               borderRadius="25px"
                               height="100%"
                               border="none"
+                              name={quest.name}
                               placeholder={quest.name}
                               _focusVisible={{
                                 outline: "none",
@@ -136,6 +137,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                               height="248px"
                               borderRadius="25px"
                               border="none"
+                              name={quest.name}
                               placeholder={quest.name}
                               _focusVisible={{
                                 outline: "none",
@@ -159,6 +161,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                               borderRadius="25px"
                               height="100%"
                               border="none"
+                              name={quest.name}
                               placeholder={quest.name}
                               _focusVisible={{
                                 outline: "none",
@@ -210,21 +213,23 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                       </>
                     ))}
                 </VStack>
+                <Flex justifyContent="flex-end">
+                  <Button
+                    w="179px"
+                    h="50px"
+                    borderRadius="25px"
+                    bg="red.600"
+                    fontSize="20px"
+                    mt="40px"
+                    type="submit"
+                    _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                  >
+                    <Icon as={TbSend} mr="10px" />
+                    Enviar
+                  </Button>
+                </Flex>
               </form>
-              <Flex justifyContent="flex-end">
-                <Button
-                  w="179px"
-                  h="50px"
-                  borderRadius="25px"
-                  bg="red.600"
-                  fontSize="20px"
-                  mt="40px"
-                  _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-                >
-                  <Icon as={TbSend} mr="10px" />
-                  Enviar
-                </Button>
-              </Flex>
+
             </Box>
           </GridItem>
         </Grid>
