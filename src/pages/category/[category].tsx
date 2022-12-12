@@ -1,10 +1,8 @@
-import { Box, Container, Flex, Text } from "@chakra-ui/react";
+import { Container, Flex, Text } from "@chakra-ui/react";
 import { Header } from "../../components/Header";
 import { Contact } from "../../components/Contact";
 import { Footer } from "../../components/Footer";
 import { Player } from "../../components/Player";
-import { Image } from "../../components/Image";
-import { pxToRem } from "../../utils/pxToRem";
 import { SmoothScroll } from "../../components/SmoothScroll";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -12,12 +10,6 @@ import { ListCategory } from "../../components/ListCategory";
 import { useAuth } from "../../contextAuth/authContext";
 import Head from "next/head";
 import { AdBanners } from "../../components/AdBanners";
-
-const products = [] as number[];
-
-for (let i = 0; i < 56; i++) {
-  products.push(i + 1);
-}
 
 const Category = () => {
   const router = useRouter();
@@ -80,7 +72,9 @@ const Category = () => {
         }
       });
 
-      let categFind = allCategoryActive.find((el: any) => el.name == nameCategory);
+      let categFind = allCategoryActive.find(
+        (el: any) => el.name == nameCategory
+      );
       setCateg(categFind);
       let list: any = [];
 
