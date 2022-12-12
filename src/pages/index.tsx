@@ -386,7 +386,7 @@ const Home = () => {
           <Image src={Mapa} minH={500} bgSize="100%" />
         </Box>
       </Flex>
-      <Flex w="100%" p="80px 0" bg="white">
+      {/* <Flex w="100%" p="80px 0" bg="white">
         <GridChakra
           templateColumns={[
             "repeat(1, 1fr)",
@@ -422,7 +422,7 @@ const Home = () => {
             img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
           />
         </GridChakra>
-      </Flex>
+      </Flex> */}
 
       <Catalog />
 
