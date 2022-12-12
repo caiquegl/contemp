@@ -1,5 +1,4 @@
 import { BackgroundDetail } from "./BackgroundDetail";
-import { pxToRem } from "../utils/pxToRem";
 
 import PlusDetail from "../assets/background-details/detail-plus.svg";
 import CirclesHorizontalDetail from "../assets/background-details/detail-circle-horizontal.svg";
