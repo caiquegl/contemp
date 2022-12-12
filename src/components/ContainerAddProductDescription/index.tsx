@@ -11,7 +11,7 @@ import {
   Icon,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useRef, useState } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { database, initFirebase } from "../../utils/db";
 import CKeditor from "../CKEditor";
@@ -26,7 +26,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { AiFillEye } from 'react-icons/ai'
+import { AiFillEye } from "react-icons/ai";
 import EditTab from "./editTab";
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
@@ -53,7 +53,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
     setTimeout(() => {
       setEditorLoaded(true);
     }, 500);
-  }
+  };
 
   useEffect(() => {
     if (values.tab) {
@@ -204,11 +204,25 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
     }
   };
 
+  const handleOnTabNameChange = (evt: BaseSyntheticEvent, tabIndex: number) => {
+    let newList = tabs.map((tab: any, index: number) => {
+      if (index === tabIndex)
+        return {
+          ...tab,
+          name: evt.target.value,
+        };
+
+      return tab;
+    });
+
+    setTabs(newList);
+  };
+
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
       <VStack spacing="30px" divider={<Divider />} w="100%">
-        {tabs.map((list: any, index: number) => (
-          <Box w="100%" key={index}>
+        {tabs.map((list: any, tabIndex: number) => (
+          <Box w="100%" key={tabIndex}>
             <Flex
               mb="20px"
               alignItems="center"
@@ -218,7 +232,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
               <Flex alignItems="center" w="100%" maxW="636px">
                 <Box w="100%" maxW="636px">
                   <Text color="black.800" fontSize="20px" mb="10px">
-                    Nome da tab {index + 1}
+                    Nome da tab {tabIndex + 1}
                   </Text>
                   <InputGroup
                     borderRadius="6px"
@@ -242,12 +256,8 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                       borderRadius="21px"
                       color="black.800"
                       placeholder="nome completo"
-                      onChange={(evt) => {
-                        let newList = tabs;
-                        newList[index].name = evt.target.value;
-                        setTabs(newList);
-                      }}
-                      value={tabs[index]?.name}
+                      onChange={(evt) => handleOnTabNameChange(evt, tabIndex)}
+                      value={tabs[tabIndex]?.name}
                       _focusVisible={{
                         outline: "none",
                       }}
@@ -266,7 +276,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                   as={GrSubtractCircle}
                   fontSize="30px"
                   cursor="pointer"
-                  onClick={() => remove(index)}
+                  onClick={() => remove(tabIndex)}
                 />
               </HStack>
             </Flex>
@@ -290,7 +300,13 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
               />
             </Box> */}
 
-            <EditTab load={() => load()} editorLoaded={editorLoaded} setTabs={setTabs} index={index} tabs={tabs} />
+            <EditTab
+              load={() => load()}
+              editorLoaded={editorLoaded}
+              setTabs={setTabs}
+              index={tabIndex}
+              tabs={tabs}
+            />
           </Box>
         ))}
       </VStack>
