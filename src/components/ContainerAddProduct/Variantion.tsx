@@ -1,20 +1,13 @@
 import {
   Box,
-  Text,
   InputGroup,
-  Input,
   HStack,
-  VStack,
-  Checkbox,
-  Button,
   Flex,
-  Divider,
   Icon,
   Select,
-  useToast,
   FormLabel,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 import { InputDefault } from "../Form/Input";
