@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Grid } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 import React from "react";
 import { pxToRem } from "../utils/pxToRem";
 import CardProductWithDescription from "./CardProductWithDescription";
