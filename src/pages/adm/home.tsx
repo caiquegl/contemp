@@ -11,20 +11,18 @@ import {
   Tab,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Logo from "../../assets/icons/logo.png";
 import TabCategory from "../../components/Tabs/TabCategory";
 import TabHome from "../../components/Tabs/TabHome";
 import TabProduct from "../../components/Tabs/TabProduct";
-import TabSeo from "../../components/Tabs/TabSeo";
-import { useRouter } from "next/router";
-import { useAuth } from "../../contextAuth/authContext";
-import Cookies from "js-cookie";
+// import { useRouter } from "next/router";
+// import { useAuth } from "../../contextAuth/authContext";
 import moment from "moment";
 
 const Adm = () => {
-  const router = useRouter();
-  const { user, setUser } = useAuth();
+  // const router = useRouter();
+  // const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(0);
 
   // useEffect(() => {
@@ -58,7 +56,9 @@ const Adm = () => {
               <Text fontWeight="bold" fontSize="20px" textAlign="right">
                 Olá
               </Text>
-              <Text fontSize="20px">{moment().format('DD/MM/YYYY - HH:mm')}</Text>
+              <Text fontSize="20px">
+                {moment().format("DD/MM/YYYY - HH:mm")}
+              </Text>
             </Box>
             <Avatar
               bg="white"
@@ -131,10 +131,19 @@ const Adm = () => {
         </Flex>
         <Divider mt="20px" mb="20px" bg="black.800" />
         {componentsTab[activeTab]}
-
       </Box>
-      <Flex alignItems="center" justifyContent="flex-end" bg="white.500" w="100%" >
-        <Link mr="50px" isExternal href="https://3hub.co/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
+      <Flex
+        alignItems="center"
+        justifyContent="flex-end"
+        bg="white.500"
+        w="100%"
+      >
+        <Link
+          mr="50px"
+          isExternal
+          href="https://3hub.co/"
+          _hover={{ textDecoration: "none", color: "black.800" }}
+        >
           <Text fontSize="20px" color="black.800">
             Desenvolvido por{" "}
             <Text as="span" color="red.600" fontWeight="bold">
