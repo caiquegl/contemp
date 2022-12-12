@@ -1,6 +1,5 @@
 import { Box, Button, Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 // import { Image } from "../components/Image";
-import Pirometro from "../assets/icons/pritometro_white.svg";
 import { pxToRem } from "../utils/pxToRem";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
