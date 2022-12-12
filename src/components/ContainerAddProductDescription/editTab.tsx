@@ -2,7 +2,6 @@ import {
     Box,
     Text,
     Flex,
-    Divider,
     Icon,
     Textarea,
 } from "@chakra-ui/react";
