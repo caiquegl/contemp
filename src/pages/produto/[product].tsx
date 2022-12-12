@@ -16,9 +16,9 @@ import {
   TabPanels,
   Tabs,
   Text,
+  VStack,
   useBreakpointValue,
   useToast,
-  VStack,
 } from "@chakra-ui/react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -27,7 +27,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay, Navigation } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import ReactHtmlParser from "react-html-parser";
 import { Contact } from "../../components/Contact";
 import { Player } from "../../components/Player";
@@ -75,9 +75,15 @@ const Product = () => {
       let ex = allProductsActive.filter((el: any) => el.name == produto);
 
       let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category);
-      let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie);
-      let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie);
-      let cg4 = allCategoryActive.filter((el: any) => el.id == cg3[0]?.sub_categorie);
+      let cg2 = allCategoryActive.filter(
+        (el: any) => el.id == cg1[0]?.sub_categorie
+      );
+      let cg3 = allCategoryActive.filter(
+        (el: any) => el.id == cg2[0]?.sub_categorie
+      );
+      let cg4 = allCategoryActive.filter(
+        (el: any) => el.id == cg3[0]?.sub_categorie
+      );
 
       let id = "";
       let names: any = [];
@@ -191,8 +197,14 @@ const Product = () => {
         alignItems="flex-start"
         flexDirection={["column", "column", "column", "row", "row"]}
       >
-        <Center bg="white.500" w={{ base: "100%", lg: "40%" }} h={["350px", "804px"]}>
+        <Center
+          bg="white.500"
+          w={{ base: "100%", lg: "40%" }}
+          h={["350px", "804px"]}
+          onClick={(evt) => (evt.currentTarget.style.cursor = "move")}
+        >
           <Swiper
+            initialSlide={0}
             slidesPerView={1}
             spaceBetween={30}
             autoplay={{
@@ -205,21 +217,20 @@ const Product = () => {
             navigation={true}
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper"
-            cssMode={true}
           >
             {detail.urls &&
               detail.urls.length > 0 &&
               detail.urls.map((photo: any) => (
                 <SwiperSlide>
-                  <Zoom>
-                    <Center h="100%" maxH={pxToRem(765)} width="100%">
+                  <Center h="100%" maxH={pxToRem(765)} width="100%">
+                    <Zoom>
                       <img
                         alt={detail.name ? detail.name : ""}
                         src={photo}
                         width="600"
                       />
-                    </Center>
-                  </Zoom>
+                    </Zoom>
+                  </Center>
                 </SwiperSlide>
               ))}
           </Swiper>
@@ -362,14 +373,14 @@ const Product = () => {
                       product_id: detail.id,
                       variation: variation,
                       qtd,
-                    })
+                    });
                     toast({
                       title: "Sucesso",
                       description: "Produto adicionado com sucesso.",
                       status: "success",
                       duration: 3000,
                       isClosable: true,
-                    })
+                    });
                   }}
                 >
                   <Center>Adicionar ao orçamento</Center>
