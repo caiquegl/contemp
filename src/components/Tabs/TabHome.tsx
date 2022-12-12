@@ -9,6 +9,7 @@ import {
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { database, initFirebase } from "../../utils/db";
+import { pxToRem } from "../../utils/pxToRem";
 import ContainerHome from "../ContainerHome";
 
 const TabHome = () => {
@@ -42,6 +43,9 @@ const TabHome = () => {
   useEffect(() => {
     listHome();
   }, [activeTab]);
+
+  const tabs = Array.from({ length: 7 }, (_, index) => index);
+
   return (
     <Tabs
       variant="unstyled"
@@ -49,7 +53,22 @@ const TabHome = () => {
       onChange={(indexTab) => setActiveTab(indexTab)}
     >
       <TabList>
-        <Tab
+        {tabs.map((tabNumber) => (
+          <Tab
+            key={tabNumber}
+            _selected={{
+              bg: "red.600",
+              color: "white",
+              fontWeight: "bold",
+            }}
+            w={pxToRem(133)}
+            color="black.800"
+          >
+            Produto {tabNumber + 1}
+          </Tab>
+        ))}
+
+        {/* <Tab
           _selected={{
             bg: "red.600",
             color: "white",
@@ -125,10 +144,22 @@ const TabHome = () => {
           color="black.800"
         >
           Produto 7
-        </Tab>
+        </Tab> */}
       </TabList>
       <TabPanels>
-        <TabPanel>
+        {tabs.map((tabNumber) => (
+          <TabPanel key={tabNumber}>
+            <ContainerHome
+              reset={() => listHome()}
+              indexProduct={tabNumber}
+              defaultValues={
+                list.filter((el: any) => el.indexProduct === tabNumber)[0]
+              }
+            />
+          </TabPanel>
+        ))}
+
+        {/* <TabPanel>
           <ContainerHome
             reset={() => listHome()}
             indexProduct={0}
@@ -176,7 +207,7 @@ const TabHome = () => {
             indexProduct={6}
             defaultValues={list.filter((el: any) => el.indexProduct == 6)[0]}
           />
-        </TabPanel>
+        </TabPanel> */}
       </TabPanels>
     </Tabs>
   );
