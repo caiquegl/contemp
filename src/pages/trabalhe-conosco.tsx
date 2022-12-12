@@ -26,6 +26,7 @@ const Home = () => {
         </Text>
       </Flex>
       <Contact
+        id="vagas"
         title="VENHA FAZER PARTE DA EQUIPE CONTEMP"
         description="Estamos sempre em busca dos melhores profissionais do Brasil. Preencha o formulário e aguarde a oportunidade mais próxima."
         ocultAddres={true}

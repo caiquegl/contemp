@@ -106,6 +106,7 @@ const Support = () => {
       </Flex>
       <Player />
       <Contact
+        id="duvidas-e-orcamentos"
         title="DÚVIDAS E ORÇAMENTOS"
         description="Essa é a seleção que a equipe da Contemp escolheu como os
               destaques do mês"

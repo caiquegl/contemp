@@ -25,8 +25,9 @@ interface IProps {
   description: string;
   ocultAddres?: boolean;
   form: any;
+  id?: string
 }
-export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
+export const Contact = ({ title, description, ocultAddres, form, id }: IProps) => {
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
       <ContainerChakra
@@ -94,120 +95,122 @@ export const Contact = ({ title, description, ocultAddres, form }: IProps) => {
               width="100%"
               height="100%"
             >
-              <VStack spacing="18px">
-                {form &&
-                  form.length > 0 &&
-                  form.map((quest: any) => (
-                    <>
-                      {quest.type === "text" && (
-                        <InputGroup
-                          borderRadius="25px"
-                          bg="white.700"
-                          w="100%"
-                          h="50px"
-                          outline="none"
-                          color="black.800"
-                        >
-                          <Input
-                            w="100%"
+              <form id={id} method="POST">
+                <VStack spacing="18px">
+                  {form &&
+                    form.length > 0 &&
+                    form.map((quest: any) => (
+                      <>
+                        {quest.type === "text" && (
+                          <InputGroup
                             borderRadius="25px"
-                            height="100%"
-                            border="none"
-                            placeholder={quest.name}
-                            _focusVisible={{
-                              outline: "none",
-                            }}
-                          />
-                        </InputGroup>
-                      )}
-                      {quest.type === "textArea" && (
-                        <InputGroup
-                          borderRadius="25px"
-                          bg="white.700"
-                          height="248px"
-                          w="100%"
-                          outline="none"
-                          color="black.800"
-                        >
-                          <Textarea
+                            bg="white.700"
                             w="100%"
+                            h="50px"
+                            outline="none"
+                            color="black.800"
+                          >
+                            <Input
+                              w="100%"
+                              borderRadius="25px"
+                              height="100%"
+                              border="none"
+                              placeholder={quest.name}
+                              _focusVisible={{
+                                outline: "none",
+                              }}
+                            />
+                          </InputGroup>
+                        )}
+                        {quest.type === "textArea" && (
+                          <InputGroup
+                            borderRadius="25px"
+                            bg="white.700"
                             height="248px"
-                            borderRadius="25px"
-                            border="none"
-                            placeholder={quest.name}
-                            _focusVisible={{
-                              outline: "none",
-                            }}
-                          />
-                        </InputGroup>
-                      )}
-                      {quest.type === "select" && (
-                        <InputGroup
-                          borderRadius="25px"
-                          bg="white.700"
-                          height="50px"
-                          w="100%"
-                          outline="none"
-                          color="black.800"
-                          display="flex"
-                          alignItems="center"
-                        >
-                          <Select
                             w="100%"
+                            outline="none"
+                            color="black.800"
+                          >
+                            <Textarea
+                              w="100%"
+                              height="248px"
+                              borderRadius="25px"
+                              border="none"
+                              placeholder={quest.name}
+                              _focusVisible={{
+                                outline: "none",
+                              }}
+                            />
+                          </InputGroup>
+                        )}
+                        {quest.type === "select" && (
+                          <InputGroup
                             borderRadius="25px"
-                            height="100%"
-                            border="none"
-                            placeholder={quest.name}
-                            _focusVisible={{
-                              outline: "none",
-                            }}
+                            bg="white.700"
+                            height="50px"
+                            w="100%"
+                            outline="none"
+                            color="black.800"
+                            display="flex"
+                            alignItems="center"
                           >
-                            {quest.options.map((opt: string) => (
-                              <option value={opt}>{opt}</option>
-                            ))}
-                          </Select>
-                        </InputGroup>
-                      )}
-                      {quest.type === "upload" && (
-                        <Flex
-                          w="100%"
-                          h="205px"
-                          borderRadius="25px"
-                          border="2px dashed #D1D1D1"
-                          alignItems="center"
-                          justifyContent="center"
-                          flexDirection="column"
-                          p="10px"
-                        >
-                          <Icon
-                            as={AiOutlineCloudUpload}
-                            fontSize="50px"
-                            color="white.900"
-                          />
-                          <Text
-                            fontSize="16px"
-                            fontStyle="italic"
-                            color="black.200"
-                            maxW="437px"
-                            mt="10px"
-                            mb="20px"
+                            <Select
+                              w="100%"
+                              borderRadius="25px"
+                              height="100%"
+                              border="none"
+                              placeholder={quest.name}
+                              _focusVisible={{
+                                outline: "none",
+                              }}
+                            >
+                              {quest.options.map((opt: string) => (
+                                <option value={opt}>{opt}</option>
+                              ))}
+                            </Select>
+                          </InputGroup>
+                        )}
+                        {quest.type === "upload" && (
+                          <Flex
+                            w="100%"
+                            h="205px"
+                            borderRadius="25px"
+                            border="2px dashed #D1D1D1"
+                            alignItems="center"
+                            justifyContent="center"
+                            flexDirection="column"
+                            p="10px"
                           >
-                            Arraste ou selecione o arquivo que deseja enviar.
-                            Arquivo em PDF no máximo 5mb
-                          </Text>
-                          <Text
-                            fontSize="16px"
-                            color="red.600"
-                            maxW="437px"
-                            mb="20px"
-                          >
-                            Escolher arquivo
-                          </Text>
-                        </Flex>
-                      )}
-                    </>
-                  ))}
-              </VStack>
+                            <Icon
+                              as={AiOutlineCloudUpload}
+                              fontSize="50px"
+                              color="white.900"
+                            />
+                            <Text
+                              fontSize="16px"
+                              fontStyle="italic"
+                              color="black.200"
+                              maxW="437px"
+                              mt="10px"
+                              mb="20px"
+                            >
+                              Arraste ou selecione o arquivo que deseja enviar.
+                              Arquivo em PDF no máximo 5mb
+                            </Text>
+                            <Text
+                              fontSize="16px"
+                              color="red.600"
+                              maxW="437px"
+                              mb="20px"
+                            >
+                              Escolher arquivo
+                            </Text>
+                          </Flex>
+                        )}
+                      </>
+                    ))}
+                </VStack>
+              </form>
               <Flex justifyContent="flex-end">
                 <Button
                   w="179px"
