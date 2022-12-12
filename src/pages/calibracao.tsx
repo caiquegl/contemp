@@ -192,7 +192,7 @@ const Calibracao = () => {
                 </Text>
               </Flex>
               <Center>
-                <Link target="_blank" href="https://contemp.com.br/?jet_download=2921" _hover={{ textDecoration: 'none', color: 'white' }}>
+                <Link target="_blank" href="https://contemp.com.br/Certificado-Acreditaçao-INMETRO - 24.04.21.pdf" _hover={{ textDecoration: 'none', color: 'white' }}>
                   <Button
                     w="100%"
                     maxW="344px"
