@@ -1,8 +1,5 @@
 import {
   Box,
-  Text,
-  InputGroup,
-  Input,
   HStack,
   VStack,
   Checkbox,
