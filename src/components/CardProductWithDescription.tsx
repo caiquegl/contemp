@@ -24,7 +24,7 @@ const CardProductWithDescription = ({
   containerProps,
 }: IProps) => {
   const router = useRouter();
-  const [isHovering, setIsHovering] = useState(false);
+  const [_, setIsHovering] = useState(false);
 
   const handleIsHovering = () => setIsHovering((isHovering) => !isHovering);
 
@@ -34,15 +34,12 @@ const CardProductWithDescription = ({
       gridTemplateRows="max-content 0.7fr 2fr 0.5fr"
       rowGap={pxToRem(10)}
       borderRadius="8px"
-      // border={isHovering ? '2px solid' : 'none'}
-      // borderColor={color ? color : "black.800"}
-      // border={'2px solid'}
-      // borderColor={"black.800"}
+      cursor="pointer"
+      onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)}
       maxW={pxToRem(350)}
       w="100%"
       h={pxToRem(700)}
       mt="20px"
-      // h="100%"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
       border="2px solid"
