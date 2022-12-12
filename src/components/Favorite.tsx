@@ -16,9 +16,9 @@ import { pxToRem } from "../utils/pxToRem";
 import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
-import { useAuth } from '../contextAuth/authContext'
+import { useAuth } from "../contextAuth/authContext";
 export const Favorite = () => {
-  const { allProductsActive, allProductsHome, allCategoryActive } = useAuth()
+  const { allProductsActive, allProductsHome, allCategoryActive } = useAuth();
   const router = useRouter();
   const toast = useToast();
   const [products, setProducts] = useState<any>([]);
@@ -71,19 +71,23 @@ export const Favorite = () => {
         if (el.destaque) {
           newList.push({
             ...el,
-            nameCategory: allCategoryActive.find((ec: any) => ec.id == el.category).name
-          })
+            nameCategory: allCategoryActive.find(
+              (ec: any) => ec.id == el.category
+            ).name,
+          });
         }
-      })
+      });
 
       allProductsHome.forEach((el: any) => {
         if (el.destaque) {
           newList.push({
             ...el,
-            nameCategory: allCategoryActive.find((ec: any) => ec.id == el.category).name
-          })
+            nameCategory: allCategoryActive.find(
+              (ec: any) => ec.id == el.category
+            ).name,
+          });
         }
-      })
+      });
       setProducts(newList);
     } catch (error) {
       console.log(error);
@@ -99,8 +103,13 @@ export const Favorite = () => {
 
   const getHomeTab1 = async () => {
     try {
-      let find = allProductsHome.find((el: any) => el.indexProduct == 0)
-      let tab1 = { ...find, nameCategory: allCategoryActive.find((el: any) => el.id == find.category).name };
+      let find = allProductsHome.find((el: any) => el.indexProduct == 0);
+      let tab1 = {
+        ...find,
+        nameCategory: allCategoryActive.find(
+          (el: any) => el.id == find.category
+        ).name,
+      };
 
       if (Object.keys(tab1).length === 0) return;
       setHomeTabs({ ...homeTabs, tab1 });
@@ -117,7 +126,11 @@ export const Favorite = () => {
   };
 
   useEffect(() => {
-    if (allCategoryActive.length > 0 && allProductsActive.length > 0 && allProductsHome.length > 0) {
+    if (
+      allCategoryActive.length > 0 &&
+      allProductsActive.length > 0 &&
+      allProductsHome.length > 0
+    ) {
       listProductDestaque();
       getHomeTab1();
     }
@@ -161,6 +174,7 @@ export const Favorite = () => {
           autoplay={{
             delay: 2000,
           }}
+          initialSlide={0}
           speed={1000}
           spaceBetween={isTablet ? 20 : 30}
           modules={[Autoplay, Pagination]}
