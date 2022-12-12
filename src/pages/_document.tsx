@@ -1,4 +1,3 @@
-import Script from "next/script";
 import Document, {
   Html,
   Main,
