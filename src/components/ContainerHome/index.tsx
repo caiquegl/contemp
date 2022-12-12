@@ -45,7 +45,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
 
   const saveProduct = async (body: any) => {
     try {
-
       if (urls.length === 0 || !!!icon) {
         toast({
           title: "Erro",
@@ -122,7 +121,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
       });
     } finally {
       setLoading(false);
-      reset()
+      reset();
     }
   };
 
@@ -158,12 +157,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
     setValue("category", defaultValues?.category);
     setValue("description", defaultValues?.description);
     setValue("link_name", defaultValues?.link_name);
-    setHasCarrocel(
-      defaultValues &&
-        defaultValues.hasCarrocel
-        ? true
-        : false
-    );
+    setHasCarrocel(defaultValues && defaultValues.hasCarrocel ? true : false);
     setUrls(defaultValues && defaultValues.urls ? defaultValues.urls : []);
     setIcon(defaultValues && defaultValues.icon ? defaultValues.icon : "");
   }, [defaultValues]);
@@ -217,7 +211,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
               typeInput="file"
               getUrls={(values: any) => setUrls([...urls, ...values])}
             />
-            <HStack spacing="20px" flexWrap="wrap" w="100%">
+            <HStack spacing="20px" flexWrap="wrap" w="100%" marginTop={5}>
               {urls &&
                 urls.length > 0 &&
                 urls.map((value: any, index: number) => (
@@ -240,7 +234,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
               typeInput="fileSingle"
               getUrls={(link: any) => setIcon(link)}
             />
-            <Box mt="20px" w="200px">
+            <Box marginTop={5} w="200px">
               {icon && <ViewImage url={icon} remove={() => setIcon("")} />}
             </Box>
           </Box>
