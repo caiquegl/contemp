@@ -18,11 +18,9 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { collection, getDocs, deleteDoc } from "firebase/firestore";
-import ContainerAddProduct from "../ContainerAddProduct";
-import ContainerAddProductDescription from "../ContainerAddProductDescription";
+import { collection, getDocs } from "firebase/firestore";
 import { database, initFirebase } from "../../utils/db";
 import ContainerSeo from "../ContainerSeo";
 import moment from "moment";
