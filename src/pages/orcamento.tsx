@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Text,
-  useBreakpointValue,
   Button,
   Icon,
   VStack,
@@ -57,12 +56,13 @@ const Orcamento = () => {
       if (cart.length === 0) {
         toast({
           title: "Atenção",
-          description: "Para solicitar orçamento é necessário adicionar ao menos um produto.",
+          description:
+            "Para solicitar orçamento é necessário adicionar ao menos um produto.",
           status: "error",
           duration: 3000,
           isClosable: true,
         });
-        return
+        return;
       }
       bodyForm = { ...bodyForm, isAprove, products: cart };
 
@@ -181,7 +181,12 @@ const Orcamento = () => {
             recebimento.
           </Text>
 
-          <Box as="form" onSubmit={handleSubmit(saveCart)} ref={formRef}>
+          <Box
+            as="form"
+            id="carrinho"
+            onSubmit={handleSubmit(saveCart)}
+            ref={formRef}
+          >
             <VStack spacing="20px" w="100%">
               <HStack
                 spacing={[0, "20px"]}
