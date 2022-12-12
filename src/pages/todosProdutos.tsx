@@ -1,11 +1,11 @@
 import {
   Box,
+  Center,
   Container,
   Flex,
-  Text,
   Grid,
+  Text,
   useBreakpointValue,
-  Center,
 } from "@chakra-ui/react";
 import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
@@ -24,10 +24,10 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { AdBanners } from "../components/AdBanners";
 import { customSwiperBullets } from "../utils/customSwiperBullets";
-import { useAuth } from '../contextAuth/authContext'
+import { useAuth } from "../contextAuth/authContext";
 
 const AllProduct = () => {
-  const { allCategoryActive, allProductsActive, allProductsHome } = useAuth()
+  const { allCategoryActive, allProductsActive, allProductsHome } = useAuth();
   const [favorites, setFavorites] = useState<any>([]);
   const [categories, setCategories] = useState<any>([]);
 
@@ -50,10 +50,10 @@ const AllProduct = () => {
           listFavorite.push({
             ...el,
             idCategorie: el.id,
-            products: []
-          })
+            products: [],
+          });
         }
-      })
+      });
 
       if (listFavorite.length === 0) return;
       let index = 0;
@@ -83,9 +83,9 @@ const AllProduct = () => {
       allProductsActive.forEach((el: any) => {
         list.push({
           ...el,
-          idCategorie: el.id
-        })
-      })
+          idCategorie: el.id,
+        });
+      });
 
       if (list.length === 0) return;
 
@@ -96,7 +96,11 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    if (allCategoryActive.length > 0 && allProductsHome.length > 0 && allProductsActive.length > 0) {
+    if (
+      allCategoryActive.length > 0 &&
+      allProductsHome.length > 0 &&
+      allProductsActive.length > 0
+    ) {
       getFavorites();
       getCategories();
     }
@@ -115,7 +119,6 @@ const AllProduct = () => {
     }
     findOverflowingElements();
   }, [allCategoryActive, allProductsActive, allProductsHome]);
-
 
   return (
     <SmoothScroll>
@@ -160,7 +163,10 @@ const AllProduct = () => {
             p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
           >
             <Container maxW="7xl" p="80px 0">
-              <Flex alignItems={['flex-start', "center"]} flexDirection={['column', 'row']}>
+              <Flex
+                alignItems={["flex-start", "center"]}
+                flexDirection={["column", "row"]}
+              >
                 {fv.url ? (
                   <Center w="70px" h="70px" borderRadius="5px" mb={["20px", 0]}>
                     <Image
@@ -176,17 +182,20 @@ const AllProduct = () => {
                     />
                   </Center>
                 ) : (
-                  <Box w="55px" h="55px" borderRadius="5px" bg="black.800" mb={["20px", 0]} />
+                  <Box
+                    w="55px"
+                    h="55px"
+                    borderRadius="5px"
+                    bg="black.800"
+                    mb={["20px", 0]}
+                  />
                 )}
                 <Text
                   color="black.800"
-                  fontSize={[
-                    "35px",
-                    "45px",
-                  ]}
+                  fontSize={["35px", "45px"]}
                   fontWeight="bold"
                   ml="15px"
-                  lineHeight={['40px']}
+                  lineHeight={["40px"]}
                 >
                   {fv.name}
                 </Text>
@@ -195,6 +204,7 @@ const AllProduct = () => {
                 <Swiper
                   slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
                   spaceBetween={30}
+                  initialSlide={0}
                   autoplay={{
                     delay: 2000,
                     pauseOnMouseEnter: true,
@@ -305,22 +315,6 @@ const AllProduct = () => {
       />
       <Footer />
     </SmoothScroll>
-  );
-};
-
-const AdBanner = () => {
-  return (
-    <Image
-      src="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
-      alt="bateria"
-      bgSize="contain"
-      minH={{
-        base: pxToRem(228),
-        md: pxToRem(330),
-        lg: pxToRem(425),
-        xl: pxToRem(400),
-      }}
-    />
   );
 };
 
