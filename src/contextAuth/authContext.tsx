@@ -8,7 +8,7 @@ import {
 import Cookies from "js-cookie";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, database } from "../utils/db";
-import { Box, Button, Center, Flex, HStack, Link, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, HStack, Link, Text, useDisclosure } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 interface AuthProviderProps {
   children: ReactNode;
