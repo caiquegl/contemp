@@ -5,16 +5,6 @@ import {
   Flex,
   HStack,
   Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -29,7 +19,6 @@ import {
   orderBy,
   query,
   where,
-  deleteDoc,
   updateDoc,
   doc,
 } from "firebase/firestore";
@@ -42,7 +31,9 @@ import InputsHome from "../ContainerHome/inputs";
 import { ViewImage } from "../ContainerAddProduct/ViewImage";
 import { useAuth } from "../../contextAuth/authContext";
 import { Table } from "antd";
-import { BsSearch } from "react-icons/bs";
+import { SearchBar } from "../SearchBar";
+import { colors } from "../../styles/theme";
+import { pxToRem } from "../../utils/pxToRem";
 interface IBody {
   name: string;
   is_main?: string;
@@ -127,7 +118,7 @@ const TabCategory = () => {
           isClosable: true,
         });
       }
-      reload()
+      reload();
     } catch (error) {
       console.log(error);
       toast({
@@ -187,7 +178,7 @@ const TabCategory = () => {
           isClosable: true,
         });
       }
-      reload()
+      reload();
     } catch (error) {
       toast({
         title: "Erro",
@@ -203,9 +194,8 @@ const TabCategory = () => {
 
   const listCategory = async () => {
     try {
-
-      let newList = allCategory.sort((a: any, b: any) => a.order < b.order)
-      setListClone(newList)
+      let newList = allCategory.sort((a: any, b: any) => a.order < b.order);
+      setListClone(newList);
       setList(newList);
     } catch (error) {
       toast({
@@ -238,11 +228,11 @@ const TabCategory = () => {
       );
 
       await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) exist = true
+        if (data.docs.length > 0) exist = true;
       });
 
       await getDocs(qExistHome).then((data) => {
-        if (data.docs.length > 0) exist = true
+        if (data.docs.length > 0) exist = true;
       });
 
       const dbInstanceCategory = collection(database, "categories");
@@ -253,7 +243,7 @@ const TabCategory = () => {
       );
 
       await getDocs(qExistCategory).then((data) => {
-        if (data.docs.length > 0) existSubCategory = true
+        if (data.docs.length > 0) existSubCategory = true;
       });
 
       if (exist) {
@@ -264,7 +254,7 @@ const TabCategory = () => {
           duration: 3000,
           isClosable: true,
         });
-        return
+        return;
       }
       if (existSubCategory) {
         toast({
@@ -274,7 +264,7 @@ const TabCategory = () => {
           duration: 3000,
           isClosable: true,
         });
-        return
+        return;
       }
       // await deleteDoc(category.ref);
       toast({
@@ -341,17 +331,17 @@ const TabCategory = () => {
 
   const column = [
     {
-      title: 'Order',
-      render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />
+      title: "Order",
+      render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
     {
-      title: 'Nome',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Nome",
+      dataIndex: "name",
+      key: "name",
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
-      title: 'Ações',
+      title: "Ações",
       render: (a: any) => (
         <HStack spacing="20px">
           <Icon
@@ -369,8 +359,7 @@ const TabCategory = () => {
               setIsActive(a.is_active);
               setUpdate(a);
               setUrl(a.url ? a.url : "");
-              if (a.sub_categorie)
-                setValue("sub_categorie", a.sub_categorie);
+              if (a.sub_categorie) setValue("sub_categorie", a.sub_categorie);
             }}
           />
           <Icon
@@ -381,53 +370,34 @@ const TabCategory = () => {
             onClick={() => deleteCategory(a)}
           />
         </HStack>
-      )
-    }
-  ]
+      ),
+    },
+  ];
   return (
     <>
-      <Flex
-        w="100%"
-        alignItems="center"
-        justifyContent="flex-end"
-        mb="18px"
-      >
-        <InputGroup
-          borderRadius="25px"
-          bg="white.500"
-          p="3px 7px"
-          w="100%"
-          h="50px"
-          maxW="288px"
-          outline="none"
-          border="1px solid"
-          borderColor="black.800"
-          color="black.800"
-          mb="20px"
-        >
-          <Input
-            w="100%"
-            height="100%"
-            border="none"
-            borderRadius="21px"
-            placeholder="Digite a categoria..."
-            type="text"
-            onChange={(evt) => {
+      <Flex w="100%" alignItems="center" justifyContent="flex-end" mb="18px">
+        <SearchBar
+          inputProps={{
+            placeholder: "Digite a categoria...",
+            onChange: (evt) => {
               let newList = listClone.filter((item: any) =>
-                item.name
-                  .toLowerCase()
-                  .includes(evt.target.value.toLowerCase())
+                item.name.toLowerCase().includes(evt.target.value.toLowerCase())
               );
               setList(newList);
-            }}
-            _focusVisible={{
-              outline: "none",
-            }}
-          />
-          <InputRightElement
-            children={<Icon as={BsSearch} fontSize="20px" />}
-          />
-        </InputGroup>
+            },
+            _placeholder: {
+              color: "black.800",
+              opacity: "50%",
+            },
+          }}
+          containerProps={{
+            bg: "white.500",
+            border: "1px solid",
+            borderColor: "black.800",
+            color: colors.black[800],
+            maxW: pxToRem(288),
+          }}
+        />
       </Flex>
       <HStack spacing="20px" alignItems="flex-start">
         <Box borderRadius="8px" bg="white" p="30px" w="100%">
@@ -470,7 +440,9 @@ const TabCategory = () => {
                     value: value.id,
                   };
                 })}
-                {...register("sub_categorie", { required: "Campo obrigatório" })}
+                {...register("sub_categorie", {
+                  required: "Campo obrigatório",
+                })}
               />
             )}
             <TextareaDefault
@@ -593,7 +565,6 @@ const TabCategory = () => {
         </Box>
       </HStack>
     </>
-
   );
 };
 
