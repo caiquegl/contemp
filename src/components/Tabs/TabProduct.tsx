@@ -1,23 +1,15 @@
-import {
-  Box,
-  HStack,
-  Icon,
-  Flex,
-  Button,
-  InputGroup,
-  Input,
-  InputRightElement,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, HStack, Icon, Flex, Button, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
-import { BsSearch } from "react-icons/bs";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc } from "firebase/firestore";
 import ContainerAddProduct from "../ContainerAddProduct";
 import ContainerAddProductDescription from "../ContainerAddProductDescription";
-import { database, initFirebase } from "../../utils/db";
+import { initFirebase } from "../../utils/db";
 import { useAuth } from "../../contextAuth/authContext";
 import { Table } from "antd";
+import { SearchBar } from "../SearchBar";
+import { colors } from "../../styles/theme";
+import { pxToRem } from "../../utils/pxToRem";
 
 const TabProduct = () => {
   initFirebase();
@@ -32,24 +24,24 @@ const TabProduct = () => {
 
   const column = [
     {
-      title: 'Nome',
-      dataIndex: 'name',
-      key: 'name',
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
+      title: "Nome",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
-      title: 'Categoria',
-      dataIndex: 'nameCategory',
-      key: 'nameCategory',
-      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory)
+      title: "Categoria",
+      dataIndex: "nameCategory",
+      key: "nameCategory",
+      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory),
     },
     {
-      title: 'Url',
-      dataIndex: 'url',
-      key: 'url',
+      title: "Url",
+      dataIndex: "url",
+      key: "url",
     },
     {
-      title: 'Ação',
+      title: "Ação",
       render: (a: any) => (
         <HStack spacing="20px">
           <Icon
@@ -70,18 +62,24 @@ const TabProduct = () => {
             onClick={() => deleteProduct(a)}
           />
         </HStack>
-      )
-    }
-  ]
+      ),
+    },
+  ];
   const listProduct = async () => {
     try {
       let newList: any = [];
 
       allProducts.forEach((el: any) => {
-        newList.push({ ...el, nameCategory: allCategory.find((cg: any) => cg.id == el.category).name })
-      })
+        newList.push({
+          ...el,
+          nameCategory: allCategory.find((cg: any) => cg.id == el.category)
+            .name,
+        });
+      });
 
-      let sortList = newList.sort((a: any, b: any) => a.name.localeCompare(b.name))
+      let sortList = newList.sort((a: any, b: any) =>
+        a.name.localeCompare(b.name)
+      );
       setList(sortList);
       setListClone(sortList);
     } catch (error) {
@@ -122,8 +120,8 @@ const TabProduct = () => {
   }, [allProducts, allCategory]);
 
   useEffect(() => {
-    reload()
-  }, [step])
+    reload();
+  }, [step]);
 
   return (
     <>
@@ -147,7 +145,31 @@ const TabProduct = () => {
             >
               Adicionar
             </Button>
-            <InputGroup
+            <SearchBar
+              inputProps={{
+                placeholder: "Digite o produto...",
+                onChange: (evt) => {
+                  let newList = listClone.filter((item: any) =>
+                    item.name
+                      .toLowerCase()
+                      .includes(evt.target.value.toLowerCase())
+                  );
+                  setList(newList);
+                },
+                _placeholder: {
+                  color: "black.800",
+                  opacity: "50%",
+                },
+              }}
+              containerProps={{
+                bg: "white.500",
+                border: "1px solid",
+                borderColor: "black.800",
+                color: colors.black[800],
+                maxW: pxToRem(288),
+              }}
+            />
+            {/* <InputGroup
               borderRadius="25px"
               bg="white.500"
               p="3px 7px"
@@ -182,7 +204,7 @@ const TabProduct = () => {
               <InputRightElement
                 children={<Icon as={BsSearch} fontSize="20px" />}
               />
-            </InputGroup>
+            </InputGroup> */}
           </Flex>
           <Box borderRadius="8px" bg="white" p="30px" w="100%">
             <Table dataSource={list} columns={column} />
