@@ -26,6 +26,7 @@ export default class MyDocument extends Document {
           />
           <title>Contemp</title>
           <link rel="icon" href="/favicon.png" />
+          
         </Head>
         <body>
           <Main />

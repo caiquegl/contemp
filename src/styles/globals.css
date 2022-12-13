@@ -174,10 +174,9 @@ body {
 .ant-menu-item-only-child {
   padding-left: 16px !important;
 }
-
-.ant-menu-horizontal>.ant-menu-item,
-.ant-menu-horizontal>.ant-menu-submenu:hover,
-.ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title:hover {
+.ant-menu-horizontal>.ant-menu-item, .ant-menu-horizontal>.ant-menu-submenu:hover,
+.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title:hover {
+>>>>>>> Stashed changes
   background: var(--chakra-colors-red-600);
   border-radius: 4px;
 }
