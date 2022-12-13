@@ -398,26 +398,23 @@ const Home = () => {
           <CardBlog
             bg="red.600"
             color="white"
-            title="Termopar, onde utilizar ?"
-            text="Termopar termopares, são sensores de temperatura composto por
-            dois elementos."
-            img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+            title="Conheça os principais segmentos em que a Contemp atua e saiba como a marca se posiciona no mercado"
+            text="Nossa missão no mercado brasileiro é garantir a melhor solução para medição e controle de temperatura em processos industriais, com excelência técnica em produtos e atendimento. Conheça os principais segmentos em que a Contemp atua."
+            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_8.png"
           />
           <CardBlog
             bg="white.500"
             color="black.800"
-            title="Termopar, onde utilizar ?"
-            text="Termopar termopares, são sensores de temperatura composto por
-            dois elementos."
-            img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+            title="Por que utilizar termopares de platina e onde aplicá-los?"
+            text="Os termopares de platina são utilizados para medição de alta temperatura em processos industriais, normalmente na faixa de 1.000°C à 1.700°C."
+            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_7.png"
           />
           <CardBlog
             bg="black.800"
             color="white"
-            title="Termopar, onde utilizar ?"
-            text="Termopar termopares, são sensores de temperatura composto por
-            dois elementos."
-            img="https://www.fenixbaterias.com.br/wp-content/uploads/2020/04/bateria-automotiva-america-2-495x400.png"
+            title="Medição de Temperatura por Infravermelho em Metais Ferrosos"
+            text="Devido às suas características físico-químicas, o metais são utilizados na produção desde pequenos itens do cotidiano às grandes obras."
+            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_6.png"
           />
         </GridChakra>
       </Flex> */}

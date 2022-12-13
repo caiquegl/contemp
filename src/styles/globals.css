@@ -175,8 +175,8 @@ body {
   padding-left: 16px !important;
 }
 .ant-menu-horizontal>.ant-menu-item, .ant-menu-horizontal>.ant-menu-submenu:hover,
-.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title:hover {
->>>>>>> Stashed changes
+.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title:hover,
+.ant-menu-vertical.ant-menu-sub .ant-menu-item:hover {
   background: var(--chakra-colors-red-600);
   border-radius: 4px;
 }
