@@ -114,7 +114,6 @@ export const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY);
       setScrollY(window.scrollY);
     };
 
@@ -147,7 +146,6 @@ export const Header = () => {
             position="relative"
             cursor="pointer"
             onClick={() => {
-              console.log("aquiii");
               if (totalCart == 0 && !totalCart) {
                 oOpen();
                 return;
