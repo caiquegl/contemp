@@ -91,7 +91,7 @@ body {
   margin-left: 13px;
 }
 
-.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title {
+.ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title {
   justify-content: flex-end;
   width: 100%;
 }
@@ -143,7 +143,7 @@ body {
   padding-bottom: 50px !important;
 }
 
-.ant-table-thead > tr > th {
+.ant-table-thead>tr>th {
   background: #fff !important;
 }
 
@@ -167,10 +167,17 @@ body {
   color: #fff !important;
 }
 
-.ant-menu-submenu  {
+.ant-menu-submenu {
   padding: 0px 1rem !important;
 }
 
 .ant-menu-item-only-child {
   padding-left: 16px !important;
+}
+
+.ant-menu-horizontal>.ant-menu-item,
+.ant-menu-horizontal>.ant-menu-submenu:hover,
+.ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title:hover {
+  background: var(--chakra-colors-red-600);
+  border-radius: 4px;
 }
