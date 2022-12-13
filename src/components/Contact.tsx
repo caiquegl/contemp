@@ -26,9 +26,15 @@ interface IProps {
   description: string;
   ocultAddres?: boolean;
   form: any;
-  id?: string
+  id?: string;
 }
-export const Contact = ({ title, description, ocultAddres, form, id }: IProps) => {
+export const Contact = ({
+  title,
+  description,
+  ocultAddres,
+  form,
+  id,
+}: IProps) => {
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
       <ContainerChakra
@@ -57,19 +63,27 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
               <>
                 <HStack spacing="20px" mb="22px">
                   <Icon as={BsTelephone} fontSize="20px" color="red.600" />
-                  <Link href="tel:1142265140" _hover={{ textDecoration: 'none' }} target="_blank">
-                  <Text fontSize="20px" color="black.800">
-                    (11) 4223-5140
-                  </Text>
+                  <Link
+                    href="tel:1142265140"
+                    _hover={{ textDecoration: "none" }}
+                    target="_blank"
+                  >
+                    <Text fontSize="20px" color="black.800">
+                      (11) 4223-5140
+                    </Text>
                   </Link>
                 </HStack>
                 <HStack spacing="20px" mb="22px">
                   <Icon as={BiMap} fontSize="20px" color="red.600" />
-                  <Link href="https://goo.gl/maps/6C1R41LG79c9FWyRA" _hover={{ textDecoration: 'none' }} target="_blank">
-                  <Text fontSize="20px" color="black.800">
-                    Alameda Araguaia, 204 - Santa Maria, São Caetano do Sul -
-                    SP, 09560-580
-                  </Text>
+                  <Link
+                    href="https://goo.gl/maps/6C1R41LG79c9FWyRA"
+                    _hover={{ textDecoration: "none" }}
+                    target="_blank"
+                  >
+                    <Text fontSize="20px" color="black.800">
+                      Alameda Araguaia, 204 - Santa Maria, São Caetano do Sul -
+                      SP, 09560-580
+                    </Text>
                   </Link>
                 </HStack>
               </>
@@ -86,8 +100,8 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
           </GridItem>
           <GridItem
             w="100%"
-          // ml={["0", "0", "0", "0", "56px"]}
-          // mt={["50px", "50px", "50px", "50px", "50px"]}
+            // ml={["0", "0", "0", "0", "56px"]}
+            // mt={["50px", "50px", "50px", "50px", "50px"]}
           >
             <Box
               border="2px solid"
@@ -100,7 +114,13 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
               width="100%"
               height="100%"
             >
-              <form id={id} method="POST">
+              <form
+                id={id}
+                method="POST"
+                onSubmit={async (evt) => {
+                  evt.preventDefault();
+                }}
+              >
                 <VStack spacing="18px">
                   {form &&
                     form.length > 0 &&
@@ -234,7 +254,6 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                   </Button>
                 </Flex>
               </form>
-
             </Box>
           </GridItem>
         </Grid>
