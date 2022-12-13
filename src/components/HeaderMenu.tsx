@@ -5,6 +5,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { useRouter } from "next/router";
 import Icon from "./Icon";
 import { pxToRem } from "../utils/pxToRem";
+import { Box } from "@chakra-ui/react";
 
 export type MenuProps = {
   menuItems: any;
@@ -53,7 +54,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           title: el.name,
           key: el.name,
           onTitleClick: (value: any) => {
-            router.push(`/category/${el.name.replaceAll(' ', '_')}`)
+            router.push(`/category/${el.name.replaceAll(" ", "_")}`);
           },
           // onclick: (value: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`),
           // onclick: (a: any) => console.log('aquii', a),
@@ -120,7 +121,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
+          router.push(`/category/${evt.keyPath[0].replaceAll(" ", "_")}`);
         }}
         mode={"horizontal"}
         items={list}
@@ -129,14 +130,18 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           background: "#242424",
           border: "none",
           fontSize: 16,
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexWrap: "wrap",
           position: "relative",
           alignItems: "center",
           width: "100%",
-          justifyContent: 'center'
+          justifyContent: "center",
         }}
-        overflowedIndicator={<p>Outros</p>}
+        overflowedIndicator={
+          <Box as={"p"} _hover={{ color: "white" }}>
+            Outros
+          </Box>
+        }
       />
     </>
   );
@@ -159,7 +164,9 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
               icon={AiOutlineEye}
               size={20}
               color="#fff"
-              onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
+              onClick={(item: any) =>
+                router.push(`/category/${el.name.replaceAll(" ", "_")}`)
+              }
             />
           ),
         };
