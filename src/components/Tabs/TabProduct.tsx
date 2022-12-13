@@ -13,7 +13,10 @@ import { pxToRem } from "../../utils/pxToRem";
 
 const TabProduct = () => {
   initFirebase();
-  const toast = useToast();
+  const toast = useToast({
+    duration: 3000,
+    isClosable: true,
+  });
   const { allCategory, allProducts, reload } = useAuth();
 
   const [step, setStep] = useState(1);
@@ -87,8 +90,6 @@ const TabProduct = () => {
         title: "Erro",
         description: "Erro ao listar produtos",
         status: "error",
-        duration: 3000,
-        isClosable: true,
       });
     }
   };
@@ -100,8 +101,6 @@ const TabProduct = () => {
         title: "Sucesso",
         description: "Produto deletada com sucesso.",
         status: "success",
-        duration: 3000,
-        isClosable: true,
       });
       listProduct();
     } catch (err) {
@@ -109,8 +108,6 @@ const TabProduct = () => {
         title: "Erro",
         description: "Erro ao deletar produto",
         status: "error",
-        duration: 3000,
-        isClosable: true,
       });
     }
   };
@@ -145,6 +142,7 @@ const TabProduct = () => {
             >
               Adicionar
             </Button>
+
             <SearchBar
               inputProps={{
                 placeholder: "Digite o produto...",
@@ -169,43 +167,8 @@ const TabProduct = () => {
                 maxW: pxToRem(288),
               }}
             />
-            {/* <InputGroup
-              borderRadius="25px"
-              bg="white.500"
-              p="3px 7px"
-              w="100%"
-              h="50px"
-              maxW="288px"
-              outline="none"
-              border="1px solid"
-              borderColor="black.800"
-              color="black.800"
-              mb="20px"
-            >
-              <Input
-                w="100%"
-                height="100%"
-                border="none"
-                borderRadius="21px"
-                placeholder="Digite o produto..."
-                type="text"
-                onChange={(evt) => {
-                  let newList = listClone.filter((item: any) =>
-                    item.name
-                      .toLowerCase()
-                      .includes(evt.target.value.toLowerCase())
-                  );
-                  setList(newList);
-                }}
-                _focusVisible={{
-                  outline: "none",
-                }}
-              />
-              <InputRightElement
-                children={<Icon as={BsSearch} fontSize="20px" />}
-              />
-            </InputGroup> */}
           </Flex>
+
           <Box borderRadius="8px" bg="white" p="30px" w="100%">
             <Table dataSource={list} columns={column} />
           </Box>
