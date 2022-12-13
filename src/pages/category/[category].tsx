@@ -18,6 +18,7 @@ const Category = () => {
   const { category } = router.query;
   const [list, setList] = useState<any>([]);
   const [categ, setCateg] = useState<any>({});
+  const [loading, setLoading] = useState(true);
 
   const dividerList = (listProduct: any) => {
     let list: any = [];
@@ -43,6 +44,7 @@ const Category = () => {
 
   const getCategoryList = async () => {
     try {
+      setLoading(true);
       // const dbInstanceCategory = collection(database, "categories");
       // const dbInstanceProducts = collection(database, "products");
       // const dbInstanceHome = collection(database, "home");
@@ -54,16 +56,16 @@ const Category = () => {
       // });
       let idCategory: any = [];
       let nameCategory = "";
-      if (category && typeof category == "string")
+      if (category && typeof category === "string")
         nameCategory = category.replaceAll("_", " ");
-      allCategoryActive.forEach((el: any) => {
-        if (el.name == nameCategory) {
+      await allCategoryActive.forEach(async (el: any) => {
+        if (el.name === nameCategory) {
           idCategory.push(el.id);
-          allCategoryActive.forEach((el2: any) => {
-            if (el2.sub_categorie && el2.sub_categorie == el.id) {
+          await allCategoryActive.forEach((el2: any) => {
+            if (el2.sub_categorie && el2.sub_categorie === el.id) {
               idCategory.push(el2.id);
               allCategoryActive.forEach((el3: any) => {
-                if (el3.sub_categorie && el3.sub_categorie == el2.id) {
+                if (el3.sub_categorie && el3.sub_categorie === el2.id) {
                   idCategory.push(el3.id);
                 }
               });
@@ -72,21 +74,23 @@ const Category = () => {
         }
       });
 
-      let categFind = allCategoryActive.find(
-        (el: any) => el.name == nameCategory
+      let categFind = await allCategoryActive.find(
+        (el: any) => el.name === nameCategory
       );
       setCateg(categFind);
       let list: any = [];
 
-      allProductsActive.forEach((el: any) => {
+      await allProductsActive.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el);
+          if (el.category === ct) list.push(el);
         });
       });
 
       dividerList(list);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -95,6 +99,18 @@ const Category = () => {
       getCategoryList();
     }
   }, [category, allCategoryActive, allProductsActive]);
+
+  const scrollToProductList = () => {
+    const productList = document.querySelector("#product-list");
+    const productListTop = productList?.getBoundingClientRect().top;
+    window.scrollTo({ top: productListTop });
+  };
+
+  useEffect(() => {
+    if (window) {
+      scrollToProductList();
+    }
+  }, [loading, category]);
 
   return (
     <SmoothScroll>
@@ -114,6 +130,7 @@ const Category = () => {
         justifyContent="center"
         direction="column"
         h={["350px", "350px", "250px", "250px", "250px", "250px"]}
+        id="product-list"
       >
         <Text
           fontSize={["30px", "30px", "40px", "40px", "40px", "40px"]}
@@ -122,7 +139,7 @@ const Category = () => {
           maxW="1037px"
           p={["0 20px", "0 20px", "0 20px", "0 20px", "0"]}
         >
-          {category && typeof category == "string"
+          {category && typeof category === "string"
             ? category.replaceAll("_", " ")
             : ""}
         </Text>
@@ -133,9 +150,9 @@ const Category = () => {
           index = index + 1;
           let bg = "white";
 
-          if (index % 2 == 0) bg = "white.500";
-          if (index % 3 == 0) bg = "black.800";
-          if (index % 4 == 0) bg = "red.600";
+          if (index % 2 === 0) bg = "white.500";
+          if (index % 3 === 0) bg = "black.800";
+          if (index % 4 === 0) bg = "red.600";
 
           return <ListCategory bg={bg} data={categ} />;
         })}
