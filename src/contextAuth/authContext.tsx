@@ -6,9 +6,16 @@ import {
   useState,
 } from "react";
 import Cookies from "js-cookie";
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "../utils/db";
-import { Button, Flex, HStack, Link, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  HStack,
+  Link,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 interface AuthProviderProps {
   children: ReactNode;
@@ -20,22 +27,22 @@ type UserAuthContextData = {
   listHeader: any;
   setListHeader: any;
   setAllProducts: any;
-  allProducts: any
-  allProductsActive: any
-  cart: any
-  setCart: any
-  addCart: any
-  clearCart: any
-  removeCart: any
-  isOpen: any
-  onClose: any
-  onOpen: any
-  totalCart: any
-  allCategory: any
-  allCategoryActive: any
-  reload: any
-  allProductsHome: any
-  loading: any
+  allProducts: any;
+  allProductsActive: any;
+  cart: any;
+  setCart: any;
+  addCart: any;
+  clearCart: any;
+  removeCart: any;
+  isOpen: any;
+  onClose: any;
+  onOpen: any;
+  totalCart: any;
+  allCategory: any;
+  allCategoryActive: any;
+  reload: any;
+  allProductsHome: any;
+  loading: any;
 };
 const UserAuthContext = createContext({} as UserAuthContextData);
 
@@ -68,155 +75,183 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const acepetCookie = () => {
-    localStorage.setItem('acepetCookie', JSON.stringify(true))
-    getCookie()
-  }
-
+    localStorage.setItem("acepetCookie", JSON.stringify(true));
+    getCookie();
+  };
 
   useEffect(() => {
     const au = onAuthStateChanged(auth, (use) => {
       if (use) {
-        setUser(use)
+        setUser(use);
       } else {
-        setUser({})
+        setUser({});
       }
-    })
-    return () => au()
-  }, [])
+    });
+    return () => au();
+  }, []);
 
   const getCategory = async () => {
     try {
       const dbInstanceCategory = collection(database, "categories");
 
-      let list: any = []
+      let list: any = [];
       await getDocs(dbInstanceCategory).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id })
-        })
+          list.push({
+            ...el.data(),
+            id: data.docs[index].id,
+          });
+        });
       });
 
-      let active = list.filter((el: any) => el.is_active == true)
-      setAllCategoryActive(active)
-      setAllCategory(list)
+      let active = list.filter((el: any) => el.is_active == true);
+      setAllCategoryActive(active);
+      setAllCategory(list);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getAllProducts = async () => {
     try {
       const dbInstanceProduct = collection(database, "products");
 
-      let list: any = []
+      let list: any = [];
       await getDocs(dbInstanceProduct).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id })
-        })
+          list.push({
+            ...el.data(),
+            id: data.docs[index].id,
+            ref: data.docs[index].ref,
+          });
+        });
       });
 
-      let active = list.filter((el: any) => el.is_active == true)
-      setAllProductsActive(active)
-      setAllProducts(list)
+      let active = list.filter((el: any) => el.is_active == true);
+      setAllProductsActive(active);
+      setAllProducts(list);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const getAllProductsHome = async () => {
     try {
       const dbInstanceHome = collection(database, "home");
 
-      let list: any = []
+      let list: any = [];
       await getDocs(dbInstanceHome).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id })
-        })
+          list.push({ ...el.data(), id: data.docs[index].id });
+        });
       });
 
-      setAllProductsHome(list)
+      setAllProductsHome(list);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const reload = async () => {
-    setLoading(true)
-    await getCategory()
-    await getAllProducts()
-    await getAllProductsHome()
-    setLoading(false)
-
-  }
+    setLoading(true);
+    await getCategory();
+    await getAllProducts();
+    await getAllProductsHome();
+    setLoading(false);
+  };
 
   useEffect(() => {
-    reload()
-  }, [])
+    reload();
+  }, []);
 
   const getItemLocal = () => {
-    let getItem = window.localStorage.getItem('CART-CONTEMP')
+    let getItem = window.localStorage.getItem("CART-CONTEMP");
 
     if (getItem) {
-      let convert = JSON.parse(getItem)
-      setCart(convert)
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
+      let convert = JSON.parse(getItem);
+      setCart(convert);
+      window.localStorage.setItem("CART-CONTEMP", JSON.stringify(convert));
 
-      let total = 0
+      let total = 0;
       convert.forEach((el: any) => {
-        total = total + el.qtd
-      })
-      setTotalCart(total)
+        total = total + el.qtd;
+      });
+      setTotalCart(total);
     }
-  }
+  };
 
   const addCart = (body: any) => {
-    let getItem = window.localStorage.getItem('CART-CONTEMP')
+    let getItem = window.localStorage.getItem("CART-CONTEMP");
 
     if (getItem) {
-      let convert = JSON.parse(getItem)
-      convert.push(body)
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
+      let convert = JSON.parse(getItem);
+      convert.push(body);
+      window.localStorage.setItem("CART-CONTEMP", JSON.stringify(convert));
     } else {
-      window.localStorage.setItem('CART-CONTEMP', JSON.stringify([body]))
+      window.localStorage.setItem("CART-CONTEMP", JSON.stringify([body]));
     }
-    getItemLocal()
-  }
+    getItemLocal();
+  };
 
   const removeCart = (body: any, index: number) => {
-
-    let newList: any = []
+    let newList: any = [];
 
     body.forEach((el: any, indexremove: number) => {
-      if (indexremove != index) newList.push(el)
-    })
+      if (indexremove != index) newList.push(el);
+    });
 
-    window.localStorage.setItem('CART-CONTEMP', JSON.stringify(newList))
-    getItemLocal()
-  }
+    window.localStorage.setItem("CART-CONTEMP", JSON.stringify(newList));
+    getItemLocal();
+  };
 
   const clearCart = (body: any) => {
-    window.localStorage.removeItem('CART-CONTEMP')
-    setCart([])
-  }
+    window.localStorage.removeItem("CART-CONTEMP");
+    setCart([]);
+  };
 
   const disclosure = useDisclosure();
 
   const { isOpen, onClose, onOpen } = disclosure;
 
   const getCookie = () => {
-    let has = localStorage.getItem('acepetCookie')
+    let has = localStorage.getItem("acepetCookie");
     if (!has) {
-      setHasCookie(true)
+      setHasCookie(true);
     } else {
-      setHasCookie(false)
+      setHasCookie(false);
     }
-  }
+  };
   useEffect(() => {
-    getItemLocal()
-    getCookie()
-  }, [])
+    getItemLocal();
+    getCookie();
+  }, []);
   return (
-    <UserAuthContext.Provider value={{ allCategoryActive, allProductsActive, loading, allProductsHome, reload, allCategory, totalCart, isOpen, onClose, onOpen, removeCart, clearCart, addCart, cart, setCart, user, setUser, listHeader, setListHeader, allProducts, setAllProducts }}>
-      {hasCookie &&
+    <UserAuthContext.Provider
+      value={{
+        allCategoryActive,
+        allProductsActive,
+        loading,
+        allProductsHome,
+        reload,
+        allCategory,
+        totalCart,
+        isOpen,
+        onClose,
+        onOpen,
+        removeCart,
+        clearCart,
+        addCart,
+        cart,
+        setCart,
+        user,
+        setUser,
+        listHeader,
+        setListHeader,
+        allProducts,
+        setAllProducts,
+      }}
+    >
+      {hasCookie && (
         <Flex
           w="100%"
           maxW="440px"
@@ -236,8 +271,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
             Valorizamos sua privacidade
           </Text>
           <Text color="white" fontSize="18px" mb="10px">
-            Utilizamos cookies para aprimorar sua experiência de navegação, exibir anúncios ou conteúdos personalizado e analisar nosso tráfego. Ao clicar em "Aceitar todos", você concorda com nosso uso de cookies.
-            <Link as="span" ml="5px" isExternal href="https://blog.contemp.com.br/politica-de-privacidade" target="_blank">
+            Utilizamos cookies para aprimorar sua experiência de navegação,
+            exibir anúncios ou conteúdos personalizado e analisar nosso tráfego.
+            Ao clicar em "Aceitar todos", você concorda com nosso uso de
+            cookies.
+            <Link
+              as="span"
+              ml="5px"
+              isExternal
+              href="https://blog.contemp.com.br/politica-de-privacidade"
+              target="_blank"
+            >
               Leia mais
             </Link>
           </Text>
@@ -246,7 +290,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
               <Button
                 onClick={() => acepetCookie()}
                 _hover={{
-                  opacity: 0.7
+                  opacity: 0.7,
                 }}
                 bg="transparent"
                 border="2px solid white"
@@ -264,17 +308,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 border="none"
                 onClick={() => acepetCookie()}
                 _hover={{
-                  opacity: 0.7
+                  opacity: 0.7,
                 }}
                 color="black.800"
-                textAlign="center" borderRadius="20px" height="40px" p="10px">
+                textAlign="center"
+                borderRadius="20px"
+                height="40px"
+                p="10px"
+              >
                 Aceitar
               </Button>
             </HStack>
           </Flex>
-
         </Flex>
-      }
+      )}
       {children}
     </UserAuthContext.Provider>
   );
