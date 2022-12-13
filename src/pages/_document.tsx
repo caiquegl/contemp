@@ -7,7 +7,6 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 
-
 export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -31,10 +30,15 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js" ></script>
-          
-          <script dangerouslySetInnerHTML={{
-            __html: `
+          <script
+            type="text/javascript"
+            async
+            src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js"
+          ></script>
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
               !function (t, e, c, n) {
                 var s = e.createElement(c);
                 s.async = 1, s.src = 'https://scripts.claspo.io/scripts/' + n + '.js';
@@ -53,7 +57,23 @@ export default class MyDocument extends Document {
               
               claspo('init');
             `,
-          }} />
+            }}
+          />
+
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-24615402-1"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-24615402-1');
+          `,
+            }}
+          />
         </body>
       </Html>
     );
