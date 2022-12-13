@@ -35,7 +35,13 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const { errors } = formState;
 
   const saveProduct = async (bodyForm: any) => {
-    let body = { ...bodyForm, hasVariation, urls, destaque, is_active: isActive };
+    let body = {
+      ...bodyForm,
+      hasVariation,
+      urls,
+      destaque,
+      is_active: isActive,
+    };
     if (hasVariation) {
       let falt = false;
       let more = false;
@@ -121,7 +127,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           <InputDefault
             label="Nome do produto"
             type="text"
-            placeholder="nome do produto"
+            placeholder="Nome do produto"
             error={errors.name}
             {...register("name", { required: "Nome é obrigatório" })}
           />
@@ -245,7 +251,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               addVariation={(variation: any) => {
                 let newList = listVariation;
                 newList[index].name = variation.name;
-                if (!variation.addOpt) return
+                if (!variation.addOpt) return;
                 if (newList[index].opt) {
                   newList[index].opt.push(variation.addOpt);
                 } else {
