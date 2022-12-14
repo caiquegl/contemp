@@ -49,6 +49,7 @@ const TabCategory = () => {
     duration: 3000,
     isClosable: true
   })
+
   initFirebase()
   const { allCategory, reload } = useAuth()
 
@@ -106,15 +107,11 @@ const TabCategory = () => {
 
         toast({
           title: 'Sucesso',
-          description: 'Categoria cadastradado com sucesso.',
+          description: 'Categoria cadastrada com sucesso.',
           status: 'success'
         })
         setUrl('')
         setUpdate({} as IBody)
-        setTimeout(() => {
-          router.reload()
-        }, 1500);
-
       } else {
         toast({
           title: 'Erro',
@@ -127,19 +124,18 @@ const TabCategory = () => {
       toast({
         title: 'Erro',
         description: 'Erro ao salvar categoria',
-        status: 'error',
-        duration: 3000,
-        isClosable: true
+        status: 'error'
       })
     } finally {
       setLoading(false)
       reset()
+      await reload()
+      await listCategory()
     }
   }
 
   const updateCategory = async (bodyForm: any) => {
     try {
-      console.log(update, 'update')
       setLoading(true)
       const dbInstance = collection(database, 'categories')
       let exist = false
@@ -155,7 +151,6 @@ const TabCategory = () => {
       })
 
       if (!exist) {
-        console.log('categories', update.id)
         const dbInstanceUpdate = doc(database, 'categories', update.id)
         await updateDoc(dbInstanceUpdate, {
           ...bodyForm,
@@ -166,16 +161,11 @@ const TabCategory = () => {
 
         toast({
           title: 'Sucesso',
-          description: 'Categoria cadastradado com sucesso.',
+          description: 'Categoria atualizada com sucesso.',
           status: 'success'
         })
         setUrl('')
         setUpdate({} as IBody)
-        setTimeout(() => {
-          router.reload()
-        }, 1500);
-
-
       } else {
         toast({
           title: 'Erro',
@@ -187,9 +177,7 @@ const TabCategory = () => {
       toast({
         title: 'Erro',
         description: 'Erro ao atualizar categoria',
-        status: 'error',
-        duration: 3000,
-        isClosable: true
+        status: 'error'
       })
     } finally {
       setLoading(false)
@@ -208,9 +196,7 @@ const TabCategory = () => {
       toast({
         title: 'Erro',
         description: 'Erro ao listar categoria',
-        status: 'error',
-        duration: 3000,
-        isClosable: true
+        status: 'error'
       })
     }
   }
@@ -270,25 +256,17 @@ const TabCategory = () => {
         return
       }
       await deleteDoc(category.ref)
+      await reload()
       toast({
         title: 'Sucesso',
         description: 'Categoria deletada com sucesso.',
-        status: 'success',
-        duration: 3000,
-        isClosable: true
+        status: 'success'
       })
-
-      setTimeout(() => {
-        router.reload()
-      }, 1500);
-
     } catch (err) {
       toast({
         title: 'Erro',
         description: 'Erro ao deletar categoria',
-        status: 'error',
-        duration: 3000,
-        isClosable: true
+        status: 'error'
       })
     }
   }
@@ -317,18 +295,14 @@ const TabCategory = () => {
       toast({
         title: 'Sucesso',
         description: 'Sucesso ao alterar ordem.',
-        status: 'success',
-        duration: 3000,
-        isClosable: true
+        status: 'success'
       })
       await reload()
     } catch (err) {
       toast({
         title: 'Erro',
         description: 'Erro ao alterar ordem',
-        status: 'error',
-        duration: 3000,
-        isClosable: true
+        status: 'error'
       })
     }
   }
@@ -340,6 +314,22 @@ const TabCategory = () => {
 
     getCategoryList()
   }, [])
+
+  const handleOnEditClick = (category: any) => {
+    setValue('name', category.name)
+    setValue('is_main', category.is_main)
+    setValue('description', category.description)
+    setValue('favorite', category.favorite)
+    setValue('key_word_seo', category.key_word_seo)
+    setValue('description_seo', category.description_seo)
+    setIsFavorite(category.favorite)
+    setIsActive(category.is_active)
+    setUpdate(category)
+    setUrl(category.url ? category.url : '')
+
+    if (category.sub_categorie)
+      setValue('sub_categorie', category.sub_categorie)
+  }
 
   const column = [
     {
@@ -360,21 +350,7 @@ const TabCategory = () => {
             cursor="pointer"
             as={AiOutlineEdit}
             fontSize="17px"
-            onClick={() => {
-              const isMain = a.is_main === 'true' ? true : false
-              console.log(a)
-              setValue('name', a.name)
-              setValue('is_main', isMain)
-              setValue('description', a.description)
-              setValue('favorite', a.favorite)
-              setValue('key_word_seo', a.key_word_seo)
-              setValue('description_seo', a.description_seo)
-              setIsFavorite(a.favorite)
-              setIsActive(a.is_active)
-              setUpdate(a)
-              setUrl(a.url ? a.url : '')
-              if (a.sub_categorie) setValue('sub_categorie', a.sub_categorie)
-            }}
+            onClick={() => handleOnEditClick(a)}
           />
           <Icon
             cursor="pointer"
@@ -388,12 +364,17 @@ const TabCategory = () => {
     }
   ]
 
-  const categoryOptions = list?.map((value: any) => {
+  const categoryOptions = listClone?.map((value: any) => {
     return {
       name: value.name,
       value: value.id
     }
   })
+
+  const isMainOptions = [
+    { name: 'SIM', value: 'true' },
+    { name: 'NÃO', value: 'false' }
+  ]
 
   return (
     <>
@@ -444,10 +425,7 @@ const TabCategory = () => {
             <SelectDefault
               label="É principal?"
               error={errors.is_main}
-              opt={[
-                { name: 'SIM', value: true },
-                { name: 'NÃO', value: false }
-              ]}
+              opt={isMainOptions}
               {...register('is_main', { required: 'Campo obrigatório' })}
             />
             {watch().is_main === 'false' && (
