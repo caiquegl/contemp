@@ -14,12 +14,17 @@ import {
   Textarea,
   VStack,
   Link,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import { BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import { TbSend } from "react-icons/tb";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import { InputDefault } from "./Form/Input";
+import { TextareaDefault } from "./Form/Textarea";
+import { SelectDefault } from "./Form/Select";
 
 interface IProps {
   title: string;
@@ -35,6 +40,40 @@ export const Contact = ({
   form,
   id,
 }: IProps) => {
+  const toast = useToast();
+  const formRef = useRef<any>();
+  const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
+    {}
+  );
+  const { errors } = formState;
+
+  const sendMail = async (bodyForm: any) => {
+    try {
+      await fetch(`api/defaultEmail`, {
+        method: "POST",
+        body: JSON.stringify({ body: bodyForm, id }),
+      });
+      reset()
+      toast({
+        title: "Sucesso",
+        description: "Sucesso ao enviar email",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Erro",
+        description: "Erro ao enviar email",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+    }
+  };
+
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
       <ContainerChakra
@@ -100,8 +139,8 @@ export const Contact = ({
           </GridItem>
           <GridItem
             w="100%"
-            // ml={["0", "0", "0", "0", "56px"]}
-            // mt={["50px", "50px", "50px", "50px", "50px"]}
+          // ml={["0", "0", "0", "0", "56px"]}
+          // mt={["50px", "50px", "50px", "50px", "50px"]}
           >
             <Box
               border="2px solid"
@@ -114,12 +153,12 @@ export const Contact = ({
               width="100%"
               height="100%"
             >
-              <form
+              <Box
                 id={id}
                 method="POST"
-                onSubmit={async (evt) => {
-                  evt.preventDefault();
-                }}
+                as="form"
+                onSubmit={handleSubmit(sendMail)}
+                ref={formRef}
               >
                 <VStack spacing="18px">
                   {form &&
@@ -127,76 +166,32 @@ export const Contact = ({
                     form.map((quest: any) => (
                       <>
                         {quest.type === "text" && (
-                          <InputGroup
-                            borderRadius="25px"
-                            bg="white.700"
-                            w="100%"
-                            h="50px"
-                            outline="none"
-                            color="black.800"
-                          >
-                            <Input
-                              w="100%"
-                              borderRadius="25px"
-                              height="100%"
-                              border="none"
-                              name={quest.name}
-                              placeholder={quest.name}
-                              _focusVisible={{
-                                outline: "none",
-                              }}
-                            />
-                          </InputGroup>
+                          <InputDefault
+                            label={quest.name}
+                            type="text"
+                            error={errors.name}
+                            {...register(quest.name)}
+                          />
                         )}
                         {quest.type === "textArea" && (
-                          <InputGroup
-                            borderRadius="25px"
-                            bg="white.700"
-                            height="248px"
-                            w="100%"
-                            outline="none"
-                            color="black.800"
-                          >
-                            <Textarea
-                              w="100%"
-                              height="248px"
-                              borderRadius="25px"
-                              border="none"
-                              name={quest.name}
-                              placeholder={quest.name}
-                              _focusVisible={{
-                                outline: "none",
-                              }}
-                            />
-                          </InputGroup>
+                          <TextareaDefault
+                            label={quest.name}
+                            error={errors.description}
+                            {...register(quest.name)}
+                          />
                         )}
                         {quest.type === "select" && (
-                          <InputGroup
-                            borderRadius="25px"
-                            bg="white.700"
-                            height="50px"
-                            w="100%"
-                            outline="none"
-                            color="black.800"
-                            display="flex"
-                            alignItems="center"
-                          >
-                            <Select
-                              w="100%"
-                              borderRadius="25px"
-                              height="100%"
-                              border="none"
-                              name={quest.name}
-                              placeholder={quest.name}
-                              _focusVisible={{
-                                outline: "none",
-                              }}
-                            >
-                              {quest.options.map((opt: string) => (
-                                <option value={opt}>{opt}</option>
-                              ))}
-                            </Select>
-                          </InputGroup>
+                          <SelectDefault
+                            label={quest.name}
+                            error={errors.is_main}
+                            opt={quest.options.map((opt: string) => {
+                              return {
+                                name: opt,
+                                value: opt
+                              }
+                            })}
+                            {...register(quest.name)}
+                          />
                         )}
                         {quest.type === "upload" && (
                           <Flex
@@ -253,7 +248,7 @@ export const Contact = ({
                     Enviar
                   </Button>
                 </Flex>
-              </form>
+              </Box>
             </Box>
           </GridItem>
         </Grid>
