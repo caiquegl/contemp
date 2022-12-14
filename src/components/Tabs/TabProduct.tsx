@@ -1,50 +1,50 @@
-import { Box, HStack, Icon, Flex, Button, useToast } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
-import { deleteDoc } from "firebase/firestore";
-import ContainerAddProduct from "../ContainerAddProduct";
-import ContainerAddProductDescription from "../ContainerAddProductDescription";
-import { initFirebase } from "../../utils/db";
-import { useAuth } from "../../contextAuth/authContext";
-import { Table } from "antd";
-import { SearchBar } from "../SearchBar";
-import { colors } from "../../styles/theme";
-import { pxToRem } from "../../utils/pxToRem";
+import { Box, HStack, Icon, Flex, Button, useToast } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
+import { deleteDoc } from 'firebase/firestore'
+import ContainerAddProduct from '../ContainerAddProduct'
+import ContainerAddProductDescription from '../ContainerAddProductDescription'
+import { initFirebase } from '../../utils/db'
+import { useAuth } from '../../contextAuth/authContext'
+import { Table } from 'antd'
+import { SearchBar } from '../SearchBar'
+import { colors } from '../../styles/theme'
+import { pxToRem } from '../../utils/pxToRem'
 
 const TabProduct = () => {
-  initFirebase();
+  initFirebase()
   const toast = useToast({
     duration: 3000,
-    isClosable: true,
-  });
-  const { allCategory, allProducts, reload } = useAuth();
+    isClosable: true
+  })
+  const { allCategory, allProducts, reload } = useAuth()
 
-  const [step, setStep] = useState(1);
-  const [list, setList] = useState<any>([]);
-  const [listClone, setListClone] = useState<any>([]);
-  const [body, setBody] = useState({});
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [step, setStep] = useState(1)
+  const [list, setList] = useState<any>([])
+  const [listClone, setListClone] = useState<any>([])
+  const [body, setBody] = useState({})
+  const [isUpdate, setIsUpdate] = useState(false)
 
   const column = [
     {
-      title: "Nome",
-      dataIndex: "name",
-      key: "name",
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
     },
     {
-      title: "Categoria",
-      dataIndex: "nameCategory",
-      key: "nameCategory",
-      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory),
+      title: 'Categoria',
+      dataIndex: 'nameCategory',
+      key: 'nameCategory',
+      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory)
     },
     {
-      title: "Url",
-      dataIndex: "url",
-      key: "url",
+      title: 'Url',
+      dataIndex: 'url',
+      key: 'url'
     },
     {
-      title: "Ação",
+      title: 'Ação',
       render: (a: any) => (
         <HStack spacing="20px">
           <Icon
@@ -52,9 +52,9 @@ const TabProduct = () => {
             as={AiOutlineEdit}
             fontSize="17px"
             onClick={() => {
-              setBody(a);
-              setIsUpdate(true);
-              setStep(2);
+              setBody(a)
+              setIsUpdate(true)
+              setStep(2)
             }}
           />
           <Icon
@@ -65,64 +65,65 @@ const TabProduct = () => {
             onClick={() => deleteProduct(a)}
           />
         </HStack>
-      ),
-    },
-  ];
+      )
+    }
+  ]
   const listProduct = async () => {
     try {
-      let newList: any = [];
+      let newList: any = []
 
       allProducts.forEach((el: any) => {
         newList.push({
           ...el,
-          nameCategory: allCategory.find((cg: any) => cg.id == el.category)
-            .name,
-        });
-      });
+          nameCategory: allCategory.find((cg: any) => cg.id === el.category)
+            .name
+        })
+      })
 
       let sortList = newList.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
-      );
-      setList(sortList);
-      setListClone(sortList);
+      )
+      setList(sortList)
+      setListClone(sortList)
     } catch (error) {
       toast({
-        title: "Erro",
-        description: "Erro ao listar produtos",
-        status: "error",
-      });
+        title: 'Erro',
+        description: 'Erro ao listar produtos',
+        status: 'error'
+      })
     }
-  };
+  }
 
   const deleteProduct = async (product: any) => {
     try {
-      await deleteDoc(product.ref);
+      await deleteDoc(product.ref)
       toast({
-        title: "Sucesso",
-        description: "Produto deletada com sucesso.",
-        status: "success",
-      });
-      listProduct();
+        title: 'Sucesso',
+        description: 'Produto deletada com sucesso.',
+        status: 'success'
+      })
+      reload()
+      listProduct()
     } catch (err) {
       toast({
-        title: "Erro",
-        description: "Erro ao deletar produto",
-        status: "error",
-      });
+        title: 'Erro',
+        description: 'Erro ao deletar produto',
+        status: 'error'
+      })
     }
-  };
+  }
 
   useEffect(() => {
-    listProduct();
-  }, [allProducts, allCategory]);
+    listProduct()
+  }, [allProducts, allCategory])
 
   useEffect(() => {
-    reload();
-  }, [step]);
+    reload()
+  }, [step])
 
   return (
     <>
-      {step == 1 && (
+      {step === 1 && (
         <>
           <Flex
             w="100%"
@@ -137,7 +138,7 @@ const TabProduct = () => {
               borderRadius="4px"
               w="128px"
               h="47px"
-              _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
               onClick={() => setStep(2)}
             >
               Adicionar
@@ -145,26 +146,26 @@ const TabProduct = () => {
 
             <SearchBar
               inputProps={{
-                placeholder: "Digite o produto...",
+                placeholder: 'Digite o produto...',
                 onChange: (evt) => {
                   let newList = listClone.filter((item: any) =>
                     item.name
                       .toLowerCase()
                       .includes(evt.target.value.toLowerCase())
-                  );
-                  setList(newList);
+                  )
+                  setList(newList)
                 },
                 _placeholder: {
-                  color: "black.800",
-                  opacity: "50%",
-                },
+                  color: 'black.800',
+                  opacity: '50%'
+                }
               }}
               containerProps={{
-                bg: "white.500",
-                border: "1px solid",
-                borderColor: "black.800",
+                bg: 'white.500',
+                border: '1px solid',
+                borderColor: 'black.800',
                 color: colors.black[800],
-                maxW: pxToRem(288),
+                maxW: pxToRem(288)
               }}
             />
           </Flex>
@@ -174,7 +175,7 @@ const TabProduct = () => {
           </Box>
         </>
       )}
-      {step == 2 && (
+      {step === 2 && (
         <>
           <Flex
             w="100%"
@@ -191,10 +192,10 @@ const TabProduct = () => {
               h="47px"
               border="2px solid"
               borderColor="black.800"
-              _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
               onClick={() => {
-                setBody({});
-                setStep(1);
+                setBody({})
+                setStep(1)
               }}
             >
               Voltar
@@ -203,13 +204,13 @@ const TabProduct = () => {
           <ContainerAddProduct
             defaultValues={body}
             nextStep={(data: any) => {
-              setBody({ ...body, ...data });
-              setStep(3);
+              setBody({ ...body, ...data })
+              setStep(3)
             }}
           />
         </>
       )}
-      {step == 3 && (
+      {step === 3 && (
         <>
           <Flex
             w="100%"
@@ -226,7 +227,7 @@ const TabProduct = () => {
               h="47px"
               border="2px solid"
               borderColor="black.800"
-              _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
               onClick={() => setStep(2)}
             >
               Voltar
@@ -236,16 +237,16 @@ const TabProduct = () => {
             values={body}
             isUpdate={isUpdate}
             reset={() => {
-              setStep(1);
-              listProduct();
-              setIsUpdate(false);
-              setBody({});
+              setStep(1)
+              listProduct()
+              setIsUpdate(false)
+              setBody({})
             }}
           />
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default TabProduct;
+export default TabProduct
