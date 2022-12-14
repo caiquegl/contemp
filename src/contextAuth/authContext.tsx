@@ -3,228 +3,229 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState,
-} from "react";
-import Cookies from "js-cookie";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, database } from "../utils/db";
+  useState
+} from 'react'
+import Cookies from 'js-cookie'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth, database } from '../utils/db'
 import {
   Button,
   Flex,
   HStack,
   Link,
   Text,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { collection, getDocs } from "firebase/firestore";
+  useDisclosure
+} from '@chakra-ui/react'
+import { collection, getDocs } from 'firebase/firestore'
 interface AuthProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 type UserAuthContextData = {
-  user: any;
-  setUser: any;
-  listHeader: any;
-  setListHeader: any;
-  setAllProducts: any;
-  allProducts: any;
-  allProductsActive: any;
-  cart: any;
-  setCart: any;
-  addCart: any;
-  clearCart: any;
-  removeCart: any;
-  isOpen: any;
-  onClose: any;
-  onOpen: any;
-  totalCart: any;
-  allCategory: any;
-  allCategoryActive: any;
-  reload: any;
-  allProductsHome: any;
-  loading: any;
-};
-const UserAuthContext = createContext({} as UserAuthContextData);
+  user: any
+  setUser: any
+  listHeader: any
+  setListHeader: any
+  setAllProducts: any
+  allProducts: any
+  allProductsActive: any
+  cart: any
+  setCart: any
+  addCart: any
+  clearCart: any
+  removeCart: any
+  isOpen: any
+  onClose: any
+  onOpen: any
+  totalCart: any
+  allCategory: any
+  allCategoryActive: any
+  reload: any
+  allProductsHome: any
+  loading: any
+}
+const UserAuthContext = createContext({} as UserAuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUserContext] = useState({});
-  const [listHeader, setListHeader] = useState<any>([]);
-  const [allProducts, setAllProducts] = useState<any>([]);
-  const [allProductsActive, setAllProductsActive] = useState<any>([]);
-  const [allProductsHome, setAllProductsHome] = useState<any>([]);
-  const [allCategory, setAllCategory] = useState<any>([]);
-  const [allCategoryActive, setAllCategoryActive] = useState<any>([]);
-  const [cart, setCart] = useState<any>([]);
-  const [totalCart, setTotalCart] = useState<any>(0);
-  const [loading, setLoading] = useState<any>(false);
-  const [hasCookie, setHasCookie] = useState<any>(false);
+  const [user, setUserContext] = useState({})
+  const [listHeader, setListHeader] = useState<any>([])
+  const [allProducts, setAllProducts] = useState<any>([])
+  const [allProductsActive, setAllProductsActive] = useState<any>([])
+  const [allProductsHome, setAllProductsHome] = useState<any>([])
+  const [allCategory, setAllCategory] = useState<any>([])
+  const [allCategoryActive, setAllCategoryActive] = useState<any>([])
+  const [cart, setCart] = useState<any>([])
+  const [totalCart, setTotalCart] = useState<any>(0)
+  const [loading, setLoading] = useState<any>(false)
+  const [hasCookie, setHasCookie] = useState<any>(false)
 
   const setUser = (body: any) => {
-    setUserContext(body);
-    Cookies.set("SET_USER", JSON.stringify(body));
-  };
+    setUserContext(body)
+    Cookies.set('SET_USER', JSON.stringify(body))
+  }
 
   useEffect(() => {
     async function loadUserFromCookies() {
-      const user = Cookies.get("SET_USER");
+      const user = Cookies.get('SET_USER')
       if (user) {
-        setUser(JSON.parse(user));
+        setUser(JSON.parse(user))
       }
     }
-    loadUserFromCookies();
-  }, []);
+    loadUserFromCookies()
+  }, [])
 
   const acepetCookie = () => {
-    localStorage.setItem("acepetCookie", JSON.stringify(true));
-    getCookie();
-  };
+    localStorage.setItem('acepetCookie', JSON.stringify(true))
+    getCookie()
+  }
 
   useEffect(() => {
     const au = onAuthStateChanged(auth, (use) => {
       if (use) {
-        setUser(use);
+        setUser(use)
       } else {
-        setUser({});
+        setUser({})
       }
-    });
-    return () => au();
-  }, []);
+    })
+    return () => au()
+  }, [])
 
   const getCategory = async () => {
     try {
-      const dbInstanceCategory = collection(database, "categories");
+      const dbInstanceCategory = collection(database, 'categories')
 
-      let list: any = [];
+      let list: any = []
       await getDocs(dbInstanceCategory).then(async (data) => {
         data.docs.map((el: any, index: number) => {
           list.push({
             ...el.data(),
             id: data.docs[index].id,
-          });
-        });
-      });
+            ref: data.docs[index].ref
+          })
+        })
+      })
 
-      let active = list.filter((el: any) => el.is_active == true);
-      setAllCategoryActive(active);
-      setAllCategory(list);
+      let active = list.filter((el: any) => el.is_active == true)
+      setAllCategoryActive(active)
+      setAllCategory(list)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const getAllProducts = async () => {
     try {
-      const dbInstanceProduct = collection(database, "products");
+      const dbInstanceProduct = collection(database, 'products')
 
-      let list: any = [];
+      let list: any = []
       await getDocs(dbInstanceProduct).then(async (data) => {
         data.docs.map((el: any, index: number) => {
           list.push({
             ...el.data(),
             id: data.docs[index].id,
-            ref: data.docs[index].ref,
-          });
-        });
-      });
+            ref: data.docs[index].ref
+          })
+        })
+      })
 
-      let active = list.filter((el: any) => el.is_active == true);
-      setAllProductsActive(active);
-      setAllProducts(list);
+      let active = list.filter((el: any) => el.is_active == true)
+      setAllProductsActive(active)
+      setAllProducts(list)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const getAllProductsHome = async () => {
     try {
-      const dbInstanceHome = collection(database, "home");
+      const dbInstanceHome = collection(database, 'home')
 
-      let list: any = [];
+      let list: any = []
       await getDocs(dbInstanceHome).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id });
-        });
-      });
+          list.push({ ...el.data(), id: data.docs[index].id })
+        })
+      })
 
-      setAllProductsHome(list);
+      setAllProductsHome(list)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const reload = async () => {
-    setLoading(true);
-    await getCategory();
-    await getAllProducts();
-    await getAllProductsHome();
-    setLoading(false);
-  };
+    setLoading(true)
+    await getCategory()
+    await getAllProducts()
+    await getAllProductsHome()
+    setLoading(false)
+  }
 
   useEffect(() => {
-    reload();
-  }, []);
+    reload()
+  }, [])
 
   const getItemLocal = () => {
-    let getItem = window.localStorage.getItem("CART-CONTEMP");
+    let getItem = window.localStorage.getItem('CART-CONTEMP')
 
     if (getItem) {
-      let convert = JSON.parse(getItem);
-      setCart(convert);
-      window.localStorage.setItem("CART-CONTEMP", JSON.stringify(convert));
+      let convert = JSON.parse(getItem)
+      setCart(convert)
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
 
-      let total = 0;
+      let total = 0
       convert.forEach((el: any) => {
-        total = total + el.qtd;
-      });
-      setTotalCart(total);
+        total = total + el.qtd
+      })
+      setTotalCart(total)
     }
-  };
+  }
 
   const addCart = (body: any) => {
-    let getItem = window.localStorage.getItem("CART-CONTEMP");
+    let getItem = window.localStorage.getItem('CART-CONTEMP')
 
     if (getItem) {
-      let convert = JSON.parse(getItem);
-      convert.push(body);
-      window.localStorage.setItem("CART-CONTEMP", JSON.stringify(convert));
+      let convert = JSON.parse(getItem)
+      convert.push(body)
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify(convert))
     } else {
-      window.localStorage.setItem("CART-CONTEMP", JSON.stringify([body]));
+      window.localStorage.setItem('CART-CONTEMP', JSON.stringify([body]))
     }
-    getItemLocal();
-  };
+    getItemLocal()
+  }
 
   const removeCart = (body: any, index: number) => {
-    let newList: any = [];
+    let newList: any = []
 
     body.forEach((el: any, indexremove: number) => {
-      if (indexremove != index) newList.push(el);
-    });
+      if (indexremove != index) newList.push(el)
+    })
 
-    window.localStorage.setItem("CART-CONTEMP", JSON.stringify(newList));
-    getItemLocal();
-  };
+    window.localStorage.setItem('CART-CONTEMP', JSON.stringify(newList))
+    getItemLocal()
+  }
 
   const clearCart = (body: any) => {
-    window.localStorage.removeItem("CART-CONTEMP");
-    setCart([]);
-  };
+    window.localStorage.removeItem('CART-CONTEMP')
+    setCart([])
+  }
 
-  const disclosure = useDisclosure();
+  const disclosure = useDisclosure()
 
-  const { isOpen, onClose, onOpen } = disclosure;
+  const { isOpen, onClose, onOpen } = disclosure
 
   const getCookie = () => {
-    let has = localStorage.getItem("acepetCookie");
+    let has = localStorage.getItem('acepetCookie')
     if (!has) {
-      setHasCookie(true);
+      setHasCookie(true)
     } else {
-      setHasCookie(false);
+      setHasCookie(false)
     }
-  };
+  }
   useEffect(() => {
-    getItemLocal();
-    getCookie();
-  }, []);
+    getItemLocal()
+    getCookie()
+  }, [])
   return (
     <UserAuthContext.Provider
       value={{
@@ -248,7 +249,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         listHeader,
         setListHeader,
         allProducts,
-        setAllProducts,
+        setAllProducts
       }}
     >
       {hasCookie && (
@@ -290,7 +291,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
               <Button
                 onClick={() => acepetCookie()}
                 _hover={{
-                  opacity: 0.7,
+                  opacity: 0.7
                 }}
                 bg="transparent"
                 border="2px solid white"
@@ -308,7 +309,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 border="none"
                 onClick={() => acepetCookie()}
                 _hover={{
-                  opacity: 0.7,
+                  opacity: 0.7
                 }}
                 color="black.800"
                 textAlign="center"
@@ -324,7 +325,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       )}
       {children}
     </UserAuthContext.Provider>
-  );
+  )
 }
 
-export const useAuth = () => useContext(UserAuthContext);
+export const useAuth = () => useContext(UserAuthContext)
