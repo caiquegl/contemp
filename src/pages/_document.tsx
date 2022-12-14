@@ -24,8 +24,9 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
             rel="stylesheet"
           />
-          <title>Contemp</title>
+          <title>Contemp - Indústria</title>
           <link rel="icon" href="/favicon.png" />
+          <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
 
         </Head>
         <body>
@@ -75,7 +76,6 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-          <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
         </body>
       </Html>
     );
