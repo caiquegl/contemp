@@ -49,6 +49,7 @@ export const Contact = ({
 
   const sendMail = async (bodyForm: any) => {
     try {
+      console.log('chamou sendMail')
       await fetch(`api/defaultEmail`, {
         method: "POST",
         body: JSON.stringify({ body: bodyForm, id }),
