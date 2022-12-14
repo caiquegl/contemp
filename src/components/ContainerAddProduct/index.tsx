@@ -6,33 +6,33 @@ import {
   Button,
   Flex,
   Divider,
-  useToast,
-} from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
-import InputsHome from "../ContainerHome/inputs";
-import { useForm } from "react-hook-form";
-import { InputDefault } from "../Form/Input";
-import { database, initFirebase } from "../../utils/db/index";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { SelectDefault } from "../Form/Select";
-import { TextareaDefault } from "../Form/Textarea";
-import Variation from "./Variantion";
-import { ViewImage } from "./ViewImage";
+  useToast
+} from '@chakra-ui/react'
+import { useEffect, useRef, useState } from 'react'
+import InputsHome from '../ContainerHome/inputs'
+import { useForm } from 'react-hook-form'
+import { InputDefault } from '../Form/Input'
+import { database, initFirebase } from '../../utils/db/index'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { SelectDefault } from '../Form/Select'
+import { TextareaDefault } from '../Form/Textarea'
+import Variation from './Variantion'
+import { ViewImage } from './ViewImage'
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
-  initFirebase();
-  const toast = useToast();
-  const formRef = useRef<any>();
-  const [hasVariation, setHasVariation] = useState<any>(false);
-  const [isActive, setIsActive] = useState<any>(false);
-  const [destaque, setDestaque] = useState<any>(false);
-  const [listVariation, setListVariation] = useState<any>([{ id: 1 }]);
-  const [list, setList] = useState<any>([]);
-  const [urls, setUrls] = useState<any>([]);
+  initFirebase()
+  const toast = useToast()
+  const formRef = useRef<any>()
+  const [hasVariation, setHasVariation] = useState<any>(false)
+  const [isActive, setIsActive] = useState<any>(false)
+  const [destaque, setDestaque] = useState<any>(false)
+  const [listVariation, setListVariation] = useState<any>([{ id: 1 }])
+  const [list, setList] = useState<any>([])
+  const [urls, setUrls] = useState<any>([])
 
-  const { register, handleSubmit, formState, setValue, reset } = useForm({});
+  const { register, handleSubmit, formState, setValue, reset } = useForm({})
 
-  const { errors } = formState;
+  const { errors } = formState
 
   const saveProduct = async (bodyForm: any) => {
     let body = {
@@ -40,79 +40,79 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       hasVariation,
       urls,
       destaque,
-      is_active: isActive,
-    };
+      is_active: isActive
+    }
     if (hasVariation) {
-      let falt = false;
-      let more = false;
+      let falt = false
+      let more = false
       listVariation.forEach((list: any) => {
-        if (!list.name) falt = true;
-        if (!list.opt || list.opt.length === 0) more = true;
-      });
+        if (!list.name) falt = true
+        if (!list.opt || list.opt.length === 0) more = true
+      })
 
       if (falt || more) {
         toast({
-          title: "Erro",
+          title: 'Erro',
           description: falt
-            ? "Preencha todos os nome de variações"
-            : "Adicione ao menos uma opção",
-          status: "error",
+            ? 'Preencha todos os nome de variações'
+            : 'Adicione ao menos uma opção',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
-        return;
+          isClosable: true
+        })
+        return
       }
 
-      body = { ...body, listVariation };
+      body = { ...body, listVariation }
     }
 
-    setListVariation([{ id: 1 }]);
-    setUrls([]);
-    nextStep(body);
-    reset();
-  };
+    setListVariation([{ id: 1 }])
+    setUrls([])
+    nextStep(body)
+    reset()
+  }
 
   const listCategory = async () => {
     try {
-      const dbInstance = collection(database, "categories");
-      let newList: any = [];
-      const q = query(dbInstance, orderBy("order", "asc"));
+      const dbInstance = collection(database, 'categories')
+      let newList: any = []
+      const q = query(dbInstance, orderBy('order', 'asc'))
       await getDocs(q).then((data) => {
         data.docs.forEach((doc) => {
-          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
-        });
-      });
+          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref })
+        })
+      })
 
-      setList(newList);
+      setList(newList)
     } catch (error) {
       toast({
-        title: "Erro",
-        description: "Erro ao listar categoria",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao listar categoria',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     }
-  };
+  }
 
   useEffect(() => {
-    listCategory();
-  }, []);
+    listCategory()
+  }, [])
 
   useEffect(() => {
-    setValue("name", defaultValues?.name);
-    setValue("category", defaultValues?.category);
-    setValue("description", defaultValues?.description);
-    setValue("key_word_seo", defaultValues?.key_word_seo);
-    setValue("description_seo", defaultValues?.description_seo);
-    setHasVariation(defaultValues && defaultValues.hasVariation ? true : false);
-    setDestaque(defaultValues && defaultValues.destaque ? true : false);
-    setIsActive(defaultValues && defaultValues.is_active ? true : false);
+    setValue('name', defaultValues?.name)
+    setValue('category', defaultValues?.category)
+    setValue('description', defaultValues?.description)
+    setValue('key_word_seo', defaultValues?.key_word_seo)
+    setValue('description_seo', defaultValues?.description_seo)
+    setHasVariation(defaultValues && defaultValues.hasVariation ? true : false)
+    setDestaque(defaultValues && defaultValues.destaque ? true : false)
+    setIsActive(defaultValues && defaultValues.is_active ? true : false)
     if (defaultValues.listVariation) {
-      setListVariation(defaultValues.listVariation);
+      setListVariation(defaultValues.listVariation)
     }
-    if (defaultValues.urls) setUrls(defaultValues.urls);
-  }, [defaultValues]);
+    if (defaultValues.urls) setUrls(defaultValues.urls)
+  }, [defaultValues])
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
@@ -129,7 +129,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             type="text"
             placeholder="Nome do produto"
             error={errors.name}
-            {...register("name", { required: "Nome é obrigatório" })}
+            {...register('name', { required: 'Nome é obrigatório' })}
           />
           <SelectDefault
             label="Categoria"
@@ -138,10 +138,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             opt={list.map((value: any) => {
               return {
                 name: value.name,
-                value: value.id,
-              };
+                value: value.id
+              }
             })}
-            {...register("category", { required: "Campo obrigatório" })}
+            {...register('category', { required: 'Campo obrigatório' })}
           />
         </HStack>
         <InputsHome
@@ -156,11 +156,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               <ViewImage
                 url={value}
                 remove={() => {
-                  let newList: any = [];
+                  let newList: any = []
                   urls.forEach((value: any, indexRemove: number) => {
-                    if (index != indexRemove) newList.push(value);
-                  });
-                  setUrls(newList);
+                    if (index != indexRemove) newList.push(value)
+                  })
+                  setUrls(newList)
                 }}
               />
             ))}
@@ -168,23 +168,23 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
         <TextareaDefault
           label="Descrição curta"
           error={errors.description}
-          {...register("description", {
-            required: "Descrição é obrigatório",
+          {...register('description', {
+            required: 'Descrição é obrigatório'
           })}
         />
         <HStack spacing="20px" w="100%">
           <TextareaDefault
             label="Descrição SEO"
             error={errors.description_seo}
-            {...register("description_seo", {
-              required: "Descrição seo é obrigatório",
+            {...register('description_seo', {
+              required: 'Descrição seo é obrigatório'
             })}
           />
           <TextareaDefault
             label="key Word SEO"
             error={errors.key_word_seo}
-            {...register("key_word_seo", {
-              required: "Key word seo é obrigatório",
+            {...register('key_word_seo', {
+              required: 'Key word seo é obrigatório'
             })}
           />
         </HStack>
@@ -236,29 +236,29 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               newVariation={() => {
                 setListVariation([
                   ...listVariation,
-                  { id: listVariation.length + 1 },
-                ]);
+                  { id: listVariation.length + 1 }
+                ])
               }}
               removeVariation={() => {
-                let newList: any = [];
+                let newList: any = []
                 listVariation.forEach((list: any, indexRemove: number) => {
-                  if (index != indexRemove) newList.push(list);
-                });
-                setListVariation(newList);
+                  if (index != indexRemove) newList.push(list)
+                })
+                setListVariation(newList)
               }}
               index={index}
               key={index}
               addVariation={(variation: any) => {
-                let newList = listVariation;
-                newList[index].name = variation.name;
-                if (!variation.addOpt) return;
+                let newList = listVariation
+                newList[index].name = variation.name
+                if (!variation.addOpt) return
                 if (newList[index].opt) {
-                  newList[index].opt.push(variation.addOpt);
+                  newList[index].opt.push(variation.addOpt)
                 } else {
-                  newList[index].opt = [variation.addOpt];
+                  newList[index].opt = [variation.addOpt]
                 }
 
-                setListVariation(newList);
+                setListVariation(newList)
               }}
               defaultValues={listVariation[index]}
             />
@@ -273,7 +273,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           borderRadius="4px"
           w="128px"
           h="47px"
-          _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
           type="button"
           onClick={() => formRef.current?.requestSubmit()}
         >
@@ -281,7 +281,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
         </Button>
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export default ContainerAddProduct;
+export default ContainerAddProduct
