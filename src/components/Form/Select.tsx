@@ -3,32 +3,33 @@ import {
   FormErrorMessage,
   FormLabel,
   InputGroup,
-  Select as Inpt,
-} from "@chakra-ui/react";
+  Select as Inpt
+} from '@chakra-ui/react'
 import {
   forwardRef,
   ForwardRefRenderFunction,
   useEffect,
-  useState,
-} from "react";
-import { FieldError } from "react-hook-form";
+  useState
+} from 'react'
+import { FieldError } from 'react-hook-form'
 
 interface InpuptProps {
-  name: string;
-  label?: string;
-  error: FieldError;
-  opt: any;
-  defaultValue?: any;
+  name: string
+  label?: string
+  error: FieldError
+  opt: any
+  defaultValue?: any
 }
 const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
   { name, label, opt, error, defaultValue, ...rest }: any,
   ref: any
 ) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('')
 
   useEffect(() => {
-    if (defaultValue) setValue(defaultValue);
-  }, [defaultValue, opt]);
+    if (defaultValue) setValue(defaultValue)
+  }, [defaultValue, opt])
+
   return (
     <FormControl isInvalid={!!error}>
       {!!label && (
@@ -60,22 +61,24 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
           color="black.800"
           options={opt}
           defaultValue={defaultValue}
-          value={value}
+          // value={value}
           onChangeCapture={(evt: any) => {
-            setValue(evt.target.value);
+            setValue(evt.target.value)
           }}
           placeholder="Selecione uma opção"
           {...rest}
         >
           {opt &&
             opt.map((list: any) => (
-              <option value={list.value}>{list.name}</option>
+              <option value={list.value} key={list.value}>
+                {list.name}
+              </option>
             ))}
         </Inpt>
       </InputGroup>
       {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>
-  );
-};
+  )
+}
 
-export const SelectDefault = forwardRef(InputBase);
+export const SelectDefault = forwardRef(InputBase)
