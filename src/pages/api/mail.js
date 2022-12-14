@@ -26,9 +26,7 @@ export default async (req, response) => {
         `;
 
         let mailSned = await mail.send({
-            // to: 'kemelin@3hub.co',
-            to: 'arq.caique@hotmail.com',
-            // cc: ['vendas@contemp.com', 'kemelin@3hub.co'],
+            to: 'vendas@contemp.com',
             cc: ['kemelin@3hub.co'],
             from: 'marketing@contemp.com.br',
             subject: 'Novo orçamento',
