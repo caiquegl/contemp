@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
           />
           <title>Contemp</title>
           <link rel="icon" href="/favicon.png" />
-          
+
         </Head>
         <body>
           <Main />
@@ -75,6 +75,7 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+          <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
         </body>
       </Html>
     );
