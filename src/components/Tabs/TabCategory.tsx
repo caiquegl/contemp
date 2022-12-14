@@ -35,6 +35,7 @@ import { Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
+import { useRouter } from 'next/router'
 interface IBody {
   name: string
   is_main?: string
@@ -59,6 +60,7 @@ const TabCategory = () => {
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
   const formRef = useRef<any>()
+  const router = useRouter()
 
   const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
     {}
@@ -109,7 +111,10 @@ const TabCategory = () => {
         })
         setUrl('')
         setUpdate({} as IBody)
-        listCategory()
+        setTimeout(() => {
+          router.reload()
+        }, 1500);
+
       } else {
         toast({
           title: 'Erro',
@@ -129,12 +134,12 @@ const TabCategory = () => {
     } finally {
       setLoading(false)
       reset()
-      reload()
     }
   }
 
   const updateCategory = async (bodyForm: any) => {
     try {
+      console.log(update, 'update')
       setLoading(true)
       const dbInstance = collection(database, 'categories')
       let exist = false
@@ -150,6 +155,7 @@ const TabCategory = () => {
       })
 
       if (!exist) {
+        console.log('categories', update.id)
         const dbInstanceUpdate = doc(database, 'categories', update.id)
         await updateDoc(dbInstanceUpdate, {
           ...bodyForm,
@@ -165,7 +171,11 @@ const TabCategory = () => {
         })
         setUrl('')
         setUpdate({} as IBody)
-        listCategory()
+        setTimeout(() => {
+          router.reload()
+        }, 1500);
+
+
       } else {
         toast({
           title: 'Erro',
@@ -184,7 +194,8 @@ const TabCategory = () => {
     } finally {
       setLoading(false)
       reset()
-      reload()
+      await reload()
+      await listCategory()
     }
   }
 
@@ -259,7 +270,7 @@ const TabCategory = () => {
         return
       }
       await deleteDoc(category.ref)
-      reload()
+      await reload()
       toast({
         title: 'Sucesso',
         description: 'Categoria deletada com sucesso.',
@@ -267,7 +278,7 @@ const TabCategory = () => {
         duration: 3000,
         isClosable: true
       })
-      listCategory()
+      await listCategory()
     } catch (err) {
       toast({
         title: 'Erro',
@@ -299,7 +310,7 @@ const TabCategory = () => {
 
       const dbInstanceUpdate = doc(database, 'categories', ref.id)
       await updateDoc(dbInstanceUpdate, { order: order })
-      listCategory()
+      await listCategory()
       toast({
         title: 'Sucesso',
         description: 'Sucesso ao alterar ordem.',
@@ -307,7 +318,7 @@ const TabCategory = () => {
         duration: 3000,
         isClosable: true
       })
-      reload()
+      await reload()
     } catch (err) {
       toast({
         title: 'Erro',
@@ -348,7 +359,7 @@ const TabCategory = () => {
             fontSize="17px"
             onClick={() => {
               const isMain = a.is_main === 'true' ? true : false
-              console.log({ isMain })
+              console.log(a)
               setValue('name', a.name)
               setValue('is_main', isMain)
               setValue('description', a.description)

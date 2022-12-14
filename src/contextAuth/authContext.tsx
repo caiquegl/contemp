@@ -106,8 +106,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       let active = list.filter((el: any) => el.is_active == true)
-      setAllCategoryActive(active)
-      setAllCategory(list)
+      setAllCategoryActive([...active])
+      setAllCategory([...list])
     } catch (error) {
       console.log(error)
     }
@@ -129,8 +129,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       let active = list.filter((el: any) => el.is_active == true)
-      setAllProductsActive(active)
-      setAllProducts(list)
+      setAllProductsActive([...active])
+      setAllProducts([...list])
     } catch (error) {
       console.log(error)
     }
@@ -147,7 +147,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      setAllProductsHome(list)
+      setAllProductsHome([...list])
     } catch (error) {
       console.log(error)
     }
