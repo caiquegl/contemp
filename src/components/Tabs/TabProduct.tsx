@@ -99,7 +99,7 @@ const TabProduct = () => {
       await deleteDoc(product.ref)
       toast({
         title: 'Sucesso',
-        description: 'Produto deletada com sucesso.',
+        description: 'Produto deletado com sucesso.',
         status: 'success'
       })
       reload()
