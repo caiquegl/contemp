@@ -1,11 +1,4 @@
-import {
-  Box,
-  VStack,
-  Button,
-  Flex,
-  Divider,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, VStack, Button, Flex, Divider, useToast } from '@chakra-ui/react'
 import {
   addDoc,
   collection,
@@ -15,137 +8,137 @@ import {
   orderBy,
   query,
   updateDoc,
-  where,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { database, initFirebase } from "../../utils/db";
-import moment from "moment";
-import { InputDefault } from "../Form/Input";
-import { TextareaDefault } from "../Form/Textarea";
+  where
+} from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { database, initFirebase } from '../../utils/db'
+import moment from 'moment'
+import { InputDefault } from '../Form/Input'
+import { TextareaDefault } from '../Form/Textarea'
 
 const ContainerSeo = ({ nextStep, defaultValues }: any) => {
-  initFirebase();
-  const toast = useToast();
-  const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, formState, setValue, reset } = useForm({});
-  const { errors } = formState;
+  initFirebase()
+  const toast = useToast()
+  const [loading, setLoading] = useState(false)
+  const { register, handleSubmit, formState, setValue, reset } = useForm({})
+  const { errors } = formState
 
   const saveSEO = async (bodyForm: any) => {
     try {
-      bodyForm.updated_at = moment().toString();
+      bodyForm.updated_at = moment().toString()
       if (Object.keys(defaultValues).length > 0) {
-        updateSEO(bodyForm);
-        return;
+        updateSEO(bodyForm)
+        return
       }
 
-      setLoading(true);
+      setLoading(true)
 
-      const dbInstance = collection(database, "seo");
-      let exist = false;
-      const q = query(dbInstance, orderBy("order", "desc"), limit(1));
+      const dbInstance = collection(database, 'seo')
+      let exist = false
+      const q = query(dbInstance, orderBy('order', 'desc'), limit(1))
       const qExist = query(
         dbInstance,
-        where("name", "==", bodyForm.name),
+        where('name', '==', bodyForm.name),
         limit(1)
-      );
+      )
 
       await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) exist = true;
-      });
+        if (data.docs.length > 0) exist = true
+      })
 
       if (!exist) {
-        await addDoc(dbInstance, bodyForm);
+        await addDoc(dbInstance, bodyForm)
 
         toast({
-          title: "Sucesso",
-          description: "SEO cadastradado com sucesso.",
-          status: "success",
+          title: 'Sucesso',
+          description: 'SEO cadastradado com sucesso.',
+          status: 'success',
           duration: 3000,
-          isClosable: true,
-        });
-        reset();
+          isClosable: true
+        })
+        reset()
       } else {
         toast({
-          title: "Erro",
-          description: "SEO já existe",
-          status: "error",
+          title: 'Erro',
+          description: 'SEO já existe',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
+          isClosable: true
+        })
       }
-      nextStep();
+      nextStep()
     } catch (error) {
-      console.log(error);
+      console.log(error)
       toast({
-        title: "Erro",
-        description: "Erro ao salvar SEO",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao salvar SEO',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const updateSEO = async (bodyForm: any) => {
     try {
-      setLoading(true);
+      setLoading(true)
 
-      const dbInstance = collection(database, "seo");
-      let exist = false;
+      const dbInstance = collection(database, 'seo')
+      let exist = false
       const qExist = query(
         dbInstance,
-        where("name", "==", bodyForm.name),
+        where('name', '==', bodyForm.name),
         limit(1)
-      );
+      )
 
       await getDocs(qExist).then((data) => {
         if (data.docs.length > 0 && data.docs[0].id != defaultValues.id)
-          exist = true;
-      });
+          exist = true
+      })
 
       if (!exist) {
-        const dbInstanceUpdate = doc(database, "seo", defaultValues.id);
-        await updateDoc(dbInstanceUpdate, bodyForm);
+        const dbInstanceUpdate = doc(database, 'seo', defaultValues.id)
+        await updateDoc(dbInstanceUpdate, bodyForm)
         toast({
-          title: "Sucesso",
-          description: "SEO atualizado com sucesso.",
-          status: "success",
+          title: 'Sucesso',
+          description: 'SEO atualizado com sucesso.',
+          status: 'success',
           duration: 3000,
-          isClosable: true,
-        });
-        reset();
+          isClosable: true
+        })
+        reset()
       } else {
         toast({
-          title: "Erro",
-          description: "SEO já existe",
-          status: "error",
+          title: 'Erro',
+          description: 'SEO já existe',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
+          isClosable: true
+        })
       }
-      nextStep();
+      nextStep()
     } catch (error) {
       toast({
-        title: "Erro",
-        description: "Erro ao atualizar SEO",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao atualizar SEO',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    setValue("name", defaultValues?.name);
-    setValue("title", defaultValues?.title);
-    setValue("description", defaultValues?.description);
-    setValue("tags", defaultValues?.tags);
-  }, [defaultValues]);
+    setValue('name', defaultValues?.name)
+    setValue('title', defaultValues?.title)
+    setValue('description', defaultValues?.description)
+    setValue('tags', defaultValues?.tags)
+  }, [defaultValues])
 
   return (
     <Box
@@ -160,22 +153,22 @@ const ContainerSeo = ({ nextStep, defaultValues }: any) => {
         <InputDefault
           label="Nome do produto"
           type="text"
-          placeholder="nome do produto"
+          placeholder="Nome do produto"
           error={errors.name}
-          {...register("name", { required: "Nome é obrigatório" })}
+          {...register('name', { required: 'Nome é obrigatório' })}
         />
         <InputDefault
           label="Título"
           type="text"
           placeholder="Título"
           error={errors.name}
-          {...register("title", { required: "Título é obrigatório" })}
+          {...register('title', { required: 'Título é obrigatório' })}
         />
         <TextareaDefault
           label="Descrição curta"
           error={errors.description}
-          {...register("description", {
-            required: "Descrição é obrigatório",
+          {...register('description', {
+            required: 'Descrição é obrigatório'
           })}
         />
         <InputDefault
@@ -183,7 +176,7 @@ const ContainerSeo = ({ nextStep, defaultValues }: any) => {
           type="text"
           placeholder="tags"
           error={errors.name}
-          {...register("tags", { required: "tag é obrigatório" })}
+          {...register('tags', { required: 'tag é obrigatório' })}
         />
       </VStack>
       <Divider />
@@ -198,13 +191,13 @@ const ContainerSeo = ({ nextStep, defaultValues }: any) => {
           h="47px"
           type="submit"
           isLoading={loading}
-          _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
         >
           Salvar
         </Button>
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export default ContainerSeo;
+export default ContainerSeo
