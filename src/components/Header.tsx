@@ -345,7 +345,7 @@ export const Header = () => {
           position="fixed"
           top="0"
           w="100%"
-          h="120px"
+          h="70px"
           bg="black.800"
           zIndex={999}
         >
@@ -460,11 +460,11 @@ export const Header = () => {
   }
 
   return (
-    <Container maxW="7xl" p="12px 15px 31px 15px">
+    <Container maxW="7xl" p="12px 15px">
       <Flex
         alignItems="center"
         justifyContent="space-evenly"
-        marginBottom="32px"
+        marginBottom="22px"
       >
         <Box display="flex" flex={1}>
           <Link
@@ -545,7 +545,7 @@ export const Header = () => {
         </HStack>
       </Flex>
 
-      <Flex alignItems="center" justifyContent="space-between" h={70} mb="30px">
+      <Flex alignItems="center" justifyContent="space-between" h={70} mb="0px">
         <Box
           onClick={() => router.push("/")}
           cursor="pointer"
