@@ -24,12 +24,6 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
   { name, label, opt, error, defaultValue, ...rest }: any,
   ref: any
 ) => {
-  const [value, setValue] = useState('')
-
-  useEffect(() => {
-    if (defaultValue) setValue(defaultValue)
-  }, [defaultValue, opt])
-
   return (
     <FormControl isInvalid={!!error}>
       {!!label && (
@@ -61,10 +55,6 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
           color="black.800"
           options={opt}
           defaultValue={defaultValue}
-          // value={value}
-          onChangeCapture={(evt: any) => {
-            setValue(evt.target.value)
-          }}
           placeholder="Selecione uma opção"
           {...rest}
         >
