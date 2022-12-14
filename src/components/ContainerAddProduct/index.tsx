@@ -101,8 +101,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
   useEffect(() => {
     setValue('name', defaultValues?.name)
-    setValue('category', defaultValues?.category)
     setValue('description', defaultValues?.description)
+    setValue('category', defaultValues?.category)
     setValue('key_word_seo', defaultValues?.key_word_seo)
     setValue('description_seo', defaultValues?.description_seo)
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false)
@@ -113,6 +113,13 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     }
     if (defaultValues.urls) setUrls(defaultValues.urls)
   }, [defaultValues])
+
+  const categoryOptions = list.map((value: any) => {
+    return {
+      name: value.name,
+      value: value.id
+    }
+  })
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
@@ -134,13 +141,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           <SelectDefault
             label="Categoria"
             error={errors.category}
-            defaultValue={defaultValues.category}
-            opt={list.map((value: any) => {
-              return {
-                name: value.name,
-                value: value.id
-              }
-            })}
+            opt={categoryOptions}
             {...register('category', { required: 'Campo obrigatório' })}
           />
         </HStack>
