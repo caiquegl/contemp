@@ -31,7 +31,7 @@ import Linkedin from "../assets/icons/linkedin.svg";
 import Instagram from "../assets/icons/instagram.svg";
 import Facebook from "../assets/icons/facebook-f.svg";
 import Youtube from "../assets/icons/youtube.svg";
-import Logo from "../assets/icons/logo-Contemp.svg";
+import Logo from "../assets/icons/Logo-Contemp.svg";
 import ImageNext from "next/image";
 import { BsBag, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
