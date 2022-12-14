@@ -4,47 +4,47 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  useToast,
-} from "@chakra-ui/react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { database, initFirebase } from "../../utils/db";
-import { pxToRem } from "../../utils/pxToRem";
-import ContainerHome from "../ContainerHome";
+  useToast
+} from '@chakra-ui/react'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { database, initFirebase } from '../../utils/db'
+import { pxToRem } from '../../utils/pxToRem'
+import ContainerHome from '../ContainerHome'
 
 const TabHome = () => {
-  const toast = useToast();
-  initFirebase();
-  const [activeTab, setActiveTab] = useState(0);
-  const [list, setList] = useState([]);
+  const toast = useToast()
+  initFirebase()
+  const [activeTab, setActiveTab] = useState(0)
+  const [list, setList] = useState([])
 
   const listHome = async () => {
     try {
-      const dbInstance = collection(database, "home");
-      let newList: any = [];
-      const q = query(dbInstance, orderBy("indexProduct", "desc"));
+      const dbInstance = collection(database, 'home')
+      let newList: any = []
+      const q = query(dbInstance, orderBy('indexProduct', 'desc'))
       await getDocs(q).then((data) => {
         data.docs.forEach((doc) => {
-          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref });
-        });
-      });
-      setList(newList);
+          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref })
+        })
+      })
+      setList(newList)
     } catch (error) {
       toast({
-        title: "Erro",
-        description: "Erro ao listar produtos",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao listar produtos',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     }
-  };
+  }
 
   useEffect(() => {
-    listHome();
-  }, [activeTab]);
+    listHome()
+  }, [activeTab])
 
-  const tabs = Array.from({ length: 7 }, (_, index) => index);
+  const tabs = Array.from({ length: 7 }, (_, index) => index)
 
   return (
     <Tabs
@@ -57,9 +57,9 @@ const TabHome = () => {
           <Tab
             key={tabNumber}
             _selected={{
-              bg: "red.600",
-              color: "white",
-              fontWeight: "bold",
+              bg: 'red.600',
+              color: 'white',
+              fontWeight: 'bold'
             }}
             w={pxToRem(133)}
             color="black.800"
@@ -67,84 +67,6 @@ const TabHome = () => {
             Produto {tabNumber + 1}
           </Tab>
         ))}
-
-        {/* <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 1
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 2
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 3
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 4
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 5
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 6
-        </Tab>
-        <Tab
-          _selected={{
-            bg: "red.600",
-            color: "white",
-            fontWeight: "bold",
-          }}
-          w="133px"
-          color="black.800"
-        >
-          Produto 7
-        </Tab> */}
       </TabList>
       <TabPanels>
         {tabs.map((tabNumber) => (
@@ -158,59 +80,9 @@ const TabHome = () => {
             />
           </TabPanel>
         ))}
-
-        {/* <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={0}
-            defaultValues={list.filter((el: any) => el.indexProduct == 0)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={1}
-            defaultValues={list.filter((el: any) => el.indexProduct == 1)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={2}
-            defaultValues={list.filter((el: any) => el.indexProduct == 2)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={3}
-            defaultValues={list.filter((el: any) => el.indexProduct == 3)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={4}
-            defaultValues={list.filter((el: any) => el.indexProduct == 4)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={5}
-            defaultValues={list.filter((el: any) => el.indexProduct == 5)[0]}
-          />
-        </TabPanel>
-        <TabPanel>
-          <ContainerHome
-            reset={() => listHome()}
-            indexProduct={6}
-            defaultValues={list.filter((el: any) => el.indexProduct == 6)[0]}
-          />
-        </TabPanel> */}
       </TabPanels>
     </Tabs>
-  );
-};
+  )
+}
 
-export default TabHome;
+export default TabHome
