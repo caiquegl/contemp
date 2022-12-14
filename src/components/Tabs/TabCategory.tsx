@@ -270,7 +270,6 @@ const TabCategory = () => {
         return
       }
       await deleteDoc(category.ref)
-      await reload()
       toast({
         title: 'Sucesso',
         description: 'Categoria deletada com sucesso.',
@@ -278,7 +277,11 @@ const TabCategory = () => {
         duration: 3000,
         isClosable: true
       })
-      await listCategory()
+
+      setTimeout(() => {
+        router.reload()
+      }, 1500);
+
     } catch (err) {
       toast({
         title: 'Erro',
