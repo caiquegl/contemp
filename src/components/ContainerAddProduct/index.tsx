@@ -99,10 +99,16 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     listCategory()
   }, [])
 
+  const categoryOptions = list.map((value: any) => {
+    return {
+      name: value.name,
+      value: value.id
+    }
+  })
+
   useEffect(() => {
     setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
-    setValue('category', defaultValues?.category)
     setValue('key_word_seo', defaultValues?.key_word_seo)
     setValue('description_seo', defaultValues?.description_seo)
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false)
@@ -114,12 +120,9 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     if (defaultValues.urls) setUrls(defaultValues.urls)
   }, [defaultValues])
 
-  const categoryOptions = list.map((value: any) => {
-    return {
-      name: value.name,
-      value: value.id
-    }
-  })
+  useEffect(() => {
+    if (list.length > 0) setValue('category', defaultValues?.category)
+  }, [list.length])
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
