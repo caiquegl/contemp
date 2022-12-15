@@ -1,36 +1,18 @@
+function creatRedirectObj (source, destination, permanent = true) {
+  return {
+    source,
+    destination,
+    permanent
+  }
+}
 module.exports = {
   async redirects() {
     return [
-      {
-        source: '/vagas',
-        destination: '/trabalhe-conosco',
-        permanent: true,
-      },
-      {
-        source: '/contato',
-        destination: 'https://contemp.com.br',
-        permanent: true,
-      },
-      {
-        source: '/empresa',
-        destination: '/a-contemp',
-        permanent: true,
-      },
-      {
-        source: '/laboratorio-de-calibracao',
-        destination: '/calibracao',
-        permanent: true,
-      },
-      {
-        source: '/blog',
-        destination: 'https://blog.contemp.com.br/',
-        permanent: true,
-      },
-      {
-        source: '/',
-        destination: 'https://contemp.com.br',
-        permanent: true,
-      },
+      creatRedirectObj ('/vagas', '/trabalhe-conosco'),
+      creatRedirectObj ('/contato', 'https://contemp.com.br'),
+      creatRedirectObj ('/empresa', '/a-contemp'),
+      creatRedirectObj ('/laboratorio-de-calibracao', '/calibracao'),
+      creatRedirectObj ('/blog', 'https://blog.contemp.com.br/'),
     ]
   },
 }
