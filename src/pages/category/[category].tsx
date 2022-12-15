@@ -109,6 +109,7 @@ const Category = () => {
       const current = productListRef?.current as Element
       const productListTop = current.getBoundingClientRect().top
       window.scrollTo({ top: productListTop })
+      return
     }
 
     if (window && !loading && list.length !== 0) {

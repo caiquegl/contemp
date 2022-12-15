@@ -1,19 +1,22 @@
-import { Flex, FlexProps, Text } from "@chakra-ui/react";
-import { pxToRem } from "../utils/pxToRem";
-import { Image } from "./Image";
-import { StaticImageData } from "next/image";
+import { Flex, FlexProps, Text } from '@chakra-ui/react'
+import { pxToRem } from '../utils/pxToRem'
+import { Image } from './Image'
+import { StaticImageData } from 'next/image'
+import { useRouter } from 'next/router'
 
 type ProductCategoryWithIconProps = {
-  title: string;
-  icon: string | StaticImageData;
-  containerProps?: FlexProps;
-};
+  title: string
+  icon: string | StaticImageData
+  containerProps?: FlexProps
+}
 
 export const ProductCategoryWithIcon = ({
   title,
   icon,
-  containerProps,
+  containerProps
 }: ProductCategoryWithIconProps) => {
+  const router = useRouter()
+
   return (
     <Flex
       p={`${pxToRem(10)}`}
@@ -28,6 +31,8 @@ export const ProductCategoryWithIcon = ({
       maxW={pxToRem(400)}
       maxH={pxToRem(85)}
       {...containerProps}
+      onClick={() => router.push(`/category/${title.replaceAll(' ', '_')}`)}
+      cursor="pointer"
     >
       <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
         {title}
@@ -41,5 +46,5 @@ export const ProductCategoryWithIcon = ({
         flex={1}
       />
     </Flex>
-  );
-};
+  )
+}

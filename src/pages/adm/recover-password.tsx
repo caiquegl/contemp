@@ -5,10 +5,11 @@ import {
   Button,
   InputGroup,
   Input,
-  Link,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import Logo from "../../assets/icons/logo.png";
+  Link
+} from '@chakra-ui/react'
+import Image from 'next/image'
+import Logo from '../../assets/icons/logo.png'
+import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 
 const Adm = () => {
   return (
@@ -21,7 +22,7 @@ const Adm = () => {
       minW="100vw"
     >
       <Box mb="30px">
-        <Image src={Logo} />
+        <Image src={Logo} onContextMenu={setContextMenuFalse} />
       </Box>
       <Box
         bg="white"
@@ -64,7 +65,7 @@ const Adm = () => {
             borderRadius="21px"
             placeholder="Email"
             _focusVisible={{
-              outline: "none",
+              outline: 'none'
             }}
           />
         </InputGroup>
@@ -75,8 +76,8 @@ const Adm = () => {
             color="black.800"
             textStyle="italic"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Voltar
@@ -89,24 +90,28 @@ const Adm = () => {
             color="white"
             textAlign="center"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Enviar
           </Button>
         </Flex>
       </Box>
-      <Link isExternal href="https://3hub.co/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
+      <Link
+        isExternal
+        href="https://3hub.co/"
+        _hover={{ textDecoration: 'none', color: 'black.800' }}
+      >
         <Text fontSize="20px" color="black.800">
-          Desenvolvido por{" "}
+          Desenvolvido por{' '}
           <Text as="span" color="red.600" fontWeight="bold">
             3Hub
           </Text>
         </Text>
       </Link>
     </Flex>
-  );
-};
+  )
+}
 
-export default Adm;
+export default Adm

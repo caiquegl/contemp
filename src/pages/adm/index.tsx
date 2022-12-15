@@ -6,63 +6,65 @@ import {
   InputGroup,
   Input,
   Link,
-  useToast,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import { useState } from "react";
-import Logo from "../../assets/images/170x41.png";
-import { initFirebase } from "../../utils/db/index";
-import "firebase/compat/auth";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/router";
-import { useAuth } from "../../contextAuth/authContext";
+  useToast
+} from '@chakra-ui/react'
+import Image from 'next/image'
+import { useState } from 'react'
+import Logo from '../../assets/images/170x41.png'
+import { initFirebase } from '../../utils/db/index'
+import 'firebase/compat/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'next/router'
+import { useAuth } from '../../contextAuth/authContext'
+import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 
 const Adm = () => {
-  const router = useRouter();
-  const { setUser } = useAuth();
-  const toast = useToast();
-  initFirebase();
-  const auth = getAuth();
-  const [loading, setLoading] = useState(false);
-  const [body, setBody] = useState({ email: "", password: "" });
+  const router = useRouter()
+  const { setUser } = useAuth()
+  const toast = useToast()
+  initFirebase()
+  const auth = getAuth()
+  const [loading, setLoading] = useState(false)
+  const [body, setBody] = useState({ email: '', password: '' })
 
   const signIn = async () => {
     try {
-      setLoading(true);
+      setLoading(true)
       const result = await signInWithEmailAndPassword(
         auth,
         body.email,
         body.password
-      );
+      )
 
-      setUser(result.user);
-      router.push("/adm/home");
+      setUser(result.user)
+      router.push('/adm/home')
     } catch (error: any) {
       toast({
-        title: "Erro",
+        title: 'Erro',
         description:
-          error.message === "EMAIL_NOT_FOUND"
-            ? "Email não cadastrado"
-            : "Senha inválida",
-        status: "error",
+          error.message === 'EMAIL_NOT_FOUND'
+            ? 'Email não cadastrado'
+            : 'Senha inválida',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
   return (
     <Flex
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
       backgroundImage={`url('./images/banner-contemp.png')`}
+      onContextMenu={setContextMenuFalse}
       minH="100vh"
       minW="100vw"
     >
       <Box mb="30px">
-        <Image src={Logo} />
+        <Image src={Logo} onContextMenu={setContextMenuFalse} />
       </Box>
       <Box
         bg="white"
@@ -99,7 +101,7 @@ const Adm = () => {
               setBody({ ...body, email: value.target.value })
             }
             _focusVisible={{
-              outline: "none",
+              outline: 'none'
             }}
           />
         </InputGroup>
@@ -126,7 +128,7 @@ const Adm = () => {
               setBody({ ...body, password: value.target.value })
             }
             _focusVisible={{
-              outline: "none",
+              outline: 'none'
             }}
           />
         </InputGroup>
@@ -137,8 +139,8 @@ const Adm = () => {
             color="black.800"
             textStyle="italic"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Esqueci a senha
@@ -153,24 +155,28 @@ const Adm = () => {
             isLoading={loading}
             onClick={signIn}
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Entrar
           </Button>
         </Flex>
       </Box>
-      <Link isExternal href="https://3hub.co/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
+      <Link
+        isExternal
+        href="https://3hub.co/"
+        _hover={{ textDecoration: 'none', color: 'black.800' }}
+      >
         <Text fontSize="20px" color="black.800">
-          Desenvolvido por{" "}
+          Desenvolvido por{' '}
           <Text as="span" color="red.600" fontWeight="bold">
             3Hub
           </Text>
         </Text>
       </Link>
     </Flex>
-  );
-};
+  )
+}
 
-export default Adm;
+export default Adm

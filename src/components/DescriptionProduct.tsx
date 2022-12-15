@@ -1,28 +1,28 @@
-import { Box, Button, Flex, FlexProps, Image, Text } from "@chakra-ui/react";
-// import { Image } from "../components/Image";
-import { pxToRem } from "../utils/pxToRem";
-import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
-import { useRouter } from "next/router";
+import { Box, Button, Flex, FlexProps, Text } from '@chakra-ui/react'
+import { Image } from '../components/Image'
+import { pxToRem } from '../utils/pxToRem'
+import { ProductCategoryWithIcon } from './ProductCategoryWithIcon'
+import { useRouter } from 'next/router'
 
 type DataTabProps = {
-  category: string;
-  description: string;
-  destaque: boolean;
-  icon: string;
-  indexProduct: number;
-  link_name: string;
-  name: string;
-  nameCategory: string;
-  urls: string[];
-};
+  category: string
+  description: string
+  destaque: boolean
+  icon: string
+  indexProduct: number
+  link_name: string
+  name: string
+  nameCategory: string
+  urls: string[]
+}
 
 interface IProps {
-  bg: string;
-  borderColor: string;
-  borderColorButton: string;
-  color: string;
-  containerProps?: FlexProps;
-  dataTab?: DataTabProps;
+  bg: string
+  borderColor: string
+  borderColorButton: string
+  color: string
+  containerProps?: FlexProps
+  dataTab?: DataTabProps
 }
 
 const DescriptionProduct = ({
@@ -31,11 +31,11 @@ const DescriptionProduct = ({
   color,
   borderColorButton,
   containerProps,
-  dataTab,
+  dataTab
 }: IProps) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  if (!dataTab || Object.keys(dataTab).length === 0) return <Box />;
+  if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
 
   return (
     <Flex
@@ -48,8 +48,8 @@ const DescriptionProduct = ({
     >
       <Flex
         direction={{
-          base: "column",
-          xl: "row",
+          base: 'column',
+          xl: 'row'
         }}
         alignItems="center"
         justifyContent="space-between"
@@ -59,19 +59,20 @@ const DescriptionProduct = ({
         {...containerProps}
       >
         <Image
-          src={dataTab?.urls ? dataTab.urls[0] : ""}
+          src={dataTab?.urls ? dataTab.urls[0] : ''}
           alt={dataTab?.name}
-          // flex={1}
+          flex={1}
+          bgSize="100%"
           zIndex={30}
           minH="auto"
           w={{
-            base: "55%",
-            md: "45%",
-            lg: "45%",
-            xl: "55%",
+            base: '55%',
+            md: '45%',
+            lg: '45%',
+            xl: '55%'
           }}
           onClick={() =>
-            router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
+            router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)
           }
           cursor="pointer"
         />
@@ -83,7 +84,7 @@ const DescriptionProduct = ({
             fontSize={{
               base: pxToRem(30),
               lg: pxToRem(35),
-              xl: pxToRem(40),
+              xl: pxToRem(40)
             }}
           >
             {dataTab?.name}
@@ -96,7 +97,7 @@ const DescriptionProduct = ({
               bg,
               color,
               borderColor,
-              margin: `${pxToRem(10)} 0`,
+              margin: `${pxToRem(10)} 0`
             }}
           />
 
@@ -121,12 +122,12 @@ const DescriptionProduct = ({
               h={pxToRem(50)}
               flex={6}
               onClick={() =>
-                router.push(`/produto/${dataTab?.name.replaceAll(" ", "_")}`)
+                router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)
               }
               _hover={{
                 bg: color,
                 color: bg,
-                transition: "all 0.3s",
+                transition: 'all 0.3s'
               }}
             >
               Veja mais
@@ -135,7 +136,7 @@ const DescriptionProduct = ({
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default DescriptionProduct;
+export default DescriptionProduct

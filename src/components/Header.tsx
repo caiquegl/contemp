@@ -32,7 +32,7 @@ import Instagram from '../assets/icons/instagram.svg'
 import Facebook from '../assets/icons/facebook-f.svg'
 import Youtube from '../assets/icons/youtube.svg'
 import Logo from '../assets/icons/Logo-Contemp.svg'
-import ImageNext from 'next/image'
+import ImageNext, { ImageProps } from 'next/image'
 import { BsBag, BsThreeDotsVertical } from 'react-icons/bs'
 import { AiOutlineClose } from 'react-icons/ai'
 import {
@@ -47,6 +47,7 @@ import { pxToRem } from '../utils/pxToRem'
 import { HeaderMenu, HeaderMenuVertical } from './HeaderMenu'
 import { useRouter } from 'next/router'
 import { FiAlertTriangle } from 'react-icons/fi'
+import { setContextMenuFalse } from '../utils/setContextMenuFalse'
 
 export const Header = () => {
   const router = useRouter()
@@ -123,11 +124,14 @@ export const Header = () => {
     handleScroll()
 
     window.addEventListener('scroll', handleScroll)
-
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  const NextImageMenuFalse = (props: ImageProps) => (
+    <ImageNext {...props} onContextMenu={setContextMenuFalse} />
+  )
 
   if (isDrawerSiderbar) {
     return (
@@ -139,7 +143,7 @@ export const Header = () => {
         padding={`0 ${pxToRem(10)}`}
       >
         <Link href="/">
-          <ImageNext src={Logo} width={160} />
+          <NextImageMenuFalse src={Logo} width={160} />
         </Link>
 
         <HStack spacing="27px">
@@ -202,7 +206,7 @@ export const Header = () => {
                 width="100%"
               >
                 <Link href="/">
-                  <ImageNext src={Logo} width={160} />
+                  <NextImageMenuFalse src={Logo} width={160} />
                 </Link>
                 <Flex
                   borderRadius="5px"
@@ -359,7 +363,7 @@ export const Header = () => {
                 height={41}
                 mr="20px"
               >
-                <ImageNext width={160} height={41} src={Logo} />
+                <NextImageMenuFalse width={160} height={41} src={Logo} />
               </Box>
 
               <Box>

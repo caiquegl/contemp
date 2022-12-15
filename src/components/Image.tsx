@@ -1,6 +1,7 @@
-import { Box, Image as ChakraImage, BoxProps } from "@chakra-ui/react";
-import { StaticImageData } from "next/image";
-import { pxToRem } from "../utils/pxToRem";
+import { Box, Image as ChakraImage, BoxProps } from '@chakra-ui/react'
+import { StaticImageData } from 'next/image'
+import { useEffect } from 'react'
+import { pxToRem } from '../utils/pxToRem'
 
 type ImageProps = {
   src: string | StaticImageData
@@ -8,7 +9,8 @@ type ImageProps = {
 } & BoxProps
 
 export const Image = ({ src, alt, ...props }: ImageProps) => {
-  const bgImage = typeof src === 'string' ? `url('${src}')` : src?.src ? src.src : ''
+  const bgImage =
+    typeof src === 'string' ? `url('${src}')` : src?.src ? src.src : ''
 
   return (
     <Box
@@ -21,8 +23,10 @@ export const Image = ({ src, alt, ...props }: ImageProps) => {
       minH={pxToRem(200)}
       flex={1}
       {...props}
+      userSelect="none"
+      onContextMenu={() => false}
     >
-      <ChakraImage opacity="0" src={''} alt={alt} />
+      <ChakraImage opacity="0" src={''} alt={alt} userSelect="none" />
     </Box>
   )
 }
