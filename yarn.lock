@@ -1823,6 +1823,11 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.8.8.tgz#17cf806485435877fdafce9f3bee6ff68f7f87b6"
   integrity sha512-meAEDur1IJBfKyTo9yPYAuzjIfrxA7m9Ov+1nxaW/YupsqMeseWifoUjWK03+hz/RJizsVQAaUjVxFEkyu0GWg==
 
+"@hotjar/browser@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@hotjar/browser/-/browser-1.0.6.tgz#5e1c9a2b0c7c21d65acb741b76c39ed81eaa4e5f"
+  integrity sha512-yq8pFrCk/pGe1LeI9kgd4NZNI3C8eQlck+ISmWnL3T8RtN/YYEmzDFEZ1AFZ9GGAbxyxG6xUdaL3/S7sOSqeCQ==
+
 "@humanwhocodes/config-array@^0.10.5":
   version "0.10.7"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.7.tgz#6d53769fd0c222767e6452e8ebda825c22e9f0dc"
