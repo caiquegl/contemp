@@ -21,35 +21,35 @@ import {
   ModalOverlay,
   Text,
   useBreakpointValue,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { Image } from "./Image";
-import React, { useEffect, useState } from "react";
-import Phone from "../assets/icons/phone.svg";
-import Email from "../assets/icons/envelope.svg";
-import Linkedin from "../assets/icons/linkedin.svg";
-import Instagram from "../assets/icons/instagram.svg";
-import Facebook from "../assets/icons/facebook-f.svg";
-import Youtube from "../assets/icons/youtube.svg";
-import Logo from "../assets/icons/Logo-Contemp.svg";
-import ImageNext from "next/image";
-import { BsBag, BsThreeDotsVertical } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
+  useDisclosure
+} from '@chakra-ui/react'
+import { Image } from './Image'
+import React, { useEffect, useState } from 'react'
+import Phone from '../assets/icons/phone.svg'
+import Email from '../assets/icons/envelope.svg'
+import Linkedin from '../assets/icons/linkedin.svg'
+import Instagram from '../assets/icons/instagram.svg'
+import Facebook from '../assets/icons/facebook-f.svg'
+import Youtube from '../assets/icons/youtube.svg'
+import Logo from '../assets/icons/Logo-Contemp.svg'
+import ImageNext from 'next/image'
+import { BsBag, BsThreeDotsVertical } from 'react-icons/bs'
+import { AiOutlineClose } from 'react-icons/ai'
 import {
   AiFillLinkedin,
   AiFillYoutube,
-  AiOutlineInstagram,
-} from "react-icons/ai";
-import { useAuth } from "../contextAuth/authContext";
-import { FaFacebookF } from "react-icons/fa";
-import { SearchBar } from "./SearchBar";
-import { pxToRem } from "../utils/pxToRem";
-import { HeaderMenu, HeaderMenuVertical } from "./HeaderMenu";
-import { useRouter } from "next/router";
-import { FiAlertTriangle } from "react-icons/fi";
+  AiOutlineInstagram
+} from 'react-icons/ai'
+import { useAuth } from '../contextAuth/authContext'
+import { FaFacebookF } from 'react-icons/fa'
+import { SearchBar } from './SearchBar'
+import { pxToRem } from '../utils/pxToRem'
+import { HeaderMenu, HeaderMenuVertical } from './HeaderMenu'
+import { useRouter } from 'next/router'
+import { FiAlertTriangle } from 'react-icons/fi'
 
 export const Header = () => {
-  const router = useRouter();
+  const router = useRouter()
   const {
     setListHeader,
     cart,
@@ -57,76 +57,77 @@ export const Header = () => {
     onClose,
     onOpen,
     totalCart,
-    allCategoryActive,
-  } = useAuth();
-  const [list, setList] = useState([]);
-  const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure();
-  const [scrollY, setScrollY] = useState(0);
+    allCategoryActive
+  } = useAuth()
+  const [list, setList] = useState([])
+  const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
+  const [scrollY, setScrollY] = useState(0)
 
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
-    lg: false,
-  });
+    lg: false
+  })
 
   const listCategory = async () => {
     try {
       let categories: any = allCategoryActive.filter(
-        (el: any) => el.is_main == "true"
-      );
-      let newList: any = [];
+        (el: any) => el.is_main == 'true'
+      )
+      let newList: any = []
 
       for await (let categ of categories) {
-        let list_sub_category: any = [];
+        let list_sub_category: any = []
 
         allCategoryActive.forEach((el: any) => {
           if (el.sub_categorie == categ.id)
-            list_sub_category.push({ ...el, id: el.id });
-        });
+            list_sub_category.push({ ...el, id: el.id })
+        })
 
-        let filter: any = [];
+        let filter: any = []
 
         list_sub_category.forEach((el: any) => {
-          let list_sub_category2: any = [];
+          let list_sub_category2: any = []
 
           allCategoryActive.forEach((c: any) => {
             if (c.sub_categorie == el.id)
-              list_sub_category2.push({ ...c, id: c.id });
-          });
-          filter.push({ ...el, list_sub_category: list_sub_category2 });
-        });
+              list_sub_category2.push({ ...c, id: c.id })
+          })
+          filter.push({ ...el, list_sub_category: list_sub_category2 })
+        })
 
         newList.push({
           ...categ,
           id: categ.id,
-          list_sub_category: filter,
-        });
+          list_sub_category: filter
+        })
       }
-      setList(newList);
-      setListHeader(newList);
+      setList(newList)
+      setListHeader(newList)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    if (allCategoryActive.length > 0) listCategory();
-  }, [allCategoryActive]);
+    if (allCategoryActive.length > 0) listCategory()
+  }, [allCategoryActive])
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+      setScrollY(window.scrollY)
+    }
 
     // just trigger this so that the initial state
     // is updated as soon as the component is mounted
     // related: https://stackoverflow.com/a/63408216
-    handleScroll();
+    handleScroll()
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll)
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   if (isDrawerSiderbar) {
     return (
@@ -147,10 +148,10 @@ export const Header = () => {
             cursor="pointer"
             onClick={() => {
               if (totalCart == 0 && !totalCart) {
-                oOpen();
-                return;
+                oOpen()
+                return
               }
-              router.push("/orcamento");
+              router.push('/orcamento')
             }}
           >
             {cart && cart.length > 0 && (
@@ -183,8 +184,8 @@ export const Header = () => {
             cursor="pointer"
             onClick={onOpen}
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.6,
+              transition: 'all 0.4s',
+              opacity: 0.6
             }}
           >
             <Icon as={BsThreeDotsVertical} fontSize="20px" />
@@ -214,8 +215,8 @@ export const Header = () => {
                   cursor="pointer"
                   onClick={onClose}
                   _hover={{
-                    transition: "all 0.4s",
-                    opacity: 0.6,
+                    transition: 'all 0.4s',
+                    opacity: 0.6
                   }}
                 >
                   <Icon as={AiOutlineClose} fontSize="20px" />
@@ -333,12 +334,12 @@ export const Header = () => {
           </ModalContent>
         </Modal>
       </Flex>
-    );
+    )
   }
 
-  if (scrollY > 200) {
+  if (scrollY >= 200) {
     return (
-      <Box h="250px">
+      <Box h="250px" transition="all 0.2s">
         <Box
           display="flex"
           alignItems="center"
@@ -348,11 +349,12 @@ export const Header = () => {
           h="70px"
           bg="black.800"
           zIndex={999}
+          transition="inherit"
         >
           <Container maxW="7xl" p="12px 15px 15px 15px">
             <Flex alignItems="center" justifyContent="space-between" h={70}>
               <Box
-                onClick={() => router.push("/")}
+                onClick={() => router.push('/')}
                 cursor="pointer"
                 height={41}
                 mr="20px"
@@ -363,14 +365,14 @@ export const Header = () => {
               <Box>
                 <Link
                   href="/todosProdutos"
-                  _hover={{ color: "#fff", textDecoration: "none" }}
+                  _hover={{ color: '#fff', textDecoration: 'none' }}
                 >
                   <Button
                     borderRadius="5px"
                     bg="red.600"
                     _hover={{
-                      bg: "red.600",
-                      opacity: 0.6,
+                      bg: 'red.600',
+                      opacity: 0.6
                     }}
                   >
                     <Icon
@@ -389,10 +391,10 @@ export const Header = () => {
                 cursor="pointer"
                 onClick={() => {
                   if (totalCart == 0 && !totalCart) {
-                    oOpen();
-                    return;
+                    oOpen()
+                    return
                   }
-                  router.push("/orcamento");
+                  router.push('/orcamento')
                 }}
               >
                 {cart && cart.length > 0 && (
@@ -456,20 +458,21 @@ export const Header = () => {
           </Container>
         </Box>
       </Box>
-    );
+    )
   }
 
   return (
-    <Container maxW="7xl" p="12px 15px">
+    <Container maxW="7xl" p="12px 15px" transition="all 0.2s">
       <Flex
         alignItems="center"
         justifyContent="space-evenly"
         marginBottom="22px"
+        transition="inherit"
       >
         <Box display="flex" flex={1}>
           <Link
             href="tel:1142235140"
-            _hover={{ textDecoration: "none", color: "#fff" }}
+            _hover={{ textDecoration: 'none', color: '#fff' }}
           >
             <Flex alignItems="center" w="max-content" mr={3}>
               <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
@@ -480,7 +483,7 @@ export const Header = () => {
           </Link>
           <Link
             href="mailto:vendas@contemp.com.br"
-            _hover={{ textDecoration: "none", color: "#fff" }}
+            _hover={{ textDecoration: 'none', color: '#fff' }}
           >
             <Flex alignItems="center">
               <Image src={Email} width={20} minHeight={15} flex={0.3} />
@@ -547,7 +550,7 @@ export const Header = () => {
 
       <Flex alignItems="center" justifyContent="space-between" h={70} mb="0px">
         <Box
-          onClick={() => router.push("/")}
+          onClick={() => router.push('/')}
           cursor="pointer"
           height={41}
           mr="20px"
@@ -558,14 +561,14 @@ export const Header = () => {
         <Box>
           <Link
             href="/todosProdutos"
-            _hover={{ color: "#fff", textDecoration: "none" }}
+            _hover={{ color: '#fff', textDecoration: 'none' }}
           >
             <Button
               borderRadius="5px"
               bg="red.600"
               _hover={{
-                bg: "red.600",
-                opacity: 0.6,
+                bg: 'red.600',
+                opacity: 0.6
               }}
             >
               Todos os produtos
@@ -590,8 +593,8 @@ export const Header = () => {
           <Link
             href="/a-contemp"
             _hover={{
-              textDecoration: "none",
-              color: "red.600",
+              textDecoration: 'none',
+              color: 'red.600'
             }}
           >
             <Text w="max-content" fontSize="18px">
@@ -600,8 +603,8 @@ export const Header = () => {
           </Link>
           <Link
             _hover={{
-              textDecoration: "none",
-              color: "red.600",
+              textDecoration: 'none',
+              color: 'red.600'
             }}
             href="/calibracao"
           >
@@ -611,8 +614,8 @@ export const Header = () => {
           </Link>
           <Link
             _hover={{
-              textDecoration: "none",
-              color: "red.600",
+              textDecoration: 'none',
+              color: 'red.600'
             }}
             href="/suporte-tecnico"
           >
@@ -622,8 +625,8 @@ export const Header = () => {
           </Link>
           <Link
             _hover={{
-              textDecoration: "none",
-              color: "red.600",
+              textDecoration: 'none',
+              color: 'red.600'
             }}
             href="/trabalhe-conosco"
           >
@@ -633,8 +636,8 @@ export const Header = () => {
           </Link>
           <Link
             _hover={{
-              textDecoration: "none",
-              color: "red.600",
+              textDecoration: 'none',
+              color: 'red.600'
             }}
             href="https://blog.contemp.com.br"
           >
@@ -649,7 +652,7 @@ export const Header = () => {
             containerProps={{
               w: pxToRem(191),
               h: pxToRem(42),
-              marginRight: 5,
+              marginRight: 5
             }}
           />
 
@@ -658,10 +661,10 @@ export const Header = () => {
             cursor="pointer"
             onClick={() => {
               if (totalCart == 0 && !totalCart) {
-                oOpen();
-                return;
+                oOpen()
+                return
               }
-              router.push("/orcamento");
+              router.push('/orcamento')
             }}
           >
             {cart && cart.length > 0 && (
@@ -717,8 +720,8 @@ export const Header = () => {
         </ModalContent>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
 function CustomIcon({ icon }: any) {
   return (
@@ -732,5 +735,5 @@ function CustomIcon({ icon }: any) {
     >
       <Icon as={icon} fontSize={pxToRem(35)} color="black.200" />
     </Flex>
-  );
+  )
 }
