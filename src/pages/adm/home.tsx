@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState } from "react";
-import Logo from "../../assets/icons/logo.png";
+import Logo from "../../assets/icons/Logo-Contemp.svg";
 import TabCategory from "../../components/Tabs/TabCategory";
 import TabHome from "../../components/Tabs/TabHome";
 import TabProduct from "../../components/Tabs/TabProduct";
