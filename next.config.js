@@ -26,6 +26,11 @@ module.exports = {
         destination: 'https://blog.contemp.com.br/',
         permanent: true,
       },
+      {
+        source: '/',
+        destination: 'https://contemp.com.br',
+        permanent: true,
+      },
     ]
   },
 }
