@@ -68,6 +68,7 @@ const TabProduct = () => {
       )
     }
   ]
+
   const listProduct = async () => {
     try {
       let newList: any = []
@@ -139,7 +140,10 @@ const TabProduct = () => {
               w="128px"
               h="47px"
               _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
-              onClick={() => setStep(2)}
+              onClick={() => {
+                setStep(2)
+                setIsUpdate(false)
+              }}
             >
               Adicionar
             </Button>
