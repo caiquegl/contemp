@@ -9,11 +9,11 @@ import {
   Flex,
   Divider,
   Icon,
-  useToast,
-} from "@chakra-ui/react";
-import { BaseSyntheticEvent, useEffect, useState } from "react";
-import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
-import { database, initFirebase } from "../../utils/db";
+  useToast
+} from '@chakra-ui/react'
+import { BaseSyntheticEvent, useEffect, useState } from 'react'
+import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
+import { database, initFirebase } from '../../utils/db'
 import {
   addDoc,
   collection,
@@ -22,198 +22,197 @@ import {
   query,
   where,
   updateDoc,
-  doc,
-} from "firebase/firestore";
-import EditTab from "./editTab";
+  doc
+} from 'firebase/firestore'
+import EditTab from './editTab'
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
-  initFirebase();
-  const toast = useToast();
-  const [editorLoaded, setEditorLoaded] = useState<any>(false);
-  const [loading, setLoading] = useState(false);
-  const [tabs, setTabs] = useState<any>([{ id: 1 }]);
+  initFirebase()
+  const toast = useToast()
+  const [editorLoaded, setEditorLoaded] = useState<any>(false)
+  const [loading, setLoading] = useState(false)
+  const [tabs, setTabs] = useState<any>([{ id: 1 }])
 
   useEffect(() => {
-    setEditorLoaded(true);
-  }, []);
+    setEditorLoaded(true)
+  }, [])
 
   const add = () => {
-    setEditorLoaded(false);
-    setTabs([...tabs, { id: tabs.length + 1 }]);
+    setEditorLoaded(false)
+    setTabs([...tabs, { id: tabs.length + 1 }])
     setTimeout(() => {
-      setEditorLoaded(true);
-    }, 500);
-  };
+      setEditorLoaded(true)
+    }, 500)
+  }
 
   const load = () => {
-    setEditorLoaded(false);
+    setEditorLoaded(false)
     setTimeout(() => {
-      setEditorLoaded(true);
-    }, 500);
-  };
+      setEditorLoaded(true)
+    }, 500)
+  }
 
   useEffect(() => {
     if (values.tab) {
-      setEditorLoaded(false);
-      setTabs(values.tab);
+      setEditorLoaded(false)
+      setTabs(values.tab)
       setTimeout(() => {
-        setEditorLoaded(true);
-      }, 500);
+        setEditorLoaded(true)
+      }, 500)
     }
-  }, [values]);
+  }, [values])
 
   const remove = (index: number) => {
-    let newList: any = [];
+    let newList: any = []
     tabs.forEach((list: any, indexRemove: number) => {
-      if (index != indexRemove) newList.push(list);
-    });
-    setTabs(newList);
-  };
+      if (index != indexRemove) newList.push(list)
+    })
+    setTabs(newList)
+  }
 
   const saveProduct = async () => {
     try {
       if (isUpdate) {
         updateProduct({
           ...values,
-          tab: tabs,
-        });
-        return;
+          tab: tabs
+        })
+        return
       }
 
-      let falt = false;
+      let falt = false
       tabs.forEach((key: any) => {
-        if (!key.name) falt = true;
-        if (!key.text) falt = true;
-      });
+        if (!key.name) falt = true
+        if (!key.text) falt = true
+      })
 
       if (falt || Object.keys(tabs).length === 0) {
         toast({
-          title: "Erro",
-          description: "Preencha todos os campos",
-          status: "error",
+          title: 'Erro',
+          description: 'Preencha todos os campos',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
-        return;
+          isClosable: true
+        })
+        return
       }
-      setLoading(true);
+      setLoading(true)
 
-      const dbInstance = collection(database, "products");
-      let exist = false;
+      const dbInstance = collection(database, 'products')
+      let exist = false
       // const q = query(dbInstance, orderBy("order", "desc"), limit(1));
       const qExist = query(
         dbInstance,
-        where("name", "==", values.name),
+        where('name', '==', values.name),
         limit(1)
-      );
+      )
 
       await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) exist = true;
-      });
+        if (data.docs.length > 0) exist = true
+      })
 
       if (!exist) {
         await addDoc(dbInstance, {
           ...values,
-          tab: tabs,
-        });
+          tab: tabs
+        })
 
         toast({
-          title: "Sucesso",
-          description: "Produto cadastradado com sucesso.",
-          status: "success",
+          title: 'Sucesso',
+          description: 'Produto cadastradado com sucesso.',
+          status: 'success',
           duration: 3000,
-          isClosable: true,
-        });
-        reset();
+          isClosable: true
+        })
+        reset()
       } else {
         toast({
-          title: "Erro",
-          description: "Produto já existe",
-          status: "error",
+          title: 'Erro',
+          description: 'Produto já existe',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
+          isClosable: true
+        })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
       toast({
-        title: "Erro",
-        description: "Erro ao salvar produto",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao salvar produto',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const updateProduct = async (bodyForm: any) => {
     try {
-      setLoading(true);
+      setLoading(true)
 
-      const dbInstance = collection(database, "products");
-      let exist = false;
+      const dbInstance = collection(database, 'products')
+      let exist = false
       const qExist = query(
         dbInstance,
-        where("name", "==", bodyForm.name),
+        where('name', '==', bodyForm.name),
         limit(1)
-      );
+      )
 
       await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0 && data.docs[0].id != bodyForm.id)
-          exist = true;
-      });
+        if (data.docs.length > 0 && data.docs[0].id != bodyForm.id) exist = true
+      })
 
       if (!exist) {
-        const dbInstanceUpdate = doc(database, "products", bodyForm.id);
-        delete bodyForm.id;
-        delete bodyForm.ref;
-        await updateDoc(dbInstanceUpdate, bodyForm);
+        const dbInstanceUpdate = doc(database, 'products', bodyForm.id)
+        delete bodyForm.id
+        delete bodyForm.ref
+        await updateDoc(dbInstanceUpdate, bodyForm)
         toast({
-          title: "Sucesso",
-          description: "Produto atualizado com sucesso.",
-          status: "success",
+          title: 'Sucesso',
+          description: 'Produto atualizado com sucesso.',
+          status: 'success',
           duration: 3000,
-          isClosable: true,
-        });
-        reset();
+          isClosable: true
+        })
+        reset()
       } else {
         toast({
-          title: "Erro",
-          description: "Produto já existe",
-          status: "error",
+          title: 'Erro',
+          description: 'Produto já existe',
+          status: 'error',
           duration: 3000,
-          isClosable: true,
-        });
+          isClosable: true
+        })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
       toast({
-        title: "Erro",
-        description: "Erro ao atualizar produto",
-        status: "error",
+        title: 'Erro',
+        description: 'Erro ao atualizar produto',
+        status: 'error',
         duration: 3000,
-        isClosable: true,
-      });
+        isClosable: true
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleOnTabNameChange = (evt: BaseSyntheticEvent, tabIndex: number) => {
     let newList = tabs.map((tab: any, index: number) => {
       if (index === tabIndex)
         return {
           ...tab,
-          name: evt.target.value,
-        };
+          name: evt.target.value
+        }
 
-      return tab;
-    });
+      return tab
+    })
 
-    setTabs(newList);
-  };
+    setTabs(newList)
+  }
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
@@ -252,11 +251,11 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                       border="none"
                       borderRadius="21px"
                       color="black.800"
-                      placeholder="nome completo"
+                      placeholder="Nome completo"
                       onChange={(evt) => handleOnTabNameChange(evt, tabIndex)}
                       value={tabs[tabIndex]?.name}
                       _focusVisible={{
-                        outline: "none",
+                        outline: 'none'
                       }}
                     />
                   </InputGroup>
@@ -316,7 +315,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
           borderRadius="4px"
           w="128px"
           h="47px"
-          _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
           isLoading={loading}
           onClick={() => saveProduct()}
         >
@@ -324,7 +323,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
         </Button>
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export default ContainerAddProductDescription;
+export default ContainerAddProductDescription
