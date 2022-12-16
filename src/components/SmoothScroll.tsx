@@ -1,7 +1,9 @@
 import { Box } from '@chakra-ui/react'
 import React, { useEffect, useRef } from 'react'
+import { SidebarDrawerProvider } from '../contexts/SidebarDrawerContexts'
 
 import { useWindowSize } from '../utils/useWindowSize'
+import { Header } from './Header'
 
 export const SmoothScroll = ({ children }: any) => {
   const windowSize = useWindowSize()
@@ -37,16 +39,24 @@ export const SmoothScroll = ({ children }: any) => {
     data.previous += (data.current - data.previous) * data.ease
     data.rounded = Math.round(data.previous * 80) / 80
     if (scrollingContainerRef && scrollingContainerRef.current)
-      scrollingContainerRef.current.style.transform = `translateY(-${data.previous}px)`
+      scrollingContainerRef.current.style.transform = `translateY(-${Math.floor(
+        data.previous
+      )}px)`
 
     // Recursive call
     requestAnimationFrame(() => smoothScrollingHandler())
   }
 
   return (
-    <Box maxH="100vh" scrollBehavior="smooth" ref={scrollingContainerRef}>
-      {children}
-    </Box>
+    <>
+      <SidebarDrawerProvider>
+        <Header />
+      </SidebarDrawerProvider>
+
+      <Box maxH="100vh" ref={scrollingContainerRef}>
+        {children}
+      </Box>
+    </>
   )
   // return <Box >{children}</Box>;
 }
