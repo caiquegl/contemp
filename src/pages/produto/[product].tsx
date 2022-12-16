@@ -1,4 +1,3 @@
-import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import {
   Box,
@@ -186,7 +185,6 @@ const Product = () => {
           <link rel="icon" href="/favicon.png" />
         </Head>
       )}
-      <Header />
 
       <Flex
         p="10px"

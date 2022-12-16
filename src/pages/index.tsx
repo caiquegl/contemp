@@ -6,76 +6,82 @@ import {
   Button,
   Icon,
   Grid as GridChakra,
-  Link,
-} from "@chakra-ui/react";
-import Pirometro from "../assets/icons/pritometro_white.svg";
-import Mapa from "../assets/images/MAPA.png";
-import { Image } from "../components/Image";
-import { BiPhone } from "react-icons/bi";
-import { AiOutlineMail } from "react-icons/ai";
-import { Catalog } from "../components/Catalog";
-import { Header } from "../components/Header";
-import { Banner } from "../components/Banner";
-import { Favorite } from "../components/Favorite";
-import { Contact } from "../components/Contact";
-import { Footer } from "../components/Footer";
-import { Player } from "../components/Player";
-import DescriptionProduct from "../components/DescriptionProduct";
-import { pxToRem } from "../utils/pxToRem";
-import { ProductCategoryWithIcon } from "../components/ProductCategoryWithIcon";
-import { HomeBackgroundDetails } from "../components/HomeBackgroundDetails";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContexts";
-import Head from "next/head";
+  Link
+} from '@chakra-ui/react'
+import Pirometro from '../assets/icons/pritometro_white.svg'
+import Mapa from '../assets/images/MAPA.png'
+import { Image } from '../components/Image'
+import { BiPhone } from 'react-icons/bi'
+import { AiOutlineMail } from 'react-icons/ai'
+import { Catalog } from '../components/Catalog'
+import { Banner } from '../components/Banner'
+import { Favorite } from '../components/Favorite'
+import { Contact } from '../components/Contact'
+import { Footer } from '../components/Footer'
+import { Player } from '../components/Player'
+import DescriptionProduct from '../components/DescriptionProduct'
+import { pxToRem } from '../utils/pxToRem'
+import { ProductCategoryWithIcon } from '../components/ProductCategoryWithIcon'
+import { HomeBackgroundDetails } from '../components/HomeBackgroundDetails'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { SidebarDrawerProvider } from '../contexts/SidebarDrawerContexts'
+import Head from 'next/head'
 import { useAuth } from '../contextAuth/authContext'
+import { SmoothScroll } from '../components/SmoothScroll'
 
 const Home = () => {
   const { allProductsHome, allCategoryActive } = useAuth()
-  const router = useRouter();
-  const [listTab, setListtAB] = useState<any>([]);
+  const router = useRouter()
+  const [listTab, setListtAB] = useState<any>([])
 
   const getHomeTab = async () => {
     try {
-      let organize: any = [];
+      let organize: any = []
 
       allProductsHome.forEach((el: any) => {
         organize.push({
           ...el,
-          nameCategory: allCategoryActive.find((ce: any) => ce.id == el.category).name,
+          nameCategory: allCategoryActive.find(
+            (ce: any) => ce.id == el.category
+          ).name
         })
       })
 
-      setListtAB(organize);
+      setListtAB(organize)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    if (allCategoryActive.length > 0 && allProductsHome.length > 0) getHomeTab();
-  }, [allCategoryActive, allProductsHome]);
+    if (allCategoryActive.length > 0 && allProductsHome.length > 0) getHomeTab()
+  }, [allCategoryActive, allProductsHome])
 
   return (
-    <Box>
+    <SmoothScroll>
       <Head>
-        <meta name="description" content="Procurando medição e controle de temperatura em processos industriais? A Contemp é pioneira. Confira!" />
-        <meta name="keywords" content="controle de temperatura, processos industriais, contemp, medição de temperatura" />
+        <meta
+          name="description"
+          content="Procurando medição e controle de temperatura em processos industriais? A Contemp é pioneira. Confira!"
+        />
+        <meta
+          name="keywords"
+          content="controle de temperatura, processos industriais, contemp, medição de temperatura"
+        />
         <title>Contemp</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <HomeBackgroundDetails />
-      <SidebarDrawerProvider>
-        <Header />
-      </SidebarDrawerProvider>
+
       <Banner />
 
       <Favorite />
 
       <GridChakra
         templateColumns={{
-          base: "100%",
-          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
+          base: '100%',
+          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`
         }}
       >
         <DescriptionProduct
@@ -99,9 +105,9 @@ const Home = () => {
           borderColorButton="black.800"
           containerProps={{
             direction: {
-              base: "column",
-              xl: "row-reverse",
-            },
+              base: 'column',
+              xl: 'row-reverse'
+            }
           }}
           dataTab={listTab.find((el: any) => el.indexProduct === 3)}
         />
@@ -112,9 +118,9 @@ const Home = () => {
           borderColorButton="white"
           containerProps={{
             direction: {
-              base: "column",
-              xl: "row-reverse",
-            },
+              base: 'column',
+              xl: 'row-reverse'
+            }
           }}
           dataTab={listTab.find((el: any) => el.indexProduct === 4)}
         />
@@ -123,45 +129,45 @@ const Home = () => {
       <Container
         maxW="6xl"
         p={[
-          "12px 20px 31px 20px",
-          "12px 20px 31px 20px",
-          "12px 0 31px",
-          "12px 0 31px",
-          "12px 0 31px",
+          '12px 20px 31px 20px',
+          '12px 20px 31px 20px',
+          '12px 0 31px',
+          '12px 0 31px',
+          '12px 0 31px'
         ]}
       >
         <Flex
           alignItems="center"
           justifyContent="space-between"
-          flexDirection={["column", "column", "row", "row", "row"]}
+          flexDirection={['column', 'column', 'row', 'row', 'row']}
         >
           <Box
             flex={{
-              base: "none",
-              md: 1,
+              base: 'none',
+              md: 1
             }}
             textAlign="center"
           >
             <Text
               margin={{
                 base: `${pxToRem(40)} auto 0`,
-                md: "auto",
+                md: 'auto'
               }}
               fontWeight="bold"
               fontSize={{
                 base: pxToRem(45),
                 md: pxToRem(80),
-                lg: pxToRem(110),
+                lg: pxToRem(110)
               }}
               maxW={{
-                base: "100%",
+                base: '100%',
                 md: pxToRem(210),
-                lg: pxToRem(259),
+                lg: pxToRem(259)
               }}
               lineHeight={1.05}
               letterSpacing={{
                 base: pxToRem(5),
-                lg: pxToRem(9.6),
+                lg: pxToRem(9.6)
               }}
               textTransform="uppercase"
               zIndex={999}
@@ -173,8 +179,8 @@ const Home = () => {
           <Flex
             flex={1}
             alignItems={{
-              base: "center",
-              md: "initial",
+              base: 'center',
+              md: 'initial'
             }}
             flexDirection="column"
             padding={`0 ${pxToRem(15)}`}
@@ -183,10 +189,10 @@ const Home = () => {
               title="Controladores de Temperatura e Processos"
               icon={Pirometro}
               containerProps={{
-                borderColor: "red.600",
-                color: "white",
+                borderColor: 'red.600',
+                color: 'white',
                 marginTop: 10,
-                width: "100%",
+                width: '100%'
               }}
             />
 
@@ -196,8 +202,8 @@ const Home = () => {
               fontSize={pxToRem(20)}
               maxW={pxToRem(791)}
               textAlign={{
-                base: "center",
-                md: "initial",
+                base: 'center',
+                md: 'initial'
               }}
             >
               Nossos laboratórios possuem equipamentos e padrões que garantem a
@@ -214,9 +220,9 @@ const Home = () => {
               mr="15px"
               bg="transparent"
               _hover={{
-                bg: "white",
-                color: "black.800",
-                transition: "all 0.4s",
+                bg: 'white',
+                color: 'black.800',
+                transition: 'all 0.4s'
               }}
             >
               Veja mais
@@ -227,8 +233,8 @@ const Home = () => {
 
       <GridChakra
         templateColumns={{
-          base: "1fr",
-          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
+          base: '1fr',
+          md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`
         }}
         w="100%"
       >
@@ -260,10 +266,10 @@ const Home = () => {
           w="263px"
           h="50px"
           _hover={{
-            transition: "all 0.4s",
-            opacity: 0.7,
+            transition: 'all 0.4s',
+            opacity: 0.7
           }}
-          onClick={() => router.push("todosProdutos")}
+          onClick={() => router.push('todosProdutos')}
         >
           Veja todos os produtos
         </Button>
@@ -278,8 +284,8 @@ const Home = () => {
         p={`${pxToRem(70)} ${pxToRem(20)}`}
         bg="white.500"
         flexDirection={{
-          base: "column",
-          md: "row",
+          base: 'column',
+          md: 'row'
         }}
       >
         <Flex
@@ -295,11 +301,11 @@ const Home = () => {
             mb="18px"
             fontSize={{
               base: pxToRem(30),
-              md: pxToRem(45),
+              md: pxToRem(45)
             }}
             textAlign={{
-              base: "center",
-              md: "right",
+              base: 'center',
+              md: 'right'
             }}
           >
             ATENDEMOS O BRASIL E A AMÉRICA LATINA
@@ -307,7 +313,7 @@ const Home = () => {
           <Text
             fontSize={{
               base: pxToRem(17),
-              md: pxToRem(24),
+              md: pxToRem(24)
             }}
             color="black.800"
             mb="104px"
@@ -324,27 +330,27 @@ const Home = () => {
             w="100%"
             maxW={pxToRem(400)}
             h={{
-              base: 120,
+              base: 120
             }}
             flexDirection={{
-              base: "column",
-              md: "row",
+              base: 'column',
+              md: 'row'
             }}
           >
             <Link
               href="tel:1142235140"
-              _hover={{ textDecoration: "none", color: "#fff" }}
+              _hover={{ textDecoration: 'none', color: '#fff' }}
             >
               <Button
                 width={{
                   base: pxToRem(279),
-                  md: pxToRem(179),
+                  md: pxToRem(179)
                 }}
                 h="50px"
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
               >
                 <Icon as={BiPhone} mr="10px" />
                 Telefonar
@@ -352,18 +358,18 @@ const Home = () => {
             </Link>
             <Link
               href="mailto:vendas@contemp.com.br"
-              _hover={{ textDecoration: "none", color: "#fff" }}
+              _hover={{ textDecoration: 'none', color: '#fff' }}
             >
               <Button
                 width={{
                   base: pxToRem(279),
-                  md: pxToRem(179),
+                  md: pxToRem(179)
                 }}
                 h="50px"
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
               >
                 <Icon as={AiOutlineMail} mr="10px" />
                 Enviar e-mail
@@ -378,7 +384,7 @@ const Home = () => {
           ml={{
             base: 0,
             md: pxToRem(50),
-            lg: pxToRem(180),
+            lg: pxToRem(180)
           }}
         >
           <Image src={Mapa} minH={500} bgSize="100%" />
@@ -428,30 +434,30 @@ const Home = () => {
               destaques do mês"
         form={[
           {
-            name: "Nome",
-            type: "text",
+            name: 'Nome',
+            type: 'text'
           },
           {
-            name: "E-mail",
-            type: "text",
+            name: 'E-mail',
+            type: 'text'
           },
           {
-            name: "Empresa",
-            type: "text",
+            name: 'Empresa',
+            type: 'text'
           },
           {
-            name: "Telefone",
-            type: "text",
+            name: 'Telefone',
+            type: 'text'
           },
           {
-            name: "Mensagem",
-            type: "textArea",
-          },
+            name: 'Mensagem',
+            type: 'textArea'
+          }
         ]}
       />
       <Footer />
-    </Box>
-  );
-};
+    </SmoothScroll>
+  )
+}
 
-export default Home;
+export default Home

@@ -24,6 +24,7 @@ import Head from 'next/head'
 import Banner1 from '../assets/images/contemp-fachada.webp'
 import Banner2 from '../assets/images/contemp-sobre.webp'
 import { setContextMenuFalse } from '../utils/setContextMenuFalse'
+
 const Home = () => {
   return (
     <>
