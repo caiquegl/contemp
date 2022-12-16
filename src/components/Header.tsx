@@ -1,19 +1,9 @@
 import {
   Box,
-  Button,
+  BoxProps,
   Container,
-  Divider,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
-  Grid,
-  HStack,
   Icon,
-  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -23,43 +13,28 @@ import {
   useBreakpointValue,
   useDisclosure
 } from '@chakra-ui/react'
-import { Image } from './Image'
+
 import React, { useEffect, useState } from 'react'
-import Phone from '../assets/icons/phone.svg'
-import Email from '../assets/icons/envelope.svg'
-import Linkedin from '../assets/icons/linkedin.svg'
-import Instagram from '../assets/icons/instagram.svg'
-import Facebook from '../assets/icons/facebook-f.svg'
-import Youtube from '../assets/icons/youtube.svg'
-import Logo from '../assets/icons/Logo-Contemp.svg'
-import ImageNext, { ImageProps } from 'next/image'
-import { BsBag, BsThreeDotsVertical } from 'react-icons/bs'
-import { AiOutlineClose } from 'react-icons/ai'
-import {
-  AiFillLinkedin,
-  AiFillYoutube,
-  AiOutlineInstagram
-} from 'react-icons/ai'
+import LogoImage from '../assets/icons/Logo-Contemp.svg'
+import ImageNext from 'next/image'
 import { useAuth } from '../contextAuth/authContext'
-import { FaFacebookF } from 'react-icons/fa'
 import { SearchBar } from './SearchBar'
 import { pxToRem } from '../utils/pxToRem'
-import { HeaderMenu, HeaderMenuVertical } from './HeaderMenu'
+import { HeaderMenu } from './HeaderMenu'
 import { useRouter } from 'next/router'
 import { FiAlertTriangle } from 'react-icons/fi'
 import { setContextMenuFalse } from '../utils/setContextMenuFalse'
 
+import {
+  AllProductsButton,
+  CartBag,
+  ContactAndSocialMediaHeader,
+  ContempLinks,
+  SidebarDrawer
+} from './HeaderComponents'
+
 export const Header = () => {
-  const router = useRouter()
-  const {
-    setListHeader,
-    cart,
-    isOpen,
-    onClose,
-    onOpen,
-    totalCart,
-    allCategoryActive
-  } = useAuth()
+  const { setListHeader, cart, totalCart, allCategoryActive } = useAuth()
   const [list, setList] = useState([])
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
@@ -72,7 +47,7 @@ export const Header = () => {
   const listCategory = async () => {
     try {
       let categories: any = allCategoryActive.filter(
-        (el: any) => el.is_main == 'true'
+        (el: any) => el.is_main === 'true'
       )
       let newList: any = []
 
@@ -80,7 +55,7 @@ export const Header = () => {
         let list_sub_category: any = []
 
         allCategoryActive.forEach((el: any) => {
-          if (el.sub_categorie == categ.id)
+          if (el.sub_categorie === categ.id)
             list_sub_category.push({ ...el, id: el.id })
         })
 
@@ -90,7 +65,7 @@ export const Header = () => {
           let list_sub_category2: any = []
 
           allCategoryActive.forEach((c: any) => {
-            if (c.sub_categorie == el.id)
+            if (c.sub_categorie === el.id)
               list_sub_category2.push({ ...c, id: c.id })
           })
           filter.push({ ...el, list_sub_category: list_sub_category2 })
@@ -124,620 +99,197 @@ export const Header = () => {
     handleScroll()
 
     window.addEventListener('scroll', handleScroll)
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
-  const NextImageMenuFalse = (props: ImageProps) => (
-    <ImageNext {...props} onContextMenu={setContextMenuFalse} />
-  )
-
   if (isDrawerSiderbar) {
     return (
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        width="100%"
-        h={pxToRem(70)}
-        padding={`0 ${pxToRem(10)}`}
-      >
-        <Link href="/">
-          <NextImageMenuFalse src={Logo} width={160} />
-        </Link>
-
-        <HStack spacing="27px">
-          <Box
-            position="relative"
-            cursor="pointer"
-            onClick={() => {
-              if (totalCart == 0 && !totalCart) {
-                oOpen()
-                return
-              }
-              router.push('/orcamento')
-            }}
-          >
-            {cart && cart.length > 0 && (
-              <Flex
-                p={`${pxToRem(2)} ${pxToRem(5)}`}
-                bg="red.600"
-                borderRadius={50}
-                alignItems="center"
-                justifyContent="center"
-                fontWeight="bold"
-                fontSize={pxToRem(14)}
-                position="absolute"
-                bottom={4}
-                left={4}
-              >
-                {totalCart}
-              </Flex>
-            )}
-            <Icon as={BsBag} w={30} minHeight={30} bgSize={30} flex={1} />
-          </Box>
-
-          <Flex
-            borderRadius="5px"
-            w="40px"
-            h="40px"
-            alignItems="center"
-            justifyContent="center"
-            bg="red.600"
-            color="white"
-            cursor="pointer"
-            onClick={onOpen}
-            _hover={{
-              transition: 'all 0.4s',
-              opacity: 0.6
-            }}
-          >
-            <Icon as={BsThreeDotsVertical} fontSize="20px" />
-          </Flex>
-        </HStack>
-
-        <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="md">
-          <DrawerOverlay />
-          <DrawerContent bg="black.900" p="12px">
-            <DrawerHeader>
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                width="100%"
-              >
-                <Link href="/">
-                  <NextImageMenuFalse src={Logo} width={160} />
-                </Link>
-                <Flex
-                  borderRadius="5px"
-                  w="40px"
-                  h="40px"
-                  alignItems="center"
-                  justifyContent="center"
-                  bg="red.600"
-                  color="white"
-                  cursor="pointer"
-                  onClick={onClose}
-                  _hover={{
-                    transition: 'all 0.4s',
-                    opacity: 0.6
-                  }}
-                >
-                  <Icon as={AiOutlineClose} fontSize="20px" />
-                </Flex>
-              </Flex>
-              <Divider bg="white" mt="10px" />
-            </DrawerHeader>
-
-            <DrawerBody>
-              <Box mb="60px">
-                <HeaderMenuVertical menuItems={list} />
-              </Box>
-              <Box>
-                <Text m="22px 0" fontSize="20px" fontWeight="bold">
-                  Institucional
-                </Text>
-                <Link href="/a-contemp">
-                  <Text mb="15px" fontSize="18px">
-                    A Contemp
-                  </Text>
-                </Link>
-                <Text mb="15px" fontSize="18px">
-                  Blog
-                </Text>
-                <Link href="/suporte-tecnico">
-                  <Text mb="15px" fontSize="18px">
-                    Suporte Técnico
-                  </Text>
-                </Link>
-                <Link href="/trabalhe-conosco">
-                  <Text mb="15px" fontSize="18px">
-                    Trabalhe Conosco
-                  </Text>
-                </Link>
-                <Link href="/calibracao">
-                  <Text mb="15px" fontSize="18px">
-                    Calibração
-                  </Text>
-                </Link>
-                <Text mb="15px" fontSize="18px">
-                  Política de Privacidade
-                </Text>
-              </Box>
-            </DrawerBody>
-
-            <DrawerFooter w="100%">
-              <Grid
-                templateColumns="repeat(4, 1fr)"
-                w="100%"
-                maxW={pxToRem(260)}
-                margin="auto"
-                gridColumnGap={pxToRem(10)}
-              >
-                <Link
-                  href="https://www.linkedin.com/company/contemp/"
-                  isExternal
-                >
-                  <CustomIcon icon={AiFillLinkedin} />
-                </Link>
-                <Link
-                  href="https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ"
-                  isExternal
-                >
-                  <CustomIcon icon={AiFillYoutube} />
-                </Link>
-                <Link
-                  href="https://www.instagram.com/contemp.industria/"
-                  isExternal
-                >
-                  <CustomIcon icon={AiOutlineInstagram} />
-                </Link>
-                <Link
-                  href="https://www.facebook.com/Contemp-1001000803330302/"
-                  isExternal
-                >
-                  <CustomIcon icon={FaFacebookF} />
-                </Link>
-              </Grid>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-        <Modal isOpen={open} onClose={oClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton color="red" />
-            <ModalBody p="20px" mt="20px">
-              <Flex alignItems="center">
-                <Flex
-                  mr="20px"
-                  alignItems="center"
-                  justifyContent="center"
-                  h="60px"
-                  w="60px"
-                  borderRadius="30px"
-                  bg="red.100"
-                >
-                  <Icon as={FiAlertTriangle} color="red.700" fontSize="30px" />
-                </Flex>
-                <Box>
-                  <Text fontWeight="bold" fontSize="25px" color="black.800">
-                    Atenção!
-                  </Text>
-                  <Text
-                    fontSize="16px"
-                    color="black.800"
-                    mt="10px"
-                    maxW="350px"
-                  >
-                    Para poder continuar, é necessário adicionar ao menos um
-                    produto no carrinho.
-                  </Text>
-                </Box>
-              </Flex>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Flex>
+      <>
+        <SidebarDrawer totalCart={totalCart} cart={cart} menuItems={list} />
+        <NoProductWarningModal isOpen={open} onClose={oClose} />
+      </>
     )
   }
 
-  if (scrollY >= 200) {
-    return (
-      <Box h="250px" transition="all 0.2s">
-        <Box
-          display="flex"
-          alignItems="center"
-          position="fixed"
-          top="0"
-          w="100%"
-          h="70px"
-          bg="black.800"
-          zIndex={999}
-          transition="inherit"
-        >
-          <Container maxW="7xl" p="12px 15px 15px 15px">
-            <Flex alignItems="center" justifyContent="space-between" h={70}>
-              <Box
-                onClick={() => router.push('/')}
-                cursor="pointer"
-                height={41}
-                mr="20px"
-              >
-                <NextImageMenuFalse width={160} height={41} src={Logo} />
-              </Box>
+  const scrollYIsGreaterThan100 = scrollY >= 100
 
-              <Box>
-                <Link
-                  href="/todosProdutos"
-                  _hover={{ color: '#fff', textDecoration: 'none' }}
-                >
-                  <Button
-                    borderRadius="5px"
-                    bg="red.600"
-                    _hover={{
-                      bg: 'red.600',
-                      opacity: 0.6
-                    }}
-                  >
-                    <Icon
-                      as={BsThreeDotsVertical}
-                      color="white"
-                      fontSize="20px"
-                    />
-                  </Button>
-                </Link>
-              </Box>
+  // if (scrollYIsGreaterThan100) {
+  //   return (
+  //     <Box h="250px" transition={defaultTransition}>
+  //       <Box
+  //         display="flex"
+  //         alignItems="center"
+  //         position="fixed"
+  //         top="0"
+  //         w="100%"
+  //         h="70px"
+  //         bg="black.800"
+  //         zIndex={999}
+  //         transition="inherit"
+  //       >
+  //         <Container maxW="7xl" p="12px 15px 15px 15px">
+  //           <Flex alignItems="center" justifyContent="space-between" h={70}>
+  //             <Logo />
 
-              <HeaderMenu menuItems={list} />
+  //             <AllProductsButton />
 
-              <Box
-                position="relative"
-                cursor="pointer"
-                onClick={() => {
-                  if (totalCart == 0 && !totalCart) {
-                    oOpen()
-                    return
-                  }
-                  router.push('/orcamento')
-                }}
-              >
-                {cart && cart.length > 0 && (
-                  <Flex
-                    p={`${pxToRem(2)} ${pxToRem(5)}`}
-                    bg="red.600"
-                    borderRadius={50}
-                    alignItems="center"
-                    justifyContent="center"
-                    fontWeight="bold"
-                    fontSize={pxToRem(14)}
-                    position="absolute"
-                    bottom={4}
-                    left={4}
-                  >
-                    {totalCart}
-                  </Flex>
-                )}
-                <Icon as={BsBag} width={30} height={30} />
-              </Box>
-            </Flex>
-            <Modal isOpen={open} onClose={oClose}>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalCloseButton color="red" />
-                <ModalBody p="20px" mt="20px">
-                  <Flex alignItems="center">
-                    <Flex
-                      mr="20px"
-                      alignItems="center"
-                      justifyContent="center"
-                      h="60px"
-                      w="60px"
-                      borderRadius="30px"
-                      bg="red.100"
-                    >
-                      <Icon
-                        as={FiAlertTriangle}
-                        color="red.700"
-                        fontSize="30px"
-                      />
-                    </Flex>
-                    <Box>
-                      <Text fontWeight="bold" fontSize="25px" color="black.800">
-                        Atenção!
-                      </Text>
-                      <Text
-                        fontSize="16px"
-                        color="black.800"
-                        mt="10px"
-                        maxW="350px"
-                      >
-                        Para poder continuar, é necessário adicionar ao menos um
-                        produto no carrinho.
-                      </Text>
-                    </Box>
-                  </Flex>
-                </ModalBody>
-              </ModalContent>
-            </Modal>
-          </Container>
-        </Box>
-      </Box>
-    )
-  }
+  //             <HeaderMenu menuItems={list} />
+
+  //             <CartBag cart={cart} totalCart={totalCart} onOpen={oOpen} />
+  //           </Flex>
+
+  //           <NoProductWarningModal isOpen={open} onClose={oClose} />
+  //         </Container>
+  //       </Box>
+  //     </Box>
+  //   )
+  // }
+
+  const defaultTransition = 'all 0.3s'
 
   return (
-    <Container maxW="7xl" p="12px 15px" transition="all 0.2s">
-      <Flex
-        alignItems="center"
-        justifyContent="space-evenly"
-        marginBottom="22px"
-        transition="inherit"
-      >
-        <Box display="flex" flex={1}>
-          <Link
-            href="tel:1142235140"
-            _hover={{ textDecoration: 'none', color: '#fff' }}
-          >
-            <Flex alignItems="center" w="max-content" mr={3}>
-              <Image src={Phone} minWidth={5} minHeight={15} bgSize={20} />
-              <Text fontSize="18px" color="white" ml={pxToRem(10)}>
-                (11) 4223-5140
-              </Text>
-            </Flex>
-          </Link>
-          <Link
-            href="mailto:vendas@contemp.com.br"
-            _hover={{ textDecoration: 'none', color: '#fff' }}
-          >
-            <Flex alignItems="center">
-              <Image src={Email} width={20} minHeight={15} flex={0.3} />
-              <Text fontSize="18px" color="white" ml={pxToRem(10)}>
-                vendas@contemp.com.br
-              </Text>
-            </Flex>
-          </Link>
-        </Box>
+    <Flex
+      width="100%"
+      position="sticky"
+      top="0"
+      h={'auto'}
+      zIndex={999}
+      p="12px 15px"
+      bg="black.800"
+    >
+      <Container maxW="7xl" w="100%" margin="auto">
+        <ContactAndSocialMediaHeader
+          opacity={scrollYIsGreaterThan100 ? 0 : 1}
+          w={scrollYIsGreaterThan100 ? 0 : '100%'}
+          h={scrollYIsGreaterThan100 ? 0 : 'auto'}
+          transition={defaultTransition}
+          margin={scrollYIsGreaterThan100 ? 0 : 'auto'}
+        />
 
-        <HStack spacing="20px">
-          <Link href="https://www.linkedin.com/company/contemp/" isExternal>
-            <Box
-              w="28px"
-              h="28px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={Linkedin} width={20} height={20} />
-            </Box>
-          </Link>
-          <Link
-            href="https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ"
-            isExternal
-          >
-            <Box
-              w="28px"
-              h="28px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={Youtube} width={20} height={20} />
-            </Box>
-          </Link>
-          <Link href="https://www.instagram.com/contemp.industria/" isExternal>
-            <Box
-              w="28px"
-              h="28px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={Instagram} width={20} height={20} />
-            </Box>
-          </Link>
-          <Link
-            href="https://www.facebook.com/Contemp-1001000803330302/"
-            isExternal
-          >
-            <Box
-              w="28px"
-              h="28px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Image src={Facebook} width={20} height={20} />
-            </Box>
-          </Link>
-        </HStack>
-      </Flex>
-
-      <Flex alignItems="center" justifyContent="space-between" h={70} mb="0px">
-        <Box
-          onClick={() => router.push('/')}
-          cursor="pointer"
-          height={41}
-          mr="20px"
-        >
-          <ImageNext width={160} height={41} src={Logo} />
-        </Box>
-
-        <Box>
-          <Link
-            href="/todosProdutos"
-            _hover={{ color: '#fff', textDecoration: 'none' }}
-          >
-            <Button
-              borderRadius="5px"
-              bg="red.600"
-              _hover={{
-                bg: 'red.600',
-                opacity: 0.6
-              }}
-            >
-              Todos os produtos
-              <Icon
-                as={BsThreeDotsVertical}
-                ml="10px"
-                color="white"
-                fontSize="20px"
-              />
-            </Button>
-          </Link>
-        </Box>
-
-        <HStack
-          alignSelf="center"
-          flex={{ base: 1, lg: 1.6, xl: 1 }}
-          spacing="20px"
-          w="100%"
+        <Flex
           alignItems="center"
-          justifyContent="center"
+          justifyContent="space-between"
+          h={70}
+          mb="0px"
         >
-          <Link
-            href="/a-contemp"
-            _hover={{
-              textDecoration: 'none',
-              color: 'red.600'
-            }}
-          >
-            <Text w="max-content" fontSize="18px">
-              A Contemp
-            </Text>
-          </Link>
-          <Link
-            _hover={{
-              textDecoration: 'none',
-              color: 'red.600'
-            }}
-            href="/calibracao"
-          >
-            <Text w="max-content" fontSize="18px">
-              Calibração
-            </Text>
-          </Link>
-          <Link
-            _hover={{
-              textDecoration: 'none',
-              color: 'red.600'
-            }}
-            href="/suporte-tecnico"
-          >
-            <Text w="max-content" fontSize="18px">
-              Suporte Técnico
-            </Text>
-          </Link>
-          <Link
-            _hover={{
-              textDecoration: 'none',
-              color: 'red.600'
-            }}
-            href="/trabalhe-conosco"
-          >
-            <Text w="max-content" fontSize="18px">
-              Trabalhe Conosco
-            </Text>
-          </Link>
-          <Link
-            _hover={{
-              textDecoration: 'none',
-              color: 'red.600'
-            }}
-            href="https://blog.contemp.com.br"
-          >
-            <Text w="max-content" fontSize="18px">
-              Blog
-            </Text>
-          </Link>
-        </HStack>
+          <Logo
+            height={scrollYIsGreaterThan100 ? 'max-content' : 41}
+            width={scrollYIsGreaterThan100 ? 60 : 'max-content'}
+          />
 
-        <Flex alignItems="center">
-          <SearchBar
-            containerProps={{
-              w: pxToRem(191),
-              h: pxToRem(42),
-              marginRight: 5
+          <AllProductsButton hasLabel={!scrollYIsGreaterThan100} />
+
+          <ContempLinks
+            opacity={scrollYIsGreaterThan100 ? 0 : 1}
+            w={scrollYIsGreaterThan100 ? 0 : '100%'}
+            transition={defaultTransition}
+          />
+
+          <HeaderMenu
+            menuItems={list}
+            style={{
+              opacity: !scrollYIsGreaterThan100 ? 0 : 1,
+              height: !scrollYIsGreaterThan100 ? 0 : 'initial',
+              width: !scrollYIsGreaterThan100 ? 0 : '100%',
+              transition: defaultTransition,
+              overflow: 'hidden'
             }}
           />
 
-          <Box
-            position="relative"
-            cursor="pointer"
-            onClick={() => {
-              if (totalCart == 0 && !totalCart) {
-                oOpen()
-                return
-              }
-              router.push('/orcamento')
-            }}
-          >
-            {cart && cart.length > 0 && (
-              <Flex
-                p={`${pxToRem(2)} ${pxToRem(5)}`}
-                bg="red.600"
-                borderRadius={50}
-                alignItems="center"
-                justifyContent="center"
-                fontWeight="bold"
-                fontSize={pxToRem(14)}
-                position="absolute"
-                bottom={4}
-                left={4}
-              >
-                {totalCart}
-              </Flex>
-            )}
-            <Icon as={BsBag} width={30} height={30} />
-          </Box>
-        </Flex>
-      </Flex>
+          <Flex alignItems="center">
+            <SearchBar
+              containerProps={{
+                w: scrollYIsGreaterThan100 ? 0 : pxToRem(191),
+                h: pxToRem(42),
+                marginRight: scrollYIsGreaterThan100 ? 0 : 5,
+                opacity: scrollYIsGreaterThan100 ? 0 : 1,
+                transition: defaultTransition
+              }}
+            />
 
-      <HeaderMenu menuItems={list} />
-      <Modal isOpen={open} onClose={oClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton color="red" />
-          <ModalBody p="20px" mt="20px">
-            <Flex alignItems="center">
-              <Flex
-                mr="20px"
-                alignItems="center"
-                justifyContent="center"
-                h="60px"
-                w="60px"
-                borderRadius="30px"
-                bg="red.100"
-              >
-                <Icon as={FiAlertTriangle} color="red.700" fontSize="30px" />
-              </Flex>
-              <Box>
-                <Text fontWeight="bold" fontSize="25px" color="black.800">
-                  Atenção!
-                </Text>
-                <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
-                  Para poder continuar, é necessário adicionar ao menos um
-                  produto no carrinho.
-                </Text>
-              </Box>
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </Container>
+            <CartBag cart={cart} totalCart={totalCart} onOpen={oOpen} />
+          </Flex>
+        </Flex>
+
+        <HeaderMenu
+          menuItems={list}
+          style={{
+            opacity: scrollYIsGreaterThan100 ? 0 : 1,
+            height: scrollYIsGreaterThan100 ? 0 : 'initial',
+            width: scrollYIsGreaterThan100 ? 0 : '100%',
+            transition: defaultTransition
+          }}
+        />
+
+        <NoProductWarningModal isOpen={open} onClose={oClose} />
+      </Container>
+    </Flex>
   )
 }
 
-function CustomIcon({ icon }: any) {
+function Logo({ ...props }: BoxProps) {
+  const router = useRouter()
+
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      w={pxToRem(50)}
-      h={pxToRem(50)}
-      borderRadius="full"
-      bg="white.500"
+    <Box
+      onClick={() => router.push('/')}
+      cursor="pointer"
+      height={41}
+      mr="20px"
+      {...props}
     >
-      <Icon as={icon} fontSize={pxToRem(35)} color="black.200" />
-    </Flex>
+      <ImageNext
+        width={160}
+        height={41}
+        src={LogoImage}
+        onContextMenu={setContextMenuFalse}
+      />
+    </Box>
+  )
+}
+
+type NoProductWarningModalProps = {
+  isOpen: boolean
+  onClose(): void
+}
+
+function NoProductWarningModal({
+  isOpen,
+  onClose
+}: NoProductWarningModalProps) {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton color="red" />
+        <ModalBody p="20px" mt="20px">
+          <Flex alignItems="center">
+            <Flex
+              mr="20px"
+              alignItems="center"
+              justifyContent="center"
+              h="60px"
+              w="60px"
+              borderRadius="30px"
+              bg="red.100"
+            >
+              <Icon as={FiAlertTriangle} color="red.700" fontSize="30px" />
+            </Flex>
+            <Box>
+              <Text fontWeight="bold" fontSize="25px" color="black.800">
+                Atenção!
+              </Text>
+              <Text fontSize="16px" color="black.800" mt="10px" maxW="350px">
+                Para poder continuar, é necessário adicionar ao menos um produto
+                no carrinho.
+              </Text>
+            </Box>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }
