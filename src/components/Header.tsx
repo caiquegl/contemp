@@ -571,7 +571,7 @@ export const Header = () => {
                 opacity: 0.6
               }}
             >
-              Todos os produtos
+              Todos os Produtos
               <Icon
                 as={BsThreeDotsVertical}
                 ml="10px"

@@ -127,7 +127,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
-          background: "#242424",
+          background: "none",
           border: "none",
           fontSize: 16,
           display: "flex",
@@ -139,7 +139,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         }}
         overflowedIndicator={
           <Box as={"p"} _hover={{ color: "white" }}>
-            Outros
+            OUTROS
           </Box>
         }
       />
