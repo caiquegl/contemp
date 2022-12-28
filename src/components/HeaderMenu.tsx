@@ -1,51 +1,24 @@
-import { useEffect, useState } from "react";
-import { Menu } from "antd";
-import { AiFillCaretRight } from "react-icons/ai";
-import { AiOutlineEye } from "react-icons/ai";
-import { useRouter } from "next/router";
-import Icon from "./Icon";
-import { pxToRem } from "../utils/pxToRem";
-import { Box } from "@chakra-ui/react";
+import { CSSProperties, useEffect, useState } from 'react'
+import { Menu } from 'antd'
+import { AiFillCaretRight } from 'react-icons/ai'
+import { AiOutlineEye } from 'react-icons/ai'
+import { useRouter } from 'next/router'
+import Icon from './Icon'
+import { pxToRem } from '../utils/pxToRem'
+import { Box } from '@chakra-ui/react'
 
 export type MenuProps = {
-  menuItems: any;
-};
+  menuItems: any
+  style?: CSSProperties
+}
 
-// const CustomMenuItem = ({ menu }: any) => {
-//   if (menu.list_sub_category && menu.list_sub_category.length > 0) {
-//     return (
-//       <Dropdown.Item>
-//         {menu.name}
-//         {menu.list_sub_category &&
-//           menu.list_sub_category.length > 0 &&
-//           menu.list_sub_category.map((list: any) => (
-//             <Dropdown.Submenu>
-//               <CustomMenuItem menu={list} />
-//             </Dropdown.Submenu>
-//           ))}
-//       </Dropdown.Item>
-//     );
-//   }
-//   return (
-//     <Text
-//       as={Link}
-//       href={menu.link}
-//       _hover={{ background: "red.600" }}
-//       background="black.800"
-//       color="white"
-//     >
-//       {menu.name}
-//     </Text>
-//   );
-// };
-
-export const HeaderMenu = ({ menuItems }: MenuProps) => {
-  const [list, setList] = useState([]);
-  const router = useRouter();
+export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
+  const [list, setList] = useState([])
+  const router = useRouter()
 
   const amountList = async (amount: any, hasIcon = true) => {
     try {
-      let obj: any = [];
+      let obj: any = []
 
       for await (let el of amount) {
         let newObj = {
@@ -54,57 +27,34 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           title: el.name,
           key: el.name,
           onTitleClick: (value: any) => {
-            router.push(`/category/${el.name.replaceAll(" ", "_")}`);
+            router.push(`/category/${el.name.replaceAll(' ', '_')}`)
           },
-          // onclick: (value: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`),
-          // onclick: (a: any) => console.log('aquii', a),
-          // onclick: (item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`),
-          // onClick: (item: any) => console.log(item),
-          // icon: (
-          //   <Icon
-          //     icon={AiOutlineEye}
-          //     size={20}
-          //     color="#fff"
-          //     onClick={(item: any) => router.push(`/category/${el.name.replaceAll(' ', '_')}`)}
-          //   />
-          // ),
-          // icon: hasIcon ? (
-          //   <Icon
-          //     icon={AiFillCaretDown}
-          //     size={20}
-          //     color="#fff"
-          //     iconStyle={{
-          //       gridColumn: 2,
-          //       gridRow: 1,
-          //     }}
-          //   />
-          // ) : null,
           style: {
             marginRight: 0,
-            padding: `0 ${pxToRem(5)}`,
-          },
-        };
+            padding: `0 ${pxToRem(5)}`
+          }
+        }
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, false);
+          newObj.children = await amountList(el.list_sub_category, false)
         }
-        obj.push(newObj);
+        obj.push(newObj)
       }
 
-      return obj;
+      return obj
     } catch (error) {
-      console.log(error, "error");
+      console.log(error, 'error')
     }
-  };
+  }
 
   const getList = async () => {
-    let amount = await amountList(menuItems);
-    setList(amount);
-  };
+    let amount = await amountList(menuItems)
+    setList(amount)
+  }
 
   useEffect(() => {
-    getList();
-  }, [menuItems]);
+    getList()
+  }, [menuItems])
 
   return (
     <>
@@ -121,76 +71,87 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${evt.keyPath[0].replaceAll(" ", "_")}`);
+          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
         }}
-        mode={"horizontal"}
+        mode={'horizontal'}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
+<<<<<<< HEAD
           background: "none",
           border: "none",
+=======
+          background: '#242424',
+          border: 'none',
+>>>>>>> 62869bfe7b3f7070e1bfa88a5d7c0b71b709fbd4
           fontSize: 16,
-          display: "flex",
-          flexWrap: "wrap",
-          position: "relative",
-          alignItems: "center",
-          width: "100%",
-          justifyContent: "center",
+          display: 'flex',
+          flexWrap: 'wrap',
+          position: 'relative',
+          alignItems: 'center',
+          width: '100%',
+          justifyContent: 'center',
+          ...style
         }}
         overflowedIndicator={
+<<<<<<< HEAD
           <Box as={"p"} _hover={{ color: "white" }}>
             OUTROS
+=======
+          <Box as={'p'} _hover={{ color: 'white' }}>
+            Outros
+>>>>>>> 62869bfe7b3f7070e1bfa88a5d7c0b71b709fbd4
           </Box>
         }
       />
     </>
-  );
-};
+  )
+}
 
 export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
-  const [list, setList] = useState([]);
-  const router = useRouter();
+  const [list, setList] = useState([])
+  const router = useRouter()
 
   const amountList = async (amount: any, name?: any) => {
     try {
-      let obj: any = [];
+      let obj: any = []
       for await (let el of amount) {
         let newObj = {
           ...el,
           label: el.name,
-          key: el.name.replaceAll(" ", ""),
+          key: el.name.replaceAll(' ', ''),
           icon: (
             <Icon
               icon={AiOutlineEye}
               size={20}
               color="#fff"
               onClick={(item: any) =>
-                router.push(`/category/${el.name.replaceAll(" ", "_")}`)
+                router.push(`/category/${el.name.replaceAll(' ', '_')}`)
               }
             />
-          ),
-        };
+          )
+        }
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, el.name);
+          newObj.children = await amountList(el.list_sub_category, el.name)
         }
-        obj.push(newObj);
+        obj.push(newObj)
       }
 
-      return obj;
+      return obj
     } catch (error) {
-      console.log(error, "error");
+      console.log(error, 'error')
     }
-  };
+  }
 
   const getList = async () => {
-    let amount = await amountList(menuItems);
-    setList(amount);
-  };
+    let amount = await amountList(menuItems)
+    setList(amount)
+  }
 
   useEffect(() => {
-    getList();
-  }, [menuItems]);
+    getList()
+  }, [menuItems])
 
   return (
     <Menu
@@ -198,13 +159,13 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
       mode="inline"
       items={list}
       style={{
-        background: "#242424",
-        border: "none",
-        color: "#fff",
-        fontSize: 18,
+        background: '#242424',
+        border: 'none',
+        color: '#fff',
+        fontSize: 18
       }}
       theme="dark"
       expandIcon={<Icon icon={AiFillCaretRight} size={30} />}
     />
-  );
-};
+  )
+}

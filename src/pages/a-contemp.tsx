@@ -7,28 +7,36 @@ import {
   Button,
   Icon,
   Link,
-  textDecoration,
-} from "@chakra-ui/react";
-import Iso from "../assets/images/iso.png";
-import Image from "next/image";
-import { Header } from "../components/Header";
-import { Contact } from "../components/Contact";
-import { Footer } from "../components/Footer";
-import { Player } from "../components/Player";
-import { BiTargetLock } from "react-icons/bi";
-import { AiOutlineLike } from "react-icons/ai";
-import { CiMedal } from "react-icons/ci";
-import { HiOutlineDocumentText } from "react-icons/hi";
-import { CgTrees } from "react-icons/cg";
-import Head from "next/head";
+  textDecoration
+} from '@chakra-ui/react'
+import Iso from '../assets/images/iso.png'
+import Image from 'next/image'
+import { Header } from '../components/Header'
+import { Contact } from '../components/Contact'
+import { Footer } from '../components/Footer'
+import { Player } from '../components/Player'
+import { BiTargetLock } from 'react-icons/bi'
+import { AiOutlineLike } from 'react-icons/ai'
+import { CiMedal } from 'react-icons/ci'
+import { HiOutlineDocumentText } from 'react-icons/hi'
+import { CgTrees } from 'react-icons/cg'
+import Head from 'next/head'
 import Banner1 from '../assets/images/contemp-fachada.webp'
 import Banner2 from '../assets/images/contemp-sobre.webp'
+import { setContextMenuFalse } from '../utils/setContextMenuFalse'
+
 const Home = () => {
   return (
     <>
       <Head>
-        <meta name="description" content="Procurando medição e controle de temperatura em processos industrais? A Contemp é pioneiro no Brasil. Confira!" />
-        <meta name="keywords" content="controle de temperatura, Contemp, processos industriais" />
+        <meta
+          name="description"
+          content="Procurando medição e controle de temperatura em processos industrais? A Contemp é pioneiro no Brasil. Confira!"
+        />
+        <meta
+          name="keywords"
+          content="controle de temperatura, Contemp, processos industriais"
+        />
         <title>Contemp</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
@@ -49,11 +57,11 @@ const Home = () => {
         alignItems="center"
         bg="white"
         p={[
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0 20px 256px 20px",
-          "0px 20px 256px 20px",
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '0px 20px 256px 20px'
         ]}
       >
         <Container maxW="7xl" p="12px 0 31px">
@@ -61,7 +69,7 @@ const Home = () => {
             alignItems="center"
             justifyContent="space-between"
             mb="60px"
-            flexDirection={["column", "column", "row", "row", "row"]}
+            flexDirection={['column', 'column', 'row', 'row', 'row']}
           >
             <Text
               fontSize="20px"
@@ -76,20 +84,17 @@ const Home = () => {
               fabricando soluções para medição, controle e monitoramento para os
               mais variados processos industriais.
             </Text>
-            <Box
-              w="100%"
-              maxW="788px"
-            >
-              <Image src={Banner1} />
+            <Box w="100%" maxW="788px">
+              <Image src={Banner1} onContextMenu={setContextMenuFalse} />
             </Box>
           </Flex>
           <Flex
             alignItems="center"
             justifyContent="space-between"
             mb="60px"
-            flexDirection={["column", "column", "row", "row", "row"]}
+            flexDirection={['column', 'column', 'row', 'row', 'row']}
           >
-            <Box mb={["20px", "20px", "0", "0", "0"]}>
+            <Box mb={['20px', '20px', '0', '0', '0']}>
               <Text
                 fontSize="20px"
                 maxW="931px"
@@ -130,13 +135,21 @@ const Home = () => {
               </Text>
               <HStack spacing="23px">
                 <Box w="115px" h="115px">
-                  <Image src={Iso} width="115px" height="115px" />
+                  <Image
+                    src={Iso}
+                    width="115px"
+                    height="115px"
+                    onContextMenu={setContextMenuFalse}
+                  />
                 </Box>
                 <Text maxW="249px" fontSize="20px" color="black.900">
                   Sistema de Gestão da Qualidade Certificado ISO 9001
                 </Text>
               </HStack>
-              <Link target="_blank" href="https://contemp.com.br/Certificado-ISO-9001-OUT24.pdf">
+              <Link
+                target="_blank"
+                href="https://contemp.com.br/Certificado-ISO-9001-OUT24.pdf"
+              >
                 <Button
                   w="263px"
                   h="50px"
@@ -144,7 +157,12 @@ const Home = () => {
                   mr="24px"
                   bg="red.600"
                   fontSize="20px"
-                  _hover={{ textDecoration: 'none', transition: "all 0.5s", opacity: 0.7, color: '#fff'}}
+                  _hover={{
+                    textDecoration: 'none',
+                    transition: 'all 0.5s',
+                    opacity: 0.7,
+                    color: '#fff'
+                  }}
                 >
                   Certificado ISO 9001
                 </Button>
@@ -156,11 +174,11 @@ const Home = () => {
       <Flex
         w="100%"
         p={[
-          "0 20px 0 20px",
-          "0 20px 0 20px",
-          "0 20px 0 20px",
-          "0 20px 0 20px",
-          "0px 20px 0 20px",
+          '0 20px 0 20px',
+          '0 20px 0 20px',
+          '0 20px 0 20px',
+          '0 20px 0 20px',
+          '0px 20px 0 20px'
         ]}
         alignItems="center"
         bg="red.600"
@@ -169,10 +187,10 @@ const Home = () => {
           <Flex
             justifyContent="space-between"
             mb="60px"
-            flexDirection={["column", "column", "row", "row", "row"]}
+            flexDirection={['column', 'column', 'row', 'row', 'row']}
           >
             <Box w="100%" maxW="588px" mt="-113px">
-              <Image src={Banner2} />
+              <Image src={Banner2} onContextMenu={setContextMenuFalse} />
             </Box>
             <Box mt="83px">
               <Text maxW="535px" fontSize="20px">
@@ -186,7 +204,7 @@ const Home = () => {
           <Flex
             justifyContent="space-between"
             mb="60px"
-            flexDirection={["column", "column", "column", "row", "row"]}
+            flexDirection={['column', 'column', 'column', 'row', 'row']}
           >
             <Box>
               <Flex alignItems="flex-start" mb="43px">
@@ -206,14 +224,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                  maxW={['100%', '100%', '100%', '400px', '400px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     MISSÃO
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                    maxW={['100%', '100%', '100%', '530px', '530px']}
                   >
                     Garantir a melhor solução para medição e controle de
                     temperatura em processos industriais, com excelência técnica
@@ -237,14 +255,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                  maxW={['100%', '100%', '100%', '400px', '400px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     VALORES
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                    maxW={['100%', '100%', '100%', '530px', '530px']}
                   >
                     Conhecimento técnico, experiência na indústria, sabe ouvir,
                     ética e transparência nas atitudes, engajamento para
@@ -275,14 +293,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                  maxW={['100%', '100%', '100%', '400px', '400px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     ESTRUTURA EFICIENTE
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                    maxW={['100%', '100%', '100%', '530px', '530px']}
                   >
                     É notável o cumprimento de metas da Contemp. Sua eficiência
                     corresponde a uma estrutura com forte capacidade de resposta
@@ -306,14 +324,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={["100%", "100%", "100%", "400px", "400px"]}
+                  maxW={['100%', '100%', '100%', '400px', '400px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     RESPONSABILIDADE AMBIENTAL
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={["100%", "100%", "100%", "530px", "530px"]}
+                    maxW={['100%', '100%', '100%', '530px', '530px']}
                   >
                     Todo o descarte de lixo eletrônico feito pela Contemp é
                     através de empresa especializada que atua na reciclagem de
@@ -362,30 +380,30 @@ const Home = () => {
               destaques do mês"
         form={[
           {
-            name: "Nome",
-            type: "text",
+            name: 'Nome',
+            type: 'text'
           },
           {
-            name: "E-mail",
-            type: "text",
+            name: 'E-mail',
+            type: 'text'
           },
           {
-            name: "Empresa",
-            type: "text",
+            name: 'Empresa',
+            type: 'text'
           },
           {
-            name: "Telefone",
-            type: "text",
+            name: 'Telefone',
+            type: 'text'
           },
           {
-            name: "Mensagem",
-            type: "textArea",
-          },
+            name: 'Mensagem',
+            type: 'textArea'
+          }
         ]}
       />
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

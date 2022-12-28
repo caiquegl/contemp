@@ -1,5 +1,4 @@
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
+import { Footer } from '../../components/Footer'
 import {
   Box,
   Button,
@@ -18,127 +17,127 @@ import {
   Text,
   VStack,
   useBreakpointValue,
-  useToast,
-} from "@chakra-ui/react";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
-import { Swiper, SwiperSlide } from "swiper/react";
+  useToast
+} from '@chakra-ui/react'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import { Autoplay, Navigation, Pagination } from "swiper";
-import ReactHtmlParser from "react-html-parser";
-import { Contact } from "../../components/Contact";
-import { Player } from "../../components/Player";
-import { pxToRem } from "../../utils/pxToRem";
-import CardProductWithDescription from "../../components/CardProductWithDescription";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { initFirebase } from "../../utils/db";
-import { useAuth } from "../../contextAuth/authContext";
-import Head from "next/head";
-import { Breadcrumb } from "antd";
-import { customSwiperBullets } from "../../utils/customSwiperBullets";
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Autoplay, Navigation, Pagination } from 'swiper'
+import ReactHtmlParser from 'react-html-parser'
+import { Contact } from '../../components/Contact'
+import { Player } from '../../components/Player'
+import { pxToRem } from '../../utils/pxToRem'
+import CardProductWithDescription from '../../components/CardProductWithDescription'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { initFirebase } from '../../utils/db'
+import { useAuth } from '../../contextAuth/authContext'
+import Head from 'next/head'
+import { Breadcrumb } from 'antd'
+import { customSwiperBullets } from '../../utils/customSwiperBullets'
 
 const Product = () => {
-  const router = useRouter();
-  initFirebase();
-  const toast = useToast();
-  const { allCategoryActive, allProductsActive, addCart } = useAuth();
+  const router = useRouter()
+  initFirebase()
+  const toast = useToast()
+  const { allCategoryActive, allProductsActive, addCart } = useAuth()
 
-  const { product } = router.query;
-  const [detail, setDetail] = useState<any>({});
-  const [variation, setVariation] = useState<any>({});
-  const [bradName, setBradeName] = useState<any>([]);
-  const [products, setProducts] = useState<any>([]);
-  const [qtd, setQtd] = useState(1);
+  const { product } = router.query
+  const [detail, setDetail] = useState<any>({})
+  const [variation, setVariation] = useState<any>({})
+  const [bradName, setBradeName] = useState<any>([])
+  const [products, setProducts] = useState<any>([])
+  const [qtd, setQtd] = useState(1)
   const isTablet = useBreakpointValue({
     base: true,
-    lg: false,
-  });
+    lg: false
+  })
 
   const isMobile = useBreakpointValue({
     base: true,
-    md: false,
-  });
+    md: false
+  })
 
   const getProduct = async () => {
     try {
-      let produto = "";
-      if (product && typeof product == "string")
-        produto = product.replaceAll("_", " ");
+      let produto = ''
+      if (product && typeof product == 'string')
+        produto = product.replaceAll('_', ' ')
       // const dbInstanceProducts = collection(database, "products");
       // const dbInstanceHome = collection(database, "home");
       // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
       // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
-      let ex = allProductsActive.filter((el: any) => el.name == produto);
+      let ex = allProductsActive.filter((el: any) => el.name == produto)
 
-      let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category);
+      let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0].category)
       let cg2 = allCategoryActive.filter(
         (el: any) => el.id == cg1[0]?.sub_categorie
-      );
+      )
       let cg3 = allCategoryActive.filter(
         (el: any) => el.id == cg2[0]?.sub_categorie
-      );
+      )
       let cg4 = allCategoryActive.filter(
         (el: any) => el.id == cg3[0]?.sub_categorie
-      );
+      )
 
-      let id = "";
-      let names: any = [];
+      let id = ''
+      let names: any = []
       if (cg1.length > 0) {
-        id = cg1[0].id;
-        names.push(cg1[0].name);
+        id = cg1[0].id
+        names.push(cg1[0].name)
       }
       if (cg2.length > 0) {
-        id = cg2[0].id;
-        names.push(cg2[0].name);
+        id = cg2[0].id
+        names.push(cg2[0].name)
       }
       if (cg3.length > 0) {
-        id = cg3[0].id;
-        names.push(cg3[0].name);
+        id = cg3[0].id
+        names.push(cg3[0].name)
       }
       if (cg4.length > 0) {
-        id = cg4[0].id;
-        names.push(cg4[0].name);
+        id = cg4[0].id
+        names.push(cg4[0].name)
       }
-      if (ex.length == 0) return;
+      if (ex.length == 0) return
 
-      let revertNames: any = [];
+      let revertNames: any = []
 
-      names.forEach((el: any) => revertNames.unshift(el));
+      names.forEach((el: any) => revertNames.unshift(el))
 
-      setBradeName(revertNames);
-      setDetail(ex[0]);
+      setBradeName(revertNames)
+      setDetail(ex[0])
 
-      let idCategory: any = [];
+      let idCategory: any = []
 
       allCategoryActive.forEach((el: any) => {
         if (el.id == id) {
-          idCategory.push(el.id);
+          idCategory.push(el.id)
           allCategoryActive.forEach((el2: any) => {
             if (el2.sub_categorie && el2.sub_categorie == el.id) {
-              idCategory.push(el2.id);
+              idCategory.push(el2.id)
               allCategoryActive.forEach((el3: any) => {
                 if (el3.sub_categorie && el3.sub_categorie == el2.id) {
-                  idCategory.push(el3.id);
+                  idCategory.push(el3.id)
                 }
-              });
+              })
             }
-          });
+          })
         }
-      });
+      })
 
-      let list: any = [];
+      let list: any = []
 
       allProductsActive.forEach((el: any) => {
         idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el);
-        });
-      });
+          if (el.category == ct) list.push(el)
+        })
+      })
 
-      setProducts(list);
+      setProducts(list)
 
       // if (!exist) {
       //   await getDocs(qHome).then(async (data) => {
@@ -166,15 +165,15 @@ const Product = () => {
       //   });
       // }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
     if (product) {
-      getProduct();
+      getProduct()
     }
-  }, [allCategoryActive, allProductsActive, product]);
+  }, [allCategoryActive, allProductsActive, product])
 
   return (
     <>
@@ -186,7 +185,6 @@ const Product = () => {
           <link rel="icon" href="/favicon.png" />
         </Head>
       )}
-      <Header />
 
       <Flex
         p="10px"
@@ -195,13 +193,13 @@ const Product = () => {
         w="100%"
         h="100%"
         alignItems="flex-start"
-        flexDirection={["column", "column", "column", "row", "row"]}
+        flexDirection={['column', 'column', 'column', 'row', 'row']}
       >
         <Center
           bg="white.500"
-          w={{ base: "100%", lg: "40%" }}
-          h={["350px", "804px"]}
-          onClick={(evt) => (evt.currentTarget.style.cursor = "move")}
+          w={{ base: '100%', lg: '40%' }}
+          h={['350px', '804px']}
+          onClick={(evt) => (evt.currentTarget.style.cursor = 'move')}
         >
           <Swiper
             initialSlide={0}
@@ -210,7 +208,7 @@ const Product = () => {
             autoplay={{
               delay: 2000,
               pauseOnMouseEnter: true,
-              waitForTransition: true,
+              waitForTransition: true
             }}
             speed={1000}
             pagination={true}
@@ -225,7 +223,7 @@ const Product = () => {
                   <Center h="100%" maxH={pxToRem(765)} width="100%">
                     <Zoom>
                       <img
-                        alt={detail.name ? detail.name : ""}
+                        alt={detail.name ? detail.name : ''}
                         src={photo}
                         width="600"
                       />
@@ -246,7 +244,7 @@ const Product = () => {
                   )}
                   {index != bradName.length - 1 && (
                     <Breadcrumb.Item>
-                      <a href={`/category/${el.replaceAll(" ", "_")}`}>{el}</a>
+                      <a href={`/category/${el.replaceAll(' ', '_')}`}>{el}</a>
                     </Breadcrumb.Item>
                   )}
                 </>
@@ -254,14 +252,14 @@ const Product = () => {
             </Breadcrumb>
           </Box>
           <Text fontWeight="bold" fontSize="35px" color="black.800" mb="30px">
-            {detail.name ? detail.name : ""}
+            {detail.name ? detail.name : ''}
           </Text>
           <Text color="black.800" fontSize="20px" maxW="829px" mb="30px">
             <Text as="span" noOfLines={4}>
-              {detail.description ? detail.description : ""}{" "}
+              {detail.description ? detail.description : ''}{' '}
             </Text>
-            {detail.description ? detail.description.length > 300 : "..."}{" "}
-            <Link href="#description" _hover={{ textDecoration: "none" }}>
+            {detail.description ? detail.description.length > 300 : '...'}{' '}
+            <Link href="#description" _hover={{ textDecoration: 'none' }}>
               <Text as="span" color="red.600" cursor="pointer">
                 veja descrição completa +
               </Text>
@@ -303,14 +301,14 @@ const Product = () => {
                       onChange={(evt) =>
                         setVariation({
                           ...variation,
-                          [vr.name]: evt.target.value,
+                          [vr.name]: evt.target.value
                         })
                       }
                       _placeholder={{
-                        color: "black.50",
+                        color: 'black.50'
                       }}
                       _focusVisible={{
-                        outline: "none",
+                        outline: 'none'
                       }}
                     >
                       {vr.opt &&
@@ -334,10 +332,10 @@ const Product = () => {
               <Flex
                 gap={pxToRem(20)}
                 flexWrap={{
-                  base: "wrap",
-                  lg: "nowrap",
+                  base: 'wrap',
+                  lg: 'nowrap'
                 }}
-                justifyContent={{ base: "center", lg: "auto" }}
+                justifyContent={{ base: 'center', lg: 'auto' }}
               >
                 <Text
                   color="black.800"
@@ -372,15 +370,15 @@ const Product = () => {
                     addCart({
                       product_id: detail.id,
                       variation: variation,
-                      qtd,
-                    });
+                      qtd
+                    })
                     toast({
-                      title: "Sucesso",
-                      description: "Produto adicionado com sucesso.",
-                      status: "success",
+                      title: 'Sucesso',
+                      description: 'Produto adicionado com sucesso.',
+                      status: 'success',
                       duration: 3000,
-                      isClosable: true,
-                    });
+                      isClosable: true
+                    })
                   }}
                 >
                   <Center>Adicionar ao orçamento</Center>
@@ -406,9 +404,9 @@ const Product = () => {
               detail.tab.map((tab: any) => (
                 <Tab
                   _selected={{
-                    bg: "white.500",
-                    color: "red.600",
-                    fontWeight: "bold",
+                    bg: 'white.500',
+                    color: 'red.600',
+                    fontWeight: 'bold'
                   }}
                   w="100%"
                   maxW="211px"
@@ -426,6 +424,7 @@ const Product = () => {
                   bg="white.500"
                   color="black.800"
                   p="40px"
+                  fontSize={pxToRem(20)}
                   borderBottomRadius="8px"
                   borderTopRightRadius="8px"
                 >
@@ -439,7 +438,7 @@ const Product = () => {
         w="100%"
         alignItems="center"
         bg="white"
-        p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
+        p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}
       >
         <Container maxW="7xl" p="80px 0">
           <Flex alignItems="center" mb="40px">
@@ -458,12 +457,12 @@ const Product = () => {
               spaceBetween={30}
               autoplay={{
                 delay: 2000,
-                pauseOnMouseEnter: true,
+                pauseOnMouseEnter: true
               }}
               pagination={{
                 enabled: true,
                 clickable: true,
-                renderBullet: customSwiperBullets,
+                renderBullet: customSwiperBullets
               }}
               modules={[Autoplay, Pagination]}
               className="mySwiper"
@@ -472,7 +471,7 @@ const Product = () => {
               {products.map((item: any) => (
                 <SwiperSlide>
                   <CardProductWithDescription
-                    img={item.urls && item.urls.length > 0 ? item.urls[0] : ""}
+                    img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
                     text={item.name}
                     description={item.description}
                   />
@@ -490,30 +489,30 @@ const Product = () => {
               destaques do mês"
         form={[
           {
-            name: "Nome",
-            type: "text",
+            name: 'Nome',
+            type: 'text'
           },
           {
-            name: "E-mail",
-            type: "text",
+            name: 'E-mail',
+            type: 'text'
           },
           {
-            name: "Empresa",
-            type: "text",
+            name: 'Empresa',
+            type: 'text'
           },
           {
-            name: "Telefone",
-            type: "text",
+            name: 'Telefone',
+            type: 'text'
           },
           {
-            name: "Mensagem",
-            type: "textArea",
-          },
+            name: 'Mensagem',
+            type: 'textArea'
+          }
         ]}
       />
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

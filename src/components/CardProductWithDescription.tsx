@@ -1,17 +1,17 @@
-import { Button, Grid, GridProps, Text, Tooltip } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { pxToRem } from "../utils/pxToRem";
-import { Image } from "./Image";
+import { Button, Grid, GridProps, Text, Tooltip } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { pxToRem } from '../utils/pxToRem'
+import { Image } from './Image'
 
 interface IProps {
-  img: string;
-  text: string;
-  description?: string;
-  alt?: string;
-  color?: string;
-  buttomBottom?: string;
-  containerProps?: GridProps;
+  img: string
+  text: string
+  description?: string
+  alt?: string
+  color?: string
+  buttomBottom?: string
+  containerProps?: GridProps
 }
 
 const CardProductWithDescription = ({
@@ -21,12 +21,12 @@ const CardProductWithDescription = ({
   description,
   color,
   buttomBottom,
-  containerProps,
+  containerProps
 }: IProps) => {
-  const router = useRouter();
-  const [_, setIsHovering] = useState(false);
+  const router = useRouter()
+  const [_, setIsHovering] = useState(false)
 
-  const handleIsHovering = () => setIsHovering((isHovering) => !isHovering);
+  const handleIsHovering = () => setIsHovering((isHovering) => !isHovering)
 
   return (
     <Grid
@@ -35,7 +35,7 @@ const CardProductWithDescription = ({
       rowGap={pxToRem(10)}
       borderRadius="8px"
       cursor="pointer"
-      onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)}
+      onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
       maxW={pxToRem(350)}
       w="100%"
       h={pxToRem(700)}
@@ -46,17 +46,17 @@ const CardProductWithDescription = ({
       borderColor="transparent"
       p="20px"
       _hover={{
-        border: "2px solid",
-        borderColor: color ?? "black.800",
+        border: '2px solid',
+        borderColor: color ?? 'black.800'
       }}
       padding={`${pxToRem(25)} ${pxToRem(20)}`}
       {...containerProps}
     >
       <Tooltip label={text} placement="top">
         <Text
-          fontSize={"2.5rem"}
+          fontSize={'2.5rem'}
           fontWeight="bold"
-          color={color ? color : "black"}
+          color={color ? color : 'black'}
           textTransform="uppercase"
           width="100%"
           lineHeight="2.7rem"
@@ -71,13 +71,13 @@ const CardProductWithDescription = ({
       >
         {description}
       </TextAntd> */}
-      <Text fontSize={pxToRem(20)} color={color ? color : "black"} gridRow={2}>
+      <Text fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
         {description &&
-          description.split("").length > 0 &&
+          description.split('').length > 0 &&
           description
-            .split("")
-            .map((el: any, index: number) => <>{index < 100 ? el : ""}</>)}
-        {description && description.split("").length > 100 ? "..." : ""}
+            .split('')
+            .map((el: any, index: number) => <>{index < 100 ? el : ''}</>)}
+        {description && description.split('').length > 100 ? '...' : ''}
       </Text>
 
       <Image
@@ -85,7 +85,7 @@ const CardProductWithDescription = ({
         alt={alt}
         h={{
           base: pxToRem(260),
-          xl: pxToRem(280),
+          xl: pxToRem(280)
         }}
         gridRow={3}
         bgSize="contain"
@@ -99,15 +99,15 @@ const CardProductWithDescription = ({
         margin="auto"
         bg="red.600"
         fontSize={pxToRem(20)}
-        borderColor={buttomBottom ? buttomBottom : "transparent"}
-        borderWidth={buttomBottom ? "2px" : "0"}
-        _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-        onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)}
+        borderColor={buttomBottom ? buttomBottom : 'transparent'}
+        borderWidth={buttomBottom ? '2px' : '0'}
+        _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+        onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
       >
         Solicitar orçamento
       </Button>
     </Grid>
-  );
-};
+  )
+}
 
-export default CardProductWithDescription;
+export default CardProductWithDescription

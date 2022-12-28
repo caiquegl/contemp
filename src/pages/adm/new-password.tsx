@@ -5,10 +5,11 @@ import {
   Button,
   InputGroup,
   Input,
-  Link,
-} from "@chakra-ui/react";
-import Image from "next/image";
-import Logo from "../../assets/icons/logo.png";
+  Link
+} from '@chakra-ui/react'
+import Image from 'next/image'
+import Logo from '../../assets/icons/logo.png'
+import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 
 const NewPassword = () => {
   return (
@@ -21,7 +22,7 @@ const NewPassword = () => {
       minW="100vw"
     >
       <Box mb="30px">
-        <Image src={Logo} />
+        <Image src={Logo} onContextMenu={setContextMenuFalse} />
       </Box>
       <Box
         bg="white"
@@ -65,7 +66,7 @@ const NewPassword = () => {
             placeholder="Nova senha"
             type="password"
             _focusVisible={{
-              outline: "none",
+              outline: 'none'
             }}
           />
         </InputGroup>
@@ -89,7 +90,7 @@ const NewPassword = () => {
             placeholder="Confirmar nova senha"
             type="password"
             _focusVisible={{
-              outline: "none",
+              outline: 'none'
             }}
           />
         </InputGroup>
@@ -100,8 +101,8 @@ const NewPassword = () => {
             color="black.800"
             textStyle="italic"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Voltar
@@ -114,25 +115,28 @@ const NewPassword = () => {
             color="white"
             textAlign="center"
             _hover={{
-              transition: "all 0.4s",
-              opacity: 0.7,
+              transition: 'all 0.4s',
+              opacity: 0.7
             }}
           >
             Enviar
           </Button>
         </Flex>
       </Box>
-      <Link isExternal href="https://3hub.co/" _hover={{ textDecoration: 'none', color: 'black.800' }}>
-
+      <Link
+        isExternal
+        href="https://3hub.co/"
+        _hover={{ textDecoration: 'none', color: 'black.800' }}
+      >
         <Text fontSize="20px" color="black.800">
-          Desenvolvido por{" "}
+          Desenvolvido por{' '}
           <Text as="span" color="red.600" fontWeight="bold">
             3Hub
           </Text>
         </Text>
       </Link>
     </Flex>
-  );
-};
+  )
+}
 
-export default NewPassword;
+export default NewPassword

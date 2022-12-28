@@ -1,5 +1,4 @@
 import { Container, Flex, Text } from '@chakra-ui/react'
-import { Header } from '../../components/Header'
 import { Contact } from '../../components/Contact'
 import { Footer } from '../../components/Footer'
 import { Player } from '../../components/Player'
@@ -98,23 +97,24 @@ const Category = () => {
 
   const productListRef = useRef(null)
 
-  const scrollToProductList = () => {
-    const productList = document.querySelector('#product-list')
-    const productListTop = productList?.getBoundingClientRect().top
-    window.scrollTo({ top: productListTop })
+  const handleScrollToProductList = () => {
+    const current = productListRef?.current as unknown as Element
+    const productListTop = current?.getBoundingClientRect().top
+
+    if (document.body.scrollTop === 0 && !loading && list.length !== 0) {
+      window.scrollTo({ top: productListTop })
+    }
   }
 
   useEffect(() => {
-    if (productListRef?.current) {
-      const current = productListRef?.current as Element
-      const productListTop = current.getBoundingClientRect().top
-      window.scrollTo({ top: productListTop })
-    }
+    handleScrollToProductList()
+  }, [category])
 
-    if (window && !loading && list.length !== 0) {
-      scrollToProductList()
-    }
-  }, [loading, list])
+  useEffect(() => {
+    window.addEventListener('scroll', handleScrollToProductList)
+
+    return () => window.removeEventListener('scroll', handleScrollToProductList)
+  }, [])
 
   return (
     <SmoothScroll>
@@ -126,8 +126,6 @@ const Category = () => {
           <link rel="icon" href="/favicon.png" />
         </Head>
       )}
-      <Header />
-
       <Flex
         w="100%"
         alignItems="center"

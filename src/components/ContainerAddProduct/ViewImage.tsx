@@ -1,6 +1,7 @@
-import { Box, Icon, Image } from "@chakra-ui/react";
-import React from "react";
-import { AiTwotoneDelete } from "react-icons/ai";
+import { Box, Icon, Image } from '@chakra-ui/react'
+import React from 'react'
+import { AiTwotoneDelete } from 'react-icons/ai'
+import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 
 export const ViewImage = ({ url, remove }: any) => {
   return (
@@ -13,7 +14,13 @@ export const ViewImage = ({ url, remove }: any) => {
         cursor="pointer"
         onClick={() => remove()}
       />
-      <Image boxSize="150px" objectFit="cover" src={url} alt="product" />
+      <Image
+        boxSize="150px"
+        objectFit="cover"
+        src={url}
+        alt="product"
+        onContextMenu={setContextMenuFalse}
+      />
     </Box>
-  );
-};
+  )
+}
