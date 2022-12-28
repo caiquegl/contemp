@@ -41,6 +41,7 @@ type UserAuthContextData = {
   allCategory: any
   allCategoryActive: any
   reload: any
+  reloadCategory: any
   allProductsHome: any
   loading: any
 }
@@ -108,6 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       let active = list.filter((el: any) => el.is_active == true)
       setAllCategoryActive([...active])
       setAllCategory([...list])
+      return list
     } catch (error) {
       console.log(error)
     }
@@ -159,6 +161,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await getAllProducts()
     await getAllProductsHome()
     setLoading(false)
+  }
+
+  const reloadCategory = async () => {
+    return await getCategory()
   }
 
   useEffect(() => {
@@ -229,6 +235,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <UserAuthContext.Provider
       value={{
+        reloadCategory,
         allCategoryActive,
         allProductsActive,
         loading,

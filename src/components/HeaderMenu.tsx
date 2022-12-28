@@ -77,13 +77,8 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
-<<<<<<< HEAD
-          background: "none",
-          border: "none",
-=======
           background: '#242424',
           border: 'none',
->>>>>>> 62869bfe7b3f7070e1bfa88a5d7c0b71b709fbd4
           fontSize: 16,
           display: 'flex',
           flexWrap: 'wrap',
@@ -94,13 +89,8 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
           ...style
         }}
         overflowedIndicator={
-<<<<<<< HEAD
           <Box as={"p"} _hover={{ color: "white" }}>
             OUTROS
-=======
-          <Box as={'p'} _hover={{ color: 'white' }}>
-            Outros
->>>>>>> 62869bfe7b3f7070e1bfa88a5d7c0b71b709fbd4
           </Box>
         }
       />

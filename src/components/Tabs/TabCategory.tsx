@@ -51,7 +51,7 @@ const TabCategory = () => {
   })
 
   initFirebase()
-  const { allCategory, reload } = useAuth()
+  const { allCategory, reload, reloadCategory } = useAuth()
 
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
@@ -127,10 +127,11 @@ const TabCategory = () => {
         status: 'error'
       })
     } finally {
-      setLoading(false)
       reset()
       await reload()
-      await listCategory()
+      let newList = await reloadCategory()
+      await listCategory(newList)
+      setLoading(false)
     }
   }
 
@@ -180,18 +181,20 @@ const TabCategory = () => {
         status: 'error'
       })
     } finally {
-      setLoading(false)
       reset()
       await reload()
-      await listCategory()
+      let newList = await reloadCategory()
+      await listCategory(newList)
+      setLoading(false)
+
     }
   }
 
-  const listCategory = async () => {
+  const listCategory = async (list?: any) => {
     try {
-      let newList = allCategory.sort((a: any, b: any) => a.order < b.order)
-      setListClone(newList)
-      setList(newList)
+      let newList = list ? list.sort((a: any, b: any) => a.order < b.order) : allCategory.sort((a: any, b: any) => a.order < b.order)
+      setListClone([...newList])
+      setList([...newList])
     } catch (error) {
       toast({
         title: 'Erro',
@@ -203,8 +206,12 @@ const TabCategory = () => {
 
   const deleteCategory = async (category: any) => {
     try {
+      setLoading(true)
+
       let exist = false
+      let namesExist = ''
       let existSubCategory = false
+      let categoryExist = ''
 
       const dbInstance = collection(database, 'products')
       const qExist = query(
@@ -222,10 +229,16 @@ const TabCategory = () => {
 
       await getDocs(qExist).then((data) => {
         if (data.docs.length > 0) exist = true
+        data.docs.forEach((value, index) => {
+          namesExist = `${namesExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
+        })
       })
 
       await getDocs(qExistHome).then((data) => {
         if (data.docs.length > 0) exist = true
+        data.docs.forEach((value, index) => {
+          namesExist = `${namesExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
+        })
       })
 
       const dbInstanceCategory = collection(database, 'categories')
@@ -237,21 +250,28 @@ const TabCategory = () => {
 
       await getDocs(qExistCategory).then((data) => {
         if (data.docs.length > 0) existSubCategory = true
+        data.docs.forEach((value, index) => {
+          categoryExist = `${categoryExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
+        })
       })
 
       if (exist) {
         toast({
           title: 'Erro',
-          description: 'Categoria vinculada a produto',
-          status: 'error'
+          description: `Categoria vinculada aos seguintes produto: ${namesExist}`,
+          status: 'error',
+          duration: 500000,
+          isClosable: true
         })
         return
       }
       if (existSubCategory) {
         toast({
           title: 'Erro',
-          description: 'Existe uma subcategoria vinculada a está categoria',
-          status: 'error'
+          description: `As seguintes subcategorias estão vinculadas: ${categoryExist} `,
+          status: 'error',
+          duration: 500000,
+          isClosable: true
         })
         return
       }
@@ -268,6 +288,12 @@ const TabCategory = () => {
         description: 'Erro ao deletar categoria',
         status: 'error'
       })
+    } finally {
+      await reload()
+      setTimeout(async () => {
+        await listCategory()
+        setLoading(false)
+      }, 1200);
     }
   }
 
@@ -404,7 +430,7 @@ const TabCategory = () => {
       </Flex>
       <HStack spacing="20px" alignItems="flex-start">
         <Box borderRadius="8px" bg="white" p="30px" w="100%">
-          <Table dataSource={list} columns={column} />
+          <Table dataSource={loading ? [] : list} columns={column} loading={loading} />
         </Box>
         <Box
           borderRadius="8px"
