@@ -17,7 +17,7 @@ const TabProduct = () => {
     duration: 3000,
     isClosable: true
   })
-  const { allCategory, allProducts, reload } = useAuth()
+  const { allCategory, allProducts, reload, reloadProduct } = useAuth()
 
   const [step, setStep] = useState(1)
   const [list, setList] = useState<any>([])
@@ -81,7 +81,9 @@ const TabProduct = () => {
         })
       })
 
-      let sortList = newList.sort((a: any, b: any) =>
+      let list = await reloadProduct()
+
+      let sortList = await list.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       )
       setList(sortList)
@@ -120,6 +122,7 @@ const TabProduct = () => {
 
   useEffect(() => {
     reload()
+    listProduct()
   }, [step])
 
   return (
