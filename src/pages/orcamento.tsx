@@ -64,6 +64,18 @@ const Orcamento = () => {
         });
         return;
       }
+
+      if (!isAprove) {
+        toast({
+          title: "Atenção",
+          description:
+            "Para solicitar orçamento é necessário aprovar o contato dos vendedores.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return
+      }
       bodyForm = { ...bodyForm, isAprove, products: cart };
 
       setLoading(true);

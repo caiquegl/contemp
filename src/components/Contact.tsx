@@ -16,7 +16,7 @@ import {
   Link,
   useToast,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import { TbSend } from "react-icons/tb";
@@ -25,6 +25,9 @@ import { useForm } from "react-hook-form";
 import { InputDefault } from "./Form/Input";
 import { TextareaDefault } from "./Form/Textarea";
 import { SelectDefault } from "./Form/Select";
+import { useDropzone } from 'react-dropzone'
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../utils/db";
 
 interface IProps {
   title: string;
@@ -42,6 +45,7 @@ export const Contact = ({
 }: IProps) => {
   const toast = useToast();
   const formRef = useRef<any>();
+  const [file, setFile] = useState('')
   const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
     {}
   );
@@ -49,10 +53,12 @@ export const Contact = ({
 
   const sendMail = async (bodyForm: any) => {
     try {
-      console.log('chamou sendMail')
+      let newBody: any = { body: bodyForm, id }
+
+      if (file) newBody.arquivo = file
       await fetch(`api/defaultEmail`, {
         method: "POST",
-        body: JSON.stringify({ body: bodyForm, id }),
+        body: JSON.stringify(newBody),
       });
       reset()
       toast({
@@ -74,6 +80,44 @@ export const Contact = ({
     } finally {
     }
   };
+
+  const onDrop = useCallback(async (acceptedFiles: any) => {
+    acceptedFiles.forEach(async (file: any) => {
+      const imageRef = ref(storage, `${id}/${file.name}`);
+
+      const uploadTask = uploadBytesResumable(imageRef, file);
+
+      uploadTask.on("state_changed",
+        (snapshot) => {
+          const progress =
+            Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        },
+        (error) => {
+          toast({
+            title: "Erro",
+            description: "Erro ao fazer upload de arquivo",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            toast({
+              title: "Sucesso",
+              description: "Upload completo",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+            setFile(downloadURL)
+          });
+        })
+
+    })
+
+  }, [])
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
@@ -155,13 +199,13 @@ export const Contact = ({
               height="100%"
             >
               <Box
-                id={id}
-                method="POST"
-                as="form"
-                onSubmit={handleSubmit(sendMail)}
-                ref={formRef}
+
               >
-                <VStack spacing="18px">
+
+                <VStack spacing="18px" id={id}
+                  as="form"
+                  onSubmit={handleSubmit(sendMail)}
+                  ref={formRef}>
                   {form &&
                     form.length > 0 &&
                     form.map((quest: any) => (
@@ -171,7 +215,7 @@ export const Contact = ({
                             label={quest.name}
                             type="text"
                             error={errors.name}
-                            {...register(quest.name, { required: `${quest.name} é obrigatório` })}
+                            {...register(quest.name, { required: `Campo  obrigatório` })}
                           />
                         )}
                         {quest.type === "textArea" && (
@@ -195,6 +239,7 @@ export const Contact = ({
                           />
                         )}
                         {quest.type === "upload" && (
+
                           <Flex
                             w="100%"
                             h="205px"
@@ -204,7 +249,9 @@ export const Contact = ({
                             justifyContent="center"
                             flexDirection="column"
                             p="10px"
+                            {...getRootProps()}
                           >
+                            <input {...getInputProps()} />
                             <Icon
                               as={AiOutlineCloudUpload}
                               fontSize="50px"
@@ -233,22 +280,23 @@ export const Contact = ({
                         )}
                       </>
                     ))}
+                  <Flex justifyContent="flex-end">
+                    <Button
+                      w="179px"
+                      h="50px"
+                      borderRadius="25px"
+                      bg="red.600"
+                      fontSize="20px"
+                      mt="40px"
+                      type="submit"
+                      _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                    >
+                      <Icon as={TbSend} mr="10px" />
+                      Enviar
+                    </Button>
+                  </Flex>
                 </VStack>
-                <Flex justifyContent="flex-end">
-                  <Button
-                    w="179px"
-                    h="50px"
-                    borderRadius="25px"
-                    bg="red.600"
-                    fontSize="20px"
-                    mt="40px"
-                    type="submit"
-                    _hover={{ transition: "all 0.5s", opacity: 0.7 }}
-                  >
-                    <Icon as={TbSend} mr="10px" />
-                    Enviar
-                  </Button>
-                </Flex>
+
               </Box>
             </Box>
           </GridItem>
