@@ -80,7 +80,7 @@ module.exports = {
       creatRedirectObj ('/wp-content/uploads/2017/06/D501-F.jpg', 'https://contemp.com.br'),
       creatRedirectObj ('/wp-content/uploads/2012/04/Contemp-P501-1.jpg', 'https://contemp.com.br'),
       creatRedirectObj ('/ukzzv-17538-procesador-SLGTE-Intel-Core-Duo-E7500', 'https://contemp.com.br'),
-      creatRedirectObj ('/allProduct', '/todosProdutos')
+      creatRedirectObj ('/allProduct', '/todosProdutos'),
       // creatRedirectObj ('', '')
     ]
   },

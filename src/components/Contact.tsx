@@ -171,14 +171,14 @@ export const Contact = ({
                             label={quest.name}
                             type="text"
                             error={errors.name}
-                            {...register(quest.name)}
+                            {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
                         {quest.type === "textArea" && (
                           <TextareaDefault
                             label={quest.name}
                             error={errors.description}
-                            {...register(quest.name)}
+                            {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
                         {quest.type === "select" && (
@@ -191,7 +191,7 @@ export const Contact = ({
                                 value: opt
                               }
                             })}
-                            {...register(quest.name)}
+                            {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
                         {quest.type === "upload" && (

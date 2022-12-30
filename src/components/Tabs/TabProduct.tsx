@@ -36,6 +36,16 @@ const TabProduct = () => {
       title: 'Categoria',
       dataIndex: 'nameCategory',
       key: 'nameCategory',
+      render: (a: any, b: any) => {
+        let name = ''
+        console.log(b)
+        if (allCategory) {
+          let find = allCategory.find((el: any) => el.id === b.category)
+          if (find?.name) name = find.name
+        }
+
+        return name
+      },
       sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory)
     },
     {
@@ -71,15 +81,6 @@ const TabProduct = () => {
 
   const listProduct = async () => {
     try {
-      let newList: any = []
-
-      allProducts.forEach((el: any) => {
-        newList.push({
-          ...el,
-          nameCategory: allCategory.find((cg: any) => cg.id === el.category)
-            .name
-        })
-      })
 
       let list = await reloadProduct()
 
@@ -115,10 +116,6 @@ const TabProduct = () => {
       })
     }
   }
-
-  useEffect(() => {
-    listProduct()
-  }, [allProducts, allCategory])
 
   useEffect(() => {
     reload()
@@ -160,7 +157,7 @@ const TabProduct = () => {
                       .toLowerCase()
                       .includes(evt.target.value.toLowerCase())
                   )
-                  setList(newList)
+                  setList([...newList])
                 },
                 _placeholder: {
                   color: 'black.800',
