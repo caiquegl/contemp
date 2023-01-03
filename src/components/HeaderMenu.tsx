@@ -177,6 +177,7 @@ import { Box } from "@chakra-ui/react";
 
 export type MenuProps = {
   menuItems: any;
+  onClose?: any
 };
 
 // const CustomMenuItem = ({ menu }: any) => {
@@ -292,7 +293,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   );
 };
 
-export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
+export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
   const [list, setList] = useState([]);
   const router = useRouter();
 
@@ -309,9 +310,10 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
               icon={AiOutlineEye}
               size={20}
               color="#fff"
-              onClick={(item: any) =>
+              onClick={(item: any) => {
+                onClose()
                 router.push(`/category/${el.name.replaceAll(" ", "_")}`)
-              }
+              }}
             />
           ),
         };
