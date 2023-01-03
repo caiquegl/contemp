@@ -31,7 +31,7 @@ export const ProductCategoryWithIcon = ({
       maxW={pxToRem(400)}
       maxH={pxToRem(85)}
       {...containerProps}
-      onClick={() => router.push(`/category/${title.replaceAll(' ', '_')}`)}
+      onClick={() => router.push(`/category/${title.replaceAll(' ', '_')}#viewCategory`)}
       cursor="pointer"
     >
       <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>

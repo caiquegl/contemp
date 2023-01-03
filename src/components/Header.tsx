@@ -165,7 +165,7 @@ export const Header = () => {
           opacity={scrollYIsGreaterThan100 ? 0 : 1}
           w={scrollYIsGreaterThan100 ? 0 : '100%'}
           h={scrollYIsGreaterThan100 ? 0 : 'auto'}
-          transition={defaultTransition}
+          // transition={defaultTransition}
           margin={scrollYIsGreaterThan100 ? 0 : 'auto'}
         />
 
@@ -185,7 +185,7 @@ export const Header = () => {
           <ContempLinks
             opacity={scrollYIsGreaterThan100 ? 0 : 1}
             w={scrollYIsGreaterThan100 ? 0 : '100%'}
-            transition={defaultTransition}
+          // transition={defaultTransition}
           />
 
           <HeaderMenu
@@ -194,7 +194,7 @@ export const Header = () => {
               opacity: !scrollYIsGreaterThan100 ? 0 : 1,
               height: !scrollYIsGreaterThan100 ? 0 : 'initial',
               width: !scrollYIsGreaterThan100 ? 0 : '100%',
-              transition: defaultTransition,
+              // transition: defaultTransition,
               overflow: 'hidden'
             }}
           />
@@ -206,7 +206,7 @@ export const Header = () => {
                 h: pxToRem(42),
                 marginRight: scrollYIsGreaterThan100 ? 0 : 5,
                 opacity: scrollYIsGreaterThan100 ? 0 : 1,
-                transition: defaultTransition
+                // transition: defaultTransition
               }}
             />
 
@@ -220,7 +220,7 @@ export const Header = () => {
             opacity: scrollYIsGreaterThan100 ? 0 : 1,
             height: scrollYIsGreaterThan100 ? 0 : 'initial',
             width: scrollYIsGreaterThan100 ? 0 : '100%',
-            transition: defaultTransition
+            // transition: defaultTransition
           }}
         />
 

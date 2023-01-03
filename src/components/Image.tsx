@@ -1,6 +1,6 @@
-import { Box, Image as ChakraImage, BoxProps } from '@chakra-ui/react'
+import { Box, Image as ChakraImage, BoxProps, Spinner, Center } from '@chakra-ui/react'
 import ImageNext, { StaticImageData } from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 
 type ImageProps = {
@@ -11,22 +11,28 @@ type ImageProps = {
   hImg?: number
 } & BoxProps
 
+export const CustomLoader = () => {
+  return <Center h="100%"><Spinner color='red.500' size='xl' /></Center>
+}
+
 export const Image = ({ src, alt, wImg, hImg, uri, ...props }: ImageProps) => {
   const bgImage =
     typeof src === 'string' ? `url('${src}')` : src?.src ? src.src : ''
-  console.log(uri)
+  const [loading, setLoading] = useState(false)
   return (
     <>
-      {uri && wImg ?
-        <Box
+      {uri ?
+        <Center
           w="100%"
           h="100%"
           minH={pxToRem(200)}
           {...props}
           onContextMenu={() => false}
         >
-          <ChakraImage src={uri ? uri : bgImage} alt={alt} width={wImg} height={hImg} loading='lazy' />
-        </Box>
+          {loading ? <CustomLoader /> :
+            <ChakraImage onLoad={() => setLoading(false)} onLoadStart={() => setLoading(true)} src={uri ? uri : bgImage} alt={alt} width={wImg} height={hImg} loading='lazy' />
+          }
+        </Center>
         :
         <Box
           bgImage={bgImage}

@@ -42,7 +42,12 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
         transition="all 0.3s"
         cursor="pointer"
       >
-        <Image src={img ? img : DefaultImg} alt={alt} onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)} />
+        {img && typeof img == 'string' ?
+          <Image uri={img} alt={alt} onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)} />
+          :
+          <Image src={DefaultImg} alt={alt} onClick={() => router.push(`/produto/${text.replaceAll(" ", "_")}`)} />
+
+        }
 
         <Box
           className="see-more-text"

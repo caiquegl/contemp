@@ -205,7 +205,7 @@ export const Footer = () => {
                 mb="20px"
                 cursor="pointer"
                 onClick={() =>
-                  router.push(`/category/${el.name.replaceAll(' ', '_')}`)
+                  router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
                 }
               >
                 {el.name}
@@ -221,7 +221,7 @@ export const Footer = () => {
                       cursor="pointer"
                       onClick={() =>
                         router.push(
-                          `/category/${el2.name.replaceAll(' ', '_')}`
+                          `/category/${el2.name.replaceAll(' ', '_')}#viewCategory`
                         )
                       }
                     >
@@ -236,7 +236,7 @@ export const Footer = () => {
                             cursor="pointer"
                             onClick={() =>
                               router.push(
-                                `/category/${el3.name.replaceAll(' ', '_')}`
+                                `/category/${el3.name.replaceAll(' ', '_')}#viewCategory`
                               )
                             }
                           >

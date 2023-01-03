@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FlexProps, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, FlexProps, Text } from '@chakra-ui/react'
 import { Image } from '../components/Image'
 import { pxToRem } from '../utils/pxToRem'
 import { ProductCategoryWithIcon } from './ProductCategoryWithIcon'
@@ -58,24 +58,27 @@ const DescriptionProduct = ({
         padding={`${pxToRem(15)}`}
         {...containerProps}
       >
-        <Image
-          src={dataTab?.urls ? dataTab.urls[0] : ''}
-          alt={dataTab?.name}
-          flex={1}
-          bgSize="100%"
-          zIndex={30}
-          minH="auto"
-          w={{
-            base: '55%',
-            md: '45%',
-            lg: '45%',
-            xl: '55%'
-          }}
-          onClick={() =>
-            router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)
-          }
-          cursor="pointer"
-        />
+        <Center h="100%" w={{
+          base: '55%',
+          md: '45%',
+          lg: '45%',
+          xl: '55%'
+        }}>
+          <Image
+            uri={dataTab?.urls ? dataTab.urls[0] : ''}
+            alt={dataTab?.name}
+            flex={1}
+            bgSize="100%"
+            zIndex={30}
+            minH="auto"
+
+            onClick={() =>
+              router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)
+            }
+            cursor="pointer"
+          />
+        </Center>
+
 
         <Flex flexDirection="column" alignItems="initial" flex={1.07}>
           <Text

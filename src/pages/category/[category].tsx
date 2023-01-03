@@ -1,4 +1,4 @@
-import { Container, Flex, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import { Contact } from '../../components/Contact'
 import { Footer } from '../../components/Footer'
 import { Player } from '../../components/Player'
@@ -132,6 +132,7 @@ const Category = () => {
         justifyContent="center"
         direction="column"
         h={['350px', '350px', '250px', '250px', '250px', '250px']}
+        id="viewCategory"
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
@@ -145,18 +146,21 @@ const Category = () => {
             : ''}
         </Text>
       </Flex>
-      {list &&
-        list.length > 0 &&
-        list.map((categ: any, index: number) => {
-          index = index + 1
-          let bg = 'white'
+      <Box id="viewCategory"
+      >
+        {list &&
+          list.length > 0 &&
+          list.map((categ: any, index: number) => {
+            index = index + 1
+            let bg = 'white'
 
-          if (index % 2 === 0) bg = 'white.500'
-          if (index % 3 === 0) bg = 'black.800'
-          if (index % 4 === 0) bg = 'red.600'
+            if (index % 2 === 0) bg = 'white.500'
+            if (index % 3 === 0) bg = 'black.800'
+            if (index % 4 === 0) bg = 'red.600'
 
-          return <ListCategory bg={bg} data={categ} ref={productListRef} />
-        })}
+            return <ListCategory bg={bg} data={categ} ref={productListRef} />
+          })}
+      </Box>
       <Flex
         w="100%"
         alignItems="center"

@@ -27,7 +27,7 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
           title: el.name,
           key: el.name,
           onTitleClick: (value: any) => {
-            router.push(`/category/${el.name.replaceAll(' ', '_')}`)
+            router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
           },
           style: {
             marginRight: 0,
@@ -71,7 +71,7 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
 
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
+          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}#viewCategory`)
         }}
         mode={'horizontal'}
         items={list}
@@ -116,7 +116,7 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
               size={20}
               color="#fff"
               onClick={(item: any) =>
-                router.push(`/category/${el.name.replaceAll(' ', '_')}`)
+                router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
               }
             />
           )
