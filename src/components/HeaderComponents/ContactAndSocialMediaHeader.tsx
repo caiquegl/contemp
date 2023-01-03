@@ -15,7 +15,7 @@ export function ContactAndSocialMediaHeader({ ...props }: FlexProps) {
       alignItems="center"
       justifyContent="space-evenly"
       marginBottom="22px"
-      transition="inherit"
+      // transition="inherit"
       {...props}
     >
       <Box display="flex" flex={1}>

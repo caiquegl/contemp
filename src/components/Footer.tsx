@@ -62,7 +62,7 @@ export const Footer = () => {
     newList.push(five)
     newList.push(six)
     newList.push(seven)
-    setList(newList)
+    setList(listHeader)
   }, [listHeader])
 
   return (
