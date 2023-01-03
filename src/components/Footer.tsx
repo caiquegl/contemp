@@ -38,30 +38,35 @@ export const Footer = () => {
     let six: any = {}
     let seven: any = {}
 
-    listHeader.forEach((el: any) => {
-      if (el.name.toLowerCase() === 'SENSOR'.toLowerCase()) first = el
-      if (el.name.toLowerCase() === 'SOFTWARES'.toLowerCase()) second = el
-      if (el.name.toLowerCase() === 'PIRÔMETROS PORTÁTEIS'.toLowerCase())
-        thrid = el
-      if (
-        el.name.toLowerCase() === 'CÂMERAS TERMOGRÁFICAS OPTRIS'.toLowerCase()
-      )
-        four = el
-      if (el.name.toLowerCase() === 'PIRÔMETROS FIXOS OPTRIS'.toLowerCase())
-        five = el
-      if (el.name.toLowerCase() === 'CONTROLADORES DE POTÊNCIA'.toLowerCase())
-        six = el
-      if (el.name.toLowerCase() === 'INSTRUMENTOS E CONTROLE'.toLowerCase())
-        seven = el
+    let order: any = []
+
+    listHeader.forEach((el: any, index: number) => {
+      let count = el.list_sub_category.length
+
+      el.list_sub_category.forEach((el2: any) => {
+        count = count + el2.list_sub_category.length
+      })
+
+      order.push({
+        index,
+        count
+      })
     })
 
-    newList.push(first)
-    newList.push(second)
-    newList.push(thrid)
-    newList.push(four)
-    newList.push(five)
-    newList.push(six)
-    newList.push(seven)
+    let newOrder = order.sort((a: any, b: any) => a.count - b.count)
+
+    console.log(newOrder, listHeader)
+    newOrder.forEach((el: any) => {
+      newList.push(listHeader[el.index])
+    })
+
+    // newList.push(first)
+    // newList.push(second)
+    // newList.push(thrid)
+    // newList.push(four)
+    // newList.push(five)
+    // newList.push(six)
+    // newList.push(seven)
     setList(newList)
   }, [listHeader])
 
