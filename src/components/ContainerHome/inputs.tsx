@@ -20,6 +20,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { app, initFirebase } from "../../utils/db";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IProps extends InputProps {
   name: string;
@@ -96,7 +97,7 @@ const InputsHome = ({
           >
             {options &&
               options.length > 0 &&
-              options.map((opt: any) => <option value={opt}>{opt}</option>)}
+              options.map((opt: any) => <option value={opt} key={uuidv4()}>{opt}</option>)}
           </Select>
         )}
 

@@ -37,39 +37,38 @@ export const Catalog = () => {
       <Row style={{ height: '100%' }}>
         <Col xs={24} sm={24} md={12} lg={12}>
           <Link href="https://contemp.com.br/temnacontemp.pdf" target={"_blank"}>
-          <Image
-            src={CatalogImg}
-            display={{
-              base: "none",
-              lg: "flex",
-            }}
-            width={{
-              base: pxToRem(400),
-              lg: pxToRem(500),
-              xl: pxToRem(700),
-              "2xl": pxToRem(750),
-            }}
-            height={{
-              lg: pxToRem(700),
-              xl: pxToRem(680),
-              "2xl": pxToRem(700),
-            }}
-            gridColumn={1}
-            bgSize={{
-              base: 0,
-              lg: "100%",
-              xl: "contain",
-            }}
-            zIndex={99}
-            position="absolute"
-            top="-100px"
-          />
+            <Image
+              src={CatalogImg}
+              display={{
+                base: "none",
+                lg: "flex",
+              }}
+              width={{
+                base: pxToRem(400),
+                lg: pxToRem(500),
+                xl: pxToRem(700),
+                "2xl": pxToRem(750),
+              }}
+              height={{
+                lg: pxToRem(700),
+                xl: pxToRem(680),
+                "2xl": pxToRem(700),
+              }}
+              gridColumn={1}
+              bgSize={{
+                base: 0,
+                lg: "100%",
+                xl: "contain",
+              }}
+              zIndex={99}
+              position="absolute"
+              top="-100px"
+            />
           </Link>
 
         </Col>
         <Col xs={24} sm={24} md={12} lg={12}>
           <Flex
-            // gridColumn={{ base: 1, lg: 2 }}
             flexDirection="column"
             alignItems="center"
             justifyContent="center"

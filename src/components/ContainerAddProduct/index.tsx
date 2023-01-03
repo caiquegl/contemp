@@ -18,6 +18,7 @@ import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import Variation from './Variantion'
 import { ViewImage } from './ViewImage'
+import { v4 as uuidv4 } from 'uuid';
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   initFirebase()
@@ -158,6 +159,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             urls.length > 0 &&
             urls.map((value: any, index: number) => (
               <ViewImage
+                key={uuidv4()}
                 url={value}
                 remove={() => {
                   let newList: any = []
@@ -237,6 +239,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
         {hasVariation &&
           listVariation.map((list: any, index: number) => (
             <Variation
+              key={uuidv4()}
               newVariation={() => {
                 setListVariation([
                   ...listVariation,
@@ -251,7 +254,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 setListVariation(newList)
               }}
               index={index}
-              key={index}
               addVariation={(variation: any) => {
                 let newList = listVariation
                 newList[index].name = variation.name

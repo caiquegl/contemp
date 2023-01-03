@@ -7,13 +7,6 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 
-import Hotjar from '@hotjar/browser';
-
-const siteId = 3290469;
-const hotjarVersion = 6;
-
-Hotjar.init(siteId, hotjarVersion);
-
 export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -21,6 +14,8 @@ export default class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
+
+
   render() {
     return (
       <Html>
@@ -31,7 +26,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
             rel="stylesheet"
           />
-          <title>Contemp</title>
           <link rel="icon" href="/favicon.png" />
           <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
 

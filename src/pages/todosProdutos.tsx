@@ -24,6 +24,7 @@ import Head from 'next/head'
 import { AdBanners } from '../components/AdBanners'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { useAuth } from '../contextAuth/authContext'
+import { v4 as uuidv4 } from 'uuid';
 
 const AllProduct = () => {
   const { allCategoryActive, allProductsActive, allProductsHome } = useAuth()
@@ -156,6 +157,7 @@ const AllProduct = () => {
         favorites.length > 0 &&
         favorites.map((fv: any) => (
           <Flex
+            key={uuidv4()}
             w="100%"
             alignItems={'center'}
             bg="white"
@@ -222,7 +224,7 @@ const AllProduct = () => {
                   {fv.products &&
                     fv.products.length > 0 &&
                     fv.products.map((item: any) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={uuidv4()}>
                         <CardProductWithDescription
                           img={item.urls[0]}
                           text={item.name}
@@ -251,7 +253,6 @@ const AllProduct = () => {
           </Text>
           <Grid
             templateColumns="repeat(auto-fit, minmax(260px, 1fr))"
-            // gridAutoRows={pxToRem(360)}
             gap={pxToRem(15)}
             padding={`0 ${pxToRem(10)}`}
           >
@@ -273,6 +274,7 @@ const AllProduct = () => {
 
                 return (
                   <CardCatalog
+                    key={uuidv4()}
                     bg={bg}
                     color={color}
                     title={categ.name}

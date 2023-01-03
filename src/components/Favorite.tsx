@@ -17,6 +17,7 @@ import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
 import { useAuth } from "../contextAuth/authContext";
+import { v4 as uuidv4 } from 'uuid';
 export const Favorite = () => {
   const { allProductsActive, allProductsHome, allCategoryActive } = useAuth();
   const router = useRouter();
@@ -186,7 +187,7 @@ export const Favorite = () => {
           }}
         >
           {products.map((item: any) => (
-            <SwiperSlide style={{ width: "100%" }}>
+            <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
               <CardProduct
                 img={item.urls && item.urls.length > 0 && item.urls[0]}
                 text={item.name}
@@ -283,12 +284,6 @@ export const Favorite = () => {
               >
                 Veja mais
               </Button>
-              {/* 
-              <Image
-                src={homeTabs.tab1.icon}
-                bgSize={pxToRem(40)}
-                minH={pxToRem(40)}
-              /> */}
             </Flex>
           </Box>
         </Flex>

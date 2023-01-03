@@ -96,9 +96,7 @@ export const HomeBackgroundDetails = () => {
         bgSize="85%"
         bgRepeat="no-repeat"
         bgPosition="center"
-        // w="100%"
         h="100%"
-        // minH={200}
         flex={1}
       >
         <Image src={PlusDetail} alt={'lt'} />

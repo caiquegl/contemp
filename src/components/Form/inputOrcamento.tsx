@@ -19,11 +19,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InpuptProps> = (
 ) => {
   return (
     <FormControl isInvalid={!!error}>
-      {/* {!!label && (
-        <FormLabel htmlFor={name} fontWeight="bold" fontSize="20px" mb="10px" color="black.800">
-          {label}
-        </FormLabel>
-      )} */}
       <InputGroup
         borderRadius="25px"
         bg="black.100"

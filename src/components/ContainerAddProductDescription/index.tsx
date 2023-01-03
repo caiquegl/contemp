@@ -25,6 +25,7 @@ import {
   doc
 } from 'firebase/firestore'
 import EditTab from './editTab'
+import { v4 as uuidv4 } from 'uuid';
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   initFirebase()
@@ -218,7 +219,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
       <VStack spacing="30px" divider={<Divider />} w="100%">
         {tabs.map((list: any, tabIndex: number) => (
-          <Box w="100%" key={tabIndex}>
+          <Box w="100%" key={uuidv4()}>
             <Flex
               mb="20px"
               alignItems="center"

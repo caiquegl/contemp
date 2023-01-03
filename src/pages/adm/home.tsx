@@ -16,8 +16,7 @@ import Logo from '../../assets/icons/Logo-Contemp.svg'
 import TabCategory from '../../components/Tabs/TabCategory'
 import TabHome from '../../components/Tabs/TabHome'
 import TabProduct from '../../components/Tabs/TabProduct'
-// import { useRouter } from "next/router";
-// import { useAuth } from "../../contextAuth/authContext";
+
 import moment from 'moment'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 

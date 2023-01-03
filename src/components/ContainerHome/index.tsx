@@ -26,6 +26,7 @@ import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import { useForm } from 'react-hook-form'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
+import { v4 as uuidv4 } from 'uuid';
 
 const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   initFirebase()
@@ -213,6 +214,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
                 urls.length > 0 &&
                 urls.map((value: any, index: number) => (
                   <ViewImage
+                    key={uuidv4()}
                     url={value}
                     remove={() => {
                       let newList: any = []

@@ -28,6 +28,7 @@ import { SelectDefault } from "./Form/Select";
 import { useDropzone } from 'react-dropzone'
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../utils/db";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IProps {
   title: string;
@@ -184,8 +185,6 @@ export const Contact = ({
           </GridItem>
           <GridItem
             w="100%"
-          // ml={["0", "0", "0", "0", "56px"]}
-          // mt={["50px", "50px", "50px", "50px", "50px"]}
           >
             <Box
               border="2px solid"
@@ -199,9 +198,7 @@ export const Contact = ({
               height="100%"
             >
               <Box
-
               >
-
                 <VStack spacing="18px" id={id}
                   as="form"
                   onSubmit={handleSubmit(sendMail)}
@@ -209,7 +206,7 @@ export const Contact = ({
                   {form &&
                     form.length > 0 &&
                     form.map((quest: any, index: number) => (
-                      <Fragment key={index}>
+                      <Fragment key={uuidv4()}>
                         {quest.type === "text" && (
                           <InputDefault
                             label={quest.name}

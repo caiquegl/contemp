@@ -36,7 +36,6 @@ import { Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
-import { useRouter } from 'next/router'
 
 const { confirm } = Modal;
 
@@ -65,7 +64,6 @@ const TabCategory = () => {
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
   const formRef = useRef<any>()
-  const router = useRouter()
 
   const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
     {}
@@ -219,99 +217,6 @@ const TabCategory = () => {
         description: 'Erro ao listar categoria',
         status: 'error'
       })
-    }
-  }
-
-  const deleteCategory = async (category: any) => {
-    try {
-      setLoading(true)
-
-      let exist = false
-      let namesExist = ''
-      let existSubCategory = false
-      let categoryExist = ''
-
-      const dbInstance = collection(database, 'products')
-      const qExist = query(
-        dbInstance,
-        where('category', '==', category.id),
-        limit(1)
-      )
-
-      const dbInstanceHome = collection(database, 'home')
-      const qExistHome = query(
-        dbInstanceHome,
-        where('category', '==', category.id),
-        limit(1)
-      )
-
-      await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) exist = true
-        data.docs.forEach((value, index) => {
-          namesExist = `${namesExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
-        })
-      })
-
-      await getDocs(qExistHome).then((data) => {
-        if (data.docs.length > 0) exist = true
-        data.docs.forEach((value, index) => {
-          namesExist = `${namesExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
-        })
-      })
-
-      const dbInstanceCategory = collection(database, 'categories')
-      const qExistCategory = query(
-        dbInstanceCategory,
-        where('sub_categorie', '==', category.id),
-        limit(1)
-      )
-
-      await getDocs(qExistCategory).then((data) => {
-        if (data.docs.length > 0) existSubCategory = true
-        data.docs.forEach((value, index) => {
-          categoryExist = `${categoryExist}${index != data.docs.length - 1 ? `${value.data().name}, ` : value.data().name}`
-        })
-      })
-
-      if (exist) {
-        toast({
-          title: 'Erro',
-          description: `Categoria vinculada aos seguintes produto: ${namesExist}`,
-          status: 'error',
-          duration: 500000,
-          isClosable: true
-        })
-        return
-      }
-      if (existSubCategory) {
-        toast({
-          title: 'Erro',
-          description: `As seguintes subcategorias estão vinculadas: ${categoryExist} `,
-          status: 'error',
-          duration: 500000,
-          isClosable: true
-        })
-        return
-      }
-      await deleteDoc(category.ref)
-      await reload()
-      toast({
-        title: 'Sucesso',
-        description: 'Categoria deletada com sucesso.',
-        status: 'success'
-      })
-    } catch (err) {
-      toast({
-        title: 'Erro',
-        description: 'Erro ao deletar categoria',
-        status: 'error'
-      })
-    } finally {
-      await reload()
-      setTimeout(async () => {
-        await listCategory()
-        setLoading(false)
-      }, 1200);
     }
   }
 

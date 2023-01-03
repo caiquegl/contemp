@@ -6,6 +6,7 @@ import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
 import { useAuth } from '../contextAuth/authContext'
+import { v4 as uuidv4 } from 'uuid';
 
 const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
   const { allProductsActive } = useAuth()
@@ -67,7 +68,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
         {data.variation &&
           Object.keys(data.variation).length > 0 &&
           Object.keys(data.variation).map((key: any) => (
-            <Flex alignItems="flex-start" m="5px 0" flexDirection="column">
+            <Flex key={uuidv4()} alignItems="flex-start" m="5px 0" flexDirection="column">
               <Tooltip label={key} placement="top">
                 <Text
                   fontSize="17px"

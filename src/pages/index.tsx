@@ -25,7 +25,6 @@ import { ProductCategoryWithIcon } from '../components/ProductCategoryWithIcon'
 import { HomeBackgroundDetails } from '../components/HomeBackgroundDetails'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { SidebarDrawerProvider } from '../contexts/SidebarDrawerContexts'
 import Head from 'next/head'
 import { useAuth } from '../contextAuth/authContext'
 import { SmoothScroll } from '../components/SmoothScroll'
@@ -390,43 +389,7 @@ const Home = () => {
           <Image src={Mapa} minH={500} bgSize="100%" />
         </Box>
       </Flex>
-      {/* <Flex w="100%" p="80px 0" bg="white">
-        <GridChakra
-          templateColumns={[
-            "repeat(1, 1fr)",
-            "repeat(1, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-            "repeat(3, 1fr)",
-          ]}
-          w="100%"
-        >
-          <CardBlog
-            bg="red.600"
-            color="white"
-            title="Conheça os principais segmentos em que a Contemp atua e saiba como a marca se posiciona no mercado"
-            text="Nossa missão no mercado brasileiro é garantir a melhor solução para medição e controle de temperatura em processos industriais, com excelência técnica em produtos e atendimento. Conheça os principais segmentos em que a Contemp atua."
-            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_8.png"
-          />
-          <CardBlog
-            bg="white.500"
-            color="black.800"
-            title="Por que utilizar termopares de platina e onde aplicá-los?"
-            text="Os termopares de platina são utilizados para medição de alta temperatura em processos industriais, normalmente na faixa de 1.000°C à 1.700°C."
-            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_7.png"
-          />
-          <CardBlog
-            bg="black.800"
-            color="white"
-            title="Medição de Temperatura por Infravermelho em Metais Ferrosos"
-            text="Devido às suas características físico-químicas, o metais são utilizados na produção desde pequenos itens do cotidiano às grandes obras."
-            img="https://blog.contemp.com.br/wp-content/uploads/2022/11/CONTEMP_IMAGENS_BLOG_6.png"
-          />
-        </GridChakra>
-      </Flex> */}
-
       <Catalog />
-
       <Contact
         id="duvidas-e-orcamentos"
         title="DÚVIDAS E ORÇAMENTOS"

@@ -2,6 +2,7 @@ import { Flex, Grid } from '@chakra-ui/react'
 import React, { forwardRef } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import CardProductWithDescription from './CardProductWithDescription'
+import { v4 as uuidv4 } from 'uuid';
 
 export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
   return (
@@ -19,6 +20,7 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
           data.length > 0 &&
           data.map((catg: any) => (
             <CardProductWithDescription
+              key={uuidv4()}
               img={catg.urls && catg.urls[0] ? catg.urls[0] : ''}
               text={catg?.name}
               description={catg?.description}

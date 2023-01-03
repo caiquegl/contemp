@@ -1,9 +1,10 @@
 import { Button, Grid, GridProps, Text, Tooltip } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
+import { v4 as uuidv4 } from 'uuid';
 
 interface IProps {
   img: string
@@ -67,18 +68,12 @@ const CardProductWithDescription = ({
           {text}
         </Text>
       </Tooltip>
-      {/* <TextAntd
-        style={{ fontSize: 20, marginBottom: 20, color: '#000' }}
-        ellipsis={{ tooltip: description }}
-      >
-        {description}
-      </TextAntd> */}
       <Text fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
         {description &&
           description.split('').length > 0 &&
           description
             .split('')
-            .map((el: any, index: number) => <>{index < 100 ? el : ''}</>)}
+            .map((el: any, index: number) => <Fragment key={uuidv4()} >{index < 100 ? el : ''}</Fragment>)}
         {description && description.split('').length > 100 ? '...' : ''}
       </Text>
       {img ?

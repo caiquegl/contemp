@@ -7,11 +7,10 @@ import {
 } from '@chakra-ui/react'
 import {
   forwardRef,
-  ForwardRefRenderFunction,
-  useEffect,
-  useState
+  ForwardRefRenderFunction
 } from 'react'
 import { FieldError } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid';
 
 interface InpuptProps {
   name: string
@@ -60,7 +59,7 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
         >
           {opt &&
             opt.map((list: any) => (
-              <option value={list.value} key={list.value}>
+              <option value={list.value} key={uuidv4()}>
                 {list.name}
               </option>
             ))}

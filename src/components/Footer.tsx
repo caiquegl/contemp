@@ -22,6 +22,7 @@ import { FaFacebookF } from 'react-icons/fa'
 import { SearchBar } from './SearchBar'
 import { useAuth } from '../contextAuth/authContext'
 import { useRouter } from 'next/router'
+import { v4 as uuidv4 } from 'uuid';
 
 export const Footer = () => {
   const { listHeader } = useAuth()
@@ -30,13 +31,6 @@ export const Footer = () => {
 
   useEffect(() => {
     let newList: any = []
-    let first: any = {}
-    let second: any = {}
-    let thrid: any = {}
-    let four: any = {}
-    let five: any = {}
-    let six: any = {}
-    let seven: any = {}
 
     let order: any = []
 
@@ -114,7 +108,7 @@ export const Footer = () => {
         {list &&
           list.length > 0 &&
           list.map((el: any, index: number) => (
-            <GridItem w="100%" gap={6} key={index}>
+            <GridItem w="100%" gap={6} key={uuidv4()}>
               {index === 2 && (
                 <HStack spacing="20px" mb="40px">
                   <Link
@@ -209,7 +203,7 @@ export const Footer = () => {
               {el.list_sub_category &&
                 el.list_sub_category.length > 0 &&
                 el.list_sub_category.map((el2: any) => (
-                  <Fragment key={index}>
+                  <Fragment key={uuidv4()}>
                     <Text
                       fontWeight="bold"
                       fontSize="20px"
@@ -228,7 +222,7 @@ export const Footer = () => {
                         el2.list_sub_category.length > 0 &&
                         el2.list_sub_category.map((el3: any, index: number) => (
                           <Text
-                            key={index}
+                            key={uuidv4()}
                             fontSize="20px"
                             cursor="pointer"
                             onClick={() =>

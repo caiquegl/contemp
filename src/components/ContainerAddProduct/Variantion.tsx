@@ -11,6 +11,7 @@ import { useEffect, useRef } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 import { InputDefault } from "../Form/Input";
+import { v4 as uuidv4 } from 'uuid';
 
 const Variation = ({
   index,
@@ -126,7 +127,7 @@ const Variation = ({
             >
               {defaultValues.opt &&
                 defaultValues.opt.map((value: any) => (
-                  <option key={value}>{value}</option>
+                  <option key={uuidv4()}>{value}</option>
                 ))}
             </Select>
           </InputGroup>

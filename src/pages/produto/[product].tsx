@@ -23,6 +23,7 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import DefaultImg from '../../assets/images/image-default.webp'
+import { v4 as uuidv4 } from 'uuid';
 
 // Import Swiper styles
 import 'swiper/css'
@@ -40,7 +41,6 @@ import { useAuth } from '../../contextAuth/authContext'
 import Head from 'next/head'
 import { Breadcrumb } from 'antd'
 import { customSwiperBullets } from '../../utils/customSwiperBullets'
-import { Header } from '../../components/Header'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
 
@@ -71,10 +71,6 @@ const Product = () => {
     let produto = ''
     if (product && typeof product == 'string')
       produto = product.replaceAll('_', ' ')
-    // const dbInstanceProducts = collection(database, "products");
-    // const dbInstanceHome = collection(database, "home");
-    // const qProduct = query(dbInstanceProducts, where("name", "==", produto), limit(1))
-    // const qHome = query(dbInstanceHome, where("name", "==", produto), limit(1))
     let ex = allProductsActive.filter((el: any) => el.name == produto)
 
     let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0]?.category)
@@ -143,38 +139,7 @@ const Product = () => {
         })
       })
     }
-
-
     setProducts(list)
-
-    // if (!exist) {
-    //   await getDocs(qHome).then(async (data) => {
-    //     if (data.docs.length == 0) return
-    //     setDetail({ ...data.docs[0].data(), id: data.docs[0].id })
-
-    //     const qProductCategory = query(dbInstanceProducts, where("category", "==", data.docs[0].data().category), limit(1))
-    //     const qHomeCategory = query(dbInstanceHome, where("category", "==", data.docs[0].data().category), limit(1))
-
-    //     let listProducts: any = []
-    //     await getDocs(qHomeCategory).then(async (dataCategory) => {
-    //       if (dataCategory.docs.length == 0) return
-    //       dataCategory.docs.forEach((dt) => {
-    //         listProducts.push(dt.data())
-    //       })
-    //     });
-
-    //     await getDocs(qProductCategory).then(async (dataCategory) => {
-    //       if (dataCategory.docs.length == 0) return
-    //       dataCategory.docs.forEach((dt) => {
-    //         listProducts.push(dt.data())
-    //       })
-    //     });
-    //     setProducts(listProducts)
-    //   });
-    // }
-    // } catch (error) {
-    //   console.log(error)
-    // }
   }
 
   useEffect(() => {
@@ -227,7 +192,7 @@ const Product = () => {
               {detail.urls &&
                 detail.urls.length > 0 ?
                 detail.urls.map((photo: any, key: number) => (
-                  <SwiperSlide key={key}>
+                  <SwiperSlide key={uuidv4()}>
                     <Center h="100%" maxH={pxToRem(765)} width="100%">
                       <Zoom>
                         <img
@@ -258,7 +223,7 @@ const Product = () => {
             <Box w="100%" mb="30px">
               <Breadcrumb>
                 {bradName.map((el: any, index: number) => (
-                  <Fragment key={index}>
+                  <Fragment key={uuidv4()}>
                     {index == bradName.length - 1 && (
                       <Breadcrumb.Item>{el}</Breadcrumb.Item>
                     )}
@@ -291,7 +256,7 @@ const Product = () => {
                 detail.listVariation.length > 0 &&
                 detail.listVariation.map((vr: any, key: number) => (
                   <Flex
-                    key={key}
+                    key={uuidv4()}
                     w="100%"
                     alignItems="center"
                     justifyContent="space-between"
@@ -335,7 +300,7 @@ const Product = () => {
                         {vr.opt &&
                           vr.opt.length > 0 &&
                           vr.opt.map((opt: any, key: number) => (
-                            <option value={opt} key={key}>{opt}</option>
+                            <option value={opt} key={uuidv4()}>{opt}</option>
                           ))}
                       </Select>
                     </InputGroup>
@@ -424,7 +389,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <Tab
-                    key={key}
+                    key={uuidv4()}
                     _selected={{
                       bg: 'white.500',
                       color: 'red.600',
@@ -443,7 +408,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <TabPanel
-                    key={key}
+                    key={uuidv4()}
                     bg="white.500"
                     color="black.800"
                     p="40px"
@@ -492,7 +457,7 @@ const Product = () => {
                 speed={1000}
               >
                 {products.map((item: any, key: number) => (
-                  <SwiperSlide key={key}>
+                  <SwiperSlide key={uuidv4()}>
                     <CardProductWithDescription
                       img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
                       text={item.name}

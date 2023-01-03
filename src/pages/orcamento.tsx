@@ -17,7 +17,7 @@ import {
   ModalBody,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Header } from "../components/Header";
+import { v4 as uuidv4 } from 'uuid';
 import Mapa from "../assets/images/MAPA.png";
 import { Footer } from "../components/Footer";
 import { BiPhone } from "react-icons/bi";
@@ -121,7 +121,6 @@ const Orcamento = () => {
 
   return (
     <SmoothScroll>
-      {/* <Header /> */}
       <Head>
         <meta
           name="description"
@@ -301,6 +300,7 @@ const Orcamento = () => {
               cart.length > 0 &&
               cart.map((product: any, index: number) => (
                 <CardProductCart
+                  key={uuidv4()}
                   data={product}
                   changeQtd={(value: any) => {
                     let newList = cart;

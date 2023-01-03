@@ -9,6 +9,7 @@ import { ListCategory } from '../../components/ListCategory'
 import { useAuth } from '../../contextAuth/authContext'
 import Head from 'next/head'
 import { AdBanners } from '../../components/AdBanners'
+import { v4 as uuidv4 } from 'uuid';
 
 const Category = () => {
   const router = useRouter()
@@ -158,7 +159,7 @@ const Category = () => {
             if (index % 3 === 0) bg = 'black.800'
             if (index % 4 === 0) bg = 'red.600'
 
-            return <ListCategory bg={bg} data={categ} ref={productListRef} />
+            return <ListCategory key={uuidv4()} bg={bg} data={categ} ref={productListRef} />
           })}
       </Box>
       <Flex

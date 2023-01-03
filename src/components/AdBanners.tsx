@@ -1,5 +1,4 @@
 import { Box, Grid } from '@chakra-ui/react'
-import { StaticImageData } from 'next/image'
 import Image from 'next/image'
 import { pxToRem } from '../utils/pxToRem'
 import InovacaoContemp from '../assets/banners/inovacao-contemp.png'

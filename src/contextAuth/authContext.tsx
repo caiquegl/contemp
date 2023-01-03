@@ -219,9 +219,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getCategoryOffiline()
     getProductOffiline()
     getProductHomeOffiline()
-    await getCategory()
-    await getAllProducts()
-    await getAllProductsHome()
+    getCategory()
+    getAllProducts()
+    getAllProductsHome()
     setLoading(false)
   }
 

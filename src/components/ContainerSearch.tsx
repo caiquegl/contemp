@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import DefaultImg from '../assets/images/image-default.webp'
 import ImageNext from 'next/image'
 import { setContextMenuFalse } from '../utils/setContextMenuFalse'
+import { v4 as uuidv4 } from 'uuid';
 
 export const ContainerSearch = ({ list, searchCard, click }: any) => {
   const router = useRouter()
@@ -28,6 +29,7 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
           list.length > 0 &&
           list.map((el: any) => (
             <Flex
+              key={uuidv4()}
               cursor="pointer"
               _hover={{ opacity: 0.8, transition: 'all 0.4s' }}
               alignItems="center"

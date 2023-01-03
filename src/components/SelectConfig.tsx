@@ -1,5 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export const SelectConfig = () => {
   const [text, setText] = useState({
@@ -274,7 +275,7 @@ export const SelectConfig = () => {
             </Text>
             {text.description.length > 0 &&
               text.description.map((value) => (
-                <Text color="black.800" fontSize="20px" mb="10px">
+                <Text color="black.800" fontSize="20px" mb="10px" key={uuidv4()}>
                   {value}
                 </Text>
               ))}

@@ -1,6 +1,8 @@
 import { Box, Button, Flex, GridItem, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 import { pxToRem } from "../utils/pxToRem";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IProps {
   bg: string;
@@ -47,7 +49,7 @@ const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
           <Text color={color} fontSize="20px" mt="20px">
             {text && text.split('').length > 0 && text
               .split("")
-              .map((el: any, index: number) => <>{index < 300 ? el : ""}</>)}
+              .map((el: any, index: number) => <Fragment key={uuidv4()}>{index < 300 ? el : ""}</Fragment>)}
             {text && text.split("").length > 300 ? "..." : ""}
           </Text>
 
