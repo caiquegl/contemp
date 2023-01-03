@@ -116,37 +116,37 @@ export const Header = () => {
 
   const scrollYIsGreaterThan100 = scrollY >= 100
 
-  // if (scrollYIsGreaterThan100) {
-  //   return (
-  //     <Box h="250px" transition={defaultTransition}>
-  //       <Box
-  //         display="flex"
-  //         alignItems="center"
-  //         position="fixed"
-  //         top="0"
-  //         w="100%"
-  //         h="70px"
-  //         bg="black.800"
-  //         zIndex={999}
-  //         transition="inherit"
-  //       >
-  //         <Container maxW="7xl" p="12px 15px 15px 15px">
-  //           <Flex alignItems="center" justifyContent="space-between" h={70}>
-  //             <Logo />
+  if (scrollYIsGreaterThan100) {
+    return (
+      <Box h="250px">
+        <Box
+          display="flex"
+          alignItems="center"
+          position="fixed"
+          top="0"
+          w="100%"
+          h="70px"
+          bg="black.800"
+          zIndex={999}
+          transition="inherit"
+        >
+          <Container maxW="7xl" p="12px 15px 15px 15px">
+            <Flex alignItems="center" justifyContent="space-between" h={70}>
+              <Logo />
 
-  //             <AllProductsButton />
+              <AllProductsButton />
 
-  //             <HeaderMenu menuItems={list} />
+              <HeaderMenu menuItems={list} />
 
-  //             <CartBag cart={cart} totalCart={totalCart} onOpen={oOpen} />
-  //           </Flex>
+              <CartBag cart={cart} totalCart={totalCart} onOpen={oOpen} />
+            </Flex>
 
-  //           <NoProductWarningModal isOpen={open} onClose={oClose} />
-  //         </Container>
-  //       </Box>
-  //     </Box>
-  //   )
-  // }
+            <NoProductWarningModal isOpen={open} onClose={oClose} />
+          </Container>
+        </Box>
+      </Box>
+    )
+  }
 
   const defaultTransition = 'all 0.3s'
 

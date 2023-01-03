@@ -70,11 +70,15 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
       `}</style>
 
       <Menu
+        // subMenuCloseDelay={0}
+        subMenuOpenDelay={0.5}
+        multiple={false}
         onClick={(evt) => {
           router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}#viewCategory`)
         }}
         mode={'horizontal'}
         items={list}
+        forceSubMenuRender={true}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
           background: '#242424',

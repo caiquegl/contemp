@@ -12,7 +12,7 @@ import {
   Text,
   UnorderedList
 } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
   AiFillLinkedin,
   AiFillYoutube,
@@ -118,7 +118,7 @@ export const Footer = () => {
         {list &&
           list.length > 0 &&
           list.map((el: any, index: number) => (
-            <GridItem w="100%" gap={6}>
+            <GridItem w="100%" gap={6} key={index}>
               {index === 2 && (
                 <HStack spacing="20px" mb="40px">
                   <Link
@@ -213,7 +213,7 @@ export const Footer = () => {
               {el.list_sub_category &&
                 el.list_sub_category.length > 0 &&
                 el.list_sub_category.map((el2: any) => (
-                  <>
+                  <Fragment key={index}>
                     <Text
                       fontWeight="bold"
                       fontSize="20px"
@@ -230,8 +230,9 @@ export const Footer = () => {
                     <Box mb="20px">
                       {el2.list_sub_category &&
                         el2.list_sub_category.length > 0 &&
-                        el2.list_sub_category.map((el3: any) => (
+                        el2.list_sub_category.map((el3: any, index: number) => (
                           <Text
+                            key={index}
                             fontSize="20px"
                             cursor="pointer"
                             onClick={() =>
@@ -244,7 +245,7 @@ export const Footer = () => {
                           </Text>
                         ))}
                     </Box>
-                  </>
+                  </Fragment>
                 ))}
             </GridItem>
           ))}

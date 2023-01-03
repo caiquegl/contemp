@@ -16,7 +16,7 @@ import {
   Link,
   useToast,
 } from "@chakra-ui/react";
-import React, { useCallback, useRef, useState } from "react";
+import React, { Fragment, useCallback, useRef, useState } from "react";
 import { BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import { TbSend } from "react-icons/tb";
@@ -208,8 +208,8 @@ export const Contact = ({
                   ref={formRef}>
                   {form &&
                     form.length > 0 &&
-                    form.map((quest: any) => (
-                      <>
+                    form.map((quest: any, index: number) => (
+                      <Fragment key={index}>
                         {quest.type === "text" && (
                           <InputDefault
                             label={quest.name}
@@ -278,7 +278,7 @@ export const Contact = ({
                             </Text>
                           </Flex>
                         )}
-                      </>
+                      </Fragment>
                     ))}
                   <Flex justifyContent="flex-end">
                     <Button

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
+import DefaultImg from '../assets/images/image-default.webp'
 
 interface IProps {
   img: string
@@ -79,19 +80,33 @@ const CardProductWithDescription = ({
             .map((el: any, index: number) => <>{index < 100 ? el : ''}</>)}
         {description && description.split('').length > 100 ? '...' : ''}
       </Text>
-
-      <Image
-        uri={img}
-        alt={alt}
-        wImg={260}
-        hImg={260}
-        h={{
-          base: pxToRem(260),
-          xl: pxToRem(280)
-        }}
-        gridRow={3}
-        bgSize="contain"
-      />
+      {img ?
+        <Image
+          uri={img}
+          alt={alt}
+          wImg={260}
+          hImg={260}
+          h={{
+            base: pxToRem(260),
+            xl: pxToRem(280)
+          }}
+          gridRow={3}
+          bgSize="contain"
+        />
+        :
+        <Image
+          src={DefaultImg}
+          alt={alt}
+          wImg={260}
+          hImg={260}
+          h={{
+            base: pxToRem(260),
+            xl: pxToRem(280)
+          }}
+          gridRow={3}
+          bgSize="contain"
+        />
+      }
 
       <Button
         w={pxToRem(243)}
