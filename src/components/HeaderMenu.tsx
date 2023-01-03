@@ -10,9 +10,10 @@ import { Box } from '@chakra-ui/react'
 export type MenuProps = {
   menuItems: any
   style?: CSSProperties
+  onClose?: any
 }
 
-export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
+export const HeaderMenu = ({ menuItems, style, onClose }: MenuProps) => {
   const [list, setList] = useState([])
   const router = useRouter()
 
@@ -102,7 +103,7 @@ export const HeaderMenu = ({ menuItems, style }: MenuProps) => {
   )
 }
 
-export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
+export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
   const [list, setList] = useState([])
   const router = useRouter()
 
@@ -119,9 +120,10 @@ export const HeaderMenuVertical = ({ menuItems }: MenuProps) => {
               icon={AiOutlineEye}
               size={20}
               color="#fff"
-              onClick={(item: any) =>
+              onClick={(item: any) => {
+                onClose(false)
                 router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
-              }
+              }}
             />
           )
         }
