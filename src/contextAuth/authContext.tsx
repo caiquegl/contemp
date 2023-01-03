@@ -141,16 +141,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const dbInstanceCategory = collection(database, 'categories')
 
-      let list: any = []
+      let OLDlist: any = []
       await getDocs(dbInstanceCategory).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({
+          OLDlist.push({
             ...el.data(),
             id: data.docs[index].id,
             ref: data.docs[index].ref
           })
         })
       })
+
+      let list = OLDlist.filter((el: any) => !el.NOT_SHOW)
 
       let active = list.filter((el: any) => el.is_active == true)
       setAllCategoryActive([...active])
@@ -166,10 +168,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const dbInstanceProduct = collection(database, 'products')
 
-      let list: any = []
+      let listOld: any = []
       await getDocs(dbInstanceProduct).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({
+          listOld.push({
             ...el.data(),
             id: data.docs[index].id,
             ref: data.docs[index].ref
@@ -177,9 +179,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
+      let list = listOld.filter((el: any) => el.catgeory != 'ZGRgyNWLIzLRqjwqcdPF')
+
       let active = list.filter((el: any) => el.is_active == true)
       setAllProductsActive([...active])
-      setAllProducts([...list])
+      setAllProducts([...listOld])
       localStorage.setItem('SET_PRODUCTS', JSON.stringify([...list]))
 
       return list
@@ -192,12 +196,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const dbInstanceHome = collection(database, 'home')
 
-      let list: any = []
+      let listOld: any = []
       await getDocs(dbInstanceHome).then(async (data) => {
         data.docs.map((el: any, index: number) => {
-          list.push({ ...el.data(), id: data.docs[index].id })
+          listOld.push({ ...el.data(), id: data.docs[index].id })
         })
       })
+
+      let list = listOld.filter((el: any) => el.catgeory != 'ZGRgyNWLIzLRqjwqcdPF')
+
 
       setAllProductsHome([...list])
       localStorage.setItem('SET_PRODUCTS_HOME', JSON.stringify([...list]))

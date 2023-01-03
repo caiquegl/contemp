@@ -8,6 +8,7 @@ import {
   useToast,
   VStack
 } from '@chakra-ui/react'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { database, initFirebase } from '../../utils/db/index'
@@ -31,11 +32,14 @@ import { EditOrder } from '../EditOrder'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { useAuth } from '../../contextAuth/authContext'
-import { Table } from 'antd'
+import { Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import { useRouter } from 'next/router'
+
+const { confirm } = Modal;
+
 interface IBody {
   name: string
   is_main?: string
@@ -133,6 +137,20 @@ const TabCategory = () => {
       await listCategory(newList)
       setLoading(false)
     }
+  }
+
+  const updateProducts = async (id: any) => {
+    const dbInstanceUpdate = doc(database, 'products', id)
+    await updateDoc(dbInstanceUpdate, {
+      category: 'ZGRgyNWLIzLRqjwqcdPF'
+    })
+  }
+
+  const updateHome = async (id: any) => {
+    const dbInstanceUpdate = doc(database, 'home', id)
+    await updateDoc(dbInstanceUpdate, {
+      category: 'ZGRgyNWLIzLRqjwqcdPF'
+    })
   }
 
   const updateCategory = async (bodyForm: any) => {
@@ -297,6 +315,118 @@ const TabCategory = () => {
     }
   }
 
+  const deleteAllCategory = async (category: any) => {
+    setLoading(true)
+    const dbInstanceCategory = collection(database, 'categories')
+    const qExistCategory = query(
+      dbInstanceCategory,
+      where('sub_categorie', '==', category.id),
+    )
+
+    await getDocs(qExistCategory).then(async (categFather) => {
+
+      for await (let [i, categ] of categFather.docs.entries()) {
+        // primeira categoria
+
+        const db2Category = collection(database, 'categories')
+        const q2Category = query(
+          db2Category,
+          where('sub_categorie', '==', categFather.docs[i].id),
+        )
+
+        await getDocs(q2Category).then(async (categ2Father) => {
+          for await (let [i2, categ2] of categ2Father.docs.entries()) {
+
+            const db2Product = collection(database, 'products')
+            const q2Product = query(
+              db2Product,
+              where('category', '==', categ2Father.docs[i2].id),
+            )
+
+            await getDocs(q2Product).then(async (prod2Father) => {
+              for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
+                await updateProducts(prod2Father.docs[iProd2].id)
+              }
+            })
+
+            const db2Home = collection(database, 'home')
+            const q2Home = query(
+              db2Home,
+              where('category', '==', categ2Father.docs[i2].id),
+            )
+            await getDocs(q2Home).then(async (home2Father) => {
+              for await (let [ihome2, home2] of home2Father.docs.entries()) {
+                await updateHome(home2Father.docs[ihome2])
+              }
+            })
+            await deleteDoc(categ2Father.docs[i2].ref)
+          }
+        })
+
+        const dbProduct = collection(database, 'products')
+        const qProduct = query(
+          dbProduct,
+          where('category', '==', categFather.docs[i].id),
+        )
+
+        await getDocs(qProduct).then(async (prod2Father) => {
+          for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
+            await updateProducts(prod2Father.docs[iProd2].id)
+          }
+        })
+
+        const dbHome = collection(database, 'home')
+        const qHome = query(
+          dbHome,
+          where('category', '==', categFather.docs[i].id),
+        )
+        await getDocs(qHome).then(async (home2Father) => {
+          for await (let [ihome2, home2] of home2Father.docs.entries()) {
+            await updateHome(home2Father.docs[ihome2].id)
+          }
+        })
+
+        await deleteDoc(categFather.docs[i].ref)
+      }
+    })
+
+    const dbFatherProduct = collection(database, 'products')
+    const qfatherProduct = query(
+      dbFatherProduct,
+      where('category', '==', category.id),
+    )
+
+    await getDocs(qfatherProduct).then(async (prod2Father) => {
+      for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
+        await updateProducts(prod2Father.docs[iProd2].id)
+      }
+    })
+
+    const dbFatherHome = collection(database, 'home')
+    const qFatherHome = query(
+      dbFatherHome,
+      where('category', '==', category.id),
+    )
+    await getDocs(qFatherHome).then(async (home2Father) => {
+      for await (let [ihome2, home2] of home2Father.docs.entries()) {
+        await updateHome(home2Father.docs[ihome2].id)
+
+      }
+    })
+    await deleteDoc(category.ref)
+    setLoading(false)
+    toast({
+      title: 'Sucesso',
+      description: 'Categoria deletada com sucesso.',
+      status: 'success'
+    })
+
+    reset()
+    await reload()
+    let newList = await reloadCategory()
+    await listCategory(newList)
+  }
+
   const changerOrder = async (order: number, ref: any) => {
     try {
       const dbInstance = collection(database, 'categories')
@@ -383,7 +513,20 @@ const TabCategory = () => {
             as={AiOutlineClose}
             fontSize="17px"
             color="red.500"
-            onClick={() => deleteCategory(a)}
+            onClick={() => {
+              confirm({
+                title: 'ATENÇÃO',
+                icon: <ExclamationCircleOutlined />,
+                content: 'Você está prestes a pagar todas as sub categorias e produtos vinculados a essa categoria, você tem certeza disso ?',
+                onOk() {
+                  deleteAllCategory(a)
+                },
+                onCancel() {
+                  console.log('Cancel');
+                },
+              });
+
+            }}
           />
         </HStack>
       )

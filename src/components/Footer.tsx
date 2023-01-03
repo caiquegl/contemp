@@ -55,18 +55,9 @@ export const Footer = () => {
 
     let newOrder = order.sort((a: any, b: any) => a.count - b.count)
 
-    console.log(newOrder, listHeader)
     newOrder.forEach((el: any) => {
       newList.push(listHeader[el.index])
     })
-
-    // newList.push(first)
-    // newList.push(second)
-    // newList.push(thrid)
-    // newList.push(four)
-    // newList.push(five)
-    // newList.push(six)
-    // newList.push(seven)
     setList(newList)
   }, [listHeader])
 
