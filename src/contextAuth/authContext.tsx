@@ -16,7 +16,7 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
-import { collection, getDocs, onSnapshot, disableNetwork, enableNetwork } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 interface AuthProviderProps {
   children: ReactNode
 }
@@ -219,9 +219,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     getCategoryOffiline()
     getProductOffiline()
     getProductHomeOffiline()
-    getCategory()
-    getAllProducts()
-    getAllProductsHome()
+    await getCategory()
+    await getAllProducts()
+    await getAllProductsHome()
     setLoading(false)
   }
 
@@ -398,6 +398,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         </Flex>
       )}
       {children}
+
     </UserAuthContext.Provider>
   )
 }
