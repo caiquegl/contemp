@@ -1,4 +1,4 @@
-import { Box, Button, Flex, GridItem, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, GridItem, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { pxToRem } from "../utils/pxToRem";
 
@@ -7,8 +7,9 @@ interface IProps {
   text: string;
   title: string;
   color: string;
+  img?: string;
 }
-const CardCatalog = ({ bg, text, title, color }: IProps) => {
+const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
   const router = useRouter();
 
   return (
@@ -16,14 +17,23 @@ const CardCatalog = ({ bg, text, title, color }: IProps) => {
       <Flex h="100%" justifyContent="space-between" flexDirection="column">
         <Box>
           <Box mb={pxToRem(15)}>
-            <Box
-              w="41px"
-              h="41px"
-              borderRadius="5px"
-              bg={color}
-              mb={pxToRem(10)}
-            />
-
+            {!img ?
+              <Box
+                w="41px"
+                h="41px"
+                borderRadius="5px"
+                bg={color}
+                mb={pxToRem(10)}
+              />
+              :
+              <Box
+                w="41px"
+                h="41px"
+                borderRadius="5px"
+              >
+                <Image src={img} alt={title} />
+              </Box>
+            }
             <Text
               color={color}
               fontSize={pxToRem(30)}

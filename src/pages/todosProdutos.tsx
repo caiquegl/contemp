@@ -79,7 +79,7 @@ const AllProduct = () => {
     try {
       let list: any = []
 
-      allProductsActive.forEach((el: any) => {
+      allCategoryActive.forEach((el: any) => {
         list.push({
           ...el,
           idCategorie: el.id
@@ -107,14 +107,14 @@ const AllProduct = () => {
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth
 
-      ;[].forEach.call(
-        document.querySelectorAll('*'),
-        function (element: HTMLElement) {
-          if (element.offsetWidth > docWidth) {
-            console.log(element)
+        ;[].forEach.call(
+          document.querySelectorAll('*'),
+          function (element: HTMLElement) {
+            if (element.offsetWidth > docWidth) {
+              console.log(element)
+            }
           }
-        }
-      )
+        )
     }
     findOverflowingElements()
   }, [allCategoryActive, allProductsActive, allProductsHome])
@@ -277,6 +277,7 @@ const AllProduct = () => {
                     color={color}
                     title={categ.name}
                     text={categ.description}
+                    img={categ.url}
                   />
                 )
               })}
