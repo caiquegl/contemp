@@ -81,8 +81,10 @@ const CardProductWithDescription = ({
       </Text>
 
       <Image
-        src={img}
+        uri={img}
         alt={alt}
+        wImg={260}
+        hImg={260}
         h={{
           base: pxToRem(260),
           xl: pxToRem(280)

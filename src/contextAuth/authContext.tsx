@@ -16,7 +16,7 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot, disableNetwork, enableNetwork } from 'firebase/firestore'
 interface AuthProviderProps {
   children: ReactNode
 }
@@ -92,6 +92,51 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return () => au()
   }, [])
 
+  const getCategoryOffiline = async () => {
+    try {
+      let get = localStorage.getItem('SET_CATEGORY')
+      if (get) {
+        let list = JSON.parse(get)
+        let active = list.filter((el: any) => el.is_active == true)
+        setAllCategoryActive([...active])
+        setAllCategory([...list])
+        return list
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getProductOffiline = async () => {
+    try {
+      let get = localStorage.getItem('SET_PRODUCTS')
+      if (get) {
+        let list = JSON.parse(get)
+        let active = list.filter((el: any) => el.is_active == true)
+        setAllCategoryActive([...active])
+        setAllCategory([...list])
+        return list
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getProductHomeOffiline = async () => {
+    try {
+      let get = localStorage.getItem('SET_PRODUCTS_HOME')
+      if (get) {
+        let list = JSON.parse(get)
+        let active = list.filter((el: any) => el.is_active == true)
+        setAllCategoryActive([...active])
+        setAllCategory([...list])
+        return list
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const getCategory = async () => {
     try {
       const dbInstanceCategory = collection(database, 'categories')
@@ -110,6 +155,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       let active = list.filter((el: any) => el.is_active == true)
       setAllCategoryActive([...active])
       setAllCategory([...list])
+      localStorage.setItem('SET_CATEGORY', JSON.stringify([...list]))
       return list
     } catch (error) {
       console.log(error)
@@ -134,6 +180,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       let active = list.filter((el: any) => el.is_active == true)
       setAllProductsActive([...active])
       setAllProducts([...list])
+      localStorage.setItem('SET_PRODUCTS', JSON.stringify([...list]))
+
       return list
     } catch (error) {
       console.log(error)
@@ -152,6 +200,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       setAllProductsHome([...list])
+      localStorage.setItem('SET_PRODUCTS_HOME', JSON.stringify([...list]))
+
     } catch (error) {
       console.log(error)
     }
@@ -159,6 +209,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const reload = async () => {
     setLoading(true)
+    getCategoryOffiline()
+    getProductOffiline()
+    getProductHomeOffiline()
     await getCategory()
     await getAllProducts()
     await getAllProductsHome()

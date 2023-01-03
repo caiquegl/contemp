@@ -53,7 +53,8 @@ export const SmoothScroll = ({ children }: any) => {
         <Header />
       </SidebarDrawerProvider>
 
-      <Box maxH="100vh" ref={scrollingContainerRef}>
+      {/* <Box maxH="100vh" ref={scrollingContainerRef}> */}
+      <Box maxH="100vh" >
         {children}
       </Box>
     </>
