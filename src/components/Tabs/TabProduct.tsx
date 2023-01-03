@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Flex, Button, useToast } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { deleteDoc } from 'firebase/firestore'
@@ -51,7 +51,11 @@ const TabProduct = () => {
     {
       title: 'Url',
       dataIndex: 'url',
-      key: 'url'
+      key: 'url',
+      render: (a: any, b: any) => <Link href={b.name ? `/produto/${b.name.replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
+
+        {`https://contemp.com.br/produto/${b.name.replaceAll(' ', '_')}`}
+      </Link>
     },
     {
       title: 'Ação',
