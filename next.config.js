@@ -83,5 +83,5 @@ module.exports = {
       creatRedirectObj ('/allProduct', '/todosProdutos'),
       // creatRedirectObj ('', '')
     ]
-  },
+  }
 }

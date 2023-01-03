@@ -14,6 +14,7 @@ import {
   HStack,
   Link,
   Text,
+  useBreakpointValue,
   useDisclosure
 } from '@chakra-ui/react'
 import { collection, getDocs } from 'firebase/firestore'

@@ -76,33 +76,12 @@ const CardProductWithDescription = ({
             .map((el: any, index: number) => <Fragment key={uuidv4()} >{index < 100 ? el : ''}</Fragment>)}
         {description && description.split('').length > 100 ? '...' : ''}
       </Text>
-      {img ?
-        <Image
-          uri={img}
-          alt={alt}
-          wImg={260}
-          hImg={260}
-          h={{
-            base: pxToRem(260),
-            xl: pxToRem(280)
-          }}
-          gridRow={3}
-          bgSize="contain"
-        />
-        :
-        <Image
-          src={DefaultImg}
-          alt={alt}
-          wImg={260}
-          hImg={260}
-          h={{
-            base: pxToRem(260),
-            xl: pxToRem(280)
-          }}
-          gridRow={3}
-          bgSize="contain"
-        />
-      }
+      <Image src={img ? img : DefaultImg} alt={alt} h={{
+        base: pxToRem(260),
+        xl: pxToRem(280)
+      }}
+        gridRow={3}
+        bgSize="contain" />
 
       <Button
         w={pxToRem(243)}

@@ -19,10 +19,17 @@ import { useRouter } from "next/router";
 import { useAuth } from "../contextAuth/authContext";
 import { v4 as uuidv4 } from 'uuid';
 import { useWindowSize } from "../utils/useWindowSize";
+import ImageNext, { StaticImageData } from 'next/image'
 
 export const Favorite = () => {
   const windowSize = useWindowSize()
-
+  const isDrawerSiderbar = useBreakpointValue({
+    base: true,
+    lg: false,
+    xl: false,
+    md: false,
+    sm: false
+  });
   const [maxWidth] = useState(930)
   const [width, setWidth] = useState(0)
 
@@ -48,6 +55,8 @@ export const Favorite = () => {
     md: true,
     lg: false,
   });
+
+
 
   const isDesktop = useBreakpointValue({
     lg: true,
@@ -219,6 +228,7 @@ export const Favorite = () => {
           mb="53px"
           flexDirection={["column", "column", "row", "row", "row"]}
         >
+
           <Image
             flex={1}
             src={homeTabs.tab1.urls[0]}
