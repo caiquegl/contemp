@@ -17,7 +17,22 @@ import { Image } from "./Image";
 import { ProductCategoryWithIcon } from "./ProductCategoryWithIcon";
 import { useRouter } from "next/router";
 import { useAuth } from "../contextAuth/authContext";
+import { useWindowSize } from "../utils/useWindowSize";
+
 export const Favorite = () => {
+  const windowSize = useWindowSize()
+
+  const [ maxWidth ] = useState(930)
+  const [ width, setWidth ] = useState(0)
+
+  useEffect(() => {
+    if (windowSize) {
+      setWidth(windowSize?.width as number)
+    } else {
+      setWidth(window.innerWidth)
+    }
+  }, [windowSize])
+  
   const { allProductsActive, allProductsHome, allCategoryActive } = useAuth();
   const router = useRouter();
   const toast = useToast();
@@ -153,7 +168,7 @@ export const Favorite = () => {
         fontSize="40px"
         fontWeight="bold"
         textAlign="center"
-        mt="80px"
+        mt={width > maxWidth ? '80px' : '20px'}
       >
         Confira nossos destaques
       </Text>

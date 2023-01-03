@@ -1,12 +1,26 @@
 import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import { Image } from './Image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Team from '../assets/images/temnacontemp.png'
 import { Typewriter } from 'react-simple-typewriter'
 import { pxToRem } from '../utils/pxToRem'
 import { SearchBar } from './SearchBar'
+import { useWindowSize } from '../utils/useWindowSize'
 
 export const Banner = () => {
+  const windowSize = useWindowSize()
+
+  const [ maxWidth ] = useState(930)
+  const [ width, setWidth ] = useState(0)
+
+  useEffect(() => {
+    if (windowSize) {
+      setWidth(windowSize?.width as number)
+    } else {
+      setWidth(window.innerWidth)
+    }
+  }, [windowSize])
+
   return (
     <Flex
       w="100%"
@@ -33,8 +47,8 @@ export const Banner = () => {
           w="100%"
           maxW="650px"
           flexDirection="column"
-          marginBottom={pxToRem(87)}
-          minH={pxToRem(150)}
+          marginBottom={pxToRem(width > maxWidth ? 87: 60)}
+          minH={pxToRem(width > maxWidth ? 150: 40)}
         >
           <Text
             color="white"
@@ -50,7 +64,7 @@ export const Banner = () => {
             textAlign="center"
             fontSize={['1.3rem', '1.3rem', '2.3rem']}
             fontWeight="bold"
-            h={pxToRem(130)}
+            h={pxToRem(width > maxWidth ? 130 : 40)}
           >
             <Typewriter words={typewriterWords} loop={0} cursor={true} />
           </Text>
