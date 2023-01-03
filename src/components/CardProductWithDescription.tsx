@@ -33,13 +33,14 @@ const CardProductWithDescription = ({
     <Grid
       alignItems="center"
       gridTemplateRows="max-content 0.7fr 2fr 0.5fr"
+      justifyContent="space-between"
       rowGap={pxToRem(10)}
       borderRadius="8px"
       cursor="pointer"
       onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
       maxW={pxToRem(350)}
       w="100%"
-      h={pxToRem(700)}
+      h={pxToRem(800)}
       mt="20px"
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}

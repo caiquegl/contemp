@@ -323,17 +323,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         <Flex
           w="100%"
           maxW="440px"
-          h="280px"
+          h={["340px", "280px"]}
           borderRadius="6px"
           position="fixed"
           bg="red.600"
           bottom="10px"
-          left="20px"
+          left={["0", "20px"]}
           p="20px 26px"
           flexDirection="column"
           justifyContent="space-between"
           boxShadow="0 -1px 10px 0 #acabab4d;"
-          zIndex={999999}
+          zIndex={999999999}
         >
           <Text fontWeight="bold" color="white" fontSize="20px" mb="10px">
             Valorizamos sua privacidade

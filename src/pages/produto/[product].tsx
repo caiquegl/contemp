@@ -474,7 +474,7 @@ const Product = () => {
                 #temnacontemp
               </Text>
             </Flex>
-            <Flex alignItems="center" h={pxToRem(670)} mt="31px">
+            <Flex alignItems="center" h={pxToRem(970)} mt="31px">
               <Swiper
                 slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
                 spaceBetween={30}
