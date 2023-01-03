@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
-        <Script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X" />
+        {/* <Script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X" /> */}
         <Head>
           <title>Contemp</title>
         </Head>

@@ -27,20 +27,20 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="/favicon.png" />
-          <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
+          {/* <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script> */}
 
 
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script
+          {/* <script
             type="text/javascript"
             async
             src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js"
-          ></script>
+          ></script> */}
 
-          <script
+          {/* <script
             dangerouslySetInnerHTML={{
               __html: `
               !function (t, e, c, n) {
@@ -62,9 +62,9 @@ export default class MyDocument extends Document {
               claspo('init');
             `,
             }}
-          />
+          /> */}
 
-          <script
+          {/* <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-24615402-1"
           />
@@ -77,7 +77,7 @@ export default class MyDocument extends Document {
           gtag('config', 'UA-24615402-1');
           `,
             }}
-          />
+          /> */}
         </body>
       </Html>
     );
