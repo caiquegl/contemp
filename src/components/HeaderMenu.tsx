@@ -29,10 +29,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           onTitleClick: (value: any) => {
             router.push(`/category/${el.name.replaceAll(" ", "_")}#viewCategory`);
           },
-          style: {
-            marginRight: 0,
-            padding: `0 ${pxToRem(5)}`,
-          },
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
@@ -58,6 +54,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
+      {console.log(list)}
       <style lang="css" scoped>{`
         .ant-menu-submenu-title {
           display: flex;
@@ -75,6 +72,8 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         mode={"horizontal"}
         subMenuOpenDelay={0.5}
         items={list}
+        // defaultSelectedKeys={["CÂMERAS TERMOGRÁFICAS FIXAS"]}
+        // openKeys={["CÂMERAS TERMOGRÁFICAS FIXAS"]}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
           background: "#242424",

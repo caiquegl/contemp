@@ -96,25 +96,29 @@ const Category = () => {
     }
   }, [category, allCategoryActive, allProductsActive])
 
-  const productListRef = useRef(null)
+  // const productListRef = useRef(null)
 
-  const handleScrollToProductList = () => {
-    const current = productListRef?.current as unknown as Element
-    const productListTop = current?.getBoundingClientRect().top
+  // const handleScrollToProductList = () => {
+  //   const current = productListRef?.current as unknown as Element
+  //   const productListTop = current?.getBoundingClientRect().top
 
-    if (document.body.scrollTop === 0 && !loading && list.length !== 0) {
-      window.scrollTo({ top: productListTop })
-    }
-  }
+  //   if (document.body.scrollTop === 0 && !loading && list.length !== 0) {
+  //     window.scrollTo({ top: productListTop })
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   handleScrollToProductList()
+  // }, [category])
 
   useEffect(() => {
-    handleScrollToProductList()
-  }, [category])
+    window.scrollTo({
+      top: 230,
+      behavior: 'smooth',
+    });
+    // window.addEventListener('scroll', handleScrollToProductList)
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScrollToProductList)
-
-    return () => window.removeEventListener('scroll', handleScrollToProductList)
+    // return () => window.removeEventListener('scroll', handleScrollToProductList)
   }, [])
 
   return (
@@ -133,7 +137,7 @@ const Category = () => {
         justifyContent="center"
         direction="column"
         h={['350px', '350px', '250px', '250px', '250px', '250px']}
-        id="viewCategory"
+      // id="viewCategory"
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
@@ -141,13 +145,15 @@ const Category = () => {
           textAlign="center"
           maxW="1037px"
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
+
         >
           {category && typeof category === 'string'
             ? category.replaceAll('_', ' ')
             : ''}
         </Text>
       </Flex>
-      <Box id="viewCategory"
+      <Box
+
       >
         {list &&
           list.length > 0 &&
@@ -159,7 +165,7 @@ const Category = () => {
             if (index % 3 === 0) bg = 'black.800'
             if (index % 4 === 0) bg = 'red.600'
 
-            return <ListCategory key={uuidv4()} bg={bg} data={categ} ref={productListRef} />
+            return <ListCategory key={uuidv4()} bg={bg} data={categ} />
           })}
       </Box>
       <Flex
