@@ -48,7 +48,7 @@ const Product = () => {
   const router = useRouter()
   initFirebase()
   const toast = useToast()
-  const { allCategoryActive, allProductsActive, addCart } = useAuth()
+  const { allCategoryActive, allProductsActive, addCart, allProductsHome } = useAuth()
 
   const { product } = router.query
   const [detail, setDetail] = useState<any>({})
@@ -71,7 +71,9 @@ const Product = () => {
     let produto = ''
     if (product && typeof product == 'string')
       produto = product.replaceAll('_', ' ')
+    console.log(produto)
     let ex = allProductsActive.filter((el: any) => el.name == produto)
+    if (ex.length == 0) ex = allProductsHome.filter((el: any) => el.name == produto)
 
     let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0]?.category)
 
@@ -148,6 +150,9 @@ const Product = () => {
     }
   }, [allCategoryActive, allProductsActive, product])
 
+  useEffect(() => {
+    console.log(variation)
+  }, [variation])
   return (
     <>
       <SmoothScroll>
@@ -284,6 +289,7 @@ const Product = () => {
                         borderRadius="21px"
                         placeholder="Selecione uma opção"
                         color="black.800"
+                        value={variation[vr.name] ? variation[vr.name] : undefined}
                         onChange={(evt) =>
                           setVariation({
                             ...variation,

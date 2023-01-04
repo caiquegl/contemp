@@ -38,7 +38,6 @@ const TabProduct = () => {
       key: 'nameCategory',
       render: (a: any, b: any) => {
         let name = ''
-        console.log(b)
         if (allCategory) {
           let find = allCategory.find((el: any) => el.id === b.category)
           if (find?.name) name = find.name
@@ -46,7 +45,7 @@ const TabProduct = () => {
 
         return name
       },
-      sorter: (a: any, b: any) => a.nameCategory.localeCompare(b.nameCategory)
+      sorter: (a: any, b: any) => a.nameCategory?.localeCompare(b.nameCategory)
     },
     {
       title: 'Url',

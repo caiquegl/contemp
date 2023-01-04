@@ -9,12 +9,13 @@ import { useAuth } from '../contextAuth/authContext'
 import { v4 as uuidv4 } from 'uuid';
 
 const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
-  const { allProductsActive } = useAuth()
+  const { allProductsActive, allProductsHome } = useAuth()
   const router = useRouter()
   const [products, setProduct] = useState<any>({})
 
   const getProduct = async () => {
     let find = allProductsActive.find((el: any) => el.id == data.product_id)
+    if (!find) find = allProductsHome.find((el: any) => el.id == data.product_id)
     setProduct(find)
   }
 

@@ -153,7 +153,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      let list = OLDlist.filter((el: any) => !el.NOT_SHOW)
+      let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
 
       let active = list.filter((el: any) => el.is_active == true)
       setAllCategoryActive([...active])
@@ -180,7 +180,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      let list = listOld.filter((el: any) => el.catgeory != 'ZGRgyNWLIzLRqjwqcdPF')
+      let list = listOld.filter((el: any) => el.category != 'ZGRgyNWLIzLRqjwqcdPF')
 
       let active = list.filter((el: any) => el.is_active == true)
       setAllProductsActive([...active])
@@ -204,7 +204,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      let list = listOld.filter((el: any) => el.catgeory != 'ZGRgyNWLIzLRqjwqcdPF')
+      let list = listOld.filter((el: any) => el.category != 'ZGRgyNWLIzLRqjwqcdPF')
 
 
       setAllProductsHome([...list])

@@ -87,10 +87,10 @@ const Orcamento = () => {
         method: "POST",
         body: JSON.stringify({ ...bodyForm, product: product }),
       });
-      reset();
-      window.localStorage.removeItem("CART-CONTEMP");
-      onOpen();
-      clearCart();
+      // reset();
+      // window.localStorage.removeItem("CART-CONTEMP");
+      // onOpen();
+      // clearCart();
     } catch (error) {
       console.log(error);
       toast({

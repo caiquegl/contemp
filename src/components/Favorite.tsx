@@ -129,6 +129,7 @@ export const Favorite = () => {
   const getHomeTab1 = async () => {
     try {
       let find = allProductsHome.find((el: any) => el.indexProduct == 0);
+      if (!find) return
       let tab1 = {
         ...find,
         nameCategory: allCategoryActive.find(

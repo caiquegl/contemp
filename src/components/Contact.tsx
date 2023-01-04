@@ -57,9 +57,17 @@ export const Contact = ({
       let newBody: any = { body: bodyForm, id }
 
       if (file) newBody.arquivo = file
-      await fetch(`api/defaultEmail`, {
+      await fetch(`api/mail`, {
         method: "POST",
-        body: JSON.stringify(newBody),
+        body: JSON.stringify({
+          email: bodyForm['E-mail'],
+          name: bodyForm['Nome'],
+          empresa: bodyForm['Empresa'],
+          telephone: bodyForm['Telefone'],
+          description: bodyForm['Mensagem'],
+          file: file,
+          id
+        }),
       });
       reset()
       toast({
