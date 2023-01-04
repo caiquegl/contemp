@@ -123,10 +123,6 @@ body {
   width: 100% !important;
 }
 
-.ant-menu-vertical.ant-menu-sub .ant-menu-item {
-  margin-left: 13px !important;
-}
-
 .swiper-wrapper {
   padding-bottom: 50px !important;
 }
@@ -155,10 +151,6 @@ body {
   color: #fff !important;
 }
 
-.ant-menu-submenu {
-  padding: 0px 1rem !important;
-}
-
 .ant-menu-item-only-child {
   padding-left: 16px !important;
 }
@@ -169,9 +161,9 @@ body {
   border-radius: 4px;
 }
 
-.ant-menu-vertical.ant-menu-sub .ant-menu-item:hover {
+/* .ant-menu-vertical.ant-menu-sub .ant-menu-item:hover {
   width: 80% !important;
-}
+} */
 /* .ant-menu-submenu-popup {
   top: 180px !important;
 } */
