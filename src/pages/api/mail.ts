@@ -14,7 +14,7 @@ export default async (req: any, response: any) => {
           "subject": body.id ? 'Novo contato' : 'Orçamento',
           "htmlContent":body.id ? HtmlDefault(body.name, body.email, body.empresa,body.telephone,  body.description, body.file) : HtmlOrcamento(body.name, body.email, '',body.telephone,  body.description, '', body.products ),
           "messageVersions":[
-            { "to": [{ "email": 'arq.caique@hotmail.com', name: 'caique' }],
+            { "to": [{ "email": 'vendas@contemp.com.br', name: 'contemp' }],
             "cc": [{ "email": 'arq.caique@hotmail.com', name: 'caique' }, { "email": 'kemelin@3hub.co', name: 'Kemilin' }],
            }
           ]
