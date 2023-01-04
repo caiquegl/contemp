@@ -8,7 +8,7 @@ export default async (req: any, response: any) => {
 
         
 
-        SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = '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'
+        SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = process.env.SENDBLUE
         await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
           "sender":{ "email":"marketing@contemp.com.br", "name":"Contemp"},
           "subject": body.id ? 'Novo contato' : 'Orçamento',
