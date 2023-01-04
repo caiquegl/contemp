@@ -406,34 +406,39 @@ const TabCategory = () => {
     {
       title: 'Ações',
       render: (a: any) => (
-        <HStack spacing="20px">
-          <Icon
-            cursor="pointer"
-            as={AiOutlineEdit}
-            fontSize="17px"
-            onClick={() => handleOnEditClick(a)}
-          />
-          <Icon
-            cursor="pointer"
-            as={AiOutlineClose}
-            fontSize="17px"
-            color="red.500"
-            onClick={() => {
-              confirm({
-                title: 'ATENÇÃO',
-                icon: <ExclamationCircleOutlined />,
-                content: 'Você está prestes a pagar todas as sub categorias e produtos vinculados a essa categoria, você tem certeza disso ?',
-                onOk() {
-                  deleteAllCategory(a)
-                },
-                onCancel() {
-                  console.log('Cancel');
-                },
-              });
+        <>
+          {a.id != 'ZGRgyNWLIzLRqjwqcdPF' &&
+            <HStack spacing="20px">
+              <Icon
+                cursor="pointer"
+                as={AiOutlineEdit}
+                fontSize="17px"
+                onClick={() => handleOnEditClick(a)}
+              />
+              <Icon
+                cursor="pointer"
+                as={AiOutlineClose}
+                fontSize="17px"
+                color="red.500"
+                onClick={() => {
+                  confirm({
+                    title: 'ATENÇÃO',
+                    icon: <ExclamationCircleOutlined />,
+                    content: 'Você está prestes a pagar todas as sub categorias e produtos vinculados a essa categoria, você tem certeza disso ?',
+                    onOk() {
+                      deleteAllCategory(a)
+                    },
+                    onCancel() {
+                      console.log('Cancel');
+                    },
+                  });
 
-            }}
-          />
-        </HStack>
+                }}
+              />
+            </HStack>
+          }
+        </>
+
       )
     }
   ]

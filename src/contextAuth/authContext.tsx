@@ -153,13 +153,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
+      // let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
 
-      let active = list.filter((el: any) => el.is_active == true)
+      let active = OLDlist.filter((el: any) => el.is_active == true && el.id != 'ZGRgyNWLIzLRqjwqcdPF')
       setAllCategoryActive([...active])
-      setAllCategory([...list])
-      localStorage.setItem('SET_CATEGORY', JSON.stringify([...list]))
-      return list
+      setAllCategory([...OLDlist])
+      localStorage.setItem('SET_CATEGORY', JSON.stringify([...active]))
+      return OLDlist
     } catch (error) {
       console.log(error)
     }
@@ -187,7 +187,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setAllProducts([...listOld])
       localStorage.setItem('SET_PRODUCTS', JSON.stringify([...list]))
 
-      return list
+      return listOld
     } catch (error) {
       console.log(error)
     }
