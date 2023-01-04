@@ -87,15 +87,22 @@ const Orcamento = () => {
         method: "POST",
         body: JSON.stringify({ ...bodyForm, product: product }),
       });
-      // reset();
-      // window.localStorage.removeItem("CART-CONTEMP");
-      // onOpen();
-      // clearCart();
+      reset();
+      window.localStorage.removeItem("CART-CONTEMP");
+      onOpen();
+      clearCart();
+      toast({
+        title: "Sucesso",
+        description: "Sucesso ao solicitar orçamento",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (error) {
       console.log(error);
       toast({
         title: "Erro",
-        description: "Erro ao salvar categoria",
+        description: "Erro ao solicitar orçamento",
         status: "error",
         duration: 3000,
         isClosable: true,
