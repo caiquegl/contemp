@@ -603,130 +603,124 @@ export const Header = () => {
             </Fade>
             {scrollY > 190 &&
                 <Box
-                    h="auto"
-                    zIndex={9999999999999999}
+                    zIndex={99}
                     position="fixed"
                     top="0"
                     w="100%"
                 >
                     <Fade in={scrollY > 200}>
                         <Box
-                            h="250px"
+                            display="flex"
+                            alignItems="center"
+                            h="80px"
+                            bg="black.800"
+
                         >
-                            <Box
-                                display="flex"
-                                alignItems="center"
+                            <Container maxW="7xl" p="12px 15px 15px 15px">
+                                <Flex alignItems="center" justifyContent="space-between" h={70}>
+                                    <Box
+                                        onClick={() => router.push("/")}
+                                        cursor="pointer"
+                                        height={41}
+                                        mr="20px"
+                                    >
+                                        <ImageNext width={160} height={41} src={Logo} />
+                                    </Box>
 
-                                h="120px"
-                                bg="black.800"
-
-                            >
-                                <Container maxW="7xl" p="12px 15px 15px 15px">
-                                    <Flex alignItems="center" justifyContent="space-between" h={70}>
-                                        <Box
-                                            onClick={() => router.push("/")}
-                                            cursor="pointer"
-                                            height={41}
-                                            mr="20px"
+                                    <Box>
+                                        <Link
+                                            href="/todosProdutos"
+                                            _hover={{ color: "#fff", textDecoration: "none" }}
                                         >
-                                            <ImageNext width={160} height={41} src={Logo} />
-                                        </Box>
-
-                                        <Box>
-                                            <Link
-                                                href="/todosProdutos"
-                                                _hover={{ color: "#fff", textDecoration: "none" }}
+                                            <Button
+                                                borderRadius="5px"
+                                                bg="red.600"
+                                                _hover={{
+                                                    bg: "red.600",
+                                                    opacity: 0.6,
+                                                }}
                                             >
-                                                <Button
-                                                    borderRadius="5px"
-                                                    bg="red.600"
-                                                    _hover={{
-                                                        bg: "red.600",
-                                                        opacity: 0.6,
-                                                    }}
-                                                >
-                                                    <Icon
-                                                        as={BsThreeDotsVertical}
-                                                        color="white"
-                                                        fontSize="20px"
-                                                    />
-                                                </Button>
-                                            </Link>
-                                        </Box>
+                                                <Icon
+                                                    as={BsThreeDotsVertical}
+                                                    color="white"
+                                                    fontSize="20px"
+                                                />
+                                            </Button>
+                                        </Link>
+                                    </Box>
 
-                                        <HeaderMenu menuItems={list} />
+                                    <HeaderMenu menuItems={list} />
 
-                                        <Box
-                                            position="relative"
-                                            cursor="pointer"
-                                            onClick={() => {
-                                                if (totalCart == 0 && !totalCart) {
-                                                    oOpen();
-                                                    return;
-                                                }
-                                                router.push("/orcamento");
-                                            }}
-                                        >
-                                            {cart && cart.length > 0 && (
+                                    <Box
+                                        position="relative"
+                                        cursor="pointer"
+                                        onClick={() => {
+                                            if (totalCart == 0 && !totalCart) {
+                                                oOpen();
+                                                return;
+                                            }
+                                            router.push("/orcamento");
+                                        }}
+                                    >
+                                        {cart && cart.length > 0 && (
+                                            <Flex
+                                                p={`${pxToRem(2)} ${pxToRem(5)}`}
+                                                bg="red.600"
+                                                borderRadius={50}
+                                                alignItems="center"
+                                                justifyContent="center"
+                                                fontWeight="bold"
+                                                fontSize={pxToRem(14)}
+                                                position="absolute"
+                                                bottom={4}
+                                                left={4}
+                                            >
+                                                {totalCart}
+                                            </Flex>
+                                        )}
+                                        <Icon as={BsBag} width={30} height={30} />
+                                    </Box>
+                                </Flex>
+                                <Modal isOpen={open} onClose={oClose}>
+                                    <ModalOverlay />
+                                    <ModalContent>
+                                        <ModalCloseButton color="red" />
+                                        <ModalBody p="20px" mt="20px">
+                                            <Flex alignItems="center">
                                                 <Flex
-                                                    p={`${pxToRem(2)} ${pxToRem(5)}`}
-                                                    bg="red.600"
-                                                    borderRadius={50}
+                                                    mr="20px"
                                                     alignItems="center"
                                                     justifyContent="center"
-                                                    fontWeight="bold"
-                                                    fontSize={pxToRem(14)}
-                                                    position="absolute"
-                                                    bottom={4}
-                                                    left={4}
+                                                    h="60px"
+                                                    w="60px"
+                                                    borderRadius="30px"
+                                                    bg="red.100"
                                                 >
-                                                    {totalCart}
+                                                    <Icon
+                                                        as={FiAlertTriangle}
+                                                        color="red.700"
+                                                        fontSize="30px"
+                                                    />
                                                 </Flex>
-                                            )}
-                                            <Icon as={BsBag} width={30} height={30} />
-                                        </Box>
-                                    </Flex>
-                                    <Modal isOpen={open} onClose={oClose}>
-                                        <ModalOverlay />
-                                        <ModalContent>
-                                            <ModalCloseButton color="red" />
-                                            <ModalBody p="20px" mt="20px">
-                                                <Flex alignItems="center">
-                                                    <Flex
-                                                        mr="20px"
-                                                        alignItems="center"
-                                                        justifyContent="center"
-                                                        h="60px"
-                                                        w="60px"
-                                                        borderRadius="30px"
-                                                        bg="red.100"
+                                                <Box>
+                                                    <Text fontWeight="bold" fontSize="25px" color="black.800">
+                                                        Atenção!
+                                                    </Text>
+                                                    <Text
+                                                        fontSize="16px"
+                                                        color="black.800"
+                                                        mt="10px"
+                                                        maxW="350px"
                                                     >
-                                                        <Icon
-                                                            as={FiAlertTriangle}
-                                                            color="red.700"
-                                                            fontSize="30px"
-                                                        />
-                                                    </Flex>
-                                                    <Box>
-                                                        <Text fontWeight="bold" fontSize="25px" color="black.800">
-                                                            Atenção!
-                                                        </Text>
-                                                        <Text
-                                                            fontSize="16px"
-                                                            color="black.800"
-                                                            mt="10px"
-                                                            maxW="350px"
-                                                        >
-                                                            Para poder continuar, é necessário adicionar ao menos um
-                                                            produto no carrinho.
-                                                        </Text>
-                                                    </Box>
-                                                </Flex>
-                                            </ModalBody>
-                                        </ModalContent>
-                                    </Modal>
-                                </Container>
-                            </Box>
+                                                        Para poder continuar, é necessário adicionar ao menos um
+                                                        produto no carrinho.
+                                                    </Text>
+                                                </Box>
+                                            </Flex>
+                                        </ModalBody>
+                                    </ModalContent>
+                                </Modal>
+                            </Container>
                         </Box>
                     </Fade>
                 </Box>
