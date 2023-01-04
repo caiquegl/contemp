@@ -44,6 +44,7 @@ export const Contact = ({
   form,
   id,
 }: IProps) => {
+  const [loading, setLoading] = useState(false)
   const toast = useToast();
   const formRef = useRef<any>();
   const [file, setFile] = useState('')
@@ -54,6 +55,7 @@ export const Contact = ({
 
   const sendMail = async (bodyForm: any) => {
     try {
+      setLoading(true)
       let newBody: any = { body: bodyForm, id }
 
       if (file) newBody.arquivo = file
@@ -87,6 +89,8 @@ export const Contact = ({
         isClosable: true,
       });
     } finally {
+      setLoading(false)
+
     }
   };
 
@@ -294,6 +298,7 @@ export const Contact = ({
                       fontSize="20px"
                       mt="40px"
                       type="submit"
+                      isLoading={loading}
                       _hover={{ transition: "all 0.5s", opacity: 0.7 }}
                     >
                       <Icon as={TbSend} mr="10px" />
