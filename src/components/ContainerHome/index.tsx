@@ -73,6 +73,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
 
   const saveProduct = async (body: any) => {
     try {
+
       if (urls.length === 0 || !!!icon) {
         toast({
           title: 'Erro',
@@ -110,6 +111,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
           ...body,
           indexProduct,
           destaque: hasCarrocel,
+          category: body.category.value,
           urls,
           icon
         })
@@ -123,9 +125,9 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
         })
       } else {
         const dbInstanceUpdate = doc(database, 'home', bodyExist.id)
-
         await updateDoc(dbInstanceUpdate, {
           ...body,
+          category: body.category.value,
           indexProduct,
           destaque: hasCarrocel,
           urls,
@@ -140,6 +142,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
         })
       }
     } catch (error) {
+      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao salvar produto',
@@ -182,7 +185,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
 
   useEffect(() => {
     setValue('name', defaultValues?.name)
-    setValue('category', defaultValues?.category)
+    // setValue('category', defaultValues?.category)
     setValue('description', defaultValues?.description)
     setValue('link_name', defaultValues?.link_name)
     setHasCarrocel(defaultValues && defaultValues.hasCarrocel ? true : false)
@@ -250,11 +253,11 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
                   value={value}
                   components={asyncComponents}
                   useBasicStyles
-                  options={list.map((el: any) => ({ label: el.name, value: el.value }))}
+                  options={list.map((el: any) => ({ label: el.name, value: el.id }))}
 
                   loadOptions={(inputValue, callback) => {
                     setTimeout(() => {
-                      let filter = list.map((el: any) => ({ label: el.name, value: el.value }))
+                      let filter = list.map((el: any) => ({ label: el.name, value: el.id }))
                       const values = filter.filter((option: any) =>
                         option.label.toLowerCase().includes(inputValue.toLowerCase())
                       );

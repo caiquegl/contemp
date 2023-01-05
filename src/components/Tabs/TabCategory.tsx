@@ -102,7 +102,7 @@ const TabCategory = () => {
 
   const saveCategory = async (bodyForm: any) => {
     try {
-      bodyForm = { ...bodyForm, url }
+      bodyForm = { ...bodyForm, url, sub_categorie: bodyForm.sub_categorie.value }
       if (Object.keys(update).length > 0) {
         updateCategory(bodyForm)
         return
@@ -201,7 +201,8 @@ const TabCategory = () => {
         await updateDoc(dbInstanceUpdate, {
           ...bodyForm,
           favorite: isFavorite,
-          is_active: isActive
+          is_active: isActive,
+          sub_categorie: bodyForm.sub_categorie.value
         })
         setUpdate({})
 
@@ -605,11 +606,11 @@ const TabCategory = () => {
                       value={value}
                       components={asyncComponents}
                       useBasicStyles
-                      options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+                      options={categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))}
 
                       loadOptions={(inputValue, callback) => {
                         setTimeout(() => {
-                          let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                          let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))
                           const values = filter.filter((option: any) =>
                             option.label.toLowerCase().includes(inputValue.toLowerCase())
                           );

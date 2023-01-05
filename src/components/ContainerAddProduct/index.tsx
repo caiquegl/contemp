@@ -24,6 +24,7 @@ import Variation from './Variantion'
 import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid';
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
+import category from '../../pages/api/category'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -68,7 +69,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       hasVariation,
       urls,
       destaque,
-      is_active: isActive
+      is_active: isActive,
+      category: bodyForm.category.value
     }
     if (hasVariation) {
       let falt = false
@@ -206,11 +208,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   value={value}
                   components={asyncComponents}
                   useBasicStyles
-                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))}
 
                   loadOptions={(inputValue, callback) => {
                     setTimeout(() => {
-                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))
                       const values = filter.filter((option: any) =>
                         option.label.toLowerCase().includes(inputValue.toLowerCase())
                       );
