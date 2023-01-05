@@ -102,7 +102,8 @@ const TabCategory = () => {
 
   const saveCategory = async (bodyForm: any) => {
     try {
-      bodyForm = { ...bodyForm, url, sub_categorie: bodyForm.sub_categorie.value }
+      if (bodyForm.sub_categorie) bodyForm = { ...bodyForm, sub_categorie: bodyForm.sub_categorie.value }
+      bodyForm = { ...bodyForm, url }
       if (Object.keys(update).length > 0) {
         updateCategory(bodyForm)
         return
