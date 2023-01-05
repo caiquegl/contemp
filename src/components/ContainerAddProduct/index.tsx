@@ -178,7 +178,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               field: { onChange, onBlur, value, name, ref },
               fieldState: { error }
             }) => (
-              <FormControl isInvalid={!!error} id={name}>
+              <FormControl isInvalid={!!error} id={name} color="black.800">
                 <FormLabel fontSize="20px" mb="10px" color="black.800">
                   Categoria
                 </FormLabel>
