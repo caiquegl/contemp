@@ -169,6 +169,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
         const dbInstanceUpdate = doc(database, 'products', bodyForm.id)
         delete bodyForm.id
         delete bodyForm.ref
+        console.log(bodyForm)
         await updateDoc(dbInstanceUpdate, bodyForm)
         toast({
           title: 'Sucesso',

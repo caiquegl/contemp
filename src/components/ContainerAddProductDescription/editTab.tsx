@@ -9,8 +9,10 @@ import {
 import { AiFillEye } from 'react-icons/ai'
 import { useState } from "react";
 import { Editor } from '../EditorFile'
+import { CKEditor } from 'ckeditor4-react';
+
 const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
-    const [see, setSee] = useState(true)
+    const [see, setSee] = useState(false)
     let [value, setValue] = useState(tabs[index]?.text ? tabs[index]?.text : "")
 
     let handleInputChange = (e: any) => {
@@ -37,6 +39,12 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                     <Textarea value={value} onChange={handleInputChange} h="200px" />
                     :
                     <div>
+                        <CKEditor
+                            debug={true}
+                            onGetData={(value) => console.log(value, 'value')}
+                            initData={tabs[index]?.text ? tabs[index]?.text : ""}
+
+                        />
                         {/* <Editor
                             name="description"
                             onChange={(evt: any) => {

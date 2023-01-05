@@ -75,6 +75,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       is_active: isActive,
       category: bodyForm.category.value
     }
+
     if (hasVariation) {
       let falt = false
       let more = false
@@ -214,11 +215,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   value={value}
                   components={asyncComponents}
                   useBasicStyles
-                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))}
+                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
 
                   loadOptions={(inputValue, callback) => {
                     setTimeout(() => {
-                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.id }))
+                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
                       const values = filter.filter((option: any) =>
                         option.label.toLowerCase().includes(inputValue.toLowerCase())
                       );
