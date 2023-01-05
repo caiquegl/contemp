@@ -42,8 +42,9 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                         <CKEditor
                             initData={tabs[index]?.text ? tabs[index]?.text : ""}
                             // onGetData={(value) => console.log(value, 'value')}
-                            // data={tabs[index]?.text ? tabs[index]?.text : ""}
+                            data={tabs[index]?.text ? tabs[index]?.text : ""}
                             onGetData={(value: any) => {
+                                console.log(value)
                                 if (value.data?.dataValue) {
                                     let newList = tabs;
                                     newList[index].text = value.data.dataValue;
