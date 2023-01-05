@@ -40,10 +40,17 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                     :
                     <div>
                         <CKEditor
-                            debug={true}
-                            onGetData={(value) => console.log(value, 'value')}
                             initData={tabs[index]?.text ? tabs[index]?.text : ""}
+                            // onGetData={(value) => console.log(value, 'value')}
+                            // data={tabs[index]?.text ? tabs[index]?.text : ""}
+                            onGetData={(value: any) => {
+                                if (value.data?.dataValue) {
+                                    let newList = tabs;
+                                    newList[index].text = value.data.dataValue;
+                                    setTabs(newList)
+                                }
 
+                            }}
                         />
                         {/* <Editor
                             name="description"
