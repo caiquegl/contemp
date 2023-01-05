@@ -183,7 +183,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   Categoria
                 </FormLabel>
 
-                <InputGroup
+                {/* <InputGroup
                   borderRadius="6px"
                   bg="white.500"
                   p="3px 7px"
@@ -195,30 +195,30 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                >
-                  <AsyncSelect
-                    placeholder="Selecione"
-                    size="lg"
-                    name={name}
-                    ref={ref}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    components={asyncComponents}
-                    useBasicStyles
-                    options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+                > */}
+                <AsyncSelect
+                  placeholder="Selecione"
+                  size="lg"
+                  name={name}
+                  ref={ref}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  components={asyncComponents}
+                  useBasicStyles
+                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
 
-                    loadOptions={(inputValue, callback) => {
-                      setTimeout(() => {
-                        let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
-                        const values = filter.filter((option: any) =>
-                          option.label.toLowerCase().includes(inputValue.toLowerCase())
-                        );
-                        callback(values);
-                      }, 1500);
-                    }}
-                  />
-                  <Select
+                  loadOptions={(inputValue, callback) => {
+                    setTimeout(() => {
+                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                      const values = filter.filter((option: any) =>
+                        option.label.toLowerCase().includes(inputValue.toLowerCase())
+                      );
+                      callback(values);
+                    }, 1500);
+                  }}
+                />
+                {/* <Select
                     name={name}
                     ref={ref}
                     onChange={onChange}
@@ -238,7 +238,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                         </option>
                       ))}
                   </Select>
-                </InputGroup>
+                </InputGroup> */}
                 {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
               </FormControl>
             )} />
