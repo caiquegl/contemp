@@ -6,19 +6,46 @@ import {
   Button,
   Flex,
   Divider,
-  useToast
+  useToast,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  Select,
+  FormErrorMessage
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from '../ContainerHome/inputs'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { InputDefault } from '../Form/Input'
 import { database, initFirebase } from '../../utils/db/index'
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
-import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import Variation from './Variantion'
 import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid';
+import { AsyncSelect, chakraComponents } from "chakra-react-select";
+
+const asyncComponents = {
+  LoadingIndicator: (props: any) => (
+    <chakraComponents.LoadingIndicator
+      // The color of the main line which makes up the spinner
+      // This could be accomplished using `chakraStyles` but it is also available as a custom prop
+      color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
+      // The color of the remaining space that makes up the spinner
+      emptyColor="transparent"
+      // The `size` prop on the Chakra spinner
+      // Defaults to one size smaller than the Select's size
+      spinnerSize="md"
+      // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
+      speed="0.45s"
+      // A CSS size string representing the thickness of the spinner's line
+      thickness="2px"
+
+      // Don't forget to forward the props!
+      {...props}
+    />
+  ),
+};
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   initFirebase()
@@ -31,7 +58,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const [list, setList] = useState<any>([])
   const [urls, setUrls] = useState<any>([])
 
-  const { register, handleSubmit, formState, setValue, reset } = useForm({})
+  const { register, handleSubmit, formState, setValue, reset, control } = useForm({})
 
   const { errors } = formState
 
@@ -109,6 +136,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
   useEffect(() => {
     setValue('name', defaultValues?.name)
+    setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
     setValue('key_word_seo', defaultValues?.key_word_seo)
     setValue('description_seo', defaultValues?.description_seo)
@@ -142,12 +170,84 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             error={errors.name}
             {...register('name', { required: 'Nome é obrigatório' })}
           />
-          <SelectDefault
+          <Controller
+            control={control}
+            name="category"
+            rules={{ required: "Campo obrigatório" }}
+            render={({
+              field: { onChange, onBlur, value, name, ref },
+              fieldState: { error }
+            }) => (
+              <FormControl isInvalid={!!error} id={name}>
+                <FormLabel fontSize="20px" mb="10px" color="black.800">
+                  Categoria
+                </FormLabel>
+
+                <InputGroup
+                  borderRadius="6px"
+                  bg="white.500"
+                  p="3px 7px"
+                  w="100%"
+                  h="50px"
+                  outline="none"
+                  border="1px solid"
+                  borderColor="black.800"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <AsyncSelect
+                    placeholder="Selecione"
+                    size="lg"
+                    name={name}
+                    ref={ref}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    components={asyncComponents}
+                    useBasicStyles
+                    options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+
+                    loadOptions={(inputValue, callback) => {
+                      setTimeout(() => {
+                        let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                        const values = filter.filter((option: any) =>
+                          option.label.toLowerCase().includes(inputValue.toLowerCase())
+                        );
+                        callback(values);
+                      }, 1500);
+                    }}
+                  />
+                  <Select
+                    name={name}
+                    ref={ref}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    w="100%"
+                    height="100%"
+                    border="none"
+                    borderRadius="21px"
+                    color="black.800"
+                    placeholder="Selecione uma opção"
+                  >
+                    {categoryOptions &&
+                      categoryOptions.map((list: any) => (
+                        <option value={list.value} key={uuidv4()}>
+                          {list.name}
+                        </option>
+                      ))}
+                  </Select>
+                </InputGroup>
+                {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+              </FormControl>
+            )} />
+          {/* <SelectDefault
             label="Categoria"
             error={errors.category}
             opt={categoryOptions}
             {...register('category', { required: 'Campo obrigatório' })}
-          />
+          /> */}
         </HStack>
         <InputsHome
           name="Foto e vídeo do produto"

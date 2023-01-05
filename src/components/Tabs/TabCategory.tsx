@@ -42,6 +42,7 @@ import { Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
+import { AsyncSelect, chakraComponents } from "chakra-react-select";
 
 const { confirm } = Modal;
 
@@ -52,6 +53,28 @@ interface IBody {
   description: string
   favorite: boolean
 }
+
+const asyncComponents = {
+  LoadingIndicator: (props: any) => (
+    <chakraComponents.LoadingIndicator
+      // The color of the main line which makes up the spinner
+      // This could be accomplished using `chakraStyles` but it is also available as a custom prop
+      color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
+      // The color of the remaining space that makes up the spinner
+      emptyColor="transparent"
+      // The `size` prop on the Chakra spinner
+      // Defaults to one size smaller than the Select's size
+      spinnerSize="md"
+      // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
+      speed="0.45s"
+      // A CSS size string representing the thickness of the spinner's line
+      thickness="2px"
+
+      // Don't forget to forward the props!
+      {...props}
+    />
+  ),
+};
 
 const TabCategory = () => {
   const toast = useToast({
@@ -568,45 +591,32 @@ const TabCategory = () => {
                   field: { onChange, onBlur, value, name, ref },
                   fieldState: { error }
                 }) => (
-                  <FormControl isInvalid={!!error} id={name}>
+                  <FormControl isInvalid={!!error} id={name} color="black.800">
                     <FormLabel fontSize="20px" mb="10px" color="black.800">
                       Selecione a categoria
                     </FormLabel>
+                    <AsyncSelect
+                      placeholder="Selecione"
+                      size="lg"
+                      name={name}
+                      ref={ref}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      value={value}
+                      components={asyncComponents}
+                      useBasicStyles
+                      options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
 
-                    <InputGroup
-                      borderRadius="6px"
-                      bg="white.500"
-                      p="3px 7px"
-                      w="100%"
-                      h="50px"
-                      outline="none"
-                      border="1px solid"
-                      borderColor="black.800"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Select
-                        name={name}
-                        ref={ref}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        value={value}
-                        w="100%"
-                        height="100%"
-                        border="none"
-                        borderRadius="21px"
-                        color="black.800"
-                        placeholder="Selecione uma opção"
-                      >
-                        {categoryOptions &&
-                          categoryOptions.map((list: any) => (
-                            <option value={list.value} key={uuidv4()}>
-                              {list.name}
-                            </option>
-                          ))}
-                      </Select>
-                    </InputGroup>
+                      loadOptions={(inputValue, callback) => {
+                        setTimeout(() => {
+                          let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                          const values = filter.filter((option: any) =>
+                            option.label.toLowerCase().includes(inputValue.toLowerCase())
+                          );
+                          callback(values);
+                        }, 1500);
+                      }}
+                    />
                     {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
                   </FormControl>
                 )} />
