@@ -3,8 +3,13 @@ import {
   Button,
   Checkbox,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   HStack,
   Icon,
+  InputGroup,
+  Select,
   useToast,
   VStack
 } from '@chakra-ui/react'
@@ -12,6 +17,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import { database, initFirebase } from '../../utils/db/index'
+import { v4 as uuidv4 } from 'uuid';
 import {
   addDoc,
   collection,
@@ -25,7 +31,7 @@ import {
   deleteDoc
 } from 'firebase/firestore'
 import { InputDefault } from '../Form/Input'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import { EditOrder } from '../EditOrder'
@@ -501,27 +507,109 @@ const TabCategory = () => {
               error={errors.name}
               {...register('name', { required: 'Nome é obrigatório' })}
             />
-            <SelectDefault
-              label="É principal?"
-              error={errors.is_main}
-              opt={isMainOptions}
-              name={'is_main'}
-              reff={register('is_main', { required: 'Campo obrigatório' })}
-            // {...register('is_main', { required: 'Campo obrigatório' })}
-            />
+            <Controller
+              control={control}
+              name="is_main"
+              rules={{ required: "Campo obrigatório" }}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { error }
+              }) => (
+                <FormControl isInvalid={!!error} id={name}>
+                  <FormLabel fontSize="20px" mb="10px" color="black.800">
+                    É principal?
+                  </FormLabel>
+
+                  <InputGroup
+                    borderRadius="6px"
+                    bg="white.500"
+                    p="3px 7px"
+                    w="100%"
+                    h="50px"
+                    outline="none"
+                    border="1px solid"
+                    borderColor="black.800"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Select
+                      name={name}
+                      ref={ref}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      value={value}
+                      w="100%"
+                      height="100%"
+                      border="none"
+                      borderRadius="21px"
+                      color="black.800"
+                      placeholder="Selecione uma opção"
+                    >
+                      {isMainOptions &&
+                        isMainOptions.map((list: any) => (
+                          <option value={list.value} key={uuidv4()}>
+                            {list.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </InputGroup>
+                  {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                </FormControl>
+              )} />
+
+
             {watch().is_main === 'false' && (
-              <SelectDefault
-                label="Selecione a categoria"
-                error={errors.sub_categorie}
-                opt={categoryOptions}
-                reff={register('sub_categorie', {
-                  required: 'Campo obrigatório'
-                })}
+              <Controller
+                control={control}
                 name="sub_categorie"
-              // {...register('sub_categorie', {
-              //   required: 'Campo obrigatório'
-              // })}
-              />
+                rules={{ required: "Campo obrigatório" }}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { error }
+                }) => (
+                  <FormControl isInvalid={!!error} id={name}>
+                    <FormLabel fontSize="20px" mb="10px" color="black.800">
+                      Selecione a categoria
+                    </FormLabel>
+
+                    <InputGroup
+                      borderRadius="6px"
+                      bg="white.500"
+                      p="3px 7px"
+                      w="100%"
+                      h="50px"
+                      outline="none"
+                      border="1px solid"
+                      borderColor="black.800"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Select
+                        name={name}
+                        ref={ref}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        w="100%"
+                        height="100%"
+                        border="none"
+                        borderRadius="21px"
+                        color="black.800"
+                        placeholder="Selecione uma opção"
+                      >
+                        {categoryOptions &&
+                          categoryOptions.map((list: any) => (
+                            <option value={list.value} key={uuidv4()}>
+                              {list.name}
+                            </option>
+                          ))}
+                      </Select>
+                    </InputGroup>
+                    {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                  </FormControl>
+                )} />
             )}
             <TextareaDefault
               label="Descrição"
