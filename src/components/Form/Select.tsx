@@ -18,7 +18,7 @@ interface InpuptProps {
   error: FieldError
   opt: any
   defaultValue?: any
-  reff: any
+  reff?: any
 }
 const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
   { name, label, opt, error, defaultValue, reff, ...rest }: any,
