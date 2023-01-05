@@ -65,7 +65,7 @@ const TabCategory = () => {
   const [listClone, setListClone] = useState<any>([])
   const formRef = useRef<any>()
 
-  const { register, handleSubmit, formState, reset, watch, setValue } = useForm(
+  const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm(
     {}
   )
 
@@ -505,16 +505,22 @@ const TabCategory = () => {
               label="É principal?"
               error={errors.is_main}
               opt={isMainOptions}
-              {...register('is_main', { required: 'Campo obrigatório' })}
+              name={'is_main'}
+              reff={register('is_main', { required: 'Campo obrigatório' })}
+            // {...register('is_main', { required: 'Campo obrigatório' })}
             />
             {watch().is_main === 'false' && (
               <SelectDefault
                 label="Selecione a categoria"
                 error={errors.sub_categorie}
                 opt={categoryOptions}
-                {...register('sub_categorie', {
+                reff={register('sub_categorie', {
                   required: 'Campo obrigatório'
                 })}
+                name="sub_categorie"
+              // {...register('sub_categorie', {
+              //   required: 'Campo obrigatório'
+              // })}
               />
             )}
             <TextareaDefault

@@ -153,12 +153,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
+      await fetch(`api/category`, {
+        method: "POST",
+        body: JSON.stringify(OLDlist),
+      });
+
       // let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
 
       let active = OLDlist.filter((el: any) => el.is_active == true && el.id != 'ZGRgyNWLIzLRqjwqcdPF')
       setAllCategoryActive([...active])
       setAllCategory([...OLDlist])
       localStorage.setItem('SET_CATEGORY', JSON.stringify([...active]))
+
       return OLDlist
     } catch (error) {
       console.log(error)

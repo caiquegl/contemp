@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
             src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/e038acad-48ed-4f16-8e46-7c675b617c92-loader.js"
           ></script>
 
-          {/* <script
+          <script
             dangerouslySetInnerHTML={{
               __html: `
               !function (t, e, c, n) {
@@ -56,13 +56,13 @@ export default class MyDocument extends Document {
                     f.q.push(arguments);
                 };
                 t['claspo'] = t['claspo'] || f;
-              }(window, document, 'script', 'D8ABC933B8D7450EB4285DE2F58D1A8D');
+              }(window, document, 'script', 'D2A6126274A54444A114BABFD55E0B7D');
 
               
               claspo('init');
             `,
             }}
-          /> */}
+          />
 
           <script
             async
