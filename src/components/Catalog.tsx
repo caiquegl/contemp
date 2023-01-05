@@ -60,7 +60,7 @@ export const Catalog = () => {
                 lg: "100%",
                 xl: "contain",
               }}
-              zIndex={99}
+              zIndex={9}
               position="absolute"
               top="-100px"
             />

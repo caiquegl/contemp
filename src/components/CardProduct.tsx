@@ -55,6 +55,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
             fontWeight="bold"
             color="black"
             textTransform="uppercase"
+            px="10px"
           >
             {text}
           </Text>

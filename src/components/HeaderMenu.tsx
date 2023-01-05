@@ -26,6 +26,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           label: el.name,
           title: el.name,
           key: el.name,
+          order: 1,
           onTitleClick: (value: any) => {
             router.push(`/category/${el.name.replaceAll(" ", "_")}#viewCategory`);
           },
