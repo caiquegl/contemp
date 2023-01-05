@@ -62,7 +62,7 @@ const Adm = () => {
                 Olá
               </Text>
               <Text fontSize="20px">
-                {moment().format('DD/MM/YYYY - HH:mm')}
+                {`${moment().format('DD/MM/YYYY - HH:mm').toString()}`}
               </Text>
             </Box>
             <Avatar

@@ -6,12 +6,11 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 
-import CKeditor from "../CKEditor";
 import { AiFillEye } from 'react-icons/ai'
 import { useState } from "react";
-
+import { Editor } from '../EditorFile'
 const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
-    const [see, setSee] = useState(false)
+    const [see, setSee] = useState(true)
     let [value, setValue] = useState(tabs[index]?.text ? tabs[index]?.text : "")
 
     let handleInputChange = (e: any) => {
@@ -35,18 +34,21 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
             </Flex>
             <Box color="black.800">
                 {see ?
-                    <Textarea value={value} onChange={handleInputChange} />
+                    <Textarea value={value} onChange={handleInputChange} h="200px" />
                     :
-                    <CKeditor
-                        name="description"
-                        onChange={(evt: any) => {
-                            let newList = tabs;
-                            newList[index].text = evt;
-                            setTabs(newList);
-                        }}
-                        value={tabs[index]?.text ? tabs[index]?.text : ""}
-                        editorLoaded={editorLoaded}
-                    />
+                    <div>
+                        {/* <Editor
+                            name="description"
+                            onChange={(evt: any) => {
+                                let newList = tabs;
+                                newList[index].text = evt;
+                                setTabs(newList);
+                            }}
+                            value={tabs[index]?.text ? tabs[index]?.text : ""}
+                            editorLoaded={editorLoaded}
+                        /> */}
+                    </div>
+
                 }
             </Box>
         </Box>

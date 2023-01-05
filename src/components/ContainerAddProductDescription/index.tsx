@@ -277,26 +277,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                 />
               </HStack>
             </Flex>
-            {/* <Flex>
-              <Text color="black.800" fontSize="20px" mb="10px">
-                Conteúdo da tab
-              </Text>
-              <Icon as={AiFillEye} color="black.800" fontSize="20px" />
-            </Flex>
-
-            <Box color="black.800">
-              <CKeditor
-                name="description"
-                onChange={(evt: any) => {
-                  let newList = tabs;
-                  newList[index].text = evt;
-                  setTabs(newList);
-                }}
-                value={tabs[index]?.text ? tabs[index]?.text : ""}
-                editorLoaded={editorLoaded}
-              />
-            </Box> */}
-
             <EditTab
               load={() => load()}
               editorLoaded={editorLoaded}
