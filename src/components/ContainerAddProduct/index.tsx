@@ -25,6 +25,7 @@ import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid';
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
 import category from '../../pages/api/category'
+import { useAuth } from '../../contextAuth/authContext'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -50,6 +51,8 @@ const asyncComponents = {
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   initFirebase()
+  const { allCategory } = useAuth()
+
   const toast = useToast()
   const formRef = useRef<any>()
   const [hasVariation, setHasVariation] = useState<any>(false)
@@ -152,8 +155,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   }, [defaultValues])
 
   useEffect(() => {
-    if (list.length > 0) setValue('category', defaultValues?.category)
-  }, [list.length])
+    if (list.length > 0) {
+      let find = allCategory.find((el: any) => el.id == defaultValues?.category)
+      if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.category, label: find.name })
+    }
+  }, [list.length, allCategory])
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">

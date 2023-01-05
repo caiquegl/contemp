@@ -418,8 +418,10 @@ const TabCategory = () => {
     setUpdate(category)
     setUrl(category.url ? category.url : '')
 
-    if (category.sub_categorie)
-      setValue('sub_categorie', category.sub_categorie)
+    if (category.sub_categorie) {
+      let find = allCategory.find((el: any) => el.id == category?.sub_categorie)
+      if (find && Object.keys(find).length > 0) setValue('sub_categorie', { value: category?.sub_categorie, label: find.name })
+    }
   }
 
   const column = [

@@ -34,6 +34,8 @@ import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { v4 as uuidv4 } from 'uuid';
 
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
+import category from '../../pages/api/category'
+import { useAuth } from '../../contextAuth/authContext'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -60,6 +62,8 @@ const asyncComponents = {
 
 const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   initFirebase()
+  const { allCategory } = useAuth()
+
   const toast = useToast()
   const formRef = useRef<any>()
   const [loading, setLoading] = useState(false)
@@ -194,8 +198,12 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   }, [defaultValues])
 
   useEffect(() => {
-    if (list.length > 0) setValue('category', defaultValues?.category)
-  }, [list.length])
+    if (list.length > 0) {
+      let find = allCategory.find((el: any) => el.id == defaultValues?.category)
+      console.log(find)
+      if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.category, label: find.name })
+    }
+  }, [list.length, allCategory])
 
   return (
     <Box
@@ -251,6 +259,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
                   onChange={onChange}
                   onBlur={onBlur}
                   value={value}
+                  defaultInputValue={value}
                   components={asyncComponents}
                   useBasicStyles
                   options={list.map((el: any) => ({ label: el.name, value: el.id }))}
