@@ -110,17 +110,17 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
           ...el,
           label: el.name,
           key: el.name.replaceAll(" ", ""),
-          icon: (
-            <Icon
-              icon={AiOutlineEye}
-              size={20}
-              color="#fff"
-              onClick={(item: any) => {
-                onClose()
-                router.push(`/category/${el.name.replaceAll(" ", "_")}`)
-              }}
-            />
-          ),
+          // icon: (
+          //   <Icon
+          //     icon={AiOutlineEye}
+          //     size={20}
+          //     color="#fff"
+          //     onClick={(item: any) => {
+          //       onClose()
+          //       router.push(`/category/${el.name.replaceAll(" ", "_")}`)
+          //     }}
+          //   />
+          // ),
         };
 
         if (el.list_sub_category && el.list_sub_category.length > 0) {
@@ -146,7 +146,10 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
 
   return (
     <Menu
-      onClick={(avt) => console.log(avt)}
+      onClick={(avt) => {
+        onClose()
+        router.push(`/category/${avt.key.replaceAll(" ", "_")}`)
+      }}
       mode="inline"
       items={list}
       style={{
