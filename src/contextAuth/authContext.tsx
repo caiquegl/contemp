@@ -153,10 +153,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
       })
 
-      await fetch(`api/category`, {
-        method: "POST",
-        body: JSON.stringify(OLDlist),
-      });
+      // await fetch(`api/category`, {
+      //   method: "POST",
+      //   body: JSON.stringify(OLDlist),
+      // });
 
       // let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
 

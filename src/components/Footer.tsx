@@ -108,9 +108,9 @@ export const Footer = () => {
         {list &&
           list.length > 0 &&
           list.map((el: any, index: number) => (
-            <GridItem w="100%" gap={6} key={uuidv4()}>
+            <GridItem w="100%" gap={6} key={uuidv4()} px="20px">
               {index === 2 && (
-                <HStack spacing="20px" mb="40px" px="10px">
+                <HStack spacing="20px" mb="40px" >
                   <Link
                     href="https://www.linkedin.com/company/contemp/"
                     isExternal
