@@ -13,7 +13,7 @@ import dynamic from "next/dynamic";
 const CustomEditor = dynamic(() => import('../CustomEditor'), { ssr: false })
 
 const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
-    const [see, setSee] = useState(false)
+    const [see, setSee] = useState(true)
     let [value, setValue] = useState(tabs[index]?.text ? tabs[index]?.text : "")
 
     let handleInputChange = (e: any) => {
@@ -22,26 +22,6 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
         let newList = tabs;
         newList[index].text = inputValue;
         setTabs(newList);
-    }
-
-    const [contents, setContents] = useState('')
-
-    const handleReady = (editor: any) => {
-        // console.log('onReady')
-    }
-
-    const handleChange = (event: any, editor: any) => {
-        // console.log('onChange')
-        const data = editor.getData()
-        setContents(data)
-    }
-
-    const handleBlur = (event: any, editor: any) => {
-        // console.log('onBlur')
-    }
-
-    const handleFocus = (event: any, editor: any) => {
-        // console.log('onFocus')
     }
 
     return (

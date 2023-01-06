@@ -47,21 +47,22 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   }
 
   const load = () => {
-    setEditorLoaded(false)
+    setEditorLoaded(false);
     setTimeout(() => {
-      setEditorLoaded(true)
-    }, 500)
+      setEditorLoaded(true);
+    }, 500);
   }
 
   useEffect(() => {
     if (values.tab) {
-      setEditorLoaded(false)
-      setTabs(values.tab)
+      setEditorLoaded(false);
+      setTabs(values.tab);
       setTimeout(() => {
-        setEditorLoaded(true)
-      }, 500)
+        setEditorLoaded(true);
+      }, 500);
     }
-  }, [values])
+  }, [values]);
+
 
   const remove = (index: number) => {
     let newList: any = []
@@ -169,7 +170,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
         const dbInstanceUpdate = doc(database, 'products', bodyForm.id)
         delete bodyForm.id
         delete bodyForm.ref
-        console.log(bodyForm)
         await updateDoc(dbInstanceUpdate, bodyForm)
         toast({
           title: 'Sucesso',
@@ -202,25 +202,12 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
     }
   }
 
-  const handleOnTabNameChange = (evt: BaseSyntheticEvent, tabIndex: number) => {
-    let newList = tabs.map((tab: any, index: number) => {
-      if (index === tabIndex)
-        return {
-          ...tab,
-          name: evt.target.value
-        }
-
-      return tab
-    })
-
-    setTabs(newList)
-  }
 
   return (
     <Box mt="30px" bg="white" borderRadius="8px" p="30px 40px" w="100%">
       <VStack spacing="30px" divider={<Divider />} w="100%">
-        {tabs.map((list: any, tabIndex: number) => (
-          <Box w="100%" key={uuidv4()}>
+        {tabs.map((list: any, index: number) => (
+          <Box w="100%" key={index}>
             <Flex
               mb="20px"
               alignItems="center"
@@ -230,7 +217,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
               <Flex alignItems="center" w="100%" maxW="636px">
                 <Box w="100%" maxW="636px">
                   <Text color="black.800" fontSize="20px" mb="10px">
-                    Nome da tab {tabIndex + 1}
+                    Nome da tab {index + 1}
                   </Text>
                   <InputGroup
                     borderRadius="6px"
@@ -253,11 +240,18 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                       border="none"
                       borderRadius="21px"
                       color="black.800"
-                      placeholder="Nome completo"
-                      onChange={(evt) => handleOnTabNameChange(evt, tabIndex)}
-                      value={tabs[tabIndex]?.name}
+                      placeholder="nome completo"
+                      onChange={(evt) => {
+                        let value = evt.target.value
+                        let newList = tabs;
+
+                        newList[index].name = evt.target.value;
+
+                        setTabs([...newList]);
+                      }}
+                      value={tabs[index]?.name}
                       _focusVisible={{
-                        outline: 'none'
+                        outline: "none",
                       }}
                     />
                   </InputGroup>
@@ -274,17 +268,31 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                   as={GrSubtractCircle}
                   fontSize="30px"
                   cursor="pointer"
-                  onClick={() => remove(tabIndex)}
+                  onClick={() => remove(index)}
                 />
               </HStack>
             </Flex>
-            <EditTab
-              load={() => load()}
+            {/* <Flex>
+            <Text color="black.800" fontSize="20px" mb="10px">
+              Conteúdo da tab
+            </Text>
+            <Icon as={AiFillEye} color="black.800" fontSize="20px" />
+          </Flex>
+
+          <Box color="black.800">
+            <CKeditor
+              name="description"
+              onChange={(evt: any) => {
+                let newList = tabs;
+                newList[index].text = evt;
+                setTabs(newList);
+              }}
+              value={tabs[index]?.text ? tabs[index]?.text : ""}
               editorLoaded={editorLoaded}
-              setTabs={setTabs}
-              index={tabIndex}
-              tabs={tabs}
             />
+          </Box> */}
+
+            <EditTab load={() => load()} editorLoaded={editorLoaded} setTabs={setTabs} index={index} tabs={tabs} />
           </Box>
         ))}
       </VStack>
@@ -297,7 +305,7 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
           borderRadius="4px"
           w="128px"
           h="47px"
-          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+          _hover={{ transition: "all 0.4s", opacity: 0.7 }}
           isLoading={loading}
           onClick={() => saveProduct()}
         >
