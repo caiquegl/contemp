@@ -203,7 +203,6 @@ const TabCategory = () => {
           ...bodyForm,
           favorite: isFavorite,
           is_active: isActive,
-          sub_categorie: bodyForm.sub_categorie.value
         })
         setUpdate({})
 
@@ -222,6 +221,7 @@ const TabCategory = () => {
         })
       }
     } catch (error) {
+      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao atualizar categoria',
