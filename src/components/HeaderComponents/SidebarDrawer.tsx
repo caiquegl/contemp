@@ -142,7 +142,7 @@ export function SidebarDrawer({
 
           <DrawerBody>
             <Box mb="60px">
-              <HeaderMenuVertical menuItems={menuItems} onClose={onClose} />
+              <HeaderMenuVertical menuItems={menuItems} onClose={() => onClose()} />
             </Box>
             <Box>
               <Text m="22px 0" fontSize="20px" fontWeight="bold">

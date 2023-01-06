@@ -230,7 +230,7 @@ export const Header = () => {
 
                         <DrawerBody>
                             <Box mb="60px">
-                                <HeaderMenuVertical menuItems={list} onClose={oClose} />
+                                <HeaderMenuVertical menuItems={list} onClose={() => onClose()} />
                             </Box>
                             <Box>
                                 <Text m="22px 0" fontSize="20px" fontWeight="bold">
