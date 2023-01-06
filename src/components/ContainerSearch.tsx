@@ -35,7 +35,7 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
               alignItems="center"
               justifyContent="flex-start"
               w="100%"
-              onClick={() => click(el.name)}
+              onClick={() => click(el)}
             >
               {el.urls && el.urls.length > 0 ? (
                 <Image

@@ -9,7 +9,8 @@ import {
 import { AiFillEye } from 'react-icons/ai'
 import { useState } from "react";
 import { Editor } from '../EditorFile'
-import { CKEditor } from 'ckeditor4-react';
+import dynamic from "next/dynamic";
+const CustomEditor = dynamic(() => import('../CustomEditor'), { ssr: false })
 
 const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
     const [see, setSee] = useState(false)
@@ -21,6 +22,26 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
         let newList = tabs;
         newList[index].text = inputValue;
         setTabs(newList);
+    }
+
+    const [contents, setContents] = useState('')
+
+    const handleReady = (editor: any) => {
+        // console.log('onReady')
+    }
+
+    const handleChange = (event: any, editor: any) => {
+        // console.log('onChange')
+        const data = editor.getData()
+        setContents(data)
+    }
+
+    const handleBlur = (event: any, editor: any) => {
+        // console.log('onBlur')
+    }
+
+    const handleFocus = (event: any, editor: any) => {
+        // console.log('onFocus')
     }
 
     return (
@@ -39,21 +60,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                     <Textarea value={value} onChange={handleInputChange} h="200px" />
                     :
                     <div>
-                        <CKEditor
-                            initData={tabs[index]?.text ? tabs[index]?.text : ""}
-                            // onGetData={(value) => console.log(value, 'value')}
-                            data={tabs[index]?.text ? tabs[index]?.text : ""}
-                            onGetData={(value: any) => {
-                                console.log(value)
-                                if (value.data?.dataValue) {
-                                    let newList = tabs;
-                                    newList[index].text = value.data.dataValue;
-                                    setTabs(newList)
-                                }
-
-                            }}
-                        />
-                        {/* <Editor
+                        <CustomEditor
                             name="description"
                             onChange={(evt: any) => {
                                 let newList = tabs;
@@ -62,7 +69,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                             }}
                             value={tabs[index]?.text ? tabs[index]?.text : ""}
                             editorLoaded={editorLoaded}
-                        /> */}
+                        />
                     </div>
 
                 }
