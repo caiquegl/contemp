@@ -19,8 +19,9 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const amountList = async (amount: any, hasIcon = true) => {
     try {
       let obj: any = [];
+      let sort = amount.sort((a: any, b: any) => a.order - b.order)
 
-      for await (let el of amount) {
+      for await (let el of sort) {
         let newObj = {
           ...el,
           label: el.name,

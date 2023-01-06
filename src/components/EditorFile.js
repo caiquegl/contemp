@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 export const Editor = ({ onChange, editorLoaded, name, value }) => {
   const editorRef = useRef();
+
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   useEffect(() => {
     editorRef.current = {

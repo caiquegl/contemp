@@ -103,8 +103,10 @@ export const Header = () => {
                     list_sub_category: filter,
                 });
             }
-            setList(newList);
-            setListHeader(newList);
+
+            let sort = newList.sort((a: any, b: any) => a.order - b.order)
+            setList(sort);
+            setListHeader(sort);
         } catch (error) {
             console.log(error);
         }
