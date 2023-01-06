@@ -10,8 +10,8 @@ import { useWindowSize } from '../utils/useWindowSize'
 export const Banner = () => {
   const windowSize = useWindowSize()
 
-  const [ maxWidth ] = useState(930)
-  const [ width, setWidth ] = useState(0)
+  const [maxWidth] = useState(930)
+  const [width, setWidth] = useState(0)
 
   useEffect(() => {
     if (windowSize) {
@@ -47,8 +47,8 @@ export const Banner = () => {
           w="100%"
           maxW="650px"
           flexDirection="column"
-          marginBottom={pxToRem(width > maxWidth ? 87: 60)}
-          minH={pxToRem(width > maxWidth ? 150: 40)}
+          marginBottom={pxToRem(width > maxWidth ? 87 : 60)}
+          minH={pxToRem(width > maxWidth ? 150 : 40)}
         >
           <Text
             color="white"
@@ -95,30 +95,31 @@ export const Banner = () => {
 }
 
 const typewriterWords = [
-  'Aquisitores De Dados',
-  'Ihm - Interface',
-  'Contadores',
-  'Temporizadores',
-  'Placas Controladoras De Processo',
-  'Indicadores De Temperatura E Processos',
-  'Transmissores De Sinais',
-  'Transmissores De Temperatura E Umidade',
-  'Transmissores De Pressão',
-  'Integrador De Corrente',
-  'Controladores De Processos',
-  'Controladores De Temperatura',
-  'Controladores De Potência',
-  'Relés De Estado Sólido',
-  'Dissipador De Calor',
-  'Câmeras Termográficas Fixas Optris',
-  'Pirômetros Infravermelhos Fixos Optris',
-  'Pirômetros Infravermelhos Portáteis Optris',
+  'Controladores de Processos',
+  'Controladores de Temperatura',
+  'Indicadores de Temperatura e Processos',
+  'Controladores de Potência',
+  'Relés de Estado Sólido',
+  'IHM - Interface',
   'Termorresistências',
   'Termopares',
-  'Sensores PT100',
-  'Sensores PT1000',
-  'Cabos Para Termopares',
-  'Software - Contemp Connect',
+  'Sensores pt100',
+  'Sensores pt1000',
+  'Cabos para Termopares',
+  'Câmeras Termográficas Fixas Óptris',
+  'Pirômetros Infravermelhos Fixos Óptris',
+  'Pirômetros Infravermelhos Portáteis Óptris',
+  'Aquisitores de Dados',
+  'Contadores',
+  'Temporizadores',
+  'Placas controladoras de Processo',
+  'Transmissores de Sinais',
+  'Transmissores de Temperatura e Umidade',
+  'Transmissores de Pressão',
+  'Integrador de Corrente',
+  'Dissipador de Calor',
+  'Software - Contemp Conect',
   'Software - Contemp Bridge',
   'Software - Contemp Tools'
+
 ]
