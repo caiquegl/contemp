@@ -65,7 +65,7 @@ export const SearchBar = ({
           list={listProducts}
           searchCard={searchCard}
           click={(product: any) => {
-            router.push(product.order ? `/category/${product.replaceAll(" ", "_")}#viewCategory` : `/produto/${product.replaceAll(" ", "_")}`);
+            router.push(product.order ? `/category/${product.name.replaceAll(" ", "_")}#viewCategory` : `/produto/${product.name.replaceAll(" ", "_")}`);
             setListProducts([]);
           }}
         />
