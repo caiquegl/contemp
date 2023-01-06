@@ -57,7 +57,7 @@ const CardProductWithDescription = ({
     >
       <Tooltip label={text} placement="top">
         <Text
-          fontSize={'2.5rem'}
+          fontSize={'2.25rem'}
           fontWeight="bold"
           color={color ? color : 'black'}
           textTransform="uppercase"
