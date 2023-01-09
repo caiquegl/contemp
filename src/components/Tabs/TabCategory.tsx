@@ -428,6 +428,7 @@ const TabCategory = () => {
   const column = [
     {
       title: 'Order',
+      sorter: (a:any, b:any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />
     },
     {
