@@ -78,6 +78,7 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X"></script>
         </body>
       </Html>
     );
