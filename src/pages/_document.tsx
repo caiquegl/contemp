@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
           />
           <link rel="icon" href="/favicon.png" />
           <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X"></script>
 
 
         </Head>
@@ -78,7 +79,6 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X"></script>
         </body>
       </Html>
     );
