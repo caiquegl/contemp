@@ -30,6 +30,18 @@ export default class MyDocument extends Document {
           <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
           <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X"></script>
 
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RE6JLX9LC"/>
+          <script
+          dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7RE6JLX9LC');
+            `,
+          }}
+          />
+
 
         </Head>
         <body>
@@ -65,7 +77,7 @@ export default class MyDocument extends Document {
             }}
           />
 
-          <script
+          {/*<script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-24615402-1"
           />
@@ -78,7 +90,7 @@ export default class MyDocument extends Document {
           gtag('config', 'UA-24615402-1');
           `,
             }}
-          />
+          />*/}
         </body>
       </Html>
     );
