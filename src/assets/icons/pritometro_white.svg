@@ -1,32 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Creator: CorelDRAW X7 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="16.9029mm" height="16.9548mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 154939 155415"
- xmlns:xlink="http://www.w3.org/1999/xlink">
- <defs>
-  <style type="text/css">
-   <![CDATA[
-    .str0 {stroke:white;stroke-width:3880.15}
-    .str1 {stroke:#373435;stroke-width:1833.29}
-    .str2 {stroke:#373435;stroke-width:698.482}
-    .fil1 {fill:none}
-    .fil2 {fill:#373435}
-    .fil0 {fill:white}
-   ]]>
-  </style>
- </defs>
- <g id="Camada_x0020_1">
-  <metadata id="CorelCorpID_0Corel-Layer"/>
-  <circle class="fil0" cx="146959" cy="147434" r="7981"/>
-  <path class="fil1 str0" d="M134927 153400l-116027 4c-8426,0 -16959,-9306 -16959,-17953l0 -112726c0,-10943 8513,-20784 17257,-20784l115043 0c10878,-13 18621,9884 18619,20517l-2 112875"/>
-  <circle class="fil0 str1" cx="77400" cy="77572" r="29489"/>
-  <circle class="fil2" cx="77399" cy="77572" r="17477"/>
-  <rect class="fil0" x="74493" y="29357" width="5812" height="96430"/>
-  <rect class="fil0" transform="matrix(6.70821E-014 -2.87528 1.37896 5.16685E-014 29184.2 80477.5)" width="2021" height="69930"/>
-  <rect class="fil2 str2" transform="matrix(1.06978E-013 -2.87528 0.267798 2.01144E-014 92785 80482.3)" width="2021" height="69930"/>
-  <rect class="fil2 str2" transform="matrix(1.06978E-013 -2.87528 0.267798 2.01144E-014 44202.4 80482.3)" width="2021" height="69930"/>
-  <rect class="fil2 str2" x="74493" y="91997" width="5812" height="18727"/>
-  <rect class="fil2 str2" x="74493" y="44427" width="5812" height="18727"/>
- </g>
+<svg id="Camada_2" data-name="Camada 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.94 78.8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2, .cls-5 {
+        stroke-width: .23px;
+      }
+
+      .cls-2, .cls-5, .cls-6, .cls-3, .cls-4, .cls-7 {
+        fill: #1d1d1b;
+      }
+
+      .cls-2, .cls-5, .cls-6, .cls-8, .cls-4, .cls-7 {
+        stroke: #1d1d1b;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-6 {
+        stroke-width: .71px;
+      }
+
+      .cls-8 {
+        fill: none;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Camada_1-2" data-name="Camada 1">
+    <g>
+      <path class="cls-1" d="m11.68,0h57.5c6.45,0,11.76,5.15,11.76,11.5v55.72c0,6.35-5.31,11.58-11.76,11.58H11.68c-6.45,0-11.68-5.23-11.68-11.58V11.5C0,5.15,5.23,0,11.68,0h0Z"/>
+      <path class="cls-8" d="m19.36,46.2c-2.01,0-4.08.06-6.09.06.37-38.44,53-37.46,55.01,0-2.19,0-4.45,0-6.7.06"/>
+      <line class="cls-6" x1="55" y1="32.19" x2="59.99" y2="26.16"/>
+      <line class="cls-7" x1="25.21" y1="32.25" x2="20.15" y2="26.22"/>
+      <line class="cls-7" x1="40.38" y1="17.81" x2="40.38" y2="24.76"/>
+      <polygon class="cls-4" points="13.51 49.98 17.11 49.98 17.11 53.57 13.51 53.63 13.51 49.98"/>
+      <rect class="cls-7" x="63.83" y="49.85" width="3.59" height="3.65"/>
+      <path class="cls-2" d="m44.89,23.11l-1.64,7.55c-1.16,5.67-1.89,10.23-5,15.53l1.77,8.28,4.14-7.31c-1.34-6.03-.67-10.66,0-16.39l.73-7.68Zm-3.17,18.21l.61.12-.55,3.47.12,2.62-1.16,2.07-.55-2.31.97-2.62.55-3.35Z"/>
+      <line class="cls-5" x1="43.85" y1="29.69" x2="46.29" y2="14.16"/>
+      <path class="cls-3" d="m40.44,51.38c2.19,0,3.96,1.77,3.96,4.02s-1.77,3.96-3.9,3.96-3.96-1.77-3.96-3.96,1.77-4.02,3.9-4.02h0Z"/>
+    </g>
+  </g>
 </svg>

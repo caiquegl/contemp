@@ -185,7 +185,7 @@ const Home = () => {
             padding={`0 ${pxToRem(15)}`}
           >
             <ProductCategoryWithIcon
-              title="Controladores de Temperatura e Processos"
+              title="Calibração"
               icon={Pirometro}
               containerProps={{
                 borderColor: 'red.600',
@@ -239,7 +239,7 @@ const Home = () => {
       >
         <DescriptionProduct
           color="white"
-          bg="black.800"
+          bg="red.600"
           borderColor="white"
           borderColorButton="white"
           dataTab={listTab.find((el: any) => el.indexProduct === 5)}
