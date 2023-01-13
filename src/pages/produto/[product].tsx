@@ -259,8 +259,9 @@ const Product = () => {
                   <Flex
                     key={uuidv4()}
                     w="100%"
-                    alignItems="center"
+                    alignItems={["flex-start","center"]}
                     justifyContent="space-between"
+                    direction={["column", "row"]}
                   >
                     <Text fontWeight="bold" fontSize="20px" color="black.800">
                       {vr.name}

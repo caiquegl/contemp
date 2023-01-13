@@ -108,7 +108,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         let newObj = {
           ...el,
           label: el.name,
-          key: el.name.replaceAll(" ", ""),
+          key: el.name.replaceAll(" ", "_"),
           // icon: (
           //   <Icon
           //     icon={AiOutlineEye}
@@ -147,7 +147,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
     <Menu
       onClick={(avt) => {
         onClose()
-        router.push(`/category/${avt.key.replaceAll(" ", "_")}`)
+        router.push(`/category/${avt.key}`)
       }}
       mode="inline"
       items={list}

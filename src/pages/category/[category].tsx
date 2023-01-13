@@ -136,7 +136,7 @@ const Category = () => {
         alignItems="center"
         justifyContent="center"
         direction="column"
-        h={['350px', '350px', '250px', '250px', '250px', '250px']}
+        h={['110px', '110px', '250px', '250px', '250px', '250px']}
       // id="viewCategory"
       >
         <Text
