@@ -8,79 +8,52 @@ import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Parallax } from 'react-scroll-parallax'
+import { Parallax, useParallax } from 'react-scroll-parallax'
 
 export const HomeBackgroundDetails = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const [top1, setTop1] = useState(1440)
-  const [top2, setTop2] = useState(1930)
-  const [top3, setTop3] = useState(2545)
-  const [top4, setTop4] = useState(3555)
-  const [top5, setTop5] = useState(4417)
-  const [top6, setTop6] = useState(4417)
-  const [top7, setTop7] = useState(6655)
+  const parallax = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+  const parallax2 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    // just trigger this so that the initial state 
-    // is updated as soon as the component is mounted
-    // related: https://stackoverflow.com/a/63408216
-    handleScroll();
+  const parallax3 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+  const parallax4 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const parallax5 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-  useEffect(() => {
-    console.log(scrollY)
-    if (scrollY > 610 && scrollY < 670) {
-      setTop1(scrollY * 2.3)
-    }
+  const parallax6 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    if (scrollY > 820 && scrollY < 920) {
-      setTop2(scrollY * 2.3)
-    }
+  const parallax7 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    if (scrollY > 1050 && scrollY < 1150) {
-      setTop3(scrollY * 2.3)
-    }
+  const parallax8 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
 
-    if (scrollY > 1716 && scrollY < 1716) {
-      setTop4(scrollY * 2.3)
-    }
-
-    if (scrollY > 2000 && scrollY < 2200) {
-      setTop5(scrollY * 2)
-    }
-
-    if (scrollY > 2500 && scrollY < 2700) {
-      setTop6(scrollY * 2)
-    }
-
-    if (scrollY > 2500 && scrollY < 2700) {
-      setTop6(scrollY * 2)
-    }
-
-    if (scrollY > 3400 && scrollY < 3500) {
-      setTop7(scrollY * 2)
-    }
-
-
-  }, [scrollY])
-
+  const parallax9 = useParallax<HTMLDivElement>({
+    translateY: [0, 150]
+  });
   return (
     <Box zIndex={-10}>
+
       <Box
         className="square"
         bgImage={PlusDetail}
-        top={scrollY > 610 && scrollY < 670 ? scrollY * 2.3 : top1}
+        ref={parallax.ref}
+        top={1440}
         left={{
           lg: "10%",
           xl: "7%",
@@ -103,11 +76,10 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={PlusDetail} alt={'lt'} />
       </Box>
-      <Parallax offsetYMin={200} offsetYMax={1500}>
       <Box
         bgImage={CirclesHorizontalDetail}
-        // top={scrollY > 820 && scrollY < 920 ? scrollY * 2.3 : top2}
-        top={820}
+        ref={parallax2.ref}
+        top={1930}
         left={-20}
         maxH={100}
         display={{
@@ -129,12 +101,13 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={CirclesHorizontalDetail} alt={'lt'} />
       </Box>
-      </Parallax>
+
       <Box
         bgImage={TrianglesDetail}
-        top={top2}
+        top={1930}
         right="10%"
         maxH={100}
+        ref={parallax3.ref}
         display={{
           base: 'none',
           lg: 'block'
@@ -156,7 +129,9 @@ export const HomeBackgroundDetails = () => {
 
       <Box
         bgImage={PlusDetailDark}
-        top={top3}
+        top={2545}
+        ref={parallax4.ref}
+
         right="10%"
         maxH={100}
         display={{
@@ -177,23 +152,30 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={PlusDetailDark} alt={'lt'} />
       </Box>
+      <Box
+        ref={parallax5.ref}
 
-      <BackgroundDetail
-        src={CriclesDetail}
-        top={3220}
-        left={{
-          lg: "10%",
-          xl: "7%",
-          "2xl": "10%",
-        }}
-        w={70}
-        maxH={100}
-        zIndex={10}
-      />
+      >
+        <BackgroundDetail
+          src={CriclesDetail}
+          top={3220}
+          left={{
+            lg: "10%",
+            xl: "7%",
+            "2xl": "10%",
+          }}
+          w={70}
+          maxH={100}
+          zIndex={10}
+        />
+      </Box>
+
 
       <Box
         bgImage={CirclesHorizontalDetail}
-        top={top4}
+        top={3555}
+        ref={parallax6.ref}
+
         // right="10%"
         maxH={50}
         display={{
@@ -218,7 +200,9 @@ export const HomeBackgroundDetails = () => {
 
       <Box
         bgImage={CriclesDetail}
-        top={top5}
+        top={4417}
+        ref={parallax7.ref}
+
         // right="10%"
         maxH={100}
         display={{
@@ -240,23 +224,33 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={CriclesDetail} alt={'lt'} />
       </Box>
-      <BackgroundDetail
-        src={CirclesHorizontalDetail}
-        top={top6}
-        left={-20}
-        w={300}
-        maxH={50}
-        zIndex={0}
-      />
+      <Box
+        ref={parallax8.ref}
 
-      <BackgroundDetail
-        src={PlusDetail}
-        top={top7}
-        left="10%"
-        w={70}
-        maxH={100}
-        zIndex={10}
-      />
+      >
+        <BackgroundDetail
+          src={CirclesHorizontalDetail}
+          top={4417}
+          left={-20}
+          w={300}
+          maxH={50}
+          zIndex={0}
+        />
+      </Box>
+      <Box
+        ref={parallax9.ref}
+
+      >
+
+        <BackgroundDetail
+          src={PlusDetail}
+          top={6655}
+          left="10%"
+          w={70}
+          maxH={100}
+          zIndex={10}
+        />
+      </Box>
     </Box >
   );
 };
