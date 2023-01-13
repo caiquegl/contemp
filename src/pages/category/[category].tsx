@@ -43,15 +43,6 @@ const Category = () => {
 
   const getCategoryList = async () => {
     try {
-      // const dbInstanceCategory = collection(database, "categories");
-      // const dbInstanceProducts = collection(database, "products");
-      // const dbInstanceHome = collection(database, "home");
-      // const qCategory = query(dbInstanceCategory, where("name", "==", category), limit(1))
-
-      // await getDocs(qCategory).then(async (data) => {
-      //   if (data.docs.length === 0) return
-      //   idCategory = data.docs[0].id
-      // });
       let idCategory: any = []
       let nameCategory = ''
       if (category && typeof category === 'string')

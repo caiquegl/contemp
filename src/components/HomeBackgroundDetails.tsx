@@ -8,6 +8,7 @@ import CriclesDetail from "../assets/background-details/detail-circle.svg";
 import { Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Parallax } from 'react-scroll-parallax'
 
 export const HomeBackgroundDetails = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -38,6 +39,7 @@ export const HomeBackgroundDetails = () => {
   }, []);
 
   useEffect(() => {
+    console.log(scrollY)
     if (scrollY > 610 && scrollY < 670) {
       setTop1(scrollY * 2.3)
     }
@@ -101,9 +103,11 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={PlusDetail} alt={'lt'} />
       </Box>
+      <Parallax offsetYMin={200} offsetYMax={1500}>
       <Box
         bgImage={CirclesHorizontalDetail}
-        top={scrollY > 820 && scrollY < 920 ? scrollY * 2.3 : top2}
+        // top={scrollY > 820 && scrollY < 920 ? scrollY * 2.3 : top2}
+        top={820}
         left={-20}
         maxH={100}
         display={{
@@ -125,7 +129,7 @@ export const HomeBackgroundDetails = () => {
       >
         <Image src={CirclesHorizontalDetail} alt={'lt'} />
       </Box>
-
+      </Parallax>
       <Box
         bgImage={TrianglesDetail}
         top={top2}

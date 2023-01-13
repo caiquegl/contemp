@@ -41,6 +41,71 @@ const AllProduct = () => {
     md: false
   })
 
+  const getProduct = async (categoryId: string) => {
+
+
+    let cg1 = allCategoryActive.filter((el: any) => el.id == categoryId)
+
+    let cg2 = allCategoryActive.filter(
+      (el: any) => el.id == cg1[0]?.sub_categorie
+    )
+    let cg3 = allCategoryActive.filter(
+      (el: any) => el.id == cg2[0]?.sub_categorie
+    )
+    let cg4 = allCategoryActive.filter(
+      (el: any) => el.id == cg3[0]?.sub_categorie
+    )
+
+    let id = ''
+    let names: any = []
+    if (cg1.length > 0) {
+      id = cg1[0].id
+      names.push(cg1[0].name)
+    }
+    if (cg2.length > 0) {
+      id = cg2[0].id
+      names.push(cg2[0].name)
+    }
+    if (cg3.length > 0) {
+      id = cg3[0].id
+      names.push(cg3[0].name)
+    }
+    if (cg4.length > 0) {
+      id = cg4[0].id
+      names.push(cg4[0].name)
+    }
+
+
+    let idCategory: any = []
+
+    allCategoryActive.forEach((el: any) => {
+      if (el.id == id) {
+        idCategory.push(el.id)
+        allCategoryActive.forEach((el2: any) => {
+          if (el2.sub_categorie && el2.sub_categorie == el.id) {
+            idCategory.push(el2.id)
+            allCategoryActive.forEach((el3: any) => {
+              if (el3.sub_categorie && el3.sub_categorie == el2.id) {
+                idCategory.push(el3.id)
+              }
+            })
+          }
+        })
+      }
+    })
+
+    let list: any = []
+
+    if (idCategory.length > 0) {
+      allProductsActive.forEach((el: any) => {
+        idCategory.forEach((ct: any) => {
+          if (el.category == ct) list.push(el)
+        })
+      })
+    }
+    return (list)
+  }
+
   const getFavorites = async () => {
     try {
       let listFavorite: any = []
@@ -58,23 +123,30 @@ const AllProduct = () => {
       if (listFavorite.length === 0) return
       let index = 0
       for await (let categories of listFavorite) {
-        allProductsActive.filter((el: any) => {
-          if (el.category == categories.idCategorie)
-            listFavorite[index].products.push(el)
-        })
+        let p = await getProduct(categories.idCategorie)
+        listFavorite[index].products = p
+        // allProductsActive.filter((el: any) => {
+        //   if (el.category == categories.idCategorie)
+        //     listFavorite[index].products.push(el)
+        // })
 
-        allProductsHome.filter((el: any) => {
-          if (el.category == categories.idCategorie)
-            listFavorite[index].products.push(el)
-        })
+        // allProductsHome.filter((el: any) => {
+        //   if (el.category == categories.idCategorie)
+        //     listFavorite[index].products.push(el)
+        // })
 
         index = index + 1
       }
+
+      console.log(listFavorite)
       setFavorites(listFavorite)
     } catch (error) {
       console.log(error)
     }
   }
+
+
+
 
   const getCategories = async () => {
     try {
@@ -163,12 +235,12 @@ const AllProduct = () => {
             bg="white"
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}
           >
-            <Container maxW="7xl" p="80px 0">
+            <Container maxW="7xl" p="130px 0">
               <Flex
                 alignItems={['flex-start', 'center']}
                 flexDirection={['column', 'row']}
               >
-                {fv.url ? (
+                {fv.url && (
                   <Center w="70px" h="70px" borderRadius="5px" mb={['20px', 0]}>
                     <Image
                       src={fv.url}
@@ -182,15 +254,16 @@ const AllProduct = () => {
                       flex={0.8}
                     />
                   </Center>
-                ) : (
-                  <Box
-                    w="55px"
-                    h="55px"
-                    borderRadius="5px"
-                    bg="black.800"
-                    mb={['20px', 0]}
-                  />
                 )}
+                 {/* ) : (
+                   <Box
+                     w="55px"
+                     h="55px"
+                     borderRadius="5px"
+                     bg="black.800"
+                     mb={['20px', 0]}
+                   />
+                 )} */}
                 <Text
                   color="black.800"
                   fontSize={['35px', '45px']}
