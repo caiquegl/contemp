@@ -6,8 +6,9 @@ import {
   Button,
   useBreakpointValue,
   useToast,
+  Link
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper";
@@ -22,6 +23,7 @@ import { useWindowSize } from "../utils/useWindowSize";
 import ImageNext, { StaticImageData } from 'next/image'
 
 export const Favorite = () => {
+  const swiperRef = useRef<any>(null)
   const windowSize = useWindowSize()
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
@@ -46,6 +48,7 @@ export const Favorite = () => {
   const toast = useToast();
   const [products, setProducts] = useState<any>([]);
   const [homeTabs, setHomeTabs] = useState<any>({});
+  const [stop, setSTop] = useState(false)
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -195,10 +198,12 @@ export const Favorite = () => {
       </Text>
       <Flex h={pxToRem(250)} w="100%">
         <Swiper
+          ref={swiperRef}
           loop={true}
           slidesPerView={slidesPerView()}
           autoplay={{
             delay: 2000,
+            
           }}
           initialSlide={0}
           speed={1000}
@@ -213,11 +218,17 @@ export const Favorite = () => {
         >
           {products.map((item: any) => (
             <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
-              <CardProduct
-                img={item.urls && item.urls.length > 0 && item.urls[0]}
-                text={item.name}
-                categoryName={item.nameCategory}
-              />
+              <Link href={item.name ? `/produto/${item.name.replaceAll(" ", "_")}` : ""} _hover={{ color: 'black', textDecoration: 'none' }}
+              onMouseEnter={() => swiperRef.current?.swiper.autoplay.stop()}
+              onMouseLeave={() => swiperRef.current?.swiper.autoplay.start()}
+              >
+                  <CardProduct
+                    img={item.urls && item.urls.length > 0 && item.urls[0]}
+                    text={item.name}
+                    categoryName={item.nameCategory}
+                  />
+              </Link>
+
             </SwiperSlide>
           ))}
         </Swiper>
