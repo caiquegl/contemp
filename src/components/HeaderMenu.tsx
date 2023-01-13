@@ -89,7 +89,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         }}
         overflowedIndicator={
           <Box as={"p"} _hover={{ color: "white" }}>
-            OUTROS
+            MAIS CATEGORIAS
           </Box>
         }
       />
