@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/ContainerAddProductDescription/index.tsx"
-  ],
+, "src/components/Favorite.js"  ],
   "exclude": [
     "node_modules",
     "u614611595"

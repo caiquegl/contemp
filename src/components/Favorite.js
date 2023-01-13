@@ -23,7 +23,7 @@ import { useWindowSize } from "../utils/useWindowSize";
 import ImageNext, { StaticImageData } from 'next/image'
 
 export const Favorite = () => {
-  const swiperRef = useRef<any>(null)
+  const swiperRef = useRef(null)
   const windowSize = useWindowSize()
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
@@ -37,7 +37,7 @@ export const Favorite = () => {
 
   useEffect(() => {
     if (windowSize) {
-      setWidth(windowSize?.width as number)
+      setWidth(windowSize?.width)
     } else {
       setWidth(window.innerWidth)
     }
@@ -46,8 +46,8 @@ export const Favorite = () => {
   const { allProductsActive, allProductsHome, allCategoryActive } = useAuth();
   const router = useRouter();
   const toast = useToast();
-  const [products, setProducts] = useState<any>([]);
-  const [homeTabs, setHomeTabs] = useState<any>({});
+  const [products, setProducts] = useStat>([]);
+  const [homeTabs, setHomeTabs] = useStat>({});
   const [stop, setSTop] = useState(false)
   const isMobile = useBreakpointValue({
     base: true,
@@ -71,7 +71,7 @@ export const Favorite = () => {
     "2xl": false,
   });
 
-  const slidesPerView = (): number => {
+  const slidesPerView = () => {
     if (isMobile) {
       return 1;
     }
@@ -93,25 +93,25 @@ export const Favorite = () => {
 
   const listProductDestaque = async () => {
     try {
-      let newList: any = [];
+      let newList = [];
 
-      allProductsActive.forEach((el: any) => {
+      allProductsActive.forEach((el) => {
         if (el.destaque) {
           newList.push({
             ...el,
             nameCategory: allCategoryActive.find(
-              (ec: any) => ec.id == el.category
+              (ec) => ec.id == el.category
             ).name,
           });
         }
       });
 
-      allProductsHome.forEach((el: any) => {
+      allProductsHome.forEach((el) => {
         if (el.destaque) {
           newList.push({
             ...el,
             nameCategory: allCategoryActive.find(
-              (ec: any) => ec.id == el.category
+              (ec) => ec.id == el.category
             ).name,
           });
         }
@@ -131,12 +131,12 @@ export const Favorite = () => {
 
   const getHomeTab1 = async () => {
     try {
-      let find = allProductsHome.find((el: any) => el.indexProduct == 0);
+      let find = allProductsHome.find((el) => el.indexProduct == 0);
       if (!find) return
       let tab1 = {
         ...find,
         nameCategory: allCategoryActive.find(
-          (el: any) => el.id == find.category
+          (el) => el.id == find.category
         ).name,
       };
 
@@ -216,7 +216,7 @@ export const Favorite = () => {
             alignItems: "center",
           }}
         >
-          {products.map((item: any) => (
+          {products.map((item) => (
             <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
               <Link href={item.name ? `/produto/${item.name.replaceAll(" ", "_")}` : ""} _hover={{ color: 'black', textDecoration: 'none' }}
               onMouseEnter={() => swiperRef.current?.swiper.autoplay.stop()}
