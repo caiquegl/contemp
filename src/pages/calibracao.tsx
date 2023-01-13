@@ -43,10 +43,9 @@ const Calibracao = () => {
         w="100%"
         bg="white"
         p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
-        pt="100px"
       >
-        <Container maxW="7xl" p="12px 0 77px">
-          <Text fontSize="25px" fontWeight="bold" color="red.600" >
+        <Container maxW="7xl" p="12px 0 77px" px="20px">
+          <Text fontSize="25px" fontWeight="bold" mt="100px" color="red.600" >
             Calibrações efetuadas com símbolo de acreditação – RBC
           </Text>
           <Text fontSize="20px" color="black.900" mt="25px" lineHeight="34px">

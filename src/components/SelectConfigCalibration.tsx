@@ -23,6 +23,7 @@ export const SelectConfigCalibration = () => {
       w="100%"
       justifyContent="center"
       flexDirection={["column", "column", "row", "row", "row"]}
+      mt="100px"
     >
       <Box>
         <Flex
