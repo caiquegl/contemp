@@ -89,7 +89,7 @@ const AllProduct = () => {
 
       if (list.length === 0) return
       let order = list.sort((a:any, b:any) => a.order - b.order)
-      setCategories(order)
+      setCategories(list)
     } catch (error) {
       console.log(error)
     }

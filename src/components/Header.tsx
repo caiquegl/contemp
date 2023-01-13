@@ -437,6 +437,13 @@ export const Header = () => {
                             height={41}
                             mr="20px"
                         >
+                            <Box
+                                position="absolute"
+                                zIndex={9}
+                                bg="transparent"
+                                w="160px"
+                                h="41px"
+                            />
                             <ImageNext width={160} height={41} src={Logo} />
                         </Box>
 
