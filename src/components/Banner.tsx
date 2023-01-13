@@ -6,7 +6,7 @@ import { Typewriter } from 'react-simple-typewriter'
 import { pxToRem } from '../utils/pxToRem'
 import { SearchBar } from './SearchBar'
 import { useWindowSize } from '../utils/useWindowSize'
-
+import BGFavorite from '../assets/banners/Banner.png'
 export const Banner = () => {
   const windowSize = useWindowSize()
 
@@ -29,7 +29,8 @@ export const Banner = () => {
       alignItems="center"
       justifyContent="center"
       flexDirection="column"
-      backgroundImage={`url('./images/Banner.png')`}
+      // backgroundImage={`url('./images/Banner.png')`}
+      backgroundImage={`url(${BGFavorite.src})`}
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
     >
