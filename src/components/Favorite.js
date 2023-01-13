@@ -46,8 +46,8 @@ export const Favorite = () => {
   const { allProductsActive, allProductsHome, allCategoryActive } = useAuth();
   const router = useRouter();
   const toast = useToast();
-  const [products, setProducts] = useStat>([]);
-  const [homeTabs, setHomeTabs] = useStat>({});
+  const [products, setProducts] = useState>([]);
+  const [homeTabs, setHomeTabs] = useState>({});
   const [stop, setSTop] = useState(false)
   const isMobile = useBreakpointValue({
     base: true,
