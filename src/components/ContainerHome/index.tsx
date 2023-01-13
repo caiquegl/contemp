@@ -200,7 +200,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   useEffect(() => {
     if (list.length > 0) {
       let find = allCategory.find((el: any) => el.id == defaultValues?.category)
-      console.log(find)
       if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.category, label: find.name })
     }
   }, [list.length, allCategory])

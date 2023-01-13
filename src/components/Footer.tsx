@@ -27,7 +27,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const Footer = () => {
   const { listHeader } = useAuth()
   const router = useRouter()
-  const [list, setList] = useState<any>(listHeader)
+  const [list, setList] = useState<any>([])
 
   useEffect(() => {
     let newList: any = []
@@ -52,7 +52,9 @@ export const Footer = () => {
     newOrder.forEach((el: any) => {
       newList.push(listHeader[el.index])
     })
-    setList(newList)
+
+    console.log(newList)
+    setList([...newList])
   }, [listHeader])
 
   return (
@@ -109,7 +111,7 @@ export const Footer = () => {
           list.length > 0 &&
           list.map((el: any, index: number) => (
             <GridItem w="100%" gap={6} key={uuidv4()} px="20px">
-              {index === 2 && (
+              {/* {index === 2 && (
                 <HStack spacing="20px" mb="40px" >
                   <Link
                     href="https://www.linkedin.com/company/contemp/"
@@ -188,7 +190,7 @@ export const Footer = () => {
                     </Flex>
                   </Link>
                 </HStack>
-              )}
+              )} */}
               <Text
                 fontWeight="bold"
                 fontSize="25px"
@@ -205,7 +207,6 @@ export const Footer = () => {
                 el.list_sub_category.map((el2: any) => (
                   <Fragment key={uuidv4()}>
                     <Text
-                      fontWeight="bold"
                       fontSize="20px"
                       mb="15px"
                       cursor="pointer"

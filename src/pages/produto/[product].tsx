@@ -71,7 +71,6 @@ const Product = () => {
     let produto = ''
     if (product && typeof product == 'string')
       produto = product.replaceAll('_', ' ')
-    console.log(produto)
     let ex = allProductsActive.filter((el: any) => el.name == produto)
     if (ex.length == 0) ex = allProductsHome.filter((el: any) => el.name == produto)
 
@@ -150,9 +149,6 @@ const Product = () => {
     }
   }, [allCategoryActive, allProductsActive, product])
 
-  useEffect(() => {
-    console.log(variation)
-  }, [variation])
   return (
     <>
       <SmoothScroll>

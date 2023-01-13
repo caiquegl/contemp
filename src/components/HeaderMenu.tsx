@@ -56,7 +56,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
-      {console.log(list)}
       <style lang="css" scoped>{`
         .ant-menu-submenu-title {
           display: flex;
