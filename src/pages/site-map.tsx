@@ -5,7 +5,7 @@ import { useAuth } from '../contextAuth/authContext'
 import { useRouter } from 'next/router'
 import { v4 as uuidv4 } from 'uuid'
 import { Header } from '../components/Header'
-import  {updateSiteMapXML}  from './api/site-map-xml'
+// import  {updateSiteMapXML}  from './api/sitemap.xml'
 
 const SiteMapContainer = () => {
   const router = useRouter()
@@ -23,7 +23,7 @@ const SiteMapContainer = () => {
         }),
       }
     })
-    updateSiteMapXML(allCategory,allProductsActive);
+    // updateSiteMapXML(allCategory,allProductsActive);
     setListCategory(
     newListCategory.sort(function (a:any, b:any) {
       return a.products.length - b.products.length
