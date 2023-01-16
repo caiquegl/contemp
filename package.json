@@ -26,7 +26,9 @@
     "firebase": "9.14.0",
     "firebase-admin": "11.3.0",
     "framer-motion": "8.1.5",
+    "fs": "^0.0.1-security",
     "js-cookie": "3.0.1",
+    "js2xmlparser": "^5.0.0",
     "knex": "2.3.0",
     "moment": "2.29.4",
     "next": "12.3.1",
@@ -48,7 +50,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",
-    "@types/node": "18.8.3",
+    "@types/node": "^18.11.18",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@types/react-html-parser": "^2.0.2",
