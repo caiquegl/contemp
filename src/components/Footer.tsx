@@ -10,19 +10,15 @@ import {
   Link,
   ListItem,
   Text,
-  UnorderedList
+  UnorderedList,
 } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
-import {
-  AiFillLinkedin,
-  AiFillYoutube,
-  AiOutlineInstagram
-} from 'react-icons/ai'
+import { AiFillLinkedin, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai'
 import { FaFacebookF } from 'react-icons/fa'
 import { SearchBar } from './SearchBar'
 import { useAuth } from '../contextAuth/authContext'
 import { useRouter } from 'next/router'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 export const Footer = () => {
   const { listHeader } = useAuth()
@@ -43,7 +39,7 @@ export const Footer = () => {
 
       order.push({
         index,
-        count
+        count,
       })
     })
 
@@ -59,58 +55,45 @@ export const Footer = () => {
 
   return (
     <Container
-      maxW="7xl"
-      p={[
-        '40px 20px 31px',
-        '40px 20px 31px',
-        '40px 20px 31px',
-        '40px 20px 31px',
-        '40px 10px 31px'
-      ]}
+      maxW='7xl'
+      p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 10px 31px']}
     >
       <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        marginBottom="32px"
+        alignItems='center'
+        justifyContent='space-between'
+        marginBottom='32px'
         flexDirection={['column', 'column', 'row', 'row', 'row']}
       >
         <Flex
-          w="100%"
-          justifyContent="space-between"
-          alignItems="center"
+          w='100%'
+          justifyContent='space-between'
+          alignItems='center'
           flexDirection={['column', 'column', 'row', 'row', 'row']}
         >
           <Box>
-            <Text fontWeight="bold" fontSize="30px" mb="15px">
+            <Text fontWeight='bold' fontSize='30px' mb='15px'>
               Procure o produto que deseja aqui
             </Text>
-            <Text fontSize="20px" mb="15px">
-              Se ainda não encontrou o produto que esteja procurando é só
-              digitar ao lado.
+            <Text fontSize='20px' mb='15px'>
+              Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.
             </Text>
           </Box>
           <SearchBar
             inputProps={{
-              placeholder: 'Procure aqui seu produto...'
+              placeholder: 'Procure aqui seu produto...',
             }}
           />
         </Flex>
       </Flex>
-      <Divider mb="100px" />
+      <Divider mb='100px' />
       <Grid
-        templateColumns={[
-          'repeat(1, 1fr)',
-          'repeat(1, 1fr)',
-          'repeat(2, 1fr)',
-          'repeat(2, 1fr)',
-          'repeat(3, 1fr)'
-        ]}
-        w="100%"
+        templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+        w='100%'
       >
         {list &&
           list.length > 0 &&
           list.map((el: any, index: number) => (
-            <GridItem w="100%" gap={6} key={uuidv4()} px="20px">
+            <GridItem w='100%' gap={6} key={uuidv4()} px='20px'>
               {/* {index === 2 && (
                 <HStack spacing="20px" mb="40px" >
                   <Link
@@ -191,49 +174,38 @@ export const Footer = () => {
                   </Link>
                 </HStack>
               )} */}
-              <Text
-                fontWeight="bold"
-                fontSize="25px"
-                mb="20px"
-                cursor="pointer"
-                onClick={() =>
-                  router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
-                }
+              <Link
+                href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
+                _hover={{ color: 'white', textDecoration: 'none' }}
               >
-                {el.name}
-              </Text>
+                <Text fontWeight='bold' fontSize='25px' mb='20px' cursor='pointer'>
+                  {el.name}
+                </Text>
+              </Link>
               {el.list_sub_category &&
                 el.list_sub_category.length > 0 &&
                 el.list_sub_category.map((el2: any) => (
                   <Fragment key={uuidv4()}>
-                    <Text
-                      fontSize="20px"
-                      mb="15px"
-                      cursor="pointer"
-                      onClick={() =>
-                        router.push(
-                          `/category/${el2.name.replaceAll(' ', '_')}#viewCategory`
-                        )
-                      }
+                    <Link
+                      href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
+                      _hover={{ color: 'white', textDecoration: 'none' }}
                     >
-                      {el2.name}
-                    </Text>
-                    <Box mb="20px">
+                      <Text fontSize='20px' mb='15px' cursor='pointer'>
+                        {el2.name}
+                      </Text>
+                    </Link>
+                    <Box mb='20px'>
                       {el2.list_sub_category &&
                         el2.list_sub_category.length > 0 &&
                         el2.list_sub_category.map((el3: any, index: number) => (
-                          <Text
-                            key={uuidv4()}
-                            fontSize="20px"
-                            cursor="pointer"
-                            onClick={() =>
-                              router.push(
-                                `/category/${el3.name.replaceAll(' ', '_')}#viewCategory`
-                              )
-                            }
+                          <Link
+                            href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
+                            _hover={{ color: 'white', textDecoration: 'none' }}
                           >
-                            {el3.name}
-                          </Text>
+                            <Text key={uuidv4()} fontSize='20px' cursor='pointer'>
+                              {el3.name}
+                            </Text>
+                          </Link>
                         ))}
                     </Box>
                   </Fragment>
@@ -241,43 +213,31 @@ export const Footer = () => {
             </GridItem>
           ))}
       </Grid>
-      <Divider m="50px 0" />
+      <Divider m='50px 0' />
       <Flex
         direction={['column-reverse', 'row']}
         alignItems={['flex-start', 'center']}
-        justifyContent="space-between"
-        fontSize="18px"
-        flexWrap="wrap"
+        justifyContent='space-between'
+        fontSize='18px'
+        flexWrap='wrap'
       >
-        <Text color="white" fontSize="18px">
+        <Text color='white' fontSize='18px'>
           Copyright © 2022 Contemp. Todos os direitos reservados.
         </Text>
-        <UnorderedList
-          color="white"
-          fontSize="18px"
-          display="flex"
-          mb={['20px', 0]}
-          flexDirection={['column', 'row']}
-        >
-          <Link
-            href="/todosProdutos"
-            _hover={{ color: '#fff', textDecoration: 'none' }}
-          >
+        <UnorderedList color='white' fontSize='18px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
+          <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Todos os Produtos</ListItem>
           </Link>
           <Link
-            href="https://blog.contemp.com.br/politica-de-privacidade"
+            href='https://blog.contemp.com.br/politica-de-privacidade'
             _hover={{ color: '#fff', textDecoration: 'none' }}
           >
             <ListItem m={[0, '0 0 0 30px']}>Politica de Privacidade</ListItem>
           </Link>
-          <Link
-            href="/trabalhe-conosco"
-            _hover={{ color: '#fff', textDecoration: 'none' }}
-          >
+          <Link href='/trabalhe-conosco' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem m={[0, '0 30px']}>Trabalhe Conosco</ListItem>
           </Link>
-          <Link href="/sitemap.xml" _hover={{ color: '#fff', textDecoration: 'none' }}>
+          <Link href='/sitemap.xml' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Mapa do Site</ListItem>
           </Link>
         </UnorderedList>

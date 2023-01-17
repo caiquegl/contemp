@@ -1,4 +1,4 @@
-import { Container, Divider, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Container, Divider, Flex, Grid, GridItem, Link, Text } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
 
 import { useAuth } from '../contextAuth/authContext'
@@ -61,27 +61,26 @@ const SiteMapContainer = () => {
             listCategory.length > 0 &&
             listCategory.map((el: any, index: number) => (
               <GridItem w='100%' gap={6} key={uuidv4()} px='20px'>
-                <Text
-                  fontWeight='bold'
-                  fontSize='20px'
-                  mb='20px'
-                  cursor='pointer'
-                  onClick={() => router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)}
+                <Link
+                  href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
+                  _hover={{ color: 'white', textDecoration: 'none' }}
                 >
-                  {el.name}
-                </Text>
+                  <Text fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
+                    {el.name}
+                  </Text>
+                </Link>
                 {el.products &&
                   el.products.length > 0 &&
                   el.products.map((el: any, index: number) => (
                     <GridItem w='100%' gap={6} key={uuidv4()}>
-                      <Text
-                        fontSize='15px'
-                        mb='20px'
-                        cursor='pointer'
-                        onClick={() => router.push(`/produto/${el.name.replaceAll(' ', '_')}`)}
+                      <Link
+                        href={`/produto/${el.name.replaceAll(' ', '_')}`}
+                        _hover={{ color: 'white', textDecoration: 'none' }}
                       >
-                        {el.name}
-                      </Text>
+                        <Text fontSize='15px' mb='20px' cursor='pointer'>
+                          {el.name}
+                        </Text>
+                      </Link>
                     </GridItem>
                   ))}
                 {listCategory.length - 1 != index && <Divider mb='20px' />}
