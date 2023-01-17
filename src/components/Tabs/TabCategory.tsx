@@ -101,6 +101,8 @@ const TabCategory = () => {
     try {
       if (bodyForm.sub_categorie) bodyForm = { ...bodyForm, sub_categorie: bodyForm.sub_categorie.value }
       bodyForm = { ...bodyForm, url }
+      if (bodyForm.is_main == 'true') delete bodyForm.sub_categorie
+
       if (Object.keys(update).length > 0) {
         updateCategory(bodyForm)
         return
@@ -177,6 +179,7 @@ const TabCategory = () => {
   const updateCategory = async (bodyForm: any) => {
     try {
       setLoading(true)
+      if (bodyForm.is_main == 'true') delete bodyForm.sub_categorie
       const dbInstance = collection(database, 'categories')
       let exist = false
       const qExist = query(dbInstance, where('name', '==', bodyForm.name), limit(1))
