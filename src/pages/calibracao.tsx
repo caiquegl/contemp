@@ -139,6 +139,17 @@ const Calibracao = () => {
       </Box>
       <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='0px 0 77px'>
+          <Text
+            mt='119px'
+            fontWeight='bold'
+            fontSize='45px'
+            textAlign='center'
+            mb='70px'
+            color='red.600'
+            textTransform='uppercase'
+          >
+            Principais modelos de Calibração
+          </Text>
           <SelectConfigCalibration />
           <Text textAlign='center' color='red.600' fontWeight='bold' fontSize='45px' mt='107px'>
             QUALIFICAÇÕES
