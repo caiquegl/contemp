@@ -193,21 +193,29 @@ const Home = () => {
               acreditação – RBC e rastreabilidade ao Inmetro.
             </Text>
 
-            <Button
-              border='2px solid white'
-              borderRadius='25px'
-              width='157px'
-              height='50px'
-              mr='15px'
-              bg='transparent'
+            <Link
+              textDecoration='none'
               _hover={{
-                bg: 'white',
-                color: 'black.800',
-                transition: 'all 0.4s',
+                textDecoration: 'none',
               }}
+              href='/calibracao'
             >
-              Veja mais
-            </Button>
+              <Button
+                border='2px solid white'
+                borderRadius='25px'
+                width='157px'
+                height='50px'
+                mr='15px'
+                bg='transparent'
+                _hover={{
+                  bg: 'white',
+                  color: 'black.800',
+                  transition: 'all 0.4s',
+                }}
+              >
+                Veja mais
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </Container>
