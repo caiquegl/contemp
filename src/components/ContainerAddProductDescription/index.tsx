@@ -56,11 +56,11 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   useEffect(() => {
     if (values.tab) {
       setEditorLoaded(false);
-      setTabs(values.tab);
+      setTabs(values.tab && values.tab.length > 0 ? values.tab : [{ id: 1 }]);
       setTimeout(() => {
         setEditorLoaded(true);
       }, 500);
-    }
+    } 
   }, [values]);
 
 
