@@ -208,6 +208,22 @@ export const Header = () => {
             </DrawerHeader>
 
             <DrawerBody>
+            <Box>
+              <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
+                <Button
+                  borderRadius='5px'
+                  bg='red.600'
+                  w="100%"
+                  _hover={{
+                    bg: 'red.600',
+                    opacity: 0.6,
+                  }}
+                >
+                  Todos os produtos
+                  <Icon as={BsThreeDotsVertical} ml='10px' color='white' fontSize='20px' />
+                </Button>
+              </Link>
+            </Box>
               <Box mb='60px'>
                 <HeaderMenuVertical menuItems={list} onClose={() => onClose()} />
               </Box>
@@ -220,9 +236,11 @@ export const Header = () => {
                     A Contemp
                   </Text>
                 </Link>
-                <Text mb='15px' fontSize='18px'>
-                  Blog
-                </Text>
+                <Link href='https://blog.contemp.com.br'>
+                  <Text mb='15px' fontSize='18px' >
+                    Blog
+                  </Text>
+                </Link>
                 <Link href='/suporte-tecnico'>
                   <Text mb='15px' fontSize='18px'>
                     Suporte Técnico
@@ -238,9 +256,11 @@ export const Header = () => {
                     Calibração
                   </Text>
                 </Link>
-                <Text mb='15px' fontSize='18px'>
-                  Política de Privacidade
-                </Text>
+                <Link href="https://blog.contemp.com.br/politica-de-privacidade/">
+                  <Text mb="15px" fontSize="18px">
+                    Política de Privacidade
+                  </Text>
+                </Link>
               </Box>
             </DrawerBody>
 
