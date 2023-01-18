@@ -240,7 +240,7 @@ const AllProduct = () => {
                 alignItems={['flex-start', 'center']}
                 flexDirection={['column', 'row']}
               >
-                {fv.url && (
+                {/* {fv.url && (
                   <Center w="70px" h="70px" borderRadius="5px" mb={['20px', 0]}>
                     <Image
                       src={fv.url}
@@ -254,7 +254,7 @@ const AllProduct = () => {
                       flex={0.8}
                     />
                   </Center>
-                )}
+                )} */}
                  {/* ) : (
                    <Box
                      w="55px"
