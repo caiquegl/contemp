@@ -208,12 +208,13 @@ export const Header = () => {
             </DrawerHeader>
 
             <DrawerBody>
-            <Box>
+            <Box >
               <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
                 <Button
                   borderRadius='5px'
                   bg='red.600'
                   w="100%"
+                  justifyContent="space-between"
                   _hover={{
                     bg: 'red.600',
                     opacity: 0.6,

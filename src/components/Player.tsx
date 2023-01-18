@@ -94,10 +94,11 @@ export const Player = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color="red" />
-          <ModalBody p="20px" mt="20px">
+          <ModalBody mt="50px">
             <Flex alignItems="center">
                 <ReactPlayer
                   url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
+                  width="350px"
                   height="195px"
                 />
               </Flex>
@@ -110,11 +111,11 @@ export const Player = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton color="red" />
-          <ModalBody p="20px" mt="20px">
+          <ModalBody mt="50px">
             <Flex alignItems="center">
                 <ReactPlayer
                   url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
-                  width="300px"
+                  width="350px"
                   height="195px"
                 />
             </Flex>
