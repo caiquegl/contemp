@@ -153,9 +153,11 @@ export function SidebarDrawer({
                   A Contemp
                 </Text>
               </Link>
-              <Text mb="15px" fontSize="18px">
-                Blog
-              </Text>
+              <Link href='https://blog.contemp.com.br'>
+                <Text mb='15px' fontSize='18px' >
+                  Blog
+                </Text>
+              </Link>
               <Link href="/suporte-tecnico">
                 <Text mb="15px" fontSize="18px">
                   Suporte Técnico
@@ -171,9 +173,11 @@ export function SidebarDrawer({
                   Calibração
                 </Text>
               </Link>
-              <Text mb="15px" fontSize="18px">
-                Política de Privacidade
-              </Text>
+              <Link href="https://blog.contemp.com.br/politica-de-privacidade/">
+                <Text mb="15px" fontSize="18px">
+                  Política de Privacidade
+                </Text>
+              </Link>
             </Box>
           </DrawerBody>
 

@@ -131,6 +131,11 @@ img {
   padding-bottom: 50px !important;
 }
 
+@media only screen and (max-width: 600px){
+  .swiper-wrapper {
+    padding-bottom: 80px !important;
+  }
+}
 .ant-table-thead>tr>th {
   background: #fff !important;
 }
