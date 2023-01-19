@@ -59,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [allCategoryActive, setAllCategoryActive] = useState<any>([])
   const [cart, setCart] = useState<any>([])
   const [totalCart, setTotalCart] = useState<any>(0)
-  const [loading, setLoading] = useState<any>(false)
+  const [loading, setLoading] = useState<any>(true)
   const [hasCookie, setHasCookie] = useState<any>(false)
 
   const setUser = (body: any) => {
