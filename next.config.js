@@ -81,7 +81,17 @@ module.exports = {
       creatRedirectObj ('/wp-content/uploads/2012/04/Contemp-P501-1.jpg', 'https://contemp.com.br'),
       creatRedirectObj ('/ukzzv-17538-procesador-SLGTE-Intel-Core-Duo-E7500', 'https://contemp.com.br'),
       creatRedirectObj ('/allProduct', '/todosProdutos'),
-      // creatRedirectObj ('', '')
+      //Erro de redirecionamento Google Search
+      creatRedirectObj ('/cjbeewii-154907-DTAP-pour-câble-de-montage-DSLR-Utilisation-de/', '/todosProdutos'),
+      creatRedirectObj ('/lhnab-3642-quilates-ohrhänger-pendiente-Aretes-chysopras/', '/todosProdutos'),
+      creatRedirectObj ('/pjnawf-897229-combustible-de-gasolina-Anillo-de-Retención-Correa-Ajuste-Para-Volvo/', '/todosProdutos'),
+      creatRedirectObj ('/vlwkiydh-564950-de-dígitos-descodificar-Land-Rover-Discovery/', '/todosProdutos'),
+      creatRedirectObj ('/vozvnobt-920779-eliminaciónEliminador-de-HICAS-con-Superpro-Arbustos-Para-Horizonte-R-GTR/', '/todosProdutos'),
+      creatRedirectObj ('/wp-content/uploads/2022/02/C71X_V1.05-REV.03.pdf', '/category/LINHA_AVAN%C3%87ADA_-_C71X'),
+      creatRedirectObj ('/produto/instrumentos/controladores-de-temperatura-e-processo/c714-controlador-de-processos-linha-avancada/', '/produto/CONTROLADOR_DE_TEMPERATURA_E_PROCESSOS_-_C714'),
+      creatRedirectObj ('/wp-content/uploads/2022/02/C41X_V1.05-REV.2-1.pdf', '/category/LINHA_ECON%C3%94MICA_-_C41X'),
+      creatRedirectObj ('/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada', '/category/CONTROLADORES_DE_POT%C3%8ANCIA'),
+      // creatRedirectObj ('', ''),
     ]
   }
 }
