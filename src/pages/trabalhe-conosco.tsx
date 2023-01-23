@@ -46,7 +46,7 @@ const Home = () => {
           {
             name: "Área desejada",
             type: "select",
-            options: ["Marketing"],
+            options: ["Administração","Marketing","Vendas", "Outros"],
           },
           {
             type: "upload",
