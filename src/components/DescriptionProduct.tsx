@@ -21,11 +21,15 @@ interface IProps {
   borderColor: string
   borderColorButton: string
   color: string
+  colorHoverButton: string
+  bgHoverButton: string
+  colorButton: string
+  bgButton:string
   containerProps?: FlexProps
   dataTab?: DataTabProps
 }
 
-const DescriptionProduct = ({ bg, borderColor, color, borderColorButton, containerProps, dataTab }: IProps) => {
+const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverButton,colorButton,bgButton, borderColorButton, containerProps, dataTab }: IProps) => {
   const router = useRouter()
 
   if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
@@ -109,14 +113,15 @@ const DescriptionProduct = ({ bg, borderColor, color, borderColorButton, contain
                 borderRadius='25px'
                 border='2px solid'
                 borderColor={borderColorButton}
-                bg={bg}
+                color={colorButton}
+                bg={bgButton}
                 m={`${pxToRem(20)} 0`}
                 maxW={pxToRem(157)}
                 h={pxToRem(50)}
                 flex={6}
                 _hover={{
-                  bg: color,
-                  color: bg,
+                  bg: bgHoverButton,
+                  color: colorHoverButton,
                   transition: 'all 0.3s',
                 }}
               >
