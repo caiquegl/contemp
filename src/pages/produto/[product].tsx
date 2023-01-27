@@ -110,9 +110,11 @@ const Product = () => {
 
     const changeText = (txt: string) => {
       let val = txt
-      let result = txt.substring(0, 2)
+      val = val.toString().replace('<a', '<a target="_blank"')
 
-      if (result == '<a') {
+      let result = txt.substring(0, 2)
+      let result2 = txt.substring(0, 5)
+      if (result == '<a' || result2 == '<p><a') {
         if (val.indexOf('class=') == -1) {
           val = val.toString().replace('<a', '<a class="editor_button"')
         }
