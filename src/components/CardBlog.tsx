@@ -8,7 +8,7 @@ interface IProps {
   color: string;
   title: string;
   text: string;
-  img: string;
+  img: any;
 }
 
 export const CardBlog = ({ bg, color, title, text, img }: IProps) => {
