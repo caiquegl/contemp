@@ -216,7 +216,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await getCategory()
     await getAllProducts()
     await getAllProductsHome()
-    if (router.asPath == '/') setLoading(false)
+    setLoading(false)
   }
 
   const reloadCategory = async () => {
