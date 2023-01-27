@@ -49,6 +49,7 @@ export const Header = () => {
   const router = useRouter()
   const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategoryActive } = useAuth()
   const [list, setList] = useState([])
+  const [loading, setLoading] = useState(false)
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
 
@@ -97,6 +98,7 @@ export const Header = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
     if (allCategoryActive.length > 0) listCategory()
   }, [allCategoryActive])
 
@@ -325,7 +327,7 @@ export const Header = () => {
   return (
     <Box zIndex={9999999999999999}>
       <Fade in={scrollY < 200}>
-        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'}>
+        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'} transition='all 3s' opacity={!loading ? 0 : 1}>
           <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px'>
             <Box display='flex' flex={1}>
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  Grid,
-  Text,
-  useBreakpointValue
-} from '@chakra-ui/react'
+import { Box, Center, Container, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
 import { Player } from '../components/Player'
@@ -24,7 +16,7 @@ import Head from 'next/head'
 import { AdBanners } from '../components/AdBanners'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { useAuth } from '../contextAuth/authContext'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 const AllProduct = () => {
   const { allCategoryActive, allProductsActive, allProductsHome } = useAuth()
@@ -33,28 +25,20 @@ const AllProduct = () => {
 
   const isTablet = useBreakpointValue({
     base: true,
-    lg: false
+    lg: false,
   })
 
   const isMobile = useBreakpointValue({
     base: true,
-    md: false
+    md: false,
   })
 
   const getProduct = async (categoryId: string) => {
-
-
     let cg1 = allCategoryActive.filter((el: any) => el.id == categoryId)
 
-    let cg2 = allCategoryActive.filter(
-      (el: any) => el.id == cg1[0]?.sub_categorie
-    )
-    let cg3 = allCategoryActive.filter(
-      (el: any) => el.id == cg2[0]?.sub_categorie
-    )
-    let cg4 = allCategoryActive.filter(
-      (el: any) => el.id == cg3[0]?.sub_categorie
-    )
+    let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie)
+    let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie)
+    let cg4 = allCategoryActive.filter((el: any) => el.id == cg3[0]?.sub_categorie)
 
     let id = ''
     let names: any = []
@@ -74,7 +58,6 @@ const AllProduct = () => {
       id = cg4[0].id
       names.push(cg4[0].name)
     }
-
 
     let idCategory: any = []
 
@@ -103,7 +86,7 @@ const AllProduct = () => {
         })
       })
     }
-    return (list)
+    return list
   }
 
   const getFavorites = async () => {
@@ -115,7 +98,7 @@ const AllProduct = () => {
           listFavorite.push({
             ...el,
             idCategorie: el.id,
-            products: []
+            products: [],
           })
         }
       })
@@ -138,15 +121,11 @@ const AllProduct = () => {
         index = index + 1
       }
 
-      console.log(listFavorite)
       setFavorites(listFavorite)
     } catch (error) {
       console.log(error)
     }
   }
-
-
-
 
   const getCategories = async () => {
     try {
@@ -155,12 +134,12 @@ const AllProduct = () => {
       allCategoryActive.forEach((el: any) => {
         list.push({
           ...el,
-          idCategorie: el.id
+          idCategorie: el.id,
         })
       })
 
       if (list.length === 0) return
-      let order = list.sort((a:any, b:any) => a.order - b.order)
+      let order = list.sort((a: any, b: any) => a.order - b.order)
       setCategories(list)
     } catch (error) {
       console.log(error)
@@ -168,11 +147,7 @@ const AllProduct = () => {
   }
 
   useEffect(() => {
-    if (
-      allCategoryActive.length > 0 &&
-      allProductsHome.length > 0 &&
-      allProductsActive.length > 0
-    ) {
+    if (allCategoryActive.length > 0 && allProductsHome.length > 0 && allProductsActive.length > 0) {
       getFavorites()
       getCategories()
     }
@@ -180,14 +155,11 @@ const AllProduct = () => {
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth
 
-        ;[].forEach.call(
-          document.querySelectorAll('*'),
-          function (element: HTMLElement) {
-            if (element.offsetWidth > docWidth) {
-              console.log(element)
-            }
-          }
-        )
+      ;[].forEach.call(document.querySelectorAll('*'), function (element: HTMLElement) {
+        if (element.offsetWidth > docWidth) {
+          console.log(element)
+        }
+      })
     }
     findOverflowingElements()
   }, [allCategoryActive, allProductsActive, allProductsHome])
@@ -196,33 +168,32 @@ const AllProduct = () => {
     <SmoothScroll>
       <Head>
         <meta
-          name="description"
-          content="Encontre tudo em soluções para medição, controle e monitoramento para os mais variados processos industrais."
+          name='description'
+          content='Encontre tudo em soluções para medição, controle e monitoramento para os mais variados processos industrais.'
         />
         <meta
-          name="keywords"
-          content="soluções para medição, medição, controle de temperatura, monitoramento, processos industriais"
+          name='keywords'
+          content='soluções para medição, medição, controle de temperatura, monitoramento, processos industriais'
         />
         <title>Contemp</title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel='icon' href='/favicon.png' />
       </Head>
 
       <Flex
-        w="100%"
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
+        w='100%'
+        alignItems='center'
+        justifyContent='center'
+        direction='column'
         h={['350px', '350px', '250px', '250px', '250px', '250px']}
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
-          fontWeight="bold"
-          textAlign="center"
-          maxW="1037px"
+          fontWeight='bold'
+          textAlign='center'
+          maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
-          Soluções para medição, controle e monitoramento para os mais variados
-          processos industriais.
+          Soluções para medição, controle e monitoramento para os mais variados processos industriais.
         </Text>
       </Flex>
       {favorites &&
@@ -230,16 +201,13 @@ const AllProduct = () => {
         favorites.map((fv: any) => (
           <Flex
             key={uuidv4()}
-            w="100%"
+            w='100%'
             alignItems={'center'}
-            bg="white"
+            bg='white'
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}
           >
-            <Container maxW="7xl" p="130px 0">
-              <Flex
-                alignItems={['flex-start', 'center']}
-                flexDirection={['column', 'row']}
-              >
+            <Container maxW='7xl' p='130px 0'>
+              <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
                 {/* {fv.url && (
                   <Center w="70px" h="70px" borderRadius="5px" mb={['20px', 0]}>
                     <Image
@@ -255,7 +223,7 @@ const AllProduct = () => {
                     />
                   </Center>
                 )} */}
-                 {/* ) : (
+                {/* ) : (
                    <Box
                      w="55px"
                      h="55px"
@@ -264,13 +232,7 @@ const AllProduct = () => {
                      mb={['20px', 0]}
                    />
                  )} */}
-                <Text
-                  color="black.800"
-                  fontSize={['35px', '45px']}
-                  fontWeight="bold"
-                  ml="15px"
-                  lineHeight={['40px']}
-                >
+                <Text color='black.800' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
                   {fv.name}
                 </Text>
               </Flex>
@@ -282,16 +244,16 @@ const AllProduct = () => {
                   autoplay={{
                     delay: 2000,
                     pauseOnMouseEnter: true,
-                    waitForTransition: true
+                    waitForTransition: true,
                   }}
                   speed={1000}
                   pagination={{
                     clickable: true,
                     enabled: true,
-                    renderBullet: customSwiperBullets
+                    renderBullet: customSwiperBullets,
                   }}
                   modules={[Autoplay, Pagination]}
-                  className="mySwiper"
+                  className='mySwiper'
                   cssMode={true}
                 >
                   {fv.products &&
@@ -310,25 +272,21 @@ const AllProduct = () => {
             </Container>
           </Flex>
         ))}
-      <Box bg="white" w="100%" p="20px" pt="100px">
+      <Box bg='white' w='100%' p='20px' pt='100px'>
         <AdBanners />
       </Box>
-      <Flex w="100%" alignItems="center" bg="white.500" p="0 20px">
-        <Container maxW="7xl" p="80px 0">
+      <Flex w='100%' alignItems='center' bg='white.500' p='0 20px'>
+        <Container maxW='7xl' p='80px 0'>
           <Text
-            color="black.800"
-            fontSize="45px"
-            fontWeight="bold"
-            mb="31px"
+            color='black.800'
+            fontSize='45px'
+            fontWeight='bold'
+            mb='31px'
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
           >
             Navegue por Categoria
           </Text>
-          <Grid
-            templateColumns="repeat(auto-fit, minmax(260px, 1fr))"
-            gap={pxToRem(15)}
-            padding={`0 ${pxToRem(10)}`}
-          >
+          <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
             {categories &&
               categories.length > 0 &&
               categories.map((categ: any, index: number) => {
@@ -361,31 +319,31 @@ const AllProduct = () => {
       </Flex>
       <Player />
       <Contact
-        id="duvidas-e-orcamentos"
-        title="DÚVIDAS E ORÇAMENTOS"
-        description="Essa é a seleção que a equipe da Contemp escolheu como os
-              destaques do mês"
+        id='duvidas-e-orcamentos'
+        title='DÚVIDAS E ORÇAMENTOS'
+        description='Essa é a seleção que a equipe da Contemp escolheu como os
+              destaques do mês'
         form={[
           {
             name: 'Nome',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'E-mail',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Empresa',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Telefone',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Mensagem',
-            type: 'textArea'
-          }
+            type: 'textArea',
+          },
         ]}
       />
       <Footer />

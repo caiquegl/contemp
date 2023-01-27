@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Menu } from 'antd'
 import { AiFillCaretRight } from 'react-icons/ai'
 import { AiOutlineEye } from 'react-icons/ai'
@@ -37,6 +37,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         if (el.list_sub_category && el.list_sub_category.length > 0) {
           newObj.children = await amountList(el.list_sub_category, false)
         }
+        delete obj.onTitleClick
         obj.push(newObj)
       }
 
@@ -50,6 +51,8 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
     let amount = await amountList(menuItems)
     setLoading(true)
     setList(amount)
+
+    setTimeout(() => setLoading(false), 1500)
   }
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
-      <style lang='css' scoped>{`
+      {/* <style lang='css' scoped>{`
         .ant-menu-submenu-title {
           display: flex;
           flex-direction: row-reverse;
@@ -66,36 +69,37 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         .ant-menu-submenu-title svg {
           margin-left: 5px;
         }
-      `}</style>
-      <Fade in={loading}>
-        <Menu
-          onClick={(evt) => {
-            router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
-          }}
-          mode={'horizontal'}
-          subMenuOpenDelay={0.5}
-          items={list}
-          // defaultSelectedKeys={["CÂMERAS TERMOGRÁFICAS FIXAS"]}
-          // openKeys={["CÂMERAS TERMOGRÁFICAS FIXAS"]}
-          expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
-          style={{
-            background: '#242424',
-            border: 'none',
-            fontSize: 16,
-            display: 'flex',
-            // flexWrap: 'wrap',
-            position: 'relative',
-            alignItems: 'center',
-            width: '100%',
-            justifyContent: 'center',
-          }}
-          overflowedIndicator={
-            <Box as={'p'} _hover={{ color: 'white' }}>
-              MAIS CATEGORIAS
-            </Box>
-          }
-        />
-      </Fade>
+      `}</style> */}
+      {/* <Fade in={loading}> */}
+
+      <Menu
+        onClick={(evt) => {
+          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
+        }}
+        mode={'horizontal'}
+        subMenuOpenDelay={0.5}
+        items={list}
+        expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
+        style={{
+          background: '#242424',
+          border: 'none',
+          fontSize: 16,
+          display: 'flex',
+          opacity: list.length === 0 || loading ? 0 : 1,
+          transition: '0.2s',
+          // flexWrap: 'wrap',
+          position: 'relative',
+          alignItems: 'center',
+          width: '100%',
+          justifyContent: 'center',
+        }}
+        overflowedIndicator={
+          <Box as={'p'} _hover={{ color: 'white' }}>
+            MAIS CATEGORIAS
+          </Box>
+        }
+      />
+      {/* </Fade> */}
     </>
   )
 }

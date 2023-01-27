@@ -49,7 +49,6 @@ export const Footer = () => {
       newList.push(listHeader[el.index])
     })
 
-    console.log(newList)
     setList([...newList])
   }, [listHeader])
 
