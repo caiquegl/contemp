@@ -208,30 +208,6 @@ const AllProduct = () => {
           >
             <Container maxW='7xl' p='130px 0'>
               <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
-                {/* {fv.url && (
-                  <Center w="70px" h="70px" borderRadius="5px" mb={['20px', 0]}>
-                    <Image
-                      src={fv.url}
-                      alt={fv.name}
-                      bgSize="contain"
-                      minH={{
-                        base: pxToRem(228),
-                        md: pxToRem(330),
-                        lg: pxToRem(425)
-                      }}
-                      flex={0.8}
-                    />
-                  </Center>
-                )} */}
-                {/* ) : (
-                   <Box
-                     w="55px"
-                     h="55px"
-                     borderRadius="5px"
-                     bg="black.800"
-                     mb={['20px', 0]}
-                   />
-                 )} */}
                 <Text color='black.800' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
                   {fv.name}
                 </Text>

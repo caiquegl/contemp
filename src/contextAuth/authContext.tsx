@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, database } from '../utils/db'
@@ -51,6 +51,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState<any>(true)
   const [hasCookie, setHasCookie] = useState<any>(false)
 
+  useLayoutEffect(() => {
+    let exist = sessionStorage.getItem('set_load')
+    if (exist) setLoading(false)
+  })
   const setUser = (body: any) => {
     setUserContext(body)
     Cookies.set('SET_USER', JSON.stringify(body))
@@ -209,7 +213,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const reload = async () => {
-    if (router.asPath == '/') setLoading(true)
+    let getLoad = sessionStorage.getItem('set_load')
+    if (!getLoad) {
+      sessionStorage.setItem('set_load', 'true')
+      setLoading(true)
+    }
     getCategoryOffiline()
     getProductOffiline()
     getProductHomeOffiline()
