@@ -208,23 +208,23 @@ export const Header = () => {
             </DrawerHeader>
 
             <DrawerBody>
-            <Box >
-              <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
-                <Button
-                  borderRadius='5px'
-                  bg='red.600'
-                  w="100%"
-                  justifyContent="space-between"
-                  _hover={{
-                    bg: 'red.600',
-                    opacity: 0.6,
-                  }}
-                >
-                  Todos os produtos
-                  <Icon as={BsThreeDotsVertical} ml='10px' color='white' fontSize='20px' />
-                </Button>
-              </Link>
-            </Box>
+              <Box>
+                <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
+                  <Button
+                    borderRadius='5px'
+                    bg='red.600'
+                    w='100%'
+                    justifyContent='space-between'
+                    _hover={{
+                      bg: 'red.600',
+                      opacity: 0.6,
+                    }}
+                  >
+                    Todos os produtos
+                    <Icon as={BsThreeDotsVertical} ml='10px' color='white' fontSize='20px' />
+                  </Button>
+                </Link>
+              </Box>
               <Box mb='60px'>
                 <HeaderMenuVertical menuItems={list} onClose={() => onClose()} />
               </Box>
@@ -238,7 +238,7 @@ export const Header = () => {
                   </Text>
                 </Link>
                 <Link href='https://blog.contemp.com.br'>
-                  <Text mb='15px' fontSize='18px' >
+                  <Text mb='15px' fontSize='18px'>
                     Blog
                   </Text>
                 </Link>
@@ -257,8 +257,8 @@ export const Header = () => {
                     Calibração
                   </Text>
                 </Link>
-                <Link href="https://blog.contemp.com.br/politica-de-privacidade/">
-                  <Text mb="15px" fontSize="18px">
+                <Link href='https://blog.contemp.com.br/politica-de-privacidade/'>
+                  <Text mb='15px' fontSize='18px'>
                     Política de Privacidade
                   </Text>
                 </Link>
@@ -325,7 +325,7 @@ export const Header = () => {
   return (
     <Box zIndex={9999999999999999}>
       <Fade in={scrollY < 200}>
-        <Container maxW='7xl' p='12px 15px 31px 15px'>
+        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'}>
           <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px'>
             <Box display='flex' flex={1}>
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>
