@@ -1,11 +1,13 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Menu } from 'antd'
+// import { Menu } from 'antd'
 import { AiFillCaretRight } from 'react-icons/ai'
 import { AiOutlineEye } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 import Icon from './Icon'
 import { pxToRem } from '../utils/pxToRem'
 import { Box, Fade } from '@chakra-ui/react'
+import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu'
+import 'rc-menu/assets/index.css'
 
 export type MenuProps = {
   menuItems: any
@@ -15,6 +17,7 @@ export type MenuProps = {
 export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState([])
+  const [eventClose, setEventClose] = useState([])
   const router = useRouter()
 
   const amountList = async (amount: any, hasIcon = true) => {
@@ -37,7 +40,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
         if (el.list_sub_category && el.list_sub_category.length > 0) {
           newObj.children = await amountList(el.list_sub_category, false)
         }
-        delete obj.onTitleClick
         obj.push(newObj)
       }
 
@@ -61,23 +63,15 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
 
   return (
     <>
-      {/* <style lang='css' scoped>{`
-        .ant-menu-submenu-title {
-          display: flex;
-          flex-direction: row-reverse;
-        }
-        .ant-menu-submenu-title svg {
-          margin-left: 5px;
-        }
-      `}</style> */}
-      {/* <Fade in={loading}> */}
-
       <Menu
         onClick={(evt) => {
           router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
         }}
         mode={'horizontal'}
+        // openKeys={['rc-menu-more']}
         subMenuOpenDelay={0.5}
+        // subMenuCloseDelay={0.5}
+        // onMouseLeave={() => console.log('saiu')}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
@@ -164,7 +158,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         color: '#fff',
         fontSize: 18,
       }}
-      theme='dark'
+      // theme='dark'
       expandIcon={<Icon icon={AiFillCaretRight} size={30} />}
     />
   )

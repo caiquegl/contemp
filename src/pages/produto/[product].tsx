@@ -43,6 +43,7 @@ import { Breadcrumb } from 'antd'
 import { customSwiperBullets } from '../../utils/customSwiperBullets'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
+import { text } from 'stream/consumers'
 
 const Product = () => {
   const router = useRouter()
@@ -106,7 +107,29 @@ const Product = () => {
     names.forEach((el: any) => revertNames.unshift(el))
 
     setBradeName(revertNames)
-    setDetail(ex[0])
+
+    const changeText = (txt: string) => {
+      let val = txt
+      let result = txt.substring(0, 2)
+
+      if (result == '<a') {
+        if (val.indexOf('class=') == -1) {
+          val = val.toString().replace('<a', '<a class="editor_button"')
+        }
+      }
+
+      return val
+    }
+
+    const [getDetail] = ex
+
+    setDetail({
+      ...getDetail,
+      tab: getDetail.tab.map((t: any) => ({
+        ...t,
+        text: changeText(t.text),
+      })),
+    })
 
     let idCategory: any = []
 
