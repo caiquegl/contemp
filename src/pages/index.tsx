@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text, Button, Icon, Grid as GridChakra, Link } from '@chakra-ui/react'
+import { Box, Container, Flex, Text, Button, Icon, Grid as GridChakra, Link,useBreakpointValue, Grid } from '@chakra-ui/react'
 import Pirometro from '../assets/icons/pritometro_white.svg'
 import Mapa from '../assets/images/MAPA.png'
 import { Image } from '../components/Image'
@@ -12,19 +12,35 @@ import { Footer } from '../components/Footer'
 import { Player } from '../components/Player'
 import DescriptionProduct from '../components/DescriptionProduct'
 import { pxToRem } from '../utils/pxToRem'
-import { ProductCategoryWithIcon } from '../components/ProductCategoryWithIcon'
 import { HomeBackgroundDetails } from '../components/HomeBackgroundDetails'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { useAuth } from '../contextAuth/authContext'
 import { SmoothScroll } from '../components/SmoothScroll'
+import { CardBlog } from '../components/CardBlog'
+import Logo from '../assets/icons/Logo-Contemp.svg'
+import DefaultImg from '../assets/images/image-default.webp'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Autoplay, Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { customSwiperBullets } from '../utils/customSwiperBullets'
+import { v4 as uuidv4 } from 'uuid'
 
 const Home = () => {
   const { allProductsHome, allCategoryActive } = useAuth()
   const router = useRouter()
   const [listTab, setListtAB] = useState<any>([])
+  const isTablet = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
 
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  })
   const getHomeTab = async () => {
     try {
       let organize: any = []
@@ -76,6 +92,10 @@ const Home = () => {
           color='white'
           bg='red.600'
           borderColor='white'
+          colorButton='red.600'
+          bgButton='white'
+          colorHoverButton='white'
+          bgHoverButton='red.600'
           borderColorButton='white'
           dataTab={listTab.find((el: any) => el.indexProduct === 1)}
         />
@@ -83,14 +103,22 @@ const Home = () => {
           color='black.800'
           bg='white'
           borderColor='red.600'
+          colorButton='white'
+          bgButton='black.800'
           borderColorButton='black.800'
+          colorHoverButton='black.800'
+          bgHoverButton='white'
           dataTab={listTab.find((el: any) => el.indexProduct === 2)}
         />
         <DescriptionProduct
           color='black.800'
           bg='white'
           borderColor='red.600'
+          colorButton='white'
+          bgButton='black.800'
           borderColorButton='black.800'
+          colorHoverButton='black.800'
+          bgHoverButton='white'
           containerProps={{
             direction: {
               base: 'column',
@@ -103,7 +131,11 @@ const Home = () => {
           color='white'
           bg='red.600'
           borderColor='white'
+          colorButton='red.600'
+          bgButton='white'
           borderColorButton='white'
+          colorHoverButton='white'
+          bgHoverButton='red.600'
           containerProps={{
             direction: {
               base: 'column',
@@ -167,16 +199,31 @@ const Home = () => {
             flexDirection='column'
             padding={`0 ${pxToRem(15)}`}
           >
-            <ProductCategoryWithIcon
-              title='Calibração'
-              icon={Pirometro}
-              containerProps={{
-                borderColor: 'red.600',
-                color: 'white',
-                marginTop: 10,
-                width: '100%',
-              }}
-            />
+                <Flex
+                as='a'
+                p={`${pxToRem(10)}`}
+                border='2px solid'
+                borderColor='red.600'
+                color = 'white'
+                mt='10'
+                w='100%'
+                zIndex={20}
+                borderRadius='4px'
+                alignItems='center'
+                justifyContent='space-between'
+                minW={pxToRem(150)}
+                maxW={pxToRem(400)}
+                maxH={pxToRem(85)}
+                _hover={{ color: 'white' }}
+                href={`/calibracao`}
+                cursor='pointer'
+              >
+                <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
+                CALIBRAÇÃO
+                </Text>
+
+                <Image src={Pirometro} bgSize='contain' minH={pxToRem(35)} minW={pxToRem(35)} flex={1} />
+              </Flex>
 
             <Text
               mt='27px'
@@ -232,13 +279,21 @@ const Home = () => {
           bg='red.600'
           borderColor='white'
           borderColorButton='white'
+          colorButton='red.600'
+          bgButton='white'
+          colorHoverButton='white'
+          bgHoverButton='red.600'
           dataTab={listTab.find((el: any) => el.indexProduct === 5)}
         />
         <DescriptionProduct
           color='black.800'
           bg='white'
           borderColor='red.600'
+          colorButton='white'
+          bgButton='black.800'
           borderColorButton='black.800'
+          colorHoverButton='black.800'
+          bgHoverButton='white'
           dataTab={listTab.find((el: any) => el.indexProduct === 6)}
         />
       </GridChakra>
@@ -390,6 +445,77 @@ const Home = () => {
           },
         ]}
       />
+        <Flex  w='100%' mt='-100px' bg='white' alignItems="center" justifyContent="center">
+          <Container maxW={['100%','100%','8xl','8xl','8xl']} mb="50px" >
+            <Flex h={[pxToRem(500), pxToRem(600)]} >
+              {isMobile && 
+                      <Swiper
+                      loop={true}
+                      slidesPerView={1}
+                      autoplay={{
+                        delay: 2000,
+                        
+                      }}
+                      initialSlide={0}
+                      speed={1000}
+                      spaceBetween={isTablet ? 20 : 30}
+                      modules={[Autoplay, Pagination]}
+                      className="mySwiper"
+                      style={{
+                        margin: "auto",
+                        width: "100%",
+                        alignItems: "center",
+                      }}
+                    >
+                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
+                    <CardBlog
+                      color='white'
+                      bg='red.600'
+                      title='Termopar, onde utilizar?'
+                      text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                      img={DefaultImg} />
+                </SwiperSlide>
+                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
+                  <CardBlog
+                    color='black.800'
+                    bg='white'
+                    title='Termopar, onde utilizar?'
+                    text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                    img={DefaultImg} />
+                </SwiperSlide>
+                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
+                  <CardBlog
+                    color='white'
+                    bg='black.800'
+                    title='Termopar, onde utilizar?'
+                    text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                    img={DefaultImg} />
+                </SwiperSlide>
+                </Swiper>
+              }
+              {!isMobile && 
+
+                <><CardBlog
+                color='white'
+                bg='red.600'
+                title='Termopar, onde utilizar?'
+                text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                img={DefaultImg} /><CardBlog
+                  color='black.800'
+                  bg='white'
+                  title='Termopar, onde utilizar?'
+                  text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                  img={DefaultImg} /><CardBlog
+                  color='white'
+                  bg='black.800'
+                  title='Termopar, onde utilizar?'
+                  text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
+                  img={DefaultImg} /></>
+              }
+            </Flex>
+          </Container>
+        </Flex>
+
       <Footer />
     </SmoothScroll>
   )
