@@ -215,7 +215,7 @@ const Product = () => {
                   <SwiperSlide key={uuidv4()}>
                     <Center h='100%' maxH={pxToRem(765)} width='100%'>
                       <Zoom>
-                        <img alt={detail.name ? detail.name : ''} src={photo} width='600' />
+                        <img id="zoom" alt={detail.name ? detail.name : ''} src={photo} width='600' />
                       </Zoom>
                     </Center>
                   </SwiperSlide>

@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Button, Flex, GridItem, Text } from "@chakra-ui/react";
-import { Image } from './Image'
+import { Box, Button, Flex, GridItem, Link, Text, Image } from "@chakra-ui/react";
 import { pxToRem } from "../utils/pxToRem";
+import splitText from '../utils/splitText';
 
 interface IProps {
   bg: string;
@@ -9,17 +9,20 @@ interface IProps {
   title: string;
   text: string;
   img: any;
+  hrefButton: string
 }
 
-export const CardBlog = ({ bg, color, title, text, img }: IProps) => {
+export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) => {
   return (
     <Flex
       bg={bg}
+      borderRadius="8px"
       minH="350px"
-      p={['10px 20px', '10px 20px', '10px 20px', '10px 50px', '10px 50px']}
+      p={['20px', '20px', '20px', '50px', '50px']}
       alignItems="center"
       justifyContent="space-between"
       display="flex"
+      overflow="hidden"
     >
       <Box
         w="100%"
@@ -27,38 +30,42 @@ export const CardBlog = ({ bg, color, title, text, img }: IProps) => {
         minH={[pxToRem(100), pxToRem(150)]}
         borderRadius="8px"
         border="2px solid"
-        h={[pxToRem(450), pxToRem(550)]}
+        h={[pxToRem(450), pxToRem(570)]}
         borderColor={color}
-        p={pxToRem(20)}
+        p={[pxToRem(20), pxToRem(20)]}
+        display="flex"
+        flexDirection={'column'}
+        justifyContent='space-between'
       >
-        <Image src={img} alt="bateria" w="100%" h={[pxToRem(150),pxToRem(300)]} />
-
-        <Text fontWeight="bold" fontSize={pxToRem(25)} mt={["5px","15px"]}color={color}>
-          {title}
-        </Text>
-
-        <Text fontSize={["14px","18px"]} mt={["5px","15px"]} color={color}>
-          {text}
-        </Text>
-
-        <Button
-          borderRadius="30px"
-          w="150px"
-          h={["30px","40px"]}
-          textAlign="center"
-          mt="20px"
-          bg="none"
-          border="2px solid"
-          borderColor={color}
-          color={color}
-          _hover={{
-            bg: color,
-            color: bg,
-            transition: "all 0.3s",
-          }}
-        >
-          Veja mais
-        </Button>
+        <Box >
+          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={[pxToRem(250), pxToRem(350)]} src={img}/>
+          <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(25)} mt={["5px","15px"]} color={color}>
+            {title}
+          </Text>
+        </Box>
+        {/* <Text fontSize={["14px","18px"]} mt={["5px","15px"]} color={color}>
+          <div dangerouslySetInnerHTML={{__html: text}} />
+        </Text> */}
+          <Link 
+            href={hrefButton}>
+            <Button
+              borderRadius="30px"
+              w="150px"
+              h={["40px"]}
+              textAlign="center"
+              bg="none"
+              border="2px solid"
+              borderColor={color}
+              color={color}
+              _hover={{
+                bg: color,
+                color: bg,
+                transition: "all 0.3s",
+              }}
+            >
+              Veja mais
+            </Button>
+          </Link>
       </Box>
     </Flex>
   );

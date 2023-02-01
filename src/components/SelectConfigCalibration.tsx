@@ -58,7 +58,7 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text>Calibrações de Termometria</Text>
+          <Text cursor={'pointer'}>Calibrações de Termometria</Text>
         </Flex>
         <Flex
           p='16px 20px'
@@ -117,7 +117,7 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text>Calibrações Dimensionais</Text>
+          <Text cursor={'pointer'}>Calibrações Dimensionais</Text>
         </Flex>
         <Flex
           p='16px 20px'
@@ -159,7 +159,7 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text>Calibrações de Processos</Text>
+          <Text cursor={'pointer'}>Calibrações de Processos</Text>
         </Flex>
       </Box>
 

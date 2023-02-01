@@ -10,3 +10,14 @@ export const db = knex({
     database : 'production_rocketpdv'
   }
 }) as Knex
+
+export const dbBlog = knex({
+  client: 'mysql',
+  connection: {
+    host : 'db.systagg.com.br',
+    port : 3306,
+    user : 'systagg',
+    password : 'tagg!$$@',
+    database : 'contemp_blog'
+  }
+}) as Knex
