@@ -38,7 +38,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
         justifyContent='space-between'
       >
         <Box >
-          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={[pxToRem(250), pxToRem(350)]} src={img}/>
+          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img}/>
           <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(25)} mt={["5px","15px"]} color={color}>
             {title}
           </Text>
