@@ -170,6 +170,10 @@ img {
   border-radius: 4px;
 }
 
+#zoom {
+  pointer-events: all !important;
+}
+
 /* .ant-menu-vertical.ant-menu-sub .ant-menu-item:hover {
   width: 80% !important;
 } */
