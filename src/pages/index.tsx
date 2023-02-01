@@ -21,21 +21,36 @@ import { SmoothScroll } from '../components/SmoothScroll'
 import { CardBlog } from '../components/CardBlog'
 import Logo from '../assets/icons/Logo-Contemp.svg'
 import DefaultImg from '../assets/images/image-default.webp'
+import Blog1 from '../assets/images/CONTEMP_IMAGENS_BLOG_6.png'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { v4 as uuidv4 } from 'uuid'
+import { array } from 'yup'
+
+type Post = {
+  post_title : string
+  post_image : string
+  post_url : string
+  post_content : string
+}
 
 const Home = () => {
   const { allProductsHome, allCategoryActive } = useAuth()
   const router = useRouter()
   const [listTab, setListtAB] = useState<any>([])
+  const [post, setPost] = useState<Post[]>([])
   const isTablet = useBreakpointValue({
     base: true,
     lg: false,
   })
+  const styles_card = [
+    { bg: 'red.600', font: 'white' },
+    { bg: 'white', font: 'black.800' },
+    { bg: 'black.800', font: 'white' },
+  ]
 
   const isMobile = useBreakpointValue({
     base: true,
@@ -62,6 +77,14 @@ const Home = () => {
     if (allCategoryActive.length > 0 && allProductsHome.length > 0) getHomeTab()
   }, [allCategoryActive, allProductsHome])
 
+  const getPostsData = async () => {
+    const postsData = await fetch('/api/get-posts')
+    setPost(await postsData.json() as Post[])
+  }
+
+  useEffect(() => {
+    getPostsData();
+  }, [])
   return (
     <SmoothScroll>
       <Head>
@@ -447,71 +470,57 @@ const Home = () => {
       />
         <Flex  w='100%' mt='-100px' bg='white' alignItems="center" justifyContent="center">
           <Container maxW={['100%','100%','8xl','8xl','8xl']} mb="50px" >
-            <Flex h={[pxToRem(500), pxToRem(600)]} >
-              {isMobile && 
-                      <Swiper
-                      loop={true}
-                      slidesPerView={1}
-                      autoplay={{
-                        delay: 2000,
-                        
-                      }}
-                      initialSlide={0}
-                      speed={1000}
-                      spaceBetween={isTablet ? 20 : 30}
-                      modules={[Autoplay, Pagination]}
-                      className="mySwiper"
-                      style={{
-                        margin: "auto",
-                        width: "100%",
-                        alignItems: "center",
-                      }}
-                    >
-                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
-                    <CardBlog
-                      color='white'
-                      bg='red.600'
-                      title='Termopar, onde utilizar?'
-                      text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                      img={DefaultImg} />
-                </SwiperSlide>
-                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
-                  <CardBlog
-                    color='black.800'
-                    bg='white'
-                    title='Termopar, onde utilizar?'
-                    text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                    img={DefaultImg} />
-                </SwiperSlide>
-                <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
-                  <CardBlog
-                    color='white'
-                    bg='black.800'
-                    title='Termopar, onde utilizar?'
-                    text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                    img={DefaultImg} />
-                </SwiperSlide>
-                </Swiper>
-              }
-              {!isMobile && 
+            <Flex h={[pxToRem(500), pxToRem(660)]} >
+              {isMobile && (
+                <Swiper
+                    loop={true}
+                    slidesPerView={1}
+                    autoplay={{
+                      delay: 2000,
 
-                <><CardBlog
-                color='white'
-                bg='red.600'
-                title='Termopar, onde utilizar?'
-                text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                img={DefaultImg} /><CardBlog
-                  color='black.800'
-                  bg='white'
-                  title='Termopar, onde utilizar?'
-                  text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                  img={DefaultImg} /><CardBlog
-                  color='white'
-                  bg='black.800'
-                  title='Termopar, onde utilizar?'
-                  text='Termopar Termopares são sensores de temperatura compostos por dois elementos.'
-                  img={DefaultImg} /></>
-              }
+                    }}
+                    initialSlide={0}
+                    speed={1000}
+                    spaceBetween={isTablet ? 20 : 30}
+                    modules={[Autoplay, Pagination]}
+                    className="mySwiper"
+                    style={{
+                      margin: "auto",
+                      width: "100%",
+                      alignItems: "center",
+                    }}
+                  >
+                {post.map((p, index) => {
+                  return(
+                  <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
+                  <CardBlog
+                          color={styles_card[index].font}
+                          bg={styles_card[index].bg}
+                          title={p.post_title}
+                          text={p.post_content}
+                          hrefButton={p.post_url}
+                          img={p.post_image}
+                        />
+                  </SwiperSlide>
+                  )
+                })}
+              </Swiper>
+              )} {!isMobile && (
+                <>
+                  {post.map((p, index) => {
+                    return  (
+                      <CardBlog
+                        color={styles_card[index].font}
+                        bg={styles_card[index].bg}
+                        title={p.post_title}
+                        text={p.post_content}
+                        hrefButton={p.post_url}
+                        img={p.post_image}
+                      />
+                    )
+                  })}
+                </>
+              )}
             </Flex>
           </Container>
         </Flex>
