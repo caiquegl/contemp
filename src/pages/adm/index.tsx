@@ -18,6 +18,7 @@ import { useRouter } from 'next/router'
 import { useAuth } from '../../contextAuth/authContext'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { setCookie } from 'nookies'
+import { withSSRAuthRedirect } from '../../utils/withSSRAuthRedirect'
 
 const Adm = () => {
   const router = useRouter()
@@ -40,11 +41,13 @@ const Adm = () => {
       setCookie(undefined, "nextAuth.contemp", JSON.stringify({
         auth,
         body
-      }), {
-        path: "/adm/home",
-      });
-      setUser(result.user)
-      router.push('/adm/home')
+      }));
+      // // setUser(result.user)
+      // setTimeout(() => {
+        
+      //   router.reload();
+      // }, 1000);
+      await router.push('/adm/home')
     } catch (error: any) {
       console.log(error)
       toast({
@@ -188,3 +191,9 @@ const Adm = () => {
 }
 
 export default Adm
+
+export const getServerSideProps = withSSRAuthRedirect(async (ctx) => {
+  return {
+    props: {},
+  };
+});
