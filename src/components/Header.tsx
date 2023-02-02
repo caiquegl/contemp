@@ -559,9 +559,12 @@ export const Header = () => {
                       </Button>
                     </Link>
                   </Box>
-
-                  <HeaderMenu menuItems={list} />
-
+                  <Box
+                    margin="0 20px"
+                    w="100%"
+                  >
+                    <HeaderMenu menuItems={list} />
+                  </Box>
                   <Box
                     position='relative'
                     cursor='pointer'

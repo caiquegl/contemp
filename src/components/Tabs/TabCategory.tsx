@@ -330,6 +330,8 @@ const TabCategory = () => {
 
   const changerOrder = async (order: number, ref: any) => {
     try {
+      setLoading(true)
+
       const dbInstance = collection(database, 'categories')
       const qExist = query(dbInstance, where('order', '==', order), limit(1))
 
@@ -364,6 +366,8 @@ const TabCategory = () => {
         description: 'Erro ao alterar ordem',
         status: 'error',
       })
+    } finally {
+      setLoading(false)
     }
   }
 

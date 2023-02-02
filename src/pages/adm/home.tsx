@@ -16,9 +16,9 @@ import Logo from '../../assets/icons/Logo-Contemp.svg'
 import TabCategory from '../../components/Tabs/TabCategory'
 import TabHome from '../../components/Tabs/TabHome'
 import TabProduct from '../../components/Tabs/TabProduct'
-
 import moment from 'moment'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
+import { withSSRAuth } from '../../utils/withSSRAuth'
 
 const Adm = () => {
   // const router = useRouter();
@@ -162,3 +162,10 @@ const Adm = () => {
 }
 
 export default Adm
+
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  return {
+    props: {},
+  };
+});

@@ -17,6 +17,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useAuth } from '../../contextAuth/authContext'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
+import { setCookie } from 'nookies'
 
 const Adm = () => {
   const router = useRouter()
@@ -36,9 +37,16 @@ const Adm = () => {
         body.password
       )
 
+      setCookie(undefined, "nextAuth.contemp", JSON.stringify({
+        auth,
+        body
+      }), {
+        path: "/adm/home",
+      });
       setUser(result.user)
       router.push('/adm/home')
     } catch (error: any) {
+      console.log(error)
       toast({
         title: 'Erro',
         description:
