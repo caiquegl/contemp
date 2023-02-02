@@ -188,13 +188,14 @@ img {
 .rc-menu-submenu-selected {
   background-color: #232323 !important;
   /* border-radius: 5px; */
-  border-color: #b60005 !important;
-  /* border: none !important; */
+  /* border-color: #b60005 !important; */
+  border: none !important;
 }
 
 .rc-menu-horizontal > .rc-menu-submenu-active {
   background-color: #232323 !important;
-  border-color: #b60005 !important;
+  /* border-color: #b60005 !important; */
+  border: none !important;
 }
 
 .rc-menu-submenu-active:hover {
