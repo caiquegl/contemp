@@ -24,6 +24,7 @@ export const SelectConfig = () => {
           color={text.index == 1 ? "red.600" : "black.800"}
           maxW="367px"
           w="100%"
+          cursor="pointer"
           bg={text.index == 1 ? "white.500" : "white"}
           minH="57px"
           fontWeight={text.index == 1 ? "bold" : "normal"}
@@ -48,6 +49,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C714</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
@@ -78,6 +80,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C715</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
@@ -114,6 +117,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C719</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
@@ -152,6 +156,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C304</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
@@ -184,6 +189,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C414</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
@@ -216,6 +222,7 @@ export const SelectConfig = () => {
           <Text>Controlador de Processos C417</Text>
         </Flex>
         <Flex
+          cursor="pointer"
           p="16px 20px"
           fontSize="20px"
           justifyContent="flex-end"
