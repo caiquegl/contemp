@@ -3,6 +3,7 @@ import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import { StaticImageData } from 'next/image'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 
 type ProductCategoryWithIconProps = {
   title: string
@@ -13,6 +14,9 @@ type ProductCategoryWithIconProps = {
 export const ProductCategoryWithIcon = ({ title, icon, containerProps }: ProductCategoryWithIconProps) => {
   const router = useRouter()
 
+
+  console.log(containerProps)
+  
   return (
     <Flex
       as='a'
@@ -28,7 +32,7 @@ export const ProductCategoryWithIcon = ({ title, icon, containerProps }: Product
       maxW={pxToRem(400)}
       maxH={pxToRem(85)}
       {...containerProps}
-      _hover={{ color: 'white' }}
+      _hover={{ opacity: 0.7, transition: 'all 0.4s', color: containerProps && containerProps.color ? containerProps.color : 'white' }}
       href={`/category/${title.replaceAll(' ', '_')}#viewCategory`}
       cursor='pointer'
     >
