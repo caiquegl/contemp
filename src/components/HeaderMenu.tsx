@@ -68,10 +68,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
         }}
         mode={'horizontal'}
-        // openKeys={['rc-menu-more']}
         subMenuOpenDelay={0.5}
-        // subMenuCloseDelay={0.5}
-        // onMouseLeave={() => console.log('saiu')}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{

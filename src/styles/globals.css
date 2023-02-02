@@ -256,3 +256,7 @@ img {
 .rc-menu-submenu-title > svg {
   width: 17px !important;
 }
+
+.rc-menu-vertical > .rc-menu-item {
+  padding: 12px 24px !important;
+}
