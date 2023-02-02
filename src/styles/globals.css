@@ -260,3 +260,15 @@ img {
 .rc-menu-vertical > .rc-menu-item {
   padding: 12px 24px !important;
 }
+
+.rc-menu-horizontal > .rc-menu-submenu > .rc-menu-submenu-title {
+  cursor: pointer !important;
+}
+
+.rc-menu-vertical > .rc-menu-item {
+  cursor: pointer !important;
+}
+
+.rc-menu-submenu-title {
+  cursor: pointer !important;
+}
