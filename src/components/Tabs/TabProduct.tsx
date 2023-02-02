@@ -10,6 +10,7 @@ import { Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
+import AllProduct from '../../pages/todosProdutos'
 
 const TabProduct = () => {
   initFirebase()
@@ -36,15 +37,15 @@ const TabProduct = () => {
       title: 'Categoria',
       dataIndex: 'nameCategory',
       key: 'nameCategory',
-      render: (a: any, b: any) => {
-        let name = ''
-        if (allCategory) {
-          let find = allCategory.find((el: any) => el.id === b.category)
-          if (find?.name) name = find.name
-        }
+      // render: (a: any, b: any) => {
+      //   let name = ''
+      //   if (allCategory) {
+      //     let find = allCategory.find((el: any) => el.id === b.category)
+      //     if (find?.name) name = find.name
+      //   }
 
-        return name
-      },
+      //   return name
+      // },
       sorter: (a: any, b: any) => a.nameCategory?.localeCompare(b.nameCategory)
     },
     {
@@ -90,8 +91,17 @@ const TabProduct = () => {
       let sortList = await list.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       )
-      setList(sortList)
-      setListClone(sortList)
+
+      let organize = sortList.map((elProduct: any) => {
+        let name = ''
+        let find = allCategory.find((el: any) => el.id === elProduct.category)
+        if (find?.name) name = find.name
+        
+
+        return {...elProduct, nameCategory: name}
+      })
+      setList(organize)
+      setListClone(organize)
     } catch (error) {
       toast({
         title: 'Erro',
@@ -122,8 +132,11 @@ const TabProduct = () => {
 
   useEffect(() => {
     reload()
-    listProduct()
   }, [step])
+
+  useEffect(() => {
+    if(allProducts.length > 0 && allCategory.length > 0) listProduct()
+  }, [allProducts, allCategory])
 
   return (
     <>
