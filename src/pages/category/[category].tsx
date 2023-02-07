@@ -10,6 +10,7 @@ import { useAuth } from '../../contextAuth/authContext'
 import Head from 'next/head'
 import { AdBanners } from '../../components/AdBanners'
 import { v4 as uuidv4 } from 'uuid';
+import { decodeName } from '../../utils/replaceNameToUrl'
 
 const Category = () => {
   const router = useRouter()
@@ -46,7 +47,7 @@ const Category = () => {
       let idCategory: any = []
       let nameCategory = ''
       if (category && typeof category === 'string')
-        nameCategory = category.replaceAll('_', ' ')
+        nameCategory = decodeName(category).replaceAll('_', ' ')
       await allCategoryActive.forEach(async (el: any) => {
         if (el.name === nameCategory) {
           idCategory.push(el.id)
@@ -139,7 +140,7 @@ const Category = () => {
 
         >
           {category && typeof category === 'string'
-            ? category.replaceAll('_', ' ')
+            ? decodeName(category).replaceAll('_', ' ')
             : ''}
         </Text>
       </Flex>

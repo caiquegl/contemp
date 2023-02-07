@@ -43,7 +43,7 @@ import { Breadcrumb } from 'antd'
 import { customSwiperBullets } from '../../utils/customSwiperBullets'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
-import { text } from 'stream/consumers'
+import { decodeName } from '../../utils/replaceNameToUrl'
 
 const Product = () => {
   const router = useRouter()
@@ -70,7 +70,7 @@ const Product = () => {
   const getProduct = async () => {
     // try {
     let produto = ''
-    if (product && typeof product == 'string') produto = product.replaceAll('_', ' ')
+    if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
     let ex = allProductsActive.filter((el: any) => el.name == produto)
     if (ex.length == 0) {
       ex = allProductsHome.filter((el: any) => el.name == produto)
@@ -109,6 +109,7 @@ const Product = () => {
     setBradeName(revertNames)
 
     const changeText = (txt: string) => {
+      if(!txt) return
       let val = txt
       val = val.toString().replace('<a', '<a target="_blank"')
 

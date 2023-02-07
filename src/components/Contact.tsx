@@ -57,7 +57,7 @@ export const Contact = ({
     try {
       setLoading(true)
       let newBody: any = { body: bodyForm, id }
-
+      console.log(bodyForm)
       if (file) newBody.arquivo = file
       await fetch(`api/mail`, {
         method: "POST",
@@ -67,6 +67,7 @@ export const Contact = ({
           empresa: bodyForm['Empresa'],
           telephone: bodyForm['Telefone'],
           description: bodyForm['Mensagem'],
+          area: bodyForm['Área desejada'],
           file: file,
           id
         }),
@@ -247,6 +248,7 @@ export const Contact = ({
                             {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
+                        
                         {quest.type === "upload" && (
 
                           <Flex

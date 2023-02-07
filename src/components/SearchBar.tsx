@@ -6,6 +6,7 @@ import { ContainerSearch } from './ContainerSearch'
 import { useRouter } from 'next/router'
 import { BsSearch } from 'react-icons/bs'
 import Icon from './Icon'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 
 type SearchBarProps = {
   containerProps?: InputGroupProps
@@ -58,8 +59,8 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
           click={(product: any) => {
             router.push(
               product.order
-                ? `/category/${product.name.replaceAll(' ', '_')}#viewCategory`
-                : `/produto/${product.name.replaceAll(' ', '_')}`
+                ? `/category/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}#viewCategory`
+                : `/produto/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}`
             )
             setListProducts([])
           }}

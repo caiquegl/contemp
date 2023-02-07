@@ -69,7 +69,8 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
               lg: '45%',
               xl: '55%',
             }}
-            onClick={() => router.push(`/produto/${dataTab?.name.replaceAll(' ', '_')}`)}
+            
+            onClick={() => router.replace(dataTab.link_name)}
             cursor='pointer'
           />
         </Center>
@@ -104,7 +105,7 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
 
           <Flex w='75%' maxW={pxToRem(220)} alignItems='center'>
             <Link
-              href={`/produto/${dataTab?.name.replaceAll(' ', '_')}`}
+              href={dataTab.link_name}
               _hover={{ color: 'black', textDecoration: 'none' }}
               w='100%'
               maxW={pxToRem(157)}

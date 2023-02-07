@@ -1,4 +1,4 @@
-export const HtmlDefault = (name?: string, email?: string, empresa?: string, telefone?: string, mensagem?: string, file?: string) => {
+export const HtmlDefault = (name?: string, email?: string, empresa?: string, telefone?: string, mensagem?: string, file?: string, area?: string) => {
     let msg = `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -103,6 +103,11 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
                 <p style="margin-bottom: 10px;">
                     <b>Telefone:</b>  ${telefone ? telefone : ''}
                 </p>
+                ${
+                    area ? `<p style="margin-bottom: 10px;">
+                    <b>Área desejada:</b>  ${area ? area : ''}
+                </p>` : ''
+                }
                 <p style="margin-bottom: 10px;">
                     <b>Arquivo:</b>  ${file ? file : ''}
                 </p>

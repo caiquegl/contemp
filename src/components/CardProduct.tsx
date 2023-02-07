@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 interface IProps extends FlexProps {
   img: string | StaticImageData
   text: string
@@ -39,7 +40,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
         <Image
           src={img ? img : DefaultImg}
           alt={alt}
-          onClick={() => router.push(`/produto/${text.replaceAll(' ', '_')}`)}
+          onClick={() => router.push(`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`)}
         />
 
         <Box className='see-more-text' display='none' flex={0.3} textAlign='center'>
@@ -47,7 +48,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
             {text}
           </Text>
           <Link
-            href={text ? `/produto/${text.replaceAll(' ', '_')}` : ''}
+            href={text ? `/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}` : ''}
             _hover={{ color: 'black', textDecoration: 'none' }}
           >
             <Text fontSize='20px' color='black'>

@@ -8,6 +8,7 @@ import { pxToRem } from '../utils/pxToRem'
 import { Box, Fade } from '@chakra-ui/react'
 import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu'
 import 'rc-menu/assets/index.css'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 
 export type MenuProps = {
   menuItems: any
@@ -33,7 +34,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           key: el.name,
           order: 1,
           onTitleClick: (value: any) => {
-            router.push(`/category/${el.name.replaceAll(' ', '_')}#viewCategory`)
+            router.push(`/category/${replaceNameToUrl(el.name).replaceAll(' ', '_')}#viewCategory`)
           },
         }
 
@@ -65,7 +66,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
     <>
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${evt.keyPath[0].replaceAll(' ', '_')}`)
+          router.push(`/category/${replaceNameToUrl(evt.keyPath[0]).replaceAll(' ', '_')}`)
         }}
         mode={'horizontal'}
         subMenuOpenDelay={0.5}
@@ -145,7 +146,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
     <Menu
       onClick={(avt) => {
         onClose()
-        router.push(`/category/${avt.key}`)
+        router.push(`/category/${replaceNameToUrl(avt.key)}`)
       }}
       mode='inline'
       items={list}

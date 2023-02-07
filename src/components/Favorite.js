@@ -240,7 +240,6 @@ export const Favorite = () => {
           mb="53px"
           flexDirection={["column", "column", "row", "row", "row"]}
         >
-          
           <Image
             flex={1}
             src={homeTabs.tab1.urls[0]}
@@ -258,7 +257,7 @@ export const Favorite = () => {
             }}
             cursor="pointer"
             onClick={() =>
-              router.push(`/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`)
+              router.replace(homeTabs.tab1.link_name)
             }
           />
 
@@ -302,7 +301,7 @@ export const Favorite = () => {
 
             <Flex alignItems="center" w="80%" maxW={pxToRem(220)}>
             <Link
-        href={`/produto/${homeTabs.tab1.name.replaceAll(" ", "_")}`}
+        href={homeTabs.tab1.link_name}
         _hover={{ color: 'black', textDecoration: 'none' }}
       >
               <Button
