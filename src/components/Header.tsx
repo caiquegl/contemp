@@ -99,7 +99,7 @@ export const Header = () => {
 
   useEffect(() => {
     setLoading(true)
-    if (allCategoryActive.length > 0) listCategory()
+    if (allCategoryActive.length > 0 && list.length == 0 ) listCategory()
   }, [allCategoryActive])
 
   useEffect(() => {
