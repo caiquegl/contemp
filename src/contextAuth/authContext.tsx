@@ -107,8 +107,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (get) {
         let list = JSON.parse(get)
         let active = list.filter((el: any) => el.is_active == true)
-        setAllCategoryActive([...active])
-        setAllCategory([...list])
+        setAllProductsActive([...active])
+        setAllProducts([...list])
         return list
       }
     } catch (error) {
@@ -122,8 +122,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (get) {
         let list = JSON.parse(get)
         let active = list.filter((el: any) => el.is_active == true)
-        setAllCategoryActive([...active])
-        setAllCategory([...list])
+        setAllProductsHome([...active])
         return list
       }
     } catch (error) {
@@ -218,6 +217,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
       sessionStorage.setItem('set_load', 'true')
       setLoading(true)
     }
+    if(router.asPath == '/') setLoading(true)
+    getCategoryOffiline()
+    getProductOffiline()
+    getProductHomeOffiline()
+    await getCategory()
+    await getAllProducts()
+    await getAllProductsHome()
+    setLoading(false)
+  }
+
+  const reloadOffiline = async () => {
+    let getLoad = sessionStorage.getItem('set_load')
+    if (!getLoad) {
+      sessionStorage.setItem('set_load', 'true')
+      setLoading(true)
+    }
     getCategoryOffiline()
     getProductOffiline()
     getProductHomeOffiline()
@@ -236,7 +251,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   useEffect(() => {
-    reload()
+    console.log(router.asPath, 'route')
+     reload()
   }, [])
 
   const getItemLocal = () => {
