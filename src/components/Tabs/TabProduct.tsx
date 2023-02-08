@@ -53,7 +53,7 @@ const TabProduct = () => {
       title: 'Url',
       dataIndex: 'url',
       key: 'url',
-      render: (a: any, b: any) => <Link href={b.name ? `/produto/${b.name.replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
+      render: (a: any, b: any) => <Link href={b.name ? `/produto/${replaceNameToUrl(b.name).replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
 
         {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}`}
       </Link>

@@ -68,7 +68,7 @@ const Product = () => {
   })
 
   const getProduct = async () => {
-    // try {
+    try {
     let produto = ''
     if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
     let ex = allProductsActive.filter((el: any) => el.name == produto)
@@ -162,6 +162,9 @@ const Product = () => {
       })
     }
     setProducts(list)
+  } catch (e) {
+    console.log(e)
+  }
   }
 
   useEffect(() => {
