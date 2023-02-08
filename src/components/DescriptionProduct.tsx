@@ -114,8 +114,9 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
                 borderRadius='25px'
                 border='2px solid'
                 borderColor={borderColorButton}
-                color={colorButton}
-                bg={bgButton}
+                color={borderColorButton}
+                // bg={bgButton}
+                bg="transparent"
                 m={`${pxToRem(20)} 0`}
                 // maxW={pxToRem(157)}
                 width="157px"
@@ -123,8 +124,8 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
                 // h={pxToRem(50)}
                 flex={6}
                 _hover={{
-                  bg: bgHoverButton,
-                  color: colorHoverButton,
+                  bg: bgButton,
+                  color: bgHoverButton,
                   transition: 'all 0.3s',
                 }}
               >
