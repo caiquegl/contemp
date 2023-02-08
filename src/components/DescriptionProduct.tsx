@@ -117,8 +117,10 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
                 color={colorButton}
                 bg={bgButton}
                 m={`${pxToRem(20)} 0`}
-                maxW={pxToRem(157)}
-                h={pxToRem(50)}
+                // maxW={pxToRem(157)}
+                width="157px"
+                height="50px"
+                // h={pxToRem(50)}
                 flex={6}
                 _hover={{
                   bg: bgHoverButton,

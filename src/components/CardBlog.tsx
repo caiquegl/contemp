@@ -47,11 +47,15 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
           <div dangerouslySetInnerHTML={{__html: text}} />
         </Text> */}
           <Link 
-            href={hrefButton}>
+            href={hrefButton}
+            _hover={{textDecoration: 'none'}}
+            >
             <Button
               borderRadius="30px"
-              w="150px"
-              h={["40px"]}
+              // w="150px"
+              width="157px"
+              height="50px"
+              // h={["40px"]}
               textAlign="center"
               bg="none"
               border="2px solid"
