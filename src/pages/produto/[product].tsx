@@ -196,6 +196,7 @@ const Product = () => {
             onClick={(evt) => (evt.currentTarget.style.cursor = 'move')}
           >
             <Swiper
+            id="unique"
               initialSlide={0}
               slidesPerView={1}
               spaceBetween={30}
@@ -205,8 +206,8 @@ const Product = () => {
                 waitForTransition: true,
               }}
               speed={1000}
-              pagination={true}
               navigation={true}
+              pagination={{ clickable: true }}
               modules={[Autoplay, Pagination, Navigation]}
               className='mySwiper'
             >
