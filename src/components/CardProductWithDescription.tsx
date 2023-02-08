@@ -5,6 +5,7 @@ import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
 import { v4 as uuidv4 } from 'uuid'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 
 interface IProps {
   img: string
@@ -47,7 +48,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
       {...containerProps}
     >
       <Link
-        href={`/produto/${text.replaceAll(' ', '_')}`}
+        href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
         _hover={{ color: 'black', textDecoration: 'none' }}
         display='flex'
         flexDirection='column'
@@ -86,7 +87,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
           gridRow={3}
           bgSize='contain'
         />
-        <Link href={`/produto/${text.replaceAll(' ', '_')}`} _hover={{ color: 'black', textDecoration: 'none' }}>
+        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{ color: 'black', textDecoration: 'none' }}>
           <Button
             w={pxToRem(243)}
             h={pxToRem(50)}

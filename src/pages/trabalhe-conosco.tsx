@@ -25,6 +25,7 @@ const Home = () => {
           Trabalhe Conosco
         </Text>
       </Flex>
+      
       <Contact
         id="vagas"
         title="VENHA FAZER PARTE DA EQUIPE CONTEMP"

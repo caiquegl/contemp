@@ -2,8 +2,6 @@ import { Flex, FlexProps, Text } from '@chakra-ui/react'
 import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import { StaticImageData } from 'next/image'
-import { useRouter } from 'next/router'
-import { useRef } from 'react'
 
 type ProductCategoryWithIconProps = {
   title: string
@@ -12,11 +10,6 @@ type ProductCategoryWithIconProps = {
 }
 
 export const ProductCategoryWithIcon = ({ title, icon, containerProps }: ProductCategoryWithIconProps) => {
-  const router = useRouter()
-
-
-  console.log(containerProps)
-  
   return (
     <Flex
       as='a'

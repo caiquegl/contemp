@@ -18,6 +18,11 @@ import {
   VStack,
   useBreakpointValue,
   useToast,
+  NumberInput,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  NumberInputField,
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -43,7 +48,7 @@ import { Breadcrumb } from 'antd'
 import { customSwiperBullets } from '../../utils/customSwiperBullets'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
-import { text } from 'stream/consumers'
+import { decodeName } from '../../utils/replaceNameToUrl'
 
 const Product = () => {
   const router = useRouter()
@@ -68,9 +73,9 @@ const Product = () => {
   })
 
   const getProduct = async () => {
-    // try {
+    try {
     let produto = ''
-    if (product && typeof product == 'string') produto = product.replaceAll('_', ' ')
+    if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
     let ex = allProductsActive.filter((el: any) => el.name == produto)
     if (ex.length == 0) {
       ex = allProductsHome.filter((el: any) => el.name == produto)
@@ -109,6 +114,7 @@ const Product = () => {
     setBradeName(revertNames)
 
     const changeText = (txt: string) => {
+      if(!txt) return
       let val = txt
       val = val.toString().replace('<a', '<a target="_blank"')
 
@@ -161,6 +167,9 @@ const Product = () => {
       })
     }
     setProducts(list)
+  } catch (e) {
+    console.log(e)
+  }
   }
 
   useEffect(() => {
@@ -333,19 +342,27 @@ const Product = () => {
                   <Text color='black.800' fontWeight='bold' fontSize={pxToRem(20)} margin='auto'>
                     Quantidade
                   </Text>
-                  <Input
-                    type='number'
-                    w='auto'
+                  <NumberInput
                     margin='auto'
                     color='black.800'
                     defaultValue='1'
                     border='1px solid'
                     borderColor='black.800'
                     borderRadius='25px'
-                    maxW='89px'
+                    h="40px"
+                    w='150px'
                     value={qtd}
-                    onChange={(evt: any) => setQtd(parseFloat(evt.target.value))}
-                  />
+                    onChange={(evt: any) => {
+                      console.log(evt)
+                      setQtd(evt)
+                    }}
+                  >
+                    <NumberInputField borderRadius='25px' border="none" _hover={{border: 'none'}} _active={{border: 'none'}} _focus={{border: 'none'}} outline="none" />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                    </NumberInput>
                   <Button
                     h='50px'
                     bg='red.600'

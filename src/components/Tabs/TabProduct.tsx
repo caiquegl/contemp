@@ -11,6 +11,7 @@ import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import AllProduct from '../../pages/todosProdutos'
+import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 
 const TabProduct = () => {
   initFirebase()
@@ -52,9 +53,9 @@ const TabProduct = () => {
       title: 'Url',
       dataIndex: 'url',
       key: 'url',
-      render: (a: any, b: any) => <Link href={b.name ? `/produto/${b.name.replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
+      render: (a: any, b: any) => <Link href={b.name ? `/produto/${replaceNameToUrl(b.name).replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
 
-        {`https://contemp.com.br/produto/${b.name.replaceAll(' ', '_')}`}
+        {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}`}
       </Link>
     },
     {
@@ -86,9 +87,9 @@ const TabProduct = () => {
   const listProduct = async () => {
     try {
 
-      let list = await reloadProduct()
+      // let list = await reloadProduct()
 
-      let sortList = await list.sort((a: any, b: any) =>
+      let sortList = await allProducts.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       )
 
@@ -137,6 +138,10 @@ const TabProduct = () => {
   useEffect(() => {
     if(allProducts.length > 0 && allCategory.length > 0) listProduct()
   }, [allProducts, allCategory])
+
+  useEffect(() => {
+    console.log(list)
+  }, [list])
 
   return (
     <>
