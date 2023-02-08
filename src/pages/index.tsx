@@ -48,7 +48,7 @@ const Home = () => {
   })
   const styles_card = [
     { bg: 'red.600', font: 'white' },
-    { bg: 'white.500', font: 'black.800' },
+    { bg: 'white', font: 'black.800' },
     { bg: 'black.800', font: 'white' },
   ]
 
