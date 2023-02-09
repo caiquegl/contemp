@@ -20,7 +20,7 @@ import React, { Fragment, useCallback, useRef, useState } from "react";
 import { BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import { TbSend } from "react-icons/tb";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineCloudUpload, AiOutlineFile } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { InputDefault } from "./Form/Input";
 import { TextareaDefault } from "./Form/Textarea";
@@ -29,6 +29,10 @@ import { useDropzone } from 'react-dropzone'
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../utils/db";
 import { v4 as uuidv4 } from 'uuid';
+import { Upload } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+const { Dragger } = Upload;
 
 interface IProps {
   title: string;
@@ -117,13 +121,13 @@ export const Contact = ({
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            toast({
-              title: "Sucesso",
-              description: "Upload completo",
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-            });
+            // toast({
+            //   title: "Sucesso",
+            //   description: "Upload completo",
+            //   status: "success",
+            //   duration: 3000,
+            //   isClosable: true,
+            // });
             setFile(downloadURL)
           });
         })
@@ -131,7 +135,90 @@ export const Contact = ({
     })
 
   }, [])
-  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
+  const props: UploadProps = {
+    name: 'file',
+    multiple: false,
+    // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    onChange(info: any) {
+      const { status, name } = info.file;
+      const imageRef = ref(storage, `${id}/${name}`);
+
+      const uploadTask = uploadBytesResumable(imageRef, info.file.originFileObj);
+
+      uploadTask.on("state_changed",
+        (snapshot) => {
+          const progress =
+            Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        },
+        (error) => {
+          toast({
+            title: "Erro",
+            description: "Erro ao fazer upload de arquivo",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            // toast({
+            //   title: "Sucesso",
+            //   description: "Upload completo",
+            //   status: "success",
+            //   duration: 3000,
+            //   isClosable: true,
+            // });
+            setFile(downloadURL)
+          });
+        })
+
+    },
+
+    // if (status !== 'uploading') {
+    //   console.log(info.file, info.fileList);
+    // }
+    // if (status === 'done') {
+    //   message.success(`${info.file.name} file uploaded successfully.`);
+    // } else if (status === 'error') {
+    //   message.error(`${info.file.name} file upload failed.`);
+    // }
+    onDrop(e: any) {
+      console.log('Dropped files', e.dataTransfer.files);
+      const { status, name } = e.dataTransfer.files[0];
+      const imageRef = ref(storage, `${id}/${name}`);
+
+      const uploadTask = uploadBytesResumable(imageRef, e.dataTransfer.files[0].originFileObj);
+
+      uploadTask.on("state_changed",
+        (snapshot) => {
+          const progress =
+            Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        },
+        (error) => {
+          toast({
+            title: "Erro",
+            description: "Erro ao fazer upload de arquivo",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            // toast({
+            //   title: "Sucesso",
+            //   description: "Upload completo",
+            //   status: "success",
+            //   duration: 3000,
+            //   isClosable: true,
+            // });
+            console.log(downloadURL)
+            setFile(downloadURL)
+          });
+        })
+    },
+  };
 
   return (
     <Box w="100%" bg="white" pt="185px" pb="173px">
@@ -248,46 +335,67 @@ export const Contact = ({
                             {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
-                        
-                        {quest.type === "upload" && (
 
-                          <Flex
-                            w="100%"
-                            h="205px"
-                            borderRadius="25px"
-                            border="2px dashed #D1D1D1"
-                            alignItems="center"
-                            justifyContent="center"
-                            flexDirection="column"
-                            p="10px"
-                            {...getRootProps()}
-                          >
-                            <input {...getInputProps()} />
-                            <Icon
-                              as={AiOutlineCloudUpload}
-                              fontSize="50px"
-                              color="white.900"
-                            />
-                            <Text
-                              fontSize="16px"
-                              fontStyle="italic"
-                              color="black.200"
-                              maxW="437px"
-                              mt="10px"
-                              mb="20px"
-                            >
-                              Arraste ou selecione o arquivo que deseja enviar.
-                              Arquivo em PDF no máximo 5mb
-                            </Text>
-                            <Text
-                              fontSize="16px"
-                              color="red.600"
-                              maxW="437px"
-                              mb="20px"
-                            >
-                              Escolher arquivo
-                            </Text>
-                          </Flex>
+                        {quest.type === "upload" && (
+                          <Box w="100%">
+                            <Dragger {...props}>
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p className="ant-upload-text">Click ou arraste o arquivo para área de upload</p>
+
+                            </Dragger>
+                            {file && <>
+                              <Flex mt="15px" p="5px" border="1px solid #E2E8F0" alignItems="center" justifyContent="space-between">
+                                <Link href={file} isExternal={true}>
+                                  <Flex alignItems="center" justifyContent="center">
+                                  <Icon as={AiOutlineFile} fontSize={20} color="#232323"/>
+                                  <Text color="black.900" ml="10px">
+                                    Curriculo anexado
+                                  </Text>
+                                  </Flex>
+                                </Link>
+                                <Icon as={AiOutlineCloseCircle} fontSize={15} color="#f70c0c" cursor="pointer" onClick={() => setFile("")}/>
+                              </Flex>
+                            </>}
+                          </Box>
+                          // <Flex
+                          //   w="100%"
+                          //   h="205px"
+                          //   borderRadius="25px"
+                          //   border="2px dashed #D1D1D1"
+                          //   alignItems="center"
+                          //   justifyContent="center"
+                          //   flexDirection="column"
+                          //   p="10px"
+                          //   {...getRootProps()}
+                          // >
+                          //   <input {...getInputProps()} />
+                          //   <Icon
+                          //     as={AiOutlineCloudUpload}
+                          //     fontSize="50px"
+                          //     color="white.900"
+                          //   />
+                          //   <Text
+                          //     fontSize="16px"
+                          //     fontStyle="italic"
+                          //     color="black.200"
+                          //     maxW="437px"
+                          //     mt="10px"
+                          //     mb="20px"
+                          //   >
+                          //     Arraste ou selecione o arquivo que deseja enviar.
+                          //     Arquivo em PDF no máximo 5mb
+                          //   </Text>
+                          //   <Text
+                          //     fontSize="16px"
+                          //     color="red.600"
+                          //     maxW="437px"
+                          //     mb="20px"
+                          //   >
+                          //     Escolher arquivo
+                          //   </Text>
+                          // </Flex>
                         )}
                       </Fragment>
                     ))}
