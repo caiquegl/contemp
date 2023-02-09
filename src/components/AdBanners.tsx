@@ -25,7 +25,7 @@ export function AdBanners() {
       gap='20px'
     >
       <Link
-        href={`/produto/${'P501'.replaceAll(' ', '_')}`}
+        href={`/category/LINHA_AVAN%C3%87ADA_-_P501`}
         textDecoration='none'
         _hover={{
           textDecoration: 'none',
@@ -36,7 +36,7 @@ export function AdBanners() {
         </Box>
       </Link>
       <Link
-        href={`/produto/${'P501'.replaceAll(' ', '_')}`}
+        href={`/category/LINHA_AVAN%C3%87ADA_-_P501`}
         textDecoration='none'
         _hover={{
           textDecoration: 'none',
