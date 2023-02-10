@@ -65,11 +65,16 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
 
   const remove = (index: number) => {
+    setEditorLoaded(false)
+
     let newList: any = []
     tabs.forEach((list: any, indexRemove: number) => {
       if (index != indexRemove) newList.push(list)
     })
-    setTabs(newList)
+    setTabs([...newList])
+    setTimeout(() => {
+      setEditorLoaded(true);
+    }, 500);
   }
 
   const saveProduct = async () => {
