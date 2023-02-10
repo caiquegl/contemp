@@ -25,7 +25,7 @@ export const ProductCategoryWithIcon = ({ title, icon, containerProps }: Product
       maxW={pxToRem(400)}
       maxH={pxToRem(85)}
       {...containerProps}
-      _hover={{ opacity: 0.7, transition: 'all 0.4s', color: containerProps && containerProps.color ? containerProps.color : 'white' }}
+      _hover={{ transition: 'all 0.4s', color: containerProps && containerProps.color ? containerProps.color : 'white' }}
       href={`/category/${title.replaceAll(' ', '_')}#viewCategory`}
       cursor='pointer'
     >

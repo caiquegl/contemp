@@ -328,8 +328,9 @@ const Home = () => {
             w='263px'
             h='50px'
             _hover={{
+              bg: 'black.800',
+              color: 'white',
               transition: 'all 0.4s',
-              opacity: 0.7,
             }}
           >
             Veja todos os produtos
@@ -402,7 +403,11 @@ const Home = () => {
                 borderRadius='25px'
                 bg='red.600'
                 fontSize={pxToRem(20)}
-                _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+                _hover={{
+                  bg: 'black.800',
+                  color: 'white',
+                  transition: 'all 0.4s',
+                }}
               >
                 <Icon as={BiPhone} mr='10px' />
                 Telefonar
@@ -418,7 +423,11 @@ const Home = () => {
                 borderRadius='25px'
                 bg='red.600'
                 fontSize={pxToRem(20)}
-                _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+                _hover={{
+                  bg: 'black.800',
+                  color: 'white',
+                  transition: 'all 0.4s',
+                }}
               >
                 <Icon as={AiOutlineMail} mr='10px' />
                 Enviar e-mail

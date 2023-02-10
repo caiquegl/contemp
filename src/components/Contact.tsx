@@ -409,7 +409,11 @@ export const Contact = ({
                       mt="40px"
                       type="submit"
                       isLoading={loading}
-                      _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                      _hover={{
+                        bg: 'black.800',
+                        color: 'white',
+                        transition: 'all 0.4s',
+                      }}
                     >
                       <Icon as={TbSend} mr="10px" />
                       Enviar

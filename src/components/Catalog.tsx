@@ -128,18 +128,30 @@ export const Catalog = () => {
                 href="tel:1142235140"
                 _hover={{ textDecoration: "none", color: "#fff" }}
               >
-                <ActionButton label={"Telefonar"} icon={BiPhone} />
+                <ActionButton label={"Telefonar"} icon={BiPhone} _hover={{
+              bg: 'white',
+              color: 'black.800',
+              transition: 'all 0.4s',
+            }} />
               </Link>
 
               <Link
                 href="mailto:vendas@contemp.com.br"
                 _hover={{ textDecoration: "none", color: "#fff" }}
               >
-                <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} />
+                <ActionButton label={"Enviar e-mail"} icon={AiOutlineMail} _hover={{
+              bg: 'white',
+              color: 'black.800',
+              transition: 'all 0.4s',
+            }} />
               </Link>
 
               <Link href="https://contemp.com.br/temnacontemp.pdf" isExternal _hover={{ textDecoration: 'none', color: '#fff' }} target="_blank">
-                <ActionButton label={"Download"} icon={FiDownload} />
+                <ActionButton label={"Download"} icon={FiDownload} _hover={{
+              bg: 'white',
+              color: 'black.800',
+              transition: 'all 0.4s',
+            }} />
               </Link>
             </Grid>
           </Flex>
