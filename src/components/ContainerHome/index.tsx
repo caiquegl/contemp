@@ -377,7 +377,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
           h="47px"
           isLoading={loading}
           type="submit"
-          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s'}}
         >
           Salvar
         </Button>

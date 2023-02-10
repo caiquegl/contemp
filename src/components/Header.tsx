@@ -173,7 +173,7 @@ export const Header = () => {
             onClick={onOpen}
             _hover={{
               transition: 'all 0.4s',
-              opacity: 0.6,
+              
             }}
           >
             <Icon as={BsThreeDotsVertical} fontSize='20px' />
@@ -200,7 +200,7 @@ export const Header = () => {
                   onClick={onClose}
                   _hover={{
                     transition: 'all 0.4s',
-                    opacity: 0.6,
+                    
                   }}
                 >
                   <Icon as={AiOutlineClose} fontSize='20px' />
@@ -218,8 +218,8 @@ export const Header = () => {
                     w='100%'
                     justifyContent='space-between'
                     _hover={{
-                      bg: 'red.600',
-                      opacity: 0.6,
+                      bg: 'white',
+                    color:"black.800"
                     }}
                   >
                     Todos os produtos
@@ -386,12 +386,12 @@ export const Header = () => {
                   borderRadius='5px'
                   bg='red.600'
                   _hover={{
-                    bg: 'red.600',
-                    opacity: 0.6,
+                    bg: 'white',
+                    color:"black.800"
                   }}
                 >
                   Todos os produtos
-                  <Icon as={BsThreeDotsVertical} ml='10px' color='white' fontSize='20px' />
+                  <Icon as={BsThreeDotsVertical} ml='10px'  fontSize='20px' />
                 </Button>
               </Link>
             </Box>

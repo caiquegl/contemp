@@ -31,7 +31,7 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
             <Flex
               key={uuidv4()}
               cursor="pointer"
-              _hover={{ opacity: 0.8, transition: 'all 0.4s' }}
+              _hover={{transition: 'all 0.4s' }}
               alignItems="center"
               justifyContent="flex-start"
               w="100%"

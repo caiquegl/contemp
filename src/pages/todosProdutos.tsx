@@ -184,7 +184,7 @@ const AllProduct = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['350px', '350px', '250px', '250px', '250px', '250px']}
+        h={['350px', '350px', '180px', '180px', '180px', '180px']}
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}

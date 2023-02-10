@@ -191,7 +191,7 @@ const ContainerSeo = ({ nextStep, defaultValues }: any) => {
           h="47px"
           type="submit"
           isLoading={loading}
-          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s'}}
         >
           Salvar
         </Button>

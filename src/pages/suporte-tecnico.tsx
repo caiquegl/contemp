@@ -21,7 +21,7 @@ const Support = () => {
         alignItems="center"
         justifyContent="center"
         direction="column"
-        h="250px"
+        h="180px"
       >
         <Text fontSize="45px" fontWeight="bold" textAlign="center">
           Suporte Técnico

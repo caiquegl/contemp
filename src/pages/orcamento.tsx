@@ -145,7 +145,7 @@ const Orcamento = () => {
         alignItems="center"
         justifyContent="center"
         direction="column"
-        h={["350px", "350px", "250px", "250px", "250px", "250px"]}
+        h={["350px", "350px", "180px", "180px", "180px", "180px"]}
       >
         <Text
           fontSize={["30px", "30px", "40px", "40px", "40px", "40px"]}
@@ -278,7 +278,7 @@ const Orcamento = () => {
                 borderRadius="4px"
                 h="47px"
                 isLoading={loading}
-                _hover={{ transition: "all 0.4s", opacity: 0.7 }}
+                _hover={{ transition: "all 0.4s" }}
                 type="submit"
               >
                 Solicitar orçamento
@@ -400,7 +400,7 @@ const Orcamento = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: "all 0.5s" }}
               >
                 <Icon as={BiPhone} mr="10px" />
                 Telefonar
@@ -419,7 +419,7 @@ const Orcamento = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: "all 0.5s" }}
               >
                 <Icon as={AiOutlineMail} mr="10px" />
                 Enviar e-mail

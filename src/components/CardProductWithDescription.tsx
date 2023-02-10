@@ -98,7 +98,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
             fontSize={pxToRem(20)}
             borderColor={buttomBottom ? buttomBottom : 'transparent'}
             borderWidth={buttomBottom ? '2px' : '0'}
-            _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+            _hover={{ transition: 'all 0.5s'}}
           >
             Solicitar orçamento
           </Button>

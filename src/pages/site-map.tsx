@@ -44,7 +44,7 @@ const SiteMapContainer = () => {
         <link rel="icon" href="/favicon.png" />
       </Head> */}
       <Header />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='250px'>
+      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='180px'>
         <Text fontSize='45px' fontWeight='bold' textAlign='center'>
           Site Map
         </Text>

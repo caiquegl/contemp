@@ -61,7 +61,7 @@ export const Player = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: "all 0.5s"}}
                 onClick={onOpen}
               >
                 <Icon as={AiOutlinePlayCircle} mr="10px" />
@@ -73,7 +73,7 @@ export const Player = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+                _hover={{ transition: "all 0.5s"}}
                 onClick={onOpen2}
               >
                 <Icon as={AiOutlinePlayCircle} mr="10px" />

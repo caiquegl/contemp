@@ -20,7 +20,7 @@ export function AllProductsButton({ hasLabel }: AllProductsButtonProps) {
           bg="red.600"
           _hover={{
             bg: 'red.600',
-            opacity: 0.6
+    
           }}
           width={hasLabel ? '100%' : 0}
         >

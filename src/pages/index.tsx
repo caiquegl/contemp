@@ -99,7 +99,7 @@ const Home = () => {
         <title>Contemp</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
-      <HomeBackgroundDetails />
+      {/* <HomeBackgroundDetails /> */}
 
       <Banner />
 

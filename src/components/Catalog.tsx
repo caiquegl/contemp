@@ -171,7 +171,7 @@ function ActionButton({ label, icon, ...props }: any & ButtonProps) {
       borderRadius="25px"
       bg="red.600"
       fontSize={pxToRem(20)}
-      _hover={{ transition: "all 0.5s", opacity: 0.7 }}
+      _hover={{ transition: "all 0.5s" }}
       {...props}
     >
       <Icon as={icon} mr="10px" />

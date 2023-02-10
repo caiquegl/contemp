@@ -665,7 +665,7 @@ const TabCategory = () => {
                 w='88px'
                 h='47px'
                 isLoading={loading}
-                _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+                _hover={{ transition: 'all 0.4s' }}
                 onClick={() => {
                   setUpdate({})
                   setUrl('')
@@ -685,7 +685,7 @@ const TabCategory = () => {
               w='128px'
               h='47px'
               isLoading={loading}
-              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s' }}
               type='submit'
             >
               Salvar

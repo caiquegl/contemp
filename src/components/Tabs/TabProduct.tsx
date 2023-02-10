@@ -160,7 +160,7 @@ const TabProduct = () => {
               borderRadius="4px"
               w="128px"
               h="47px"
-              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s' }}
               onClick={() => {
                 setStep(2)
                 setIsUpdate(false)
@@ -217,7 +217,7 @@ const TabProduct = () => {
               h="47px"
               border="2px solid"
               borderColor="black.800"
-              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s' }}
               onClick={() => {
                 setBody({})
                 setStep(1)
@@ -252,7 +252,7 @@ const TabProduct = () => {
               h="47px"
               border="2px solid"
               borderColor="black.800"
-              _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+              _hover={{ transition: 'all 0.4s' }}
               onClick={() => setStep(2)}
             >
               Voltar

@@ -388,7 +388,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           borderRadius="4px"
           w="128px"
           h="47px"
-          _hover={{ transition: 'all 0.4s', opacity: 0.7 }}
+          _hover={{ transition: 'all 0.4s' }}
           type="button"
           onClick={() => formRef.current?.requestSubmit()}
         >

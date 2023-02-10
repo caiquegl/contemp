@@ -178,7 +178,7 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+                    _hover={{ transition: 'all 0.5s'}}
                   >
                     Certificado ISO 9001
                   </Button>
@@ -208,7 +208,7 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ transition: 'all 0.5s', opacity: 0.7 }}
+                    _hover={{ transition: 'all 0.5s'}}
                   >
                     Certificado Acreditação INMETRO
                   </Button>
