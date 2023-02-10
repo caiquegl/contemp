@@ -14,7 +14,10 @@ interface IProps {
 
 export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) => {
   return (
-    <Flex
+    <Link
+      isExternal={true}
+      as="a"
+      href={hrefButton}
       bg={bg}
       borderRadius="8px"
       minH="350px"
@@ -23,6 +26,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
       justifyContent="space-between"
       display="flex"
       overflow="hidden"
+      _hover={{textDecoration: 'none'}}
     >
       <Box
         w="100%"
@@ -36,6 +40,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
         display="flex"
         flexDirection={'column'}
         justifyContent='space-between'
+
       >
         <Box >
           <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img}/>
@@ -71,6 +76,6 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
             </Button>
           </Link>
       </Box>
-    </Flex>
+    </Link>
   );
 };
