@@ -70,10 +70,10 @@ export const Footer = () => {
           flexDirection={['column', 'column', 'row', 'row', 'row']}
         >
           <Box>
-            <Text fontWeight='bold' fontSize='30px' mb='15px'>
+            <Text fontWeight='bold' fontSize='20px' mb='15px' textTransform={'Uppercase'}>
               Procure o produto que deseja aqui
             </Text>
-            <Text fontSize='20px' mb='15px'>
+            <Text fontSize='16px' mb='15px'>
               Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.
             </Text>
           </Box>
@@ -177,7 +177,7 @@ export const Footer = () => {
                 href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
                 _hover={{ color: 'white', textDecoration: 'none' }}
               >
-                <Text fontWeight='bold' fontSize='25px' mb='20px' cursor='pointer'>
+                <Text fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
                   {el.name}
                 </Text>
               </Link>
@@ -189,7 +189,7 @@ export const Footer = () => {
                       href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
                       _hover={{ color: 'white', textDecoration: 'none' }}
                     >
-                      <Text fontSize='20px' mb='15px' cursor='pointer'>
+                      <Text fontSize='16px' mb='15px' cursor='pointer'>
                         {el2.name}
                       </Text>
                     </Link>
@@ -201,7 +201,7 @@ export const Footer = () => {
                             href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
                             _hover={{ color: 'white', textDecoration: 'none' }}
                           >
-                            <Text key={uuidv4()} fontSize='20px' cursor='pointer'>
+                            <Text key={uuidv4()} fontSize='16px' cursor='pointer'>
                               {el3.name}
                             </Text>
                           </Link>
@@ -220,10 +220,10 @@ export const Footer = () => {
         fontSize='18px'
         flexWrap='wrap'
       >
-        <Text color='white' fontSize='18px'>
+        <Text color='white' fontSize='16px'>
           Copyright © 2022 Contemp. Todos os direitos reservados.
         </Text>
-        <UnorderedList color='white' fontSize='18px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
+        <UnorderedList color='white' fontSize='16px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
           <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Todos os Produtos</ListItem>
           </Link>

@@ -34,7 +34,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
         minH={[pxToRem(100), pxToRem(150)]}
         borderRadius="8px"
         border="2px solid"
-        h={[pxToRem(450), pxToRem(570)]}
+        h={[pxToRem(400), pxToRem(530)]}
         borderColor={color}
         p={[pxToRem(20), pxToRem(20)]}
         display="flex"
@@ -44,7 +44,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
       >
         <Box >
           <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img}/>
-          <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(25)} mt={["5px","15px"]} color={color}>
+          <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(20)} mt={["5px","15px"]} color={color}>
             {title}
           </Text>
         </Box>
