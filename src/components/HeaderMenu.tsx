@@ -18,7 +18,6 @@ export type MenuProps = {
 export const HeaderMenu = ({ menuItems }: MenuProps) => {
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState([])
-  const [eventClose, setEventClose] = useState([])
   const router = useRouter()
 
   const amountList = async (amount: any, hasIcon = true) => {
@@ -69,6 +68,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           router.push(`/category/${replaceNameToUrl(evt.keyPath[0]).replaceAll(' ', '_')}`)
         }}
         mode={'horizontal'}
+
         subMenuOpenDelay={0.5}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
@@ -84,6 +84,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           alignItems: 'center',
           width: '100%',
           justifyContent: 'center',
+          zIndex: 99999999999999999
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>

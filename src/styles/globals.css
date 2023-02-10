@@ -17,7 +17,6 @@ img {
 
 .swiper-pagination-bullet-active {
   background-color: #b60005 !important;
-
 }
 
 .ck-editor__editable_inline {
@@ -113,7 +112,12 @@ img {
   background: #2d04e6;
 }
 
-#unique > .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+.rc-menu-submenu-popup {
+  z-index: 9999999999 !important;
+}
+
+#unique > .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
   width: 15px;
   height: 15px;
 }
