@@ -240,7 +240,7 @@ const Product = () => {
             </Swiper>
           </Center>
 
-          <Box m={`${pxToRem(25)} auto`} ml={{ lg: 20 }}>
+          <Box m={`${pxToRem(60)} auto`} ml={{ lg: 20 }}>
             <Box w='100%' mb='30px'>
               <Breadcrumb>
                 {bradName.map((el: any, index: number) => (
