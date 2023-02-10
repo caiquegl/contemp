@@ -411,7 +411,8 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   padding: '3px 13px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  transition: 'all 0'
                 }}
               >
                 <Text w='max-content' fontSize='18px'>
@@ -424,7 +425,8 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   padding: '3px 13px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  transition: 'all 0'
                 }}
                 href='/calibracao'
               >
@@ -438,7 +440,8 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   padding: '3px 13px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  transition: 'all 0'
                 }}
                 href='/suporte-tecnico'
               >
@@ -452,7 +455,8 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   padding: '3px 13px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  transition: 'all 0'
                 }}
                 href='/trabalhe-conosco'
               >
@@ -466,7 +470,8 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   padding: '3px 13px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  transition: 'all 0'
                 }}
                 href='https://blog.contemp.com.br'
               >
