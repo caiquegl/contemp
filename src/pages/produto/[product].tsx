@@ -354,8 +354,7 @@ const Product = () => {
                     w='150px'
                     value={qtd}
                     onChange={(evt: any) => {
-                      console.log(evt)
-                      setQtd(evt)
+                      setQtd(parseInt(evt))
                     }}
                   >
                     <NumberInputField borderRadius='25px' border="none" _hover={{border: 'none'}} _active={{border: 'none'}} _focus={{border: 'none'}} outline="none" />

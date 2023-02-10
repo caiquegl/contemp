@@ -265,7 +265,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       let total = 0
       convert.forEach((el: any) => {
-        total = total + el.qtd
+        total = total + parseInt(el.qtd)
       })
       setTotalCart(total)
     }
