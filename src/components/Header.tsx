@@ -403,14 +403,15 @@ export const Header = () => {
               w='100%'
               alignItems='center'
               justifyContent='center'
+              ml="10px"
             >
               <Link
                 href='/a-contemp'
+                padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
-                  padding: '3px 13px',
                   borderRadius: '4px',
                   transition: 'all 0'
                 }}
@@ -420,11 +421,11 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
+              padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
-                  padding: '3px 13px',
                   borderRadius: '4px',
                   transition: 'all 0'
                 }}
@@ -435,11 +436,11 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
+              padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
-                  padding: '3px 13px',
                   borderRadius: '4px',
                   transition: 'all 0'
                 }}
@@ -450,11 +451,11 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
+              padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
-                  padding: '3px 13px',
                   borderRadius: '4px',
                   transition: 'all 0'
                 }}
@@ -465,11 +466,11 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
+              padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
-                  padding: '3px 13px',
                   borderRadius: '4px',
                   transition: 'all 0'
                 }}
