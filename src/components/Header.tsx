@@ -99,7 +99,7 @@ export const Header = () => {
 
   useEffect(() => {
     setLoading(true)
-    if (allCategoryActive.length > 0 && list.length == 0 ) listCategory()
+    if (allCategoryActive.length > 0 && list.length == 0) listCategory()
   }, [allCategoryActive])
 
   useEffect(() => {
@@ -408,7 +408,10 @@ export const Header = () => {
                 href='/a-contemp'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'red.600',
+                  color: 'black.800',
+                  background: 'white',
+                  padding: '3px 13px',
+                  borderRadius: '4px'
                 }}
               >
                 <Text w='max-content' fontSize='18px'>
@@ -418,7 +421,10 @@ export const Header = () => {
               <Link
                 _hover={{
                   textDecoration: 'none',
-                  color: 'red.600',
+                  color: 'black.800',
+                  background: 'white',
+                  padding: '3px 13px',
+                  borderRadius: '4px'
                 }}
                 href='/calibracao'
               >
@@ -429,7 +435,10 @@ export const Header = () => {
               <Link
                 _hover={{
                   textDecoration: 'none',
-                  color: 'red.600',
+                  color: 'black.800',
+                  background: 'white',
+                  padding: '3px 13px',
+                  borderRadius: '4px'
                 }}
                 href='/suporte-tecnico'
               >
@@ -440,7 +449,10 @@ export const Header = () => {
               <Link
                 _hover={{
                   textDecoration: 'none',
-                  color: 'red.600',
+                  color: 'black.800',
+                  background: 'white',
+                  padding: '3px 13px',
+                  borderRadius: '4px'
                 }}
                 href='/trabalhe-conosco'
               >
@@ -451,7 +463,10 @@ export const Header = () => {
               <Link
                 _hover={{
                   textDecoration: 'none',
-                  color: 'red.600',
+                  color: 'black.800',
+                  background: 'white',
+                  padding: '3px 13px',
+                  borderRadius: '4px'
                 }}
                 href='https://blog.contemp.com.br'
               >
