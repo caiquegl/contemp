@@ -399,11 +399,9 @@ export const Header = () => {
             <HStack
               alignSelf='center'
               flex={{ base: 1, lg: 1.6, xl: 1 }}
-              spacing='20px'
               w='100%'
               alignItems='center'
               justifyContent='center'
-              ml="10px"
             >
               <Link
                 href='/a-contemp'
