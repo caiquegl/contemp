@@ -70,7 +70,7 @@ export const Footer = () => {
           flexDirection={['column', 'column', 'row', 'row', 'row']}
         >
           <Box>
-            <Text fontWeight='bold' fontSize='20px' mb='15px' textTransform={'Uppercase'}>
+            <Text fontWeight='bold' fontSize='20px' mb='15px'>
               Procure o produto que deseja aqui
             </Text>
             <Text fontSize='16px' mb='15px'>
