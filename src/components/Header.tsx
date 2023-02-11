@@ -565,16 +565,16 @@ export const Header = () => {
                     </Box>
                   </Link>
                   <Box>
-                    <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
+                    <Link href='/todosProdutos' _hover={{ textDecoration: 'none' }}>
                       <Button
                         borderRadius='5px'
                         bg='red.600'
                         _hover={{
-                          bg: 'red.600',
-                          opacity: 0.6,
+                          bg: 'white',
+                          color:"black.800"
                         }}
                       >
-                        <Icon as={BsThreeDotsVertical} color='white' fontSize='20px' />
+                        <Icon as={BsThreeDotsVertical} fontSize='20px' />
                       </Button>
                     </Link>
                   </Box>

@@ -168,7 +168,7 @@ const Calibracao = () => {
                 <Link
                   target='_blank'
                   href='/Certificado-ISO-9001-OUT24.pdf'
-                  _hover={{ textDecoration: 'none', color: 'white' }}
+                  _hover={{ textDecoration: 'none'}}
                 >
                   <Button
                     w='100%'
@@ -178,7 +178,11 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ transition: 'all 0.5s'}}
+                    _hover={{ 
+                      transition: 'all 0.5s',
+                      bg: 'black.800',
+                      color:"white"
+                    }}
                   >
                     Certificado ISO 9001
                   </Button>
@@ -198,7 +202,7 @@ const Calibracao = () => {
                 <Link
                   target='_blank'
                   href='https://contemp.com.br/Certificado-Acreditaçao-INMETRO - 24.04.21.pdf'
-                  _hover={{ textDecoration: 'none', color: 'white' }}
+                  _hover={{ textDecoration: 'none'}}
                 >
                   <Button
                     w='100%'
@@ -208,7 +212,11 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ transition: 'all 0.5s'}}
+                    _hover={{ 
+                      transition: 'all 0.5s',
+                      bg: 'black.800',
+                      color:"white"
+                    }}
                   >
                     Certificado Acreditação INMETRO
                   </Button>
@@ -232,7 +240,7 @@ const Calibracao = () => {
               href='https://laboratorio.contemp.com.br/'
               isExternal
               target={'_blank'}
-              _hover={{ color: '#fff', textDecoration: 'none' }}
+              _hover={{ textDecoration: 'none' }}
             >
               <Button
                 mb='70px'
@@ -243,6 +251,11 @@ const Calibracao = () => {
                 w='243px'
                 h='50px'
                 textAlign='center'
+                _hover={{
+                  transition: 'all 0.4s',
+                  bg: 'black.800',
+                  color:"white"
+                }}
               >
                 Acessar padrões
               </Button>

@@ -149,6 +149,7 @@ const Home = () => {
               <Link
                 target="_blank"
                 href="https://contemp.com.br/Certificado-ISO-9001-OUT24.pdf"
+                _hover={{textDecoration: 'none'}}
               >
                 <Button
                   w="263px"
@@ -160,8 +161,8 @@ const Home = () => {
                   _hover={{
                     textDecoration: 'none',
                     transition: 'all 0.5s',
-                    opacity: 0.7,
-                    color: '#fff'
+                    bg: 'black.800',
+                    color:"white"
                   }}
                 >
                   Certificado ISO 9001

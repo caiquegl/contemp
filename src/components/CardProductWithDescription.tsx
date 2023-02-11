@@ -49,7 +49,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
     >
       <Link
         href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
-        _hover={{ color: 'black', textDecoration: 'none' }}
+        _hover={{ color: 'white', textDecoration: 'none' }}
         display='flex'
         flexDirection='column'
         h='100%'
@@ -87,7 +87,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
           gridRow={3}
           bgSize='contain'
         />
-        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{ color: 'black', textDecoration: 'none' }}>
+        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{  textDecoration: 'none' }}>
           <Button
             w={pxToRem(243)}
             h={pxToRem(50)}
@@ -98,7 +98,10 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
             fontSize={pxToRem(20)}
             borderColor={buttomBottom ? buttomBottom : 'transparent'}
             borderWidth={buttomBottom ? '2px' : '0'}
-            _hover={{ transition: 'all 0.5s'}}
+            _hover={{ 
+              bg: 'black.800',
+              color:"white"
+            }}
           >
             Solicitar orçamento
           </Button>

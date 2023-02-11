@@ -278,7 +278,11 @@ const Orcamento = () => {
                 borderRadius="4px"
                 h="47px"
                 isLoading={loading}
-                _hover={{ transition: "all 0.4s" }}
+                _hover={{ 
+                  transition: "all 0.4s", 
+                  bg: 'black.800',
+                  color:"white"
+                }}
                 type="submit"
               >
                 Solicitar orçamento
@@ -389,7 +393,7 @@ const Orcamento = () => {
           >
             <Link
               href="tel:1142235140"
-              _hover={{ textDecoration: "none", color: "#fff" }}
+              _hover={{ textDecoration: "none" }}
             >
               <Button
                 width={{
@@ -400,7 +404,11 @@ const Orcamento = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s" }}
+                _hover={{ 
+                  transition: "all 0.5s",
+                  bg: 'black.800',
+                color:"white"
+                 }}
               >
                 <Icon as={BiPhone} mr="10px" />
                 Telefonar
@@ -408,7 +416,7 @@ const Orcamento = () => {
             </Link>
             <Link
               href="mailto:vendas@contemp.com.br"
-              _hover={{ textDecoration: "none", color: "#fff" }}
+              _hover={{ textDecoration: "none"}}
             >
               <Button
                 width={{
@@ -419,7 +427,11 @@ const Orcamento = () => {
                 borderRadius="25px"
                 bg="red.600"
                 fontSize={pxToRem(20)}
-                _hover={{ transition: "all 0.5s" }}
+                _hover={{ 
+                  transition: "all 0.5s",
+                  bg: 'black.800',
+                  color:"white"
+                }}
               >
                 <Icon as={AiOutlineMail} mr="10px" />
                 Enviar e-mail

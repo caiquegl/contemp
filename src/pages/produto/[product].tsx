@@ -371,6 +371,10 @@ const Product = () => {
                     borderRadius='25px'
                     maxW={pxToRem(279)}
                     w='100%'
+                    _hover={{
+                      bg: 'black.800',
+                      color:"white"
+                    }}
                     onClick={() => {
                       addCart({
                         product_id: detail.id,
