@@ -373,7 +373,7 @@ const Home = () => {
               md: pxToRem(24),
             }}
             color='black.800'
-            mb='104px'
+            mb='1%'
             maxW='425px'
           >
             Temos uma equipe de vendedores-técnicos de prontidão para te atender.
