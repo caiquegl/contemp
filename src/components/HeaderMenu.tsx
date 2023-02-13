@@ -84,7 +84,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           alignItems: 'center',
           width: '100%',
           justifyContent: 'center',
-          zIndex: 99999999999999999
+          // zIndex: 99999999999999999
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>
