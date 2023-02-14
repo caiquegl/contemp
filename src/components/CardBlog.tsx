@@ -43,7 +43,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
 
       >
         <Box >
-          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img}/>
+          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img} borderRadius="8px"/>
           <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(20)} mt={["5px","15px"]} color={color}>
             {title}
           </Text>
