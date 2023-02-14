@@ -40,7 +40,7 @@ export const Player = () => {
       {!isMobile && (
         <Box w="100%" maxW={pxToRem(700)} mr="40px">
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
+            url="https://www.youtube.com/watch?v=iKF2F4Q-xBU"
             height={pxToRem(533)}
             width="100%"
           />
@@ -83,7 +83,7 @@ export const Player = () => {
         ) : (
           <Box w="100%" maxW="359px" h="195px">
             <ReactPlayer
-              url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
+              url="https://www.youtube.com/watch?v=qpcecRYRupg"
               width="300px"
               height="195px"
             />
@@ -97,7 +97,7 @@ export const Player = () => {
           <ModalBody mt="50px">
             <Flex alignItems="center">
                 <ReactPlayer
-                  url="https://www.youtube.com/watch?v=_wDK3yVYC7Y"
+                  url="https://www.youtube.com/watch?v=qpcecRYRupg"
                   width="350px"
                   height="195px"
                 />

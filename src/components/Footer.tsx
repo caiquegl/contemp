@@ -221,7 +221,7 @@ export const Footer = () => {
         flexWrap='wrap'
       >
         <Text color='white' fontSize='16px'>
-          Copyright © 2022 Contemp. Todos os direitos reservados.
+          Copyright © 2022 - 2023 Contemp. Todos os direitos reservados.
         </Text>
         <UnorderedList color='white' fontSize='16px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
           <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
