@@ -78,7 +78,7 @@ export const Catalog = () => {
               textAlign="center"
               fontSize={{
                 base: pxToRem(35),
-                xl: pxToRem(45),
+                xl: (pxToRem(45)),
               }}
               fontWeight="bold"
               color="white"
@@ -93,7 +93,7 @@ export const Catalog = () => {
               }}
               mb={{
                 base: pxToRem(20),
-                lg: pxToRem(30),
+                lg: pxToRem(20),
               }}
               maxW={pxToRem(1000)}
               textAlign="center"

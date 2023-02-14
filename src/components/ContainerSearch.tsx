@@ -18,7 +18,7 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
       position="absolute"
       top="50px"
       left={searchCard ? '0' : '-120px'}
-      zIndex="999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+      zIndex="999999999999999999999999999999999"
       borderRadius="10px"
       borderColor="white"
       borderWidth="2px"

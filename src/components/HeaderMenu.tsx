@@ -65,7 +65,7 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
     <>
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${replaceNameToUrl(evt.keyPath[0]).replaceAll(' ', '_')}`)
+          router.push(`/category/${replaceNameToUrl(evt.keyPath[0].replaceAll(' ', '_'))}`)
         }}
         mode={'horizontal'}
 
