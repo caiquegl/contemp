@@ -187,11 +187,11 @@ const Home = () => {
       <Flex
         w="100%"
         p={[
-          '40px 40px 40px 40p',
-          '40px 40px 40px 40p',
-          '40px 40px 40px 40p',
-          '40px 40px 40px 40p',
-          '40px 40px 256px 40px'
+          '40px 40px 40px 40px',
+          '40px 40px 40px 40px',
+          '40px 40px 40px 40px',
+          '40px 40px 40px 40px',
+          '40px 40px 40px 40px'
         ]}
         alignItems="center"
         bg="red.600"
