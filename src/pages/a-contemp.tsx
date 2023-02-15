@@ -57,11 +57,11 @@ const Home = () => {
         alignItems="center"
         bg="white"
         p={[
-          '0 20px 256px 20px',
-          '0 20px 256px 20px',
-          '0 20px 256px 20px',
-          '0 20px 256px 20px',
-          '0px 20px 256px 20px'
+          '40px 40px 10px 40px',
+          '40px 40px 10px 40px',
+          '40px 40px 10px 40px',
+          '40px 40px 10px 40px',
+          '40px 40px 10px 40px'
         ]}
       >
         <Container maxW="7xl" p="12px 0 31px">
@@ -83,6 +83,11 @@ const Home = () => {
               dos mais de 35 anos de competência, dedicação e conhecimento
               fabricando soluções para medição, controle e monitoramento para os
               mais variados processos industriais.
+              <p>A isso você soma a qualidade, facilidade de operação,
+                atendimento e o suporte diferenciado. A Contemp sabe que tudo
+                isso não tem preço! E por esse motivo não cobra por aquilo que
+                considera sua principal razão de existir: assegurar a
+                tranquilidade de seus clientes.</p>
             </Text>
             <Box w="100%" maxW="788px">
               <Image src={Banner1} onContextMenu={setContextMenuFalse} />
@@ -102,11 +107,7 @@ const Home = () => {
                 textAlign="justify"
                 mr="40px"
               >
-                A isso você soma a qualidade, facilidade de operação,
-                atendimento e o suporte diferenciado. A Contemp sabe que tudo
-                isso não tem preço! E por esse motivo não cobra por aquilo que
-                considera sua principal razão de existir: assegurar a
-                tranquilidade de seus clientes.
+                
               </Text>
               <Text
                 fontSize="20px"
@@ -124,7 +125,7 @@ const Home = () => {
                 transparecendo segurança e satisfação para o cliente.
               </Text>
             </Box>
-            <Box ml="40px">
+            <Box ml="40px" backgroundColor={"#ededed"} padding={"44px 60px"} borderRadius={"8px"} >
               <Text
                 fontSize="20px"
                 fontWeight="bold"
@@ -142,7 +143,7 @@ const Home = () => {
                     onContextMenu={setContextMenuFalse}
                   />
                 </Box>
-                <Text maxW="249px" fontSize="20px" color="black.900">
+                <Text fontSize="20px" color="black.900" marginTop={'-9%'} >
                   Sistema de Gestão da Qualidade Certificado ISO 9001
                 </Text>
               </HStack>
@@ -175,11 +176,11 @@ const Home = () => {
       <Flex
         w="100%"
         p={[
-          '0 20px 0 20px',
-          '0 20px 0 20px',
-          '0 20px 0 20px',
-          '0 20px 0 20px',
-          '0px 20px 0 20px'
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '0 20px 256px 20px',
+          '40px 40px 256px 40px'
         ]}
         alignItems="center"
         bg="red.600"
@@ -204,7 +205,7 @@ const Home = () => {
           </Flex>
           <Flex
             justifyContent="space-between"
-            mb="60px"
+            mb="0px"
             flexDirection={['column', 'column', 'column', 'row', 'row']}
           >
             <Box>
@@ -225,7 +226,7 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={['100%', '100%', '100%', '400px', '400px']}
+                  maxW={['100%', '100%', '100%', '400px', '500px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     MISSÃO
@@ -256,14 +257,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={['100%', '100%', '100%', '400px', '400px']}
+                  maxW={['100%', '100%', '100%', '400px', '500px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     VALORES
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={['100%', '100%', '100%', '530px', '530px']}
+                    maxW={['100%', '100%', '100%', '530px', '500px']}
                   >
                     Conhecimento técnico, experiência na indústria, sabe ouvir,
                     ética e transparência nas atitudes, engajamento para
@@ -294,14 +295,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={['100%', '100%', '100%', '400px', '400px']}
+                  maxW={['100%', '100%', '100%', '400px', '500px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     ESTRUTURA EFICIENTE
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={['100%', '100%', '100%', '530px', '530px']}
+                    maxW={['100%', '100%', '100%', '530px', '500px']}
                   >
                     É notável o cumprimento de metas da Contemp. Sua eficiência
                     corresponde a uma estrutura com forte capacidade de resposta
@@ -325,14 +326,14 @@ const Home = () => {
                 <Box
                   ml="20px"
                   w="100%"
-                  maxW={['100%', '100%', '100%', '400px', '400px']}
+                  maxW={['100%', '100%', '100%', '400px', '500px']}
                 >
                   <Text fontWeight="bold" fontSize="20px" mb="10px">
                     RESPONSABILIDADE AMBIENTAL
                   </Text>
                   <Text
                     fontSize="20px"
-                    maxW={['100%', '100%', '100%', '530px', '530px']}
+                    maxW={['100%', '100%', '100%', '530px', '500px']}
                   >
                     Todo o descarte de lixo eletrônico feito pela Contemp é
                     através de empresa especializada que atua na reciclagem de
