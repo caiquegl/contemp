@@ -51,7 +51,7 @@ export const Player = () => {
           Nova Linha de Controles e Indicadores
         </Text>
         <Text fontSize={pxToRem(20)} mb={"15px"} mt={"-35px"}>
-        Estamos muito felizes em ter você aqui no site da Contemp. Veja ao lado a nossa nova linha de produtos e também especificações tecnicas e de aplicações em seus processos.
+        Estamos muito felizes em ter você aqui no site da Contemp. Vejam nossa nova linha de produtos, a funcionalidade do NFC e as especificações técnicas para aplicações em seus processos.
         </Text>
         {isMobile ? (
           <VStack spacing={pxToRem(20)} alignItems="center">
