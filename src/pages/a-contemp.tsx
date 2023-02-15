@@ -71,6 +71,7 @@ const Home = () => {
             mb="60px"
             flexDirection={['column', 'column', 'row', 'row', 'row']}
           >
+            <Box>
             <Text
               fontSize="20px"
               maxW="535px"
@@ -83,12 +84,22 @@ const Home = () => {
               dos mais de 35 anos de competência, dedicação e conhecimento
               fabricando soluções para medição, controle e monitoramento para os
               mais variados processos industriais.
-              <p>A isso você soma a qualidade, facilidade de operação,
+              
+            </Text>
+            <Text
+            fontSize="20px"
+            maxW="535px"
+            color="black.900"
+            textAlign="justify"
+            mr="40px"
+            mt="15px"
+            >A isso você soma a qualidade, facilidade de operação,
                 atendimento e o suporte diferenciado. A Contemp sabe que tudo
                 isso não tem preço! E por esse motivo não cobra por aquilo que
                 considera sua principal razão de existir: assegurar a
-                tranquilidade de seus clientes.</p>
-            </Text>
+                tranquilidade de seus clientes.</Text>
+            </Box>
+            
             <Box w="100%" maxW="788px">
               <Image src={Banner1} onContextMenu={setContextMenuFalse} />
             </Box>
