@@ -355,6 +355,18 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   { id: listVariation.length + 1 }
                 ])
               }}
+              removeOptVariation={(indexRemove: any) => {
+                let newList: any = listVariation
+
+                let newListOptions: any = []
+                newList[index].opt.forEach((opt: any, indexOpt: number) => {
+                  if (indexRemove != indexOpt) newListOptions.push(opt)
+                })
+                
+                newList[index].opt = newListOptions
+                console.log(newList)
+                setListVariation([...newList])
+              }}
               removeVariation={() => {
                 let newList: any = []
                 listVariation.forEach((list: any, indexRemove: number) => {

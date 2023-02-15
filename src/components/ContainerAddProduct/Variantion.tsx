@@ -6,8 +6,10 @@ import {
   Icon,
   Select,
   FormLabel,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 import { InputDefault } from "../Form/Input";
@@ -19,7 +21,9 @@ const Variation = ({
   defaultValues,
   newVariation,
   removeVariation,
+  removeOptVariation
 }: any) => {
+  const [list, setList] = useState<any>([])
   const formRefOpt = useRef<any>();
 
   const { register, handleSubmit, formState, setValue, resetField } = useForm(
@@ -35,6 +39,7 @@ const Variation = ({
 
   useEffect(() => {
     setValue("name", defaultValues?.name);
+    setList(defaultValues)
   }, [defaultValues]);
 
   return (
@@ -94,8 +99,25 @@ const Variation = ({
           />
         </Flex>
 
-        <Box w="100%" ml="30px">
-          <FormLabel fontSize="20px" mb="10px" color="black.800">
+        <Box w="100%" ml="50px">
+          <UnorderedList>
+              {list.opt &&
+                list.opt.map((value: any, index: number) => (
+                  <ListItem key={uuidv4()} color="black.800" fontSize="18px" mb="6px">
+                    <Flex alignItems="center">
+                      {value}
+                      <Icon
+                        as={GrSubtractCircle}
+                        fontSize="20px"
+                        ml="10px"
+                        cursor="pointer"
+                        onClick={() => removeOptVariation(index)}
+                      />
+                    </Flex>
+                  </ListItem>
+                ))}
+            </UnorderedList>
+          {/* <FormLabel fontSize="20px" mb="10px" color="black.800">
             Opções
           </FormLabel>
           <InputGroup
@@ -130,7 +152,7 @@ const Variation = ({
                   <option key={uuidv4()}>{value}</option>
                 ))}
             </Select>
-          </InputGroup>
+          </InputGroup> */}
         </Box>
       </Flex>
     </Box>
