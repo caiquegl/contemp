@@ -47,11 +47,11 @@ export const Player = () => {
         </Box>
       )}
       <Grid maxW={pxToRem(359)} templateRows="1fr 0.73fr 1fr">
-        <Text fontSize={pxToRem(40)} fontWeight="bold">
+        <Text fontSize={pxToRem(40)} fontWeight="bold" lineHeight={'2.75rem'}>
           Nova Linha de Controles e Indicadores
         </Text>
-        <Text fontSize={pxToRem(20)}>
-          Logo abaixo nosso vídeo sobre Contemp C504 – Controlador de Processos.
+        <Text fontSize={pxToRem(20)} mb={"15px"} mt={"-35px"}>
+        Estamos muito felizes em ter você aqui no site da Contemp. Veja ao lado a nossa nova linha de produtos e também especificações tecnicas e de aplicações em seus processos.
         </Text>
         {isMobile ? (
           <VStack spacing={pxToRem(20)} alignItems="center">
