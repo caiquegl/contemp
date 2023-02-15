@@ -39,7 +39,6 @@ const Variation = ({
 
   useEffect(() => {
     setValue("name", defaultValues?.name);
-    setList(defaultValues)
   }, [defaultValues]);
 
   return (
@@ -101,8 +100,8 @@ const Variation = ({
 
         <Box w="100%" ml="50px">
           <UnorderedList>
-              {list.opt &&
-                list.opt.map((value: any, index: number) => (
+              {defaultValues.opt &&
+                defaultValues.opt.map((value: any, index: number) => (
                   <ListItem key={uuidv4()} color="black.800" fontSize="18px" mb="6px">
                     <Flex alignItems="center">
                       {value}
