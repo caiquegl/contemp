@@ -27,6 +27,7 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
               color={
                 bg === 'red.600' || bg === 'black.800' ? 'white' : undefined
               }
+              bg={bg}
               buttomBottom={bg === 'red.600' ? 'white' : undefined}
               containerProps={{
                 margin: 'auto'

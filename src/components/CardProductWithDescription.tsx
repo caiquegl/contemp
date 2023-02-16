@@ -13,16 +13,31 @@ interface IProps {
   description?: string
   alt?: string
   color?: string
+  bg?: string
   buttomBottom?: string
   containerProps?: GridProps
 }
 
-const CardProductWithDescription = ({ img, text, alt, description, color, buttomBottom, containerProps }: IProps) => {
+const CardProductWithDescription = ({ bg, img, text, alt, description, color, buttomBottom, containerProps }: IProps) => {
   const router = useRouter()
   const [_, setIsHovering] = useState(false)
 
   const handleIsHovering = () => setIsHovering((isHovering) => !isHovering)
+    const hoverBg: any = {
+      'red.600': 'white',
+      'white': 'black.800',
+      'white.500': 'black.800',
+      'black.800': 'white'
+    }
 
+    const hoverColor: any = {
+      'red.600': 'black.800',
+      'white': 'white',
+      'white.500': 'white',
+      'black.800': 'black.800'
+
+    }
+    console.log(bg)
   return (
     <Grid
       // alignItems='center'
@@ -87,7 +102,7 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
           gridRow={3}
           bgSize='contain'
         />
-        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{  textDecoration: 'none' }}>
+        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{  textDecoration: 'none', color: bg ? hoverColor[bg] : "white" }}>
           <Button
             w={pxToRem(243)}
             h={pxToRem(50)}
@@ -99,8 +114,8 @@ const CardProductWithDescription = ({ img, text, alt, description, color, buttom
             borderColor={buttomBottom ? buttomBottom : 'transparent'}
             borderWidth={buttomBottom ? '2px' : '0'}
             _hover={{ 
-              bg: 'black.800',
-              color:"white"
+              bg: bg ? hoverBg[bg] : 'black.800',
+              color: bg ? hoverColor[bg] : "white"
             }}
           >
             Solicitar orçamento
