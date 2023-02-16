@@ -9,7 +9,7 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
     <Flex w="100%" bg={bg} ref={ref}>
       <Grid
         margin={`${pxToRem(80)} 0`}
-        templateColumns={`repeat(auto-fill, minmax(${pxToRem(320)}, 1fr))`}
+        templateColumns={['repeat(1, 1fr)','repeat(4, 1fr)']}
         columnGap={pxToRem(30)}
         p={{
           xl: '0 20px'
