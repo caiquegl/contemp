@@ -55,7 +55,7 @@ export const Footer = () => {
   return (
     <Container
       maxW='7xl'
-      p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 10px 31px']}
+      p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
     >
       <Flex
         alignItems='center'

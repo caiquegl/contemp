@@ -35,7 +35,7 @@ export const Player = () => {
       w="100%"
       alignItems="center"
       justifyContent="center"
-      p={["123px 20px", "123px 20px", "123px 20px", "123px 20px", "123px 0"]}
+      p={["100px 20px", "100px 20px", "100px 20px", "100px 20px", "100px 0"]}
     >
       {!isMobile && (
         <Box w="100%" maxW={pxToRem(700)} mr="40px">

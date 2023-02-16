@@ -29,7 +29,7 @@ const Calibracao = () => {
         </Text>
       </Flex>
       <Box w='100%' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
-        <Container maxW='7xl' p='12px 0 77px' px='20px'>
+        <Container maxW='7xl' p='12px 0 80px' px='20px'>
           <Text fontSize='25px' fontWeight='bold' mt='100px' color='red.600'>
             Calibrações efetuadas com símbolo de acreditação – RBC
           </Text>
@@ -62,7 +62,7 @@ const Calibracao = () => {
           </Text>
         </Container>
       </Box>
-      <Box w='100%' bg='white.500' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']} pt='100px'>
+      <Box w='100%' bg='white.500' p={['60px 20px', '60px 20px', '60px 20px', '60px 20px', '60px 20px']} pt='100px'>
         <Container maxW='7xl' p='12px 0 40px'>
           <Text fontSize='25px' fontWeight='bold' color='red.600'>
             Técnicos
