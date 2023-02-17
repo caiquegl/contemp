@@ -221,7 +221,7 @@ export const Contact = ({
   };
 
   return (
-    <Box w="100%" bg="white" pt="0px" pb="100px">
+    <Box w="100%" bg="white" pt="100px" pb="100px">
       <ContainerChakra
         maxW="6xl"
         p={["12px 20px", "12px 20px", "12px 20px", "12px 20px", "12px 0 31px"]}
