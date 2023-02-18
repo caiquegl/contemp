@@ -113,7 +113,7 @@ const typewriterWords = [
   'Aquisitores de Dados',
   'Contadores',
   'Temporizadores',
-  'Placas controladoras de Processo',
+  'Placas Controladoras de Processo',
   'Transmissores de Sinais',
   'Transmissores de Temperatura e Umidade',
   'Transmissores de Pressão',
