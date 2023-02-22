@@ -125,7 +125,7 @@ const Home = () => {
                 maxW="931px"
                 color="black.900"
                 textAlign="justify"
-                mt="40px"
+                mt="0px"
               >
                 Sua história é uma trajetória de conquistas que se iniciou em
                 1984 e continua nos dias atuais. A experiência que adquiriu ao
@@ -205,7 +205,7 @@ const Home = () => {
             <Box w="100%" maxW="588px" mt="-113px">
               <Image src={Banner2} onContextMenu={setContextMenuFalse} />
             </Box>
-            <Box mt="83px">
+            <Box mt="38px">
               <Text maxW="535px" fontSize="20px">
                 A Contemp disponibiliza uma gama de soluções adequadas para
                 diversos segmentos da indústria, e também para fabricantes de

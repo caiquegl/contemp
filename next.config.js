@@ -91,6 +91,7 @@ module.exports = {
       creatRedirectObj ('/produto/instrumentos/controladores-de-temperatura-e-processo/c714-controlador-de-processos-linha-avancada/', '/produto/CONTROLADOR_DE_TEMPERATURA_E_PROCESSOS_-_C714'),
       creatRedirectObj ('/wp-content/uploads/2022/02/C41X_V1.05-REV.2-1.pdf', '/category/LINHA_ECON%C3%94MICA_-_C41X'),
       creatRedirectObj ('/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada', '/category/CONTROLADORES_DE_POT%C3%8ANCIA'),
+      creatRedirectObj ('/produto/optris-ctratio-1m/', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
       // creatRedirectObj ('', ''),
     ]
   }

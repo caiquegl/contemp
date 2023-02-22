@@ -33,7 +33,7 @@ const Support = () => {
         bg="white"
         p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
       >
-        <Container maxW="7xl" p="12px 0 77px">
+        <Container maxW="7xl" p="12px 0 100px">
           <Text fontSize="20px" color="black.900" mt="50px" lineHeight="34px">
             Nós da Contemp nos dedicamos continuamente à melhoria de nossos
             produtos e processos de fabricação, buscando fornecer instrumentos e
@@ -74,7 +74,7 @@ const Support = () => {
         bg="red.600"
         p={["0 20px", "0 20px", "0 20px", "0 20px", "0 20px"]}
       >
-        <Container maxW="7xl" p="72px 0">
+        <Container maxW="7xl" p="72px 0 100px">
           <Text fontSize="45px" fontWeight="bold" textAlign="center" mb="50px">
             GARANTIA CONTEMP
           </Text>
