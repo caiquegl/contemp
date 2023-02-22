@@ -173,7 +173,6 @@ export const Header = () => {
             onClick={onOpen}
             _hover={{
               transition: 'all 0.4s',
-              
             }}
           >
             <Icon as={BsThreeDotsVertical} fontSize='20px' />
@@ -200,7 +199,6 @@ export const Header = () => {
                   onClick={onClose}
                   _hover={{
                     transition: 'all 0.4s',
-                    
                   }}
                 >
                   <Icon as={AiOutlineClose} fontSize='20px' />
@@ -219,7 +217,7 @@ export const Header = () => {
                     justifyContent='space-between'
                     _hover={{
                       bg: 'white',
-                    color:"black.800"
+                      color: 'black.800',
                     }}
                   >
                     Todos os produtos
@@ -387,11 +385,11 @@ export const Header = () => {
                   bg='red.600'
                   _hover={{
                     bg: 'white',
-                    color:"black.800"
+                    color: 'black.800',
                   }}
                 >
                   Todos os produtos
-                  <Icon as={BsThreeDotsVertical} ml='10px'  fontSize='20px' />
+                  <Icon as={BsThreeDotsVertical} ml='10px' fontSize='20px' />
                 </Button>
               </Link>
             </Box>
@@ -411,7 +409,7 @@ export const Header = () => {
                   color: 'black.800',
                   background: 'white',
                   borderRadius: '4px',
-                  transition: 'all 0'
+                  transition: 'all 0',
                 }}
               >
                 <Text w='max-content' fontSize='18px'>
@@ -419,13 +417,13 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
-              padding='3px 13px'
+                padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
                   borderRadius: '4px',
-                  transition: 'all 0'
+                  transition: 'all 0',
                 }}
                 href='/calibracao'
               >
@@ -434,13 +432,13 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
-              padding='3px 13px'
+                padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
                   borderRadius: '4px',
-                  transition: 'all 0'
+                  transition: 'all 0',
                 }}
                 href='/suporte-tecnico'
               >
@@ -449,13 +447,13 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
-              padding='3px 13px'
+                padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
                   borderRadius: '4px',
-                  transition: 'all 0'
+                  transition: 'all 0',
                 }}
                 href='/trabalhe-conosco'
               >
@@ -464,13 +462,13 @@ export const Header = () => {
                 </Text>
               </Link>
               <Link
-              padding='3px 13px'
+                padding='3px 13px'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
                   background: 'white',
                   borderRadius: '4px',
-                  transition: 'all 0'
+                  transition: 'all 0',
                 }}
                 href='https://blog.contemp.com.br'
               >
@@ -558,7 +556,7 @@ export const Header = () => {
           <Fade in={scrollY > 200}>
             <Box display='flex' alignItems='center' h='80px' bg='black.800'>
               <Container maxW='7xl' p='12px 15px 15px 15px'>
-                <Flex alignItems='center' justifyContent='space-between' h={70}>
+                <Flex alignItems='center' justifyContent='space-between' h={70} boxSizing='border-box'>
                   <Link href={`/`} _hover={{ color: 'black', textDecoration: 'none' }}>
                     <Box cursor='pointer' height={41} mr='20px'>
                       <ImageNext width={160} height={41} src={Logo} />
@@ -571,18 +569,15 @@ export const Header = () => {
                         bg='red.600'
                         _hover={{
                           bg: 'white',
-                          color:"black.800"
+                          color: 'black.800',
                         }}
                       >
                         <Icon as={BsThreeDotsVertical} fontSize='20px' />
                       </Button>
                     </Link>
                   </Box>
-                  <Box
-                    margin="0 20px"
-                    w="100%"
-                  >
-                    <HeaderMenu menuItems={list} />
+                  <Box margin='0 20px' w='100%'>
+                    <HeaderMenu menuItems={list} maxWidth={true} />
                   </Box>
                   <Box
                     position='relative'

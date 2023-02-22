@@ -13,9 +13,10 @@ import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 export type MenuProps = {
   menuItems: any
   onClose?: any
+  maxWidth?: any
 }
 
-export const HeaderMenu = ({ menuItems }: MenuProps) => {
+export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState([])
   const router = useRouter()
@@ -68,7 +69,6 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           router.push(`/category/${replaceNameToUrl(evt.keyPath[0].replaceAll(' ', '_'))}`)
         }}
         mode={'horizontal'}
-
         subMenuOpenDelay={0.5}
         items={list}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
@@ -82,9 +82,10 @@ export const HeaderMenu = ({ menuItems }: MenuProps) => {
           // flexWrap: 'wrap',
           position: 'relative',
           alignItems: 'center',
-          width: '100%',
+          width: maxWidth ? 'calc(100% - 75px)' : '100%',
           justifyContent: 'center',
           // zIndex: 99999999999999999
+          margin: 'auto',
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>
