@@ -1,13 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  InputGroup,
-  Input,
-  Link,
-  useToast
-} from '@chakra-ui/react'
+import { Box, Flex, Text, Button, InputGroup, Input, Link, useToast } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 import Logo from '../../assets/images/170x41.png'
@@ -15,14 +6,12 @@ import { initFirebase } from '../../utils/db/index'
 import 'firebase/compat/auth'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
-import { useAuth } from '../../contextAuth/authContext'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { setCookie } from 'nookies'
 import { withSSRAuthRedirect } from '../../utils/withSSRAuthRedirect'
 
 const Adm = () => {
   const router = useRouter()
-  const { setUser } = useAuth()
   const toast = useToast()
   initFirebase()
   const auth = getAuth()
@@ -32,33 +21,24 @@ const Adm = () => {
   const signIn = async () => {
     try {
       setLoading(true)
-      const result = await signInWithEmailAndPassword(
-        auth,
-        body.email,
-        body.password
-      )
 
-      setCookie(undefined, "nextAuth.contemp", JSON.stringify({
-        auth,
-        body
-      }));
-      // // setUser(result.user)
-      // setTimeout(() => {
-        
-      //   router.reload();
-      // }, 1000);
+      setCookie(
+        undefined,
+        'nextAuth.contemp',
+        JSON.stringify({
+          auth,
+          body,
+        })
+      )
       await router.push('/adm/home')
     } catch (error: any) {
       console.log(error)
       toast({
         title: 'Erro',
-        description:
-          error.message === 'EMAIL_NOT_FOUND'
-            ? 'Email não cadastrado'
-            : 'Senha inválida',
+        description: error.message === 'EMAIL_NOT_FOUND' ? 'Email não cadastrado' : 'Senha inválida',
         status: 'error',
         duration: 3000,
-        isClosable: true
+        isClosable: true,
       })
     } finally {
       setLoading(false)
@@ -66,122 +46,105 @@ const Adm = () => {
   }
   return (
     <Flex
-      alignItems="center"
-      justifyContent="center"
-      flexDirection="column"
+      alignItems='center'
+      justifyContent='center'
+      flexDirection='column'
       backgroundImage={`url('./images/banner-contemp.png')`}
       onContextMenu={setContextMenuFalse}
-      minH="100vh"
-      minW="100vw"
+      minH='100vh'
+      minW='100vw'
     >
-      <Box mb="30px">
+      <Box mb='30px'>
         <Image src={Logo} onContextMenu={setContextMenuFalse} />
       </Box>
-      <Box
-        bg="white"
-        borderRadius="8px"
-        p="30px"
-        w="100%"
-        maxW="463px"
-        minH="364px"
-        textAlign="center"
-        mb="20px"
-      >
-        <Text color="black.800" fontSize="30px" fontWeight="bold" mb="30px">
+      <Box bg='white' borderRadius='8px' p='30px' w='100%' maxW='463px' minH='364px' textAlign='center' mb='20px'>
+        <Text color='black.800' fontSize='30px' fontWeight='bold' mb='30px'>
           Painel Administrativo
         </Text>
         <InputGroup
-          borderRadius="25px"
-          bg="white.500"
-          p="3px 7px"
-          w="100%"
-          h="50px"
-          outline="none"
-          border="1px solid"
-          borderColor="black.800"
-          color="black.800"
-          mb="22px"
+          borderRadius='25px'
+          bg='white.500'
+          p='3px 7px'
+          w='100%'
+          h='50px'
+          outline='none'
+          border='1px solid'
+          borderColor='black.800'
+          color='black.800'
+          mb='22px'
         >
           <Input
-            w="100%"
-            height="100%"
-            border="none"
-            borderRadius="21px"
-            placeholder="Email"
-            onChange={(value) =>
-              setBody({ ...body, email: value.target.value })
-            }
+            w='100%'
+            height='100%'
+            border='none'
+            borderRadius='21px'
+            placeholder='Email'
+            onChange={(value) => setBody({ ...body, email: value.target.value })}
             _focusVisible={{
-              outline: 'none'
+              outline: 'none',
             }}
           />
         </InputGroup>
         <InputGroup
-          borderRadius="25px"
-          bg="white.500"
-          p="3px 7px"
-          w="100%"
-          h="50px"
-          outline="none"
-          border="1px solid"
-          borderColor="black.800"
-          color="black.800"
-          mb="40px"
+          borderRadius='25px'
+          bg='white.500'
+          p='3px 7px'
+          w='100%'
+          h='50px'
+          outline='none'
+          border='1px solid'
+          borderColor='black.800'
+          color='black.800'
+          mb='40px'
         >
           <Input
-            w="100%"
-            height="100%"
-            border="none"
-            borderRadius="21px"
-            placeholder="Senha"
-            type="password"
-            onChange={(value) =>
-              setBody({ ...body, password: value.target.value })
-            }
+            w='100%'
+            height='100%'
+            border='none'
+            borderRadius='21px'
+            placeholder='Senha'
+            type='password'
+            onChange={(value) => setBody({ ...body, password: value.target.value })}
             _focusVisible={{
-              outline: 'none'
+              outline: 'none',
             }}
           />
         </InputGroup>
-        <Flex w="100%" alignItems="center" justifyContent="space-between">
+        <Flex w='100%' alignItems='center' justifyContent='space-between'>
           <Link
-            href="/adm/recover-password"
-            textDecoration="none"
-            color="black.800"
-            textStyle="italic"
+            href='/adm/recover-password'
+            textDecoration='none'
+            color='black.800'
+            textStyle='italic'
             _hover={{
               transition: 'all 0.4s',
-              opacity: 0.7
+              opacity: 0.7,
             }}
           >
             Esqueci a senha
           </Link>
           <Button
-            w="128px"
-            h="50px"
-            borderRadius="25px"
-            bg="red.600"
-            color="white"
-            textAlign="center"
+            w='128px'
+            h='50px'
+            borderRadius='25px'
+            bg='red.600'
+            color='white'
+            textAlign='center'
             isLoading={loading}
             onClick={signIn}
             _hover={{
               transition: 'all 0.4s',
-              opacity: 0.7
+              opacity: 0.7,
             }}
           >
             Entrar
           </Button>
         </Flex>
       </Box>
-      <Link
-        isExternal
-        href="https://3hub.co/"
-        _hover={{ textDecoration: 'none', color: 'black.800' }}
-      >
-        <Text fontSize="20px" color="black.800">
+      <Link isExternal href='https://3hub.co/' _hover={{ textDecoration: 'none', color: 'black.800' }}>
+        <Text fontSize='20px' color='black.800'>
           Desenvolvido por{' '}
-          <Text as="span" color="red.600" fontWeight="bold">
+          <Text as='span' color='red.600' fontWeight='bold'>
             3Hub
           </Text>
         </Text>
@@ -195,5 +158,5 @@ export default Adm
 export const getServerSideProps = withSSRAuthRedirect(async (ctx) => {
   return {
     props: {},
-  };
-});
+  }
+})

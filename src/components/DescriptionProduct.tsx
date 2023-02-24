@@ -24,12 +24,23 @@ interface IProps {
   colorHoverButton: string
   bgHoverButton: string
   colorButton: string
-  bgButton:string
+  bgButton: string
   containerProps?: FlexProps
-  dataTab?: DataTabProps
+  dataTab?: any
 }
 
-const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverButton,colorButton,bgButton, borderColorButton, containerProps, dataTab }: IProps) => {
+const DescriptionProduct = ({
+  bg,
+  borderColor,
+  color,
+  colorHoverButton,
+  bgHoverButton,
+  colorButton,
+  bgButton,
+  borderColorButton,
+  containerProps,
+  dataTab,
+}: IProps) => {
   const router = useRouter()
 
   if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
@@ -69,7 +80,6 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
               lg: '45%',
               xl: '55%',
             }}
-            
             onClick={() => router.replace(dataTab.link_name)}
             cursor='pointer'
           />
@@ -89,7 +99,7 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
           </Text>
 
           <ProductCategoryWithIcon
-            title={dataTab?.nameCategory}
+            title={dataTab?.category.name}
             icon={dataTab?.icon}
             containerProps={{
               bg,
@@ -116,11 +126,11 @@ const DescriptionProduct = ({ bg, borderColor, color,colorHoverButton,bgHoverBut
                 borderColor={borderColorButton}
                 color={borderColorButton}
                 // bg={bgButton}
-                bg="transparent"
+                bg='transparent'
                 m={`${pxToRem(20)} 0`}
                 // maxW={pxToRem(157)}
-                width="157px"
-                height="50px"
+                width='157px'
+                height='50px'
                 // h={pxToRem(50)}
                 flex={6}
                 _hover={{

@@ -32,7 +32,6 @@ import {
 } from 'firebase/firestore'
 import { InputDefault } from '../Form/Input'
 import { Controller, useForm } from 'react-hook-form'
-import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import { EditOrder } from '../EditOrder'
 import InputsHome from '../ContainerHome/inputs'
@@ -43,6 +42,7 @@ import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
+import { api } from '../../lib/axios'
 
 const { confirm } = Modal
 
@@ -82,8 +82,6 @@ const TabCategory = () => {
   })
 
   initFirebase()
-  const { allCategory, reload, reloadCategory } = useAuth()
-
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
@@ -92,9 +90,7 @@ const TabCategory = () => {
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
   const formRef = useRef<any>()
-
   const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
-
   const { errors } = formState
 
   const saveCategory = async (bodyForm: any) => {
@@ -155,9 +151,7 @@ const TabCategory = () => {
       })
     } finally {
       reset()
-      await reload()
-      let newList = await reloadCategory()
-      await listCategory(newList)
+      await listCategory()
       setLoading(false)
     }
   }
@@ -220,18 +214,18 @@ const TabCategory = () => {
       })
     } finally {
       reset()
-      await reload()
-      let newList = await reloadCategory()
-      await listCategory(newList)
+      await listCategory()
       setLoading(false)
     }
   }
 
   const listCategory = async (list?: any) => {
     try {
+      const { data } = await api.get('getAllCategory')
+
       let newList = list
         ? list.sort((a: any, b: any) => a.order < b.order)
-        : allCategory.sort((a: any, b: any) => a.order < b.order)
+        : data.sort((a: any, b: any) => a.order < b.order)
       setListClone([...newList])
       setList([...newList])
     } catch (error) {
@@ -323,9 +317,7 @@ const TabCategory = () => {
     })
 
     reset()
-    await reload()
-    let newList = await reloadCategory()
-    await listCategory(newList)
+    await listCategory()
   }
 
   const changerOrder = async (order: number, ref: any) => {
@@ -357,9 +349,6 @@ const TabCategory = () => {
         status: 'success',
       })
       reset()
-      await reload()
-      let newList = await reloadCategory()
-      await listCategory(newList)
     } catch (err) {
       toast({
         title: 'Erro',
@@ -368,6 +357,7 @@ const TabCategory = () => {
       })
     } finally {
       setLoading(false)
+      await listCategory()
     }
   }
 
@@ -379,7 +369,7 @@ const TabCategory = () => {
     getCategoryList()
   }, [])
 
-  const handleOnEditClick = (category: any) => {
+  const handleOnEditClick = async (category: any) => {
     setValue('name', category.name)
     setValue('is_main', category.is_main)
     setValue('description', category.description)
@@ -391,10 +381,10 @@ const TabCategory = () => {
     setUpdate(category)
     setUrl(category.url ? category.url : '')
 
-    if (category.sub_categorie) {
-      let find = allCategory.find((el: any) => el.id == category?.sub_categorie)
-      if (find && Object.keys(find).length > 0)
-        setValue('sub_categorie', { value: category?.sub_categorie, label: find.name })
+    const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`)
+
+    if (data.sub_category_id) {
+      setValue('sub_categorie', { value: data?.sub_category_id, label: data.name })
     }
   }
 

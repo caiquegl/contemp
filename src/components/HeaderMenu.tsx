@@ -1,12 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { Menu } from 'antd'
 import { AiFillCaretRight } from 'react-icons/ai'
-import { AiOutlineEye } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 import Icon from './Icon'
-import { pxToRem } from '../utils/pxToRem'
-import { Box, Fade } from '@chakra-ui/react'
-import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu'
+import { Box } from '@chakra-ui/react'
+import Menu from 'rc-menu'
 import 'rc-menu/assets/index.css'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 
@@ -17,50 +15,7 @@ export type MenuProps = {
 }
 
 export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
-  const [loading, setLoading] = useState(false)
-  const [list, setList] = useState([])
   const router = useRouter()
-
-  const amountList = async (amount: any, hasIcon = true) => {
-    try {
-      let obj: any = []
-      let sort = amount.sort((a: any, b: any) => a.order - b.order)
-
-      for await (let el of sort) {
-        let newObj = {
-          ...el,
-          label: el.name,
-          title: el.name,
-          key: el.name,
-          order: 1,
-          onTitleClick: (value: any) => {
-            router.push(`/category/${replaceNameToUrl(el.name).replaceAll(' ', '_')}#viewCategory`)
-          },
-        }
-
-        if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, false)
-        }
-        obj.push(newObj)
-      }
-
-      return obj
-    } catch (error) {
-      console.log(error, 'error')
-    }
-  }
-
-  const getList = async () => {
-    let amount = await amountList(menuItems)
-    setLoading(true)
-    setList(amount)
-
-    setTimeout(() => setLoading(false), 1500)
-  }
-
-  useEffect(() => {
-    getList()
-  }, [menuItems])
 
   return (
     <>
@@ -70,14 +25,13 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
         }}
         mode={'horizontal'}
         subMenuOpenDelay={0.5}
-        items={list}
+        items={menuItems}
         expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
         style={{
           background: '#242424',
           border: 'none',
           fontSize: 16,
           display: 'flex',
-          opacity: list.length === 0 || loading ? 0 : 1,
           transition: '0.2s',
           // flexWrap: 'wrap',
           position: 'relative',
@@ -99,51 +53,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
 }
 
 export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
-  const [list, setList] = useState([])
   const router = useRouter()
-
-  const amountList = async (amount: any, name?: any) => {
-    try {
-      let obj: any = []
-      for await (let el of amount) {
-        let newObj = {
-          ...el,
-          label: el.name,
-          key: el.name.replaceAll(' ', '_'),
-          // icon: (
-          //   <Icon
-          //     icon={AiOutlineEye}
-          //     size={20}
-          //     color="#fff"
-          //     onClick={(item: any) => {
-          //       onClose()
-          //       router.push(`/category/${el.name.replaceAll(" ", "_")}`)
-          //     }}
-          //   />
-          // ),
-        }
-
-        if (el.list_sub_category && el.list_sub_category.length > 0) {
-          newObj.children = await amountList(el.list_sub_category, el.name)
-        }
-        obj.push(newObj)
-      }
-
-      return obj
-    } catch (error) {
-      console.log(error, 'error')
-    }
-  }
-
-  const getList = async () => {
-    let amount = await amountList(menuItems)
-    setList(amount)
-  }
-
-  useEffect(() => {
-    getList()
-  }, [menuItems])
-
   return (
     <Menu
       onClick={(avt) => {
@@ -151,7 +61,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         router.push(`/category/${replaceNameToUrl(avt.key)}`)
       }}
       mode='inline'
-      items={list}
+      items={menuItems}
       style={{
         background: '#242424',
         border: 'none',

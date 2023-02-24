@@ -1,41 +1,20 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Flex,
-  Grid,
-  GridItem,
-  HStack,
-  Icon,
-  Link,
-  ListItem,
-  Text,
-  UnorderedList,
-} from '@chakra-ui/react'
+import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
-import { AiFillLinkedin, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai'
-import { FaFacebookF } from 'react-icons/fa'
 import { SearchBar } from './SearchBar'
-import { useAuth } from '../contextAuth/authContext'
-import { useRouter } from 'next/router'
 import { v4 as uuidv4 } from 'uuid'
+import { api } from '../lib/axios'
 
 export const Footer = () => {
-  const { listHeader } = useAuth()
-  const router = useRouter()
   const [list, setList] = useState<any>([])
 
-  useEffect(() => {
+  const listFooter = async () => {
+    const { data } = await api.get('getMenu')
     let newList: any = []
 
     let order: any = []
 
-    listHeader.forEach((el: any, index: number) => {
-      let count = el.list_sub_category.length
-
-      el.list_sub_category.forEach((el2: any) => {
-        count = count + el2.list_sub_category.length
-      })
+    data.forEach((el: any, index: number) => {
+      let count = el.children.length
 
       order.push({
         index,
@@ -46,11 +25,15 @@ export const Footer = () => {
     let newOrder = order.sort((a: any, b: any) => a.count - b.count)
 
     newOrder.forEach((el: any) => {
-      newList.push(listHeader[el.index])
+      newList.push(data[el.index])
     })
 
     setList([...newList])
-  }, [listHeader])
+  }
+
+  useEffect(() => {
+    listFooter()
+  }, [])
 
   return (
     <Container
@@ -181,9 +164,9 @@ export const Footer = () => {
                   {el.name}
                 </Text>
               </Link>
-              {el.list_sub_category &&
-                el.list_sub_category.length > 0 &&
-                el.list_sub_category.map((el2: any) => (
+              {el.children &&
+                el.children.length > 0 &&
+                el.children.map((el2: any) => (
                   <Fragment key={uuidv4()}>
                     <Link
                       href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
@@ -194,9 +177,9 @@ export const Footer = () => {
                       </Text>
                     </Link>
                     <Box mb='20px'>
-                      {el2.list_sub_category &&
-                        el2.list_sub_category.length > 0 &&
-                        el2.list_sub_category.map((el3: any, index: number) => (
+                      {el2.children &&
+                        el2.children.length > 0 &&
+                        el2.children.map((el3: any, index: number) => (
                           <Link
                             href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
                             _hover={{ color: 'white', textDecoration: 'none' }}

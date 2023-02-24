@@ -1,4 +1,4 @@
-import { Box, Center, Container, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Container, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
 import { Player } from '../components/Player'
@@ -8,18 +8,16 @@ import 'swiper/css/pagination'
 import { Autoplay, Pagination } from 'swiper'
 import CardProductWithDescription from '../components/CardProductWithDescription'
 import CardCatalog from '../components/CardCatalog'
-import { Image } from '../components/Image'
 import { pxToRem } from '../utils/pxToRem'
 import { SmoothScroll } from '../components/SmoothScroll'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { AdBanners } from '../components/AdBanners'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
-import { useAuth } from '../contextAuth/authContext'
 import { v4 as uuidv4 } from 'uuid'
+import { api } from '../lib/axios'
 
 const AllProduct = () => {
-  const { allCategoryActive, allProductsActive, allProductsHome } = useAuth()
   const [favorites, setFavorites] = useState<any>([])
   const [categories, setCategories] = useState<any>([])
 
@@ -33,95 +31,11 @@ const AllProduct = () => {
     md: false,
   })
 
-  const getProduct = async (categoryId: string) => {
-    let cg1 = allCategoryActive.filter((el: any) => el.id == categoryId)
-
-    let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie)
-    let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie)
-    let cg4 = allCategoryActive.filter((el: any) => el.id == cg3[0]?.sub_categorie)
-
-    let id = ''
-    let names: any = []
-    if (cg1.length > 0) {
-      id = cg1[0].id
-      names.push(cg1[0].name)
-    }
-    if (cg2.length > 0) {
-      id = cg2[0].id
-      names.push(cg2[0].name)
-    }
-    if (cg3.length > 0) {
-      id = cg3[0].id
-      names.push(cg3[0].name)
-    }
-    if (cg4.length > 0) {
-      id = cg4[0].id
-      names.push(cg4[0].name)
-    }
-
-    let idCategory: any = []
-
-    allCategoryActive.forEach((el: any) => {
-      if (el.id == id) {
-        idCategory.push(el.id)
-        allCategoryActive.forEach((el2: any) => {
-          if (el2.sub_categorie && el2.sub_categorie == el.id) {
-            idCategory.push(el2.id)
-            allCategoryActive.forEach((el3: any) => {
-              if (el3.sub_categorie && el3.sub_categorie == el2.id) {
-                idCategory.push(el3.id)
-              }
-            })
-          }
-        })
-      }
-    })
-
-    let list: any = []
-
-    if (idCategory.length > 0) {
-      allProductsActive.forEach((el: any) => {
-        idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el)
-        })
-      })
-    }
-    return list
-  }
-
   const getFavorites = async () => {
     try {
-      let listFavorite: any = []
+      const { data } = await api.get('getCategoryFavoriteWithProduct')
 
-      allCategoryActive.forEach((el: any) => {
-        if (el.favorite) {
-          listFavorite.push({
-            ...el,
-            idCategorie: el.id,
-            products: [],
-          })
-        }
-      })
-
-      if (listFavorite.length === 0) return
-      let index = 0
-      for await (let categories of listFavorite) {
-        let p = await getProduct(categories.idCategorie)
-        listFavorite[index].products = p
-        // allProductsActive.filter((el: any) => {
-        //   if (el.category == categories.idCategorie)
-        //     listFavorite[index].products.push(el)
-        // })
-
-        // allProductsHome.filter((el: any) => {
-        //   if (el.category == categories.idCategorie)
-        //     listFavorite[index].products.push(el)
-        // })
-
-        index = index + 1
-      }
-
-      setFavorites(listFavorite)
+      setFavorites(data)
     } catch (error) {
       console.log(error)
     }
@@ -129,28 +43,16 @@ const AllProduct = () => {
 
   const getCategories = async () => {
     try {
-      let list: any = []
-
-      allCategoryActive.forEach((el: any) => {
-        list.push({
-          ...el,
-          idCategorie: el.id,
-        })
-      })
-
-      if (list.length === 0) return
-      let order = list.sort((a: any, b: any) => a.order - b.order)
-      setCategories(list)
+      const { data } = await api.get('getCategoryActive')
+      setCategories(data)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    if (allCategoryActive.length > 0 && allProductsHome.length > 0 && allProductsActive.length > 0) {
-      getFavorites()
-      getCategories()
-    }
+    getFavorites()
+    getCategories()
 
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth
@@ -162,7 +64,7 @@ const AllProduct = () => {
       })
     }
     findOverflowingElements()
-  }, [allCategoryActive, allProductsActive, allProductsHome])
+  }, [])
 
   return (
     <SmoothScroll>
@@ -209,7 +111,7 @@ const AllProduct = () => {
             <Container maxW='7xl' p='130px 0'>
               <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
                 <Text color='black.800' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
-                  {fv.name}
+                  {fv.category_name}
                 </Text>
               </Flex>
               <Box h={pxToRem(650)} mt={pxToRem(31)}>

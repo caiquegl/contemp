@@ -1,12 +1,12 @@
 import { InputGroup, Input, InputGroupProps, InputProps } from '@chakra-ui/react'
 import { pxToRem } from '../utils/pxToRem'
-import { useState } from 'react'
-import { useAuth } from '../contextAuth/authContext'
+import { useEffect, useState } from 'react'
 import { ContainerSearch } from './ContainerSearch'
 import { useRouter } from 'next/router'
 import { BsSearch } from 'react-icons/bs'
 import Icon from './Icon'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import { api } from '../lib/axios'
 
 type SearchBarProps = {
   containerProps?: InputGroupProps
@@ -15,9 +15,19 @@ type SearchBarProps = {
 }
 
 export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarProps) => {
-  const { allProductsActive, allCategoryActive } = useAuth()
   const [listProducts, setListProducts] = useState<any>([])
+  const [listProductsClone, setListProductsClone] = useState<any>([])
   const router = useRouter()
+
+  const getList = async () => {
+    const { data } = await api.get(`getProductAndCategory`)
+    setListProductsClone(data)
+  }
+
+  useEffect(() => {
+    getList()
+  }, [])
+
   return (
     <InputGroup
       borderRadius='21px'
@@ -44,9 +54,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
             setListProducts([])
             return
           }
-          let list = [...allProductsActive, ...allCategoryActive].filter((el: any) =>
-            el.name.toLowerCase().includes(value)
-          )
+          let list = listProductsClone.filter((el: any) => el.name.toLowerCase().includes(value))
           setListProducts(list)
         }}
         _placeholder={{ color: 'white.500', opacity: '50%' }}

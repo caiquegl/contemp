@@ -1,48 +1,26 @@
 import { Container, Divider, Flex, Grid, GridItem, Link, Text } from '@chakra-ui/react'
-import React, { Fragment, useEffect, useState } from 'react'
-
-import { useAuth } from '../contextAuth/authContext'
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Header } from '../components/Header'
+import { api } from '../lib/axios'
 
 const SiteMapContainer = () => {
-  const router = useRouter()
-  const { allCategory } = useAuth()
-  const { allProductsActive } = useAuth()
-
   const [listCategory, setListCategory] = useState<any>([])
 
-  useEffect(() => {
-    let newListCategory = allCategory.map((category: any) => {
-      return {
-        ...category,
-        products: allProductsActive.filter((product: { nameCategory: string; category: string }) => {
-          return product.category == category.id
-        }),
-      }
-    })
+  const getStatus = async () => {
+    const { data } = await api.get(`getSiteMap`)
     setListCategory(
-      newListCategory.sort(function (a: any, b: any) {
-        return a.products.length - b.products.length
+      data.sort(function (a: any, b: any) {
+        return a.Products.length - b.Products.length
       })
     )
-  }, [allCategory, allProductsActive])
+  }
+  useEffect(() => {
+    getStatus()
+  }, [])
 
   return (
     <>
-      {/* <Head>
-        <meta
-          name="description"
-          content="Procurando medição e controle de temperatura em processos industrais? A Contemp é pioneiro no Brasil. Confira!"
-        />
-        <meta
-          name="keywords"
-          content="controle de temperatura, Contemp, processos industriais"
-        />
-        <title>Contemp</title>
-        <link rel="icon" href="/favicon.png" />
-      </Head> */}
       <Header />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='180px'>
         <Text fontSize='45px' fontWeight='bold' textAlign='center'>
@@ -69,9 +47,9 @@ const SiteMapContainer = () => {
                     {el.name}
                   </Text>
                 </Link>
-                {el.products &&
-                  el.products.length > 0 &&
-                  el.products.map((el: any, index: number) => (
+                {el.Products &&
+                  el.Products.length > 0 &&
+                  el.Products.map((el: any, index: number) => (
                     <GridItem w='100%' gap={6} key={uuidv4()}>
                       <Link
                         href={`/produto/${el.name.replaceAll(' ', '_')}`}

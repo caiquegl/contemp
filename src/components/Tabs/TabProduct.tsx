@@ -5,21 +5,19 @@ import { deleteDoc } from 'firebase/firestore'
 import ContainerAddProduct from '../ContainerAddProduct'
 import ContainerAddProductDescription from '../ContainerAddProductDescription'
 import { initFirebase } from '../../utils/db'
-import { useAuth } from '../../contextAuth/authContext'
 import { Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
-import AllProduct from '../../pages/todosProdutos'
 import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
+import { api } from '../../lib/axios'
 
 const TabProduct = () => {
   initFirebase()
   const toast = useToast({
     duration: 3000,
-    isClosable: true
+    isClosable: true,
   })
-  const { allCategory, allProducts, reload, reloadProduct } = useAuth()
 
   const [step, setStep] = useState(1)
   const [list, setList] = useState<any>([])
@@ -32,82 +30,57 @@ const TabProduct = () => {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name)
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
       title: 'Categoria',
-      dataIndex: 'nameCategory',
-      key: 'nameCategory',
-      // render: (a: any, b: any) => {
-      //   let name = ''
-      //   if (allCategory) {
-      //     let find = allCategory.find((el: any) => el.id === b.category)
-      //     if (find?.name) name = find.name
-      //   }
-
-      //   return name
-      // },
-      sorter: (a: any, b: any) => a.nameCategory?.localeCompare(b.nameCategory)
+      render: (a: any, b: any) => <p>{a.category.name}</p>,
+      sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
     },
     {
       title: 'Url',
       dataIndex: 'url',
       key: 'url',
-      render: (a: any, b: any) => <Link href={b.name ? `/produto/${replaceNameToUrl(b.name).replaceAll(" ", "_")}` : ""} isExternal={true} _hover={{ color: 'black', textDecoration: 'none' }}>
-
-        {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}`}
-      </Link>
+      render: (a: any, b: any) => (
+        <Link
+          href={b.name ? `/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}` : ''}
+          isExternal={true}
+          _hover={{ color: 'black', textDecoration: 'none' }}
+        >
+          {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}`}
+        </Link>
+      ),
     },
     {
       title: 'Ação',
       render: (a: any) => (
-        <HStack spacing="20px">
+        <HStack spacing='20px'>
           <Icon
-            cursor="pointer"
+            cursor='pointer'
             as={AiOutlineEdit}
-            fontSize="17px"
+            fontSize='17px'
             onClick={() => {
               setBody(a)
               setIsUpdate(true)
               setStep(2)
             }}
           />
-          <Icon
-            cursor="pointer"
-            as={AiOutlineClose}
-            fontSize="17px"
-            color="red.500"
-            onClick={() => deleteProduct(a)}
-          />
+          <Icon cursor='pointer' as={AiOutlineClose} fontSize='17px' color='red.500' onClick={() => deleteProduct(a)} />
         </HStack>
-      )
-    }
+      ),
+    },
   ]
 
   const listProduct = async () => {
     try {
-
-      // let list = await reloadProduct()
-
-      let sortList = await allProducts.sort((a: any, b: any) =>
-        a.name.localeCompare(b.name)
-      )
-
-      let organize = sortList.map((elProduct: any) => {
-        let name = ''
-        let find = allCategory.find((el: any) => el.id === elProduct.category)
-        if (find?.name) name = find.name
-        
-
-        return {...elProduct, nameCategory: name}
-      })
-      setList(organize)
-      setListClone(organize)
+      const { data } = await api.get('getAllProductsWidthCategory')
+      setList(data)
+      setListClone(data)
     } catch (error) {
       toast({
         title: 'Erro',
         description: 'Erro ao listar produtos',
-        status: 'error'
+        status: 'error',
       })
     }
   }
@@ -118,48 +91,34 @@ const TabProduct = () => {
       toast({
         title: 'Sucesso',
         description: 'Produto deletado com sucesso.',
-        status: 'success'
+        status: 'success',
       })
-      reload()
       listProduct()
     } catch (err) {
       toast({
         title: 'Erro',
         description: 'Erro ao deletar produto',
-        status: 'error'
+        status: 'error',
       })
     }
   }
 
   useEffect(() => {
-    reload()
-  }, [step])
-
-  useEffect(() => {
-    if(allProducts.length > 0 && allCategory.length > 0) listProduct()
-  }, [allProducts, allCategory])
-
-  useEffect(() => {
-    console.log(list)
-  }, [list])
+    listProduct()
+  }, [])
 
   return (
     <>
       {step === 1 && (
         <>
-          <Flex
-            w="100%"
-            alignItems="center"
-            justifyContent="space-between"
-            mb="18px"
-          >
+          <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
-              bg="red.600"
-              color="white"
-              fontSize="20px"
-              borderRadius="4px"
-              w="128px"
-              h="47px"
+              bg='red.600'
+              color='white'
+              fontSize='20px'
+              borderRadius='4px'
+              w='128px'
+              h='47px'
               _hover={{ transition: 'all 0.4s' }}
               onClick={() => {
                 setStep(2)
@@ -174,49 +133,42 @@ const TabProduct = () => {
                 placeholder: 'Digite o produto...',
                 onChange: (evt) => {
                   let newList = listClone.filter((item: any) =>
-                    item.name
-                      .toLowerCase()
-                      .includes(evt.target.value.toLowerCase())
+                    item.name.toLowerCase().includes(evt.target.value.toLowerCase())
                   )
                   setList([...newList])
                 },
                 _placeholder: {
                   color: 'black.800',
-                  opacity: '50%'
-                }
+                  opacity: '50%',
+                },
               }}
               containerProps={{
                 bg: 'white.500',
                 border: '1px solid',
                 borderColor: 'black.800',
                 color: colors.black[800],
-                maxW: pxToRem(288)
+                maxW: pxToRem(288),
               }}
             />
           </Flex>
 
-          <Box borderRadius="8px" bg="white" p="30px" w="100%">
+          <Box borderRadius='8px' bg='white' p='30px' w='100%'>
             <Table dataSource={list} columns={column} />
           </Box>
         </>
       )}
       {step === 2 && (
         <>
-          <Flex
-            w="100%"
-            alignItems="center"
-            justifyContent="space-between"
-            mb="18px"
-          >
+          <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
-              bg="transparent"
-              color="black.800"
-              fontSize="20px"
-              borderRadius="4px"
-              w="128px"
-              h="47px"
-              border="2px solid"
-              borderColor="black.800"
+              bg='transparent'
+              color='black.800'
+              fontSize='20px'
+              borderRadius='4px'
+              w='128px'
+              h='47px'
+              border='2px solid'
+              borderColor='black.800'
               _hover={{ transition: 'all 0.4s' }}
               onClick={() => {
                 setBody({})
@@ -237,21 +189,16 @@ const TabProduct = () => {
       )}
       {step === 3 && (
         <>
-          <Flex
-            w="100%"
-            alignItems="center"
-            justifyContent="space-between"
-            mb="18px"
-          >
+          <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
-              bg="transparent"
-              color="black.800"
-              fontSize="20px"
-              borderRadius="4px"
-              w="128px"
-              h="47px"
-              border="2px solid"
-              borderColor="black.800"
+              bg='transparent'
+              color='black.800'
+              fontSize='20px'
+              borderRadius='4px'
+              w='128px'
+              h='47px'
+              border='2px solid'
+              borderColor='black.800'
               _hover={{ transition: 'all 0.4s' }}
               onClick={() => setStep(2)}
             >

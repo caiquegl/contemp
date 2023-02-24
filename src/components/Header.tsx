@@ -44,12 +44,14 @@ import { pxToRem } from '../utils/pxToRem'
 import { HeaderMenu, HeaderMenuVertical } from './HeaderMenu'
 import { useRouter } from 'next/router'
 import { FiAlertTriangle } from 'react-icons/fi'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import { api } from '../lib/axios'
 
 export const Header = () => {
   const router = useRouter()
-  const { setListHeader, cart, isOpen, onClose, onOpen, totalCart, allCategoryActive } = useAuth()
+  const { cart, isOpen, onClose, onOpen, totalCart } = useAuth()
   const [list, setList] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
 
@@ -60,47 +62,23 @@ export const Header = () => {
 
   const listCategory = async () => {
     try {
-      let categories: any = allCategoryActive.filter((el: any) => el.is_main == 'true')
-
-      let newList: any = []
-
-      for await (let categ of categories) {
-        let list_sub_category: any = []
-
-        allCategoryActive.forEach((el: any) => {
-          if (el.sub_categorie == categ.id) list_sub_category.push({ ...el, id: el.id })
-        })
-
-        let filter: any = []
-
-        list_sub_category.forEach((el: any) => {
-          let list_sub_category2: any = []
-
-          allCategoryActive.forEach((c: any) => {
-            if (c.sub_categorie == el.id) list_sub_category2.push({ ...c, id: c.id })
-          })
-          filter.push({ ...el, list_sub_category: list_sub_category2 })
-        })
-
-        newList.push({
-          ...categ,
-          id: categ.id,
-          list_sub_category: filter,
-        })
-      }
-
-      let sort = newList.sort((a: any, b: any) => a.order - b.order)
-      setList(sort)
-      setListHeader(sort)
+      const { data } = await api.get('getMenu')
+      const listMenu = data.map((el: any) => ({
+        ...el,
+        onTitleClick: (value: any) => {
+          router.push(`/category/${replaceNameToUrl(el.name).replaceAll(' ', '_')}#viewCategory`)
+        },
+      }))
+      setList(listMenu)
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    setLoading(true)
-    if (allCategoryActive.length > 0 && list.length == 0) listCategory()
-  }, [allCategoryActive])
+    listCategory()
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -325,7 +303,7 @@ export const Header = () => {
   return (
     <Box zIndex={9999999999999999}>
       <Fade in={scrollY < 200}>
-        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'} transition='all 3s' opacity={!loading ? 0 : 1}>
+        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'} transition='all 3s' opacity={loading ? 0 : 1}>
           <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px'>
             <Box display='flex' flex={1}>
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>

@@ -18,26 +18,33 @@ interface IProps {
   containerProps?: GridProps
 }
 
-const CardProductWithDescription = ({ bg, img, text, alt, description, color, buttomBottom, containerProps }: IProps) => {
+const CardProductWithDescription = ({
+  bg,
+  img,
+  text,
+  alt,
+  description,
+  color,
+  buttomBottom,
+  containerProps,
+}: IProps) => {
   const router = useRouter()
   const [_, setIsHovering] = useState(false)
 
   const handleIsHovering = () => setIsHovering((isHovering) => !isHovering)
-    const hoverBg: any = {
-      'red.600': 'white',
-      'white': 'black.800',
-      'white.500': 'black.800',
-      'black.800': 'white'
-    }
+  const hoverBg: any = {
+    'red.600': 'white',
+    white: 'black.800',
+    'white.500': 'black.800',
+    'black.800': 'white',
+  }
 
-    const hoverColor: any = {
-      'red.600': 'black.800',
-      'white': 'white',
-      'white.500': 'white',
-      'black.800': 'black.800'
-
-    }
-    console.log(bg)
+  const hoverColor: any = {
+    'red.600': 'black.800',
+    white: 'white',
+    'white.500': 'white',
+    'black.800': 'black.800',
+  }
   return (
     <Grid
       // alignItems='center'
@@ -102,7 +109,10 @@ const CardProductWithDescription = ({ bg, img, text, alt, description, color, bu
           gridRow={3}
           bgSize='contain'
         />
-        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{  textDecoration: 'none', color: bg ? hoverColor[bg] : "white" }}>
+        <Link
+          href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
+          _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
+        >
           <Button
             w={pxToRem(243)}
             h={pxToRem(50)}
@@ -113,9 +123,9 @@ const CardProductWithDescription = ({ bg, img, text, alt, description, color, bu
             fontSize={pxToRem(20)}
             borderColor={buttomBottom ? buttomBottom : 'transparent'}
             borderWidth={buttomBottom ? '2px' : '0'}
-            _hover={{ 
+            _hover={{
               bg: bg ? hoverBg[bg] : 'black.800',
-              color: bg ? hoverColor[bg] : "white"
+              color: bg ? hoverColor[bg] : 'white',
             }}
           >
             Solicitar orçamento

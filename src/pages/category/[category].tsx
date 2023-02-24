@@ -3,19 +3,17 @@ import { Contact } from '../../components/Contact'
 import { Footer } from '../../components/Footer'
 import { Player } from '../../components/Player'
 import { SmoothScroll } from '../../components/SmoothScroll'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { ListCategory } from '../../components/ListCategory'
-import { useAuth } from '../../contextAuth/authContext'
 import Head from 'next/head'
 import { AdBanners } from '../../components/AdBanners'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import { decodeName } from '../../utils/replaceNameToUrl'
+import { api } from '../../lib/axios'
 
 const Category = () => {
   const router = useRouter()
-  const { allCategoryActive, allProductsActive, loading } = useAuth()
-
   const { category } = router.query
   const [list, setList] = useState<any>([])
   const [categ, setCateg] = useState<any>({})
@@ -44,39 +42,11 @@ const Category = () => {
 
   const getCategoryList = async () => {
     try {
-      let idCategory: any = []
       let nameCategory = ''
-      if (category && typeof category === 'string')
-        nameCategory = decodeName(category).replaceAll('_', ' ')
-      await allCategoryActive.forEach(async (el: any) => {
-        if (el.name === nameCategory) {
-          idCategory.push(el.id)
-          await allCategoryActive.forEach((el2: any) => {
-            if (el2.sub_categorie && el2.sub_categorie === el.id) {
-              idCategory.push(el2.id)
-              allCategoryActive.forEach((el3: any) => {
-                if (el3.sub_categorie && el3.sub_categorie === el2.id) {
-                  idCategory.push(el3.id)
-                }
-              })
-            }
-          })
-        }
-      })
-
-      let categFind = await allCategoryActive.find(
-        (el: any) => el.name === nameCategory
-      )
-      setCateg(categFind)
-      let list: any = []
-
-      await allProductsActive.forEach((el: any) => {
-        idCategory.forEach((ct: any) => {
-          if (el.category === ct) list.push(el)
-        })
-      })
-
-      dividerList(list)
+      if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
+      const { data } = await api.get(`${nameCategory}/getCategory`)
+      setCateg(data.category)
+      dividerList(data.products)
     } catch (error) {
       console.log(error)
     }
@@ -86,28 +56,13 @@ const Category = () => {
     if (category) {
       getCategoryList()
     }
-  }, [category, allCategoryActive, allProductsActive])
-
-  // const productListRef = useRef(null)
-
-  // const handleScrollToProductList = () => {
-  //   const current = productListRef?.current as unknown as Element
-  //   const productListTop = current?.getBoundingClientRect().top
-
-  //   if (document.body.scrollTop === 0 && !loading && list.length !== 0) {
-  //     window.scrollTo({ top: productListTop })
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   handleScrollToProductList()
-  // }, [category])
+  }, [category])
 
   useEffect(() => {
     window.scrollTo({
       top: 230,
       behavior: 'smooth',
-    });
+    })
     // window.addEventListener('scroll', handleScrollToProductList)
 
     // return () => window.removeEventListener('scroll', handleScrollToProductList)
@@ -117,36 +72,31 @@ const Category = () => {
     <SmoothScroll>
       {categ && (
         <Head>
-          <meta name="description" content={categ.description_seo} />
-          <meta name="keywords" content={categ.key_word_seo} />
+          <meta name='description' content={categ.description_seo} />
+          <meta name='keywords' content={categ.key_word_seo} />
           <title>Contemp</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel='icon' href='/favicon.png' />
         </Head>
       )}
       <Flex
-        w="100%"
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
+        w='100%'
+        alignItems='center'
+        justifyContent='center'
+        direction='column'
         h={['110px', '110px', '180px', '180px', '180px', '180px']}
-      // id="viewCategory"
+        // id="viewCategory"
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
-          fontWeight="bold"
-          textAlign="center"
-          maxW="1037px"
+          fontWeight='bold'
+          textAlign='center'
+          maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-
         >
-          {category && typeof category === 'string'
-            ? decodeName(category).replaceAll('_', ' ')
-            : ''}
+          {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
       </Flex>
-      <Box
-
-      >
+      <Box>
         {list &&
           list.length > 0 &&
           list.map((categ: any, index: number) => {
@@ -160,43 +110,38 @@ const Category = () => {
             return <ListCategory key={uuidv4()} bg={bg} data={categ} />
           })}
       </Box>
-      <Flex
-        w="100%"
-        alignItems="center"
-        p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-        bg="white"
-      >
-        <Container maxW="7xl" p="80px 0">
+      <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
+        <Container maxW='7xl' p='80px 0'>
           <AdBanners />
         </Container>
       </Flex>
       <Player />
       <Contact
-        id="duvidas-e-orcamentos"
-        title="DÚVIDAS E ORÇAMENTOS"
-        description="Essa é a seleção que a equipe da Contemp escolheu como os
-              destaques do mês"
+        id='duvidas-e-orcamentos'
+        title='DÚVIDAS E ORÇAMENTOS'
+        description='Essa é a seleção que a equipe da Contemp escolheu como os
+              destaques do mês'
         form={[
           {
             name: 'Nome',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'E-mail',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Empresa',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Telefone',
-            type: 'text'
+            type: 'text',
           },
           {
             name: 'Mensagem',
-            type: 'textArea'
-          }
+            type: 'textArea',
+          },
         ]}
       />
       <Footer />

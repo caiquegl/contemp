@@ -1,22 +1,18 @@
 import { Box, Flex, HStack, Icon, Input, Link, Text, Tooltip } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { pxToRem } from '../utils/pxToRem'
 import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
-import { useAuth } from '../contextAuth/authContext'
 import { v4 as uuidv4 } from 'uuid'
+import { api } from '../lib/axios'
 
 const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
-  const { allProductsActive, allProductsHome } = useAuth()
-  const router = useRouter()
   const [products, setProduct] = useState<any>({})
 
   const getProduct = async () => {
-    let find = allProductsActive.find((el: any) => el.id == data.product_id)
-    if (!find) find = allProductsHome.find((el: any) => el.id == data.product_id)
-    setProduct(find)
+    const { data: res } = await api.get(`${data.product_id}/getProductById`)
+    setProduct(res)
   }
 
   useEffect(() => {
@@ -25,7 +21,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
 
   useEffect(() => {
     getProduct()
-  }, [data, allProductsActive])
+  }, [data])
 
   if (products === undefined) return <Box />
 

@@ -1,23 +1,11 @@
 import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from 'react'
-import Cookies from 'js-cookie'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth, database } from '../utils/db'
-import { Button, Flex, HStack, Link, Text, useBreakpointValue, useDisclosure } from '@chakra-ui/react'
-import { collection, getDocs } from 'firebase/firestore'
-import { useRouter } from 'next/router'
+import { Button, Flex, HStack, Link, Text, useDisclosure } from '@chakra-ui/react'
 
 interface AuthProviderProps {
   children: ReactNode
 }
 
 type UserAuthContextData = {
-  user: any
-  setUser: any
-  listHeader: any
-  setListHeader: any
-  setAllProducts: any
-  allProducts: any
-  allProductsActive: any
   cart: any
   setCart: any
   addCart: any
@@ -27,25 +15,11 @@ type UserAuthContextData = {
   onClose: any
   onOpen: any
   totalCart: any
-  allCategory: any
-  allCategoryActive: any
-  reload: any
-  reloadCategory: any
-  allProductsHome: any
   loading: any
-  reloadProduct: any
 }
 const UserAuthContext = createContext({} as UserAuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const router = useRouter()
-  const [user, setUserContext] = useState({})
-  const [listHeader, setListHeader] = useState<any>([])
-  const [allProducts, setAllProducts] = useState<any>([])
-  const [allProductsActive, setAllProductsActive] = useState<any>([])
-  const [allProductsHome, setAllProductsHome] = useState<any>([])
-  const [allCategory, setAllCategory] = useState<any>([])
-  const [allCategoryActive, setAllCategoryActive] = useState<any>([])
   const [cart, setCart] = useState<any>([])
   const [totalCart, setTotalCart] = useState<any>(0)
   const [loading, setLoading] = useState<any>(true)
@@ -55,205 +29,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     let exist = sessionStorage.getItem('set_load')
     if (exist) setLoading(false)
   })
-  const setUser = (body: any) => {
-    setUserContext(body)
-    Cookies.set('SET_USER', JSON.stringify(body))
-  }
-
-  useEffect(() => {
-    async function loadUserFromCookies() {
-      const user = Cookies.get('SET_USER')
-      if (user) {
-        setUser(JSON.parse(user))
-      }
-    }
-    loadUserFromCookies()
-  }, [])
 
   const acepetCookie = () => {
     localStorage.setItem('acepetCookie', JSON.stringify(true))
     getCookie()
   }
-
-  useEffect(() => {
-    const au = onAuthStateChanged(auth, (use) => {
-      if (use) {
-        setUser(use)
-      } else {
-        setUser({})
-      }
-    })
-    return () => au()
-  }, [])
-
-  const getCategoryOffiline = async () => {
-    try {
-      let get = localStorage.getItem('SET_CATEGORY')
-      if (get) {
-        let list = JSON.parse(get)
-        let active = list.filter((el: any) => el.is_active == true)
-        setAllCategoryActive([...active])
-        setAllCategory([...list])
-        return list
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getProductOffiline = async () => {
-    try {
-      let get = localStorage.getItem('SET_PRODUCTS')
-      if (get) {
-        let list = JSON.parse(get)
-        let active = list.filter((el: any) => el.is_active == true)
-        setAllProductsActive([...active])
-        setAllProducts([...list])
-        return list
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getProductHomeOffiline = async () => {
-    try {
-      let get = localStorage.getItem('SET_PRODUCTS_HOME')
-      if (get) {
-        let list = JSON.parse(get)
-        let active = list.filter((el: any) => el.is_active == true)
-        setAllProductsHome([...active])
-        return list
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getCategory = async () => {
-    try {
-      const dbInstanceCategory = collection(database, 'categories')
-
-      let OLDlist: any = []
-      await getDocs(dbInstanceCategory).then(async (data) => {
-        data.docs.map((el: any, index: number) => {
-          OLDlist.push({
-            ...el.data(),
-            id: data.docs[index].id,
-            ref: data.docs[index].ref,
-          })
-        })
-      })
-
-      // await fetch(`api/category`, {
-      //   method: "POST",
-      //   body: JSON.stringify(OLDlist),
-      // });
-
-      // let list = OLDlist.filter((el: any) => el.id != 'ZGRgyNWLIzLRqjwqcdPF')
-
-      let active = OLDlist.filter((el: any) => el.is_active == true && el.id != 'ZGRgyNWLIzLRqjwqcdPF')
-      setAllCategoryActive([...active])
-      setAllCategory([...OLDlist])
-      localStorage.setItem('SET_CATEGORY', JSON.stringify([...active]))
-
-      return OLDlist
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getAllProducts = async () => {
-    try {
-      const dbInstanceProduct = collection(database, 'products')
-
-      let listOld: any = []
-      await getDocs(dbInstanceProduct).then(async (data) => {
-        data.docs.map((el: any, index: number) => {
-          listOld.push({
-            ...el.data(),
-            id: data.docs[index].id,
-            ref: data.docs[index].ref,
-          })
-        })
-      })
-
-      let list = listOld.filter((el: any) => el.category != 'ZGRgyNWLIzLRqjwqcdPF')
-
-      let active = list.filter((el: any) => el.is_active == true)
-      setAllProductsActive([...active])
-      setAllProducts([...listOld])
-      localStorage.setItem('SET_PRODUCTS', JSON.stringify([...list]))
-
-      return listOld
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getAllProductsHome = async () => {
-    try {
-      const dbInstanceHome = collection(database, 'home')
-
-      let listOld: any = []
-      await getDocs(dbInstanceHome).then(async (data) => {
-        data.docs.map((el: any, index: number) => {
-          listOld.push({ ...el.data(), id: data.docs[index].id })
-        })
-      })
-
-      let list = listOld.filter((el: any) => el.category != 'ZGRgyNWLIzLRqjwqcdPF')
-
-      setAllProductsHome([...list])
-      localStorage.setItem('SET_PRODUCTS_HOME', JSON.stringify([...list]))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const reload = async () => {
-    let getLoad = sessionStorage.getItem('set_load')
-    if (!getLoad) {
-      sessionStorage.setItem('set_load', 'true')
-      setLoading(true)
-    }
-    if(router.asPath == '/') setLoading(true)
-    getCategoryOffiline()
-    getProductOffiline()
-    getProductHomeOffiline()
-    await getCategory()
-    await getAllProducts()
-    await getAllProductsHome()
-    setLoading(false)
-  }
-
-  const reloadOffiline = async () => {
-    let getLoad = sessionStorage.getItem('set_load')
-    if (!getLoad) {
-      sessionStorage.setItem('set_load', 'true')
-      setLoading(true)
-    }
-    getCategoryOffiline()
-    getProductOffiline()
-    getProductHomeOffiline()
-    await getCategory()
-    await getAllProducts()
-    await getAllProductsHome()
-    setLoading(false)
-  }
-
-  const reloadCategory = async () => {
-    return await getCategory()
-  }
-
-  const reloadProduct = async () => {
-    return await getAllProducts()
-  }
-
-  useEffect(() => {
-    console.log(router.asPath, 'route')
-     reload()
-  }, [])
 
   const getItemLocal = () => {
     let getItem = window.localStorage.getItem('CART-CONTEMP')
@@ -319,14 +99,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <UserAuthContext.Provider
       value={{
-        reloadProduct,
-        reloadCategory,
-        allCategoryActive,
-        allProductsActive,
         loading,
-        allProductsHome,
-        reload,
-        allCategory,
         totalCart,
         isOpen,
         onClose,
@@ -336,12 +109,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         addCart,
         cart,
         setCart,
-        user,
-        setUser,
-        listHeader,
-        setListHeader,
-        allProducts,
-        setAllProducts,
       }}
     >
       {hasCookie && (

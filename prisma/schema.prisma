@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Categories {
+  id              Int        @id @default(autoincrement())
+  description     String
+  description_seo String
+  favorite        Boolean    @default(false)
+  is_active       Boolean    @default(true)
+  is_main         Boolean    @default(false)
+  key_word_seo    String
+  name            String
+  firebase_id     String?
+  sub_category_id Int?
+  order           Int        @unique
+  url             String?
+  Home            Home[]
+  Products        Products[]
+
+  @@map("categories")
+}
+
+// model Categories1 {
+//   id              Int           @id @default(autoincrement())
+//   description     String
+//   description_seo String
+//   favorite        Boolean       @default(false)
+//   is_active       Boolean       @default(true)
+//   is_main         Boolean       @default(false)
+//   key_word_seo    String
+//   name            String
+//   order           Int           @unique
+//   category_id     Int
+//   url             String?
+//   category        Categories    @relation(fields: [category_id], references: [id])
+//   Categories2     Categories2[]
+
+//   @@map("categories1")
+// }
+
+// model Categories2 {
+//   id              Int         @id @default(autoincrement())
+//   description     String
+//   description_seo String
+//   favorite        Boolean     @default(false)
+//   is_active       Boolean     @default(true)
+//   is_main         Boolean     @default(false)
+//   key_word_seo    String
+//   name            String
+//   order           Int         @unique
+//   sub_category_id Int
+//   url             String?
+//   category        Categories1 @relation(fields: [sub_category_id], references: [id])
+//   Categories      Categories? @relation(fields: [categoriesId], references: [id])
+//   categoriesId    Int?
+
+//   @@map("categories2")
+// }
+
+model Home {
+  id           Int        @id @default(autoincrement())
+  description  String
+  destaque     Boolean    @default(false)
+  icon         String?
+  link_name    String?
+  name         String
+  indexProduct Int
+  category_id  Int
+  urls         Json
+  category     Categories @relation(fields: [category_id], references: [id])
+
+  @@map("home")
+}
+
+model Orcamento {
+  id          Int     @id @default(autoincrement())
+  description String
+  email       String
+  isAprove    Boolean
+  lastName    String
+  name        String
+  telephone   String
+
+  @@map("orcamentos")
+}
+
+model Products {
+  id              Int        @id @default(autoincrement())
+  description     String
+  description_seo String
+  destaque        Boolean    @default(false)
+  hasVariation    Boolean    @default(false)
+  isActive        Boolean    @default(true)
+  key_word_seo    String
+  name            String     @unique
+  listVariation   Json?
+  tab             Json?
+  urls            Json?
+  category_id     Int
+  category        Categories @relation(fields: [category_id], references: [id])
+
+  @@map("products")
+}

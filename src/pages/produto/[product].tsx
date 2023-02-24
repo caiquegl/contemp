@@ -49,12 +49,13 @@ import { customSwiperBullets } from '../../utils/customSwiperBullets'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
 import { decodeName } from '../../utils/replaceNameToUrl'
+import { api } from '../../lib/axios'
 
 const Product = () => {
   const router = useRouter()
   initFirebase()
   const toast = useToast()
-  const { allCategoryActive, allProductsActive, addCart, allProductsHome } = useAuth()
+  const { addCart } = useAuth()
 
   const { product } = router.query
   const [detail, setDetail] = useState<any>({})
@@ -74,109 +75,47 @@ const Product = () => {
 
   const getProduct = async () => {
     try {
-    let produto = ''
-    if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
-    let ex = allProductsActive.filter((el: any) => el.name == produto)
-    if (ex.length == 0) {
-      ex = allProductsHome.filter((el: any) => el.name == produto)
-    }
+      let produto = ''
+      if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
+      console.log('produto', produto)
+      const { data } = await api.get(`${produto}/getProduct`)
 
-    let cg1 = allCategoryActive.filter((el: any) => el.id == ex[0]?.category)
+      setBradeName(data.bradName)
 
-    let cg2 = allCategoryActive.filter((el: any) => el.id == cg1[0]?.sub_categorie)
-    let cg3 = allCategoryActive.filter((el: any) => el.id == cg2[0]?.sub_categorie)
-    let cg4 = allCategoryActive.filter((el: any) => el.id == cg3[0]?.sub_categorie)
+      const changeText = (txt: string) => {
+        if (!txt) return
+        let val = txt
+        val = val.toString().replace('<a', '<a target="_blank"')
 
-    let id = ''
-    let names: any = []
-    if (cg1.length > 0) {
-      id = cg1[0].id
-      names.push(cg1[0].name)
-    }
-    if (cg2.length > 0) {
-      id = cg2[0].id
-      names.push(cg2[0].name)
-    }
-    if (cg3.length > 0) {
-      id = cg3[0].id
-      names.push(cg3[0].name)
-    }
-    if (cg4.length > 0) {
-      id = cg4[0].id
-      names.push(cg4[0].name)
-    }
-    if (ex.length == 0) return
-
-    let revertNames: any = []
-
-    names.forEach((el: any) => revertNames.unshift(el))
-
-    setBradeName(revertNames)
-
-    const changeText = (txt: string) => {
-      if(!txt) return
-      let val = txt
-      val = val.toString().replace('<a', '<a target="_blank"')
-
-      let result = txt.substring(0, 2)
-      let result2 = txt.substring(0, 5)
-      if (result == '<a' || result2 == '<p><a') {
-        if (val.indexOf('class=') == -1) {
-          val = val.toString().replace('<a', '<a class="editor_button"')
-        }
-      }
-
-      return val
-    }
-
-    const [getDetail] = ex
-
-    setDetail({
-      ...getDetail,
-      tab: getDetail.tab.map((t: any) => ({
-        ...t,
-        text: changeText(t.text),
-      })),
-    })
-
-    let idCategory: any = []
-
-    allCategoryActive.forEach((el: any) => {
-      if (el.id == id) {
-        idCategory.push(el.id)
-        allCategoryActive.forEach((el2: any) => {
-          if (el2.sub_categorie && el2.sub_categorie == el.id) {
-            idCategory.push(el2.id)
-            allCategoryActive.forEach((el3: any) => {
-              if (el3.sub_categorie && el3.sub_categorie == el2.id) {
-                idCategory.push(el3.id)
-              }
-            })
+        let result = txt.substring(0, 2)
+        let result2 = txt.substring(0, 5)
+        if (result == '<a' || result2 == '<p><a') {
+          if (val.indexOf('class=') == -1) {
+            val = val.toString().replace('<a', '<a class="editor_button"')
           }
-        })
+        }
+
+        return val
       }
-    })
 
-    let list: any = []
-
-    if (idCategory.length > 0) {
-      allProductsActive.forEach((el: any) => {
-        idCategory.forEach((ct: any) => {
-          if (el.category == ct) list.push(el)
-        })
+      setDetail({
+        ...data.detail,
+        tab: data.detail.tab.map((t: any) => ({
+          ...t,
+          text: changeText(t.text),
+        })),
       })
+      setProducts(data.allProducts)
+    } catch (e) {
+      console.log(e)
     }
-    setProducts(list)
-  } catch (e) {
-    console.log(e)
-  }
   }
 
   useEffect(() => {
     if (product) {
       getProduct()
     }
-  }, [allCategoryActive, allProductsActive, product, allProductsHome])
+  }, [product])
 
   return (
     <>
@@ -205,7 +144,7 @@ const Product = () => {
             onClick={(evt) => (evt.currentTarget.style.cursor = 'move')}
           >
             <Swiper
-            id="unique"
+              id='unique'
               initialSlide={0}
               slidesPerView={1}
               spaceBetween={30}
@@ -225,7 +164,7 @@ const Product = () => {
                   <SwiperSlide key={uuidv4()}>
                     <Center h='100%' maxH={pxToRem(765)} width='100%'>
                       <Zoom>
-                        <img id="zoom" alt={detail.name ? detail.name : ''} src={photo} width='600' />
+                        <img id='zoom' alt={detail.name ? detail.name : ''} src={photo} width='600' />
                       </Zoom>
                     </Center>
                   </SwiperSlide>
@@ -350,19 +289,26 @@ const Product = () => {
                     border='1px solid'
                     borderColor='black.800'
                     borderRadius='25px'
-                    h="40px"
+                    h='40px'
                     w='150px'
                     value={qtd}
                     onChange={(evt: any) => {
                       setQtd(parseInt(evt))
                     }}
                   >
-                    <NumberInputField borderRadius='25px' border="none" _hover={{border: 'none'}} _active={{border: 'none'}} _focus={{border: 'none'}} outline="none" />
+                    <NumberInputField
+                      borderRadius='25px'
+                      border='none'
+                      _hover={{ border: 'none' }}
+                      _active={{ border: 'none' }}
+                      _focus={{ border: 'none' }}
+                      outline='none'
+                    />
                     <NumberInputStepper>
                       <NumberIncrementStepper />
                       <NumberDecrementStepper />
                     </NumberInputStepper>
-                    </NumberInput>
+                  </NumberInput>
                   <Button
                     h='50px'
                     bg='red.600'
@@ -373,7 +319,7 @@ const Product = () => {
                     w='100%'
                     _hover={{
                       bg: 'black.800',
-                      color:"white"
+                      color: 'white',
                     }}
                     onClick={() => {
                       addCart({

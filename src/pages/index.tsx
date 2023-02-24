@@ -1,4 +1,14 @@
-import { Box, Container, Flex, Text, Button, Icon, Grid as GridChakra, Link,useBreakpointValue, Grid } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  Button,
+  Icon,
+  Grid as GridChakra,
+  Link,
+  useBreakpointValue,
+} from '@chakra-ui/react'
 import Pirometro from '../assets/icons/pritometro_white.svg'
 import Mapa from '../assets/images/MAPA.png'
 import { Image } from '../components/Image'
@@ -12,34 +22,25 @@ import { Footer } from '../components/Footer'
 import { Player } from '../components/Player'
 import DescriptionProduct from '../components/DescriptionProduct'
 import { pxToRem } from '../utils/pxToRem'
-import { HomeBackgroundDetails } from '../components/HomeBackgroundDetails'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { useAuth } from '../contextAuth/authContext'
 import { SmoothScroll } from '../components/SmoothScroll'
 import { CardBlog } from '../components/CardBlog'
-import Logo from '../assets/icons/Logo-Contemp.svg'
-import DefaultImg from '../assets/images/image-default.webp'
-import Blog1 from '../assets/images/CONTEMP_IMAGENS_BLOG_6.png'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Autoplay, Navigation, Pagination } from 'swiper'
+import { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { v4 as uuidv4 } from 'uuid'
-import { array } from 'yup'
+import { api } from '../lib/axios'
 
 type Post = {
-  post_title : string
-  post_image : string
-  post_url : string
-  post_content : string
+  post_title: string
+  post_image: string
+  post_url: string
+  post_content: string
 }
 
 const Home = () => {
-  const { allProductsHome, allCategoryActive } = useAuth()
-  const router = useRouter()
   const [listTab, setListtAB] = useState<any>([])
   const [post, setPost] = useState<Post[]>([])
   const isTablet = useBreakpointValue({
@@ -58,32 +59,24 @@ const Home = () => {
   })
   const getHomeTab = async () => {
     try {
-      let organize: any = []
-
-      allProductsHome.forEach((el: any) => {
-        organize.push({
-          ...el,
-          nameCategory: allCategoryActive.find((ce: any) => ce.id == el.category).name,
-        })
-      })
-
-      setListtAB(organize)
+      const { data } = await api.get('getHomeTabs')
+      setListtAB(data)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    if (allCategoryActive.length > 0 && allProductsHome.length > 0) getHomeTab()
-  }, [allCategoryActive, allProductsHome])
+    getHomeTab()
+  }, [])
 
   const getPostsData = async () => {
     const postsData = await fetch('/api/get-posts')
-    setPost(await postsData.json() as Post[])
+    setPost((await postsData.json()) as Post[])
   }
 
   useEffect(() => {
-    getPostsData();
+    getPostsData()
   }, [])
   return (
     <SmoothScroll>
@@ -103,7 +96,7 @@ const Home = () => {
 
       <Banner />
 
-      <Favorite />
+      <Favorite homeTabs={listTab.find((el: any) => el.indexProduct === 0)} />
 
       <GridChakra
         templateColumns={{
@@ -222,31 +215,31 @@ const Home = () => {
             flexDirection='column'
             padding={`0 ${pxToRem(15)}`}
           >
-                <Flex
-                as='a'
-                p={`${pxToRem(10)}`}
-                border='2px solid'
-                borderColor='red.600'
-                color = 'white'
-                mt='10'
-                w='100%'
-                zIndex={20}
-                borderRadius='4px'
-                alignItems='center'
-                justifyContent='space-between'
-                minW={pxToRem(150)}
-                maxW={pxToRem(400)}
-                maxH={pxToRem(85)}
-                _hover={{ color: 'white' }}
-                href={`/calibracao`}
-                cursor='pointer'
-              >
-                <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
+            <Flex
+              as='a'
+              p={`${pxToRem(10)}`}
+              border='2px solid'
+              borderColor='red.600'
+              color='white'
+              mt='10'
+              w='100%'
+              zIndex={20}
+              borderRadius='4px'
+              alignItems='center'
+              justifyContent='space-between'
+              minW={pxToRem(150)}
+              maxW={pxToRem(400)}
+              maxH={pxToRem(85)}
+              _hover={{ color: 'white' }}
+              href={`/calibracao`}
+              cursor='pointer'
+            >
+              <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
                 CALIBRAÇÃO
-                </Text>
+              </Text>
 
-                <Image src={Pirometro} bgSize='contain' minH={pxToRem(35)} minW={pxToRem(35)} flex={1} />
-              </Flex>
+              <Image src={Pirometro} bgSize='contain' minH={pxToRem(35)} minW={pxToRem(35)} flex={1} />
+            </Flex>
 
             <Text
               mt='27px'
@@ -477,47 +470,30 @@ const Home = () => {
           },
         ]}
       />
-        <Flex  w='100%' mt='-100px' bg='white' alignItems="center" justifyContent="center">
-          <Container maxW={['100%','100%','8xl','8xl','8xl']} mb="50px" >
-            <Flex h={[pxToRem(500), pxToRem(660)]} >
-              {isMobile && (
-                <Swiper
-                    loop={true}
-                    slidesPerView={1}
-                    autoplay={{
-                      delay: 2000,
-
-                    }}
-                    initialSlide={0}
-                    speed={1000}
-                    spaceBetween={isTablet ? 20 : 30}
-                    modules={[Autoplay, Pagination]}
-                    className="mySwiper"
-                    style={{
-                      margin: "auto",
-                      width: "100%",
-                      alignItems: "center",
-                    }}
-                  >
+      <Flex w='100%' mt='-100px' bg='white' alignItems='center' justifyContent='center'>
+        <Container maxW={['100%', '100%', '8xl', '8xl', '8xl']} mb='50px'>
+          <Flex h={[pxToRem(500), pxToRem(660)]}>
+            {isMobile && (
+              <Swiper
+                loop={true}
+                slidesPerView={1}
+                autoplay={{
+                  delay: 2000,
+                }}
+                initialSlide={0}
+                speed={1000}
+                spaceBetween={isTablet ? 20 : 30}
+                modules={[Autoplay, Pagination]}
+                className='mySwiper'
+                style={{
+                  margin: 'auto',
+                  width: '100%',
+                  alignItems: 'center',
+                }}
+              >
                 {post.map((p, index) => {
-                  return(
-                  <SwiperSlide style={{ width: "100%" }} key={uuidv4()}>
-                  <CardBlog
-                          color={styles_card[index].font}
-                          bg={styles_card[index].bg}
-                          title={p.post_title}
-                          text={p.post_content}
-                          hrefButton={p.post_url}
-                          img={p.post_image}
-                        />
-                  </SwiperSlide>
-                  )
-                })}
-              </Swiper>
-              )} {!isMobile && (
-                <>
-                  {post.map((p, index) => {
-                    return  (
+                  return (
+                    <SwiperSlide style={{ width: '100%' }} key={uuidv4()}>
                       <CardBlog
                         color={styles_card[index].font}
                         bg={styles_card[index].bg}
@@ -526,13 +502,30 @@ const Home = () => {
                         hrefButton={p.post_url}
                         img={p.post_image}
                       />
-                    )
-                  })}
-                </>
-              )}
-            </Flex>
-          </Container>
-        </Flex>
+                    </SwiperSlide>
+                  )
+                })}
+              </Swiper>
+            )}{' '}
+            {!isMobile && (
+              <>
+                {post.map((p, index) => {
+                  return (
+                    <CardBlog
+                      color={styles_card[index].font}
+                      bg={styles_card[index].bg}
+                      title={p.post_title}
+                      text={p.post_content}
+                      hrefButton={p.post_url}
+                      img={p.post_image}
+                    />
+                  )
+                })}
+              </>
+            )}
+          </Flex>
+        </Container>
+      </Flex>
 
       <Footer />
     </SmoothScroll>
