@@ -283,3 +283,11 @@ img {
 .rc-menu-submenu-title {
   cursor: pointer !important;
 }
+
+.rc-menu-inline > .rc-menu-submenu > .rc-menu-submenu-title {
+  white-space: normal;
+}
+
+.rc-menu-sub.rc-menu-inline > .rc-menu-item {
+  white-space: normal;
+}
