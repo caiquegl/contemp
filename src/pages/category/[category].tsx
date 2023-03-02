@@ -72,10 +72,10 @@ const Category = () => {
     <SmoothScroll>
       {categ && (
         <Head>
-          <meta name='description' content={categ.description_seo} />
-          <meta name='keywords' content={categ.key_word_seo} />
-          <title>Contemp</title>
-          <link rel='icon' href='/favicon.png' />
+          <meta name="description" content={categ.description_seo} />
+          <meta name="keywords" content={categ.key_word_seo} />
+          <title>{categ.name}</title>
+          <link rel="icon" href="/favicon.png" />
         </Head>
       )}
       <Flex

@@ -137,7 +137,7 @@ const Orcamento = () => {
           name="keywords"
           content="contemp, orçamento online, orçamento, faça seu pedido"
         />
-        <title>Contemp</title>
+        <title>Orçamento</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Flex

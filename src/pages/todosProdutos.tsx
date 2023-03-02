@@ -77,7 +77,7 @@ const AllProduct = () => {
           name='keywords'
           content='soluções para medição, medição, controle de temperatura, monitoramento, processos industriais'
         />
-        <title>Contemp</title>
+        <title>Todos os Produtos</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
 

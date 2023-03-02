@@ -92,6 +92,15 @@ module.exports = {
       creatRedirectObj ('/wp-content/uploads/2022/02/C41X_V1.05-REV.2-1.pdf', '/category/LINHA_ECON%C3%94MICA_-_C41X'),
       creatRedirectObj ('/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada', '/category/CONTROLADORES_DE_POT%C3%8ANCIA'),
       creatRedirectObj ('/produto/optris-ctratio-1m/', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
+      creatRedirectObj ('/produto/FONTE_-__F401_-_24V/60W', '/produto/FONTE_-__F401_-_24V%7C%7C60W'),
+      creatRedirectObj ('/produto/COMPENSA%C3%87%C3%83O_TIPO_%22S/R%22', '/produto/CABO_COMPENSA%C3%87%C3%83O_TIPO_%22S%7C%7CR%22'),
+      creatRedirectObj ('/produto/CABO_TERMORRESIST%C3%8ANCIA_-_3X24_AWG_TEFLON_/_TEFLON', '/produto/CABO_TERMORRESISTÊNCIA_-_3X24_AWG_TEFLON_%7C%7C_TEFLON'),
+      creatRedirectObj ('/produto/CABO_TERMORRESIST%C3%8ANCIA_-_3x24_AWG_SILICONE_/_SILICONE', '/produto/CABO_TERMORRESISTÊNCIA_-_3x24_AWG_SILICONE_%7C%7C_SILICONE'),
+      creatRedirectObj ('/produto/CABO_TERMORRESIST%C3%8ANCIA_-_6X14_AWG_-_TEFLON/TEFLON', '/produto/CABO_TERMORRESISTÊNCIA_-_6X14_AWG_-_TEFLON%7C%7CTEFLON'),
+      creatRedirectObj ('/categoria-produto/sensores/termopares', '/category/TERMOPARES'),
+      creatRedirectObj ('/solicitar-orcamento', '/orcamento'),
+      creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/cameras-termograficas-optris-linha-automacao', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
+      creatRedirectObj ('/category/CONTADOR_/_TEMPORIZADOR_/_VELOC%C3%8DMETRO', '/category/CONTADOR_%7C%7C_TEMPORIZADOR_%7C%7C_VELOCÍMETRO'),
       // creatRedirectObj ('', ''),
     ]
   }

@@ -19,7 +19,7 @@ const Calibracao = () => {
           content='Conte com o suporte técnico da Contemp para tirar dúvidas sobre os produtos que comercializamos. Acesse!'
         />
         <meta name='keywords' content='suporte técnico, Contemp, pós-venda' />
-        <title>Contemp</title>
+        <title>Calibração</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
       <Header />
