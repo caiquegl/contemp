@@ -1,10 +1,8 @@
 import { Box, HStack, Icon, Flex, Button, useToast, Link } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
-import { deleteDoc } from 'firebase/firestore'
 import ContainerAddProduct from '../ContainerAddProduct'
 import ContainerAddProductDescription from '../ContainerAddProductDescription'
-import { initFirebase } from '../../utils/db'
 import { Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
@@ -13,7 +11,6 @@ import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
 
 const TabProduct = () => {
-  initFirebase()
   const toast = useToast({
     duration: 3000,
     isClosable: true,
@@ -87,11 +84,11 @@ const TabProduct = () => {
 
   const deleteProduct = async (product: any) => {
     try {
-      await deleteDoc(product.ref)
+      const { data, status } = await api.post(`deleteProduct`, product)
       toast({
-        title: 'Sucesso',
-        description: 'Produto deletado com sucesso.',
-        status: 'success',
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
       })
       listProduct()
     } catch (err) {

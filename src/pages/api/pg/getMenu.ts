@@ -8,7 +8,10 @@ export default async function handler(
     try {
       const categoryMain = await prisma.categories.findMany({
         where: {
-          is_main: true
+          is_main: true,
+          name: {
+            not: 'CATEGORY_SECUNDARY'
+          }
         },
         orderBy: {
           order: 'asc'

@@ -18,7 +18,7 @@ model Categories {
   is_active       Boolean    @default(true)
   is_main         Boolean    @default(false)
   key_word_seo    String
-  name            String
+  name            String     @unique
   firebase_id     String?
   sub_category_id Int?
   order           Int        @unique

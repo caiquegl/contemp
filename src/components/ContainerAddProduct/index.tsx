@@ -15,8 +15,6 @@ import { useEffect, useRef, useState } from 'react'
 import InputsHome from '../ContainerHome/inputs'
 import { Controller, useForm } from 'react-hook-form'
 import { InputDefault } from '../Form/Input'
-import { database, initFirebase } from '../../utils/db/index'
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { TextareaDefault } from '../Form/Textarea'
 import Variation from './Variantion'
 import { ViewImage } from './ViewImage'
@@ -46,8 +44,6 @@ const asyncComponents = {
 }
 
 const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
-  initFirebase()
-
   const toast = useToast()
   const formRef = useRef<any>()
   const [hasVariation, setHasVariation] = useState<any>(false)
@@ -101,16 +97,9 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
   const listCategory = async () => {
     try {
-      const dbInstance = collection(database, 'categories')
-      let newList: any = []
-      const q = query(dbInstance, orderBy('order', 'asc'))
-      await getDocs(q).then((data) => {
-        data.docs.forEach((doc) => {
-          newList.push({ ...doc.data(), id: doc.id, ref: doc.ref })
-        })
-      })
+      const { data } = await api.get('getCategoryActive')
 
-      setList(newList)
+      setList(data)
     } catch (error) {
       toast({
         title: 'Erro',
@@ -149,10 +138,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   }, [defaultValues])
 
   const getValues = async () => {
-    const { data } = await api.get(`${defaultValues?.category}/getCategoryById`)
-
-    let find = data
-    if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.category, label: find.name })
+    const { data } = await api.get(`${defaultValues?.category_id}/getCategoryById`)
+    if (data) setValue('category', { value: data.id, label: data.name })
   }
 
   useEffect(() => {

@@ -9,7 +9,10 @@ export default async function handler(
       let categories = await prisma.categories.findMany({
         where: {
           favorite: true,
-          is_active: true
+          is_active: true,
+          name: {
+            not: 'CATEGORY_SECUNDARY'
+          }
         }
       })
 

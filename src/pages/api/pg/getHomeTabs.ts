@@ -7,6 +7,11 @@ export default async function handler(
   ) {
     try {
       const productHome = await prisma.home.findMany({
+        where: {
+          category_id: {
+            not: 59
+          }
+        },
         include: {
           category: {
             select: {

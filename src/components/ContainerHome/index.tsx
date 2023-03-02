@@ -1,31 +1,13 @@
-import {
-  Box,
-  HStack,
-  VStack,
-  Checkbox,
-  Button,
-  Flex,
-  useToast,
-  FormControl,
-  FormLabel,
-  InputGroup,
-  Select,
-  FormErrorMessage,
-} from '@chakra-ui/react'
+import { Box, HStack, VStack, Button, Flex, useToast, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
-import { database, initFirebase } from '../../utils/db'
 import InputsHome from './inputs'
-import { addDoc, collection, getDocs, limit, orderBy, query, where, updateDoc, doc } from 'firebase/firestore'
 import { InputDefault } from '../Form/Input'
-import { SelectDefault } from '../Form/Select'
 import { TextareaDefault } from '../Form/Textarea'
 import { Controller, useForm } from 'react-hook-form'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { v4 as uuidv4 } from 'uuid'
 
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
-import category from '../../pages/api/category'
-import { useAuth } from '../../contextAuth/authContext'
 import { api } from '../../lib/axios'
 
 const asyncComponents = {
@@ -50,12 +32,9 @@ const asyncComponents = {
 }
 
 const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
-  initFirebase()
-
   const toast = useToast()
   const formRef = useRef<any>()
   const [loading, setLoading] = useState(false)
-  const [hasCarrocel, setHasCarrocel] = useState(false)
   const [list, setList] = useState<any>([])
   const [urls, setUrls] = useState<any>([])
   const [icon, setIcon] = useState<any>('')
@@ -76,58 +55,18 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
         return
       }
       setLoading(true)
-
-      const dbInstance = collection(database, 'home')
-      let exist = false
-      let bodyExist: any = {}
-
-      const qExist = query(dbInstance, where('indexProduct', '==', indexProduct), limit(1))
-
-      await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) {
-          exist = true
-          bodyExist = {
-            id: data.docs[0].id,
-            ref: data.docs[0].ref,
-          }
-        }
+      const { data, status } = await api.post(`saveHome`, {
+        ...body,
+        indexProduct,
+        category: body.category.value,
+        urls,
+        icon,
       })
-
-      if (!exist) {
-        await addDoc(dbInstance, {
-          ...body,
-          indexProduct,
-          destaque: hasCarrocel,
-          category: body.category.value,
-          urls,
-          icon,
-        })
-
-        toast({
-          title: 'Sucesso',
-          description: 'Produto cadastradado com sucesso.',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        })
-      } else {
-        const dbInstanceUpdate = doc(database, 'home', bodyExist.id)
-        await updateDoc(dbInstanceUpdate, {
-          ...body,
-          category: body.category.value,
-          indexProduct,
-          destaque: hasCarrocel,
-          urls,
-          icon,
-        })
-        toast({
-          title: 'Sucesso',
-          description: 'Produto atualizado com sucesso.',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        })
-      }
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
     } catch (error) {
       console.log(error)
       toast({
@@ -164,10 +103,8 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
 
   useEffect(() => {
     setValue('name', defaultValues?.name)
-    // setValue('category', defaultValues?.category)
     setValue('description', defaultValues?.description)
     setValue('link_name', defaultValues?.link_name)
-    setHasCarrocel(defaultValues && defaultValues.hasCarrocel ? true : false)
     setUrls(defaultValues && defaultValues.urls ? defaultValues.urls : [])
     setIcon(defaultValues && defaultValues.icon ? defaultValues.icon : '')
   }, [defaultValues])
@@ -322,21 +259,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
             required: 'Descrição é obrigatório',
           })}
         />
-        <Box w='100%'>
-          <Checkbox
-            colorScheme='red'
-            color='black.800'
-            mr='auto'
-            fontSize='20px'
-            height='17px'
-            defaultChecked={hasCarrocel}
-            checked={hasCarrocel}
-            isChecked={hasCarrocel}
-            onChange={(check) => setHasCarrocel(check.target.checked)}
-          >
-            Adicionar ao carrossel de destaque
-          </Checkbox>
-        </Box>
       </VStack>
       <Flex alignItems='center' justifyContent='flex-end' mt='53px' w='100%'>
         <Button

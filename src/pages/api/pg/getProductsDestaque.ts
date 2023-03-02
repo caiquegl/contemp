@@ -9,7 +9,10 @@ export default async function handler(
       let list = await prisma.products.findMany({
         where: {
           isActive: true,
-          destaque: true
+          destaque: true,
+          category_id: {
+            not: 59
+          }
         },
         include: {
           category: {

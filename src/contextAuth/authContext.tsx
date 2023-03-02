@@ -25,11 +25,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState<any>(true)
   const [hasCookie, setHasCookie] = useState<any>(false)
 
-  useLayoutEffect(() => {
-    let exist = sessionStorage.getItem('set_load')
-    if (exist) setLoading(false)
-  })
+  // useLayoutEffect(() => {
+  //   let exist = sessionStorage.getItem('set_load')
+  //   if (exist) setLoading(false)
+  // })
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 500)
+  }, [])
   const acepetCookie = () => {
     localStorage.setItem('acepetCookie', JSON.stringify(true))
     getCookie()

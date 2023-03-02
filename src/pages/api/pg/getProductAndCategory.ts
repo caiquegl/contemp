@@ -9,12 +9,18 @@ export default async function handler(
       let list = await prisma.categories.findMany({
         where: {
           is_active: true,
+          name: {
+            not: 'CATEGORY_SECUNDARY'
+          }
         }
       })
 
       let listProducts = await prisma.products.findMany({
         where: {
           isActive: true,
+          category_id: {
+            not: 59
+          }
         }
       })
 

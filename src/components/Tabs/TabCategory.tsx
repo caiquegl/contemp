@@ -16,27 +16,13 @@ import {
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
-import { database, initFirebase } from '../../utils/db/index'
 import { v4 as uuidv4 } from 'uuid'
-import {
-  addDoc,
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  where,
-  updateDoc,
-  doc,
-  deleteDoc,
-} from 'firebase/firestore'
 import { InputDefault } from '../Form/Input'
 import { Controller, useForm } from 'react-hook-form'
 import { TextareaDefault } from '../Form/Textarea'
 import { EditOrder } from '../EditOrder'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
-import { useAuth } from '../../contextAuth/authContext'
 import { Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
@@ -47,9 +33,10 @@ import { api } from '../../lib/axios'
 const { confirm } = Modal
 
 interface IBody {
+  id?: number
   name: string
   is_main?: string
-  sub_categorie?: string
+  sub_category_id?: string
   description: string
   favorite: boolean
 }
@@ -81,12 +68,12 @@ const TabCategory = () => {
     isClosable: true,
   })
 
-  initFirebase()
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
   const [isActive, setIsActive] = useState(true)
   const [url, setUrl] = useState('')
+  const [idSelected, setIdSelected] = useState<any>()
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
   const formRef = useRef<any>()
@@ -95,55 +82,27 @@ const TabCategory = () => {
 
   const saveCategory = async (bodyForm: any) => {
     try {
-      if (bodyForm.sub_categorie) bodyForm = { ...bodyForm, sub_categorie: bodyForm.sub_categorie.value }
+      if (bodyForm.sub_category_id) bodyForm = { ...bodyForm, sub_category_id: bodyForm.sub_category_id.value }
       bodyForm = { ...bodyForm, url }
-      if (bodyForm.is_main == 'true') delete bodyForm.sub_categorie
+      if (bodyForm.is_main == 'true') delete bodyForm.sub_category_id
 
       if (Object.keys(update).length > 0) {
         updateCategory(bodyForm)
         return
       }
       setLoading(true)
-
-      const dbInstance = collection(database, 'categories')
-      let exist = false
-      let order: any = 0
-      const q = query(dbInstance, orderBy('order', 'desc'), limit(1))
-      const qExist = query(dbInstance, where('name', '==', bodyForm.name), limit(1))
-
-      await getDocs(q).then((data) => {
-        if (data.docs.length === 0) return
-        order = data.docs[0].data().order
+      const { data, status } = await api.post(`saveCategory`, {
+        ...bodyForm,
+        favorite: isFavorite,
+        is_active: isActive,
       })
 
-      await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0) exist = true
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
       })
-
-      if (!exist) {
-        await addDoc(dbInstance, {
-          ...bodyForm,
-          favorite: isFavorite,
-          is_active: isActive,
-          order: order + 1,
-        })
-
-        toast({
-          title: 'Sucesso',
-          description: 'Categoria cadastrada com sucesso.',
-          status: 'success',
-        })
-        setUrl('')
-        setUpdate({} as IBody)
-      } else {
-        toast({
-          title: 'Erro',
-          description: 'Categoria já existe',
-          status: 'error',
-        })
-      }
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao salvar categoria',
@@ -156,55 +115,27 @@ const TabCategory = () => {
     }
   }
 
-  const updateProducts = async (id: any) => {
-    const dbInstanceUpdate = doc(database, 'products', id)
-    await updateDoc(dbInstanceUpdate, {
-      category: 'ZGRgyNWLIzLRqjwqcdPF',
-    })
-  }
-
-  const updateHome = async (id: any) => {
-    const dbInstanceUpdate = doc(database, 'home', id)
-    await updateDoc(dbInstanceUpdate, {
-      category: 'ZGRgyNWLIzLRqjwqcdPF',
-    })
-  }
-
   const updateCategory = async (bodyForm: any) => {
     try {
       setLoading(true)
-      if (bodyForm.is_main == 'true') delete bodyForm.sub_categorie
-      const dbInstance = collection(database, 'categories')
-      let exist = false
-      const qExist = query(dbInstance, where('name', '==', bodyForm.name), limit(1))
-
-      await getDocs(qExist).then((data) => {
-        if (data.docs.length > 0 && data.docs[0]?.data().order != update.order) exist = true
+      if (bodyForm.is_main == 'true') delete bodyForm.sub_category_id
+      const { data, status } = await api.put(`updateCategory`, {
+        ...bodyForm,
+        favorite: isFavorite,
+        is_active: isActive,
+        id: idSelected,
       })
 
-      if (!exist) {
-        const dbInstanceUpdate = doc(database, 'categories', update.id)
-        await updateDoc(dbInstanceUpdate, {
-          ...bodyForm,
-          favorite: isFavorite,
-          is_active: isActive,
-        })
-        setUpdate({})
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
 
-        toast({
-          title: 'Sucesso',
-          description: 'Categoria atualizada com sucesso.',
-          status: 'success',
-        })
-        setUrl('')
-        setUpdate({} as IBody)
-      } else {
-        toast({
-          title: 'Erro',
-          description: 'Categoria já existe',
-          status: 'error',
-        })
-      }
+      setUpdate({})
+      setUrl('')
+      setIdSelected(undefined)
+      setUpdate({} as IBody)
     } catch (error) {
       console.log(error)
       toast({
@@ -239,114 +170,29 @@ const TabCategory = () => {
 
   const deleteAllCategory = async (category: any) => {
     setLoading(true)
-    const dbInstanceCategory = collection(database, 'categories')
-    const qExistCategory = query(dbInstanceCategory, where('sub_categorie', '==', category.id))
-
-    await getDocs(qExistCategory).then(async (categFather) => {
-      for await (let [i, categ] of categFather.docs.entries()) {
-        // primeira categoria
-
-        const db2Category = collection(database, 'categories')
-        const q2Category = query(db2Category, where('sub_categorie', '==', categFather.docs[i].id))
-
-        await getDocs(q2Category).then(async (categ2Father) => {
-          for await (let [i2, categ2] of categ2Father.docs.entries()) {
-            const db2Product = collection(database, 'products')
-            const q2Product = query(db2Product, where('category', '==', categ2Father.docs[i2].id))
-
-            await getDocs(q2Product).then(async (prod2Father) => {
-              for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
-                await updateProducts(prod2Father.docs[iProd2].id)
-              }
-            })
-
-            const db2Home = collection(database, 'home')
-            const q2Home = query(db2Home, where('category', '==', categ2Father.docs[i2].id))
-            await getDocs(q2Home).then(async (home2Father) => {
-              for await (let [ihome2, home2] of home2Father.docs.entries()) {
-                await updateHome(home2Father.docs[ihome2])
-              }
-            })
-            await deleteDoc(categ2Father.docs[i2].ref)
-          }
-        })
-
-        const dbProduct = collection(database, 'products')
-        const qProduct = query(dbProduct, where('category', '==', categFather.docs[i].id))
-
-        await getDocs(qProduct).then(async (prod2Father) => {
-          for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
-            await updateProducts(prod2Father.docs[iProd2].id)
-          }
-        })
-
-        const dbHome = collection(database, 'home')
-        const qHome = query(dbHome, where('category', '==', categFather.docs[i].id))
-        await getDocs(qHome).then(async (home2Father) => {
-          for await (let [ihome2, home2] of home2Father.docs.entries()) {
-            await updateHome(home2Father.docs[ihome2].id)
-          }
-        })
-
-        await deleteDoc(categFather.docs[i].ref)
-      }
-    })
-
-    const dbFatherProduct = collection(database, 'products')
-    const qfatherProduct = query(dbFatherProduct, where('category', '==', category.id))
-
-    await getDocs(qfatherProduct).then(async (prod2Father) => {
-      for await (let [iProd2, prod2] of prod2Father.docs.entries()) {
-        await updateProducts(prod2Father.docs[iProd2].id)
-      }
-    })
-
-    const dbFatherHome = collection(database, 'home')
-    const qFatherHome = query(dbFatherHome, where('category', '==', category.id))
-    await getDocs(qFatherHome).then(async (home2Father) => {
-      for await (let [ihome2, home2] of home2Father.docs.entries()) {
-        await updateHome(home2Father.docs[ihome2].id)
-      }
-    })
-    await deleteDoc(category.ref)
-    setLoading(false)
+    const { data, status } = await api.post(`deleteCategory`, category)
     toast({
-      title: 'Sucesso',
-      description: 'Categoria deletada com sucesso.',
-      status: 'success',
+      title: status == 201 ? 'Sucesso' : 'Erro',
+      description: data.msg,
+      status: status == 201 ? 'success' : 'error',
     })
-
+    setLoading(false)
     reset()
     await listCategory()
   }
 
-  const changerOrder = async (order: number, ref: any) => {
+  const changerOrder = async (order: number, category: any) => {
     try {
       setLoading(true)
-
-      const dbInstance = collection(database, 'categories')
-      const qExist = query(dbInstance, where('order', '==', order), limit(1))
-
-      let sub: any = {}
-
-      await getDocs(qExist).then((data) => {
-        data.docs.forEach((doc) => {
-          sub = { ...doc.data(), id: doc.id, ref: doc.ref }
-        })
+      const { data, status } = await api.put(`changeOrderCategory`, {
+        order,
+        category: category,
       })
 
-      if (Object.keys(sub).length > 0) {
-        const dbInstanceUpdate = doc(database, 'categories', sub.id)
-        await updateDoc(dbInstanceUpdate, { order: parseInt(ref.order) })
-      }
-
-      const dbInstanceUpdate = doc(database, 'categories', ref.id)
-      await updateDoc(dbInstanceUpdate, { order: order })
-      await listCategory()
       toast({
-        title: 'Sucesso',
-        description: 'Sucesso ao alterar ordem.',
-        status: 'success',
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
       })
       reset()
     } catch (err) {
@@ -371,7 +217,7 @@ const TabCategory = () => {
 
   const handleOnEditClick = async (category: any) => {
     setValue('name', category.name)
-    setValue('is_main', category.is_main)
+    setValue('is_main', category.is_main.toString())
     setValue('description', category.description)
     setValue('favorite', category.favorite)
     setValue('key_word_seo', category.key_word_seo)
@@ -380,11 +226,12 @@ const TabCategory = () => {
     setIsActive(category.is_active)
     setUpdate(category)
     setUrl(category.url ? category.url : '')
+    setIdSelected(category.id)
 
     const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`)
 
-    if (data.sub_category_id) {
-      setValue('sub_categorie', { value: data?.sub_category_id, label: data.name })
+    if (data.id) {
+      setValue('sub_category_id', { value: data.id, label: data.name })
     }
   }
 
@@ -404,7 +251,7 @@ const TabCategory = () => {
       title: 'Ações',
       render: (a: any) => (
         <>
-          {a.id != 'ZGRgyNWLIzLRqjwqcdPF' && (
+          {a.id != 59 && (
             <HStack spacing='20px'>
               <Icon cursor='pointer' as={AiOutlineEdit} fontSize='17px' onClick={() => handleOnEditClick(a)} />
               <Icon
@@ -495,7 +342,9 @@ const TabCategory = () => {
             <Controller
               control={control}
               name='is_main'
-              rules={{ required: 'Campo obrigatório' }}
+              rules={{
+                required: 'Campo obrigatório',
+              }}
               render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
                 <FormControl isInvalid={!!error} id={name}>
                   <FormLabel fontSize='20px' mb='10px' color='black.800'>
@@ -544,7 +393,7 @@ const TabCategory = () => {
             {watch().is_main === 'false' && (
               <Controller
                 control={control}
-                name='sub_categorie'
+                name='sub_category_id'
                 rules={{ required: 'Campo obrigatório' }}
                 render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
                   <FormControl isInvalid={!!error} id={name} color='black.800'>
