@@ -291,3 +291,7 @@ img {
 .rc-menu-sub.rc-menu-inline > .rc-menu-item {
   white-space: normal;
 }
+
+.embed-1080p > iframe {
+  height: 600px !important;
+}

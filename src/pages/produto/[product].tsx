@@ -86,6 +86,11 @@ const Product = () => {
         if (!txt) return
         let val = txt
         val = val.toString().replace('<a', '<a target="_blank"')
+        if(val.indexOf(`<figure class=\"media\"><oembed url=`) > -1) {
+        val = val.toString().replace('<figure class=\"media\"><oembed url=', '<iframe src=')
+        val = val.toString().replace('watch?v=', 'embed/')
+        val = val.toString().replace('></oembed></figure>', 'width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
+        }
 
         let result = txt.substring(0, 2)
         let result2 = txt.substring(0, 5)
@@ -182,7 +187,7 @@ const Product = () => {
           <Box m={`${pxToRem(60)} auto`} ml={{ lg: 20 }}>
             <Box w='100%' mb='30px'>
               <Breadcrumb>
-                {bradName.map((el: any, index: number) => (
+                {bradName && bradName.map((el: any, index: number) => (
                   <Fragment key={uuidv4()}>
                     {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
                     {index != bradName.length - 1 && (
@@ -344,6 +349,9 @@ const Product = () => {
           </Box>
         </Flex>
 
+        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/XxNKL39UnA0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+
+        
         <Flex id='description' justifyContent='center' w='100%' bg='white' pt='111px' px='10px'>
           <Tabs variant='enclosed' maxW='1386px' w='100%' overflowX='auto'>
             <TabList>

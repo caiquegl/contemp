@@ -11,6 +11,7 @@ export default function CustomEditor({ onChange, editorLoaded, name, value }) {
         type=""
       name={name}
       data={value}
+      mediaEmbed={{previewsInData: true}}
       onChange={(event, editor) => {
         const data = editor.getData();
         onChange(data);
