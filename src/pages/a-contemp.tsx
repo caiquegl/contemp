@@ -37,7 +37,7 @@ const Home = () => {
           name="keywords"
           content="controle de temperatura, Contemp, processos industriais"
         />
-        <title>Contemp</title>
+        <title>A Contemp</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Header />

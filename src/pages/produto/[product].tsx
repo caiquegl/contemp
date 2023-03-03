@@ -118,6 +118,12 @@ const Product = () => {
       let val = txt
       val = val.toString().replace('<a', '<a target="_blank"')
 
+      if(val.indexOf(`<figure class=\"media\"><oembed url=`) > -1) {
+        val = val.toString().replace('<figure class=\"media\"><oembed url=', '<iframe src=')
+        val = val.toString().replace('watch?v=', 'embed/')
+        val = val.toString().replace('></oembed></figure>', 'width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
+      }
+
       let result = txt.substring(0, 2)
       let result2 = txt.substring(0, 5)
       if (result == '<a' || result2 == '<p><a') {
@@ -185,7 +191,7 @@ const Product = () => {
           <Head>
             <meta name='description' content={detail.description_seo} />
             <meta name='keywords' content={detail.key_word_seo} />
-            <title>Contemp</title>
+            <title>{detail.name}</title>
             <link rel='icon' href='/favicon.png' />
           </Head>
         )}
