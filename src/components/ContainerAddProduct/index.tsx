@@ -71,6 +71,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       let falt = false
       let more = false
       listVariation.forEach((list: any) => {
+        if(list.type_view && list.type_view == 'Range') return
         if (!list.name) falt = true
         if (!list.opt || list.opt.length === 0) more = true
       })
@@ -287,7 +288,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             height='17px'
             checked={hasVariation}
             isChecked={hasVariation}
-            onChange={(check) => setHasVariation(check.target.checked)}
+            onChange={(check) => {
+              setHasVariation(check.target.checked)
+              setListVariation([{ id: 1 }])
+            }}
           >
             Produto tem variações ?
           </Checkbox>
@@ -349,12 +353,37 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               addVariation={(variation: any) => {
                 let newList = listVariation
                 newList[index].name = variation.name
+                delete newList[index].min_value
+                delete newList[index].max_value
+
                 if (!variation.addOpt) return
                 if (newList[index].opt) {
                   newList[index].opt.push(variation.addOpt)
                 } else {
                   newList[index].opt = [variation.addOpt]
                 }
+
+                setListVariation(newList)
+              }}
+              saveName={(name: string) => {
+                let newList: any = listVariation
+                delete newList[index].opt
+
+                newList[index].name = name
+
+                setListVariation(newList)
+              }}
+              setType={(type: string) => {
+                let newList: any = listVariation
+
+                newList[index].type_view = type
+
+                setListVariation(newList)
+              }}
+              addRange={(value: any, type: string) => {
+                let newList: any = listVariation
+                newList[index].type_view = 'Range'
+                newList[index][type] = value
 
                 setListVariation(newList)
               }}

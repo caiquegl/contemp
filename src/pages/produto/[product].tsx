@@ -22,7 +22,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  NumberInputField,
+  NumberInputField
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -44,7 +44,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { initFirebase } from '../../utils/db'
 import { useAuth } from '../../contextAuth/authContext'
 import Head from 'next/head'
-import { Breadcrumb } from 'antd'
+import { Breadcrumb, Slider } from 'antd'
 import { customSwiperBullets } from '../../utils/customSwiperBullets'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
@@ -77,7 +77,6 @@ const Product = () => {
     try {
       let produto = ''
       if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
-      console.log('produto', produto)
       const { data } = await api.get(`${produto}/getProduct`)
 
       setBradeName(data.bradName)
@@ -86,10 +85,15 @@ const Product = () => {
         if (!txt) return
         let val = txt
         val = val.toString().replace('<a', '<a target="_blank"')
-        if(val.indexOf(`<figure class=\"media\"><oembed url=`) > -1) {
-        val = val.toString().replace('<figure class=\"media\"><oembed url=', '<iframe src=')
-        val = val.toString().replace('watch?v=', 'embed/')
-        val = val.toString().replace('></oembed></figure>', 'width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
+        if (val.indexOf(`<figure class=\"media\"><oembed url=`) > -1) {
+          val = val.toString().replace('<figure class="media"><oembed url=', '<iframe src=')
+          val = val.toString().replace('watch?v=', 'embed/')
+          val = val
+            .toString()
+            .replace(
+              '></oembed></figure>',
+              'width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            )
         }
 
         let result = txt.substring(0, 2)
@@ -187,16 +191,17 @@ const Product = () => {
           <Box m={`${pxToRem(60)} auto`} ml={{ lg: 20 }}>
             <Box w='100%' mb='30px'>
               <Breadcrumb>
-                {bradName && bradName.map((el: any, index: number) => (
-                  <Fragment key={uuidv4()}>
-                    {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
-                    {index != bradName.length - 1 && (
-                      <Breadcrumb.Item>
-                        <a href={`/category/${el.replaceAll(' ', '_')}#viewCategory`}>{el}</a>
-                      </Breadcrumb.Item>
-                    )}
-                  </Fragment>
-                ))}
+                {bradName &&
+                  bradName.map((el: any, index: number) => (
+                    <Fragment key={uuidv4()}>
+                      {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
+                      {index != bradName.length - 1 && (
+                        <Breadcrumb.Item>
+                          <a href={`/category/${el.replaceAll(' ', '_')}#viewCategory`}>{el}</a>
+                        </Breadcrumb.Item>
+                      )}
+                    </Fragment>
+                  ))}
               </Breadcrumb>
             </Box>
             <Text fontWeight='bold' fontSize='35px' color='black.800' mb='30px'>
@@ -213,7 +218,7 @@ const Product = () => {
                 </Text>
               </Link>
             </Text>
-            <VStack spacing='30px'>
+            <VStack spacing='45px'>
               {detail.hasVariation &&
                 detail.listVariation &&
                 detail.listVariation.length > 0 &&
@@ -228,7 +233,63 @@ const Product = () => {
                     <Text fontWeight='bold' fontSize='20px' color='black.800'>
                       {vr.name}
                     </Text>
-                    <InputGroup
+                    
+                      {vr.type_view && vr.type_view == 'Range' ? 
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+
+                      >
+                        
+                        <Slider 
+                        value={variation[vr.name] ? variation[vr.name] : undefined}
+                        onChange={(value) => setVariation({
+                          ...variation,
+                          [vr.name]: value,
+                        })}
+                        trackStyle={{
+                          backgroundColor: '#B60005',
+                        }}
+                        handleStyle={{
+                          backgroundColor: '#B60005',
+                          borderColor: '#fff'
+                        }}
+                        style={{width: '100%', marginRight: 10}} min={vr.min_value ? parseInt(vr.min_value) : 0} max={vr.max_value ? parseInt(vr.max_value) : 1000} tooltip={{ open: true }} />
+                        {vr.min_value || vr.max_value ?
+                          <Flex
+                            alignItems="center"
+                            justifyContent="space-between"
+                            mb="10px"
+                          >
+                            {vr.min_value &&
+                              <Text
+                                fontSize="13px"
+                                color="black.800"
+                              >
+                                Valor mín. {vr.min_value}
+                              </Text>
+                            }
+                            {vr.max_value &&
+                              <Text
+                                fontSize="13px"
+                                color="black.800"
+                              >
+                                Valor max. {vr.max_value}
+                              </Text>
+                            }
+                          </Flex>
+                        : null}
+
+                      </Box>
+                      :
+                      <InputGroup
                       borderRadius='6px'
                       bg='white.500'
                       p='3px 7px'
@@ -269,8 +330,10 @@ const Product = () => {
                               {opt}
                             </option>
                           ))}
-                      </Select>
-                    </InputGroup>
+                      </Select> 
+                      </InputGroup>
+
+}
                   </Flex>
                 ))}
             </VStack>
@@ -351,7 +414,6 @@ const Product = () => {
 
         {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/XxNKL39UnA0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
 
-        
         <Flex id='description' justifyContent='center' w='100%' bg='white' pt='111px' px='10px'>
           <Tabs variant='enclosed' maxW='1386px' w='100%' overflowX='auto'>
             <TabList>

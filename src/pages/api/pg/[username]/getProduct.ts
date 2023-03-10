@@ -17,7 +17,6 @@ export default async function handler(
           name: username.trim()
         }
       })
-
       if(!product) return res.status(201).json([])
 
 
@@ -31,9 +30,9 @@ export default async function handler(
         },
         where: {
           is_active: true,
-          id: product.id
+          id: product.category_id
         }
-      })
+      }) 
 
       if(!category) return res.status(201).json([])
       

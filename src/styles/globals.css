@@ -295,3 +295,7 @@ img {
 .embed-1080p > iframe {
   height: 600px !important;
 }
+
+.ant-slider-step {
+  background-color: rgba(182, 0, 5, 0.1)
+}
