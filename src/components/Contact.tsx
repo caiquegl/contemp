@@ -20,12 +20,11 @@ import React, { Fragment, useCallback, useRef, useState } from 'react'
 import { BsTelephone } from 'react-icons/bs'
 import { BiMap } from 'react-icons/bi'
 import { TbSend } from 'react-icons/tb'
-import { AiOutlineCloseCircle, AiOutlineCloudUpload, AiOutlineFile } from 'react-icons/ai'
+import { AiOutlineCloseCircle, AiOutlineFile } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { InputDefault } from './Form/Input'
 import { TextareaDefault } from './Form/Textarea'
 import { SelectDefault } from './Form/Select'
-import { useDropzone } from 'react-dropzone'
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '../utils/db'
 import { v4 as uuidv4 } from 'uuid'
@@ -46,7 +45,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
   const toast = useToast()
   const formRef = useRef<any>()
   const [file, setFile] = useState('')
-  const { register, handleSubmit, formState, reset, watch, setValue } = useForm({})
+  const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
   const { errors } = formState
 
   const sendMail = async (bodyForm: any) => {
@@ -291,15 +290,15 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                         )}
                         {quest.type === 'select' && (
                           <SelectDefault
+                            control={control}
+                            nameInput={quest.name}
                             label={quest.name}
-                            error={errors.is_main}
                             opt={quest.options.map((opt: string) => {
                               return {
                                 name: opt,
                                 value: opt,
                               }
                             })}
-                            {...register(quest.name, { required: `${quest.name} é obrigatório` })}
                           />
                         )}
 
