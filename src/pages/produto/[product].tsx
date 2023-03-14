@@ -22,7 +22,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  NumberInputField
+  NumberInputField,
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -78,7 +78,7 @@ const Product = () => {
       let produto = ''
       if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
       const { data } = await api.get(`${produto}/getProduct`)
-
+      if (!data.bradName) return router.push('/404')
       setBradeName(data.bradName)
 
       const changeText = (txt: string) => {
@@ -233,8 +233,8 @@ const Product = () => {
                     <Text fontWeight='bold' fontSize='20px' color='black.800'>
                       {vr.name}
                     </Text>
-                    
-                      {vr.type_view && vr.type_view == 'Range' ? 
+
+                    {vr.type_view && vr.type_view == 'Range' ? (
                       <Box
                         borderRadius='6px'
                         bg='white.500'
@@ -245,95 +245,87 @@ const Product = () => {
                         outline='none'
                         border='none'
                         mt={['40px', 0]}
-
                       >
-                        
-                        <Slider 
-                        value={variation[vr.name] ? variation[vr.name] : undefined}
-                        onChange={(value) => setVariation({
-                          ...variation,
-                          [vr.name]: value,
-                        })}
-                        trackStyle={{
-                          backgroundColor: '#B60005',
-                        }}
-                        handleStyle={{
-                          backgroundColor: '#B60005',
-                          borderColor: '#fff'
-                        }}
-                        style={{width: '100%', marginRight: 10}} min={vr.min_value ? parseInt(vr.min_value) : 0} max={vr.max_value ? parseInt(vr.max_value) : 1000} tooltip={{ open: true }} />
-                        {vr.min_value || vr.max_value ?
-                          <Flex
-                            alignItems="center"
-                            justifyContent="space-between"
-                            mb="10px"
-                          >
-                            {vr.min_value &&
-                              <Text
-                                fontSize="13px"
-                                color="black.800"
-                              >
+                        <Slider
+                          value={variation[vr.name] ? variation[vr.name] : undefined}
+                          onChange={(value) =>
+                            setVariation({
+                              ...variation,
+                              [vr.name]: value,
+                            })
+                          }
+                          trackStyle={{
+                            backgroundColor: '#B60005',
+                          }}
+                          handleStyle={{
+                            backgroundColor: '#B60005',
+                            borderColor: '#fff',
+                          }}
+                          style={{ width: '100%', marginRight: 10 }}
+                          min={vr.min_value ? parseInt(vr.min_value) : 0}
+                          max={vr.max_value ? parseInt(vr.max_value) : 1000}
+                          tooltip={{ open: true }}
+                        />
+                        {vr.min_value || vr.max_value ? (
+                          <Flex alignItems='center' justifyContent='space-between' mb='10px'>
+                            {vr.min_value && (
+                              <Text fontSize='13px' color='black.800'>
                                 Valor mín. {vr.min_value}
                               </Text>
-                            }
-                            {vr.max_value &&
-                              <Text
-                                fontSize="13px"
-                                color="black.800"
-                              >
+                            )}
+                            {vr.max_value && (
+                              <Text fontSize='13px' color='black.800'>
                                 Valor max. {vr.max_value}
                               </Text>
-                            }
+                            )}
                           </Flex>
-                        : null}
-
+                        ) : null}
                       </Box>
-                      :
+                    ) : (
                       <InputGroup
-                      borderRadius='6px'
-                      bg='white.500'
-                      p='3px 7px'
-                      w='100%'
-                      maxW='358px'
-                      h='50'
-                      outline='none'
-                      border='none'
-                      display='flex'
-                      alignItems='center'
-                      justifyContent='center'
-                    >
-                      <Select
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 7px'
                         w='100%'
-                        height='100%'
+                        maxW='358px'
+                        h='50'
+                        outline='none'
                         border='none'
-                        borderRadius='21px'
-                        placeholder='Selecione uma opção'
-                        color='black.800'
-                        value={variation[vr.name] ? variation[vr.name] : undefined}
-                        onChange={(evt) =>
-                          setVariation({
-                            ...variation,
-                            [vr.name]: evt.target.value,
-                          })
-                        }
-                        _placeholder={{
-                          color: 'black.50',
-                        }}
-                        _focusVisible={{
-                          outline: 'none',
-                        }}
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'
                       >
-                        {vr.opt &&
-                          vr.opt.length > 0 &&
-                          vr.opt.map((opt: any, key: number) => (
-                            <option value={opt} key={uuidv4()}>
-                              {opt}
-                            </option>
-                          ))}
-                      </Select> 
+                        <Select
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder='Selecione uma opção'
+                          color='black.800'
+                          value={variation[vr.name] ? variation[vr.name] : undefined}
+                          onChange={(evt) =>
+                            setVariation({
+                              ...variation,
+                              [vr.name]: evt.target.value,
+                            })
+                          }
+                          _placeholder={{
+                            color: 'black.50',
+                          }}
+                          _focusVisible={{
+                            outline: 'none',
+                          }}
+                        >
+                          {vr.opt &&
+                            vr.opt.length > 0 &&
+                            vr.opt.map((opt: any, key: number) => (
+                              <option value={opt} key={uuidv4()}>
+                                {opt}
+                              </option>
+                            ))}
+                        </Select>
                       </InputGroup>
-
-}
+                    )}
                   </Flex>
                 ))}
             </VStack>

@@ -45,6 +45,8 @@ const Category = () => {
       let nameCategory = ''
       if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
       const { data } = await api.get(`${nameCategory}/getCategory`)
+      if (!data.category) return router.push('/404')
+
       setCateg(data.category)
       dividerList(data.products)
     } catch (error) {
@@ -72,10 +74,10 @@ const Category = () => {
     <SmoothScroll>
       {categ && (
         <Head>
-          <meta name="description" content={categ.description_seo} />
-          <meta name="keywords" content={categ.key_word_seo} />
+          <meta name='description' content={categ.description_seo} />
+          <meta name='keywords' content={categ.key_word_seo} />
           <title>{categ.name}</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel='icon' href='/favicon.png' />
         </Head>
       )}
       <Flex
