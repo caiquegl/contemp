@@ -1,6 +1,6 @@
 import { Box, Flex, Text, Link, Container, Avatar, Divider, Tabs, TabList, Tab } from '@chakra-ui/react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Logo from '../../assets/icons/Logo-Contemp.svg'
 import TabCategory from '../../components/Tabs/TabCategory'
 import TabHome from '../../components/Tabs/TabHome'
@@ -13,7 +13,7 @@ const Adm = () => {
   // const router = useRouter();
   // const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(0)
-  const [date, setDate] = useState(moment().format('DD/MM/YYYY - HH:mm').toString())
+  const [date, setDate] = useState('')
 
   // useEffect(() => {
   //   async function loadUserFromCookies() {
@@ -27,6 +27,10 @@ const Adm = () => {
   //   }
   //   loadUserFromCookies();
   // }, []);
+
+  useEffect(() => {
+    setDate(moment().format('DD/MM/YYYY - HH:mm').toString())
+  }, [])
 
   const componentsTab = [
     // <TabSeo />,
