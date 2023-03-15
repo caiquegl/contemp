@@ -11,7 +11,7 @@ export default async function handler(
           isActive: true,
           destaque: true,
           category_id: {
-            not: 59
+            not: 8
           }
         },
         include: {

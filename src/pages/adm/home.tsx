@@ -14,7 +14,6 @@ const Adm = () => {
   // const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(0)
   const [date, setDate] = useState('')
-
   // useEffect(() => {
   //   async function loadUserFromCookies() {
   //     const userCookies = Cookies.get("SET_USER");

@@ -8,6 +8,7 @@ import {
   Grid as GridChakra,
   Link,
   useBreakpointValue,
+  Grid,
 } from '@chakra-ui/react'
 import Pirometro from '../assets/icons/pritometro_white.svg'
 import Mapa from '../assets/images/MAPA.png'
@@ -32,6 +33,8 @@ import { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
+import { collection, getDocs } from 'firebase/firestore'
+import { database } from '../utils/db'
 
 type Post = {
   post_title: string
@@ -78,6 +81,7 @@ const Home = () => {
   useEffect(() => {
     getPostsData()
   }, [])
+
   return (
     <SmoothScroll>
       <Head>

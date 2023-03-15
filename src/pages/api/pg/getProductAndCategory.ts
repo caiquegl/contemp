@@ -19,7 +19,7 @@ export default async function handler(
         where: {
           isActive: true,
           category_id: {
-            not: 59
+            not: 8
           }
         }
       })

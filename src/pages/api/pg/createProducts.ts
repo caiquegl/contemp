@@ -11,6 +11,7 @@ export default async function handler(
 
 
     const { products } = req.body
+
     for await (const [index ,el] of products.entries()) {
       let data = await prisma.categories.findFirst({
         where: {
@@ -18,6 +19,7 @@ export default async function handler(
         }
       })
       if(data) {
+
       await prisma.products.create({
         data: {
           description: el.description,
@@ -25,12 +27,13 @@ export default async function handler(
           name: el.name,
           urls: el.urls,
           destaque: el.destaque,
-          description_seo: el.description_seo,
-          key_word_seo: el.key_word_seo,
+          description_seo: el.description_seo ? el.description_seo : '',
+          key_word_seo: el.key_word_seo ? el.key_word_seo : '',
           hasVariation: el.hasVariation,
           isActive: el.is_active,
           listVariation: el.listVariation,
-          tab: el.tab
+          tab: el.tab,
+          call_product: el.call_product
         }
       })
       }

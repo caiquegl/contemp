@@ -9,6 +9,8 @@ import {
   useToast,
   FormControl,
   FormLabel,
+  InputGroup,
+  Select,
   FormErrorMessage,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
@@ -71,7 +73,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       let falt = false
       let more = false
       listVariation.forEach((list: any) => {
-        if(list.type_view && list.type_view == 'Range') return
+        if (list.type_view && list.type_view == 'Range') return
         if (!list.name) falt = true
         if (!list.opt || list.opt.length === 0) more = true
       })
@@ -127,11 +129,12 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setValue('name', defaultValues?.name)
     setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
+    setValue('call_product', defaultValues?.call_product)
     setValue('key_word_seo', defaultValues?.key_word_seo)
     setValue('description_seo', defaultValues?.description_seo)
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false)
     setDestaque(defaultValues && defaultValues.destaque ? true : false)
-    setIsActive(defaultValues && defaultValues.is_active ? true : false)
+    setIsActive(defaultValues && defaultValues.isActive ? true : false)
     if (defaultValues.listVariation) {
       setListVariation(defaultValues.listVariation)
     }
@@ -146,6 +149,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   useEffect(() => {
     if (list.length > 0) getValues()
   }, [list.length])
+
+  useEffect(() => {
+    console.log(isActive, defaultValues)
+  }, [isActive])
 
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
@@ -261,6 +268,13 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           error={errors.description}
           {...register('description', {
             required: 'Descrição é obrigatório',
+          })}
+        />
+        <TextareaDefault
+          label='Chamada de produto'
+          error={errors.call_product}
+          {...register('call_product', {
+            required: 'Chamada de produto é obrigatório',
           })}
         />
         <HStack spacing='20px' w='100%'>

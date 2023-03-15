@@ -11,6 +11,7 @@ interface IProps {
   img: string
   text: string
   description?: string
+  call_product?: string
   alt?: string
   color?: string
   bg?: string
@@ -24,6 +25,7 @@ const CardProductWithDescription = ({
   text,
   alt,
   description,
+  call_product,
   color,
   buttomBottom,
   containerProps,
@@ -91,13 +93,13 @@ const CardProductWithDescription = ({
             {text}
           </Text>
         </Tooltip>
-        <Text fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
-          {description &&
-            description.split('').length > 0 &&
-            description
+        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
+          {call_product &&
+            call_product.split('').length > 0 &&
+            call_product
               .split('')
               .map((el: any, index: number) => <Fragment key={uuidv4()}>{index < 100 ? el : ''}</Fragment>)}
-          {description && description.split('').length > 100 ? '...' : ''}
+          {call_product && call_product.split('').length > 100 ? '...' : ''}
         </Text>
         <Image
           src={img ? img : DefaultImg}

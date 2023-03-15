@@ -96,6 +96,7 @@ model Orcamento {
 model Products {
   id              Int        @id @default(autoincrement())
   description     String
+  call_product    String
   description_seo String
   destaque        Boolean    @default(false)
   hasVariation    Boolean    @default(false)

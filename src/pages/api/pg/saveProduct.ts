@@ -32,7 +32,8 @@ export default async function handler(
           isActive: body.is_active,
           listVariation: body.listVariation ? body.listVariation : undefined,
           tab: body.tab,
-          urls: body.ul
+          urls: body.ul,
+          call_product: body.call_product
         }
       })
      

@@ -142,6 +142,7 @@ const AllProduct = () => {
                           img={item.urls[0]}
                           text={item.name}
                           description={item.description}
+                          call_product={item.call_product}
                         />
                       </SwiperSlide>
                     ))}

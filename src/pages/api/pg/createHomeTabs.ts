@@ -11,6 +11,7 @@ export default async function handler(
 
 
     const { homeTabs } = req.body
+
     for await (const el of homeTabs) {
       let data = await prisma.categories.findFirst({
         where: {

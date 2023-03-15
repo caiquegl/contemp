@@ -9,7 +9,7 @@ export default async function handler(
       const productHome = await prisma.home.findMany({
         where: {
           category_id: {
-            not: 59
+            not: 8
           }
         },
         include: {
