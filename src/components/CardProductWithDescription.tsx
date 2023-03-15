@@ -11,6 +11,7 @@ interface IProps {
   img: string
   text: string
   description?: string
+  call_product?: string
   alt?: string
   color?: string
   bg?: string
@@ -18,26 +19,35 @@ interface IProps {
   containerProps?: GridProps
 }
 
-const CardProductWithDescription = ({ bg, img, text, alt, description, color, buttomBottom, containerProps }: IProps) => {
+const CardProductWithDescription = ({
+  bg,
+  img,
+  text,
+  alt,
+  description,
+  call_product,
+  color,
+  buttomBottom,
+  containerProps,
+}: IProps) => {
   const router = useRouter()
   const [_, setIsHovering] = useState(false)
 
   const handleIsHovering = () => setIsHovering((isHovering) => !isHovering)
-    const hoverBg: any = {
-      'red.600': 'white',
-      'white': 'black.800',
-      'white.500': 'black.800',
-      'black.800': 'white'
-    }
+  const hoverBg: any = {
+    'red.600': 'white',
+    white: 'black.800',
+    'white.500': 'black.800',
+    'black.800': 'white',
+  }
 
-    const hoverColor: any = {
-      'red.600': 'black.800',
-      'white': 'white',
-      'white.500': 'white',
-      'black.800': 'black.800'
-
-    }
-    console.log(bg)
+  const hoverColor: any = {
+    'red.600': 'black.800',
+    white: 'white',
+    'white.500': 'white',
+    'black.800': 'black.800',
+  }
+  console.log(bg)
   return (
     <Grid
       // alignItems='center'
@@ -84,13 +94,13 @@ const CardProductWithDescription = ({ bg, img, text, alt, description, color, bu
             {text}
           </Text>
         </Tooltip>
-        <Text fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
-          {description &&
-            description.split('').length > 0 &&
-            description
+        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
+          {call_product &&
+            call_product.split('').length > 0 &&
+            call_product
               .split('')
               .map((el: any, index: number) => <Fragment key={uuidv4()}>{index < 100 ? el : ''}</Fragment>)}
-          {description && description.split('').length > 100 ? '...' : ''}
+          {call_product && call_product.split('').length > 100 ? '...' : ''}
         </Text>
         <Image
           src={img ? img : DefaultImg}
@@ -102,7 +112,10 @@ const CardProductWithDescription = ({ bg, img, text, alt, description, color, bu
           gridRow={3}
           bgSize='contain'
         />
-        <Link href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`} _hover={{  textDecoration: 'none', color: bg ? hoverColor[bg] : "white" }}>
+        <Link
+          href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
+          _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
+        >
           <Button
             w={pxToRem(243)}
             h={pxToRem(50)}
@@ -113,9 +126,9 @@ const CardProductWithDescription = ({ bg, img, text, alt, description, color, bu
             fontSize={pxToRem(20)}
             borderColor={buttomBottom ? buttomBottom : 'transparent'}
             borderWidth={buttomBottom ? '2px' : '0'}
-            _hover={{ 
+            _hover={{
               bg: bg ? hoverBg[bg] : 'black.800',
-              color: bg ? hoverColor[bg] : "white"
+              color: bg ? hoverColor[bg] : 'white',
             }}
           >
             Solicitar orçamento

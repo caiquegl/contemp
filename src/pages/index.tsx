@@ -99,22 +99,6 @@ const Home = () => {
     getPostsData()
   }, [])
 
-  const updateProduct = async () => {
-    const dbProducts = collection(database, 'products')
-    await getDocs(dbProducts).then(async (data) => {
-      console.log(data.docs[0], data.docs[0].data())
-      console.log(data.docs[0].data().description)
-      // const update = doc(database, 'products', data.docs[0].id)
-      // await updateDoc(update, {
-      //   call_product: 'ZGRgyNWLIzLRqjwqcdPF',
-      // })
-    })
-  }
-
-  useEffect(() => {
-    updateProduct()
-  }, [])
-
   return (
     <SmoothScroll>
       <Head>
