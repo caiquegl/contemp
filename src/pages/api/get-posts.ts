@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 INNER JOIN wp_postmeta files ON attachments.ID = files.post_id
               WHERE files.meta_key = '_wp_attached_file'
               AND posts.ID = wp_posts.ID
+              ORDER BY files.post_id DESC
               LIMIT 1
           ) AS post_image,
           concat('https://blog.contemp.com.br/', wp_posts.post_name) AS post_url,
