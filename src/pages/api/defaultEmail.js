@@ -28,7 +28,7 @@ export default async (req, response) => {
     let text = JSON.stringify(body, null, 2)
     let mailSned = await mail.send({
       to: 'vendas@contemp.com',
-      cc: ['kemelin@3hub.co'],
+      cc: ['backup.contemp.digital@gmail.com'],
       from: 'marketing@contemp.digital',
       subject: id,
       text: text.toString().replace('{', '').replace('}', ''),
