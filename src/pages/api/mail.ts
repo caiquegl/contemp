@@ -13,7 +13,7 @@ export default async (req: any, response: any) => {
           "messageVersions":[
             // { "to": [{ "email": body.id && body.id == 'vagas' ? 'rh@contemp.com.br' : 'vendas@contemp.com.br', name: 'contemp' }],
             { "to": [{ "email": body.id && body.id == 'vagas' ? 'rh@contemp.com.br' : 'vendas@contemp.com.br', name: 'contemp' }],
-            // "cc": [{ "email": 'arq.caique@hotmail.com', name: 'caique' }, { "email": 'backup.contemp.digital@gmail.com', name: 'Kemilin' }],
+            "cc": [{ "email": 'backup.contemp.digital@gmail.com', name: 'Kemilin' }],
            }
           ]
         })
