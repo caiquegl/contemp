@@ -148,7 +148,7 @@ const Calibracao = () => {
             color='red.600'
             textTransform='uppercase'
           >
-            Principais modelos de Calibração
+            ESCOPO DE CALIBRAÇÃO
           </Text>
           <SelectConfigCalibration />
           <Text textAlign='center' color='red.600' fontWeight='bold' fontSize='45px' mt='107px'>
@@ -165,11 +165,7 @@ const Calibracao = () => {
                 </Text>
               </Flex>
               <Center>
-                <Link
-                  target='_blank'
-                  href='/Certificado-ISO-9001-OUT24.pdf'
-                  _hover={{ textDecoration: 'none'}}
-                >
+                <Link target='_blank' href='/Certificado-ISO-9001-OUT24.pdf' _hover={{ textDecoration: 'none' }}>
                   <Button
                     w='100%'
                     maxW='263px'
@@ -178,10 +174,10 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ 
+                    _hover={{
                       transition: 'all 0.5s',
                       bg: 'black.800',
-                      color:"white"
+                      color: 'white',
                     }}
                   >
                     Certificado ISO 9001
@@ -202,7 +198,7 @@ const Calibracao = () => {
                 <Link
                   target='_blank'
                   href='https://contemp.com.br/Certificado-Acreditaçao-INMETRO - 24.04.21.pdf'
-                  _hover={{ textDecoration: 'none'}}
+                  _hover={{ textDecoration: 'none' }}
                 >
                   <Button
                     w='100%'
@@ -212,10 +208,10 @@ const Calibracao = () => {
                     mt='24px'
                     bg='red.600'
                     fontSize='20px'
-                    _hover={{ 
+                    _hover={{
                       transition: 'all 0.5s',
                       bg: 'black.800',
-                      color:"white"
+                      color: 'white',
                     }}
                   >
                     Certificado Acreditação INMETRO
@@ -254,7 +250,7 @@ const Calibracao = () => {
                 _hover={{
                   transition: 'all 0.4s',
                   bg: 'black.800',
-                  color:"white"
+                  color: 'white',
                 }}
               >
                 Acessar padrões
@@ -263,7 +259,7 @@ const Calibracao = () => {
           </Center>
         </Container>
       </Flex>
-      <Player />
+      {/* <Player /> */}
       <Contact
         id='duvidas-e-orcamentos'
         title='DÚVIDAS E ORÇAMENTOS'

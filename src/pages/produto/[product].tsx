@@ -484,7 +484,7 @@ const Product = () => {
             </Flex>
           </Container>
         </Flex>
-        <Player />
+        {/* <Player /> */}
         <Contact
           id='duvidas-e-orcamentos'
           title='DÚVIDAS E ORÇAMENTOS'
