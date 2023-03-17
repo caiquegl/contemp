@@ -15,6 +15,8 @@ import {
   VStack,
   Link,
   useToast,
+  Spinner,
+  Center,
 } from '@chakra-ui/react'
 import React, { Fragment, useCallback, useRef, useState } from 'react'
 import { BsTelephone } from 'react-icons/bs'
@@ -42,6 +44,7 @@ interface IProps {
 }
 export const Contact = ({ title, description, ocultAddres, form, id }: IProps) => {
   const [loading, setLoading] = useState(false)
+  const [loadingUpload, setLoadingUpload] = useState(false)
   const toast = useToast()
   const formRef = useRef<any>()
   const [file, setFile] = useState('')
@@ -92,7 +95,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
       const imageRef = ref(storage, `${id}/${file.name}`)
 
       const uploadTask = uploadBytesResumable(imageRef, file)
-
+      setLoadingUpload(true)
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -116,6 +119,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
             //   duration: 3000,
             //   isClosable: true,
             // });
+            setLoadingUpload(false)
             setFile(downloadURL)
           })
         }
@@ -132,6 +136,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
       const imageRef = ref(storage, `${id}/${name}`)
 
       const uploadTask = uploadBytesResumable(imageRef, info.file.originFileObj)
+      setLoadingUpload(true)
 
       uploadTask.on(
         'state_changed',
@@ -139,6 +144,8 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
           const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         },
         (error) => {
+          setLoadingUpload(false)
+
           toast({
             title: 'Erro',
             description: 'Erro ao fazer upload de arquivo',
@@ -157,6 +164,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
             //   isClosable: true,
             // });
             setFile(downloadURL)
+            setLoadingUpload(false)
           })
         }
       )
@@ -175,6 +183,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
       const imageRef = ref(storage, `${id}/${name}`)
 
       const uploadTask = uploadBytesResumable(imageRef, e.dataTransfer.files[0].originFileObj)
+      setLoadingUpload(true)
 
       uploadTask.on(
         'state_changed',
@@ -182,6 +191,8 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
           const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         },
         (error) => {
+          setLoadingUpload(false)
+
           toast({
             title: 'Erro',
             description: 'Erro ao fazer upload de arquivo',
@@ -199,6 +210,8 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
             //   duration: 3000,
             //   isClosable: true,
             // });
+            setLoadingUpload(false)
+
             setFile(downloadURL)
           })
         }
@@ -336,6 +349,14 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                                   />
                                 </Flex>
                               </>
+                            )}
+                            {loadingUpload && (
+                              <Center flexDirection='column' mt='10px'>
+                                <Text fontSize='14px' color='black.200'>
+                                  Carregando arquivo...
+                                </Text>
+                                <Spinner size='xs' color='red' />
+                              </Center>
                             )}
                           </Box>
                           // <Flex
