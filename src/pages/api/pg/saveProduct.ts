@@ -37,6 +37,15 @@ export default async function handler(
         }
       })
      
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Criou Produto ${body.name}`
+        }
+      })
 
       return res.status(201).json({msg: 'Sucesso ao criar produto.'})
     } catch (error) {

@@ -59,6 +59,22 @@ export default async function handler(
       //     sub_category_id: body.is_main === 'true' ? null : body.sub_category_id ? body.sub_category_id : null
       //   }
       // })
+
+      const cat = await prisma.categories.findFirst({
+        where: {
+          id: category.id
+        }
+      })
+
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Atualizou ordem da categoria ${cat?.name}`
+        }
+      })
   
       return res.status(201).json({msg: 'Sucesso ao atualizar categoria.'})
     } catch (error) {

@@ -41,6 +41,16 @@ export default async function handler(
           call_product: body.call_product
         }
       })
+
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Editou Produto ${body.name}`
+        }
+      })
      
 
       return res.status(201).json({msg: 'Sucesso ao criar produto.'})

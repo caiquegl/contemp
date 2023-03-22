@@ -1,6 +1,25 @@
-import { Box, Flex, Text, Link, Container, Avatar, Divider, Tabs, TabList, Tab } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Text,
+  Link,
+  Container,
+  Avatar,
+  Divider,
+  Tabs,
+  TabList,
+  Tab,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Logo from '../../assets/icons/Logo-Contemp.svg'
 import TabCategory from '../../components/Tabs/TabCategory'
 import TabHome from '../../components/Tabs/TabHome'
@@ -8,12 +27,16 @@ import TabProduct from '../../components/Tabs/TabProduct'
 import moment from 'moment'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { withSSRAuth } from '../../utils/withSSRAuth'
+import { AiOutlineHistory } from 'react-icons/ai'
+import { Table, Tooltip } from 'antd'
+import { api } from '../../lib/axios'
 
 const Adm = () => {
   // const router = useRouter();
   // const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(0)
   const [date, setDate] = useState('')
+  const [logs, setLogs] = useState<any[]>([])
   // useEffect(() => {
   //   async function loadUserFromCookies() {
   //     const userCookies = Cookies.get("SET_USER");
@@ -29,7 +52,17 @@ const Adm = () => {
 
   useEffect(() => {
     setDate(moment().format('DD/MM/YYYY - HH:mm').toString())
+
+    const getLogs  = async () => {
+      const { data } = await api.get('getLogs')
+      setLogs(data)
+    }
+
+    getLogs()
   }, [])
+
+  const btnRef = useRef<any>()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const componentsTab = [
     // <TabSeo />,
@@ -45,6 +78,11 @@ const Adm = () => {
             <Image src={Logo} width={160} height={41} onContextMenu={setContextMenuFalse} />
           </Link>
           <Flex alignItems='center'>
+            <Box mr="20px" pr="20px" borderRight="1px solid #eee" h="100%">
+              <Tooltip title="Logs">
+                <AiOutlineHistory size={22} onClick={onOpen} style={{ cursor: 'pointer' }} />
+              </Tooltip>
+            </Box>
             <Box mr='16px'>
               <Text fontWeight='bold' fontSize='20px' textAlign='right'>
                 Olá
@@ -129,6 +167,31 @@ const Adm = () => {
           </Text>
         </Link>
       </Flex>
+
+      <Drawer
+        size={'lg'}
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton color={'#ccc'} />
+          <DrawerHeader color={'#000'}>Logs de atividades</DrawerHeader>
+
+          <DrawerBody>
+            <Table
+              columns={[
+                { title: '#', width: 170, dataIndex: 'created_at', render: (item) => moment(item).fromNow() },
+                { title: 'Usuário', width: 200, dataIndex: 'user', ellipsis: true },
+                { title: 'Log', dataIndex: 'description', ellipsis: true },
+              ]}
+              dataSource={logs}
+            />
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   )
 }

@@ -36,10 +36,20 @@ export default async function handler(
           call_product: el.call_product
         }
       })
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+        user = user?.body?.email || ''
+  
+        await prisma.logs.create({
+          data: {
+            user: user,
+            description: `Criou Produto ${data.name}`
+          }
+        })
       }
       console.log(index)
 
     }
+
     
     return res.status(201).json({})
   }

@@ -10,6 +10,8 @@ export default async function handler(
         return res.status(405).end()
       }
 
+      console.log(req.cookies['nextAuth.contemp'])
+
       const body = req.body
       const exist = await prisma.categories.findFirst({
         where: {
@@ -31,6 +33,16 @@ export default async function handler(
           ...body,
           is_main: body.is_main === 'true' ? true : false,
           sub_category_id: body.is_main === 'true' ? null : body.sub_category_id ? body.sub_category_id : null
+        }
+      })
+
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Editou Categoria ${body.name}`
         }
       })
   

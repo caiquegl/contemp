@@ -10,11 +10,27 @@ export default async function handler(
         return res.status(405).end()
       }
 
-      const body = req.body      
+      const body = req.body
+      
+      const product = await prisma.products.findFirst({
+        where: {
+          id: body.id
+        }
+      })
 
       await prisma.products.delete({
         where: {
           id: body.id
+        }
+      })
+
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Excluíu Produto ${product?.name}`
         }
       })
      

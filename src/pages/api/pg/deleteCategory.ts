@@ -40,9 +40,25 @@ export default async function handler(
         }
       })
 
+      const category = await prisma.categories.findFirst({
+        where: {
+          id: body.id
+        }
+      })
+
       await prisma.categories.delete({
         where: {
           id: body.id
+        }
+      })
+
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+      user = user?.body?.email || ''
+
+      await prisma.logs.create({
+        data: {
+          user: user,
+          description: `Excluíu Categoria ${category?.name}`
         }
       })
      

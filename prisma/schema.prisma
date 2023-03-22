@@ -111,3 +111,14 @@ model Products {
 
   @@map("products")
 }
+
+model Logs {
+  id          Int      @id @default(autoincrement())
+  user        String
+  description String
+  before      Json?
+  after       Json?
+  created_at  DateTime @default(now())
+
+  @@map("logs")
+}
