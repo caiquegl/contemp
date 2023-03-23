@@ -73,8 +73,7 @@ const Support = () => {
       <Contact
         id='duvidas-e-orcamentos'
         title='DÚVIDAS E ORÇAMENTOS'
-        description='Essa é a seleção que a equipe da Contemp escolheu como os
-              destaques do mês'
+        description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
         form={[
           {
             name: 'Nome',
