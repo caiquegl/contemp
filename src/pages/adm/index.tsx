@@ -21,12 +21,12 @@ const Adm = () => {
   const signIn = async () => {
     try {
       setLoading(true)
-
+      const data = await signInWithEmailAndPassword(auth, body.email, body.password)
       setCookie(
         undefined,
         'nextAuth.contemp',
         JSON.stringify({
-          auth,
+          data,
           body,
         })
       )
