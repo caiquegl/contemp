@@ -485,7 +485,7 @@ const Product = () => {
           </Container>
         </Flex>
         {/* <Player /> */}
-        <Contact
+        {/*<Contact
           id='duvidas-e-orcamentos'
           title='DÚVIDAS E ORÇAMENTOS'
           description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
@@ -511,7 +511,7 @@ const Product = () => {
               type: 'textArea',
             },
           ]}
-        />
+        />*/}
         <Footer />
       </SmoothScroll>
     </>
