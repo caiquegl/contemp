@@ -52,6 +52,8 @@ export function SidebarDrawer({
       width="100%"
       h={pxToRem(70)}
       padding={`0 ${pxToRem(10)}`}
+      maxWidth={'inherit'}
+      margin={0}
     >
       <Link href="/">
         <NextImageMenuFalse src={Logo} width={160} />

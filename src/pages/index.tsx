@@ -475,6 +475,12 @@ const Home = () => {
       />
       <Flex w='100%' mt='-100px' bg='white' alignItems='center' justifyContent='center'>
         <Container maxW={['100%', '100%', '8xl', '8xl', '8xl']} mb='50px'>
+        <Text color='black' fontSize='40px' fontWeight='bold' textAlign='center' mt={"5%"}>
+        Acompanhe nossos artigos
+      </Text>
+      <Text color='black' fontSize='20px' textAlign='center' mb={"5%"}>
+        No blog da Contemp você encontra artigos e conteúdo inteligente elaborado por nossa equipe.
+      </Text>
           <Flex h={[pxToRem(500), pxToRem(660)]}>
             {isMobile && (
               <Swiper

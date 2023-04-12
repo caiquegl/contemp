@@ -82,18 +82,19 @@ const CardProductWithDescription = ({
       >
         <Tooltip label={text} placement='top'>
           <Text
-            fontSize={'2.25rem'}
+            fontSize={'1.75rem'}
             fontWeight='bold'
             color={color ? color : 'black'}
             textTransform='uppercase'
             width='100%'
-            lineHeight='2.7rem'
+            lineHeight='2rem'
+            marginBottom={'5%'}
             gridRow={1}
           >
             {text}
           </Text>
         </Tooltip>
-        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2}>
+        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2} lineHeight={'1.5rem'}>
           {call_product &&
             call_product.split('').length > 0 &&
             call_product

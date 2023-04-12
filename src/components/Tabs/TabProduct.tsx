@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import ContainerAddProduct from '../ContainerAddProduct'
@@ -108,6 +108,10 @@ const TabProduct = () => {
     <>
       {step === 1 && (
         <>
+          <Box>
+            <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Painel de Produtos</Text>
+            <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Gerencie todos os produtos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua através do painel. Atenção! Ao excluir um produto não  será possivel recupera-lo.</Text>
+          </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
               bg='red.600'
@@ -150,7 +154,7 @@ const TabProduct = () => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table dataSource={list} columns={column} />
+            <Table dataSource={list} columns={column} word-wrap={'break-word'}/>
           </Box>
         </>
       )}

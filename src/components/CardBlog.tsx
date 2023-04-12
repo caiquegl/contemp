@@ -72,7 +72,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
                 transition: "all 0.3s",
               }}
             >
-              Veja mais
+              Ir para o blog
             </Button>
           </Link>
       </Box>
