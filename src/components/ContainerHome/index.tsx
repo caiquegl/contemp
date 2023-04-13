@@ -1,4 +1,4 @@
-import { Box, HStack, VStack, Button, Flex, useToast, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/react'
+import { Box, HStack, VStack, Button, Flex, useToast, FormControl, FormLabel, FormErrorMessage, Text } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from './inputs'
 import { InputDefault } from '../Form/Input'
@@ -126,7 +126,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
       bg='white'
       borderRadius='8px'
       p='30px 40px'
-      maxW='882px'
       as='form'
       onSubmit={handleSubmit(saveProduct)}
       ref={formRef}

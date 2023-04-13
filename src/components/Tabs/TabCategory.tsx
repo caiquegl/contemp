@@ -12,6 +12,8 @@ import {
   Select,
   useToast,
   VStack,
+  Text,
+  FormHelperText,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -295,7 +297,11 @@ const TabCategory = () => {
 
   return (
     <>
-      <Flex w='100%' alignItems='center' justifyContent='flex-end' mb='18px'>
+      <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
+        <Box w={'70%'}>
+          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Categorias & Subcategorias</Text>
+          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma prática.</Text>
+        </Box>
         <SearchBar
           inputProps={{
             placeholder: 'Digite a categoria...',
@@ -333,12 +339,15 @@ const TabCategory = () => {
           ref={formRef}
         >
           <VStack spacing='20px' w='100%'>
+            <FormControl>
             <InputDefault
               label='Nome da categoria'
               type='text'
               error={errors.name}
               {...register('name', { required: 'Nome é obrigatório' })}
             />
+            <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
+            </FormControl>
             <Controller
               control={control}
               name='is_main'
@@ -350,6 +359,7 @@ const TabCategory = () => {
                   <FormLabel fontSize='20px' mb='10px' color='black.800'>
                     É principal?
                   </FormLabel>
+
 
                   <InputGroup
                     borderRadius='6px'
@@ -386,6 +396,7 @@ const TabCategory = () => {
                     </Select>
                   </InputGroup>
                   {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                  <FormHelperText>Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".</FormHelperText>
                 </FormControl>
               )}
             />
@@ -426,6 +437,7 @@ const TabCategory = () => {
                 )}
               />
             )}
+            <FormControl>
             <TextareaDefault
               label='Descrição'
               error={errors.description}
@@ -433,6 +445,9 @@ const TabCategory = () => {
                 required: 'Descrição é obrigatório',
               })}
             />
+            <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
+            </FormControl>
+            <FormControl>
             <TextareaDefault
               label='Descrição SEO'
               error={errors.description_seo}
@@ -440,6 +455,9 @@ const TabCategory = () => {
                 required: 'Descrição é obrigatório',
               })}
             />
+            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+            </FormControl>
+            <FormControl>
             <TextareaDefault
               label='Key Word SEO'
               error={errors.key_word_seo}
@@ -447,6 +465,8 @@ const TabCategory = () => {
                 required: 'Key Word Seo é obrigatório',
               })}
             />
+            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+            </FormControl>
             <InputsHome name='Foto do icone' typeInput='fileSingle' getUrls={(values: any) => setUrl(values)} />
             <HStack spacing='20px' flexWrap='wrap' w='100%'>
               {url && (
@@ -459,6 +479,7 @@ const TabCategory = () => {
               )}
             </HStack>
             <Box w='100%'>
+            <FormControl>
               <Checkbox
                 colorScheme='red'
                 color='black.800'
@@ -470,9 +491,12 @@ const TabCategory = () => {
               >
                 Categoria destaque
               </Checkbox>
+              <FormHelperText>Marque caso queira que a categoria apareça na página de todos os produtos.</FormHelperText>
+              </FormControl>
             </Box>
 
             <Box w='100%' mt='10px'>
+            <FormControl>
               <Checkbox
                 colorScheme='red'
                 color='black.800'
@@ -484,6 +508,8 @@ const TabCategory = () => {
               >
                 Ativo
               </Checkbox>
+              <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
+              </FormControl>
             </Box>
           </VStack>
           <Flex

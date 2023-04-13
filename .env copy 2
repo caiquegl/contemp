@@ -1,0 +1,3 @@
+SENDGRID_API_KEY="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"
+SENDBLUE=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
+DATABASE_URL="postgresql://webadmin:AOKeha61664@191.243.198.53:5432/site_homolog?schema=public"

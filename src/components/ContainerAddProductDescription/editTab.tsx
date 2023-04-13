@@ -51,6 +51,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
             />
           </div>
         )}
+        <Text mt={'1%'} fontStyle={'italic'} fontWeight={'bold'}>Para visualizar em formato de código basta apertar no icone de olho.</Text>
       </Box>
     </Box>
   )

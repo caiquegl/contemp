@@ -134,13 +134,31 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
+      <Flex alignItems='center' justifyContent='flex-end' w='100%'>
+        <Button
+          ml='auto'
+          bg='red.600'
+          color='white'
+          fontSize='20px'
+          borderRadius='4px'
+          w='128px'
+          h='47px'
+          _hover={{ transition: 'all 0.4s' }}
+          isLoading={loading}
+          onClick={() => saveProduct()}
+        >
+          Salvar
+        </Button>
+      </Flex>
+      <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Tabs do Produto</Text>
+      <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Adicione quantas tabs achar necessário. Pode incluir links, botões, tabelas, videos, imagens e até mesmo listas ordenadas ou não ordenadas.</Text>
       <VStack spacing='30px' divider={<Divider />} w='100%'>
         {tabs.map((list: any, index: number) => (
           <Box w='100%' key={index}>
             <Flex mb='20px' alignItems='center' justifyContent='space-between' w='100%'>
               <Flex alignItems='center' w='100%' maxW='636px'>
                 <Box w='100%' maxW='636px'>
-                  <Text color='black.800' fontSize='20px' mb='10px'>
+                  <Text color='black.800' fontSize='20px' fontWeight={'black'} mb='10px'>
                     Nome da tab {index + 1}
                   </Text>
                   <InputGroup

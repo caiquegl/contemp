@@ -1,4 +1,4 @@
-import { Tabs, TabList, Tab, TabPanels, TabPanel, useToast } from '@chakra-ui/react'
+import { Tabs, TabList, Tab, TabPanels, TabPanel, useToast, Box, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { api } from '../../lib/axios'
 import { pxToRem } from '../../utils/pxToRem'
@@ -31,6 +31,9 @@ const TabHome = () => {
   const tabs = Array.from({ length: 7 }, (_, index) => index)
 
   return (
+    <Box>
+      <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Produtos da Home</Text>
+      <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Adicione e/ou edite aqui os 7 produtos que irão aparecer em destaque na home do site.</Text>
     <Tabs variant='unstyled' index={activeTab} onChange={(indexTab) => setActiveTab(indexTab)}>
       <TabList>
         {tabs.map((tabNumber) => (
@@ -40,6 +43,7 @@ const TabHome = () => {
               bg: 'red.600',
               color: 'white',
               fontWeight: 'bold',
+              borderRadius: '5px',
             }}
             w={pxToRem(133)}
             color='black.800'
@@ -60,6 +64,7 @@ const TabHome = () => {
         ))}
       </TabPanels>
     </Tabs>
+    </Box>
   )
 }
 

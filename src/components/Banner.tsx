@@ -41,9 +41,9 @@ export const Banner = () => {
         alignItems="center"
         height="100%"
       >
-        <Box marginTop={'5%'}>
+        {/*<Box marginTop={'5%'}>
           <Image src={Team} width={pxToRem(200)} height={pxToRem(52)} />
-        </Box>
+        </Box>*/}
         <Flex
           w="100%"
           maxW="650px"
@@ -56,11 +56,12 @@ export const Banner = () => {
             textAlign="center"
             fontSize={['1.3rem', '1.3rem', '2.3rem']}
             fontWeight="bold"
+            marginTop={'20%'}
           >
-            Excelência em produtos:{' '}
+            PENSOU TEMPERATURA INDUSTRIAL, PENSOU CONTEMP
           </Text>
 
-          <Text
+          {/*<Text
             color="white"
             textAlign="center"
             fontSize={['1.3rem', '1.3rem', '2.3rem']}
@@ -68,7 +69,7 @@ export const Banner = () => {
             h={pxToRem(width > maxWidth ? 130 : 40)}
           >
             <Typewriter words={typewriterWords} loop={0} cursor={true} />
-          </Text>
+          </Text>*/}
         </Flex>
         <Flex w="100%" alignItems="center" flexDirection="column">
           <SearchBar

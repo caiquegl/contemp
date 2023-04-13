@@ -12,6 +12,7 @@ import {
   InputGroup,
   Select,
   FormErrorMessage,
+  FormHelperText,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from '../ContainerHome/inputs'
@@ -157,7 +158,24 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
       <VStack spacing='20px' w='100%' as='form' onSubmit={handleSubmit(saveProduct)} ref={formRef}>
+      <Flex alignItems='center' justifyContent='flex-end' w='100%'>
+        <Button
+          ml='auto'
+          bg='red.600'
+          color='white'
+          fontSize='20px'
+          borderRadius='4px'
+          w='128px'
+          h='47px'
+          _hover={{ transition: 'all 0.4s' }}
+          type='button'
+          onClick={() => formRef.current?.requestSubmit()}
+        >
+          Avançar
+        </Button>
+      </Flex>
         <HStack w='100%' spacing='20px'>
+        <FormControl>
           <InputDefault
             label='Nome do produto'
             type='text'
@@ -165,6 +183,9 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             error={errors.name}
             {...register('name', { required: 'Nome é obrigatório' })}
           />
+          <FormHelperText>O nome do produto será o mesmo que na url e apareceça igual em todos os locais do site em que ele se encontrar.</FormHelperText>
+          </FormControl>
+          <FormControl>
           <Controller
             control={control}
             name='category'
@@ -234,6 +255,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               </FormControl>
             )}
           />
+          <FormHelperText>Basta começa a digitar o nome da categoria que ela irá aparecer como opção.</FormHelperText>
+          </FormControl>
           {/* <SelectDefault
             label="Categoria"
             error={errors.category}
@@ -241,11 +264,14 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             {...register('category', { required: 'Campo obrigatório' })}
           /> */}
         </HStack>
+        <FormControl>
         <InputsHome
           name='Foto e vídeo do produto'
           typeInput='file'
           getUrls={(values: any) => setUrls([...urls, ...values])}
         />
+        <FormHelperText>Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.</FormHelperText>
+        </FormControl>
         <HStack spacing='20px' flexWrap='wrap' w='100%' mt='20px'>
           {urls &&
             urls.length > 0 &&
@@ -263,6 +289,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               />
             ))}
         </HStack>
+        <FormControl>
         <TextareaDefault
           label='Descrição curta'
           error={errors.description}
@@ -270,6 +297,9 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             required: 'Descrição é obrigatório',
           })}
         />
+        <FormHelperText>Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.</FormHelperText>
+        </FormControl>
+        <FormControl>
         <TextareaDefault
           label='Chamada de produto'
           error={errors.call_product}
@@ -277,7 +307,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             required: 'Chamada de produto é obrigatório',
           })}
         />
+        <FormHelperText>A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.</FormHelperText>
+        </FormControl>
         <HStack spacing='20px' w='100%'>
+        <FormControl>
           <TextareaDefault
             label='Descrição SEO'
             error={errors.description_seo}
@@ -285,6 +318,9 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               required: 'Descrição seo é obrigatório',
             })}
           />
+          <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+          </FormControl>
+          <FormControl>
           <TextareaDefault
             label='key Word SEO'
             error={errors.key_word_seo}
@@ -292,6 +328,8 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               required: 'Key word seo é obrigatório',
             })}
           />
+          <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+          </FormControl>
         </HStack>
         <Flex w='100%'>
           <Checkbox
@@ -307,7 +345,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               setListVariation([{ id: 1 }])
             }}
           >
-            Produto tem variações ?
+            Produto tem opcionais / variações?
           </Checkbox>
           <Checkbox
             colorScheme='red'
@@ -320,7 +358,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             isChecked={destaque}
             onChange={(check) => setDestaque(check.target.checked)}
           >
-            Adicionar ao corrocel de destaque ?
+            Novidade?
           </Checkbox>
           <Checkbox
             colorScheme='red'

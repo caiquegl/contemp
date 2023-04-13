@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
 
+:root {
+  --blue-gray: #013e57;
+  --red-primary: #b60005;
+  --black-primary: #242424;
+  --white-primary: #fff;
+}
+
+
 html,
 body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 img {
@@ -298,4 +307,14 @@ img {
 
 .ant-slider-step {
   background-color: rgba(182, 0, 5, 0.1)
+}
+
+.chakra-form__helper-text.css-1dsvy77 {
+  color: var(--black-primary);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.css-mwllcx {
+  max-width: inherit!important;
 }

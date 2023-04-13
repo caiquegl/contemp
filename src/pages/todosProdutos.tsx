@@ -151,9 +151,9 @@ const AllProduct = () => {
             </Container>
           </Flex>
         ))}
-      <Box bg='white' w='100%' p='20px' pt='100px'>
+      {/*<Box bg='white' w='100%' p='20px' pt='100px'>
         <AdBanners />
-      </Box>
+      </Box>*/}
       <Flex w='100%' alignItems='center' bg='white.500' p='0 20px'>
         <Container maxW='7xl' p='80px 0'>
           <Text
@@ -197,7 +197,7 @@ const AllProduct = () => {
         </Container>
       </Flex>
       {/* <Player /> */}
-      <Contact
+      {/*<Contact
         id='duvidas-e-orcamentos'
         title='DÚVIDAS E ORÇAMENTOS'
         description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
@@ -223,7 +223,7 @@ const AllProduct = () => {
             type: 'textArea',
           },
         ]}
-      />
+      />*/}
       <Footer />
     </SmoothScroll>
   )

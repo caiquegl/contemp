@@ -448,8 +448,8 @@ const Product = () => {
         </Flex>
         <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
           <Container maxW='7xl' p='80px 0'>
-            <Flex alignItems='center' mb='40px'>
-              <Text color='black.800' fontSize={{ base: pxToRem(35), lg: pxToRem(45) }} fontWeight='bold' ml='15px'>
+            <Flex alignItems='center' mb={'-5%'}>
+              <Text color='black.800' fontSize={'2rem'} fontWeight='bold' ml='15px'>
                 #temnacontemp
               </Text>
             </Flex>
@@ -485,7 +485,7 @@ const Product = () => {
           </Container>
         </Flex>
         {/* <Player /> */}
-        <Contact
+        {/*<Contact
           id='duvidas-e-orcamentos'
           title='DÚVIDAS E ORÇAMENTOS'
           description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
@@ -511,7 +511,7 @@ const Product = () => {
               type: 'textArea',
             },
           ]}
-        />
+        />*/}
         <Footer />
       </SmoothScroll>
     </>

@@ -24,6 +24,7 @@ import Logo from '../../assets/icons/Logo-Contemp.svg'
 import TabCategory from '../../components/Tabs/TabCategory'
 import TabHome from '../../components/Tabs/TabHome'
 import TabProduct from '../../components/Tabs/TabProduct'
+import TabArchives from '../../components/Tabs/TabArchives'
 import moment from 'moment'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { withSSRAuth } from '../../utils/withSSRAuth'
@@ -123,6 +124,7 @@ const Adm = () => {
                   bg: 'red.600',
                   color: 'white',
                   fontWeight: 'bold',
+                  borderRadius: '5px',
                 }}
                 w='133px'
                 color='black.800'
@@ -134,6 +136,7 @@ const Adm = () => {
                   bg: 'red.600',
                   color: 'white',
                   fontWeight: 'bold',
+                  borderRadius: '5px',
                 }}
                 w='133px'
                 color='black.800'
@@ -145,12 +148,25 @@ const Adm = () => {
                   bg: 'red.600',
                   color: 'white',
                   fontWeight: 'bold',
+                  borderRadius: '5px',
                 }}
                 w='133px'
                 color='black.800'
               >
                 Produtos
               </Tab>
+              {/*<Tab>
+              _selected={{
+                  bg: 'red.600',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  borderRadius: '5px',
+                }}
+                w='133px'
+                color='black.800'
+              >
+                Arquivos
+              </Tab>*/}
             </TabList>
           </Tabs>
         </Flex>
@@ -158,7 +174,7 @@ const Adm = () => {
         {componentsTab[activeTab]}
       </Box>
       <Flex alignItems='center' justifyContent='flex-end' bg='white.500' w='100%'>
-        <Link mr='50px' isExternal href='https://3hub.co/' _hover={{ textDecoration: 'none', color: 'black.800' }}>
+        <Link mr={'5%'} mb={'3%'} isExternal href='https://3hub.co/' _hover={{ textDecoration: 'none', color: 'black.800' }}>
           <Text fontSize='20px' color='black.800'>
             Desenvolvido por{' '}
             <Text as='span' color='red.600' fontWeight='bold'>
