@@ -96,11 +96,8 @@ export const Favorite = ({ homeTabs }) => {
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
-      <Text color='white' fontSize='40px' fontWeight='bold' textAlign='center' mt={width > maxWidth ? '80px' : '20px'}>
-        Confira nossas novidades 2023
-      </Text>
-      <Text color='white' fontSize='20px' textAlign='center' mt='15px' mb='40px'>
-        Essa é a seleção de novos produtos da linha 2023 da Contemp.
+      <Text color='white' fontSize='40px' fontWeight='bold' textAlign='center' mt={width > maxWidth ? '80px' : '20px'} mb={'5%'}>
+        Confira nossas Novidades
       </Text>
       <Flex h={pxToRem(250)} w='100%'>
         <Swiper
