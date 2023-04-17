@@ -125,6 +125,17 @@ const Orcamento = () => {
         <meta name='keywords' content='contemp, orçamento online, orçamento, faça seu pedido' />
         <title>Orçamento</title>
         <link rel='icon' href='/favicon.png' />
+
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            gtag('event', 'conversion', {'send_to': 'AW-1047791211/rpeYCLih0IIDEOuM0PMD'});
+            `,
+          }}>
+        </script>
+
+
       </Head>
       <Flex
         w='100%'

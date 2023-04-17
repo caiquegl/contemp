@@ -30,17 +30,29 @@ export default class MyDocument extends Document {
           <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=14306fef-6e0e-4947-a1b2-f2c444c9ac12"> </script>
           <script src="https://www.googleoptimize.com/optimize.js?id=OPT-W2XSF2X"></script>
 
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RE6JLX9LC"/>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-7RE6JLX9LC" />
           <script
-          dangerouslySetInnerHTML={{
+            dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-7RE6JLX9LC');
             `,
-          }}
+            }}
           />
+
+          <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1047791211"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-1047791211');
+              `,
+              }}>
+          </script>
 
 
         </Head>
