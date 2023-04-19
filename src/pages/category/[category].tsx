@@ -85,7 +85,7 @@ const Category = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['110px', '110px', '180px', '180px', '180px', '180px']}
+        h={['110px', '110px', '140px', '140px', '140px', '140px']}
         // id="viewCategory"
       >
         <Text

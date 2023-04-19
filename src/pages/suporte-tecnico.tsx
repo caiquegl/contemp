@@ -1,4 +1,4 @@
-import { Container, Flex, Text } from '@chakra-ui/react'
+import { Container, Flex, Text, Link, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Box } from '@chakra-ui/react'
 import { Header } from '../components/Header'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
@@ -15,14 +15,25 @@ const Support = () => {
           content='Conte com o suporte técnico da Contemp para tirar dúvidas sobre os produtos que comercializamos. Acesse!'
         />
         <meta name='keywords' content='suporte técnico, Contemp, pós-venda' />
-        <title>Dúvidas e Orçamentos</title>
+        <title>Suporte Técnico</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
       <Header />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='180px'>
+      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
         <Text fontSize='45px' fontWeight='bold' textAlign='center'>
           Suporte Técnico
         </Text>
+        <Box>
+          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/a-contemp' _active={{color:'red',}}>A Contemp</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Box>
+
       </Flex>
       <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='12px 0 100px'>
@@ -36,7 +47,14 @@ const Support = () => {
             Caso precise de apoio técnico com um de nossos produtos, disponibilizamos para você nosso setor de suporte
             técnico. Entre em contato com um de nossos técnicos e acharemos a melhor maneira de lhe auxiliar. Contamos
             com os serviços de suporte telefônico, acesso remoto, visitas a campo, treinamento local e in company e
-            consertos em nosso laboratório
+            consertos em nosso laboratório.
+          </Text>
+          <Text fontSize='20px' color='black.900' mt='50px' lineHeight='34px'>
+            Caso precise fale com nosso suporte técnico pelo telefone
+            <Link color='black.900' href='tel:+551142235128' ml={'1%'} mr={'1%'} fontWeight={"bold"} _hover={{ color: 'red.600', }}>
+              (11) 4223-5128
+            </Link>
+            ou acesse nosso chat.
           </Text>
           <Text mt='119px' fontWeight='bold' fontSize='45px' textAlign='center' mb='70px' color='red.600'>
             VIDEOS E TUTORIAIS

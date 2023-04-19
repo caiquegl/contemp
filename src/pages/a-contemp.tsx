@@ -1,4 +1,4 @@
-import { Box, Container, Flex, HStack, Text, Button, Icon, Link, textDecoration } from '@chakra-ui/react'
+import { Box, Container, Flex, HStack, Text, Button, Icon, Link, textDecoration, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from '@chakra-ui/react'
 import Iso from '../assets/images/iso.png'
 import Image from 'next/image'
 import { Header } from '../components/Header'
@@ -28,10 +28,20 @@ const Home = () => {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <Header />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='180px'>
+      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
         <Text fontSize='45px' fontWeight='bold' textAlign='center'>
           Sobre nós
         </Text>
+        <Box>
+          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/suporte-tecnico' _active={{color:'red',}}>Suporte Técnico</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Box>
       </Flex>
       <Flex
         w='100%'

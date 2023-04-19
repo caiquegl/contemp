@@ -142,7 +142,7 @@ const Orcamento = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['350px', '350px', '180px', '180px', '180px', '180px']}
+        h={['350px', '350px', '160px', '160px', '160px', '160px']}
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
@@ -153,7 +153,7 @@ const Orcamento = () => {
         >
           Solicitar Orçamento
         </Text>
-        <Text
+        {/*<Text
           fontSize={'20px'}
           fontWeight='bold'
           textAlign='center'
@@ -163,7 +163,7 @@ const Orcamento = () => {
           Peça seu orçamento de forma facilitada. Basta adicionar ou excluir os produtos que precisa, preencher seus
           dados de contato no formulário abaixo e pronto. Um dos especialistas da Contemp irá entrar em contato para
           passar valores e mais informações.
-        </Text>
+        </Text>*/}
       </Flex>
 
       <Flex
@@ -252,7 +252,7 @@ const Orcamento = () => {
                 bg='red.600'
                 color='white'
                 fontSize='20px'
-                borderRadius='4px'
+                borderRadius='50px'
                 h='47px'
                 isLoading={loading}
                 _hover={{
