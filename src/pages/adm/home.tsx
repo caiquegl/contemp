@@ -30,13 +30,16 @@ import { withSSRAuth } from '../../utils/withSSRAuth'
 import { AiOutlineHistory } from 'react-icons/ai'
 import { Table, Tooltip } from 'antd'
 import { api } from '../../lib/axios'
+import { parseCookies } from "nookies";
+import { getFormattedDateTime } from '../../utils/countdown'
 
 const Adm = () => {
   // const router = useRouter();
-  // const { user, setUser } = useAuth();
   const [activeTab, setActiveTab] = useState(0)
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(getFormattedDateTime())
   const [logs, setLogs] = useState<any[]>([])
+  const [back, setBack] = useState<boolean>(true)
+  const [user, setUser] = useState<any>({})
   // useEffect(() => {
   //   async function loadUserFromCookies() {
   //     const userCookies = Cookies.get("SET_USER");
@@ -51,14 +54,27 @@ const Adm = () => {
   // }, []);
 
   useEffect(() => {
-    setDate(moment().format('DD/MM/YYYY - HH:mm').toString())
-
     const getLogs = async () => {
       const { data } = await api.get('getLogs')
       setLogs(data)
     }
 
     getLogs()
+  }, [])
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDate(getFormattedDateTime());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    let userJson = JSON.parse(cookies['nextAuth.contemp'])
+    setUser(userJson.body)
   }, [])
 
   const btnRef = useRef<any>()
@@ -68,8 +84,15 @@ const Adm = () => {
     // <TabSeo />,
     <TabHome />,
     <TabCategory />,
-    <TabProduct />,
+    <TabProduct back={back}/>,
   ]
+
+  const emails: any = {
+    "marketing@contemp.com.br": 'Marketing',
+    "kemelin@3hub.co": 'Kemilin',
+    "atendimento@3hub.co": 'Atendimento 3Hub'
+  }
+
   return (
     <>
       <Container maxW='7xl' p='12px 60px 12px 60px'>
@@ -85,7 +108,7 @@ const Adm = () => {
             </Box>
             <Box mr='16px'>
               <Text fontWeight='bold' fontSize='20px' textAlign='right'>
-                Olá
+                Olá {user.email ? emails[user.email] : ''}
               </Text>
               <Text fontSize='20px'>{date}</Text>
             </Box>
@@ -151,6 +174,7 @@ const Adm = () => {
                 }}
                 w='133px'
                 color='black.800'
+                onClick={() => setBack(!back)}
               >
                 Produtos
               </Tab>

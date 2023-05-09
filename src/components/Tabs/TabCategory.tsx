@@ -327,7 +327,7 @@ const TabCategory = () => {
       </Flex>
       <HStack spacing='20px' alignItems='flex-start'>
         <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-          <Table dataSource={loading ? [] : list} columns={column} loading={loading} />
+          <Table scroll={{ x: 'fit-content' }} dataSource={loading ? [] : list} columns={column} loading={loading} />
         </Box>
         <Box
           borderRadius='8px'
