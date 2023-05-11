@@ -5,6 +5,7 @@ import { database, initFirebase } from '../../utils/db'
 import { addDoc, collection, getDocs, limit, query, where, updateDoc, doc } from 'firebase/firestore'
 import EditTab from './editTab'
 import { api } from '../../lib/axios'
+import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 
 const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
   initFirebase()
@@ -132,6 +133,32 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
     }
   }
 
+  const upTab = (index: number) => {
+    setEditorLoaded(false)
+    let newList: any = tabs
+    const up = newList[index];
+    const down = newList[index - 1];
+    newList[index - 1] = up;
+    newList[index] = down;
+    setTabs([...newList])
+    setTimeout(() => {
+      setEditorLoaded(true)
+    }, 500)
+  }
+
+  const downTab = (index: number) => {
+    setEditorLoaded(false)
+    let newList: any = tabs
+    const up = newList[index];
+    const down = newList[index + 1];
+    newList[index + 1] = up;
+    newList[index] = down;
+    setTabs([...newList])
+    setTimeout(() => {
+      setEditorLoaded(true)
+    }, 500)
+  }
+
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
       <Flex alignItems='center' justifyContent='flex-end' w='100%'>
@@ -200,30 +227,12 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
                 </Box>
               </Flex>
               <HStack spacing='20px'>
+                {index !== tabs.length - 1 && <Icon as={AiOutlineArrowDown} color="#cc0b0b" fontSize='30px' cursor='pointer' onClick={() => downTab(index)} />}
+                {index !== 0 && <Icon as={AiOutlineArrowUp} color="#0e9721" fontSize='30px' cursor='pointer' onClick={() => upTab(index)} />}
                 <Icon as={GrAddCircle} fontSize='30px' cursor='pointer' onClick={() => add()} />
                 <Icon as={GrSubtractCircle} fontSize='30px' cursor='pointer' onClick={() => remove(index)} />
               </HStack>
             </Flex>
-            {/* <Flex>
-            <Text color="black.800" fontSize="20px" mb="10px">
-              Conteúdo da tab
-            </Text>
-            <Icon as={AiFillEye} color="black.800" fontSize="20px" />
-          </Flex>
-
-          <Box color="black.800">
-            <CKeditor
-              name="description"
-              onChange={(evt: any) => {
-                let newList = tabs;
-                newList[index].text = evt;
-                setTabs(newList);
-              }}
-              value={tabs[index]?.text ? tabs[index]?.text : ""}
-              editorLoaded={editorLoaded}
-            />
-          </Box> */}
-
             <EditTab load={() => load()} editorLoaded={editorLoaded} setTabs={setTabs} index={index} tabs={tabs} />
           </Box>
         ))}

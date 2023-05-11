@@ -31,6 +31,7 @@ import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
+import { EditOrderProduct } from '../EditOrderProduct'
 
 const { confirm } = Modal
 
@@ -74,7 +75,9 @@ const TabCategory = () => {
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
   const [isActive, setIsActive] = useState(true)
+  const [isAllProduct, setIsAllProduct] = useState(true)
   const [url, setUrl] = useState('')
+  const [urlPicture, setUrlPicture] = useState('')
   const [idSelected, setIdSelected] = useState<any>()
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
@@ -85,7 +88,7 @@ const TabCategory = () => {
   const saveCategory = async (bodyForm: any) => {
     try {
       if (bodyForm.sub_category_id) bodyForm = { ...bodyForm, sub_category_id: bodyForm.sub_category_id.value }
-      bodyForm = { ...bodyForm, url }
+      bodyForm = { ...bodyForm, url, urlPicture }
       if (bodyForm.is_main == 'true') delete bodyForm.sub_category_id
 
       if (Object.keys(update).length > 0) {
@@ -97,6 +100,7 @@ const TabCategory = () => {
         ...bodyForm,
         favorite: isFavorite,
         is_active: isActive,
+        all_product: isAllProduct
       })
 
       toast({
@@ -126,6 +130,7 @@ const TabCategory = () => {
         favorite: isFavorite,
         is_active: isActive,
         id: idSelected,
+        all_product: isAllProduct
       })
 
       toast({
@@ -136,6 +141,7 @@ const TabCategory = () => {
 
       setUpdate({})
       setUrl('')
+      setUrlPicture('')
       setIdSelected(undefined)
       setUpdate({} as IBody)
     } catch (error) {
@@ -209,6 +215,33 @@ const TabCategory = () => {
     }
   }
 
+  const changerOrderProducts = async (order: number, category: any) => {
+    try {
+      setLoading(true)
+      console.log(category)
+      const { data, status } = await api.put(`changeOrderCategoryProduct`, {
+        order_all_products: order,
+        category: category,
+      })
+
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
+      reset()
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await listCategory()
+    }
+  }
+
   useEffect(() => {
     async function getCategoryList() {
       await listCategory()
@@ -226,8 +259,10 @@ const TabCategory = () => {
     setValue('description_seo', category.description_seo)
     setIsFavorite(category.favorite)
     setIsActive(category.is_active)
+    setIsAllProduct(category.all_product)
     setUpdate(category)
     setUrl(category.url ? category.url : '')
+    setUrlPicture(category.urlPicture ? category.urlPicture : '')
     setIdSelected(category.id)
 
     const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`)
@@ -240,8 +275,19 @@ const TabCategory = () => {
   const column = [
     {
       title: 'Order',
+      width: 100,
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
+    },
+    {
+      title: 'Order todos produtos',
+      width: 200,
+      sorter: (a: any, b: any) =>   {
+        const orderA = a.order_all_products ?? 999999;
+        const orderB = b.order_all_products ?? 999999;
+      return orderA - orderB
+      },
+      render: (a: any) => <EditOrderProduct value={a} changerOrder={changerOrderProducts} />,
     },
     {
       title: 'Nome',
@@ -467,6 +513,17 @@ const TabCategory = () => {
             />
             <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
             </FormControl>
+            <InputsHome name='Foto da categoria' typeInput='fileSingle' getUrls={(values: any) => setUrlPicture(values)} />
+            <HStack spacing='20px' flexWrap='wrap' w='100%'>
+              {urlPicture && (
+                <ViewImage
+                  url={urlPicture}
+                  remove={() => {
+                    setUrlPicture('')
+                  }}
+                />
+              )}
+            </HStack>
             <InputsHome name='Foto do icone' typeInput='fileSingle' getUrls={(values: any) => setUrl(values)} />
             <HStack spacing='20px' flexWrap='wrap' w='100%'>
               {url && (
@@ -509,6 +566,21 @@ const TabCategory = () => {
                 Ativo
               </Checkbox>
               <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
+              </FormControl>
+            </Box>
+            <Box w='100%' mt='10px'>
+            <FormControl>
+              <Checkbox
+                colorScheme='red'
+                color='black.800'
+                mr='auto'
+                fontSize='20px'
+                height='17px'
+                isChecked={isAllProduct}
+                onChange={(evt) => setIsAllProduct(evt.target.checked)}
+              >
+                Aparecer em Todos os Produto
+              </Checkbox>
               </FormControl>
             </Box>
           </VStack>

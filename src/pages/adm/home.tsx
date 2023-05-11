@@ -89,7 +89,7 @@ const Adm = () => {
 
   const emails: any = {
     "marketing@contemp.com.br": 'Marketing',
-    "kemelin@3hub.co": 'Kemilin',
+    "kemelin@3hub.co": 'Kemelin',
     "atendimento@3hub.co": 'Atendimento 3Hub'
   }
 

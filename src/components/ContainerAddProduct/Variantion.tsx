@@ -1,18 +1,19 @@
-import { Box, InputGroup, HStack, Flex, Icon, Select, FormLabel, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Box, HStack, Flex, Icon, UnorderedList, ListItem } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
 import { useForm } from 'react-hook-form'
 import { InputDefault } from '../Form/Input'
 import { v4 as uuidv4 } from 'uuid'
 import { SelectDefault } from '../Form/Select'
+import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 
-const Variation = ({ index, addVariation, defaultValues, newVariation, removeVariation, removeOptVariation, addRange, saveName, setType }: any) => {
+const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVariation, removeVariation, removeOptVariation, addRange, saveName, setType, total, upVariation, downVariation }: any) => {
   const formRefOpt = useRef<any>()
 
   const { register, handleSubmit, formState, setValue, resetField, control, watch } = useForm({})
 
   const { errors } = formState
-
+  const [opt, setOpt] = useState<String[]>([])
   const insertOptVariation = (variation: any) => {
     addVariation(variation)
     resetField('addOpt')
@@ -23,7 +24,32 @@ const Variation = ({ index, addVariation, defaultValues, newVariation, removeVar
     setValue('type_view', defaultValues?.type_view ? defaultValues?.type_view : 'Number')
     setValue('min_value', defaultValues?.min_value)
     setValue('max_value', defaultValues?.max_value)
+
+    if (defaultValues.opt) {
+      setOpt(defaultValues.opt)
+    }
   }, [defaultValues])
+
+  const upOpt = (indexOpt: number) => {
+    let newList: any = opt
+    const up = newList[indexOpt];
+    const down = newList[indexOpt - 1];
+    newList[indexOpt - 1] = up;
+    newList[indexOpt] = down;
+    changeOrderOpt(index, [...newList])
+
+  }
+
+  const downOpt = (indexOpt: number) => {
+    let newList: any = opt
+    const up = newList[indexOpt];
+    const down = newList[indexOpt + 1];
+    newList[indexOpt + 1] = up;
+    newList[indexOpt] = down;
+    changeOrderOpt(index, [...newList])
+  }
+
+
 
   return (
     <Box w='100%' as='form' onSubmit={handleSubmit(insertOptVariation)} ref={formRefOpt}>
@@ -58,6 +84,8 @@ const Variation = ({ index, addVariation, defaultValues, newVariation, removeVar
           </Box>
         </Flex>
         <HStack spacing='20px'>
+          {index !== total && <Icon as={AiOutlineArrowDown} color="#cc0b0b" fontSize='30px' cursor='pointer' onClick={() => downVariation(index)} />}
+          {index !== 0 && <Icon as={AiOutlineArrowUp} color="#0e9721" fontSize='30px' cursor='pointer' onClick={() => upVariation(index)} />}
           <Icon as={GrAddCircle} fontSize='30px' cursor='pointer' onClick={() => newVariation()} />
           <Icon as={GrSubtractCircle} fontSize='30px' cursor='pointer' onClick={() => removeVariation()} />
         </HStack>
@@ -68,13 +96,13 @@ const Variation = ({ index, addVariation, defaultValues, newVariation, removeVar
             <InputDefault label={`Valor mínimo`} type='number' error={errors.min_value} {...register('min_value')} onChange={(e) => {
               let value = e.target.value
               addRange(value, 'min_value')
-            }}/>
+            }} />
           </Box>
           <Box w='35%'>
             <InputDefault label={`Valor máximo`} type='number' error={errors.max_value} {...register('max_value')} onChange={(e) => {
               let value = e.target.value
               addRange(value, 'max_value')
-            }}/>
+            }} />
           </Box>
         </Flex>
       )}
@@ -92,24 +120,24 @@ const Variation = ({ index, addVariation, defaultValues, newVariation, removeVar
               onClick={() => formRefOpt.current?.requestSubmit()}
             />
           </Flex>
-
           <Box w='100%' ml='50px'>
             <UnorderedList>
-              {defaultValues.opt &&
-                defaultValues.opt.map((value: any, index: number) => (
-                  <ListItem key={uuidv4()} color='black.800' fontSize='18px' mb='6px'>
-                    <Flex alignItems='center'>
-                      {value}
-                      <Icon
-                        as={GrSubtractCircle}
-                        fontSize='20px'
-                        ml='10px'
-                        cursor='pointer'
-                        onClick={() => removeOptVariation(index)}
-                      />
-                    </Flex>
-                  </ListItem>
-                ))}
+              {opt.map((value: any, indexOpt: number) => (
+                <ListItem key={uuidv4()} color='black.800' fontSize='18px' mb='6px'>
+                  <Flex alignItems='center'>
+                    {value}
+                    <Icon
+                      as={GrSubtractCircle}
+                      fontSize='20px'
+                      ml='10px'
+                      cursor='pointer'
+                      onClick={() => removeOptVariation(indexOpt)}
+                    />
+                    {indexOpt !== opt.length - 1 && <Icon as={AiOutlineArrowDown} color="#cc0b0b" fontSize='17px' cursor='pointer' onClick={() => downOpt(indexOpt)} />}
+                    {indexOpt !== 0 && <Icon as={AiOutlineArrowUp} color="#0e9721" fontSize='17px' cursor='pointer' onClick={() => upOpt(indexOpt)} />}
+                  </Flex>
+                </ListItem>
+              ))}
             </UnorderedList>
           </Box>
         </Flex>

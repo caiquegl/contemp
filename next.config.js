@@ -104,5 +104,23 @@ module.exports = {
       creatRedirectObj ('/catalogo_optris', '/category/C%C3%82MERAS_TERMOGR%C3%81FICAS_FIXAS#viewCategory'),
       // creatRedirectObj ('', ''),
     ]
-  }
+  },
+  compress: true,
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
+  async headers() {
+    return [
+      {
+        // cache all static assets for 1 year
+        source: "/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
 }
