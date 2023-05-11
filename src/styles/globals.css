@@ -318,3 +318,45 @@ img {
   max-width: inherit!important;
 }
 
+
+.btn-all-products {
+  color: white;
+  font-size: 16px;
+  background-color: #242424;
+}
+
+.btn-all-products:hover {
+  background-color: #b60005;
+  
+}
+
+.btn-all-products .ant-dropdown-menu-submenu-title {
+  color: white;
+  font-size: 16px;
+}
+
+.btn-all-products .ant-dropdown-menu-submenu-title:hover {
+  background-color: #b60005; 
+}
+
+.btn-all-products ul {
+  background-color: #242424 !important;
+}
+
+.btn-all-products-bg ul{
+  background-color: #242424 !important;
+}
+
+.btn-all-products-bg ul li{
+  color: white !important;
+  min-height: 40px;
+}
+
+.btn-all-products-bg ul li:hover{
+  background-color: #b60005; 
+}
+
+
+.btn-all-products .ant-dropdown-menu-submenu-arrow-icon {
+  color: #fff !important;
+}
