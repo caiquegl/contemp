@@ -151,10 +151,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     if (list.length > 0) getValues()
   }, [list.length])
 
-  useEffect(() => {
-    console.log(isActive, defaultValues)
-  }, [isActive])
-
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
       <VStack spacing='20px' w='100%' as='form' onSubmit={handleSubmit(saveProduct)} ref={formRef}>
@@ -379,6 +375,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
         {hasVariation &&
           listVariation.map((list: any, index: number) => (
             <Variation
+              total={listVariation.length - 1}
               key={uuidv4()}
               newVariation={() => {
                 setListVariation([...listVariation, { id: listVariation.length + 1 }])
@@ -399,7 +396,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 listVariation.forEach((list: any, indexRemove: number) => {
                   if (index != indexRemove) newList.push(list)
                 })
-                setListVariation(newList)
+                setListVariation([...newList])
               }}
               index={index}
               addVariation={(variation: any) => {
@@ -415,7 +412,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   newList[index].opt = [variation.addOpt]
                 }
 
-                setListVariation(newList)
+                setListVariation([...newList])
               }}
               saveName={(name: string) => {
                 let newList: any = listVariation
@@ -423,23 +420,45 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
                 newList[index].name = name
 
-                setListVariation(newList)
+                setListVariation([...newList])
               }}
               setType={(type: string) => {
                 let newList: any = listVariation
 
                 newList[index].type_view = type
 
-                setListVariation(newList)
+                setListVariation([...newList])
               }}
               addRange={(value: any, type: string) => {
                 let newList: any = listVariation
                 newList[index].type_view = 'Range'
                 newList[index][type] = value
 
-                setListVariation(newList)
+                setListVariation([...newList])
               }}
               defaultValues={listVariation[index]}
+              upVariation={(index: number) => {
+                let newList: any = listVariation
+                const up = newList[index];
+                const down = newList[index - 1];
+                newList[index - 1] = up;
+                newList[index] = down;
+                setListVariation([...newList])
+              }}
+              downVariation={(index: number) => {
+                let newList: any = listVariation
+                const up = newList[index];
+                const down = newList[index + 1];
+                newList[index + 1] = up;
+                newList[index] = down;
+                setListVariation([...newList])
+              }}
+
+              changeOrderOpt={(index: number, opt: string[]) => {
+                let newList: any = listVariation
+                newList[index].opt = opt
+                setListVariation([...newList])
+              }}
             />
           ))}
       </VStack>

@@ -19,7 +19,7 @@ export default async function handler(
       })
   
       let list_menu = []
-  
+      
       for await (let [index, main] of categoryMain.entries()) {
         let body: any = {
           title: main.name,
@@ -57,7 +57,6 @@ export default async function handler(
         }
         list_menu.push(body)
       }
-        
       return res.status(201).json(list_menu)
     } catch (error) {
       return res.status(201).json([])

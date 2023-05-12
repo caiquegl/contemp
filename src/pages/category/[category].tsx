@@ -46,7 +46,7 @@ const Category = () => {
       if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
-
+      console.log(data.category)
       setCateg(data.category)
       dividerList(data.products)
     } catch (error) {

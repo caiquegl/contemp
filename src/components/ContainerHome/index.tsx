@@ -110,7 +110,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   }, [defaultValues])
 
   const getValues = async () => {
-    const { data } = await api.get(`${defaultValues?.id}/getCategoryById`)
+    const { data } = await api.get(`${defaultValues?.category_id}/getCategoryById`)
 
     let find = data
     if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.id, label: find.name })

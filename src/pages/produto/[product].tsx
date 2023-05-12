@@ -477,6 +477,7 @@ const Product = () => {
                       text={item.name}
                       description={item.description}
                       call_product={item.call_product}
+                      ocultBottom={true}
                     />
                   </SwiperSlide>
                 ))}

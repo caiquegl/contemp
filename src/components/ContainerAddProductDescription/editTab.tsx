@@ -44,6 +44,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
               onChange={(evt: any) => {
                 let newList = tabs
                 newList[index].text = evt
+                setValue(evt)
                 setTabs(newList)
               }}
               value={tabs[index]?.text ? tabs[index]?.text : ''}

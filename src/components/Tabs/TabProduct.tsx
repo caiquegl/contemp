@@ -10,7 +10,10 @@ import { pxToRem } from '../../utils/pxToRem'
 import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
 
-const TabProduct = () => {
+interface IProps {
+  back: any
+}
+const TabProduct = ({back}: IProps) => {
   const toast = useToast({
     duration: 3000,
     isClosable: true,
@@ -104,6 +107,14 @@ const TabProduct = () => {
     listProduct()
   }, [])
 
+  const backTab = () => {
+    setBody({})
+    setStep(1)
+  }
+
+  useEffect(() => {
+   backTab()
+  }, [back])
   return (
     <>
       {step === 1 && (
@@ -154,7 +165,7 @@ const TabProduct = () => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table dataSource={list} columns={column} word-wrap={'break-word'}/>
+            <Table scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
           </Box>
         </>
       )}

@@ -46,6 +46,7 @@ import { useRouter } from 'next/router'
 import { FiAlertTriangle } from 'react-icons/fi'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 import { api } from '../lib/axios'
+import { ButtonAllProducts } from './ButtonAllProducts'
 
 export const Header = () => {
   const router = useRouter()
@@ -356,21 +357,7 @@ export const Header = () => {
               </Box>
             </Link>
 
-            <Box>
-              <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
-                <Button
-                  borderRadius='5px'
-                  bg='red.600'
-                  _hover={{
-                    bg: 'white',
-                    color: 'black.800',
-                  }}
-                >
-                  Todos os produtos
-                  <Icon as={BsThreeDotsVertical} ml='10px' fontSize='20px' />
-                </Button>
-              </Link>
-            </Box>
+            <ButtonAllProducts menuItems={list} />
 
             <HStack
               alignSelf='center'

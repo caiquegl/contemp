@@ -16,13 +16,17 @@ model Categories {
   description_seo String
   favorite        Boolean    @default(false)
   is_active       Boolean    @default(true)
+  all_product       Boolean    @default(true)
   is_main         Boolean    @default(false)
   key_word_seo    String
   name            String     @unique
   firebase_id     String?
   sub_category_id Int?
   order           Int        @unique
+  order_all_products           Int?
   url             String?
+  urlPicture      String?
+  filter          Json       @default("{}")
   Home            Home[]
   Products        Products[]
 
