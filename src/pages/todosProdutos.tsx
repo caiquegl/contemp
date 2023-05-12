@@ -139,7 +139,7 @@ const AllProduct = () => {
                     fv.products.map((item: any) => (
                       <SwiperSlide key={uuidv4()}>
                         <CardProductWithDescription
-                          img={item.urls[0]}
+                          img={item.urls ? item.urls[0] : ''}
                           text={item.name}
                           description={item.description}
                           call_product={item.call_product}

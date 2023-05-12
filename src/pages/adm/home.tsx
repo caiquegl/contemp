@@ -32,6 +32,7 @@ import { Table, Tooltip } from 'antd'
 import { api } from '../../lib/axios'
 import { parseCookies } from "nookies";
 import { getFormattedDateTime } from '../../utils/countdown'
+import TabFiles from '../../components/Tabs/TabFiles'
 
 const Adm = () => {
   // const router = useRouter();
@@ -85,6 +86,7 @@ const Adm = () => {
     <TabHome />,
     <TabCategory />,
     <TabProduct back={back}/>,
+    <TabFiles />
   ]
 
   const emails: any = {

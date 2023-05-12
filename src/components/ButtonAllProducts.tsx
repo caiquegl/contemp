@@ -35,8 +35,6 @@ export const ButtonAllProducts = ({menuItems}: IProps) => {
         }
     ];
 
-    console.log(menuItems)
-
     return (
         <Box>
             {/* <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
