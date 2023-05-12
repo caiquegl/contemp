@@ -102,6 +102,7 @@ module.exports = {
       creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/cameras-termograficas-optris-linha-automacao', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
       creatRedirectObj ('/category/CONTADOR_/_TEMPORIZADOR_/_VELOC%C3%8DMETRO', '/category/CONTADOR_%7C%7C_TEMPORIZADOR_%7C%7C_VELOCÍMETRO'),
       creatRedirectObj ('/catalogo_optris', '/category/C%C3%82MERAS_TERMOGR%C3%81FICAS_FIXAS#viewCategory'),
+      creatRedirectObj ('/category/agricultura-e-pecuaria', 'https://contemp.com.br'),
       // creatRedirectObj ('', ''),
     ]
   }
