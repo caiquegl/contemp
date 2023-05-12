@@ -16,7 +16,6 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
         }}
         w='100%'
       >
-        {console.log(data, 'data')}
         {data &&
           data.length > 0 &&
           data.map((catg: any) => (

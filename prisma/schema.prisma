@@ -26,6 +26,7 @@ model Categories {
   order_all_products           Int?
   url             String?
   urlPicture      String?
+  filter          Json       @default("{}")
   Home            Home[]
   Products        Products[]
 

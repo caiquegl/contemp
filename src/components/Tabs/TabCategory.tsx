@@ -14,6 +14,7 @@ import {
   VStack,
   Text,
   FormHelperText,
+  Tooltip,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -32,6 +33,8 @@ import { pxToRem } from '../../utils/pxToRem'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
 import { EditOrderProduct } from '../EditOrderProduct'
+import { BiFilterAlt } from 'react-icons/bi'
+import { ModalAddFilter } from '../modalAddFilter'
 
 const { confirm } = Modal
 
@@ -70,7 +73,7 @@ const TabCategory = () => {
     duration: 3000,
     isClosable: true,
   })
-
+  const [openFilter, setOpenFiter] = useState<boolean>(false)
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
@@ -81,6 +84,7 @@ const TabCategory = () => {
   const [idSelected, setIdSelected] = useState<any>()
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
+  const [selectCategory, setSelectCategory] = useState<any>({})
   const formRef = useRef<any>()
   const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
   const { errors } = formState
@@ -282,10 +286,10 @@ const TabCategory = () => {
     {
       title: 'Order todos produtos',
       width: 200,
-      sorter: (a: any, b: any) =>   {
+      sorter: (a: any, b: any) => {
         const orderA = a.order_all_products ?? 999999;
         const orderB = b.order_all_products ?? 999999;
-      return orderA - orderB
+        return orderA - orderB
       },
       render: (a: any) => <EditOrderProduct value={a} changerOrder={changerOrderProducts} />,
     },
@@ -301,6 +305,12 @@ const TabCategory = () => {
         <>
           {a.id != 59 && (
             <HStack spacing='20px'>
+              <Tooltip label='Filtro'>
+                <Icon cursor='pointer' as={BiFilterAlt} fontSize='17px' onClick={() => {
+                  setSelectCategory(a)
+                  setOpenFiter(!openFilter)
+                }} />
+              </Tooltip>
               <Icon cursor='pointer' as={AiOutlineEdit} fontSize='17px' onClick={() => handleOnEditClick(a)} />
               <Icon
                 cursor='pointer'
@@ -386,13 +396,13 @@ const TabCategory = () => {
         >
           <VStack spacing='20px' w='100%'>
             <FormControl>
-            <InputDefault
-              label='Nome da categoria'
-              type='text'
-              error={errors.name}
-              {...register('name', { required: 'Nome é obrigatório' })}
-            />
-            <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
+              <InputDefault
+                label='Nome da categoria'
+                type='text'
+                error={errors.name}
+                {...register('name', { required: 'Nome é obrigatório' })}
+              />
+              <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
             </FormControl>
             <Controller
               control={control}
@@ -484,34 +494,34 @@ const TabCategory = () => {
               />
             )}
             <FormControl>
-            <TextareaDefault
-              label='Descrição'
-              error={errors.description}
-              {...register('description', {
-                required: 'Descrição é obrigatório',
-              })}
-            />
-            <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
+              <TextareaDefault
+                label='Descrição'
+                error={errors.description}
+                {...register('description', {
+                  required: 'Descrição é obrigatório',
+                })}
+              />
+              <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
             </FormControl>
             <FormControl>
-            <TextareaDefault
-              label='Descrição SEO'
-              error={errors.description_seo}
-              {...register('description_seo', {
-                required: 'Descrição é obrigatório',
-              })}
-            />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <TextareaDefault
+                label='Descrição SEO'
+                error={errors.description_seo}
+                {...register('description_seo', {
+                  required: 'Descrição é obrigatório',
+                })}
+              />
+              <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
             </FormControl>
             <FormControl>
-            <TextareaDefault
-              label='Key Word SEO'
-              error={errors.key_word_seo}
-              {...register('key_word_seo', {
-                required: 'Key Word Seo é obrigatório',
-              })}
-            />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <TextareaDefault
+                label='Key Word SEO'
+                error={errors.key_word_seo}
+                {...register('key_word_seo', {
+                  required: 'Key Word Seo é obrigatório',
+                })}
+              />
+              <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
             </FormControl>
             <InputsHome name='Foto da categoria' typeInput='fileSingle' getUrls={(values: any) => setUrlPicture(values)} />
             <HStack spacing='20px' flexWrap='wrap' w='100%'>
@@ -536,51 +546,51 @@ const TabCategory = () => {
               )}
             </HStack>
             <Box w='100%'>
-            <FormControl>
-              <Checkbox
-                colorScheme='red'
-                color='black.800'
-                mr='auto'
-                fontSize='20px'
-                height='17px'
-                isChecked={isFavorite}
-                onChange={(evt) => setIsFavorite(evt.target.checked)}
-              >
-                Categoria destaque
-              </Checkbox>
-              <FormHelperText>Marque caso queira que a categoria apareça na página de todos os produtos.</FormHelperText>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isFavorite}
+                  onChange={(evt) => setIsFavorite(evt.target.checked)}
+                >
+                  Categoria destaque
+                </Checkbox>
+                <FormHelperText>Marque caso queira que a categoria apareça na página de todos os produtos.</FormHelperText>
               </FormControl>
             </Box>
 
             <Box w='100%' mt='10px'>
-            <FormControl>
-              <Checkbox
-                colorScheme='red'
-                color='black.800'
-                mr='auto'
-                fontSize='20px'
-                height='17px'
-                isChecked={isActive}
-                onChange={(evt) => setIsActive(evt.target.checked)}
-              >
-                Ativo
-              </Checkbox>
-              <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isActive}
+                  onChange={(evt) => setIsActive(evt.target.checked)}
+                >
+                  Ativo
+                </Checkbox>
+                <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
               </FormControl>
             </Box>
             <Box w='100%' mt='10px'>
-            <FormControl>
-              <Checkbox
-                colorScheme='red'
-                color='black.800'
-                mr='auto'
-                fontSize='20px'
-                height='17px'
-                isChecked={isAllProduct}
-                onChange={(evt) => setIsAllProduct(evt.target.checked)}
-              >
-                Aparecer em Todos os Produto
-              </Checkbox>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isAllProduct}
+                  onChange={(evt) => setIsAllProduct(evt.target.checked)}
+                >
+                  Aparecer em Todos os Produto
+                </Checkbox>
               </FormControl>
             </Box>
           </VStack>
@@ -630,6 +640,10 @@ const TabCategory = () => {
           </Flex>
         </Box>
       </HStack>
+      <ModalAddFilter isOpen={openFilter} onClose={() => {
+        setOpenFiter(!openFilter)
+        setSelectCategory({})
+      }} category={selectCategory} reload={() => listCategory()} />
     </>
   )
 }

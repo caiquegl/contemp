@@ -360,3 +360,11 @@ img {
 .btn-all-products .ant-dropdown-menu-submenu-arrow-icon {
   color: #fff !important;
 }
+
+.pop-select {
+  z-index: 99999999999999999999999999;
+}
+
+.indexMax {
+  z-index: 99999999999999999999999999; 
+}
