@@ -21,13 +21,13 @@ export default async function handler(
   req: MulterRequest,
   res: NextApiResponse,
 ) {
-  upload.single('file')(req, res, function (err: any) {
-    if (err) {
-      return res.status(500).send(err);
-    }
+  // upload.single('file')(req, res, function (err: any) {
+  //   if (err) {
+  //     return res.status(500).send(err);
+  //   }
 
-    const filename = req.file.filename;
-    const fileUrl = `/documentos/${filename}`;
-    res.status(200).send(fileUrl);
-  });
+  //   const filename = req.file.filename;
+  //   const fileUrl = `/documentos/${filename}`;
+    res.status(200).send(true);
+  ;
 }
