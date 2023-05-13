@@ -4,36 +4,14 @@ import { DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 import { colors } from '../styles/theme';
+import { useRouter } from 'next/router';
 
 interface IProps {
     menuItems: any
 }
 
 export const ButtonAllProducts = ({menuItems}: IProps) => {
-    const items: MenuProps['items'] = [
-        {
-            key: '1',
-            label: 'Group title',
-            className: 'btn-all-products'
-        },
-        {
-            key: '2',
-            label: 'sub menu',
-            className: 'btn-all-products',
-            children: [
-                {
-                    key: '2-1',
-                    label: '3rd menu item',
-                    className: 'btn-all-products'
-                },
-                {
-                    key: '2-2',
-                    label: '4th menu item',
-                    className: 'btn-all-products'
-                },
-            ],
-        }
-    ];
+    const router = useRouter()
 
     return (
         <Box>
@@ -71,7 +49,7 @@ export const ButtonAllProducts = ({menuItems}: IProps) => {
                         bg: 'white',
                         color: 'black.800',
                     }}
-                    onClick={(e) => e.preventDefault()}>
+                    onClick={() => router.push('/todosProdutos') }>
                     <Space>
                         Todos os produtos
                         <DownOutlined />
