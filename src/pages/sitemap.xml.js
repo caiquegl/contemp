@@ -1,4 +1,4 @@
-const EXTERNAL_DATA_URL = 'www.contemp.com.br/api/get-sitemap';
+const EXTERNAL_DATA_URL = 'https://www.contemp.com.br/api/get-sitemap';
 
 function generateSiteMap(posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -22,6 +22,7 @@ function SiteMap({ sitemap }) {
 
 export async function getServerSideProps({ res }) {
   // Fazemos uma chamada à API para obter os URLs do nosso site
+  // const request = await fetch(EXTERNAL_DATA_URL);
   const request = await fetch(EXTERNAL_DATA_URL);
   const posts = await request.json();
 
