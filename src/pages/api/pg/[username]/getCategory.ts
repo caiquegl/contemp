@@ -15,14 +15,14 @@ export default async function handler(
       where: {
         is_active: true,
         name: {
-          contains: username.trim(),
+          equals: username.trim(),
           mode: 'insensitive'
         }
       }
     })
 
     if (!allCategoryActives) return res.status(201).json([])
-
+    console.log(allCategoryActives, 'allCategoryActives')
 
     let category_ids: number[] = []
 
@@ -38,7 +38,7 @@ export default async function handler(
 
     allSubCategory.forEach((cg) => category_ids.push(cg.id))
     category_ids.push(allCategoryActives.id)
-
+    console.log(category_ids)
     const products = await prisma.products.findMany({
       where: {
         isActive: true,

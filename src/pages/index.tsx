@@ -497,7 +497,7 @@ const Home = () => {
                   alignItems: 'center',
                 }}
               >
-                {post.map((p, index) => {
+                {post?.map((p, index) => {
                   return (
                     <SwiperSlide style={{ width: '100%' }} key={uuidv4()}>
                       <CardBlog
@@ -515,7 +515,7 @@ const Home = () => {
             )}{' '}
             {!isMobile && (
               <>
-                {post.map((p, index) => {
+                {post?.map((p, index) => {
                   return (
                     <CardBlog
                       color={styles_card[index].font}
