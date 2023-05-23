@@ -1,4 +1,3 @@
-
 const EXTERNAL_DATA_URL = 'https://contemp.com.br/api/get-sitemap';
 
 function generateSiteMap(posts) {
@@ -17,25 +16,27 @@ function generateSiteMap(posts) {
  `;
 }
 
-function SiteMap() {
-  // getServerSideProps will do the heavy lifting
+function SiteMap({ sitemap }) {
+  return sitemap;
 }
 
 export async function getServerSideProps({ res }) {
-  // We make an API call to gather the URLs for our site
+  // Fazemos uma chamada à API para obter os URLs do nosso site
   const request = await fetch(EXTERNAL_DATA_URL);
   const posts = await request.json();
 
-  // We generate the XML sitemap with the posts data
+  // Geramos o sitemap XML com os dados dos posts
   const sitemap = generateSiteMap(posts);
 
   res.setHeader('Content-Type', 'text/xml');
-  // we send the XML to the browser
+  // Enviamos o XML para o navegador
   res.write(sitemap);
   res.end();
 
   return {
-    props: {},
+    props: {
+      sitemap: 'Generated sitemap', // Aqui você pode retornar uma mensagem ou o próprio sitemap
+    },
   };
 }
 
