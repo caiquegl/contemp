@@ -1,4 +1,4 @@
-const EXTERNAL_DATA_URL = 'https://contemp.com.br/api/get-sitemap';
+const EXTERNAL_DATA_URL = 'www.contemp.com.br/api/get-sitemap';
 
 function generateSiteMap(posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
