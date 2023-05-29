@@ -376,3 +376,8 @@ img {
 .btn-all-products .ant-dropdown-menu-submenu-title {
   min-height: 45px;
 }
+
+
+.ant-popover-placement-top {
+  z-index: 9999999999999999999999999999999;
+}

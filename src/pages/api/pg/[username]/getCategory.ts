@@ -23,6 +23,7 @@ export default async function handler(
 
     if (!allCategoryActives) return res.status(201).json([])
 
+    console.log('allCategoryActives', allCategoryActives)
 
     let category_ids: number[] = []
 
@@ -36,8 +37,11 @@ export default async function handler(
       }
     })
 
+
     allSubCategory.forEach((cg) => category_ids.push(cg.id))
+    console.log(category_ids, 'category_ids')
     category_ids.push(allCategoryActives.id)
+    console.log(category_ids, 'category_ids')
 
     const products = await prisma.products.findMany({
       where: {

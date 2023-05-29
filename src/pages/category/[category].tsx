@@ -11,11 +11,13 @@ import { AdBanners } from '../../components/AdBanners'
 import { v4 as uuidv4 } from 'uuid'
 import { decodeName } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
+import { Space, Tag } from 'antd'
 
 const Category = () => {
   const router = useRouter()
   const { category } = router.query
   const [list, setList] = useState<any>([])
+  const [listOrigin, setListOrigin] = useState<any>([])
   const [categ, setCateg] = useState<any>({})
 
   const dividerList = (listProduct: any) => {
@@ -38,6 +40,7 @@ const Category = () => {
     })
 
     setList(list)
+    setListOrigin(list)
   }
 
   const getCategoryList = async () => {
@@ -97,6 +100,52 @@ const Category = () => {
         >
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
+        <Space size={20} style={{ marginTop: 20 }}>
+          {categ &&
+            categ.filter &&
+            categ.filter.length > 0 &&
+            categ.filter.map((item: any) => (
+              <Tag
+                color='red'
+                style={{
+                  padding: '5px',
+                  fontSize: 15,
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  let newList: any = []
+                  list.forEach((pd: any) => {
+                    if (pd && pd.length > 0) {
+                      pd.forEach((product: any) => {
+                        item.products.forEach((pdFilter: any) => {
+                          if (product.id === pdFilter) newList.push(product)
+                        })
+                      })
+                    }
+                  })
+                  console.log(newList)
+                  setList([[...newList]])
+                }}
+              >
+                {item.name}
+              </Tag>
+            ))}
+          {categ && categ.filter && categ.filter.length > 0 && (
+            <Tag
+              color='red'
+              style={{
+                padding: '5px',
+                fontSize: 15,
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                setList(listOrigin)
+              }}
+            >
+              Limpar
+            </Tag>
+          )}
+        </Space>
       </Flex>
       <Box>
         {list &&
