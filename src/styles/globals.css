@@ -320,9 +320,9 @@ img {
 
 
 .btn-all-products {
-  color: white;
+  background-color: white;
   font-size: 16px;
-  background-color: #242424;
+  color: #242424;
 }
 
 .btn-all-products:hover {
@@ -331,7 +331,7 @@ img {
 }
 
 .btn-all-products .ant-dropdown-menu-submenu-title {
-  color: white;
+  color: #242424;
   font-size: 16px;
 }
 
@@ -340,15 +340,15 @@ img {
 }
 
 .btn-all-products ul {
-  background-color: #242424 !important;
+  background-color: #fff !important;
 }
 
 .btn-all-products-bg ul{
-  background-color: #242424 !important;
+  background-color: #fff !important;
 }
 
 .btn-all-products-bg ul li{
-  color: white !important;
+  color: 242424 !important;
   min-height: 40px;
 }
 
@@ -358,7 +358,11 @@ img {
 
 
 .btn-all-products .ant-dropdown-menu-submenu-arrow-icon {
-  color: #fff !important;
+  color: #242424 !important;
+}
+
+ .ant-dropdown-menu-title-content {
+  font-size: 17px;
 }
 
 .pop-select {
@@ -367,4 +371,8 @@ img {
 
 .indexMax {
   z-index: 99999999999999999999999999; 
+}
+
+.btn-all-products .ant-dropdown-menu-submenu-title {
+  min-height: 45px;
 }

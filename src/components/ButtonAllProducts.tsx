@@ -31,20 +31,25 @@ export const ButtonAllProducts = ({menuItems}: IProps) => {
             <Dropdown
                 menu={{
                     items: menuItems || [], style: {
-                        backgroundColor: colors.black[800],
+                        color: colors.black[800],
+                        backgroundColor: colors.white[0]
                     },
                     className: 'btn-all-products',
                     rootClassName: 'btn-all-products-bg',     
+                    subMenuOpenDelay: 0.5,
+                    
                 }}
                 overlayClassName='btn-all-products'
                 openClassName='btn-all-products'
                 overlayStyle={{
-                    backgroundColor: colors.black[800],
+                    color: colors.black[800],
+                        backgroundColor: colors.white[0]
                 }}
             >
                 <Button
                     borderRadius='5px'
-                    bg='red.600'
+                    color={colors.black[800]}
+                    bg="#fff"
                     _hover={{
                         bg: 'white',
                         color: 'black.800',
