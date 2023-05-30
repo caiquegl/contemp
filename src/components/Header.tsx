@@ -34,6 +34,7 @@ import Facebook from '../assets/icons/facebook-f.svg'
 import Youtube from '../assets/icons/youtube.svg'
 import Logo from '../assets/icons/Logo-Contemp.svg'
 import ImageNext from 'next/image'
+import { DownOutlined } from '@ant-design/icons'
 import { BsBag, BsThreeDotsVertical } from 'react-icons/bs'
 import { AiOutlineClose } from 'react-icons/ai'
 import { AiFillLinkedin, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai'
@@ -47,6 +48,7 @@ import { FiAlertTriangle } from 'react-icons/fi'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 import { api } from '../lib/axios'
 import { ButtonAllProducts } from './ButtonAllProducts'
+import { Space } from 'antd'
 
 export const Header = () => {
   const router = useRouter()
@@ -357,7 +359,15 @@ export const Header = () => {
               </Box>
             </Link>
 
-            <ButtonAllProducts menuItems={list} />
+            <ButtonAllProducts
+              menuItems={list}
+              render={
+                <Space>
+                  Todos os produtos
+                  <DownOutlined />
+                </Space>
+              }
+            />
 
             <HStack
               alignSelf='center'
@@ -528,7 +538,7 @@ export const Header = () => {
                     </Box>
                   </Link>
                   <Box>
-                    <Link href='/todosProdutos' _hover={{ textDecoration: 'none' }}>
+                    {/* <Link href='/todosProdutos' _hover={{ textDecoration: 'none' }}>
                       <Button
                         borderRadius='5px'
                         bg='red.600'
@@ -539,7 +549,8 @@ export const Header = () => {
                       >
                         <Icon as={BsThreeDotsVertical} fontSize='20px' />
                       </Button>
-                    </Link>
+                    </Link> */}
+                    <ButtonAllProducts menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='20px' />} />
                   </Box>
                   <Box margin='0 20px' w='100%'>
                     <HeaderMenu menuItems={list} maxWidth={true} />

@@ -1,6 +1,5 @@
 import { Box, Button, Icon, Link, } from '@chakra-ui/react'
 import React from 'react'
-import { DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 import { colors } from '../styles/theme';
@@ -8,9 +7,10 @@ import { useRouter } from 'next/router';
 
 interface IProps {
     menuItems: any
+    render: any
 }
 
-export const ButtonAllProducts = ({menuItems}: IProps) => {
+export const ButtonAllProducts = ({menuItems, render}: IProps) => {
     const router = useRouter()
 
     return (
@@ -55,10 +55,13 @@ export const ButtonAllProducts = ({menuItems}: IProps) => {
                         color: 'black.800',
                     }}
                     onClick={() => router.push('/todosProdutos') }>
-                    <Space>
+                        {
+                            render && render
+                        }
+                    {/* <Space>
                         Todos os produtos
                         <DownOutlined />
-                    </Space>
+                    </Space> */}
                 </Button>
             </Dropdown>
         </Box>
