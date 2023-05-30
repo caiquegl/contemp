@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { decodeName } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
 import { Space, Tag } from 'antd'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const Category = () => {
   const router = useRouter()
@@ -19,7 +20,7 @@ const Category = () => {
   const [list, setList] = useState<any>([])
   const [listOrigin, setListOrigin] = useState<any>([])
   const [categ, setCateg] = useState<any>({})
-
+  const [activeFilter, setActiveFilter] = useState<any>()
   const dividerList = (listProduct: any) => {
     let list: any = []
 
@@ -101,18 +102,37 @@ const Category = () => {
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
         <Space size={20} style={{ marginTop: 20 }}>
+          {console.log(activeFilter)}
           {categ &&
             categ.filter &&
             categ.filter.length > 0 &&
-            categ.filter.map((item: any) => (
-              <Tag
-                color='red'
-                style={{
-                  padding: '5px',
-                  fontSize: 15,
-                  cursor: 'pointer',
+            categ.filter.map((item: any, index: number) => (
+              <Box
+                color='white'
+                padding='10px 6px'
+                borderColor={activeFilter === index ? 'red.600' : 'white'}
+                backgroundColor={activeFilter === index ? 'red.600' : 'transparent'}
+                borderWidth='2px'
+                borderRadius='20px'
+                minW='80px'
+                h='40px'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                fontSize='18px'
+                cursor='pointer'
+                _hover={{
+                  transition: '0.3s',
+                  backgroundColor: 'red.600',
+                  borderColor: 'red.600',
                 }}
                 onClick={() => {
+                  console.log(activeFilter, index)
+                  if(activeFilter === index) {
+                    setList([...listOrigin])
+                    setActiveFilter(undefined)
+                    return
+                  }
                   let newList: any = []
                   list.forEach((pd: any) => {
                     if (pd && pd.length > 0) {
@@ -123,28 +143,14 @@ const Category = () => {
                       })
                     }
                   })
-                  console.log(newList)
+                  setActiveFilter(index)
                   setList([[...newList]])
                 }}
               >
-                {item.name}
-              </Tag>
+                <p style={{margin: 0}}>{item.name}</p>
+                {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />}
+              </Box>
             ))}
-          {categ && categ.filter && categ.filter.length > 0 && (
-            <Tag
-              color='red'
-              style={{
-                padding: '5px',
-                fontSize: 15,
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                setList(listOrigin)
-              }}
-            >
-              Limpar
-            </Tag>
-          )}
         </Space>
       </Flex>
       <Box>

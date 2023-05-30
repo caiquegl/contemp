@@ -10,12 +10,13 @@ import {
   Text,
   Icon,
 } from '@chakra-ui/react'
-import { Button, Form, Input, Select, Modal as ModalAntd, List, Collapse, Popover } from 'antd'
+import { Button, Form, Input, Select, Modal as ModalAntd, List, Collapse, Popover, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { AiFillDelete } from 'react-icons/ai'
 import { SettingOutlined } from '@ant-design/icons'
+import { RiDeleteBinLine } from 'react-icons/ri'
 
 const { Panel } = Collapse
 const { confirm } = ModalAntd
@@ -193,50 +194,68 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                   header={item.name}
                   key={index}
                   extra={
-                    <Popover
-                      content={() => (
-                        <>
-                          <Input
-                            value={editName}
-                            onChange={async (evt: any) => {
-                              let value = evt.target.value
-                              setEditName(value)
-                            }}
-                          />
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              marginTop: 10
-                            }}
-                          >
-                            <Button
-                              onClick={async () => {
-                                let newFilter = filter
-                                newFilter[index].name = editName
-                                setFilter([...newFilter])
-                                const { data, status } = await api.put(`updateCategory`, {
-                                  ...category,
-                                  filter: newFilter,
-                                })
+                    <Space size={20}>
+                      <Popover
+                        content={() => (
+                          <>
+                            <Input
+                              value={editName}
+                              onChange={async (evt: any) => {
+                                let value = evt.target.value
+                                setEditName(value)
                               }}
+                            />
+                            <div
                               style={{
-                                margin: 'auto',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: 10,
                               }}
                             >
-                              Salvar
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                      title='Editar título'
-                      trigger='click'
-                      afterOpenChange={() => setEditName('')}
-                      zIndex={999999999999999999999999999999999999999999999999}
-                    >
-                      <SettingOutlined />
-                    </Popover>
+                              <Button
+                                onClick={async () => {
+                                  let newFilter = filter
+                                  newFilter[index].name = editName
+                                  setFilter([...newFilter])
+                                  const { data, status } = await api.put(`updateCategory`, {
+                                    ...category,
+                                    filter: newFilter,
+                                  })
+                                }}
+                                style={{
+                                  margin: 'auto',
+                                }}
+                              >
+                                Salvar
+                              </Button>
+                            </div>
+                          </>
+                        )}
+                        title='Editar título'
+                        trigger='click'
+                        afterOpenChange={() => setEditName('')}
+                        zIndex={999999999999999999999999999999999999999999999999}
+                      >
+                        <SettingOutlined />
+                      </Popover>
+                      <RiDeleteBinLine
+                        onClick={async () => {
+                          let newFilter: any = []
+                          filter.forEach((el: any, indexR: number) => {
+                            if (index != indexR) newFilter.push(el)
+                          })
+                          setFilter([...newFilter])
+                          const { data, status } = await api.put(`updateCategory`, {
+                            ...category,
+                            filter: newFilter,
+                          })
+                        }}
+                        style={{
+                          margin: 'auto',
+                        }}
+                      />
+                    </Space>
                   }
                 >
                   <Form
@@ -256,7 +275,16 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                       name='products'
                       rules={[{ required: true, message: 'Campo obrigatório' }]}
                     >
-                      <Select mode='multiple' options={options} popupClassName='pop-select' style={{ minWidth: 200 }} />
+                      <Select
+                        mode='multiple'
+                        options={options}
+                        popupClassName='pop-select'
+                        style={{ minWidth: 200 }}
+                        filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                        filterSort={(optionA, optionB) =>
+                          (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                        }
+                      />
                     </Form.Item>
                     <Center w='100%'>
                       <Button size='large' style={{ margin: 'auto' }} htmlType='submit'>
