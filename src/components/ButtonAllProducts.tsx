@@ -4,6 +4,7 @@ import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 import { colors } from '../styles/theme';
 import { useRouter } from 'next/router';
+import { replaceNameToUrl } from '../utils/replaceNameToUrl';
 
 interface IProps {
     menuItems: any
@@ -37,6 +38,10 @@ export const ButtonAllProducts = ({menuItems, render}: IProps) => {
                     className: 'btn-all-products',
                     rootClassName: 'btn-all-products-bg',     
                     subMenuOpenDelay: 0.5,
+                    onClick: (info: any) => {
+                       if(info.name) router.push(`/category/${replaceNameToUrl(info.name.replaceAll(' ', '_'))}`)
+                       if(info.key  ) router.push(`/category/${replaceNameToUrl(info.key.replaceAll(' ', '_'))}`)
+                    }
                     
                 }}
                 overlayClassName='btn-all-products'
