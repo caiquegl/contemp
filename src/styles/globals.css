@@ -381,3 +381,15 @@ img {
 .ant-popover-placement-top {
   z-index: 9999999999999999999999999999999;
 }
+
+.chakra-modal__overlay {
+  z-index: 1 !important;
+}
+
+.chakra-modal__content-container {
+  z-index: 2 !important;
+}
+
+.chakra-modal__content {
+  z-index: 2 !important;
+}
