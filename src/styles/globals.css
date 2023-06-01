@@ -398,3 +398,8 @@ img {
 .btn-all-products .ant-dropdown-menu-submenu-title:hover {
   color: #fff !important;
 }
+
+.btn-all-products .ant-dropdown-menu-submenu-title {
+  display: flex;
+  align-items: center;
+}

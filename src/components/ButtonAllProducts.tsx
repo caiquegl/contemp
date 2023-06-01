@@ -36,7 +36,7 @@ export const ButtonAllProducts = ({menuItems, render}: IProps) => {
                         backgroundColor: colors.white[0]
                     },
                     className: 'btn-all-products',
-                    rootClassName: 'btn-all-products-bg',     
+                    rootClassName: 'btn-all-products-bg',   
                     subMenuOpenDelay: 0.5,
                     onClick: (info: any) => {
                        if(info.name) router.push(`/category/${replaceNameToUrl(info.name.replaceAll(' ', '_'))}`)
