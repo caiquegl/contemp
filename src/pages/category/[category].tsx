@@ -50,7 +50,6 @@ const Category = () => {
       if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
-      console.log(data.category)
       setCateg(data.category)
       dividerList(data.products)
     } catch (error) {
@@ -102,7 +101,6 @@ const Category = () => {
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
         <Space size={20} style={{ marginTop: 20 }}>
-          {console.log(activeFilter)}
           {categ &&
             categ.filter &&
             categ.filter.length > 0 &&
@@ -127,7 +125,6 @@ const Category = () => {
                   borderColor: 'red.600',
                 }}
                 onClick={() => {
-                  console.log(activeFilter, index)
                   if(activeFilter === index) {
                     setList([...listOrigin])
                     setActiveFilter(undefined)

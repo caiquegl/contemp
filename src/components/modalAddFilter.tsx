@@ -17,6 +17,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons'
 import { AiFillDelete } from 'react-icons/ai'
 import { SettingOutlined } from '@ant-design/icons'
 import { RiDeleteBinLine } from 'react-icons/ri'
+import ConfigModalFilter from './configModalFilter'
 
 const { Panel } = Collapse
 const { confirm } = ModalAntd
@@ -138,7 +139,6 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
           (item: any, indexFilter: number) => indexProduct != indexFilter
         )
         setLoading(true)
-        console.log(newList)
         const { data, status } = await api.put(`updateCategory`, {
           ...category,
           filter: newList,
@@ -194,68 +194,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                   header={item.name}
                   key={index}
                   extra={
-                    <Space size={20}>
-                      <Popover
-                        content={() => (
-                          <>
-                            <Input
-                              value={editName}
-                              onChange={async (evt: any) => {
-                                let value = evt.target.value
-                                setEditName(value)
-                              }}
-                            />
-                            <div
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginTop: 10,
-                              }}
-                            >
-                              <Button
-                                onClick={async () => {
-                                  let newFilter = filter
-                                  newFilter[index].name = editName
-                                  setFilter([...newFilter])
-                                  const { data, status } = await api.put(`updateCategory`, {
-                                    ...category,
-                                    filter: newFilter,
-                                  })
-                                }}
-                                style={{
-                                  margin: 'auto',
-                                }}
-                              >
-                                Salvar
-                              </Button>
-                            </div>
-                          </>
-                        )}
-                        title='Editar título'
-                        trigger='click'
-                        afterOpenChange={() => setEditName('')}
-                        zIndex={999999999999999999999999999999999999999999999999}
-                      >
-                        <SettingOutlined />
-                      </Popover>
-                      <RiDeleteBinLine
-                        onClick={async () => {
-                          let newFilter: any = []
-                          filter.forEach((el: any, indexR: number) => {
-                            if (index != indexR) newFilter.push(el)
-                          })
-                          setFilter([...newFilter])
-                          const { data, status } = await api.put(`updateCategory`, {
-                            ...category,
-                            filter: newFilter,
-                          })
-                        }}
-                        style={{
-                          margin: 'auto',
-                        }}
-                      />
-                    </Space>
+                    <ConfigModalFilter filter={filter} setFilter={setFilter} index={index} category={category} />
                   }
                 >
                   <Form

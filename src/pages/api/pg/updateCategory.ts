@@ -10,8 +10,6 @@ export default async function handler(
         return res.status(405).end()
       }
 
-      console.log(req.cookies['nextAuth.contemp'])
-
       const body = req.body
       const exist = await prisma.categories.findFirst({
         where: {
@@ -31,8 +29,8 @@ export default async function handler(
         },
         data: {
           ...body,
-          is_main: body.is_main === 'true' ? true : false,
-          sub_category_id: body.is_main === 'true' ? null : body.sub_category_id ? body.sub_category_id : null
+          is_main: body.is_main === 'true' || body.is_main === true ? true : false,
+          sub_category_id: body.is_main === 'true' || body.is_main === true ? null : body.sub_category_id ? body.sub_category_id : null
         }
       })
 

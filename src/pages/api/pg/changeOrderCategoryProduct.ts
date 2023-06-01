@@ -18,9 +18,6 @@ export default async function handler(
         }
       })
 
-      console.log(exist, category)
-
-
       if(exist) {
         await prisma.categories.update({
           where: {

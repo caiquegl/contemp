@@ -222,7 +222,6 @@ const TabCategory = () => {
   const changerOrderProducts = async (order: number, category: any) => {
     try {
       setLoading(true)
-      console.log(category)
       const { data, status } = await api.put(`changeOrderCategoryProduct`, {
         order_all_products: order,
         category: category,
