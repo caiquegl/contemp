@@ -354,6 +354,7 @@ img {
 
 .btn-all-products-bg ul li:hover{
   background-color: #b60005; 
+  color: #fff !important;
 }
 
 
@@ -392,4 +393,8 @@ img {
 
 .chakra-modal__content {
   z-index: 2 !important;
+}
+
+.btn-all-products .ant-dropdown-menu-submenu-title:hover {
+  color: #fff !important;
 }
