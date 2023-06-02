@@ -16,19 +16,6 @@ export const ButtonAllProducts = ({menuItems, render}: IProps) => {
 
     return (
         <Box>
-            {/* <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
-                <Button
-                    borderRadius='5px'
-                    bg='red.600'
-                    _hover={{
-                        bg: 'white',
-                        color: 'black.800',
-                    }}
-                >
-                    Todos os produtos
-                    <Icon as={BsThreeDotsVertical} ml='10px' fontSize='20px' />
-                </Button>
-            </Link> */}
             <Dropdown
                 menu={{
                     items: menuItems || [], style: {
@@ -63,10 +50,6 @@ export const ButtonAllProducts = ({menuItems, render}: IProps) => {
                         {
                             render && render
                         }
-                    {/* <Space>
-                        Todos os produtos
-                        <DownOutlined />
-                    </Space> */}
                 </Button>
             </Dropdown>
         </Box>

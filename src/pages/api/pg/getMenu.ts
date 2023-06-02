@@ -9,6 +9,7 @@ export default async function handler(
       const categoryMain = await prisma.categories.findMany({
         where: {
           is_main: true,
+          is_active: true,
           name: {
             not: 'CATEGORY_SECUNDARY'
           }
@@ -34,7 +35,8 @@ export default async function handler(
   
         const sub = await prisma.categories.findMany({
           where: {
-            sub_category_id: main.id
+            sub_category_id: main.id,
+            is_active: true,
           },
           orderBy: {
             order: 'asc'
