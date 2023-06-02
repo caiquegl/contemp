@@ -43,6 +43,8 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
   const [filter, setFilter] = useState<any>([])
   const [options, setOptions] = useState<ISelect[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [form] = Form.useForm();
+  const [form2] = Form.useForm();
 
   const getOptions = async () => {
     const { data } = await api.get(`${category.name}/getCategory`)
@@ -53,7 +55,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
     let exist = false
 
     body.products = []
-
+    console.log(filter)
     filter.forEach((item: any) => {
       if (item.name === body.name) exist = true
     })
@@ -70,6 +72,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
       ...category,
       filter: [...filter, body],
     })
+    form2.resetFields()
 
     setFilter([...filter, body])
     toast({
@@ -113,6 +116,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
       description: data.msg,
       status: status == 201 ? 'success' : 'error',
     })
+    form.resetFields()
     reload()
     setLoading(false)
   }
@@ -120,7 +124,8 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
   useEffect(() => {
     setOptions([])
     if (category.name) getOptions()
-    if (category && category.filter) {
+    if (category && category.filter && Array.isArray(category.filter)) {
+      console.log(Array.isArray(category.filter), 'aqui' )
       setFilter(category.filter)
     } else {
       setFilter([])
@@ -170,6 +175,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
           <Form
             onFinish={addFilter}
             layout='vertical'
+            form={form2}
             initialValues={{
               name: category.filter?.name || null,
             }}
@@ -198,8 +204,9 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                   }
                 >
                   <Form
+                    form={form}
                     onFinish={(body) => addProduct(body, index)}
-                    layout='horizontal'
+                    layout='vertical'
                     initialValues={{
                       name: category.filter?.name || null,
                     }}
@@ -212,13 +219,16 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                     <Form.Item
                       label='Produtos'
                       name='products'
+                      style={{
+                        width: '100%'
+                      }}
                       rules={[{ required: true, message: 'Campo obrigatório' }]}
                     >
                       <Select
                         mode='multiple'
                         options={options}
                         popupClassName='pop-select'
-                        style={{ minWidth: 200 }}
+                        style={{ width: '100%' }}
                         filterOption={(input, option) => (option?.label ?? '').includes(input)}
                         filterSort={(optionA, optionB) =>
                           (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())

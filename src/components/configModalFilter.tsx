@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { SettingOutlined } from '@ant-design/icons'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { api } from '../lib/axios'
+import { useToast } from '@chakra-ui/react'
 
 const ConfigModalFilter = ({ filter, setFilter, index, category }: any) => {
+  const toast = useToast()
+
   const [editName, setEditName] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)
 
@@ -34,6 +37,13 @@ const ConfigModalFilter = ({ filter, setFilter, index, category }: any) => {
             >
               <Button
                 onClick={async () => {
+                  if(!editName) return toast({
+                    title: 'Erro',
+                    description: 'Erro, o nome não pode ser vazio.',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                  })
                   let newFilter = filter
                   newFilter[index].name = editName
                   setFilter([...newFilter])

@@ -111,7 +111,7 @@ const Category = () => {
                 borderColor={activeFilter === index ? 'red.600' : 'white'}
                 backgroundColor={activeFilter === index ? 'red.600' : 'transparent'}
                 borderWidth='2px'
-                borderRadius='20px'
+                borderRadius='5px'
                 minW='80px'
                 h='40px'
                 display='flex'
@@ -145,7 +145,7 @@ const Category = () => {
                 }}
               >
                 <p style={{margin: 0}}>{item.name}</p>
-                {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />}
+                {/* {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />} */}
               </Box>
             ))}
         </Space>
