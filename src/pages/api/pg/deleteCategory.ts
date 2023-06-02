@@ -12,12 +12,19 @@ export default async function handler(
 
       const body = req.body
 
+      const CATEGORY_SECUNDARY = await prisma.categories.findFirst({
+        where: {
+          name: 'CATEGORY_SECUNDARY'
+        }
+      })
+
+      
       await prisma.categories.updateMany({
         where: {
           sub_category_id: body.id
         },
         data: {
-          sub_category_id: 59
+          sub_category_id: CATEGORY_SECUNDARY?.id
         }
       })
 
@@ -26,7 +33,7 @@ export default async function handler(
           category_id: body.id
         },
         data: {
-          category_id: 59
+          category_id: CATEGORY_SECUNDARY?.id
         }
       })
 
@@ -36,7 +43,7 @@ export default async function handler(
           category_id: body.id
         },
         data: {
-          category_id: 59
+          category_id: CATEGORY_SECUNDARY?.id
         }
       })
 
