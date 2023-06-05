@@ -26,7 +26,7 @@ import { TextareaDefault } from '../Form/Textarea'
 import { EditOrder } from '../EditOrder'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
-import { Modal, Table } from 'antd'
+import { Badge, Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
@@ -104,7 +104,7 @@ const TabCategory = () => {
         ...bodyForm,
         favorite: isFavorite,
         is_active: isActive,
-        all_product: isAllProduct
+        all_product: isAllProduct,
       })
 
       toast({
@@ -134,7 +134,7 @@ const TabCategory = () => {
         favorite: isFavorite,
         is_active: isActive,
         id: idSelected,
-        all_product: isAllProduct
+        all_product: isAllProduct,
       })
 
       toast({
@@ -286,8 +286,8 @@ const TabCategory = () => {
       title: 'Order todos produtos',
       width: 200,
       sorter: (a: any, b: any) => {
-        const orderA = a.order_all_products ?? 999999;
-        const orderB = b.order_all_products ?? 999999;
+        const orderA = a.order_all_products ?? 999999
+        const orderB = b.order_all_products ?? 999999
         return orderA - orderB
       },
       render: (a: any) => <EditOrderProduct value={a} changerOrder={changerOrderProducts} />,
@@ -305,10 +305,17 @@ const TabCategory = () => {
           {a.id != 59 && (
             <HStack spacing='20px'>
               <Tooltip label='Filtro'>
-                <Icon cursor='pointer' as={BiFilterAlt} fontSize='17px' onClick={() => {
-                  setSelectCategory(a)
-                  setOpenFiter(!openFilter)
-                }} />
+                <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' >
+                  <Icon
+                    cursor='pointer'
+                    as={BiFilterAlt}
+                    fontSize='20px'
+                    onClick={() => {
+                      setSelectCategory(a)
+                      setOpenFiter(!openFilter)
+                    }}
+                  />
+                </Badge>
               </Tooltip>
               <Icon cursor='pointer' as={AiOutlineEdit} fontSize='17px' onClick={() => handleOnEditClick(a)} />
               <Icon
@@ -354,8 +361,13 @@ const TabCategory = () => {
     <>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
         <Box w={'70%'}>
-          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Categorias & Subcategorias</Text>
-          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma prática.</Text>
+          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>
+            Categorias & Subcategorias
+          </Text>
+          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>
+            Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma
+            prática.
+          </Text>
         </Box>
         <SearchBar
           inputProps={{
@@ -415,7 +427,6 @@ const TabCategory = () => {
                     É principal?
                   </FormLabel>
 
-
                   <InputGroup
                     borderRadius='6px'
                     bg='white.500'
@@ -451,7 +462,9 @@ const TabCategory = () => {
                     </Select>
                   </InputGroup>
                   {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-                  <FormHelperText>Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".</FormHelperText>
+                  <FormHelperText>
+                    Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".
+                  </FormHelperText>
                 </FormControl>
               )}
             />
@@ -510,7 +523,9 @@ const TabCategory = () => {
                   required: 'Descrição é obrigatório',
                 })}
               />
-              <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <FormHelperText>
+                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
+              </FormHelperText>
             </FormControl>
             <FormControl>
               <TextareaDefault
@@ -520,9 +535,15 @@ const TabCategory = () => {
                   required: 'Key Word Seo é obrigatório',
                 })}
               />
-              <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <FormHelperText>
+                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
+              </FormHelperText>
             </FormControl>
-            <InputsHome name='Foto da categoria' typeInput='fileSingle' getUrls={(values: any) => setUrlPicture(values)} />
+            <InputsHome
+              name='Foto da categoria'
+              typeInput='fileSingle'
+              getUrls={(values: any) => setUrlPicture(values)}
+            />
             <HStack spacing='20px' flexWrap='wrap' w='100%'>
               {urlPicture && (
                 <ViewImage
@@ -557,7 +578,9 @@ const TabCategory = () => {
                 >
                   Categoria destaque
                 </Checkbox>
-                <FormHelperText>Marque caso queira que a categoria apareça na página de todos os produtos.</FormHelperText>
+                <FormHelperText>
+                  Marque caso queira que a categoria apareça na página de todos os produtos.
+                </FormHelperText>
               </FormControl>
             </Box>
 
@@ -574,7 +597,10 @@ const TabCategory = () => {
                 >
                   Ativo
                 </Checkbox>
-                <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
+                <FormHelperText>
+                  Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada,
+                  mas não ficará online.
+                </FormHelperText>
               </FormControl>
             </Box>
             <Box w='100%' mt='10px'>
@@ -639,10 +665,15 @@ const TabCategory = () => {
           </Flex>
         </Box>
       </HStack>
-      <ModalAddFilter isOpen={openFilter} onClose={() => {
-        setOpenFiter(!openFilter)
-        setSelectCategory({})
-      }} category={selectCategory} reload={() => listCategory()} />
+      <ModalAddFilter
+        isOpen={openFilter}
+        onClose={() => {
+          setOpenFiter(!openFilter)
+          setSelectCategory({})
+        }}
+        category={selectCategory}
+        reload={() => listCategory()}
+      />
     </>
   )
 }

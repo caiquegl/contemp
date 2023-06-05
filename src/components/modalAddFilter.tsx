@@ -125,7 +125,6 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
     setOptions([])
     if (category.name) getOptions()
     if (category && category.filter && Array.isArray(category.filter)) {
-      console.log(Array.isArray(category.filter), 'aqui' )
       setFilter(category.filter)
     } else {
       setFilter([])
@@ -200,7 +199,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                   header={item.name}
                   key={index}
                   extra={
-                    <ConfigModalFilter filter={filter} setFilter={setFilter} index={index} category={category} />
+                    <ConfigModalFilter filter={filter} setFilter={setFilter} index={index} category={category} length={filter.length - 1}/>
                   }
                 >
                   <Form
