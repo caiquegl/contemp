@@ -27,9 +27,8 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
     for await (let file of files) {
       const nameFile = file.originalname
       let url = `www.contemp.com.br/api/arquivos/${nameFile}`.replaceAll(' ','_')
-      let p: any = prisma
-
-      await p.files.create({
+      
+      await prisma.files.create({
         data: {
           url: url,
           name: nameFile,

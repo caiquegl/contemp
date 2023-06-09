@@ -6,8 +6,8 @@ export default async function handler(
     res: NextApiResponse,
   ) {
     try {
-      let p: any = prisma
-      let list = await p.files.findMany()
+      
+      let list = await prisma.files.findMany()
       return res.status(201).json(list)
     } catch (error) {
       console.log(error)

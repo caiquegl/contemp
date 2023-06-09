@@ -7,9 +7,8 @@ export default async function handler(
     res: NextApiResponse,
   ) {
     try {
-      let p: any = prisma
-
-      await p.files.delete({
+      
+      await prisma.files.delete({
         where: {
           id: req.body.id
         }
