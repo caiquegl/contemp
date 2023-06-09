@@ -6,7 +6,7 @@ import { prisma } from '../../../lib/prisma'
 const upload = multer({
   storage: multer.diskStorage({
     destination: process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos',
-    filename: (req, file, cb) => cb(null, file.originalname),
+    filename: (req, file, cb) => cb(null, file.originalname.toLocaleLowerCase()),
   }),
 })
 
