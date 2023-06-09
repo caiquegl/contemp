@@ -1,9 +1,10 @@
 import { Box, HStack, Icon, Flex, Button, useToast, Link, Text } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Modal, Table } from 'antd'
+import { Modal, Table, Tooltip } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { api } from '../../lib/axios'
+import { FiCopy } from 'react-icons/fi'
 
 const TabFiles = () => {
   const toast = useToast({
@@ -14,6 +15,26 @@ const TabFiles = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [list, setList] = useState<any>([])
   const { confirm } = Modal
+
+  function copiarTexto(texto: string) {
+    // Cria um elemento de input dinamicamente
+    var input = document.createElement('input')
+
+    // Define o valor do input como o texto a ser copiado
+    input.value = texto
+
+    // Adiciona o input ao documento
+    document.body.appendChild(input)
+
+    // Seleciona o conteúdo do input
+    input.select()
+
+    // Copia o conteúdo selecionado para a área de transferência
+    document.execCommand('copy')
+
+    // Remove o input do documento
+    document.body.removeChild(input)
+  }
 
   const column = [
     {
@@ -34,7 +55,7 @@ const TabFiles = () => {
     },
     {
       title: 'Ação',
-      render: (a: any) => (
+      render: (a: any, row: any) => (
         <HStack spacing='20px'>
           <Icon
             cursor='pointer'
@@ -47,11 +68,10 @@ const TabFiles = () => {
                 icon: <ExclamationCircleFilled />,
                 content: 'Deseja remover o arquivo ?',
                 async onOk() {
-                 
                   setLoading(true)
                   const { data, status } = await api.put(`removeFile`, {
                     id: a.id,
-                    name: a.name
+                    name: a.name,
                   })
 
                   toast({
@@ -69,6 +89,15 @@ const TabFiles = () => {
               })
             }}
           />
+          <Tooltip placement='top' title='Copiar'>
+            <FiCopy
+              style={{
+                cursor: 'pointer',
+              }}
+              onClick={() => copiarTexto(`https://${row.url}`)
+              }
+            />
+          </Tooltip>
         </HStack>
       ),
     },
