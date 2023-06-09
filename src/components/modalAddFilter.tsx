@@ -15,8 +15,6 @@ import React, { useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { AiFillDelete } from 'react-icons/ai'
-import { SettingOutlined } from '@ant-design/icons'
-import { RiDeleteBinLine } from 'react-icons/ri'
 import ConfigModalFilter from './configModalFilter'
 
 const { Panel } = Collapse

@@ -1,0 +1,93 @@
+[
+  {
+    "id": 5,
+    "description": "A Placa Controladora de Processos ETC46 possui múltiplas entradas e saídas adequadas à maioria das aplicações em processos e equipamentos. É baseado em um micro controlador RISC, o que lhe confere exatidão no processamento dos sinais.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/Ativo%202.png-Thu%20Jan%2012%202023%2018%3A14%3A58%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=8f8668d3-225a-4c8b-bcea-4ae539c4a205",
+    "link_name": "https://contemp.com.br/produto/PLACA_CONTROLADORA_-_ETC_46",
+    "name": "ETC46",
+    "indexProduct": 6,
+    "category_id": 9,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/ETC%2046.png-Wed%20Dec%2014%202022%2010%3A13%3A36%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=ab0b3ccf-0c72-4972-8b32-7a0d23a04107"
+    ]
+  },
+  {
+    "id": 6,
+    "description": "Os Indicadores de Processos I716 Linha Avançada, têm em suas funções: \nMonitoramento, configuração, armazenamento de dados e compartilhamento de informações do indicador em nuvem.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/controlador-de-potencia.png-Thu%20Jan%2012%202023%2018%3A13%3A03%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=b8ad4b2c-661c-4064-a38f-d16a549ffe65",
+    "link_name": "https://contemp.com.br/produto/INDICADOR_DE_PROCESSOS_-_I716",
+    "name": "I716",
+    "indexProduct": 5,
+    "category_id": 11,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/I716%20OK.png-Wed%20Dec%2014%202022%2010%3A16%3A22%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=48daa574-e431-4821-a119-d43af4bf9322"
+    ]
+  },
+  {
+    "id": 3,
+    "description": "A câmera termográfica fixa PI640I G7 mede a temperatura em tempo real, com alta resolução e precisão de ± 2°C. Ideal para detectar anomalias em processos industriais e sistemas elétricos, possui opções de configuração e é fácil de instalar em espaços reduzidos.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/pirometros.png-Thu%20Jan%2012%202023%2017%3A57%3A08%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=23fb848f-e957-441a-b092-23b5efd5f7a9",
+    "link_name": "https://contemp.com.br/produto/C%C3%82MERA_TERMOGR%C3%81FICA_FIXA_-_PI640I_G7",
+    "name": "PI640I G7",
+    "indexProduct": 3,
+    "category_id": 35,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/PI640%20G7.png-Fri%20May%2012%202023%2015%3A38%3A57%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=9e257640-a39b-40d6-a787-1bbca5d19ae8"
+    ]
+  },
+  {
+    "id": 2,
+    "description": "O pirômetro fixo CTRatio 2M mede a temperatura sem contato, com precisão de ± 0,5°C e faixa de 550°C a 3.200°C. Com saída analógica e digital, é fácil de instalar em indústrias metalúrgicas, vidro e cerâmica. Possui ajuste de emissividade e análise avançada de imagem em design compacto.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/Ativo%201.png-Thu%20Jan%2012%202023%2018%3A10%3A31%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=caf06f7d-2b41-4c63-9439-0501e4e28009",
+    "link_name": "https://contemp.com.br/produto/PIR%C3%94METRO_FIXO_-_CTRatio_2M",
+    "name": "CTRatio 2M",
+    "indexProduct": 4,
+    "category_id": 39,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/CTRATIO.webp-Fri%20May%2012%202023%2015%3A41%3A43%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=6577efe3-90c7-4337-b52d-a9b366633974"
+    ]
+  },
+  {
+    "id": 1,
+    "description": "O pirômetro fixo CTLaser P7 para plástico é um dispositivo de medição de temperatura sem contato, preciso e confiável. Com saída analógica e digital, é fácil de instalar e possui design compacto, ideal para espaços reduzidos em indústrias de plásticos.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/contemp.png-Thu%20Jan%2012%202023%2017%3A54%3A59%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=905a5dcf-0511-46fc-9a6d-2e3550712757",
+    "link_name": "https://contemp.com.br/produto/PIR%C3%94METRO_FIXO_-_CTLaser_P7_para_pl%C3%A1stico",
+    "name": "CTLaser P7",
+    "indexProduct": 2,
+    "category_id": 39,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/CTLaser%20P7%20para%20pl%C3%A1stico.webp-Fri%20May%2012%202023%2015%3A55%3A29%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=76fbfc82-6e88-46f3-ae4f-6dd934c1e137"
+    ]
+  },
+  {
+    "id": 4,
+    "description": "A câmera termográfica XI400 é um equipamento de alta resolução que mede a temperatura em tempo real, ideal para detectar anomalias em processos industriais e sistemas elétricos. Com ajuste de emissividade e análise avançada, é fácil de instalar e operar.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/controlador-de-potencia.png-Thu%20Jan%2012%202023%2017%3A50%3A38%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=6d1de3c7-d050-4ce9-94b9-5a06771f54d7",
+    "link_name": "https://contemp.com.br/produto/C%C3%82MERA_TERMOGR%C3%81FICA_FIXA_-_XI400",
+    "name": "XI400",
+    "indexProduct": 0,
+    "category_id": 36,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/xi400.png-Fri%20May%2012%202023%2015%3A26%3A47%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=f717c4af-5088-472a-a4cf-a524f834c1c3"
+    ]
+  },
+  {
+    "id": 7,
+    "description": "A câmera termográfica fixa PI01 M é um equipamento de alta resolução que mede a temperatura em tempo real, ideal para detectar anomalias em processos industriais e sistemas elétricos. Com precisão de ± 2°C e opções de configuração, é fácil de instalar e operar em espaços reduzidos.",
+    "destaque": false,
+    "icon": "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/controlador-de-potencia.png-Thu%20Jan%2012%202023%2017%3A53%3A40%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=62d0d696-8e0a-46cd-9b73-3f4fd712fc5d",
+    "link_name": "https://contemp.com.br/produto/C%C3%82MERA_TERMOGR%C3%81FICA_FIXA_-_PI01_M_",
+    "name": "OPTRIS PI 1M",
+    "indexProduct": 1,
+    "category_id": 15,
+    "urls": [
+      "https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/PI01ML.png-Fri%20May%2012%202023%2015%3A54%3A33%20GMT-0300%20(Hor%C3%A1rio%20Padr%C3%A3o%20de%20Bras%C3%ADlia)?alt=media&token=0afafb18-72ba-4d38-b533-be278601ab1e"
+    ]
+  }
+]

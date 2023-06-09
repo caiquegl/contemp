@@ -228,8 +228,8 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
             />
             <HStack spacing='20px' flexWrap='wrap' w='100%' marginTop={5}>
               {urls &&
-                urls.length > 0 &&
-                urls.map((value: any, index: number) => (
+                Array.isArray(urls) &&
+                urls?.map((value: any, index: number) => (
                   <ViewImage
                     key={uuidv4()}
                     url={value}

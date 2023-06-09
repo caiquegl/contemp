@@ -180,7 +180,7 @@ const Adm = () => {
               >
                 Produtos
               </Tab>
-              {/*<Tab>
+              <Tab
               _selected={{
                   bg: 'red.600',
                   color: 'white',
@@ -191,7 +191,7 @@ const Adm = () => {
                 color='black.800'
               >
                 Arquivos
-              </Tab>*/}
+              </Tab>
             </TabList>
           </Tabs>
         </Flex>

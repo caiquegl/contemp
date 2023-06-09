@@ -1,33 +1,66 @@
-import multer from 'multer';
-import path from 'path';
-import { NextApiRequest, NextApiResponse } from 'next';
+import multer from 'multer'
+import { NextApiResponse } from 'next'
+import nextConnect from 'next-connect'
+import { prisma } from '../../../lib/prisma'
 
-interface MulterRequest extends NextApiRequest {
-  file: Express.Multer.File;
-}
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos',
+    filename: (req, file, cb) => cb(null, file.originalname),
+  }),
+})
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(process.cwd(), 'documentos'));
+const apiRoute = nextConnect({
+  onError(error, req: any, res: NextApiResponse<any>) {
+    res.status(501).json({ error: `Sorry something Happened! ${error.message}` })
   },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
+  onNoMatch(req: any, res: NextApiResponse<any>) {
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` })
   },
-});
+})
 
-const upload = multer({ storage });
+apiRoute.use(upload.array('files'))
 
-export default async function handler(
-  req: MulterRequest,
-  res: NextApiResponse,
-) {
-  // upload.single('file')(req, res, function (err: any) {
-  //   if (err) {
-  //     return res.status(500).send(err);
-  //   }
+apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
+  const files = req.files
+  try {
+    for await (let file of files) {
+      const nameFile = file.originalname
+      let url = `www.contemp.com.br/api/arquivos/${nameFile}`.replaceAll(' ','_')
+      console.log(url)
+      await prisma.files.create({
+        data: {
+          url: url,
+          name: nameFile,
+          created_at: new Date()
+        }
+      })
+    }
 
-  //   const filename = req.file.filename;
-  //   const fileUrl = `/documentos/${filename}`;
-    res.status(200).send(true);
-  ;
+    let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
+    user = user?.body?.email || ''
+
+    await prisma.logs.create({
+      data: {
+        user: user,
+        description: `Subiu arquivos`
+      }
+    })
+
+    return res.status(201).json({
+      status: true
+    })
+
+  } catch (error) {
+    console.log(error)
+    return res.status(201).json({
+      status: false
+    })  }
+})
+
+export const config = {
+  api: {
+    bodyParser: false, // Disallow body parsing, consume as stream
+  },
 }
+export default apiRoute

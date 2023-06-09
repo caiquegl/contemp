@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,64 +8,27 @@ datasource db {
 }
 
 model Categories {
-  id              Int        @id @default(autoincrement())
-  description     String
-  description_seo String
-  favorite        Boolean    @default(false)
-  is_active       Boolean    @default(true)
-  all_product       Boolean    @default(true)
-  is_main         Boolean    @default(false)
-  key_word_seo    String
-  name            String     @unique
-  firebase_id     String?
-  sub_category_id Int?
-  order           Int        @unique
-  order_all_products           Int?
-  url             String?
-  urlPicture      String?
-  filter          Json       @default("{}")
-  Home            Home[]
-  Products        Products[]
+  id                 Int        @id @default(autoincrement())
+  description        String
+  description_seo    String
+  favorite           Boolean    @default(false)
+  is_active          Boolean    @default(true)
+  is_main            Boolean    @default(false)
+  key_word_seo       String
+  name               String     @unique
+  firebase_id        String?
+  sub_category_id    Int?
+  order              Int        @unique
+  url                String?
+  all_product        Boolean    @default(true)
+  urlPicture         String?
+  order_all_products Int?
+  filter             Json       @default("[]")
+  Home               Home[]
+  Products           Products[]
 
   @@map("categories")
 }
-
-// model Categories1 {
-//   id              Int           @id @default(autoincrement())
-//   description     String
-//   description_seo String
-//   favorite        Boolean       @default(false)
-//   is_active       Boolean       @default(true)
-//   is_main         Boolean       @default(false)
-//   key_word_seo    String
-//   name            String
-//   order           Int           @unique
-//   category_id     Int
-//   url             String?
-//   category        Categories    @relation(fields: [category_id], references: [id])
-//   Categories2     Categories2[]
-
-//   @@map("categories1")
-// }
-
-// model Categories2 {
-//   id              Int         @id @default(autoincrement())
-//   description     String
-//   description_seo String
-//   favorite        Boolean     @default(false)
-//   is_active       Boolean     @default(true)
-//   is_main         Boolean     @default(false)
-//   key_word_seo    String
-//   name            String
-//   order           Int         @unique
-//   sub_category_id Int
-//   url             String?
-//   category        Categories1 @relation(fields: [sub_category_id], references: [id])
-//   Categories      Categories? @relation(fields: [categoriesId], references: [id])
-//   categoriesId    Int?
-
-//   @@map("categories2")
-// }
 
 model Home {
   id           Int        @id @default(autoincrement())
@@ -100,7 +60,6 @@ model Orcamento {
 model Products {
   id              Int        @id @default(autoincrement())
   description     String
-  call_product    String
   description_seo String
   destaque        Boolean    @default(false)
   hasVariation    Boolean    @default(false)
@@ -111,6 +70,7 @@ model Products {
   tab             Json?
   urls            Json?
   category_id     Int
+  call_product    String
   category        Categories @relation(fields: [category_id], references: [id])
 
   @@map("products")
@@ -125,4 +85,13 @@ model Logs {
   created_at  DateTime @default(now())
 
   @@map("logs")
+}
+
+model Files {
+  id          Int      @id @default(autoincrement())
+  url         String
+  name         String?
+  created_at  DateTime @default(now())
+
+  @@map("files")
 }
