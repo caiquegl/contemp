@@ -27,8 +27,8 @@ const TabFiles = () => {
       dataIndex: 'url',
       key: 'url',
       render: (value: any) => (
-        <Text onClick={() => window.open(value, '_blank')} cursor='pointer'>
-          {value}
+        <Text onClick={() => window.open(`https://${value}`, '_blank')} cursor='pointer'>
+          {`https://${value}`}
         </Text>
       ),
     },
