@@ -34,6 +34,11 @@ const TabFiles = () => {
 
     // Remove o input do documento
     document.body.removeChild(input)
+    toast({
+      title: 'Copiado',
+      description: 'Link copiado com sucesso.',
+      status: 'info',
+    })
   }
 
   const column = [

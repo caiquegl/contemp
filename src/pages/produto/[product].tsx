@@ -470,7 +470,12 @@ const Product = () => {
                 className='mySwiper'
                 speed={1000}
               >
-                {products.map((item: any, key: number) => (
+                {products.sort((a: any, b: any) => {
+                      let aOrder = a.order || 999999
+                      let bOrder = b.order || 999999
+                    return aOrder - bOrder
+                    
+                  }).map((item: any, key: number) => (
                   <SwiperSlide key={uuidv4()}>
                     <CardProductWithDescription
                       img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}

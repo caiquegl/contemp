@@ -9,6 +9,7 @@ import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
+import { EditOrderTabProduct } from '../EditOrderTabProduct'
 
 interface IProps {
   back: any
@@ -18,6 +19,7 @@ const TabProduct = ({back}: IProps) => {
     duration: 3000,
     isClosable: true,
   })
+  const [loading, setLoading] = useState<boolean>(false)
 
   const [step, setStep] = useState(1)
   const [list, setList] = useState<any>([])
@@ -25,13 +27,45 @@ const TabProduct = ({back}: IProps) => {
   const [body, setBody] = useState({})
   const [isUpdate, setIsUpdate] = useState(false)
 
+  const changerOrder = async (order: number, category: any) => {
+    try {
+      setLoading(true)
+      const { data, status } = await api.put(`changeOrderProduct`, {
+        order,
+        product: category,
+      })
+
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await listProduct()
+    }
+  }
+
   const column = [
+    {
+      title: 'Order',
+      width: 100,
+      sorter: (a: any, b: any) => a.order - b.order,
+      render: (a: any) => <EditOrderTabProduct value={a} changerOrder={changerOrder} />,
+    },
     {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
+    
     {
       title: 'Categoria',
       render: (a: any, b: any) => <p>{a.category.name}</p>,
@@ -165,7 +199,7 @@ const TabProduct = ({back}: IProps) => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
+            <Table loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
           </Box>
         </>
       )}

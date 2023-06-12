@@ -136,7 +136,12 @@ const AllProduct = () => {
                 >
                   {fv.products &&
                     fv.products.length > 0 &&
-                    fv.products.map((item: any) => (
+                    fv.products.sort((a: any, b: any) => {
+                      let aOrder = a.order || 999999
+                      let bOrder = b.order || 999999
+                    return aOrder - bOrder
+                    
+                  }).map((item: any) => (
                       <SwiperSlide key={uuidv4()}>
                         <CardProductWithDescription
                           img={item.urls ? item.urls[0] : ''}

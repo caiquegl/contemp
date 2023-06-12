@@ -71,6 +71,7 @@ model Products {
   urls            Json?
   category_id     Int
   call_product    String
+  order           Int?       @unique
   category        Categories @relation(fields: [category_id], references: [id])
 
   @@map("products")

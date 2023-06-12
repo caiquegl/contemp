@@ -118,7 +118,12 @@ export const Favorite = ({ homeTabs }) => {
             alignItems: 'center',
           }}
         >
-          {products.map((item) => (
+          {products.sort((a, b) => {
+            let aOrder = a?.order || 999999
+            let bOrder = b?.order || 999999
+          return aOrder - bOrder
+          
+        }).map((item) => (
             <SwiperSlide style={{ width: '100%' }} key={uuidv4()}>
               <Link
                 href={item.name ? `/produto/${item.name.replaceAll(' ', '_')}` : ''}

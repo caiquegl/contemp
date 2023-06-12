@@ -18,7 +18,12 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
       >
         {data &&
           data.length > 0 &&
-          data.map((catg: any) => (
+          data.sort((a: any, b: any) => {
+            let aOrder = a.order || 999999
+            let bOrder = b.order || 999999
+          return aOrder - bOrder
+          
+        }).map((catg: any) => (
             <CardProductWithDescription
               key={uuidv4()}
               img={catg.urls && catg.urls[0] ? catg.urls[0] : ''}
