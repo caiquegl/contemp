@@ -58,7 +58,7 @@ export const Banner = () => {
             fontWeight="bold"
             marginTop={'20%'}
           >
-            PENSOU TEMPERATURA INDUSTRIAL, PENSOU CONTEMP
+            PARABÉNS CONTEMP, HÁ 39 ANOS SENDO REFERÊNCIA EM TEMPERATURA INDUSTRIAL.
           </Text>
 
           {/*<Text
