@@ -35,6 +35,7 @@ import { database, initFirebase } from '../utils/db'
 import { useAuth } from '../contextAuth/authContext'
 import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2'
 import Head from 'next/head'
+import { api } from '../lib/axios'
 
 const Orcamento = () => {
   initFirebase()
@@ -78,9 +79,10 @@ const Orcamento = () => {
 
       setLoading(true)
 
-      const dbInstance = collection(database, 'orcamento')
+      const { data } = await api.post('orcamento', bodyForm)
+      // const dbInstance = collection(database, 'orcamento')
 
-      await addDoc(dbInstance, bodyForm)
+      // await addDoc(dbInstance, bodyForm)
       await fetch(`api/mail`, {
         method: 'POST',
         body: JSON.stringify({ ...bodyForm, product: product }),
