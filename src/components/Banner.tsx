@@ -58,7 +58,7 @@ export const Banner = () => {
             fontWeight="bold"
             marginTop={'20%'}
           >
-            PARABÉNS CONTEMP, HÁ 39 ANOS SENDO REFERÊNCIA EM TEMPERATURA INDUSTRIAL.
+            PARABÉNS CONTEMP, HÁ 39 ANOS SENDO SOLUÇÃO EM TEMPERATURA INDUSTRIAL.
           </Text>
 
           {/*<Text
