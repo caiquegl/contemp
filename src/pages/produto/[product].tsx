@@ -76,7 +76,7 @@ const Product = () => {
   const getProduct = async () => {
     try {
       let produto = ''
-      if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ')
+      if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ').replaceAll('/', '333')
       const { data } = await api.get(`${produto}/getProduct`)
       if (!data.bradName) return router.push('/404')
       setBradeName(data.bradName)
