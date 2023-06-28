@@ -554,7 +554,7 @@ export const Header = () => {
                       </Button>
                     </Link>
                   </Box>
-                  <Box margin='0 20px' w='100%'>
+                  <Box margin='0 0px' w='100%'>
                     <HeaderMenu menuItems={list} maxWidth={true} />
                   </Box>
                   <Box

@@ -13,6 +13,7 @@ interface IProps {
 }
 
 export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) => {
+  console.log(img)
   return (
     <Link
       isExternal={true}
@@ -43,7 +44,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
 
       >
         <Box >
-          <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img} borderRadius="8px"/>
+          <Image crossOrigin="anonymous" objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img.replaceAll('https//', '')} borderRadius="8px"/>
           <Text lineHeight={pxToRem(30)} fontWeight="bold" fontSize={pxToRem(20)} mt={["5px","15px"]} color={color}>
             {title}
           </Text>
