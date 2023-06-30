@@ -108,7 +108,7 @@ module.exports = {
   },
   compress: true,
   images: {
-    domains: ['firebasestorage.googleapis.com'],
+    domains: ['firebasestorage.googleapis.com', 'blog.contemp.com.br'],
   },
   async headers() {
     return [

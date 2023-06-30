@@ -325,6 +325,15 @@ img {
   color: #242424;
 }
 
+.btn-all-products .ant-dropdown-menu-submenu-expand-icon {
+  margin-bottom: 4px !important;
+}
+
+.ant-dropdown-menu-submenu:hover > .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-expand-icon .ant-dropdown-menu-submenu-arrow-icon {
+  color: #FFF !important;
+}
+
+
 .btn-all-products:hover {
   background-color: #b60005;
   
