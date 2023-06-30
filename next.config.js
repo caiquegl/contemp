@@ -104,5 +104,8 @@ module.exports = {
       creatRedirectObj ('/catalogo_optris', '/category/C%C3%82MERAS_TERMOGR%C3%81FICAS_FIXAS#viewCategory'),
       // creatRedirectObj ('', ''),
     ]
+  },
+  images: {
+    domains: ['firebasestorage.googleapis.com', 'blog.contemp.com.br'],
   }
 }
