@@ -57,6 +57,7 @@ export const Banner = () => {
             fontSize={['1.3rem', '1.3rem', '2.3rem']}
             fontWeight="bold"
             marginTop={'20%'}
+            opacity={'0'}
           >
             PARABÉNS CONTEMP, HÁ 39 ANOS SENDO SOLUÇÃO EM TEMPERATURA INDUSTRIAL.
           </Text>
