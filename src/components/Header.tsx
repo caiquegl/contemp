@@ -552,7 +552,7 @@ export const Header = () => {
                     </Link> */}
                     <ButtonAllProducts menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='20px' />} />
                   </Box>
-                  <Box margin='0 20px' w='100%'>
+                  <Box margin='0 0' w='100%'>
                     <HeaderMenu menuItems={list} maxWidth={true} />
                   </Box>
                   <Box
