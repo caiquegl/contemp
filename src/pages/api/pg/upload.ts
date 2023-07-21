@@ -26,8 +26,16 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
   try {
     for await (let file of files) {
       const nameFile = file.originalname.toLowerCase()
-      let url = `contemp.com.br/api/arquivos/${nameFile}`.replaceAll(' ','_')
-      
+      let url = `contemp.com.br/api/arquivos/${nameFile}`.replaceAll(' ', '_')
+
+      const exist = await prisma.files.findMany({
+        where: {
+          name: {
+            in: nameFile
+          }
+        }
+      })
+      if (exist.length > 0) continue
       await prisma.files.create({
         data: {
           url: url,
@@ -55,7 +63,8 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
     console.log(error)
     return res.status(201).json({
       status: false
-    })  }
+    })
+  }
 })
 
 export const config = {

@@ -99,8 +99,7 @@ const TabFiles = () => {
               style={{
                 cursor: 'pointer',
               }}
-              onClick={() => copiarTexto(`https://${row.url}`)
-              }
+              onClick={() => copiarTexto(`https://${row.url}`)}
             />
           </Tooltip>
         </HStack>
@@ -150,6 +149,8 @@ const TabFiles = () => {
           h='47px'
           _hover={{ transition: 'all 0.4s' }}
           onClick={() => {
+            fileInputRef.current.value = null // Remove a seleção atual do arquivo
+            fileInputRef.current.key = Date.now() // Adiciona uma "key" única para forçar a recriação do elemento input
             fileInputRef.current.click()
           }}
         >
@@ -157,6 +158,7 @@ const TabFiles = () => {
         </Button>
         <input
           id='cpf_file'
+          key={Date.now()} // Adicione uma "key" única para forçar a recriação do elemento input
           type='file'
           multiple={true}
           ref={fileInputRef}
