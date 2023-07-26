@@ -6,7 +6,7 @@ import { Typewriter } from 'react-simple-typewriter'
 import { pxToRem } from '../utils/pxToRem'
 import { SearchBar } from './SearchBar'
 import { useWindowSize } from '../utils/useWindowSize'
-import BGFavorite from '../assets/banners/Banner.png'
+import BGFavorite from '../assets/banners/Banner2.png'
 export const Banner = () => {
   const windowSize = useWindowSize()
 
@@ -23,39 +23,33 @@ export const Banner = () => {
 
   return (
     <Flex
-      w="100%"
-      bg="black.900"
-      h="auto"
-      alignItems="center"
-      justifyContent="center"
-      flexDirection="column"
+      w='100%'
+      bg='black.900'
+      h='auto'
+      alignItems='center'
+      justifyContent='center'
+      flexDirection='column'
       // backgroundImage={`url('./images/Banner.png')`}
       backgroundImage={`url(${BGFavorite.src})`}
-      backgroundRepeat="no-repeat"
-      backgroundPosition="center"
+      backgroundRepeat='no-repeat'
+      backgroundPosition='center'
     >
-      <Container
-        maxW="6xl"
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        height="100%"
-      >
+      <Container maxW='6xl' display='flex' flexDirection='column' alignItems='center' height='100%'>
         {/*<Box marginTop={'5%'}>
           <Image src={Team} width={pxToRem(200)} height={pxToRem(52)} />
         </Box>*/}
         <Flex
-          w="100%"
-          maxW="650px"
-          flexDirection="column"
+          w='100%'
+          maxW='650px'
+          flexDirection='column'
           marginBottom={pxToRem(width > maxWidth ? 87 : 60)}
           minH={pxToRem(width > maxWidth ? 150 : 40)}
         >
           <Text
-            color="white"
-            textAlign="center"
+            color='white'
+            textAlign='center'
             fontSize={['1.3rem', '1.3rem', '2.3rem']}
-            fontWeight="bold"
+            fontWeight='bold'
             marginTop={'20%'}
             opacity={'0'}
           >
@@ -72,23 +66,18 @@ export const Banner = () => {
             <Typewriter words={typewriterWords} loop={0} cursor={true} />
           </Text>*/}
         </Flex>
-        <Flex w="100%" alignItems="center" flexDirection="column">
+        <Flex w='100%' alignItems='center' flexDirection='column'>
           <SearchBar
             inputProps={{
-              placeholder: 'Procure aqui seu produto...'
+              placeholder: 'Procure aqui seu produto...',
             }}
             containerProps={{
-              bg: 'red.600'
+              bg: 'red.600',
             }}
-            searchCard="100%"
+            searchCard='100%'
           />
 
-          <Text
-            fontSize="20px"
-            color="white"
-            textAlign="center"
-            marginTop={pxToRem(15)}
-          >
+          <Text fontSize='20px' color='white' textAlign='center' marginTop={pxToRem(15)}>
             Pesquise aqui o produto que precisa.
           </Text>
         </Flex>
@@ -123,6 +112,5 @@ const typewriterWords = [
   'Dissipador de Calor',
   'Software - Contemp Conect',
   'Software - Contemp Bridge',
-  'Software - Contemp Tools'
-
+  'Software - Contemp Tools',
 ]
