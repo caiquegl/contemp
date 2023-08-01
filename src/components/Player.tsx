@@ -39,7 +39,7 @@ export const Player = () => {
     >
       {!isMobile && (
         <Box w='100%' maxW={pxToRem(700)} mr='40px'>
-          <ReactPlayer url='https://www.youtube.com/watch?v=iKF2F4Q-xBU' height={pxToRem(533)} width='100%' />
+          <ReactPlayer url='https://youtu.be/vsHupNocrjE' height={pxToRem(533)} width='100%' />
         </Box>
       )}
       <Grid maxW={pxToRem(359)} templateRows='1fr 0.73fr 1fr'>
@@ -89,7 +89,7 @@ export const Player = () => {
           <ModalCloseButton color='red' />
           <ModalBody mt='50px'>
             <Flex alignItems='center'>
-              <ReactPlayer url='https://www.youtube.com/watch?v=iKF2F4Q-xBU' width='350px' height='195px' />
+              <ReactPlayer url='https://youtu.be/vsHupNocrjE' width='350px' height='195px' />
             </Flex>
           </ModalBody>
         </ModalContent>
