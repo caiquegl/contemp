@@ -67,6 +67,9 @@ export default class MyDocument extends Document {
           >
           </script>
 
+          <script src="https://cdn.croct.io/js/v1/lib/plug.js?appId=1431ba0f-c00a-49e0-868a-22b0f8b45c29"></script>
+          <script>croct.plug();</script>
+
         </Head>
         <body>
           <noscript>
