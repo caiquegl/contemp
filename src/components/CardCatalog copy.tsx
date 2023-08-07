@@ -19,6 +19,13 @@ const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
       <Flex h='100%' justifyContent='space-between' flexDirection='column'>
         <Box>
           <Box mb={pxToRem(15)}>
+            {!img ? (
+              <Box w='41px' h='41px' borderRadius='5px' bg={color} mb={pxToRem(10)} />
+            ) : (
+              <Box w='41px' h='41px' borderRadius='5px'>
+                <Image src={img} alt={title} />
+              </Box>
+            )}
             <Text color={color} fontSize={pxToRem(30)} lineHeight={1.2} fontWeight='bold'>
               {title}
             </Text>

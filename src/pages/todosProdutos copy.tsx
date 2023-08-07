@@ -189,6 +189,7 @@ const AllProduct = () => {
                     color={color}
                     title={categ.name}
                     text={categ.description}
+                    img={categ.url}
                   />
                 )
               })}
