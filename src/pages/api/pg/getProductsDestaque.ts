@@ -20,6 +20,9 @@ export default async function handler(
               name: true
             }
           }
+        },
+        orderBy: {
+          order: 'asc'
         }
       })
       return res.status(201).json(list)

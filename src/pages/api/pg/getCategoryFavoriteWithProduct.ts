@@ -39,7 +39,9 @@ export default async function handler(
             },
             isActive: true
           },
-          
+          orderBy: {
+            order: 'asc'
+          }
         })
 
 

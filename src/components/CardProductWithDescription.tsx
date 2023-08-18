@@ -17,6 +17,7 @@ interface IProps {
   bg?: string
   buttomBottom?: string
   containerProps?: GridProps
+  ocultBottom?: boolean
 }
 
 const CardProductWithDescription = ({
@@ -29,6 +30,7 @@ const CardProductWithDescription = ({
   color,
   buttomBottom,
   containerProps,
+  ocultBottom
 }: IProps) => {
   const router = useRouter()
   const [_, setIsHovering] = useState(false)
@@ -57,7 +59,7 @@ const CardProductWithDescription = ({
       cursor='pointer'
       maxW={pxToRem(350)}
       w='100%'
-      h={pxToRem(800)}
+      h={pxToRem(ocultBottom ? 600 : 800)}
       mt='20px'
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
@@ -112,28 +114,30 @@ const CardProductWithDescription = ({
           gridRow={3}
           bgSize='contain'
         />
-        <Link
-          href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
-          _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
-        >
-          <Button
-            w={pxToRem(243)}
-            h={pxToRem(50)}
-            gridRow={4}
-            borderRadius='25px'
-            margin='auto'
-            bg='red.600'
-            fontSize={pxToRem(20)}
-            borderColor={buttomBottom ? buttomBottom : 'transparent'}
-            borderWidth={buttomBottom ? '2px' : '0'}
-            _hover={{
-              bg: bg ? hoverBg[bg] : 'black.800',
-              color: bg ? hoverColor[bg] : 'white',
-            }}
+        {ocultBottom ? null :
+          <Link
+            href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
+            _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
           >
-            Solicitar orçamento
-          </Button>
-        </Link>
+            <Button
+              w={pxToRem(243)}
+              h={pxToRem(50)}
+              gridRow={4}
+              borderRadius='25px'
+              margin='auto'
+              bg='red.600'
+              fontSize={pxToRem(20)}
+              borderColor={buttomBottom ? buttomBottom : 'transparent'}
+              borderWidth={buttomBottom ? '2px' : '0'}
+              _hover={{
+                bg: bg ? hoverBg[bg] : 'black.800',
+                color: bg ? hoverColor[bg] : 'white',
+              }}
+            >
+              Solicitar orçamento
+            </Button>
+          </Link>
+        }
       </Link>
     </Grid>
   )

@@ -41,7 +41,14 @@ export default async function handler(
         })
 
       } else {
-        return res.status(500).json({msg: 'Erro ao verificar a ordem.'})
+        await prisma.categories.create({
+          data: {
+            ...body,
+            is_main: body.is_main === 'true' ? true : false,
+            order: 1,
+            sub_category_id: body.sub_category_id ? body.sub_category_id : null
+          }
+        })
       }
 
       let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)

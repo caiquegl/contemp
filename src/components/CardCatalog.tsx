@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import { v4 as uuidv4 } from 'uuid'
+import ImageNext from 'next/image';
+import DefaultImg from '../assets/images/image-default.webp'
 
 interface IProps {
   bg: string
@@ -10,14 +12,24 @@ interface IProps {
   title: string
   color: string
   img?: string
+  urlPicture: string
 }
-const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
+const CardCatalog = ({ bg, text, title, color, img, urlPicture }: IProps) => {
   const router = useRouter()
 
   return (
     <GridItem w={'100%'} bg={bg} borderRadius='8px' p='27px 17px'>
       <Flex h='100%' justifyContent='space-between' flexDirection='column'>
         <Box>
+          <Box mb="20px">
+            <ImageNext
+              src={urlPicture ? urlPicture : DefaultImg}
+              alt="Imagem"
+              width={500}
+              height={500}
+              layout="responsive"
+            />
+          </Box>
           <Box mb={pxToRem(15)}>
             <Text color={color} fontSize={pxToRem(30)} lineHeight={1.2} fontWeight='bold'>
               {title}

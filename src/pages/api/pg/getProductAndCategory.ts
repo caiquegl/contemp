@@ -21,6 +21,9 @@ export default async function handler(
           category_id: {
             not: 8
           }
+        },
+        orderBy: {
+          order: 'asc'
         }
       })
 

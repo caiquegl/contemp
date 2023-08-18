@@ -11,13 +11,16 @@ import { AdBanners } from '../../components/AdBanners'
 import { v4 as uuidv4 } from 'uuid'
 import { decodeName } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
+import { Space, Tag } from 'antd'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const Category = () => {
   const router = useRouter()
   const { category } = router.query
   const [list, setList] = useState<any>([])
+  const [listOrigin, setListOrigin] = useState<any>([])
   const [categ, setCateg] = useState<any>({})
-
+  const [activeFilter, setActiveFilter] = useState<any>()
   const dividerList = (listProduct: any) => {
     let list: any = []
 
@@ -38,6 +41,7 @@ const Category = () => {
     })
 
     setList(list)
+    setListOrigin(list)
   }
 
   const getCategoryList = async () => {
@@ -46,7 +50,6 @@ const Category = () => {
       if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
-
       setCateg(data.category)
       dividerList(data.products)
     } catch (error) {
@@ -97,6 +100,55 @@ const Category = () => {
         >
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
+        <Space size={20} style={{ marginTop: 20 }}>
+          {categ &&
+            categ.filter &&
+            categ.filter.length > 0 &&
+            categ.filter.map((item: any, index: number) => (
+              <Box
+                color='white'
+                padding='10px 6px'
+                borderColor={activeFilter === index ? 'red.600' : 'white'}
+                backgroundColor={activeFilter === index ? 'red.600' : 'transparent'}
+                borderWidth='2px'
+                borderRadius='5px'
+                minW='80px'
+                h='40px'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                fontSize='18px'
+                cursor='pointer'
+                _hover={{
+                  transition: '0.3s',
+                  backgroundColor: 'red.600',
+                  borderColor: 'red.600',
+                }}
+                onClick={() => {
+                  if(activeFilter === index) {
+                    setList([...listOrigin])
+                    setActiveFilter(undefined)
+                    return
+                  }
+                  let newList: any = []
+                  list.forEach((pd: any) => {
+                    if (pd && pd.length > 0) {
+                      pd.forEach((product: any) => {
+                        item.products.forEach((pdFilter: any) => {
+                          if (product.id === pdFilter) newList.push(product)
+                        })
+                      })
+                    }
+                  })
+                  setActiveFilter(index)
+                  setList([[...newList]])
+                }}
+              >
+                <p style={{margin: 0}}>{item.name}</p>
+                {/* {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />} */}
+              </Box>
+            ))}
+        </Space>
       </Flex>
       <Box>
         {list &&

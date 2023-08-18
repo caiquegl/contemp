@@ -9,6 +9,9 @@ export default async function handler(
       let list = await prisma.products.findMany({
         include: {
           category: true
+        },
+        orderBy: {
+          order: 'asc'
         }
       })
       return res.status(201).json(list)

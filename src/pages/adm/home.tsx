@@ -32,6 +32,7 @@ import { Table, Tooltip } from 'antd'
 import { api } from '../../lib/axios'
 import { parseCookies } from "nookies";
 import { getFormattedDateTime } from '../../utils/countdown'
+import TabFiles from '../../components/Tabs/TabFiles'
 
 const Adm = () => {
   // const router = useRouter();
@@ -85,11 +86,12 @@ const Adm = () => {
     <TabHome />,
     <TabCategory />,
     <TabProduct back={back}/>,
+    <TabFiles />
   ]
 
   const emails: any = {
     "marketing@contemp.com.br": 'Marketing',
-    "kemelin@3hub.co": 'Kemilin',
+    "kemelin@3hub.co": 'Kemelin',
     "atendimento@3hub.co": 'Atendimento 3Hub'
   }
 
@@ -178,7 +180,7 @@ const Adm = () => {
               >
                 Produtos
               </Tab>
-              {/*<Tab>
+              <Tab
               _selected={{
                   bg: 'red.600',
                   color: 'white',
@@ -189,7 +191,7 @@ const Adm = () => {
                 color='black.800'
               >
                 Arquivos
-              </Tab>*/}
+              </Tab>
             </TabList>
           </Tabs>
         </Flex>

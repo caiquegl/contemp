@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, GridItem, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, GridItem, Link, Text, useBreakpointValue } from '@chakra-ui/react'
 import { pxToRem } from '../utils/pxToRem'
 import splitText from '../utils/splitText'
 import Image from 'next/image'
@@ -14,7 +14,11 @@ interface IProps {
 }
 
 export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) => {
-  console.log(img)
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  })
+
   return (
     <Link
       isExternal={true}
@@ -54,7 +58,8 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
               className='borderRadius-8'
             />
           </Box>
-          {/* <Image crossOrigin="anonymous" objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img.replaceAll('https//', '')} borderRadius="8px"/> */}
+          {/* <Image src={img} height={200} width={200}/> */}
+          {/* <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img} borderRadius="8px"/> */}
           <Text lineHeight={pxToRem(30)} fontWeight='bold' fontSize={pxToRem(20)} mt={['5px', '15px']} color={color}>
             {title}
           </Text>

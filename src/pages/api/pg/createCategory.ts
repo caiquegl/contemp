@@ -31,7 +31,6 @@ export default async function handler(
         })
     }
 
-    console.log(is_main.length)
     const categoryExist = await prisma.categories.findMany()
 
     

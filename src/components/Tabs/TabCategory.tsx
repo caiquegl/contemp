@@ -14,6 +14,7 @@ import {
   VStack,
   Text,
   FormHelperText,
+  Tooltip,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -25,12 +26,15 @@ import { TextareaDefault } from '../Form/Textarea'
 import { EditOrder } from '../EditOrder'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
-import { Modal, Table } from 'antd'
+import { Badge, Modal, Table } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
+import { EditOrderProduct } from '../EditOrderProduct'
+import { BiFilterAlt } from 'react-icons/bi'
+import { ModalAddFilter } from '../modalAddFilter'
 
 const { confirm } = Modal
 
@@ -69,15 +73,18 @@ const TabCategory = () => {
     duration: 3000,
     isClosable: true,
   })
-
+  const [openFilter, setOpenFiter] = useState<boolean>(false)
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
   const [isActive, setIsActive] = useState(true)
+  const [isAllProduct, setIsAllProduct] = useState(true)
   const [url, setUrl] = useState('')
+  const [urlPicture, setUrlPicture] = useState('')
   const [idSelected, setIdSelected] = useState<any>()
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
+  const [selectCategory, setSelectCategory] = useState<any>({})
   const formRef = useRef<any>()
   const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
   const { errors } = formState
@@ -85,7 +92,7 @@ const TabCategory = () => {
   const saveCategory = async (bodyForm: any) => {
     try {
       if (bodyForm.sub_category_id) bodyForm = { ...bodyForm, sub_category_id: bodyForm.sub_category_id.value }
-      bodyForm = { ...bodyForm, url }
+      bodyForm = { ...bodyForm, url, urlPicture }
       if (bodyForm.is_main == 'true') delete bodyForm.sub_category_id
 
       if (Object.keys(update).length > 0) {
@@ -97,6 +104,7 @@ const TabCategory = () => {
         ...bodyForm,
         favorite: isFavorite,
         is_active: isActive,
+        all_product: isAllProduct,
       })
 
       toast({
@@ -126,6 +134,7 @@ const TabCategory = () => {
         favorite: isFavorite,
         is_active: isActive,
         id: idSelected,
+        all_product: isAllProduct,
       })
 
       toast({
@@ -136,6 +145,7 @@ const TabCategory = () => {
 
       setUpdate({})
       setUrl('')
+      setUrlPicture('')
       setIdSelected(undefined)
       setUpdate({} as IBody)
     } catch (error) {
@@ -209,6 +219,32 @@ const TabCategory = () => {
     }
   }
 
+  const changerOrderProducts = async (order: number, category: any) => {
+    try {
+      setLoading(true)
+      const { data, status } = await api.put(`changeOrderCategoryProduct`, {
+        order_all_products: order,
+        category: category,
+      })
+
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
+      reset()
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await listCategory()
+    }
+  }
+
   useEffect(() => {
     async function getCategoryList() {
       await listCategory()
@@ -226,8 +262,10 @@ const TabCategory = () => {
     setValue('description_seo', category.description_seo)
     setIsFavorite(category.favorite)
     setIsActive(category.is_active)
+    setIsAllProduct(category.all_product)
     setUpdate(category)
     setUrl(category.url ? category.url : '')
+    setUrlPicture(category.urlPicture ? category.urlPicture : '')
     setIdSelected(category.id)
 
     const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`)
@@ -240,8 +278,19 @@ const TabCategory = () => {
   const column = [
     {
       title: 'Order',
+      width: 100,
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
+    },
+    {
+      title: 'Order todos produtos',
+      width: 200,
+      sorter: (a: any, b: any) => {
+        const orderA = a.order_all_products ?? 999999
+        const orderB = b.order_all_products ?? 999999
+        return orderA - orderB
+      },
+      render: (a: any) => <EditOrderProduct value={a} changerOrder={changerOrderProducts} />,
     },
     {
       title: 'Nome',
@@ -255,6 +304,19 @@ const TabCategory = () => {
         <>
           {a.id != 59 && (
             <HStack spacing='20px'>
+              <Tooltip label='Filtro'>
+                <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' >
+                  <Icon
+                    cursor='pointer'
+                    as={BiFilterAlt}
+                    fontSize='20px'
+                    onClick={() => {
+                      setSelectCategory(a)
+                      setOpenFiter(!openFilter)
+                    }}
+                  />
+                </Badge>
+              </Tooltip>
               <Icon cursor='pointer' as={AiOutlineEdit} fontSize='17px' onClick={() => handleOnEditClick(a)} />
               <Icon
                 cursor='pointer'
@@ -299,8 +361,13 @@ const TabCategory = () => {
     <>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
         <Box w={'70%'}>
-          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Categorias & Subcategorias</Text>
-          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma prática.</Text>
+          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>
+            Categorias & Subcategorias
+          </Text>
+          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>
+            Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma
+            prática.
+          </Text>
         </Box>
         <SearchBar
           inputProps={{
@@ -340,13 +407,13 @@ const TabCategory = () => {
         >
           <VStack spacing='20px' w='100%'>
             <FormControl>
-            <InputDefault
-              label='Nome da categoria'
-              type='text'
-              error={errors.name}
-              {...register('name', { required: 'Nome é obrigatório' })}
-            />
-            <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
+              <InputDefault
+                label='Nome da categoria'
+                type='text'
+                error={errors.name}
+                {...register('name', { required: 'Nome é obrigatório' })}
+              />
+              <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
             </FormControl>
             <Controller
               control={control}
@@ -359,7 +426,6 @@ const TabCategory = () => {
                   <FormLabel fontSize='20px' mb='10px' color='black.800'>
                     É principal?
                   </FormLabel>
-
 
                   <InputGroup
                     borderRadius='6px'
@@ -396,7 +462,9 @@ const TabCategory = () => {
                     </Select>
                   </InputGroup>
                   {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-                  <FormHelperText>Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".</FormHelperText>
+                  <FormHelperText>
+                    Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".
+                  </FormHelperText>
                 </FormControl>
               )}
             />
@@ -438,35 +506,54 @@ const TabCategory = () => {
               />
             )}
             <FormControl>
-            <TextareaDefault
-              label='Descrição'
-              error={errors.description}
-              {...register('description', {
-                required: 'Descrição é obrigatório',
-              })}
-            />
-            <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
+              <TextareaDefault
+                label='Descrição'
+                error={errors.description}
+                {...register('description', {
+                  required: 'Descrição é obrigatório',
+                })}
+              />
+              <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
             </FormControl>
             <FormControl>
-            <TextareaDefault
-              label='Descrição SEO'
-              error={errors.description_seo}
-              {...register('description_seo', {
-                required: 'Descrição é obrigatório',
-              })}
-            />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <TextareaDefault
+                label='Descrição SEO'
+                error={errors.description_seo}
+                {...register('description_seo', {
+                  required: 'Descrição é obrigatório',
+                })}
+              />
+              <FormHelperText>
+                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
+              </FormHelperText>
             </FormControl>
             <FormControl>
-            <TextareaDefault
-              label='Key Word SEO'
-              error={errors.key_word_seo}
-              {...register('key_word_seo', {
-                required: 'Key Word Seo é obrigatório',
-              })}
-            />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+              <TextareaDefault
+                label='Key Word SEO'
+                error={errors.key_word_seo}
+                {...register('key_word_seo', {
+                  required: 'Key Word Seo é obrigatório',
+                })}
+              />
+              <FormHelperText>
+                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
+              </FormHelperText>
             </FormControl>
+            <InputsHome
+              name='Foto da categoria'
+              typeInput='fileSingle'
+              getUrls={(values: any) => setUrlPicture(values)}
+            />
+            <HStack spacing='20px' flexWrap='wrap' w='100%'>
+              {urlPicture && (
+                <ViewImage
+                  url={urlPicture}
+                  remove={() => {
+                    setUrlPicture('')
+                  }}
+                />
+              )}
+            </HStack>
             <InputsHome name='Foto do icone' typeInput='fileSingle' getUrls={(values: any) => setUrl(values)} />
             <HStack spacing='20px' flexWrap='wrap' w='100%'>
               {url && (
@@ -479,36 +566,56 @@ const TabCategory = () => {
               )}
             </HStack>
             <Box w='100%'>
-            <FormControl>
-              <Checkbox
-                colorScheme='red'
-                color='black.800'
-                mr='auto'
-                fontSize='20px'
-                height='17px'
-                isChecked={isFavorite}
-                onChange={(evt) => setIsFavorite(evt.target.checked)}
-              >
-                Categoria destaque
-              </Checkbox>
-              <FormHelperText>Marque caso queira que a categoria apareça na página de todos os produtos.</FormHelperText>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isFavorite}
+                  onChange={(evt) => setIsFavorite(evt.target.checked)}
+                >
+                  Categoria destaque
+                </Checkbox>
+                <FormHelperText>
+                  Marque caso queira que a categoria apareça na página de todos os produtos.
+                </FormHelperText>
               </FormControl>
             </Box>
 
             <Box w='100%' mt='10px'>
-            <FormControl>
-              <Checkbox
-                colorScheme='red'
-                color='black.800'
-                mr='auto'
-                fontSize='20px'
-                height='17px'
-                isChecked={isActive}
-                onChange={(evt) => setIsActive(evt.target.checked)}
-              >
-                Ativo
-              </Checkbox>
-              <FormHelperText>Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.</FormHelperText>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isActive}
+                  onChange={(evt) => setIsActive(evt.target.checked)}
+                >
+                  Ativo
+                </Checkbox>
+                <FormHelperText>
+                  Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada,
+                  mas não ficará online.
+                </FormHelperText>
+              </FormControl>
+            </Box>
+            <Box w='100%' mt='10px'>
+              <FormControl>
+                <Checkbox
+                  colorScheme='red'
+                  color='black.800'
+                  mr='auto'
+                  fontSize='20px'
+                  height='17px'
+                  isChecked={isAllProduct}
+                  onChange={(evt) => setIsAllProduct(evt.target.checked)}
+                >
+                  Aparecer em Todos os Produto
+                </Checkbox>
               </FormControl>
             </Box>
           </VStack>
@@ -558,6 +665,15 @@ const TabCategory = () => {
           </Flex>
         </Box>
       </HStack>
+      <ModalAddFilter
+        isOpen={openFilter}
+        onClose={() => {
+          setOpenFiter(!openFilter)
+          setSelectCategory({})
+        }}
+        category={selectCategory}
+        reload={() => listCategory()}
+      />
     </>
   )
 }

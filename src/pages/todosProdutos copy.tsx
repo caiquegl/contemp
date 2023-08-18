@@ -165,7 +165,7 @@ const AllProduct = () => {
           >
             Navegue por Categoria
           </Text>
-          <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
+          {/* <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
             {categories &&
               categories.length > 0 &&
               categories.map((categ: any, index: number) => {
@@ -193,7 +193,7 @@ const AllProduct = () => {
                   />
                 )
               })}
-          </Grid>
+          </Grid> */}
         </Container>
       </Flex>
       {/* <Player /> */}

@@ -36,6 +36,7 @@ export default async function handler(
       }
     })
 
+
     allSubCategory.forEach((cg) => category_ids.push(cg.id))
     category_ids.push(allCategoryActives.id)
     console.log(category_ids)

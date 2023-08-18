@@ -110,7 +110,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
   }, [defaultValues])
 
   const getValues = async () => {
-    const { data } = await api.get(`${defaultValues?.id}/getCategoryById`)
+    const { data } = await api.get(`${defaultValues?.category_id}/getCategoryById`)
 
     let find = data
     if (find && Object.keys(find).length > 0) setValue('category', { value: defaultValues?.id, label: find.name })
@@ -228,8 +228,8 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
             />
             <HStack spacing='20px' flexWrap='wrap' w='100%' marginTop={5}>
               {urls &&
-                urls.length > 0 &&
-                urls.map((value: any, index: number) => (
+                Array.isArray(urls) &&
+                urls?.map((value: any, index: number) => (
                   <ViewImage
                     key={uuidv4()}
                     url={value}
