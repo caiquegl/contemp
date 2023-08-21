@@ -6,7 +6,7 @@ import { Player } from '../components/Player'
 import { SelectConfigCalibration } from '../components/SelectConfigCalibration'
 import Head from 'next/head'
 import Image from 'next/image'
-import IMGCalibration from '../assets/images/calibration.png'
+import IMGCalibration from '../assets/images/Lab_contemp.png'
 import Iso from '../assets/images/iso.png'
 import Imetro from '../assets/images/imetro.png'
 
@@ -50,7 +50,7 @@ const Calibracao = () => {
           </Text>
           <Flex direction={['column', 'row']} alignItems='center' mt='40px' mb='81px'>
             <Box maxW='488px'>
-              <Image src={IMGCalibration} height={426} />
+              <Image src={IMGCalibration} />
             </Box>
             <Box w={['100%', 'calc(100% - 488px)']} ml={['0px', '20px']}>
               <Text fontSize='25px' fontWeight='bold' color='red.600'>
