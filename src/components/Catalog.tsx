@@ -25,7 +25,7 @@ export const Catalog = () => {
     >
       <Row style={{ height: '100%' }}>
         <Col xs={24} sm={24} md={12} lg={12}>
-          <Link href='https://contemp.com.br/arquivos/temnacontemp.pdf' target={'_blank'}>
+          <Link href='https://contemp.com.br/api/arquivos/temnacontemp.pdf' target={'_blank'}>
             <Image
               src={CatalogImg}
               display={{
@@ -138,7 +138,7 @@ export const Catalog = () => {
               </Link>
 
               <Link
-                href='https://contemp.com.br/arquivos/temnacontemp.pdf'
+                href='https://contemp.com.br/api/arquivos/temnacontemp.pdf'
                 isExternal
                 _hover={{ textDecoration: 'none', color: '#fff' }}
                 target='_blank'

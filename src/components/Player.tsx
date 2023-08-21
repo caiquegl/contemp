@@ -43,12 +43,11 @@ export const Player = () => {
         </Box>
       )}
       <Grid maxW={pxToRem(359)} templateRows='1fr 0.73fr 1fr'>
-        <Text fontSize={pxToRem(40)} fontWeight='bold' lineHeight={'2.75rem'} mb={['60px', 0]}>
-          Nova Linha de Controles e Indicadores
+        <Text fontSize={pxToRem(40)} fontWeight='bold' lineHeight={'2.75rem'} mb={[0, 0]}>
+          Nova P501 Upgrade
         </Text>
-        <Text fontSize={pxToRem(20)} mb={'15px'} mt={'-35px'}>
-          Estamos muito felizes em ter você aqui no site da Contemp. Veja nossa nova linha de produtos, a funcionalidade
-          do NFC e as especificações técnicas para aplicações em seus processos.
+        <Text fontSize={pxToRem(20)} mb={'15px'} mt={'-38%'}>
+          A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.
         </Text>
         {isMobile ? (
           <VStack spacing={pxToRem(20)} alignItems='center'>

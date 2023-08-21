@@ -6,6 +6,10 @@ function creatRedirectObj(source, destination, permanent = true) {
   }
 }
 module.exports = {
+    images: {
+      domains: ['contemp.com.br'], // Adicione o domínio do seu host de imagem aqui
+    },
+  
   async redirects() {
     return [
       creatRedirectObj('/vagas', '/trabalhe-conosco'),
@@ -144,6 +148,7 @@ module.exports = {
       creatRedirectObj('/produto/imageamento-termico-industrial/pirometros-portateis-infravermelho/msplus-lt-termometro-portatil-optris/', '/category/LINHA_PERFORMANCE_-_OPTRIS'),
       creatRedirectObj('/wp-content/uploads/2022/02/C71X_V1.05-REV.03-2-1.pdf', '/category/LINHA_AVANÇADA_-_C71X'),
       creatRedirectObj('/downloads/pdf/CTM45_view.pdf', '/produto/CONTROLADOR_DE_TEMPERATURA_E_PROCESSOS_-_CTM45'),
+      creatRedirectObj ('/arquivos/temnacontemp.pdf', '/api/arquivos/temnacontemp.pdf'),
       // creatRedirectObj ('', ''),
     ]
   },

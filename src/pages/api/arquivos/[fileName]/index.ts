@@ -22,7 +22,7 @@ export default function handler(req: any, res: any) {
       const encodedFilename = encodeURIComponent(filename);
 
       res.setHeader('Content-Disposition', 'inline; filename="' + encodedFilename + '"');
-      
+
       // Define o tipo de conteúdo com base no tipo de arquivo
       const fileExtension = path.extname(filename).toLowerCase();
       const contentType = getContentType(fileExtension);
@@ -35,9 +35,26 @@ export default function handler(req: any, res: any) {
   });
 }
 
-// Função auxiliar para obter o tipo de conteúdo com base na extensão do arquivo
+// // Função auxiliar para obter o tipo de conteúdo com base na extensão do arquivo
+// function getContentType(fileExtension: string): string {
+//   switch (fileExtension) {
+//     case '.pdf':
+//       return 'application/pdf';
+//     case '.jpg':
+//     case '.jpeg':
+//       return 'image/jpeg';
+//     case '.png':
+//       return 'image/png';
+//     case '.webp':
+//       return 'image/webp';
+//     // Adicione outros tipos de arquivo conforme necessário
+//     default:
+//       return 'application/octet-stream';
+//   }
+// }
+
 function getContentType(fileExtension: string): string {
-  switch (fileExtension) {
+  switch (fileExtension.toLowerCase()) {
     case '.pdf':
       return 'application/pdf';
     case '.jpg':
@@ -45,8 +62,26 @@ function getContentType(fileExtension: string): string {
       return 'image/jpeg';
     case '.png':
       return 'image/png';
+    case '.webp':
+      return 'image/webp';
+    case '.mp4':
+      return 'video/mp4';
+    case '.exe':
+      return 'application/octet-stream';
+    case '.mp3':
+      return 'audio/mpeg';
+    case '.zip':
+      return 'application/zip';
+    case '.rar':
+      return 'application/x-rar-compressed';
     // Adicione outros tipos de arquivo conforme necessário
     default:
       return 'application/octet-stream';
   }
+}
+
+function convertToUtf8AndReplaceSpaces(inputString: string, replacement: string = '-'): string {
+  const stringWithSpacesReplaced = inputString.replace(/ /g, replacement);
+  const utf8EncodedString = encodeURIComponent(stringWithSpacesReplaced);
+  return utf8EncodedString;
 }
