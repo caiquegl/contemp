@@ -35,26 +35,9 @@ export default function handler(req: any, res: any) {
   });
 }
 
-// // Função auxiliar para obter o tipo de conteúdo com base na extensão do arquivo
-// function getContentType(fileExtension: string): string {
-//   switch (fileExtension) {
-//     case '.pdf':
-//       return 'application/pdf';
-//     case '.jpg':
-//     case '.jpeg':
-//       return 'image/jpeg';
-//     case '.png':
-//       return 'image/png';
-//     case '.webp':
-//       return 'image/webp';
-//     // Adicione outros tipos de arquivo conforme necessário
-//     default:
-//       return 'application/octet-stream';
-//   }
-// }
-
+// Função auxiliar para obter o tipo de conteúdo com base na extensão do arquivo
 function getContentType(fileExtension: string): string {
-  switch (fileExtension.toLowerCase()) {
+  switch (fileExtension) {
     case '.pdf':
       return 'application/pdf';
     case '.jpg':
@@ -79,3 +62,4 @@ function getContentType(fileExtension: string): string {
       return 'application/octet-stream';
   }
 }
+
