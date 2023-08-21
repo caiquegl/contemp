@@ -79,9 +79,3 @@ function getContentType(fileExtension: string): string {
       return 'application/octet-stream';
   }
 }
-
-function convertToUtf8AndReplaceSpaces(inputString: string, replacement: string = '-'): string {
-  const stringWithSpacesReplaced = inputString.replace(/ /g, replacement);
-  const utf8EncodedString = encodeURIComponent(stringWithSpacesReplaced);
-  return utf8EncodedString;
-}
