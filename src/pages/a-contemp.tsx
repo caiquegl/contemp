@@ -149,7 +149,7 @@ const Home = () => {
           <Flex justifyContent='space-between' mb='60px' flexDirection={['column', 'column', 'row', 'row', 'row']}>
             <Box w='100%' maxW='588px' mt='-113px'>
               <Image
-                src="https://contemp.com.br/api/arquivos/dia_do_tã©cnico_industrial_contemp.png"
+                src="https://contemp.com.br/api/arquivos/contemp-sobre.webp"
                 width={'100%'} // Defina a largura desejada
                 height={'100%'} // Defina a altura desejada
                 onContextMenu={setContextMenuFalse}
