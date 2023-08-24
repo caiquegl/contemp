@@ -149,6 +149,9 @@ module.exports = {
       creatRedirectObj('/wp-content/uploads/2022/02/C71X_V1.05-REV.03-2-1.pdf', '/category/LINHA_AVANÇADA_-_C71X'),
       creatRedirectObj('/downloads/pdf/CTM45_view.pdf', '/produto/CONTROLADOR_DE_TEMPERATURA_E_PROCESSOS_-_CTM45'),
       creatRedirectObj('/arquivos/temnacontemp.pdf', '/api/arquivos/temnacontemp.pdf'),
+    //GOOGLE ADS
+      creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance', '/category/LINHA_PERFORMANCE_-_OPTRIS'),
+      creatRedirectObj ('/categoria-produto/instrumentos/contadores-e-temporizadores', '/category/CONTADORES_E_TEMPORIZADORES#viewCategory'),
       // creatRedirectObj ('', ''),
     ]
   },
