@@ -66,7 +66,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
           searchCard={searchCard}
           click={(product: any) => {
             router.push(
-              product.order
+              product.order_all_products || product.sub_category_id || product.filter
                 ? `/category/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}#viewCategory`
                 : `/produto/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}`
             )
