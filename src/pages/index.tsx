@@ -473,6 +473,7 @@ const Home = () => {
           },
         ]}
       />
+      {/* BLOG AREA
       <Flex w='100%' mt='-100px' bg='white' alignItems='center' justifyContent='center'>
         <Container maxW={['100%', '100%', '8xl', '8xl', '8xl']} mb='50px'>
         <Text color='black' fontSize='40px' fontWeight='bold' textAlign='center' mt={"5%"} mb={"5%"}>
@@ -497,7 +498,7 @@ const Home = () => {
                   alignItems: 'center',
                 }}
               >
-                {post.map((p, index) => {
+                {post?.map((p, index) => {
                   return (
                     <SwiperSlide style={{ width: '100%' }} key={uuidv4()}>
                       <CardBlog
@@ -515,7 +516,7 @@ const Home = () => {
             )}{' '}
             {!isMobile && (
               <>
-                {post.map((p, index) => {
+                {post?.map((p, index) => {
                   return (
                     <CardBlog
                       color={styles_card[index].font}
@@ -531,7 +532,7 @@ const Home = () => {
             )}
           </Flex>
         </Container>
-      </Flex>
+      </Flex>*/}
 
       <Footer />
     </SmoothScroll>

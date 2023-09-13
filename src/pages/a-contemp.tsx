@@ -35,10 +35,10 @@ const Home = () => {
         <Box>
           <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
             <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none' }} href='/'>Home</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/suporte-tecnico' _active={{color:'red',}}>Suporte Técnico</BreadcrumbLink>
+              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none' }} href='/suporte-tecnico' _active={{ color: 'red', }}>Suporte Técnico</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -148,7 +148,12 @@ const Home = () => {
         <Container maxW='7xl' p='12px 0 31px'>
           <Flex justifyContent='space-between' mb='60px' flexDirection={['column', 'column', 'row', 'row', 'row']}>
             <Box w='100%' maxW='588px' mt='-113px'>
-              <Image src={Banner2} onContextMenu={setContextMenuFalse} />
+              <Image
+                src="https://contemp.com.br/api/arquivos/contemp-sobre.webp"
+                width={'100%'} // Defina a largura desejada
+                height={'100%'} // Defina a altura desejada
+                onContextMenu={setContextMenuFalse}
+              />
             </Box>
             <Box mt='38px'>
               <Text maxW='535px' fontSize='20px'>

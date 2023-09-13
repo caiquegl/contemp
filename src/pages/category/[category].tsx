@@ -89,7 +89,7 @@ const Category = () => {
         justifyContent='center'
         direction='column'
         h={['110px', '110px', '140px', '140px', '140px', '140px']}
-        // id="viewCategory"
+      // id="viewCategory"
       >
         <Text
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
@@ -164,11 +164,11 @@ const Category = () => {
             return <ListCategory key={uuidv4()} bg={bg} data={categ} />
           })}
       </Box>
-      <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
+      {/* <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
         <Container maxW='7xl' p='80px 0'>
           <AdBanners />
         </Container>
-      </Flex>
+      </Flex>*/}
       {/* <Player /> */}
       <Contact
         id='duvidas-e-orcamentos'

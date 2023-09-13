@@ -39,16 +39,15 @@ export const Player = () => {
     >
       {!isMobile && (
         <Box w='100%' maxW={pxToRem(700)} mr='40px'>
-          <ReactPlayer url='https://www.youtube.com/watch?v=iKF2F4Q-xBU' height={pxToRem(533)} width='100%' />
+          <ReactPlayer url='https://youtu.be/vsHupNocrjE' height={pxToRem(533)} width='100%' />
         </Box>
       )}
       <Grid maxW={pxToRem(359)} templateRows='1fr 0.73fr 1fr'>
-        <Text fontSize={pxToRem(40)} fontWeight='bold' lineHeight={'2.75rem'} mb={['60px', 0]}>
-          Nova Linha de Controles e Indicadores
+        <Text fontSize={pxToRem(40)} fontWeight='bold' lineHeight={'2.75rem'} mb={[0, 0]}>
+          Nova P501 Upgrade
         </Text>
-        <Text fontSize={pxToRem(20)} mb={'15px'} mt={'-35px'}>
-          Estamos muito felizes em ter você aqui no site da Contemp. Veja nossa nova linha de produtos, a funcionalidade
-          do NFC e as especificações técnicas para aplicações em seus processos.
+        <Text fontSize={pxToRem(20)} mb={'15px'} mt={'-38%'}>
+          A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.
         </Text>
         {isMobile ? (
           <VStack spacing={pxToRem(20)} alignItems='center'>
@@ -89,7 +88,7 @@ export const Player = () => {
           <ModalCloseButton color='red' />
           <ModalBody mt='50px'>
             <Flex alignItems='center'>
-              <ReactPlayer url='https://www.youtube.com/watch?v=iKF2F4Q-xBU' width='350px' height='195px' />
+              <ReactPlayer url='https://youtu.be/vsHupNocrjE' width='350px' height='195px' />
             </Flex>
           </ModalBody>
         </ModalContent>

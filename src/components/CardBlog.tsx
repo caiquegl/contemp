@@ -49,7 +49,14 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
       >
         <Box>
           <Box h={['10.625rem', '18.75rem']} w='100%' borderRadius='8px' position='relative'>
-            <Image src={img} alt='Descrição da imagem' layout='fill' objectFit='cover' style={{borderRadius: 8}} className='borderRadius-8' />
+            <Image
+              src={img}
+              alt='Descrição da imagem'
+              layout='fill'
+              objectFit='cover'
+              style={{ borderRadius: 8 }}
+              className='borderRadius-8'
+            />
           </Box>
           {/* <Image src={img} height={200} width={200}/> */}
           {/* <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img} borderRadius="8px"/> */}

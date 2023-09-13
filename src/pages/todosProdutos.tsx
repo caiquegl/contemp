@@ -136,21 +136,22 @@ const AllProduct = () => {
                 >
                   {fv.products &&
                     fv.products.length > 0 &&
-                    fv.products.sort((a: any, b: any) => {
-                      let aOrder = a.order || 999999
-                      let bOrder = b.order || 999999
-                    return aOrder - bOrder
-                    
-                  }).map((item: any) => (
-                      <SwiperSlide key={uuidv4()}>
-                        <CardProductWithDescription
-                          img={item.urls ? item.urls[0] : ''}
-                          text={item.name}
-                          description={item.description}
-                          call_product={item.call_product}
-                        />
-                      </SwiperSlide>
-                    ))}
+                    fv.products
+                      .sort((a: any, b: any) => {
+                        let aOrder = a.order || 999999
+                        let bOrder = b.order || 999999
+                        return aOrder - bOrder
+                      })
+                      .map((item: any) => (
+                        <SwiperSlide key={uuidv4()}>
+                          <CardProductWithDescription
+                            img={item.urls ? item.urls[0] : ''}
+                            text={item.name}
+                            description={item.description}
+                            call_product={item.call_product}
+                          />
+                        </SwiperSlide>
+                      ))}
                 </Swiper>
               </Box>
             </Container>
@@ -173,37 +174,39 @@ const AllProduct = () => {
           <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
             {categories &&
               categories.length > 0 &&
-              categories.filter((categ: any) => categ.all_product).sort((a: any, b: any) => {
-                  const orderA = a.order_all_products ?? 999999;
-                  const orderB = b.order_all_products ?? 999999;
-                return orderA - orderB
-                
-              }).map((categ: any, index: number) => {
-                const cardIndex = index + 1
-                let bg = 'black.800'
-                let color = 'white'
+              categories
+                .filter((categ: any) => categ.all_product)
+                .sort((a: any, b: any) => {
+                  const orderA = a.order_all_products ?? 999999
+                  const orderB = b.order_all_products ?? 999999
+                  return orderA - orderB
+                })
+                .map((categ: any, index: number) => {
+                  const cardIndex = index + 1
+                  let bg = 'black.800'
+                  let color = 'white'
 
-                if (cardIndex % 2 === 0) {
-                  bg = 'white'
-                  color = 'black.800'
-                }
-                if (cardIndex % 3 === 0) {
-                  bg = 'red.600'
-                  color = 'white'
-                }
+                  if (cardIndex % 2 === 0) {
+                    bg = 'white'
+                    color = 'black.800'
+                  }
+                  if (cardIndex % 3 === 0) {
+                    bg = 'red.600'
+                    color = 'white'
+                  }
 
-                return (
-                  <CardCatalog
-                    key={uuidv4()}
-                    bg={bg}
-                    color={color}
-                    title={categ.name}
-                    text={categ.description}
-                    img={categ.url}
-                    urlPicture={categ.urlPicture}
-                  />
-                )
-              })}
+                  return (
+                    <CardCatalog
+                      key={uuidv4()}
+                      bg={bg}
+                      color={color}
+                      title={categ.name}
+                      text={categ.description}
+                      img={categ.url}
+                      urlPicture={categ.urlPicture}
+                    />
+                  )
+                })}
           </Grid>
         </Container>
       </Flex>
