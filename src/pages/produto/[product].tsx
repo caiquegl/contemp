@@ -23,6 +23,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   NumberInputField,
+  Textarea,
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -218,6 +219,7 @@ const Product = () => {
                 </Text>
               </Link>
             </Text>
+            {JSON.stringify(detail.listVariation)}
             <VStack spacing='45px'>
               {detail.hasVariation &&
                 detail.listVariation &&
@@ -233,8 +235,7 @@ const Product = () => {
                     <Text fontWeight='bold' fontSize='20px' color='black.800'>
                       {vr.name}
                     </Text>
-
-                    {vr.type_view && vr.type_view == 'Range' ? (
+                    {vr.type_view && vr.type_view == 'Range' && (
                       <Box
                         borderRadius='6px'
                         bg='white.500'
@@ -281,7 +282,8 @@ const Product = () => {
                           </Flex>
                         ) : null}
                       </Box>
-                    ) : (
+                    )}
+                    {vr.opt && Array.isArray(vr.opt) && vr.opt.length > 0 && (
                       <InputGroup
                         borderRadius='6px'
                         bg='white.500'
@@ -325,6 +327,70 @@ const Product = () => {
                             ))}
                         </Select>
                       </InputGroup>
+                    )}
+                    {vr.type_view && vr.type_view == 'Texto_curto' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Textarea
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder='Selecione uma opção'
+                          color='black.800'
+                          maxLength={100}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 100);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+
+                        />
+                      </Box>
+                    )}
+                    {vr.type_view && vr.type_view == 'Texto_longo' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Textarea
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder='Selecione uma opção'
+                          color='black.800'
+                          maxLength={1500}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 1500);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+
+                        />
+                      </Box>
                     )}
                   </Flex>
                 ))}
@@ -471,11 +537,11 @@ const Product = () => {
                 speed={1000}
               >
                 {products.sort((a: any, b: any) => {
-                      let aOrder = a.order || 999999
-                      let bOrder = b.order || 999999
-                    return aOrder - bOrder
-                    
-                  }).map((item: any, key: number) => (
+                  let aOrder = a.order || 999999
+                  let bOrder = b.order || 999999
+                  return aOrder - bOrder
+
+                }).map((item: any, key: number) => (
                   <SwiperSlide key={uuidv4()}>
                     <CardProductWithDescription
                       img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}

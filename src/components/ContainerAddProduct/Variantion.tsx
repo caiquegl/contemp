@@ -78,6 +78,14 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
                   value: 'Range',
                   name: 'Ranger',
                 },
+                {
+                  value: 'Texto_curto',
+                  name: 'Texto Curto',
+                },
+                {
+                  value: 'Texto_longo',
+                  name: 'Área de texto',
+                },
               ]}
               nameInput='type_view'
             />

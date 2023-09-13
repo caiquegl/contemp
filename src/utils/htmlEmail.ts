@@ -103,11 +103,10 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
                 <p style="margin-bottom: 10px;">
                     <b>Telefone:</b>  ${telefone ? telefone : ''}
                 </p>
-                ${
-                    area ? `<p style="margin-bottom: 10px;">
+                ${area ? `<p style="margin-bottom: 10px;">
                     <b>Área desejada:</b>  ${area ? area : ''}
                 </p>` : ''
-                }
+        }
                 <p style="margin-bottom: 10px;">
                     <b>Arquivo:</b>  ${file ? file : ''}
                 </p>
@@ -132,19 +131,19 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
 
 
 export const HtmlOrcamento = (
-    name?: string, 
-    email?: string, 
-    empresa?: string, 
-    telefone?: string, 
-    mensagem?: string, 
-    file?: string, 
+    name?: string,
+    email?: string,
+    empresa?: string,
+    telefone?: string,
+    mensagem?: string,
+    file?: string,
     produto?: any
 ) => {
     let stringProd = ''
 
     produto.forEach((el: any) => {
         let variation = ''
-        if(Object.keys(el.variation)) {
+        if (Object.keys(el.variation)) {
             Object.keys(el.variation).forEach((v) => {
                 variation = `${variation}${v}:${el.variation[v]}<br/>`
             })
@@ -156,7 +155,7 @@ export const HtmlOrcamento = (
         <td>${el.qtd}</td>
         </tr>`
     })
-    
+
     let msg = `<!DOCTYPE html>
     <html lang="en">
     <head>
