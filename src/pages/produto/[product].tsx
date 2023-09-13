@@ -79,6 +79,7 @@ const Product = () => {
       let produto = ''
       if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ').replaceAll('/', '333')
       const { data } = await api.get(`${produto}/getProduct`)
+      console.log(data)
       if (!data.bradName) return router.push('/404')
       setBradeName(data.bradName)
 
@@ -219,11 +220,10 @@ const Product = () => {
                 </Text>
               </Link>
             </Text>
-            {JSON.stringify(detail.listVariation)}
             <VStack spacing='45px'>
               {detail.hasVariation &&
                 detail.listVariation &&
-                detail.listVariation.length > 0 &&
+                Array.isArray(detail.listVariation) &&
                 detail.listVariation.map((vr: any, key: number) => (
                   <Flex
                     key={uuidv4()}
