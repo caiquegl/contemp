@@ -24,6 +24,7 @@ import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
+import { string } from 'yup'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -127,6 +128,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   })
 
   useEffect(() => {
+    console.log(defaultValues)
     setValue('name', defaultValues?.name)
     setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
@@ -137,7 +139,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setDestaque(defaultValues && defaultValues.destaque ? true : false)
     setIsActive(defaultValues && defaultValues.isActive ? true : false)
     if (defaultValues.listVariation) {
-      setListVariation(defaultValues.listVariation)
+      setListVariation(typeof defaultValues.listVariation == 'string' ? JSON.parse(defaultValues.listVariation) : defaultValues.listVariation)
     }
     if (defaultValues.urls) setUrls(defaultValues.urls)
   }, [defaultValues])

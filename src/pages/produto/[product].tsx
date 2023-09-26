@@ -79,7 +79,7 @@ const Product = () => {
       let produto = ''
       if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ').replaceAll('/', '333')
       const { data } = await api.get(`${produto}/getProduct`)
-      console.log(data)
+
       if (!data.bradName) return router.push('/404')
       setBradeName(data.bradName)
 
@@ -340,7 +340,7 @@ const Product = () => {
                         border='none'
                         mt={['40px', 0]}
                       >
-                        <Textarea
+                        <Input
                           defaultValue={variation[vr.name] || ''}
                           w='100%'
                           height='100%'
