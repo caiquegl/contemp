@@ -15,7 +15,7 @@ export default async function handler(
       where: {
         isActive: true,
         name: {
-          contains: username.replaceAll('333', '/').trim(),
+          equals: username.replaceAll('333', '/').trim(),
           mode: 'insensitive'
         }
       }
