@@ -30,7 +30,7 @@ export const Banner = () => {
       justifyContent='center'
       flexDirection='column'
       // backgroundImage={`url('./images/Banner.png')`}
-      backgroundImage={`url(${BGFavorite.src})`}
+      backgroundImage={`url(https://contemp.com.br/api/arquivos/bannercontemp.png)`}
       backgroundRepeat='no-repeat'
       backgroundPosition='center'
     >
