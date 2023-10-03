@@ -152,6 +152,15 @@ module.exports = {
     //GOOGLE ADS
       creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance', '/category/LINHA_PERFORMANCE_-_OPTRIS'),
       creatRedirectObj ('/categoria-produto/instrumentos/contadores-e-temporizadores', '/category/CONTADORES_E_TEMPORIZADORES#viewCategory'),
+      creatRedirectObj ('/termopares', '/category/TERMOPARES'),
+      creatRedirectObj ('/termopares-termorresistores-na-contemp', '/category/TERMORRESISTENCIAS'),
+      creatRedirectObj ('/pt-100', '/category/TERMORRESISTENCIAS'),
+      creatRedirectObj ('/produtos/c/termopares-e-termorresistencias', '/category/SENSORES'),
+      creatRedirectObj ('/produtos/cameras-termicas-fixas', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
+      creatRedirectObj ('/pirometros-fixos-infravermelho-contemp', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
+      creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/pirometros-portateis-infravermelho', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
+      creatRedirectObj ('/categoria-produto/monitoramento-termico#shop', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
+      creatRedirectObj ('/pirometros', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       // creatRedirectObj ('', ''),
     ]
   },
