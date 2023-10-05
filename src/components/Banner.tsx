@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Text, Link } from '@chakra-ui/react'
 import { Image } from './Image'
 import React, { useEffect, useState } from 'react'
 import Team from '../assets/images/temnacontemp.png'
@@ -22,6 +22,7 @@ export const Banner = () => {
   }, [windowSize])
 
   return (
+    <Link href="https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS" isExternal>
     <Flex
       w='100%'
       bg='black.900'
@@ -58,5 +59,6 @@ export const Banner = () => {
         </Flex>
       </Container>
     </Flex>
+    </Link>
   )
 }

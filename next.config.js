@@ -161,6 +161,8 @@ module.exports = {
       creatRedirectObj ('/categoria-produto/imageamento-termico-industrial/pirometros-portateis-infravermelho', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       creatRedirectObj ('/categoria-produto/monitoramento-termico#shop', '/category/CÂMERAS_TERMOGRÁFICAS_FIXAS'),
       creatRedirectObj ('/pirometros', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
+      creatRedirectObj ('/pirometros/infravermelho', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
+      creatRedirectObj ('/sensores/ir', '/category/SENSORES'),
       // creatRedirectObj ('', ''),
     ]
   },
