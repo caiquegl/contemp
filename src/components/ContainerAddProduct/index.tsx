@@ -75,7 +75,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       let falt = false
       let more = false
       listVariation.forEach((list: any) => {
-        if (list.type_view && list.type_view == 'Range' || list.type_view == 'Texto_curto' || list.type_view == 'Texto_longo') return
+        if (list.type_view && list.type_view == 'Range' || list.type_view == 'Texto_curto' || list.type_view == 'Texto_longo' || list.type_view == 'numerico') return
         if (!list.name) falt = true
         if (!list.opt || list.opt.length === 0) more = true
       })
@@ -431,6 +431,13 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
                 setListVariation([...newList])
               }}
+              addPlaceholder={(value: any) => {
+                let newList: any = listVariation
+                newList[index].placeholder_name = value
+
+                setListVariation([...newList])
+              }}
+
               addRange={(value: any, type: string) => {
                 let newList: any = listVariation
                 newList[index].type_view = 'Range'

@@ -220,6 +220,7 @@ const Product = () => {
                 </Text>
               </Link>
             </Text>
+
             <VStack spacing='45px'>
               {detail.hasVariation &&
                 detail.listVariation &&
@@ -283,7 +284,45 @@ const Product = () => {
                         ) : null}
                       </Box>
                     )}
-                    {vr.opt && Array.isArray(vr.opt) && vr.opt.length > 0 && (
+                      {vr.type_view && vr.type_view == 'numerico' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Input
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder = 'digite um numero'
+                         // placeholder={vr.placeholder_name || 'Selecione uma opção'}
+                          color='black.800'
+                          maxLength={100}
+                          onKeyPress={(e) => {
+                            const allowedChars = /[0-9]|Backspace/;
+                            if (!allowedChars.test(e.key)) {
+                              e.preventDefault();
+                            }
+                          }}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 100);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+/>                      
+                      </Box>
+                    )}
+                    {vr.opt && !vr.type_view && Array.isArray(vr.opt) && vr.opt.length > 0 && (
                       <InputGroup
                         borderRadius='6px'
                         bg='white.500'
@@ -346,7 +385,7 @@ const Product = () => {
                           height='100%'
                           border='none'
                           borderRadius='21px'
-                          placeholder='Selecione uma opção'
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
                           color='black.800'
                           maxLength={100}
                           onBlur={(e) => {
@@ -378,7 +417,7 @@ const Product = () => {
                           height='100%'
                           border='none'
                           borderRadius='21px'
-                          placeholder='Selecione uma opção'
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
                           color='black.800'
                           maxLength={1500}
                           onBlur={(e) => {
