@@ -302,8 +302,7 @@ const Product = () => {
                           height='100%'
                           border='none'
                           borderRadius='21px'
-                          placeholder = 'digite um numero'
-                         // placeholder={vr.placeholder_name || 'Selecione uma opção'}
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
                           color='black.800'
                           maxLength={100}
                           onKeyPress={(e) => {
