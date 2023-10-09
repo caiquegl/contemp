@@ -432,6 +432,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 setListVariation([...newList])
               }}
               addPlaceholder={(value: any) => {
+                console.log(value)
                 let newList: any = listVariation
                 newList[index].placeholder_name = value
 

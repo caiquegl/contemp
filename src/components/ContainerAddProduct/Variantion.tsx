@@ -117,13 +117,17 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
                       </Box>
 
           )}
+
+          
           {watch().type_view == 'numerico'  && (
           <Box w='400px'>
             <InputDefault
               label={`Nome da placeholder ${index + 1}`}
-              type='number'
+              type='text'
               error={errors.placeholder_name}
-              onBlurCapture={(evt) => addPlaceholder(evt.target.value)}
+              onBlurCapture={(evt) => {
+                addPlaceholder(evt.target.value)
+              }}
               {...register('placeholder_name')}
             />
                       </Box>
