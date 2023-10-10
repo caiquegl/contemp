@@ -17,6 +17,11 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
   const insertOptVariation = (variation: any) => {
     addVariation(variation)
     resetField('addOpt')
+    let neO = opt
+    neO.push(variation.addOpt)
+    // setOpt(neO)
+    console.log(variation, 'variation')
+
   }
 
   useEffect(() => {
@@ -25,11 +30,10 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
     setValue('min_value', defaultValues?.min_value)
     setValue('max_value', defaultValues?.max_value)
     setValue('placeholder_name', defaultValues?.placeholder_name)
-    
     if (defaultValues.opt) {
       setOpt(defaultValues.opt)
     }
-  }, [defaultValues])
+  }, [])
 
   const upOpt = (indexOpt: number) => {
     let newList: any = opt
@@ -75,7 +79,7 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
               opt={[
                 {
                   value: 'Number',
-                  name: 'Númerico',
+                  name: 'Seleção',
                 },
                 {
                   value: 'Range',
@@ -181,7 +185,7 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
           <Box w='100%' ml='50px'>
             <UnorderedList>
               {opt.map((value: any, indexOpt: number) => (
-                <ListItem key={indexOpt} color='black.800' fontSize='18px' mb='6px'>
+                <ListItem key={uuidv4()} color='black.800' fontSize='18px' mb='6px'>
                   <Flex alignItems='center'>
                     {value}
                     <Icon

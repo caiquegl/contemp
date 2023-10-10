@@ -11,17 +11,16 @@ export default async function handler(
     }
 
     const username = String(req.query.username)
-    const product = await prisma.products.findFirst({
-      where: {
-        isActive: true,
-        name: {
-          equals: username.replaceAll('333', '/').trim(),
-          mode: 'insensitive'
-        }
-      }
-    })
+    const product: any = await prisma.$queryRaw`
+    SELECT *
+    FROM products
+    WHERE "isActive" = true
+    AND lower(trim(name)) = lower(trim(replace(${username}, '333', '/')))
+  `;
+  
+  
 
-    if (!product) return res.status(201).json([])
+    if (!product || product.length == 0) return res.status(201).json([])
 
 
     let category_ids: number[] = []
@@ -34,13 +33,13 @@ export default async function handler(
       },
       where: {
         is_active: true,
-        id: product.category_id
+        id: product[0].category_id
       }
     })
 
     if (!category) return res.status(201).json([])
 
-    category_ids.push(product.category_id)
+    category_ids.push(product[0].category_id)
 
     const sub_category = await prisma.categories.findMany({
       where: {
@@ -72,7 +71,7 @@ export default async function handler(
     }
     bradName.push(category.name)
 
-    return res.status(201).json({ detail: product, allProducts: products, bradName })
+    return res.status(201).json({ detail: product[0], allProducts: products, bradName })
   } catch (error) {
     console.log(error)
     return res.status(201).json([])
