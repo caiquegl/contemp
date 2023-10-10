@@ -284,6 +284,7 @@ const Product = () => {
                         ) : null}
                       </Box>
                     )}
+                    {vr.type_view}
                       {vr.type_view && vr.type_view == 'numerico' && (
                       <Box
                         borderRadius='6px'
@@ -321,7 +322,52 @@ const Product = () => {
 />                      
                       </Box>
                     )}
-                    {vr.opt && !vr.type_view && Array.isArray(vr.opt) && vr.opt.length > 0 && (
+                      {vr.type_view && vr.type_view == 'Number' && (
+                      <InputGroup
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 7px'
+                        w='100%'
+                        maxW='358px'
+                        h='50'
+                        outline='none'
+                        border='none'
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'
+                      >
+                        <Select
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder='Selecione uma opção'
+                          color='black.800'
+                          value={variation[vr.name] ? variation[vr.name] : undefined}
+                          onChange={(evt) =>
+                            setVariation({
+                              ...variation,
+                              [vr.name]: evt.target.value,
+                            })
+                          }
+                          _placeholder={{
+                            color: 'black.50',
+                          }}
+                          _focusVisible={{
+                            outline: 'none',
+                          }}
+                        >
+                          {vr.opt &&
+                            vr.opt.length > 0 &&
+                            vr.opt.map((opt: any, key: number) => (
+                              <option value={opt} key={key}>
+                                {opt}
+                              </option>
+                            ))}
+                        </Select>
+                      </InputGroup>
+                    )}
+                    {vr.opt && !vr.type_view && Array.isArray(vr.opt) && vr.opt.length > 0 &&   (
                       <InputGroup
                         borderRadius='6px'
                         bg='white.500'
