@@ -161,7 +161,7 @@ const Category = () => {
             // if (index % 3 === 0) bg = 'black.800'
             // if (index % 4 === 0) bg = 'red.600'
 
-            return <ListCategory key={uuidv4()} bg={bg} data={categ} />
+            return <ListCategory key={index} bg={bg} data={categ} />
           })}
       </Box>
       {/* <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>

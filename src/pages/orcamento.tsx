@@ -290,7 +290,7 @@ const Orcamento = () => {
               cart.length > 0 &&
               cart.map((product: any, index: number) => (
                 <CardProductCart
-                  key={uuidv4()}
+                  key={index}
                   data={product}
                   changeQtd={(value: any) => {
                     let newList = cart

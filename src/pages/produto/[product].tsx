@@ -172,7 +172,7 @@ const Product = () => {
             >
               {detail.urls && detail.urls.length > 0 ? (
                 detail.urls.map((photo: any, key: number) => (
-                  <SwiperSlide key={uuidv4()}>
+                  <SwiperSlide key={key}>
                     <Center h='100%' maxH={pxToRem(765)} width='100%'>
                       <Zoom>
                         <img id='zoom' alt={detail.name ? detail.name : ''} src={photo} width='600' />
@@ -195,7 +195,7 @@ const Product = () => {
               <Breadcrumb>
                 {bradName &&
                   bradName.map((el: any, index: number) => (
-                    <Fragment key={uuidv4()}>
+                    <Fragment key={index}>
                       {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
                       {index != bradName.length - 1 && (
                         <Breadcrumb.Item>
@@ -227,7 +227,7 @@ const Product = () => {
                 Array.isArray(detail.listVariation) &&
                 detail.listVariation.map((vr: any, key: number) => (
                   <Flex
-                    key={uuidv4()}
+                    key={key}
                     w='100%'
                     alignItems={['flex-start', 'center']}
                     justifyContent='space-between'
@@ -359,7 +359,7 @@ const Product = () => {
                           {vr.opt &&
                             vr.opt.length > 0 &&
                             vr.opt.map((opt: any, key: number) => (
-                              <option value={opt} key={uuidv4()}>
+                              <option value={opt} key={key}>
                                 {opt}
                               </option>
                             ))}
@@ -517,7 +517,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <Tab
-                    key={uuidv4()}
+                    key={key}
                     _selected={{
                       bg: 'white.500',
                       color: 'red.600',
@@ -536,7 +536,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <TabPanel
-                    key={uuidv4()}
+                    key={key}
                     bg='white.500'
                     color='black.800'
                     p='40px'
@@ -580,7 +580,7 @@ const Product = () => {
                   return aOrder - bOrder
 
                 }).map((item: any, key: number) => (
-                  <SwiperSlide key={uuidv4()}>
+                  <SwiperSlide key={key}>
                     <CardProductWithDescription
                       img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
                       text={item.name}

@@ -181,7 +181,7 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
           <Box w='100%' ml='50px'>
             <UnorderedList>
               {opt.map((value: any, indexOpt: number) => (
-                <ListItem key={uuidv4()} color='black.800' fontSize='18px' mb='6px'>
+                <ListItem key={indexOpt} color='black.800' fontSize='18px' mb='6px'>
                   <Flex alignItems='center'>
                     {value}
                     <Icon

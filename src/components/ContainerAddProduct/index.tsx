@@ -275,7 +275,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             urls.length > 0 &&
             urls.map((value: any, index: number) => (
               <ViewImage
-                key={uuidv4()}
+                key={index}
                 url={value}
                 remove={() => {
                   let newList: any = []
@@ -378,7 +378,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           Array.isArray(listVariation) && listVariation.map((list: any, index: number) => (
             <Variation
               total={listVariation.length - 1}
-              key={uuidv4()}
+              key={index}
               newVariation={() => {
                 setListVariation([...listVariation, { id: listVariation.length + 1 }])
               }}

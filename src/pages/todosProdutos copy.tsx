@@ -100,9 +100,9 @@ const AllProduct = () => {
       </Flex>
       {favorites &&
         favorites.length > 0 &&
-        favorites.map((fv: any) => (
+        favorites.map((fv: any, index: any) => (
           <Flex
-            key={uuidv4()}
+            key={index}
             w='100%'
             alignItems={'center'}
             bg='white'
@@ -136,8 +136,8 @@ const AllProduct = () => {
                 >
                   {fv.products &&
                     fv.products.length > 0 &&
-                    fv.products.map((item: any) => (
-                      <SwiperSlide key={uuidv4()}>
+                    fv.products.map((item: any, index: any) => (
+                      <SwiperSlide key={index}>
                         <CardProductWithDescription
                           img={item.urls[0]}
                           text={item.name}

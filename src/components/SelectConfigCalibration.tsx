@@ -170,8 +170,8 @@ export const SelectConfigCalibration = () => {
               {text.title}
             </Text>
             {text.description.length > 0 &&
-              text.description.map((value) => (
-                <Text color='black.800' fontSize='20px' mb='10px' key={uuidv4()}>
+              text.description.map((value, index) => (
+                <Text color='black.800' fontSize='20px' mb='10px' key={index}>
                   {value}
                 </Text>
               ))}

@@ -38,7 +38,7 @@ const SiteMapContainer = () => {
           {listCategory &&
             listCategory.length > 0 &&
             listCategory.map((el: any, index: number) => (
-              <GridItem w='100%' gap={6} key={uuidv4()} px='20px'>
+              <GridItem w='100%' gap={6} key={index} px='20px'>
                 <Link
                   href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
                   _hover={{ color: 'white', textDecoration: 'none' }}
@@ -50,7 +50,7 @@ const SiteMapContainer = () => {
                 {el.Products &&
                   el.Products.length > 0 &&
                   el.Products.map((el: any, index: number) => (
-                    <GridItem w='100%' gap={6} key={uuidv4()}>
+                    <GridItem w='100%' gap={6} key={index}>
                       <Link
                         href={`/produto/${el.name.replaceAll(' ', '_')}`}
                         _hover={{ color: 'white', textDecoration: 'none' }}

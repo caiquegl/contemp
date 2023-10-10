@@ -123,8 +123,8 @@ export const Favorite = ({ homeTabs }) => {
             let bOrder = b?.order || 999999
           return aOrder - bOrder
           
-        }).map((item) => (
-            <SwiperSlide style={{ width: '100%' }} key={uuidv4()}>
+        }).map((item, index) => (
+            <SwiperSlide style={{ width: '100%' }} key={index}>
               <Link
                 href={item.name ? `/produto/${item.name.replaceAll(' ', '_')}` : ''}
                 _hover={{ color: 'black', textDecoration: 'none' }}

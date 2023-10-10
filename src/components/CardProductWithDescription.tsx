@@ -101,7 +101,7 @@ const CardProductWithDescription = ({
             call_product.split('').length > 0 &&
             call_product
               .split('')
-              .map((el: any, index: number) => <Fragment key={uuidv4()}>{index < 100 ? el : ''}</Fragment>)}
+              .map((el: any, index: number) => <Fragment key={index}>{index < 100 ? el : ''}</Fragment>)}
           {call_product && call_product.split('').length > 100 ? '...' : ''}
         </Text>
         <Image

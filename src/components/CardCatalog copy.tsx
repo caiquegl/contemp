@@ -36,7 +36,7 @@ const CardCatalog = ({ bg, text, title, color, img }: IProps) => {
               text.split('').length > 0 &&
               text
                 .split('')
-                .map((el: any, index: number) => <Fragment key={uuidv4()}>{index < 300 ? el : ''}</Fragment>)}
+                .map((el: any, index: number) => <Fragment key={index}>{index < 300 ? el : ''}</Fragment>)}
             {text && text.split('').length > 300 ? '...' : ''}
           </Text>
         </Box>

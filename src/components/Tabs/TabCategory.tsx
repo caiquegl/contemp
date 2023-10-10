@@ -454,8 +454,8 @@ const TabCategory = () => {
                       placeholder='Selecione uma opção'
                     >
                       {isMainOptions &&
-                        isMainOptions.map((list: any) => (
-                          <option value={list.value} key={uuidv4()}>
+                        isMainOptions.map((list: any, index: any) => (
+                          <option value={list.value} key={index}>
                             {list.name}
                           </option>
                         ))}
