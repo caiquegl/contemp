@@ -24,6 +24,7 @@ import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
+import { string } from 'yup'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -74,7 +75,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       let falt = false
       let more = false
       listVariation.forEach((list: any) => {
-        if (list.type_view && list.type_view == 'Range') return
+        if (list.type_view && list.type_view == 'Range' || list.type_view == 'Texto_curto' || list.type_view == 'Texto_longo' || list.type_view == 'numerico') return
         if (!list.name) falt = true
         if (!list.opt || list.opt.length === 0) more = true
       })
@@ -127,6 +128,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   })
 
   useEffect(() => {
+    console.log(defaultValues)
     setValue('name', defaultValues?.name)
     setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
@@ -137,7 +139,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setDestaque(defaultValues && defaultValues.destaque ? true : false)
     setIsActive(defaultValues && defaultValues.isActive ? true : false)
     if (defaultValues.listVariation) {
-      setListVariation(defaultValues.listVariation)
+      setListVariation(typeof defaultValues.listVariation == 'string' ? JSON.parse(defaultValues.listVariation) : defaultValues.listVariation)
     }
     if (defaultValues.urls) setUrls(defaultValues.urls)
   }, [defaultValues])
@@ -154,45 +156,45 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   return (
     <Box mt='30px' bg='white' borderRadius='8px' p='30px 40px' w='100%'>
       <VStack spacing='20px' w='100%' as='form' onSubmit={handleSubmit(saveProduct)} ref={formRef}>
-      <Flex alignItems='center' justifyContent='flex-end' w='100%'>
-        <Button
-          ml='auto'
-          bg='red.600'
-          color='white'
-          fontSize='20px'
-          borderRadius='4px'
-          w='128px'
-          h='47px'
-          _hover={{ transition: 'all 0.4s' }}
-          type='button'
-          onClick={() => formRef.current?.requestSubmit()}
-        >
-          Avançar
-        </Button>
-      </Flex>
+        <Flex alignItems='center' justifyContent='flex-end' w='100%'>
+          <Button
+            ml='auto'
+            bg='red.600'
+            color='white'
+            fontSize='20px'
+            borderRadius='4px'
+            w='128px'
+            h='47px'
+            _hover={{ transition: 'all 0.4s' }}
+            type='button'
+            onClick={() => formRef.current?.requestSubmit()}
+          >
+            Avançar
+          </Button>
+        </Flex>
         <HStack w='100%' spacing='20px'>
-        <FormControl>
-          <InputDefault
-            label='Nome do produto'
-            type='text'
-            placeholder='Nome do produto'
-            error={errors.name}
-            {...register('name', { required: 'Nome é obrigatório' })}
-          />
-          <FormHelperText>O nome do produto será o mesmo que na url e apareceça igual em todos os locais do site em que ele se encontrar.</FormHelperText>
+          <FormControl>
+            <InputDefault
+              label='Nome do produto'
+              type='text'
+              placeholder='Nome do produto'
+              error={errors.name}
+              {...register('name', { required: 'Nome é obrigatório' })}
+            />
+            <FormHelperText>O nome do produto será o mesmo que na url e apareceça igual em todos os locais do site em que ele se encontrar.</FormHelperText>
           </FormControl>
           <FormControl>
-          <Controller
-            control={control}
-            name='category'
-            rules={{ required: 'Campo obrigatório' }}
-            render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
-              <FormControl isInvalid={!!error} id={name} color='black.800'>
-                <FormLabel fontSize='20px' mb='10px' color='black.800'>
-                  Categoria
-                </FormLabel>
+            <Controller
+              control={control}
+              name='category'
+              rules={{ required: 'Campo obrigatório' }}
+              render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
+                <FormControl isInvalid={!!error} id={name} color='black.800'>
+                  <FormLabel fontSize='20px' mb='10px' color='black.800'>
+                    Categoria
+                  </FormLabel>
 
-                {/* <InputGroup
+                  {/* <InputGroup
                   borderRadius="6px"
                   bg="white.500"
                   p="3px 7px"
@@ -205,28 +207,28 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   alignItems="center"
                   justifyContent="center"
                 > */}
-                <AsyncSelect
-                  placeholder='Selecione'
-                  size='lg'
-                  name={name}
-                  ref={ref}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  components={asyncComponents}
-                  useBasicStyles
-                  options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
-                  loadOptions={(inputValue, callback) => {
-                    setTimeout(() => {
-                      let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
-                      const values = filter.filter((option: any) =>
-                        option.label.toLowerCase().includes(inputValue.toLowerCase())
-                      )
-                      callback(values)
-                    }, 1500)
-                  }}
-                />
-                {/* <Select
+                  <AsyncSelect
+                    placeholder='Selecione'
+                    size='lg'
+                    name={name}
+                    ref={ref}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    components={asyncComponents}
+                    useBasicStyles
+                    options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+                    loadOptions={(inputValue, callback) => {
+                      setTimeout(() => {
+                        let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                        const values = filter.filter((option: any) =>
+                          option.label.toLowerCase().includes(inputValue.toLowerCase())
+                        )
+                        callback(values)
+                      }, 1500)
+                    }}
+                  />
+                  {/* <Select
                     name={name}
                     ref={ref}
                     onChange={onChange}
@@ -247,11 +249,11 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                       ))}
                   </Select>
                 </InputGroup> */}
-                {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-              </FormControl>
-            )}
-          />
-          <FormHelperText>Basta começa a digitar o nome da categoria que ela irá aparecer como opção.</FormHelperText>
+                  {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                </FormControl>
+              )}
+            />
+            <FormHelperText>Basta começa a digitar o nome da categoria que ela irá aparecer como opção.</FormHelperText>
           </FormControl>
           {/* <SelectDefault
             label="Categoria"
@@ -261,19 +263,19 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           /> */}
         </HStack>
         <FormControl>
-        <InputsHome
-          name='Foto e vídeo do produto'
-          typeInput='file'
-          getUrls={(values: any) => setUrls([...urls, ...values])}
-        />
-        <FormHelperText>Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.</FormHelperText>
+          <InputsHome
+            name='Foto e vídeo do produto'
+            typeInput='file'
+            getUrls={(values: any) => setUrls([...urls, ...values])}
+          />
+          <FormHelperText>Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.</FormHelperText>
         </FormControl>
         <HStack spacing='20px' flexWrap='wrap' w='100%' mt='20px'>
           {urls &&
             urls.length > 0 &&
             urls.map((value: any, index: number) => (
               <ViewImage
-                key={uuidv4()}
+                key={index}
                 url={value}
                 remove={() => {
                   let newList: any = []
@@ -286,45 +288,45 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             ))}
         </HStack>
         <FormControl>
-        <TextareaDefault
-          label='Descrição curta'
-          error={errors.description}
-          {...register('description', {
-            required: 'Descrição é obrigatório',
-          })}
-        />
-        <FormHelperText>Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.</FormHelperText>
+          <TextareaDefault
+            label='Descrição curta'
+            error={errors.description}
+            {...register('description', {
+              required: 'Descrição é obrigatório',
+            })}
+          />
+          <FormHelperText>Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.</FormHelperText>
         </FormControl>
         <FormControl>
-        <TextareaDefault
-          label='Chamada de produto'
-          error={errors.call_product}
-          {...register('call_product', {
-            required: 'Chamada de produto é obrigatório',
-          })}
-        />
-        <FormHelperText>A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.</FormHelperText>
+          <TextareaDefault
+            label='Chamada de produto'
+            error={errors.call_product}
+            {...register('call_product', {
+              required: 'Chamada de produto é obrigatório',
+            })}
+          />
+          <FormHelperText>A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.</FormHelperText>
         </FormControl>
         <HStack spacing='20px' w='100%'>
-        <FormControl>
-          <TextareaDefault
-            label='Descrição SEO'
-            error={errors.description_seo}
-            {...register('description_seo', {
-              required: 'Descrição seo é obrigatório',
-            })}
-          />
-          <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+          <FormControl>
+            <TextareaDefault
+              label='Descrição SEO'
+              error={errors.description_seo}
+              {...register('description_seo', {
+                required: 'Descrição seo é obrigatório',
+              })}
+            />
+            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
           </FormControl>
           <FormControl>
-          <TextareaDefault
-            label='key Word SEO'
-            error={errors.key_word_seo}
-            {...register('key_word_seo', {
-              required: 'Key word seo é obrigatório',
-            })}
-          />
-          <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
+            <TextareaDefault
+              label='key Word SEO'
+              error={errors.key_word_seo}
+              {...register('key_word_seo', {
+                required: 'Key word seo é obrigatório',
+              })}
+            />
+            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
           </FormControl>
         </HStack>
         <Flex w='100%'>
@@ -373,10 +375,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       <Divider m='20px 0px' />
       <VStack spacing='30px' divider={<Divider />} w='100%'>
         {hasVariation &&
-          listVariation.map((list: any, index: number) => (
+          Array.isArray(listVariation) && listVariation.map((list: any, index: number) => (
             <Variation
               total={listVariation.length - 1}
-              key={uuidv4()}
+              key={index}
               newVariation={() => {
                 setListVariation([...listVariation, { id: listVariation.length + 1 }])
               }}
@@ -429,6 +431,14 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
                 setListVariation([...newList])
               }}
+              addPlaceholder={(value: any) => {
+                console.log(value)
+                let newList: any = listVariation
+                newList[index].placeholder_name = value
+
+                setListVariation([...newList])
+              }}
+
               addRange={(value: any, type: string) => {
                 let newList: any = listVariation
                 newList[index].type_view = 'Range'

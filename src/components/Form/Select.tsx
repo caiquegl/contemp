@@ -59,8 +59,8 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
                 }}
               >
                 {opt &&
-                  opt.map((list: any) => (
-                    <option value={list.value} key={uuidv4()}>
+                  opt.map((list: any, index: any) => (
+                    <option value={list.value} key={index}>
                       {list.name}
                     </option>
                   ))}

@@ -100,9 +100,9 @@ const AllProduct = () => {
       </Flex>
       {favorites &&
         favorites.length > 0 &&
-        favorites.map((fv: any) => (
+        favorites.map((fv: any, index: any) => (
           <Flex
-            key={uuidv4()}
+            key={index}
             w='100%'
             alignItems={'center'}
             bg='white'
@@ -142,8 +142,8 @@ const AllProduct = () => {
                         let bOrder = b.order || 999999
                         return aOrder - bOrder
                       })
-                      .map((item: any) => (
-                        <SwiperSlide key={uuidv4()}>
+                      .map((item: any, index: any) => (
+                        <SwiperSlide key={index}>
                           <CardProductWithDescription
                             img={item.urls ? item.urls[0] : ''}
                             text={item.name}
@@ -197,7 +197,7 @@ const AllProduct = () => {
 
                   return (
                     <CardCatalog
-                      key={uuidv4()}
+                      key={index}
                       bg={bg}
                       color={color}
                       title={categ.name}

@@ -27,9 +27,9 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
       <VStack spacing="10px" divider={<Divider />}>
         {list &&
           list.length > 0 &&
-          list.map((el: any) => (
+          list.map((el: any, index: any) => (
             <Flex
-              key={uuidv4()}
+              key={index}
               cursor="pointer"
               _hover={{transition: 'all 0.4s' }}
               alignItems="center"

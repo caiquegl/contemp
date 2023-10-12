@@ -97,7 +97,7 @@ const InputsHome = ({
           >
             {options &&
               options.length > 0 &&
-              options.map((opt: any) => <option value={opt} key={uuidv4()}>{opt}</option>)}
+              options.map((opt: any, index: any) => <option value={opt} key={index}>{opt}</option>)}
           </Select>
         )}
 

@@ -75,7 +75,7 @@ export const Footer = () => {
         {list &&
           list.length > 0 &&
           list.map((el: any, index: number) => (
-            <GridItem w='100%' gap={6} key={uuidv4()} px='20px'>
+            <GridItem w='100%' gap={6} key={index} px='20px'>
               {/* {index === 2 && (
                 <HStack spacing="20px" mb="40px" >
                   <Link
@@ -166,8 +166,8 @@ export const Footer = () => {
               </Link>
               {el.children &&
                 el.children.length > 0 &&
-                el.children.map((el2: any) => (
-                  <Fragment key={uuidv4()}>
+                el.children.map((el2: any, index: any) => (
+                  <Fragment key={index}>
                     <Link
                       href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
                       _hover={{ color: 'white', textDecoration: 'none' }}
@@ -184,7 +184,7 @@ export const Footer = () => {
                             href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
                             _hover={{ color: 'white', textDecoration: 'none' }}
                           >
-                            <Text key={uuidv4()} fontSize='16px' cursor='pointer'>
+                            <Text key={index} fontSize='16px' cursor='pointer'>
                               {el3.name}
                             </Text>
                           </Link>

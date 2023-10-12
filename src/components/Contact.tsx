@@ -285,7 +285,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                   {form &&
                     form.length > 0 &&
                     form.map((quest: any, index: number) => (
-                      <Fragment key={uuidv4()}>
+                      <Fragment key={index}>
                         {quest.type === 'text' && (
                           <InputDefault
                             label={quest.name}

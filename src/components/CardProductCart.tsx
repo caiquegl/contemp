@@ -50,8 +50,8 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
         </Text>
         {data.variation &&
           Object.keys(data.variation).length > 0 &&
-          Object.keys(data.variation).map((key: any) => (
-            <Flex key={uuidv4()} alignItems='flex-start' m='5px 0' flexDirection='column'>
+          Object.keys(data.variation).map((key: any, index: any) => (
+            <Flex key={index} alignItems='flex-start' m='5px 0' flexDirection='column'>
               <Tooltip label={key} placement='top'>
                 <Text
                   fontSize='17px'

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { SelectDefault } from '../Form/Select'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 
-const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVariation, removeVariation, removeOptVariation, addRange, saveName, setType, total, upVariation, downVariation }: any) => {
+const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVariation, removeVariation, removeOptVariation, addRange, saveName, setType, total, upVariation, downVariation, addPlaceholder }: any) => {
   const formRefOpt = useRef<any>()
 
   const { register, handleSubmit, formState, setValue, resetField, control, watch } = useForm({})
@@ -17,6 +17,11 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
   const insertOptVariation = (variation: any) => {
     addVariation(variation)
     resetField('addOpt')
+    let neO = opt
+    neO.push(variation.addOpt)
+    // setOpt(neO)
+    console.log(variation, 'variation')
+
   }
 
   useEffect(() => {
@@ -24,11 +29,11 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
     setValue('type_view', defaultValues?.type_view ? defaultValues?.type_view : 'Number')
     setValue('min_value', defaultValues?.min_value)
     setValue('max_value', defaultValues?.max_value)
-
+    setValue('placeholder_name', defaultValues?.placeholder_name)
     if (defaultValues.opt) {
       setOpt(defaultValues.opt)
     }
-  }, [defaultValues])
+  }, [])
 
   const upOpt = (indexOpt: number) => {
     let newList: any = opt
@@ -64,6 +69,8 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
               {...register('name', { required: 'Nome é obrigatório' })}
             />
           </Box>
+
+         
           <Box w='400px' ml='20px'>
             <SelectDefault
               control={control}
@@ -72,11 +79,23 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
               opt={[
                 {
                   value: 'Number',
-                  name: 'Númerico',
+                  name: 'Seleção',
                 },
                 {
                   value: 'Range',
                   name: 'Ranger',
+                },
+                {
+                  value: 'Texto_curto',
+                  name: 'Texto Curto',
+                },
+                {
+                  value: 'Texto_longo',
+                  name: 'Área de texto',
+                },
+                {
+                  value: 'numerico',
+                  name: 'Numero',
                 },
               ]}
               nameInput='type_view'
@@ -90,6 +109,49 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
           <Icon as={GrSubtractCircle} fontSize='30px' cursor='pointer' onClick={() => removeVariation()} />
         </HStack>
       </Flex>
+      {watch().type_view == 'Texto_curto'  && (
+          <Box w='400px'>
+            <InputDefault
+              label={`Nome da placeholder ${index + 1}`}
+              type='text'
+              error={errors.placeholder_name}
+              onBlurCapture={(evt) => addPlaceholder(evt.target.value)}
+              {...register('placeholder_name')}
+            />
+                      </Box>
+
+          )}
+
+          
+          {watch().type_view == 'numerico'  && (
+          <Box w='400px'>
+            <InputDefault
+              label={`Nome da placeholder ${index + 1}`}
+              type='text'
+              error={errors.placeholder_name}
+              onBlurCapture={(evt) => {
+                addPlaceholder(evt.target.value)
+              }}
+              {...register('placeholder_name')}
+            />
+                      </Box>
+
+          )}
+          
+           {watch().type_view == 'Texto_longo'  && (
+          <Box w='400px'>
+            <InputDefault
+              label={`Nome da placeholder ${index + 1}`}
+              type='text'
+              error={errors.placeholder_name}
+              onBlurCapture={(evt) => addPlaceholder(evt.target.value)}
+              {...register('placeholder_name')}
+            />
+                      </Box>
+
+          )}
+          
+
       {watch().type_view == 'Range' && (
         <Flex alignItems='center' justifyContent='space-between' w='100%'>
           <Box w='35%'>

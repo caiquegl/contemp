@@ -23,6 +23,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   NumberInputField,
+  Textarea,
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -78,6 +79,7 @@ const Product = () => {
       let produto = ''
       if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ').replaceAll('/', '333')
       const { data } = await api.get(`${produto}/getProduct`)
+
       if (!data.bradName) return router.push('/404')
       setBradeName(data.bradName)
 
@@ -170,7 +172,7 @@ const Product = () => {
             >
               {detail.urls && detail.urls.length > 0 ? (
                 detail.urls.map((photo: any, key: number) => (
-                  <SwiperSlide key={uuidv4()}>
+                  <SwiperSlide key={key}>
                     <Center h='100%' maxH={pxToRem(765)} width='100%'>
                       <Zoom>
                         <img id='zoom' alt={detail.name ? detail.name : ''} src={photo} width='600' />
@@ -193,7 +195,7 @@ const Product = () => {
               <Breadcrumb>
                 {bradName &&
                   bradName.map((el: any, index: number) => (
-                    <Fragment key={uuidv4()}>
+                    <Fragment key={index}>
                       {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
                       {index != bradName.length - 1 && (
                         <Breadcrumb.Item>
@@ -218,13 +220,14 @@ const Product = () => {
                 </Text>
               </Link>
             </Text>
+
             <VStack spacing='45px'>
               {detail.hasVariation &&
                 detail.listVariation &&
-                detail.listVariation.length > 0 &&
+                Array.isArray(detail.listVariation) &&
                 detail.listVariation.map((vr: any, key: number) => (
                   <Flex
-                    key={uuidv4()}
+                    key={key}
                     w='100%'
                     alignItems={['flex-start', 'center']}
                     justifyContent='space-between'
@@ -233,8 +236,7 @@ const Product = () => {
                     <Text fontWeight='bold' fontSize='20px' color='black.800'>
                       {vr.name}
                     </Text>
-
-                    {vr.type_view && vr.type_view == 'Range' ? (
+                    {vr.type_view && vr.type_view == 'Range' && (
                       <Box
                         borderRadius='6px'
                         bg='white.500'
@@ -281,7 +283,46 @@ const Product = () => {
                           </Flex>
                         ) : null}
                       </Box>
-                    ) : (
+                    )}
+                    {vr.type_view}
+                      {vr.type_view && vr.type_view == 'numerico' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Input
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
+                          color='black.800'
+                          maxLength={100}
+                          onKeyPress={(e) => {
+                            const allowedChars = /[0-9]|Backspace/;
+                            if (!allowedChars.test(e.key)) {
+                              e.preventDefault();
+                            }
+                          }}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 100);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+/>                      
+                      </Box>
+                    )}
+                      {vr.type_view && vr.type_view == 'Number' && (
                       <InputGroup
                         borderRadius='6px'
                         bg='white.500'
@@ -319,12 +360,121 @@ const Product = () => {
                           {vr.opt &&
                             vr.opt.length > 0 &&
                             vr.opt.map((opt: any, key: number) => (
-                              <option value={opt} key={uuidv4()}>
+                              <option value={opt} key={key}>
                                 {opt}
                               </option>
                             ))}
                         </Select>
                       </InputGroup>
+                    )}
+                    {vr.opt && !vr.type_view && Array.isArray(vr.opt) && vr.opt.length > 0 &&   (
+                      <InputGroup
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 7px'
+                        w='100%'
+                        maxW='358px'
+                        h='50'
+                        outline='none'
+                        border='none'
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'
+                      >
+                        <Select
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder='Selecione uma opção'
+                          color='black.800'
+                          value={variation[vr.name] ? variation[vr.name] : undefined}
+                          onChange={(evt) =>
+                            setVariation({
+                              ...variation,
+                              [vr.name]: evt.target.value,
+                            })
+                          }
+                          _placeholder={{
+                            color: 'black.50',
+                          }}
+                          _focusVisible={{
+                            outline: 'none',
+                          }}
+                        >
+                          {vr.opt &&
+                            vr.opt.length > 0 &&
+                            vr.opt.map((opt: any, key: number) => (
+                              <option value={opt} key={key}>
+                                {opt}
+                              </option>
+                            ))}
+                        </Select>
+                      </InputGroup>
+                    )}
+                    {vr.type_view && vr.type_view == 'Texto_curto' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Input
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
+                          color='black.800'
+                          maxLength={100}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 100);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+
+                        />
+                      </Box>
+                    )}
+                    {vr.type_view && vr.type_view == 'Texto_longo' && (
+                      <Box
+                        borderRadius='6px'
+                        bg='white.500'
+                        p='3px 10px'
+                        w='100%'
+                        maxW='358px'
+                        minH='50'
+                        outline='none'
+                        border='none'
+                        mt={['40px', 0]}
+                      >
+                        <Textarea
+                          defaultValue={variation[vr.name] || ''}
+                          w='100%'
+                          height='100%'
+                          border='none'
+                          borderRadius='21px'
+                          placeholder={vr.placeholder_name || 'Selecione uma opção'}
+                          color='black.800'
+                          maxLength={1500}
+                          onBlur={(e) => {
+                            const newValue = e.target.value.slice(0, 1500);
+                            setVariation({
+                              ...variation,
+                              [vr.name]: newValue
+                            })
+                          }}
+
+                        />
+                      </Box>
                     )}
                   </Flex>
                 ))}
@@ -413,7 +563,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <Tab
-                    key={uuidv4()}
+                    key={key}
                     _selected={{
                       bg: 'white.500',
                       color: 'red.600',
@@ -432,7 +582,7 @@ const Product = () => {
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
                   <TabPanel
-                    key={uuidv4()}
+                    key={key}
                     bg='white.500'
                     color='black.800'
                     p='40px'
@@ -471,12 +621,12 @@ const Product = () => {
                 speed={1000}
               >
                 {products.sort((a: any, b: any) => {
-                      let aOrder = a.order || 999999
-                      let bOrder = b.order || 999999
-                    return aOrder - bOrder
-                    
-                  }).map((item: any, key: number) => (
-                  <SwiperSlide key={uuidv4()}>
+                  let aOrder = a.order || 999999
+                  let bOrder = b.order || 999999
+                  return aOrder - bOrder
+
+                }).map((item: any, key: number) => (
+                  <SwiperSlide key={key}>
                     <CardProductWithDescription
                       img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
                       text={item.name}
