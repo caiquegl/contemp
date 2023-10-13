@@ -42,9 +42,10 @@ export default async function handler(
             order: 'asc'
           }
         })
+
   
         for await (let sub_category of sub) {
-          let bodySub = {
+          let bodySub: any = {
             title: sub_category.name,
             url: sub_category.url,
             order: sub_category.order,
@@ -52,8 +53,65 @@ export default async function handler(
             label: sub_category.name,
             id: sub_category.id,
             key: sub_category.name,
+            children: []
           }
-  
+
+          const sub3 = await prisma.categories.findMany({
+            where: {
+              sub_category_id: sub_category.id,
+              is_active: true,
+            },
+            orderBy: {
+              order: 'asc'
+            }
+          })
+
+          for await (let sub_category3 of sub3) {
+            let bodySub3: any = {
+              title: sub_category3.name,
+              url: sub_category3.url,
+              order: sub_category3.order,
+              name: sub_category3.name,
+              label: sub_category3.name,
+              id: sub_category3.id,
+              key: sub_category3.name,
+              children: []
+            }
+
+            const sub4 = await prisma.categories.findMany({
+              where: {
+                sub_category_id: sub_category3.id,
+                is_active: true,
+              },
+              orderBy: {
+                order: 'asc'
+              }
+            })
+
+            for await (let sub_category4 of sub4) {
+              let bodySub4: any = {
+                title: sub_category4.name,
+                url: sub_category4.url,
+                order: sub_category4.order,
+                name: sub_category4.name,
+                label: sub_category4.name,
+                id: sub_category4.id,
+                key: sub_category4.name,
+              }
+
+              bodySub3.children.push(bodySub4)
+
+            }
+
+            if(bodySub3.children && bodySub3.children.length === 0) delete bodySub3.children
+
+            bodySub.children.push(bodySub3)
+
+          }
+
+
+          if(bodySub.children && bodySub.children.length === 0) delete bodySub.children
+
           body.children.push(bodySub)
   
         }
