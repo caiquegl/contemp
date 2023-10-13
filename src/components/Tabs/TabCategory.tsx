@@ -302,7 +302,7 @@ const TabCategory = () => {
       title: 'Ações',
       render: (a: any) => (
         <>
-          {a.id != 59 && (
+          {a.name != 'CATEGORY_SECUNDARY' && (
             <HStack spacing='20px'>
               <Tooltip label='Filtro'>
                 <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' >
