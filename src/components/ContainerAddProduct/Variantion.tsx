@@ -193,7 +193,15 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
                       fontSize='20px'
                       ml='10px'
                       cursor='pointer'
-                      onClick={() => removeOptVariation(indexOpt)}
+                      onClick={() => {
+                        removeOptVariation(indexOpt)
+                        let newOpt: any = []
+                        opt.forEach((el: any) => {
+                          if(el != value) newOpt.push(el)
+                        })
+
+                        setOpt(newOpt)
+                      }}
                     />
                     {indexOpt !== opt.length - 1 && <Icon as={AiOutlineArrowDown} color="#cc0b0b" fontSize='17px' cursor='pointer' onClick={() => downOpt(indexOpt)} />}
                     {indexOpt !== 0 && <Icon as={AiOutlineArrowUp} color="#0e9721" fontSize='17px' cursor='pointer' onClick={() => upOpt(indexOpt)} />}

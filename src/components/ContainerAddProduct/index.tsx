@@ -391,6 +391,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 })
 
                 newList[index].opt = newListOptions
+                console.log(newList)
                 setListVariation([...newList])
               }}
               removeVariation={() => {

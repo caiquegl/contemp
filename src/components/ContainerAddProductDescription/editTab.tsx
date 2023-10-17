@@ -36,7 +36,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
       </Flex>
       <Box color='black.800'>
         {see ? (
-          <Textarea value={value} onChange={handleInputChange} h='200px' />
+          <Textarea value={value || tabs[index]?.text} onChange={handleInputChange} h='200px' />
         ) : (
           <div>
             <CustomEditor
