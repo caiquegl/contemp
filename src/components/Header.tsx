@@ -66,11 +66,18 @@ export const Header = () => {
   const listCategory = async () => {
     try {
       const { data } = await api.get('getMenu')
+
       const listMenu = data.map((el: any) => ({
         ...el,
         onTitleClick: (value: any) => {
           router.push(`/category/${replaceNameToUrl(el.name).replaceAll(' ', '_')}#viewCategory`)
         },
+        children: el.children ? el.children.map((el2: any) => {
+          if(el2.children) el2.onTitleClick = (value: any) => {
+            router.push(`/category/${replaceNameToUrl(el2.name).replaceAll(' ', '_')}#viewCategory`)
+          }
+          return el2
+        }) : undefined
       }))
       setList(listMenu)
       setLoading(false)
