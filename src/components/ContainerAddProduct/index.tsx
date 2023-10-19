@@ -376,101 +376,103 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       <VStack spacing='30px' divider={<Divider />} w='100%'>
         {hasVariation &&
           Array.isArray(listVariation) && listVariation.map((list: any, index: number) => (
-            <Variation
-              total={listVariation.length - 1}
-              key={index}
-              newVariation={() => {
-                setListVariation([...listVariation, { id: listVariation.length + 1 }])
-              }}
-              removeOptVariation={(indexRemove: any) => {
-                let newList: any = listVariation
-
-                let newListOptions: any = []
-                newList[index].opt.forEach((opt: any, indexOpt: number) => {
-                  if (indexRemove != indexOpt) newListOptions.push(opt)
-                })
-
-                newList[index].opt = newListOptions
-                console.log(newList)
-                setListVariation([...newList])
-              }}
-              removeVariation={() => {
-                let newList: any = []
-                listVariation.forEach((list: any, indexRemove: number) => {
-                  if (index != indexRemove) newList.push(list)
-                })
-                setListVariation([...newList])
-              }}
-              index={index}
-              addVariation={(variation: any) => {
-                let newList = listVariation
-                newList[index].name = variation.name
-                delete newList[index].min_value
-                delete newList[index].max_value
-
-                if (!variation.addOpt) return
-                if (newList[index].opt) {
-                  newList[index].opt.push(variation.addOpt)
-                } else {
-                  newList[index].opt = [variation.addOpt]
-                }
-
-                setListVariation([...newList])
-              }}
-              saveName={(name: string) => {
-                let newList: any = listVariation
-                delete newList[index].opt
-
-                newList[index].name = name
-
-                setListVariation([...newList])
-              }}
-              setType={(type: string) => {
-                let newList: any = listVariation
-
-                newList[index].type_view = type
-
-                setListVariation([...newList])
-              }}
-              addPlaceholder={(value: any) => {
-                console.log(value)
-                let newList: any = listVariation
-                newList[index].placeholder_name = value
-
-                setListVariation([...newList])
-              }}
-
-              addRange={(value: any, type: string) => {
-                let newList: any = listVariation
-                newList[index].type_view = 'Range'
-                newList[index][type] = value
-
-                setListVariation([...newList])
-              }}
-              defaultValues={listVariation[index]}
-              upVariation={(index: number) => {
-                let newList: any = listVariation
-                const up = newList[index];
-                const down = newList[index - 1];
-                newList[index - 1] = up;
-                newList[index] = down;
-                setListVariation([...newList])
-              }}
-              downVariation={(index: number) => {
-                let newList: any = listVariation
-                const up = newList[index];
-                const down = newList[index + 1];
-                newList[index + 1] = up;
-                newList[index] = down;
-                setListVariation([...newList])
-              }}
-
-              changeOrderOpt={(index: number, opt: string[]) => {
-                let newList: any = listVariation
-                newList[index].opt = opt
-                setListVariation([...newList])
-              }}
-            />
+            <div key={list.id} style={{width: '100%'}}>
+              <Variation
+                total={listVariation.length - 1}
+                key={index}
+                newVariation={() => {
+                  setListVariation([...listVariation, { id: listVariation.length + 1 }])
+                }}
+                removeOptVariation={(indexRemove: any) => {
+                  let newList: any = listVariation
+  
+                  let newListOptions: any = []
+                  newList[index].opt.forEach((opt: any, indexOpt: number) => {
+                    if (indexRemove != indexOpt) newListOptions.push(opt)
+                  })
+  
+                  newList[index].opt = newListOptions
+                  console.log(newList)
+                  setListVariation([...newList])
+                }}
+                removeVariation={() => {
+                  let newList: any = []
+                  listVariation.forEach((list: any, indexRemove: number) => {
+                    if (index != indexRemove) newList.push(list)
+                  })
+                  setListVariation([...newList])
+                }}
+                index={index}
+                addVariation={(variation: any) => {
+                  let newList = listVariation
+                  newList[index].name = variation.name
+                  delete newList[index].min_value
+                  delete newList[index].max_value
+  
+                  if (!variation.addOpt) return
+                  if (newList[index].opt) {
+                    newList[index].opt.push(variation.addOpt)
+                  } else {
+                    newList[index].opt = [variation.addOpt]
+                  }
+  
+                  setListVariation([...newList])
+                }}
+                saveName={(name: string) => {
+                  let newList: any = listVariation
+                  delete newList[index].opt
+  
+                  newList[index].name = name
+  
+                  setListVariation([...newList])
+                }}
+                setType={(type: string) => {
+                  let newList: any = listVariation
+  
+                  newList[index].type_view = type
+  
+                  setListVariation([...newList])
+                }}
+                addPlaceholder={(value: any) => {
+                  console.log(value)
+                  let newList: any = listVariation
+                  newList[index].placeholder_name = value
+  
+                  setListVariation([...newList])
+                }}
+  
+                addRange={(value: any, type: string) => {
+                  let newList: any = listVariation
+                  newList[index].type_view = 'Range'
+                  newList[index][type] = value
+  
+                  setListVariation([...newList])
+                }}
+                defaultValues={listVariation[index]}
+                upVariation={(index: number) => {
+                  let newList: any = listVariation
+                  const up = newList[index];
+                  const down = newList[index - 1];
+                  newList[index - 1] = up;
+                  newList[index] = down;
+                  setListVariation([...newList])
+                }}
+                downVariation={(index: number) => {
+                  let newList: any = listVariation
+                  const up = newList[index];
+                  const down = newList[index + 1];
+                  newList[index + 1] = up;
+                  newList[index] = down;
+                  setListVariation([...newList])
+                }}
+  
+                changeOrderOpt={(index: number, opt: string[]) => {
+                  let newList: any = listVariation
+                  newList[index].opt = opt
+                  setListVariation([...newList])
+                }}
+              />
+            </div>
           ))}
       </VStack>
       <Flex alignItems='center' justifyContent='flex-end' mt='53px' w='100%'>
