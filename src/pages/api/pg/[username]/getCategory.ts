@@ -10,7 +10,7 @@ export default async function handler(
       return res.status(405).end()
     }
 
-    const username = String(req.query.username)
+    const username = String(req.query.username).replaceAll('7777', '/')
     const allCategoryActives = await prisma.categories.findFirst({
       where: {
         is_active: true,
@@ -20,6 +20,8 @@ export default async function handler(
         }
       }
     })
+
+    console.log(username)
 
     if (!allCategoryActives) return res.status(201).json([])
     console.log(allCategoryActives, 'allCategoryActives')

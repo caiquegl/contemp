@@ -45,7 +45,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
   const [form2] = Form.useForm();
 
   const getOptions = async () => {
-    const { data } = await api.get(`${category.name}/getCategory`)
+    const { data } = await api.get(`${category.name.replaceAll('_', ' ').replaceAll('/', '7777')}/getCategory`)
     setOptions(data.products ? data.products.map((item: any) => ({ label: item.name, value: item.id })) : [])
   }
 

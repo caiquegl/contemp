@@ -47,7 +47,7 @@ const Category = () => {
   const getCategoryList = async () => {
     try {
       let nameCategory = ''
-      if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ')
+      if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ').replaceAll('/', '7777')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
       setCateg(data.category)
