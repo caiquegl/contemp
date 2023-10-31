@@ -38,8 +38,50 @@ export default async function handler(
       }
     })
 
+    
+    const allSubCategory2 = await prisma.categories.findMany({
+      select: {
+        id: true
+      },
+      where: {
+        is_active: true,
+        sub_category_id: {
+         in: allSubCategory.map((cg) => cg.id)
+        }
+      }
+    })
+
+    const allSubCategory3 = await prisma.categories.findMany({
+      select: {
+        id: true
+      },
+      where: {
+        is_active: true,
+        sub_category_id: {
+         in: allSubCategory2.map((cg) => cg.id)
+        }
+      }
+    })
+
+
+    
+    const allSubCategory4 = await prisma.categories.findMany({
+      select: {
+        id: true
+      },
+      where: {
+        is_active: true,
+        sub_category_id: {
+         in: allSubCategory3.map((cg) => cg.id)
+        }
+      }
+    })
 
     allSubCategory.forEach((cg) => category_ids.push(cg.id))
+    allSubCategory2.forEach((cg) => category_ids.push(cg.id))
+    allSubCategory3.forEach((cg) => category_ids.push(cg.id))
+    allSubCategory4.forEach((cg) => category_ids.push(cg.id))
+    
     category_ids.push(allCategoryActives.id)
     console.log(category_ids)
     const products = await prisma.products.findMany({
