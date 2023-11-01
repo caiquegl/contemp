@@ -88,15 +88,17 @@ const Category = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['110px', '110px', '140px', '140px', '140px', '140px']}
+        h={['110px', '110px', '60px', '60px', '60px', '60px']}
+        display={'none'}
       // id="viewCategory"
       >
         <Text
-          fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
+          fontSize={['1rem', '1rem', '1.25rem', '1.25rem', '1.25rem', '1.25rem']}
           fontWeight='bold'
           textAlign='center'
           maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
+          display={'none'}
         >
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>

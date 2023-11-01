@@ -313,8 +313,9 @@ export const Header = () => {
   return (
     <Box zIndex={9999999999999999}>
       <Fade in={scrollY < 200}>
-        <Container maxW='7xl' p='12px 15px 31px 15px' minH={'250px'} transition='all 3s' opacity={loading ? 0 : 1}>
-          <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px'>
+        <Container maxW='7xl' p='12px 15px' minH={'50px'} transition='all 3s' opacity={loading ? 0 : 1}>
+          {/*CONTATOS HEADER MENU*/}
+          <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px' display={'none'}>
             <Box display='flex' flex={1}>
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>
                 <Flex alignItems='center' w='max-content' mr={3}>
@@ -358,7 +359,7 @@ export const Header = () => {
             </HStack>
           </Flex>
 
-          <Flex alignItems='center' justifyContent='space-between' h={70} mb='30px'>
+          <Flex alignItems='center' justifyContent='space-between' h={70} mb='10px'>
             <Link href={`/`} _hover={{ color: 'black', textDecoration: 'none' }}>
               <Box cursor='pointer' height={41} mr='20px'>
                 <Box position='absolute' zIndex={9} bg='transparent' w='160px' h='41px' />

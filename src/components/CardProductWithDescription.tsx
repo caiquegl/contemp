@@ -57,9 +57,9 @@ const CardProductWithDescription = ({
       // rowGap={pxToRem(10)}
       borderRadius='8px'
       cursor='pointer'
-      maxW={pxToRem(350)}
+      maxW={pxToRem(300)}
       w='100%'
-      h={pxToRem(ocultBottom ? 600 : 800)}
+      h={pxToRem(ocultBottom ? 600 : 340)}
       mt='20px'
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
@@ -82,28 +82,6 @@ const CardProductWithDescription = ({
         alignItems='center'
         justifyContent='space-between'
       >
-        <Tooltip label={text} placement='top'>
-          <Text
-            fontSize={'1.75rem'}
-            fontWeight='bold'
-            color={color ? color : 'black'}
-            textTransform='uppercase'
-            width='100%'
-            lineHeight='2rem'
-            marginBottom={'5%'}
-            gridRow={1}
-          >
-            {text}
-          </Text>
-        </Tooltip>
-        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={2} lineHeight={'1.5rem'}>
-          {call_product &&
-            call_product.split('').length > 0 &&
-            call_product
-              .split('')
-              .map((el: any, index: number) => <Fragment key={index}>{index < 100 ? el : ''}</Fragment>)}
-          {call_product && call_product.split('').length > 100 ? '...' : ''}
-        </Text>
         <Image
           src={img ? img : DefaultImg}
           alt={alt}
@@ -111,13 +89,37 @@ const CardProductWithDescription = ({
             base: pxToRem(260),
             xl: pxToRem(280),
           }}
-          gridRow={3}
+          gridRow={1}
           bgSize='contain'
         />
+        <Tooltip label={text} placement='top'>
+          <Text
+            fontSize={'1rem'}
+            fontWeight='bold'
+            color={color ? color : '#242424'}
+            textTransform='uppercase'
+            width='100%'
+            lineHeight='1.25rem'
+            marginBottom={'5%'}
+            gridRow={2}
+          >
+            {text}
+          </Text>
+        </Tooltip>
+        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={3} lineHeight={'1rem'} display={'none'}>
+          {call_product &&
+            call_product.split('').length > 0 &&
+            call_product
+              .split('')
+              .map((el: any, index: number) => <Fragment key={index}>{index < 100 ? el : ''}</Fragment>)}
+          {call_product && call_product.split('').length > 100 ? '...' : ''}
+        </Text>
         {ocultBottom ? null :
           <Link
             href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
             _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
+            display={'none'}
+            opacity={'0'}
           >
             <Button
               w={pxToRem(243)}
@@ -133,6 +135,7 @@ const CardProductWithDescription = ({
                 bg: bg ? hoverBg[bg] : 'black.800',
                 color: bg ? hoverColor[bg] : 'white',
               }}
+              display={'none'}
             >
               Solicitar orçamento
             </Button>
