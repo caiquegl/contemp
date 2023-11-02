@@ -1,5 +1,6 @@
 import "antd/dist/antd.css";
 import "../styles/globals.css";
+import '../styles/customize.css'
 import type { AppProps } from "next/app";
 import { Center, ChakraProvider, Spinner } from "@chakra-ui/react";
 import { theme } from "../styles/theme";

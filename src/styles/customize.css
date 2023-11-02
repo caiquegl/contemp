@@ -1,0 +1,134 @@
+:root {
+    --black-primary: #242424;
+    --red-primary: #B60005;
+    --white-primary: #ffffff;
+    --graylight-primary: #f8f8f8;
+    --gray-primary: #c9c9c9;
+    --gray-text: #5f5f5f;
+    --ofsset-primary: #fafafa;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+html,
+body {
+    background-color: var(--white-primary);
+}
+
+.d-none {
+    display: none !important;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+Link {
+    text-decoration: none;
+}
+
+.background-preto {
+    background-color: var(--black-primary);
+}
+
+.background-vermelho {
+    background-color: var(--red-primary);
+}
+
+.background-branco {
+    background-color: var(--white-primary);
+}
+
+.background-cinza {
+    background-color: var(--gray-primary);
+}
+
+.paragrafo-preto {
+    font-size: 1rem;
+    color: var(--black-primary);
+}
+
+.paragrafo-cinza {
+    font-size: 1rem;
+    color: var(--gray-text);
+}
+
+.paragrafo-branco {
+    font-size: 1rem;
+    color: var(--black-primary);
+}
+
+.redondo {
+    border-radius: 50px !important;
+}
+
+.botao-vermelho {
+    background-color: var(--red-primary) !important;
+    color: var(--white-primary);
+    text-transform: uppercase;
+    margin-top: 5% !important;
+}
+
+.botao-vermelho:hover {
+    background-color: var(--black-primary) !important;
+    color: var(--white-primary);
+}
+
+.botao-preto {
+    background-color: var(--black-primary) !important;
+    color: var(--white-primary);
+    text-transform: uppercase;
+    margin-top: 5% !important;
+}
+
+.botao-preto:hover {
+    background-color: var(--red-primary) !important;
+    color: var(--white-primary);
+}
+
+/* CATEGORIA */
+.card-produto {
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 18.75rem;
+    margin-top: 20px;
+    border: 2px solid;
+    border-color: transparent;
+    padding: 20px;
+}
+
+.card-produto:hover {
+    border-color: var(--gray-primary);
+}
+
+.titulo-produto-categoria {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.25rem;
+    width: 100%;
+    color: var(--black-primary);
+    margin-bottom: 0%;
+    text-align: center;
+}
+
+.imagem-produto-categoria {
+    height: 17.5rem;
+}
+
+.imagem-produto-categoria:hover {
+    transform: scale(1.2);
+    transition: transform 0.4s ease;
+}
+
+.chamada-produto-categoria {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--gray-text);
+    margin-top: 5%;
+    line-height: 1.15rem;
+}

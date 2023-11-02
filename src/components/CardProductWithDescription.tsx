@@ -55,23 +55,11 @@ const CardProductWithDescription = ({
       // gridTemplateRows='max-content 0.7fr 2fr 0.5fr'
       // justifyContent='space-between'
       // rowGap={pxToRem(10)}
-      borderRadius='8px'
-      cursor='pointer'
-      maxW={pxToRem(300)}
-      w='100%'
       h={pxToRem(ocultBottom ? 600 : 340)}
-      mt='20px'
       onMouseOver={handleIsHovering}
       onMouseOut={handleIsHovering}
-      border='2px solid'
-      borderColor='transparent'
-      p='20px'
-      _hover={{
-        border: '2px solid',
-        borderColor: color ?? 'black.800',
-      }}
-      padding={`${pxToRem(25)} ${pxToRem(20)}`}
       {...containerProps}
+      className='card-produto'
     >
       <Link
         href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
@@ -82,31 +70,25 @@ const CardProductWithDescription = ({
         alignItems='center'
         justifyContent='space-between'
       >
+        {/*IMAGEM DO PRODUTO*/}
         <Image
           src={img ? img : DefaultImg}
           alt={alt}
-          h={{
-            base: pxToRem(260),
-            xl: pxToRem(280),
-          }}
           gridRow={1}
           bgSize='contain'
+          className='imagem-produto-categoria'
         />
+        
+        {/*TÍTULO DO PRODUTO*/}
         <Tooltip label={text} placement='top'>
           <Text
-            fontSize={'1rem'}
-            fontWeight='bold'
-            color={color ? color : '#242424'}
-            textTransform='uppercase'
-            width='100%'
-            lineHeight='1.25rem'
-            marginBottom={'5%'}
             gridRow={2}
+            className='titulo-produto-categoria'
           >
             {text}
           </Text>
         </Tooltip>
-        <Text w='100%' textAlign='left' fontSize={pxToRem(20)} color={color ? color : 'black'} gridRow={3} lineHeight={'1rem'} display={'none'}>
+        <Text gridRow={3} className='chamada-produto-categoria d-none'>
           {call_product &&
             call_product.split('').length > 0 &&
             call_product
@@ -118,24 +100,16 @@ const CardProductWithDescription = ({
           <Link
             href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
             _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
-            display={'none'}
-            opacity={'0'}
+            className='d-none'
           >
             <Button
               w={pxToRem(243)}
               h={pxToRem(50)}
               gridRow={4}
-              borderRadius='25px'
               margin='auto'
-              bg='red.600'
-              fontSize={pxToRem(20)}
               borderColor={buttomBottom ? buttomBottom : 'transparent'}
               borderWidth={buttomBottom ? '2px' : '0'}
-              _hover={{
-                bg: bg ? hoverBg[bg] : 'black.800',
-                color: bg ? hoverColor[bg] : 'white',
-              }}
-              display={'none'}
+              className='botao-vermelho redondo d-none'
             >
               Solicitar orçamento
             </Button>
