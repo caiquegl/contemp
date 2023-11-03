@@ -1,4 +1,4 @@
-import { Box, VStack, Button, Flex, Divider, useToast } from '@chakra-ui/react'
+import { Box, VStack, Button, Flex, Divider, useToast, Heading } from '@chakra-ui/react'
 import {
   addDoc,
   collection,
@@ -8,8 +8,7 @@ import {
   orderBy,
   query,
   updateDoc,
-  where,
-  Heading,
+  where
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
