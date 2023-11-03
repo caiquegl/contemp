@@ -108,6 +108,7 @@ const Home = () => {
           md: `repeat(2, minmax(${pxToRem(300)}, 1fr))`,
         }}
       >
+        {/* PRODUTOS HOME */}
         <DescriptionProduct
           color='white'
           bg='red.600'

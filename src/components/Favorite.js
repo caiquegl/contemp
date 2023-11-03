@@ -96,7 +96,7 @@ export const Favorite = ({ homeTabs }) => {
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
-      <Text color='white' fontSize='40px' fontWeight='bold' textAlign='center' mt={width > maxWidth ? '80px' : '20px'} mb={'5%'}>
+      <Text color='white' fontSize='2.5rem' fontWeight='bold' textAlign='center' mt={width > maxWidth ? '50px' : '20px'} mb={'3%'}>
         Confira nossas Novidades
       </Text>
       <Flex h={pxToRem(250)} w='100%'>
@@ -142,7 +142,7 @@ export const Favorite = ({ homeTabs }) => {
         </Swiper>
       </Flex>
       {homeTabs && Object.keys(homeTabs).length > 0 && (
-        <Flex alignItems='center' mt='200px' mb='53px' flexDirection={['column', 'column', 'row', 'row', 'row']}>
+        <Flex alignItems='center' mt='9%' mb='1%' flexDirection={['column', 'column', 'row', 'row', 'row']}>
           <Image
             flex={1}
             src={homeTabs.urls[0]}
@@ -173,7 +173,7 @@ export const Favorite = ({ homeTabs }) => {
                 '2xl': '98%',
               }}
             >
-              <Text fontWeight='bold' fontSize={pxToRem(60)}>
+              <Text className='home-produto-titulo'>
                 {homeTabs.name}
               </Text>
 
@@ -181,16 +181,15 @@ export const Favorite = ({ homeTabs }) => {
                 title={homeTabs.category.name}
                 icon={homeTabs.icon}
                 containerProps={{
-                  borderColor: 'red.600',
+                  borderColor: 'var(--white-primary)',
                   color: 'white',
                 }}
               />
             </Flex>
             <Text
-              textAlign='justify'
               mt='27px'
               mb='28px'
-              fontSize={pxToRem(20)}
+              className='home-produto-descricao'
               w={{
                 base: '95%',
                 xl: '80%',
@@ -200,7 +199,7 @@ export const Favorite = ({ homeTabs }) => {
               {homeTabs.description}
             </Text>
 
-            <Flex alignItems='center' w='80%' maxW={pxToRem(220)}>
+            <Flex alignItems='center' w='100%'>
               <Link href={homeTabs.link_name} _hover={{ color: 'black', textDecoration: 'none' }}>
                 <Button
                   border='2px solid white'

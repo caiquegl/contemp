@@ -46,7 +46,7 @@ const DescriptionProduct = ({
   if (!dataTab || Object.keys(dataTab).length === 0) return <Box />
 
   return (
-    <Flex w='100%' minH={pxToRem(630)} alignItems='center' justifyContent='center' bg={bg} color={color}>
+    <Flex w='100%' alignItems='center' justifyContent='center' bg={bg} color={color}>
       <Flex
         direction={{
           base: 'column',
@@ -87,13 +87,8 @@ const DescriptionProduct = ({
 
         <Flex flexDirection='column' alignItems='initial' flex={1.07}>
           <Text
-            fontWeight='bold'
+            className='home-produto-titulo'
             textTransform='uppercase'
-            fontSize={{
-              base: pxToRem(30),
-              lg: pxToRem(35),
-              xl: pxToRem(40),
-            }}
           >
             {dataTab?.name}
           </Text>
@@ -109,7 +104,7 @@ const DescriptionProduct = ({
             }}
           />
 
-          <Text fontSize={pxToRem(20)} w='100%' margin={`${pxToRem(10)} 0`} zIndex={90} bg={bg}>
+          <Text className='home-produto-descricao' w='100%' margin={`${pxToRem(10)} 0`} zIndex={90} bg={bg}>
             {dataTab?.description}
           </Text>
 

@@ -30,14 +30,14 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
         style={{
           background: '#242424',
           border: 'none',
-          fontSize: 16,
+          fontSize: '1rem',
           display: 'flex',
           transition: '0.2s',
           // flexWrap: 'wrap',
           position: 'relative',
           alignItems: 'center',
           width: maxWidth ? 'calc(100% - 75px)' : '100%',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           // zIndex: 99999999999999999
           margin: 'auto',
         }}
@@ -66,7 +66,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         background: '#242424',
         border: 'none',
         color: '#fff',
-        fontSize: 18,
+        fontSize: 16,
       }}
       // theme='dark'
       expandIcon={<Icon icon={AiFillCaretRight} size={30} />}

@@ -139,20 +139,15 @@ const Product = () => {
             <link rel='icon' href='/favicon.png' />
           </Head>
         )}
+        <Box className='container-produto'>
         <Flex
-          p='10px'
-          pt='60px'
-          bg='white'
-          w='100%'
-          h='100%'
-          alignItems='flex-start'
-          flexDirection={['column', 'column', 'column', 'row', 'row']}
+          className='card-produto-individual'
+          maxW={'1240px'}
+          m={'auto'}
         >
           <Center
-            bg='white.500'
-            w={{ base: '100%', lg: '40%' }}
-            h={['350px', '804px']}
             onClick={(evt) => (evt.currentTarget.style.cursor = 'move')}
+            className='imagem-produto-individual'
           >
             <Swiper
               id='unique'
@@ -190,7 +185,7 @@ const Product = () => {
             </Swiper>
           </Center>
 
-          <Box m={`${pxToRem(60)} auto`} ml={{ lg: 20 }}>
+          <Box m={`${pxToRem(10)} auto`} ml={{ lg: 20 }}>
             <Box w='100%' mb='30px'>
               <Breadcrumb>
                 {bradName &&
@@ -206,22 +201,23 @@ const Product = () => {
                   ))}
               </Breadcrumb>
             </Box>
-            <Text fontWeight='bold' fontSize='35px' color='black.800' mb='30px'>
+
+            <Text className='titulo-produto-individual'>
               {detail.name ? detail.name : ''}
             </Text>
-            <Text color='black.800' fontSize='20px' maxW='829px' mb='30px'>
+            <Text className='descricao-produto-individual'>
               <Text as='span' noOfLines={4}>
                 {detail.description ? detail.description : ''}{' '}
               </Text>
               {detail.description ? detail.description.length > 300 : '...'}{' '}
               <Link href='#description' _hover={{ textDecoration: 'none' }}>
-                <Text as='span' color='red.600' cursor='pointer'>
+                <Text as='span' className='link-descricao-produto-individual'>
                   veja descrição completa +
                 </Text>
               </Link>
             </Text>
 
-            <VStack spacing='45px'>
+            <VStack spacing='20px'>
               {detail.hasVariation &&
                 detail.listVariation &&
                 Array.isArray(detail.listVariation) &&
@@ -233,21 +229,11 @@ const Product = () => {
                     justifyContent='space-between'
                     direction={['column', 'row']}
                   >
-                    <Text fontWeight='bold' fontSize='20px' color='black.800'>
+                    <Text className='variacao-titulo'>
                       {vr.name}
                     </Text>
                     {vr.type_view && vr.type_view == 'Range' && (
-                      <Box
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 10px'
-                        w='100%'
-                        maxW='358px'
-                        minH='50'
-                        outline='none'
-                        border='none'
-                        mt={['40px', 0]}
-                      >
+                      <Box className='variacao-opcoes'>
                         <Slider
                           value={variation[vr.name] ? variation[vr.name] : undefined}
                           onChange={(value) =>
@@ -286,26 +272,12 @@ const Product = () => {
                     )}
                     {vr.type_view}
                       {vr.type_view && vr.type_view == 'numerico' && (
-                      <Box
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 10px'
-                        w='100%'
-                        maxW='358px'
-                        minH='50'
-                        outline='none'
-                        border='none'
-                        mt={['40px', 0]}
-                      >
+                      <Box className='variacao-opcoes'>
                         <Input
                           defaultValue={variation[vr.name] || ''}
-                          w='100%'
-                          height='100%'
-                          border='none'
-                          borderRadius='21px'
                           placeholder={vr.placeholder_name || 'Selecione uma opção'}
-                          color='black.800'
                           maxLength={100}
+                          className='variacao-input-select'
                           onKeyPress={(e) => {
                             const allowedChars = /[0-9]|Backspace/;
                             if (!allowedChars.test(e.key)) {
@@ -323,26 +295,10 @@ const Product = () => {
                       </Box>
                     )}
                       {vr.type_view && vr.type_view == 'Number' && (
-                      <InputGroup
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 7px'
-                        w='100%'
-                        maxW='358px'
-                        h='50'
-                        outline='none'
-                        border='none'
-                        display='flex'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
+                      <InputGroup className='variacao-grupo'>
                         <Select
-                          w='100%'
-                          height='100%'
-                          border='none'
-                          borderRadius='21px'
                           placeholder='Selecione uma opção'
-                          color='black.800'
+                          className='variacao-input-select'                        
                           value={variation[vr.name] ? variation[vr.name] : undefined}
                           onChange={(evt) =>
                             setVariation({
@@ -368,24 +324,8 @@ const Product = () => {
                       </InputGroup>
                     )}
                     {vr.opt && !vr.type_view && Array.isArray(vr.opt) && vr.opt.length > 0 &&   (
-                      <InputGroup
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 7px'
-                        w='100%'
-                        maxW='358px'
-                        h='50'
-                        outline='none'
-                        border='none'
-                        display='flex'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <Select
-                          w='100%'
-                          height='100%'
-                          border='none'
-                          borderRadius='21px'
+                      <InputGroup className='variacao-grupo'>
+                        <Select className='variacao-input-select'
                           placeholder='Selecione uma opção'
                           color='black.800'
                           value={variation[vr.name] ? variation[vr.name] : undefined}
@@ -413,23 +353,10 @@ const Product = () => {
                       </InputGroup>
                     )}
                     {vr.type_view && vr.type_view == 'Texto_curto' && (
-                      <Box
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 10px'
-                        w='100%'
-                        maxW='358px'
-                        minH='50'
-                        outline='none'
-                        border='none'
-                        mt={['40px', 0]}
-                      >
+                      <Box className='variacao-opcoes' mt={'0px'}>
                         <Input
+                        className='variacao-input'
                           defaultValue={variation[vr.name] || ''}
-                          w='100%'
-                          height='100%'
-                          border='none'
-                          borderRadius='21px'
                           placeholder={vr.placeholder_name || 'Selecione uma opção'}
                           color='black.800'
                           maxLength={100}
@@ -445,23 +372,10 @@ const Product = () => {
                       </Box>
                     )}
                     {vr.type_view && vr.type_view == 'Texto_longo' && (
-                      <Box
-                        borderRadius='6px'
-                        bg='white.500'
-                        p='3px 10px'
-                        w='100%'
-                        maxW='358px'
-                        minH='50'
-                        outline='none'
-                        border='none'
-                        mt={['40px', 0]}
-                      >
+                      <Box className='variacao-opcoes' mt={'0'}>
                         <Textarea
+                          className='variacao-input-textarea'
                           defaultValue={variation[vr.name] || ''}
-                          w='100%'
-                          height='100%'
-                          border='none'
-                          borderRadius='21px'
                           placeholder={vr.placeholder_name || 'Selecione uma opção'}
                           color='black.800'
                           maxLength={1500}
@@ -489,25 +403,19 @@ const Product = () => {
                   }}
                   justifyContent={{ base: 'center', lg: 'auto' }}
                 >
-                  <Text color='black.800' fontWeight='bold' fontSize={pxToRem(20)} margin='auto'>
+                  <Text className='quantidade' margin='auto'>
                     Quantidade
                   </Text>
                   <NumberInput
-                    margin='auto'
-                    color='black.800'
                     defaultValue='1'
-                    border='1px solid'
-                    borderColor='black.800'
-                    borderRadius='25px'
-                    h='40px'
-                    w='150px'
+                    className='quantidade-input'
                     value={qtd}
                     onChange={(evt: any) => {
                       setQtd(parseInt(evt))
                     }}
                   >
                     <NumberInputField
-                      borderRadius='25px'
+                      borderRadius='8px'
                       border='none'
                       _hover={{ border: 'none' }}
                       _active={{ border: 'none' }}
@@ -520,17 +428,10 @@ const Product = () => {
                     </NumberInputStepper>
                   </NumberInput>
                   <Button
-                    h='50px'
-                    bg='red.600'
-                    border='none'
-                    color='#fff'
-                    borderRadius='25px'
+                    className='botao-vermelho'
+                    mt={'0  !important'}
                     maxW={pxToRem(279)}
                     w='100%'
-                    _hover={{
-                      bg: 'black.800',
-                      color: 'white',
-                    }}
                     onClick={() => {
                       addCart({
                         product_id: detail.id,
@@ -553,25 +454,23 @@ const Product = () => {
             </Flex>
           </Box>
         </Flex>
+        
 
         {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/XxNKL39UnA0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
 
-        <Flex id='description' justifyContent='center' w='100%' bg='white' pt='111px' px='10px'>
-          <Tabs variant='enclosed' maxW='1386px' w='100%' overflowX='auto'>
+        <Flex id='description' className='container-produto-tabs' px='10px'>
+          <Tabs variant='enclosed' maxW='var(--max-tamanho)' w='100%' overflowX='auto'>
             <TabList>
               {detail.tab &&
                 detail.tab.length > 0 &&
                 detail.tab.map((tab: any, key: number) => (
-                  <Tab
+                  <Tab className='produto-tabs'
                     key={key}
                     _selected={{
-                      bg: 'white.500',
-                      color: 'red.600',
+                      bg: 'var(--graylight-primary)',
+                      color: 'var(--red-primary)',
                       fontWeight: 'bold',
                     }}
-                    w='100%'
-                    maxW='211px'
-                    color='black.800'
                   >
                     {tab.name}
                   </Tab>
@@ -596,7 +495,9 @@ const Product = () => {
             </TabPanels>
           </Tabs>
         </Flex>
-        <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
+        </Box>
+        {/* CARROSSEL TEM NA CONTEMP */}
+        {/* <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
           <Container maxW='7xl' p='80px 0'>
             <Flex alignItems='center' mb={'-5%'}>
               <Text color='black.800' fontSize={'2rem'} fontWeight='bold' ml='15px'>
@@ -639,35 +540,8 @@ const Product = () => {
               </Swiper>
             </Flex>
           </Container>
-        </Flex>
+        </Flex>*/}
         {/* <Player /> */}
-        {/*<Contact
-          id='duvidas-e-orcamentos'
-          title='DÚVIDAS E ORÇAMENTOS'
-          description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
-          form={[
-            {
-              name: 'Nome',
-              type: 'text',
-            },
-            {
-              name: 'E-mail',
-              type: 'text',
-            },
-            {
-              name: 'Empresa',
-              type: 'text',
-            },
-            {
-              name: 'Telefone',
-              type: 'text',
-            },
-            {
-              name: 'Mensagem',
-              type: 'textArea',
-            },
-          ]}
-        />*/}
         <Footer />
       </SmoothScroll>
     </>

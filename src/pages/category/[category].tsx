@@ -83,49 +83,28 @@ const Category = () => {
           <link rel='icon' href='/favicon.png' />
         </Head>
       )}
+      <Box backgroundColor={'var(--graylight-primary)'} width={'100%'}>
       <Flex
-        w='100%'
-        alignItems='center'
-        justifyContent='center'
-        direction='column'
-        h={['110px', '110px', '60px', '60px', '60px', '60px']}
-        display={'none'}
+        className='card-titulo-categoria'
       // id="viewCategory"
       >
-        <Text
-          fontSize={['1rem', '1rem', '1.25rem', '1.25rem', '1.25rem', '1.25rem']}
-          fontWeight='bold'
-          textAlign='center'
-          maxW='1037px'
-          p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-          display={'none'}
+        
+
+
+        <Text className='h3-preto titulo-categoria'
         >
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
         </Text>
-        <Space size={20} style={{ marginTop: 20 }}>
+        <Space size={20}>
           {categ &&
             categ.filter &&
             categ.filter.length > 0 &&
             categ.filter.map((item: any, index: number) => (
               <Box
-                color='white'
-                padding='10px 6px'
-                borderColor={activeFilter === index ? 'red.600' : 'white'}
-                backgroundColor={activeFilter === index ? 'red.600' : 'transparent'}
-                borderWidth='2px'
-                borderRadius='5px'
-                minW='80px'
-                h='40px'
-                display='flex'
-                alignItems='center'
-                justifyContent='center'
-                fontSize='18px'
-                cursor='pointer'
-                _hover={{
-                  transition: '0.3s',
-                  backgroundColor: 'red.600',
-                  borderColor: 'red.600',
-                }}
+                backgroundColor={activeFilter === index ? 'var(--red-primary)' : 'transparent'}
+                border={activeFilter === index ? '2px solid var(--red-primary)' : '2px solid var(--black-primary)'}
+                color={activeFilter === index ? 'var(--white-primary)!important' : 'var(--black-primary)'}
+                className='botao-filtro'
                 onClick={() => {
                   if(activeFilter === index) {
                     setList([...listOrigin])
@@ -152,7 +131,9 @@ const Category = () => {
             ))}
         </Space>
       </Flex>
-      <Box>
+      </Box>
+      <Box w={'100%'} backgroundColor={'white'} >
+      <Box className='container-categoria-produtos' >
         {list &&
           list.length > 0 &&
           list.map((categ: any, index: number) => {
@@ -165,6 +146,7 @@ const Category = () => {
 
             return <ListCategory key={index} bg={bg} data={categ} />
           })}
+      </Box>
       </Box>
       {/* <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
         <Container maxW='7xl' p='80px 0'>

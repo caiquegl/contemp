@@ -30,7 +30,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
 
   return (
     <InputGroup
-      borderRadius='21px'
+      borderRadius='8px'
       bg='black.200'
       p='3px 7px'
       w='100%'

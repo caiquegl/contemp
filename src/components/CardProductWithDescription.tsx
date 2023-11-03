@@ -83,7 +83,7 @@ const CardProductWithDescription = ({
         <Tooltip label={text} placement='top'>
           <Text
             gridRow={2}
-            className='titulo-produto-categoria'
+            className='h4-preto centro'
           >
             {text}
           </Text>

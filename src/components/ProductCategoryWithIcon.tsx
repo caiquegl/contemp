@@ -17,7 +17,7 @@ export const ProductCategoryWithIcon = ({ title, icon, containerProps }: Product
       border='2px solid'
       bg={containerProps?.bg}
       zIndex={20}
-      borderRadius='4px'
+      borderRadius='8px'
       alignItems='center'
       justifyContent='space-between'
       w='100%'
@@ -29,7 +29,7 @@ export const ProductCategoryWithIcon = ({ title, icon, containerProps }: Product
       href={`/category/${title.replaceAll(' ', '_')}#viewCategory`}
       cursor='pointer'
     >
-      <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
+      <Text className='home-produto-categoria' flex={8}>
         {title}
       </Text>
 

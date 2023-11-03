@@ -313,8 +313,7 @@ export const Header = () => {
   return (
     <Box zIndex={9999999999999999}>
       <Fade in={scrollY < 200}>
-        <Container maxW='7xl' p='12px 15px' minH={'50px'} transition='all 3s' opacity={loading ? 0 : 1}>
-          {/*CONTATOS HEADER MENU*/}
+        <Container className='container-menu' maxW={'1240px'} transition='all 3s' opacity={loading ? 0 : 1}>
           <Flex alignItems='center' justifyContent='space-evenly' marginBottom='32px' display={'none'}>
             <Box display='flex' flex={1}>
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>
@@ -359,7 +358,7 @@ export const Header = () => {
             </HStack>
           </Flex>
 
-          <Flex alignItems='center' justifyContent='space-between' h={70} mb='10px'>
+          <Flex className='menu-institucional' justifyContent={'space-between !important'} h={70}>
             <Link href={`/`} _hover={{ color: 'black', textDecoration: 'none' }}>
               <Box cursor='pointer' height={41} mr='20px'>
                 <Box position='absolute' zIndex={9} bg='transparent' w='160px' h='41px' />
@@ -371,7 +370,7 @@ export const Header = () => {
               menuItems={list}
               render={
                 <Space>
-                  Todos os produtos
+                  TODOS OS PRODUTOS
                   <DownOutlined />
                 </Space>
               }
@@ -386,51 +385,48 @@ export const Header = () => {
             >
               <Link
                 href='/a-contemp'
-                padding='3px 13px'
+                className='menu-institucional-item-link'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'black.800',
-                  background: 'white',
-                  borderRadius: '4px',
+                  color: 'var(--white-primary)',
+                  fontWeight: 'bold',
                   transition: 'all 0',
                 }}
               >
-                <Text w='max-content' fontSize='18px'>
+                <Text className='menu-institucional-item'>
                   A Contemp
                 </Text>
               </Link>
               <Link
-                padding='3px 13px'
+                className='menu-institucional-item-link'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'black.800',
-                  background: 'white',
-                  borderRadius: '4px',
+                  color: 'var(--white-primary)',
+                  fontWeight: 'bold',
                   transition: 'all 0',
                 }}
                 href='/calibracao'
               >
-                <Text w='max-content' fontSize='18px'>
+                <Text className='menu-institucional-item'>
                   Calibração
                 </Text>
               </Link>
               <Link
-                padding='3px 13px'
+                className='menu-institucional-item-link'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'black.800',
-                  background: 'white',
-                  borderRadius: '4px',
+                  color: 'var(--white-primary)',
+                  fontWeight: 'bold',
                   transition: 'all 0',
                 }}
                 href='/suporte-tecnico'
               >
-                <Text w='max-content' fontSize='18px'>
+                <Text className='menu-institucional-item'>
                   Suporte Técnico
                 </Text>
               </Link>
-              <Link
-                padding='3px 13px'
+              {/*<Link
+                className='menu-institucional-item-link'
                 _hover={{
                   textDecoration: 'none',
                   color: 'black.800',
@@ -440,22 +436,21 @@ export const Header = () => {
                 }}
                 href='/trabalhe-conosco'
               >
-                <Text w='max-content' fontSize='18px'>
+                <Text className='menu-institucional-item'>
                   Trabalhe Conosco
                 </Text>
-              </Link>
+              </Link>*/}
               <Link
-                padding='3px 13px'
+                className='menu-institucional-item-link'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'black.800',
-                  background: 'white',
-                  borderRadius: '4px',
+                  color: 'var(--white-primary)',
+                  fontWeight: 'bold',
                   transition: 'all 0',
                 }}
                 href='https://blog.contemp.com.br'
               >
-                <Text w='max-content' fontSize='18px'>
+                <Text className='menu-institucional-item'>
                   Blog
                 </Text>
               </Link>
