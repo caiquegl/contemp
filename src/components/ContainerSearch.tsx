@@ -1,4 +1,4 @@
-import { Box, VStack, Divider, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, VStack, Divider, Flex, Image, Text, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import DefaultImg from '../assets/images/image-default.webp'
 import ImageNext from 'next/image'

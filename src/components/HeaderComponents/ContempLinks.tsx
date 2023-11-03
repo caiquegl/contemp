@@ -1,5 +1,5 @@
 import React from 'react'
-import { HStack, Link, Text, StackProps } from '@chakra-ui/react'
+import { HStack, Link, Text, StackProps, Heading } from '@chakra-ui/react'
 
 export function ContempLinks({ ...props }: StackProps) {
   return (

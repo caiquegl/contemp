@@ -16,6 +16,7 @@ import {
   Input,
   InputRightElement,
   useToast,
+  Heading,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";

@@ -1,4 +1,4 @@
-import { ImageProps } from "@chakra-ui/react";
+import { ImageProps, Heading } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import React from "react";
 import { Image } from "../components/Image";

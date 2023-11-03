@@ -1,4 +1,4 @@
-import { Box, Button, Flex, GridItem, Image, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, GridItem, Image, Link, Text, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 import { pxToRem } from '../utils/pxToRem'

@@ -5,7 +5,7 @@ import CirclesHorizontalDetail from "../assets/background-details/detail-circle-
 import TrianglesDetail from "../assets/background-details/detail-triangle.svg";
 import PlusDetailDark from "../assets/background-details/detail-plus-dark.svg";
 import CriclesDetail from "../assets/background-details/detail-circle.svg";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Parallax, useParallax } from 'react-scroll-parallax'

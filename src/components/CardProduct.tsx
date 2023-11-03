@@ -1,4 +1,4 @@
-import { Box, Flex, FlexProps, Link, Text } from '@chakra-ui/react'
+import { Box, Flex, FlexProps, Link, Text, Heading } from '@chakra-ui/react'
 import { StaticImageData } from 'next/image'
 import { useRouter } from 'next/router'
 import { pxToRem } from '../utils/pxToRem'

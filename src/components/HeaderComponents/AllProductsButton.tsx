@@ -1,4 +1,4 @@
-import { Box, Button, Link, Icon, Text } from '@chakra-ui/react'
+import { Box, Button, Link, Icon, Text, Heading } from '@chakra-ui/react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
 export type AllProductsButtonProps = {

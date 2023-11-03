@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Text, HStack } from '@chakra-ui/react'
+import { Button, Center, Flex, Text, HStack, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'

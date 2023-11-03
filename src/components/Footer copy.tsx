@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react'
+import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList, Heading } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
 import { SearchBar } from './SearchBar'
 import { v4 as uuidv4 } from 'uuid'

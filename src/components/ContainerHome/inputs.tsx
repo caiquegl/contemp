@@ -10,6 +10,7 @@ import {
   InputProps,
   SelectProps,
   TextareaProps,
+  Heading,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { FiFile } from "react-icons/fi";

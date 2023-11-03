@@ -5,7 +5,8 @@ import {
   Button,
   InputGroup,
   Input,
-  Link
+  Link,
+  Heading,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import Logo from '../../assets/icons/logo.png'

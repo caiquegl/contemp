@@ -1,4 +1,4 @@
-import { Container, Flex, Text, Box, Button, useBreakpointValue, useToast, Link } from '@chakra-ui/react'
+import { Container, Flex, Text, Box, Button, useBreakpointValue, useToast, Link, Heading } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -96,7 +96,7 @@ export const Favorite = ({ homeTabs }) => {
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
-      <Text color='white' fontSize='2.5rem' fontWeight='bold' textAlign='center' mt={width > maxWidth ? '50px' : '20px'} mb={'3%'}>
+      <Text color='white' fontSize={[ '1.75rem', '2.5rem']} lineHeight={['1.75rem', '2.5rem']} fontWeight='bold' textTransform={['uppercase', 'none']} textAlign='center' mt={width > maxWidth ? '50px' : '20px'} mb={['5%', '3%']}>
         Confira nossas Novidades
       </Text>
       <Flex h={pxToRem(250)} w='100%'>

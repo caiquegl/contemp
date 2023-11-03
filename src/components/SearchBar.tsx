@@ -1,4 +1,4 @@
-import { InputGroup, Input, InputGroupProps, InputProps } from '@chakra-ui/react'
+import { InputGroup, Input, InputGroupProps, InputProps, Heading } from '@chakra-ui/react'
 import { pxToRem } from '../utils/pxToRem'
 import { useEffect, useState } from 'react'
 import { ContainerSearch } from './ContainerSearch'

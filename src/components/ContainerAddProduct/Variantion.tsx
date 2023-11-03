@@ -1,4 +1,4 @@
-import { Box, HStack, Flex, Icon, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Box, HStack, Flex, Icon, UnorderedList, ListItem, Heading } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
 import { useForm } from 'react-hook-form'

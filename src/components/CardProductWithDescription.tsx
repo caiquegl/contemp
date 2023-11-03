@@ -1,4 +1,4 @@
-import { Button, Grid, GridProps, Link, Text, Tooltip } from '@chakra-ui/react'
+import { Button, Grid, GridProps, Link, Text, Tooltip, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Fragment, useState } from 'react'
 import { pxToRem } from '../utils/pxToRem'

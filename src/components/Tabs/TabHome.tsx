@@ -1,4 +1,4 @@
-import { Tabs, TabList, Tab, TabPanels, TabPanel, useToast, Box, Text } from '@chakra-ui/react'
+import { Tabs, TabList, Tab, TabPanels, TabPanel, useToast, Box, Text, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { api } from '../../lib/axios'
 import { pxToRem } from '../../utils/pxToRem'

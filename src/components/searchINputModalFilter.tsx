@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form, Select } from 'antd'
-import { Center } from '@chakra-ui/react'
+import { Center, Heading } from '@chakra-ui/react'
 
 const SearchINputModalFilter = ({ options, addProduct }: any) => {
   const [filter, setFilter] = useState<string>('')

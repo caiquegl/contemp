@@ -1,4 +1,4 @@
-import { Box, Grid, Link } from '@chakra-ui/react'
+import { Box, Grid, Link, Heading } from '@chakra-ui/react'
 import Image from 'next/image'
 import { pxToRem } from '../utils/pxToRem'
 import InovacaoContemp from '../assets/banners/inovacao-contemp.png'

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Button, InputGroup, Input, Link, useToast } from '@chakra-ui/react'
+import { Box, Flex, Text, Button, InputGroup, Input, Link, useToast, Heading } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 import Logo from '../../assets/images/170x41.png'

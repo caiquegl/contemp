@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, FlexProps, HStack, Link, Text } from '@chakra-ui/react'
+import { Box, Flex, FlexProps, HStack, Link, Text, Heading } from '@chakra-ui/react'
 import { Image } from '../Image'
 import Phone from '../../assets/icons/phone.svg'
 import Email from '../../assets/icons/envelope.svg'

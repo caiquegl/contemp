@@ -1,4 +1,4 @@
-import { Box, Button, ButtonProps, Flex, Grid, Icon, Link, Text } from '@chakra-ui/react'
+import { Box, Button, ButtonProps, Flex, Grid, Icon, Link, Text, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { BiPhone } from 'react-icons/bi'
 import { AiOutlineMail } from 'react-icons/ai'

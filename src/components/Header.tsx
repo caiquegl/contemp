@@ -23,6 +23,7 @@ import {
   Text,
   useBreakpointValue,
   useDisclosure,
+  Heading,
 } from '@chakra-ui/react'
 import { Image } from './Image'
 import React, { useEffect, useState } from 'react'

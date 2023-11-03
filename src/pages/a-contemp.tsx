@@ -1,4 +1,4 @@
-import { Box, Container, Flex, HStack, Text, Button, Icon, Link, textDecoration, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from '@chakra-ui/react'
+import { Box, Container, Flex, HStack, Text, Button, Icon, Link, textDecoration, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Heading } from '@chakra-ui/react'
 import Iso from '../assets/images/iso.png'
 import Image from 'next/image'
 import { Header } from '../components/Header'

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { SettingOutlined } from '@ant-design/icons'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { api } from '../lib/axios'
-import { useToast } from '@chakra-ui/react'
+import { useToast, Heading } from '@chakra-ui/react'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
 
 const ConfigModalFilter = ({ filter, setFilter, index, category, length }: any) => {

@@ -1,4 +1,4 @@
-import { Box, Center, Fade, Spinner } from '@chakra-ui/react'
+import { Box, Center, Fade, Spinner, Heading } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useAuth } from '../contextAuth/authContext'
 import { SidebarDrawerProvider } from '../contexts/SidebarDrawerContexts'

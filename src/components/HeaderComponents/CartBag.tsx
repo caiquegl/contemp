@@ -1,4 +1,4 @@
-import { Box, Flex, Icon } from '@chakra-ui/react'
+import { Box, Flex, Icon, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { BsBag } from 'react-icons/bs'
 import { pxToRem } from '../../utils/pxToRem'

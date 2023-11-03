@@ -15,6 +15,7 @@ import {
   Text,
   FormHelperText,
   Tooltip,
+  Heading,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'

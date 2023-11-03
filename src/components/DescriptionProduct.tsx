@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, FlexProps, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, FlexProps, Link, Text, Heading } from '@chakra-ui/react'
 import { Image } from '../components/Image'
 import { pxToRem } from '../utils/pxToRem'
 import { ProductCategoryWithIcon } from './ProductCategoryWithIcon'
@@ -72,10 +72,11 @@ const DescriptionProduct = ({
             src={dataTab?.urls ? dataTab.urls[0] : ''}
             alt={dataTab?.name}
             // flex={1}
+            bgSize={['130%', '85%']}
             zIndex={30}
-            minH='auto'
+            minH={['150px', 'auto']}
             w={{
-              base: '55%',
+              base: '130%',
               md: '45%',
               lg: '45%',
               xl: '55%',
@@ -116,7 +117,7 @@ const DescriptionProduct = ({
               maxW={pxToRem(157)}
             >
               <Button
-                borderRadius='25px'
+                borderRadius='8px'
                 border='2px solid'
                 borderColor={borderColorButton}
                 color={borderColorButton}

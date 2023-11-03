@@ -9,6 +9,7 @@ import {
   Link,
   useBreakpointValue,
   Grid,
+  Heading,
 } from '@chakra-ui/react'
 import Pirometro from '../assets/icons/pritometro_white.svg'
 import Mapa from '../assets/images/MAPA.png'

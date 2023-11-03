@@ -1,4 +1,4 @@
-import { Box, Text, InputGroup, Input, HStack, VStack, Button, Flex, Divider, Icon, useToast } from '@chakra-ui/react'
+import { Box, Text, InputGroup, Input, HStack, VStack, Button, Flex, Divider, Icon, useToast, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
 import { database, initFirebase } from '../../utils/db'

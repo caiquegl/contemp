@@ -1,4 +1,4 @@
-import { Box, HStack, VStack, Button, Flex, useToast, FormControl, FormLabel, FormErrorMessage, Text } from '@chakra-ui/react'
+import { Box, HStack, VStack, Button, Flex, useToast, FormControl, FormLabel, FormErrorMessage, Text, Heading } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from './inputs'
 import { InputDefault } from '../Form/Input'

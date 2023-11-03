@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Icon, Input, Link, Text, Tooltip } from '@chakra-ui/react'
+import { Box, Flex, HStack, Icon, Input, Link, Text, Tooltip, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { pxToRem } from '../utils/pxToRem'

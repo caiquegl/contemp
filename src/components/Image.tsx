@@ -1,4 +1,4 @@
-import { Box, Image as ChakraImage, BoxProps } from "@chakra-ui/react";
+import { Box, Image as ChakraImage, BoxProps, Heading } from "@chakra-ui/react";
 import { StaticImageData } from "next/image";
 import { pxToRem } from "../utils/pxToRem";
 

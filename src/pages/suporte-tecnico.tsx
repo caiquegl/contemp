@@ -1,4 +1,4 @@
-import { Container, Flex, Text, Link, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Box } from '@chakra-ui/react'
+import { Container, Flex, Text, Link, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Box, Heading } from '@chakra-ui/react'
 import { Header } from '../components/Header'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'

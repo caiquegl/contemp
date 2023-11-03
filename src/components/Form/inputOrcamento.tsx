@@ -4,6 +4,7 @@ import {
   Input as Inpt,
   InputGroup,
   InputProps as ChakraInputProps,
+  Heading,
 } from "@chakra-ui/react";
 import { forwardRef, ForwardRefRenderFunction } from "react";
 import { FieldError } from "react-hook-form";

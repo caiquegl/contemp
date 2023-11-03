@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link, Text } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link, Text, Heading } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Modal, Table, Tooltip } from 'antd'

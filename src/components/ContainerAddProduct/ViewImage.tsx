@@ -1,4 +1,4 @@
-import { Box, Icon, Image } from '@chakra-ui/react'
+import { Box, Icon, Image, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { AiTwotoneDelete } from 'react-icons/ai'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'

@@ -2,7 +2,7 @@ import "antd/dist/antd.css";
 import "../styles/globals.css";
 import '../styles/customize.css'
 import type { AppProps } from "next/app";
-import { Center, ChakraProvider, Spinner } from "@chakra-ui/react";
+import { Center, ChakraProvider, Spinner, Heading } from "@chakra-ui/react";
 import { theme } from "../styles/theme";
 import { AuthProvider } from "../contextAuth/authContext";
 import Script from "next/script";

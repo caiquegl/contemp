@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, GridItem, Link, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Button, Flex, GridItem, Link, Text, useBreakpointValue, Heading } from '@chakra-ui/react'
 import { pxToRem } from '../utils/pxToRem'
 import splitText from '../utils/splitText'
 import Image from 'next/image'

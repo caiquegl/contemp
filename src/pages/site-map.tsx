@@ -1,4 +1,4 @@
-import { Container, Divider, Flex, Grid, GridItem, Link, Text } from '@chakra-ui/react'
+import { Container, Divider, Flex, Grid, GridItem, Link, Text, Heading } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Header } from '../components/Header'

@@ -1,4 +1,4 @@
-import { Box, Container as ContainerChakra } from "@chakra-ui/react";
+import { Box, Container as ContainerChakra, Heading } from "@chakra-ui/react";
 import React from "react";
 import { pxToRem } from "../utils/pxToRem";
 

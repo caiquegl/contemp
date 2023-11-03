@@ -16,6 +16,7 @@ import {
   ModalCloseButton,
   ModalBody,
   useDisclosure,
+  Heading,
 } from '@chakra-ui/react'
 import { v4 as uuidv4 } from 'uuid'
 import Mapa from '../assets/images/MAPA.png'

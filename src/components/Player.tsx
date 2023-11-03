@@ -14,6 +14,7 @@ import {
   useBreakpointValue,
   useDisclosure,
   VStack,
+  Heading,
 } from '@chakra-ui/react'
 import React from 'react'
 import dynamic from 'next/dynamic'

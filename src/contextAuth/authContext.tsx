@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from 'react'
-import { Button, Flex, HStack, Link, Text, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex, HStack, Link, Text, useDisclosure, Heading } from '@chakra-ui/react'
 
 interface AuthProviderProps {
   children: ReactNode

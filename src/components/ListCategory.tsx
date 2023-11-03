@@ -1,4 +1,4 @@
-import { Flex, Grid } from '@chakra-ui/react'
+import { Flex, Grid, Heading } from '@chakra-ui/react'
 import React, { forwardRef } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import CardProductWithDescription from './CardProductWithDescription'
