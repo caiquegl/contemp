@@ -27,6 +27,7 @@ html [type="button"] {
     text-transform: uppercase;
     font-size: 1rem;
     transition: .4s ease;
+    text-decoration: none;
 } 
 
 Link,
@@ -47,6 +48,19 @@ a {
     text-align: center;
 }
 
+.text-white {
+    color: var(--white-primary);
+}
+
+.text-black {
+    color: var(--black-primary);
+}
+.text-red {
+    color: var(--red-primary);
+}
+.negrito {
+    font-weight: bold !important;
+}
 .h3-preto {
     font-size: 1.15rem;
     color: var(--black-primary);
@@ -124,11 +138,13 @@ a {
     color: var(--white-primary);
     text-transform: uppercase;
     margin-top: 5% !important;
+    text-decoration: none !important;
 }
 
 .botao-vermelho:hover {
     background-color: var(--black-primary) !important;
     color: var(--white-primary);
+    text-decoration: none !important;
 }
 
 .botao-preto {
@@ -136,12 +152,14 @@ a {
     color: var(--white-primary);
     text-transform: uppercase;
     margin-top: 5% !important;
+    text-decoration: none !important;
 }
 
 .botao-preto:hover {
     background-color: var(--red-primary) !important;
     color: var(--white-primary);
     transition: transform 0.5s ease;
+    text-decoration: none !important;
 }
 
 /* HEADER */
@@ -173,17 +191,27 @@ a {
 }
 
 /* HOME */
-.home-produto-titulo {
-    font-size: 2.5rem;
+.home-produto-titulo,
+.player-titulo,
+.favoritos-titulo,
+.brasil-titulo,
+.catalogo-titulo,
+.contato-titulo {
+    font-size: 2.5rem !important;
     font-weight: bold;
-    line-height: 2.5rem;
+    line-height: 2.5rem !important;
+    text-transform: uppercase;
 }
 .home-produto-categoria {
     font-size: 1rem;
     line-height: 1rem;
     margin-right: 1rem;
 }
-.home-produto-descricao {
+.home-produto-descricao,
+.player-descricao,
+.catalogo-descricao,
+.contato-descricao,
+.calibracao-descricao {
     font-size: 1rem;
     text-align: justify;
 }
@@ -223,23 +251,27 @@ a {
     max-width: 100%;
     white-space: nowrap;
     font-weight: bold;
+    text-decoration: none !important;
 }
 .botao-filtro:hover {
     background-color: var(--red-primary);
     border-color: var(--red-primary);
     color: var(--white-primary) !important;
     transition: .4s ease;
+    text-decoration: none !important;
 }
 
 .botao-filtro:active {
     background-color: var(--red-primary) !important;
     color: var(--white-primary);
     border-color: var(--red-primary);
+    text-decoration: none !important;
 }
 
 .botao-filtro p {
     margin: auto;
     text-align: center;
+    text-decoration: none !important;
 }
 
 .container-categoria-produtos {
@@ -415,6 +447,18 @@ a {
     color: var(--red-primary);
 }
 
+/* PLAYER */
+
+/* BRASIL */
+.section-brasil {
+    align-items: flex-end;
+    text-align: right;
+    max-width: 1240px;
+    flex-direction: column;
+    z-index: 20;
+}
+
+
 /* RESPONSIVO */
 @media screen and (min-width: 992px) {
     .imagem-produto-individual {
@@ -429,5 +473,14 @@ a {
     }
 }
 @media screen and (min-width: 320px) and (max-width: 480px) {
-
+    .player-titulo,
+    .favoritos-titulo,
+    .brasil-titulo {
+        font-size: 1.75rem;
+        line-height: 1.75rem;
+        font-weight: bold !important;
+    }
+    .section-brasil {
+        text-align: center;
+    }
 }

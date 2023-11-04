@@ -10,7 +10,7 @@ import { Row, Col } from 'antd'
 
 export const Catalog = () => {
   return (
-    <Box
+    <Box maxW={['1240px', '1240px', '1240px', '1640px']}
       h={{
         base: pxToRem(600),
         md: pxToRem(400),
@@ -56,19 +56,13 @@ export const Catalog = () => {
           </Link>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12}>
-          <Flex flexDirection='column' alignItems='center' justifyContent='center' h='100%'>
-            <Text
-              textAlign='center'
-              fontSize={{
-                base: pxToRem(35),
-                xl: pxToRem(45),
-              }}
-              fontWeight='bold'
-              color='white'
+          <Flex flexDirection='column' justifyContent='center' h='100%'>
+            <Heading as={'h3'} className='brasil-titulo text-white' textAlign={'left'}
+              fontWeight='bold' mb={'-3.5%'}
             >
               CATÁLOGO
-            </Text>
-            <Text
+            </Heading>
+            <Text className='catalogo-descricao'
               mt={{
                 base: 10,
                 lg: 5,
@@ -79,12 +73,6 @@ export const Catalog = () => {
                 lg: pxToRem(20),
               }}
               maxW={pxToRem(1000)}
-              textAlign='center'
-              fontSize={{
-                base: pxToRem(18),
-                xl: pxToRem(20),
-                '2xl': pxToRem(24),
-              }}
             >
               Quer baixar gratuitamente nosso catalogo digital de produtos? Basta entrar em contato e solicitar para um
               de nossos representantes. Através do número{' '}
@@ -102,16 +90,12 @@ export const Catalog = () => {
               alignItems='center'
               justifyContent='center'
               w='100%'
-              maxW={{
-                lg: pxToRem(550),
-                xl: pxToRem(720),
-              }}
               templateColumns={{
                 base: 'repeat(auto-fit, minmax(220px, 1fr))',
-                xl: 'repeat(auto-fit, minmax(200px, 1fr))',
+                xl: 'repeat(auto-fit, minmax(40px, 1fr))',
               }}
-              autoRows={pxToRem(65)}
-              gridGap={2}
+              maxW={'36rem'}
+              gridGap={6}
             >
               <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>
                 <ActionButton
@@ -166,9 +150,7 @@ function ActionButton({ label, icon, ...props }: any & ButtonProps) {
     <Button
       w='100%'
       h='50px'
-      borderRadius='25px'
       bg='red.600'
-      fontSize={pxToRem(20)}
       _hover={{ transition: 'all 0.5s' }}
       {...props}
     >

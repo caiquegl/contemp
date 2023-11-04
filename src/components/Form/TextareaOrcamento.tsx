@@ -20,7 +20,7 @@ const InputBase: ForwardRefRenderFunction<HTMLTextAreaElement, InpuptProps> = (
   return (
     <FormControl isInvalid={!!error}>
       <InputGroup
-        borderRadius="6px"
+        borderRadius="8px"
         bg="black.100"
         p="3px 7px"
         w="100%"

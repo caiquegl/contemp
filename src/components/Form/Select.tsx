@@ -29,7 +29,7 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
         render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
           <>
             <InputGroup
-              borderRadius='6px'
+              borderRadius='8px'
               bg='white.500'
               p='3px 7px'
               w='100%'

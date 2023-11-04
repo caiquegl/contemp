@@ -21,12 +21,12 @@ const InputBase: ForwardRefRenderFunction<HTMLTextAreaElement, InpuptProps> = (
   return (
     <FormControl isInvalid={!!error}>
       {!!label && (
-        <FormLabel htmlFor={name} fontSize="20px" mb="10px" color="black.800">
+        <FormLabel htmlFor={name} className="paragrafo-preto negrito" textTransform={'uppercase'} mb="10px">
           {label}
         </FormLabel>
       )}
       <InputGroup
-        borderRadius="6px"
+        borderRadius="8px"
         bg="white.500"
         p="3px 7px"
         w="100%"

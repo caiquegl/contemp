@@ -44,10 +44,10 @@ export const Player = () => {
         </Box>
       )}
       <Grid maxW={pxToRem(359)} templateRows='1fr 0.73fr 1fr'>
-        <Text fontSize={pxToRem(40)} fontWeight='bold' lineHeight={'2.75rem'} mb={[0, 0]}>
+        <Heading as={'h3'} className='text-white player-titulo' mb={[0, 0]}>
           Nova P501 Upgrade
-        </Text>
-        <Text fontSize={pxToRem(20)} mb={'15px'} mt={'-38%'}>
+        </Heading>
+        <Text className='player-descricao' mb={'15px'} mt={'-30%'} textAlign={'justify'}>
           A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.
         </Text>
         {isMobile ? (

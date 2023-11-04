@@ -240,22 +240,19 @@ const Home = () => {
               href={`/calibracao`}
               cursor='pointer'
             >
-              <Text fontSize={pxToRem(18)} flex={8} mr={pxToRem(30)}>
+              <Heading as={'h2'} className='text-white' fontSize={pxToRem(16)} flex={8} mr={pxToRem(30)}>
                 CALIBRAÇÃO
-              </Text>
+              </Heading>
 
               <Image src={Pirometro} bgSize='contain' minH={pxToRem(35)} minW={pxToRem(35)} flex={1} />
             </Flex>
 
             <Text
               mt='27px'
-              mb='41px'
-              fontSize={pxToRem(20)}
+              mb='27px'
+              className='calibracao-descricao'
               maxW={pxToRem(791)}
-              textAlign={{
-                base: 'center',
-                md: 'initial',
-              }}
+              
             >
               Nossos laboratórios possuem equipamentos e padrões que garantem a qualidade e confiabilidade das medições.
               Podem ser realizadas na Contemp ou em sua empresa. Nossas calibrações são efetuadas com símbolo de
@@ -350,29 +347,13 @@ const Home = () => {
           md: 'row',
         }}
       >
-        <Flex alignItems='flex-end' textAlign='end' maxW={pxToRem(693)} flexDirection='column' zIndex={20}>
-          <Text
-            color='red.600'
-            fontWeight='bold'
-            mb='18px'
-            fontSize={{
-              base: pxToRem(30),
-              md: pxToRem(45),
-            }}
-            textAlign={{
-              base: 'center',
-              md: 'right',
-            }}
-          >
+        <Flex className='section-brasil'>
+          <Heading as={'h3'} className='brasil-titulo text-red' mb='5px'>
             ATENDEMOS O BRASIL E A AMÉRICA LATINA
-          </Text>
-          <Text
-            fontSize={{
-              base: pxToRem(17),
-              md: pxToRem(24),
-            }}
-            color='black.800'
-            mb='1%'
+          </Heading>
+          
+          <Text className='text-black'
+            mb={['12%', '1%']}
             maxW='425px'
           >
             Temos uma equipe de vendedores-técnicos de prontidão para te atender.
@@ -383,7 +364,7 @@ const Home = () => {
             justifyContent='space-between'
             flexWrap='wrap'
             w='100%'
-            maxW={pxToRem(400)}
+            maxW={'23rem'}
             h={{
               base: 120,
             }}
@@ -391,17 +372,16 @@ const Home = () => {
               base: 'column',
               md: 'row',
             }}
+            mt={'-3%'}
           >
-            <Link href='tel:1142235140' _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link href='tel:1142235140' _hover={{ color: '#fff' }}>
               <Button
                 width={{
                   base: pxToRem(279),
-                  md: pxToRem(179),
+                  md: pxToRem(170),
                 }}
                 h='50px'
-                borderRadius='25px'
                 bg='red.600'
-                fontSize={pxToRem(20)}
                 _hover={{
                   bg: 'black.800',
                   color: 'white',
@@ -412,16 +392,14 @@ const Home = () => {
                 Telefonar
               </Button>
             </Link>
-            <Link href='mailto:vendas@contemp.com.br' _hover={{ textDecoration: 'none', color: '#fff' }}>
+            <Link href='mailto:vendas@contemp.com.br' _hover={{ color: '#fff' }}>
               <Button
                 width={{
                   base: pxToRem(279),
                   md: pxToRem(179),
                 }}
                 h='50px'
-                borderRadius='25px'
                 bg='red.600'
-                fontSize={pxToRem(20)}
                 _hover={{
                   bg: 'black.800',
                   color: 'white',
