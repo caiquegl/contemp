@@ -18,6 +18,7 @@ import { BiPhone } from 'react-icons/bi'
 import { AiOutlineMail } from 'react-icons/ai'
 import { Catalog } from '../components/Catalog'
 import { Banner } from '../components/Banner'
+import { BannerMobile } from '../components/BannerMobile'
 import { Favorite } from '../components/Favorite'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
@@ -100,6 +101,7 @@ const Home = () => {
       {/* <HomeBackgroundDetails /> */}
 
       <Banner />
+      <BannerMobile />
 
       <Favorite homeTabs={listTab.find((el: any) => el.indexProduct === 0)} />
 
@@ -316,7 +318,7 @@ const Home = () => {
           dataTab={listTab.find((el: any) => el.indexProduct === 6)}
         />
       </GridChakra>
-      <Flex w='100%' alignItems='center' justifyContent='center' h='200px' bg='white'>
+      <Flex w='100%' alignItems='center' justifyContent='center' h='200px' bg='var(--black-primary)'>
         <Link href={`/todosProdutos`} _hover={{ color: 'black', textDecoration: 'none' }}>
           <Button
             bg='red.600'

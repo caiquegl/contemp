@@ -24,7 +24,7 @@ const settings = {
   slidesToScroll: 1,
 }
 
-export function Banner() {
+export function BannerMobile() {
   // As we have used custom buttons, we need a reference variable to
   // change the state
   const [slider, setSlider] = React.useState<Slider | null>(null)
@@ -64,7 +64,7 @@ export function Banner() {
   ]
 
   return (
-    <Box position={'relative'} height={['450px']} width={'full'} overflow={'hidden'} display={['none', 'block']}>
+    <Box position={'relative'} height={['450px']} width={'full'} overflow={'hidden'} display={['block', 'none']}>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"

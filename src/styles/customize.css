@@ -216,6 +216,14 @@ a {
     text-align: justify;
 }
 
+/* BANNER HOME*/
+.bannerhome-titulo {
+    font-size: 2.5rem !important;
+}
+.bannerhome-subtitulo {
+    font-size: 1.5rem !important;
+}
+
 /* CATEGORIA */
 .css-1brqqp9 {
     background-color: var(--black-primary);
@@ -453,7 +461,7 @@ a {
 .section-brasil {
     align-items: flex-end;
     text-align: right;
-    max-width: 1240px;
+    max-width: var(--max-tamanho);
     flex-direction: column;
     z-index: 20;
 }
@@ -482,5 +490,11 @@ a {
     }
     .section-brasil {
         text-align: center;
+    }
+    .bannerhome-titulo {
+        font-size: 1.5rem !important;
+    }
+    .bannerhome-subtitulo {
+        font-size: 1rem !important;
     }
 }
