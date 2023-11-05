@@ -117,6 +117,8 @@ a {
 .paragrafo-preto {
     font-size: 1rem;
     color: var(--black-primary);
+    line-height: 1.15rem;
+    text-align: justify;
 }
 
 .paragrafo-cinza {
@@ -196,11 +198,16 @@ a {
 .favoritos-titulo,
 .brasil-titulo,
 .catalogo-titulo,
-.contato-titulo {
+.contato-titulo,
+.sobre-titulo,
+.calibracao-titulo,
+.suporte-titulo,
+.todososprodutos-titulo,
+.trabalheconosco-titulo {
     font-size: 2.5rem !important;
     font-weight: bold;
     line-height: 2.5rem !important;
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 .home-produto-categoria {
     font-size: 1rem;
@@ -466,6 +473,20 @@ a {
     z-index: 20;
 }
 
+/* CALIBRAÇÃO */
+.calibracao-subtitulo {
+    font-size: 1.15rem !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* TODOS OS PRODUTOS */
+.todososprodutos-subtitulo {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    text-transform: uppercase !important;
+}
+
 
 /* RESPONSIVO */
 @media screen and (min-width: 992px) {
@@ -483,7 +504,8 @@ a {
 @media screen and (min-width: 320px) and (max-width: 480px) {
     .player-titulo,
     .favoritos-titulo,
-    .brasil-titulo {
+    .brasil-titulo,
+    .sobre-titulo {
         font-size: 1.75rem;
         line-height: 1.75rem;
         font-weight: bold !important;

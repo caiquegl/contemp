@@ -480,7 +480,7 @@ export const Header = () => {
                 {cart && cart.length > 0 && (
                   <Flex
                     p={`${pxToRem(2)} ${pxToRem(5)}`}
-                    bg='red.600'
+                    bg='var(--red-primary)'
                     borderRadius={50}
                     alignItems='center'
                     justifyContent='center'
@@ -554,7 +554,7 @@ export const Header = () => {
                         <Icon as={BsThreeDotsVertical} fontSize='20px' />
                       </Button>
                     </Link> */}
-                    <ButtonAllProducts menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='20px' />} />
+                    <ButtonAllProducts menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='16px' />} />
                   </Box>
                   <Box margin='0 0' w='100%'>
                     <HeaderMenu menuItems={list} maxWidth={true} />

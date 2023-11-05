@@ -20,19 +20,9 @@ const Support = () => {
       </Head>
       <Header />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
-        <Text fontSize='45px' fontWeight='bold' textAlign='center'>
+        <Heading as={'h2'} className='suporte-titulo text-white negrito centro'>
           Suporte Técnico
-        </Text>
-        <Box>
-          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/a-contemp' _active={{color:'red',}}>A Contemp</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
+        </Heading>
 
       </Flex>
       <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
@@ -56,17 +46,17 @@ const Support = () => {
             </Link>
             ou acesse nosso chat.
           </Text>
-          <Text mt='119px' fontWeight='bold' fontSize='45px' textAlign='center' mb='70px' color='red.600'>
+          <Heading as={'h3'} className='suporte-titulo centro negrito text-red' mt='119px' mb='70px'>
             VIDEOS E TUTORIAIS
-          </Text>
+          </Heading>
           <SelectConfig />
         </Container>
       </Flex>
       <Flex w='100%' alignItems='center' bg='red.600' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='72px 0 100px'>
-          <Text fontSize='45px' fontWeight='bold' textAlign='center' mb='50px'>
+          <Heading as={'h3'} className='suporte-titulo negrito centro text-white' mb='50px'>
             GARANTIA CONTEMP
-          </Text>
+          </Heading>
           <Text fontSize='20px' textAlign='center'>
             A Contemp garante que os equipamentos relacionados na Nota Fiscal de venda estão isentos de defeitos e
             cobertos por garantia de 12 meses a contar da data de emissão da referida Nota Fiscal. Ocorrendo defeito

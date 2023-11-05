@@ -88,15 +88,12 @@ const AllProduct = () => {
         direction='column'
         h={['350px', '350px', '180px', '180px', '180px', '180px']}
       >
-        <Text
-          fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
-          fontWeight='bold'
-          textAlign='center'
+        <Heading as={'h2'} className='todososprodutos-titulo negrito text-white centro'
           maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
           Soluções para medição, controle e monitoramento para os mais variados processos industriais.
-        </Text>
+        </Heading>
       </Flex>
       {favorites &&
         favorites.length > 0 &&
@@ -105,12 +102,12 @@ const AllProduct = () => {
             key={index}
             w='100%'
             alignItems={'center'}
-            bg='white'
+            bg='var(--white-primary)'
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}
           >
             <Container maxW='7xl' p='130px 0'>
               <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
-                <Text color='black.800' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
+                <Text color='var(--black-primary)' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
                   {fv.category_name}
                 </Text>
               </Flex>
@@ -157,20 +154,17 @@ const AllProduct = () => {
             </Container>
           </Flex>
         ))}
-      {/*<Box bg='white' w='100%' p='20px' pt='100px'>
+      {/*<Box bg='var(--white-primary)' w='100%' p='20px' pt='100px'>
         <AdBanners />
       </Box>*/}
-      <Flex w='100%' alignItems='center' bg='white.500' p='0 20px'>
+      <Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
         <Container maxW='7xl' p='80px 0'>
-          <Text
-            color='black.800'
-            fontSize='45px'
-            fontWeight='bold'
+          <Heading as={'h3'} className='todososprodutos-titulo text-black negrito'
             mb='31px'
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
           >
             Navegue por Categoria
-          </Text>
+          </Heading>
           <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
             {categories &&
               categories.length > 0 &&
@@ -183,16 +177,16 @@ const AllProduct = () => {
                 })
                 .map((categ: any, index: number) => {
                   const cardIndex = index + 1
-                  let bg = 'black.800'
-                  let color = 'white'
+                  let bg = 'var(--black-primary)'
+                  let color = 'var(--white-primary)'
 
                   if (cardIndex % 2 === 0) {
-                    bg = 'white'
-                    color = 'black.800'
+                    bg = 'var(--white-primary)'
+                    color = 'var(--black-primary)'
                   }
                   if (cardIndex % 3 === 0) {
-                    bg = 'red.600'
-                    color = 'white'
+                    bg = 'var(--red-primary)'
+                    color = 'var(--white-primary)'
                   }
 
                   return (

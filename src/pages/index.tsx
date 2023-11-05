@@ -152,14 +152,14 @@ const Home = () => {
           dataTab={listTab.find((el: any) => el.indexProduct === 3)}
         />
         <DescriptionProduct
-          color='white'
-          bg='red.600'
-          borderColor='white'
-          colorButton='red.600'
-          bgButton='white'
-          borderColorButton='white'
-          colorHoverButton='white'
-          bgHoverButton='red.600'
+          color='var(--white-primary)'
+          bg='var(--red-primary)'
+          borderColor='var(--white-primary)'
+          colorButton='var(--red-primary)'
+          bgButton='var(--white-primary)'
+          borderColorButton='var(--white-primary)'
+          colorHoverButton='var(--white-primary)'
+          bgHoverButton='var(--red-primary)'
           containerProps={{
             direction: {
               base: 'column',
@@ -186,7 +186,7 @@ const Home = () => {
             }}
             textAlign='center'
           >
-            <Text
+            <Heading as={'h3'}
               margin={{
                 base: `${pxToRem(40)} auto 0`,
                 md: 'auto',
@@ -208,10 +208,11 @@ const Home = () => {
                 lg: pxToRem(9.6),
               }}
               textTransform='uppercase'
+              color={'var(--white-primary)'}
               zIndex={999}
             >
               Calibração
-            </Text>
+            </Heading>
           </Box>
 
           <Flex

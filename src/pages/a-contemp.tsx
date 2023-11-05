@@ -29,19 +29,9 @@ const Home = () => {
       </Head>
       <Header />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
-        <Text fontSize='45px' fontWeight='bold' textAlign='center'>
+        <Heading as={'h2'} className='sobre-titulo negrito text-white'>
           Sobre nós
-        </Text>
-        <Box>
-          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none' }} href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none' }} href='/suporte-tecnico' _active={{ color: 'red', }}>Suporte Técnico</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
+        </Heading>
       </Flex>
       <Flex
         w='100%'
@@ -65,7 +55,7 @@ const Home = () => {
             <Box>
               <Text fontSize='20px' maxW='535px' color='black.900' textAlign='justify' mr='40px'>
                 A certeza de poder confiar sua linha de produção aos produtos e serviços da Contemp é algo que não
-                surgiu por acaso. É o resultado dos mais de 35 anos de competência, dedicação e conhecimento fabricando
+                surgiu por acaso. Desde 1.988 trazendo de competência, dedicação e conhecimento na fabricação de
                 soluções para medição, controle e monitoramento para os mais variados processos industriais.
               </Text>
               <Text fontSize='20px' maxW='535px' color='black.900' textAlign='justify' mr='40px' mt='15px'>
@@ -96,9 +86,9 @@ const Home = () => {
               </Text>
             </Box>
             <Box ml='40px' backgroundColor={'#ededed'} padding={'44px 60px'} borderRadius={'8px'}>
-              <Text fontSize='20px' fontWeight='bold' mb='10px' color='black.900'>
+              <Heading as={'h3'} fontSize='20px' fontWeight='bold' mb='10px' color='black.900'>
                 QUALIFICAÇÃO
-              </Text>
+              </Heading>
               <HStack spacing='23px'>
                 <Box w='115px' h='115px'>
                   <Image src={Iso} width='115px' height='115px' onContextMenu={setContextMenuFalse} />
@@ -173,9 +163,9 @@ const Home = () => {
                 </Box>
 
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
-                  <Text fontWeight='bold' fontSize='20px' mb='10px'>
+                  <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='20px' mb='10px'>
                     MISSÃO
-                  </Text>
+                  </Heading>
                   <Text fontSize='20px' maxW={['100%', '100%', '100%', '530px', '530px']}>
                     Garantir a melhor solução para medição e controle de temperatura em processos industriais, com
                     excelência técnica em produtos e atendimento.
@@ -189,9 +179,9 @@ const Home = () => {
                   </Flex>
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
-                  <Text fontWeight='bold' fontSize='20px' mb='10px'>
+                  <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='20px' mb='10px'>
                     VALORES
-                  </Text>
+                  </Heading>
                   <Text fontSize='20px' maxW={['100%', '100%', '100%', '530px', '500px']}>
                     Conhecimento técnico, experiência na indústria, sabe ouvir, ética e transparência nas atitudes,
                     engajamento para entregar o combinado, comprometimento e persistência para atingir a excelência.
@@ -207,9 +197,9 @@ const Home = () => {
                   </Flex>
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
-                  <Text fontWeight='bold' fontSize='20px' mb='10px'>
+                  <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='20px' mb='10px'>
                     ESTRUTURA EFICIENTE
-                  </Text>
+                  </Heading>
                   <Text fontSize='20px' maxW={['100%', '100%', '100%', '530px', '500px']}>
                     É notável o cumprimento de metas da Contemp. Sua eficiência corresponde a uma estrutura com forte
                     capacidade de resposta ao setor.
@@ -223,9 +213,9 @@ const Home = () => {
                   </Flex>
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
-                  <Text fontWeight='bold' fontSize='20px' mb='10px'>
+                  <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='20px' mb='10px'>
                     RESPONSABILIDADE AMBIENTAL
-                  </Text>
+                  </Heading>
                   <Text fontSize='20px' maxW={['100%', '100%', '100%', '530px', '500px']}>
                     Todo o descarte de lixo eletrônico feito pela Contemp é através de empresa especializada que atua na
                     reciclagem de eletrônicos, os quais, se entrarem em decomposição no meio ambiente, contaminam o solo
@@ -243,9 +233,9 @@ const Home = () => {
               </Flex>
             </Box>
             <Box ml='20px' w='calc(100% - 76px)'>
-              <Text fontWeight='bold' fontSize='20px' mb='10px'>
+              <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='20px' mb='10px'>
                 POLÍTICA DA QUALIDADE
-              </Text>
+              </Heading>
               <Text fontSize='20px'>
                 Manter e melhorar continuamente o sistema de gestão da qualidade conforme norma NBR ISO 9001. Fornecer
                 produtos e serviços que atendam às normas aplicáveis e aos requisitos acordados com nossos clientes.

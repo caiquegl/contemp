@@ -30,13 +30,13 @@ const CardCatalog = ({ bg, text, title, color, img, urlPicture }: IProps) => {
               layout="responsive"
             />
           </Box>
-          <Box mb={pxToRem(15)}>
-            <Text color={color} fontSize={pxToRem(30)} lineHeight={1.2} fontWeight='bold'>
+          <Box mb={'1%'}>
+            <Heading as={'h3'} className='todososprodutos-subtitulo negrito' color={color}>
               {title}
-            </Text>
+            </Heading>
           </Box>
 
-          <Text color={color} fontSize='20px' mt='20px'>
+          <Text color={color} fontSize='1rem' mt='8px'>
             {text &&
               text.split('').length > 0 &&
               text

@@ -44,14 +44,16 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
         />
 
         <Box className='see-more-text' display='none' flex={0.3} textAlign='center'>
-          <Text fontSize='20px' fontWeight='bold' color='black' textTransform='uppercase' px='10px'>
+          <Heading as={'h3'} fontSize='1.15rem' color='var(--black-primary)' textTransform='uppercase' px='10px'>
             {text}
-          </Text>
+          </Heading>
           <Link
             href={text ? `/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}` : ''}
             _hover={{ color: 'black', textDecoration: 'none' }}
           >
-            <Text fontSize='20px' color='black'>
+            <Text fontSize='1rem' color='var(--black-primary)' textTransform={'uppercase'} mt={'4%'} mb={'4%'}
+            _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}
+            >
               Veja mais +
             </Text>
           </Link>

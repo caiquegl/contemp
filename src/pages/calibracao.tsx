@@ -24,25 +24,15 @@ const Calibracao = () => {
       </Head>
       <Header />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
-        <Text fontSize='45px' fontWeight='bold' textAlign='center'>
+        <Heading as={'h2'} className='calibracao-titulo text-white centro'>
           Calibração
-        </Text>
-        <Box>
-          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/a-contemp' _active={{color:'red',}}>A Contemp</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
+        </Heading>
       </Flex>
       <Box w='100%' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='12px 0 80px' px='20px'>
-          <Text fontSize='25px' fontWeight='bold' mt='100px' color='red.600'>
+          <Heading className='calibracao-subtitulo text-red negrito' mt='100px'>
             Calibrações efetuadas com símbolo de acreditação – RBC
-          </Text>
+          </Heading>
           <Text fontSize='20px' color='black.900' mt='25px' lineHeight='34px'>
             Nossos laboratórios possuem equipamentos e padrões que garantem a qualidade e confiabilidade das medições,
             as calibrações são efetuadas segundo procedimentos de rotina, avaliados periodicamente, nossos técnicos são
@@ -53,18 +43,18 @@ const Calibracao = () => {
               <Image src={IMGCalibration} />
             </Box>
             <Box w={['100%', 'calc(100% - 488px)']} ml={['0px', '20px']}>
-              <Text fontSize='25px' fontWeight='bold' color='red.600'>
+              <Heading className='calibracao-subtitulo text-red negrito'>
                 Calibrações realizadas na Contemp ou em sua empresa
-              </Text>
+              </Heading>
               <Text fontSize='20px' color='black.900' mt='25px' lineHeight='34px'>
                 As calibrações com ou sem símbolo de acreditação podem ser efetuadas no laboratório da Contemp ou nas
                 dependências do cliente, segundo nosso escopo.
               </Text>
             </Box>
           </Flex>
-          <Text fontSize='25px' fontWeight='bold' color='red.600'>
+          <Heading className='calibracao-subtitulo text-red negrito'>
             Calibrações efetuadas com símbolo de acreditação – RBC
-          </Text>
+          </Heading>
           <Text fontSize='20px' color='black.900' mt='25px' lineHeight='34px'>
             Nossos laboratórios possuem equipamentos e padrões que garantem a qualidade e confiabilidade das medições,
             as calibrações são efetuadas segundo procedimentos de rotina, avaliados periodicamente, nossos técnicos são
@@ -74,9 +64,9 @@ const Calibracao = () => {
       </Box>
       <Box w='100%' bg='white.500' p={['60px 20px', '60px 20px', '60px 20px', '60px 20px', '60px 20px']} pt='100px'>
         <Container maxW='7xl' p='12px 0 40px'>
-          <Text fontSize='25px' fontWeight='bold' color='red.600'>
+          <Heading className='calibracao-subtitulo text-red negrito'>
             Técnicos
-          </Text>
+          </Heading>
           <Text fontSize='20px' color='black.900' mt='25px' lineHeight='34px'>
             Nossos técnicos são altamente capacitados, e avaliados periodicamente, também são habilitados a realizar
             ajustes com a finalidade de atendimento das características metrológicas de cada instrumento, adequando
@@ -87,9 +77,9 @@ const Calibracao = () => {
           </Text>
           <Flex direction={['column', 'row']} mt='61px'>
             <Box w={['100%', '50%']}>
-              <Text color='black.800' fontWeight='bold' fontSize='25px' mb='25px'>
+              <Heading className='calibracao-subtitulo text-black negrito' mb='25px'>
                 Sistema de Gerenciamento de Calibração Contemp
-              </Text>
+              </Heading>
               <Text color='black.800' fontSize='20px' mb='25px'>
                 Para clientes aos quais trabalhamos na modalidade contratual, disponibilizamos gratuitamente nosso
                 sistema de gerenciamento de calibrações com as seguintes facilidades:
@@ -128,7 +118,7 @@ const Calibracao = () => {
               </UnorderedList>
             </Box>
             <Box w={['100%', 'calc(100% - 488px)']} ml={['0px', '20px']}>
-              <Text color='black.800' fontWeight='bold' fontSize='25px' mb='25px'>
+              <Text className='calibracao-subtitulo text-black negrito' mb='25px'>
                 Atendimento ao requisito CQI 9
               </Text>
 
@@ -149,19 +139,14 @@ const Calibracao = () => {
       </Box>
       <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='0px 0 77px'>
-          <Text
+          <Heading as={'h3'} className='calibracao-titulo text-red centro negrito'
             mt='119px'
-            fontWeight='bold'
-            fontSize='45px'
-            textAlign='center'
             mb='70px'
-            color='red.600'
-            textTransform='uppercase'
           >
             ESCOPO DE CALIBRAÇÃO
-          </Text>
+          </Heading>
           <SelectConfigCalibration />
-          <Text textAlign='center' color='red.600' fontWeight='bold' fontSize='45px' mt='107px'>
+          <Text className='calibracao-titulo text-red centro negrito' mt='107px'>
             QUALIFICAÇÕES
           </Text>
           <Flex mt='86px' alignItems='center' justifyContent='center' flexDirection={['column', 'row']}>
@@ -234,9 +219,9 @@ const Calibracao = () => {
       </Flex>
       <Flex w='100%' alignItems='center' bg='red.600' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
         <Container maxW='7xl' p='72px 0'>
-          <Text fontSize='45px' fontWeight='bold' textAlign='center' mb='50px'>
+          <Heading as={'h2'} className='calibracao-titulo text-white negrito centro' mb='50px'>
             ACESSO AOS PADRÕES DO LABORATÓRIO
-          </Text>
+          </Heading>
           <Text fontSize='20px' textAlign='center' m='50px 0 25px'>
             Possui produtos Contemp? Nós temos uma base com todos os padrões de laboratório para consulta. Se preferir
             pode entrar em contato com nossa equipe técnica. Para consultar basta acessar o botão abaixo.

@@ -96,9 +96,9 @@ export const Favorite = ({ homeTabs }) => {
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
-      <Text color='white' className='favoritos-titulo text-white centro' mt={width > maxWidth ? '50px' : '20px'} mb={['5%', '3%']}>
+      <Heading as={'h2'} color='white' className='favoritos-titulo text-white centro' mt={width > maxWidth ? '50px' : '20px'} mb={['5%', '3%']}>
         Confira nossas Novidades
-      </Text>
+      </Heading>
       <Flex h={pxToRem(250)} w='100%'>
         <Swiper
           ref={swiperRef}
@@ -127,7 +127,7 @@ export const Favorite = ({ homeTabs }) => {
             <SwiperSlide style={{ width: '100%' }} key={index}>
               <Link
                 href={item.name ? `/produto/${item.name.replaceAll(' ', '_')}` : ''}
-                _hover={{ color: 'black', textDecoration: 'none' }}
+                _hover={{ color: 'black', textDecoration: 'none', lineHeight: '1.15rem',}}
                 onMouseEnter={() => swiperRef.current?.swiper.autoplay.stop()}
                 onMouseLeave={() => swiperRef.current?.swiper.autoplay.start()}
               >
@@ -173,9 +173,9 @@ export const Favorite = ({ homeTabs }) => {
                 '2xl': '98%',
               }}
             >
-              <Text className='home-produto-titulo'>
+              <Heading as={'h2'} className='home-produto-titulo white negrito' color={'var(--white-primary)'}>
                 {homeTabs.name}
-              </Text>
+              </Heading>
 
               <ProductCategoryWithIcon
                 title={homeTabs.category.name}

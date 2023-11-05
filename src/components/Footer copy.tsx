@@ -160,9 +160,9 @@ export const Footer = () => {
                 href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
                 _hover={{ color: 'white', textDecoration: 'none' }}
               >
-                <Text fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
+                <Heading as={'h2'} fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
                   {el.name}
-                </Text>
+                </Heading>
               </Link>
               {el.children &&
                 el.children.length > 0 &&
@@ -172,9 +172,9 @@ export const Footer = () => {
                       href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
                       _hover={{ color: 'white', textDecoration: 'none' }}
                     >
-                      <Text fontSize='16px' mb='15px' cursor='pointer'>
+                      <Heading as={'h3'} fontSize='16px' mb='15px' cursor='pointer'>
                         {el2.name}
-                      </Text>
+                      </Heading>
                     </Link>
                     <Box mb='20px'>
                       {el2.children &&
@@ -184,9 +184,9 @@ export const Footer = () => {
                             href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
                             _hover={{ color: 'white', textDecoration: 'none' }}
                           >
-                            <Text key={index} fontSize='16px' cursor='pointer'>
+                            <Heading as={'h3'} key={index} fontSize='16px' cursor='pointer'>
                               {el3.name}
-                            </Text>
+                            </Heading>
                           </Link>
                         ))}
                     </Box>
@@ -200,7 +200,7 @@ export const Footer = () => {
         direction={['column-reverse', 'row']}
         alignItems={['flex-start', 'center']}
         justifyContent='space-between'
-        fontSize='18px'
+        fontSize='16px'
         flexWrap='wrap'
       >
         <Text color='white' fontSize='16px'>
