@@ -91,8 +91,9 @@ export const Favorite = ({ homeTabs }) => {
   }, [])
 
   return (
+    <Box>
     <Container
-      maxW='8xl'
+      maxW='var(--max-tamanho)'
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
@@ -222,5 +223,6 @@ export const Favorite = ({ homeTabs }) => {
         </Flex>
       )}
     </Container>
+    </Box>
   )
 }
