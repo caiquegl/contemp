@@ -17,11 +17,11 @@ export const SelectConfig = () => {
       <Box>
         <Flex
           p="16px 20px"
-          fontSize="20px"
+          fontSize="1.5rem"
           justifyContent="flex-end"
           borderLeftRadius="5px"
           textAlign="end"
-          color={text.index == 1 ? "red.600" : "black.800"}
+          color={text.index == 1 ? "var(--red-primary)" : "var(--black-primary)"}
           maxW="367px"
           w="100%"
           cursor="pointer"
@@ -46,16 +46,14 @@ export const SelectConfig = () => {
             fontWeight: "bold",
           }}
         >
-          <Text>Controlador de Processos C714</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C714</Heading>
         </Flex>
         <Flex
           cursor="pointer"
           p="16px 20px"
-          fontSize="20px"
           justifyContent="flex-end"
           borderLeftRadius="5px"
           textAlign="end"
-          color="black.800"
           maxW="367px"
           w="100%"
           minH="57px"
@@ -77,12 +75,11 @@ export const SelectConfig = () => {
             fontWeight: "bold",
           }}
         >
-          <Text>Controlador de Processos C715</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C715</Heading>
         </Flex>
         <Flex
           cursor="pointer"
           p="16px 20px"
-          fontSize="20px"
           justifyContent="flex-end"
           borderLeftRadius="5px"
           textAlign="end"
@@ -114,12 +111,11 @@ export const SelectConfig = () => {
             fontWeight: "bold",
           }}
         >
-          <Text>Controlador de Processos C719</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C719</Heading>
         </Flex>
         <Flex
           cursor="pointer"
           p="16px 20px"
-          fontSize="20px"
           justifyContent="flex-end"
           borderLeftRadius="5px"
           textAlign="end"
@@ -153,7 +149,7 @@ export const SelectConfig = () => {
             fontWeight: "bold",
           }}
         >
-          <Text>Controlador de Processos C304</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C304</Heading>
         </Flex>
         <Flex
           cursor="pointer"
@@ -186,7 +182,7 @@ export const SelectConfig = () => {
             fontWeight: "bold",
           }}
         >
-          <Text>Controlador de Processos C414</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C414</Heading>
         </Flex>
         <Flex
           cursor="pointer"
@@ -219,7 +215,7 @@ export const SelectConfig = () => {
             })
           }
         >
-          <Text>Controlador de Processos C417</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C417</Heading>
         </Flex>
         <Flex
           cursor="pointer"
@@ -264,7 +260,7 @@ export const SelectConfig = () => {
             })
           }
         >
-          <Text>Controlador de Processos C514 e C515</Text>
+          <Heading as={'h3'} className="suporte-titulotab">Controlador de Processos C514 e C515</Heading>
         </Flex>
       </Box>
 
@@ -277,12 +273,12 @@ export const SelectConfig = () => {
       >
         {text.title && (
           <>
-            <Text color="red.600" fontSize="25px" fontWeight="bold" mb="10px">
+            <Heading as={'h2'} className="suporte-subtitulo negrito text-red" mb="10px">
               {text.title}
-            </Text>
+            </Heading>
             {text.description.length > 0 &&
               text.description.map((value, index) => (
-                <Text color="black.800" fontSize="20px" mb="10px" key={index}>
+                <Text className="paragrafo-preto text-black" mb="10px" key={index}>
                   {value}
                 </Text>
               ))}

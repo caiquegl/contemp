@@ -29,6 +29,7 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { SmoothScroll } from '../components/SmoothScroll'
 import { CardBlog } from '../components/CardBlog'
+import CardPontos from '../components/CardPontos'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Pagination } from 'swiper'
@@ -102,6 +103,7 @@ const Home = () => {
 
       <Banner />
       <BannerMobile />
+      <CardPontos />
 
       <Favorite homeTabs={listTab.find((el: any) => el.indexProduct === 0)} />
 

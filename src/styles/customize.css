@@ -128,7 +128,7 @@ a {
 
 .paragrafo-branco {
     font-size: 1rem;
-    color: var(--black-primary);
+    color: var(--white-primary) !important;
 }
 
 .redondo {
@@ -229,6 +229,13 @@ a {
 }
 .bannerhome-subtitulo {
     font-size: 1.5rem !important;
+}
+
+/* PONTOS */
+.pontos-titulo {
+    font-size: 1rem !important;
+    text-transform: uppercase;
+    
 }
 
 /* CATEGORIA */
@@ -474,14 +481,16 @@ a {
 }
 
 /* CALIBRAÇÃO */
-.calibracao-subtitulo {
+.calibracao-subtitulo,
+.suporte-titulotab {
     font-size: 1.15rem !important;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 /* TODOS OS PRODUTOS */
-.todososprodutos-subtitulo {
+.todososprodutos-subtitulo,
+.suporte-subtitulo {
     font-size: 1.5rem !important;
     font-weight: bold;
     text-transform: uppercase !important;
