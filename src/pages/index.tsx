@@ -172,7 +172,7 @@ const Home = () => {
         />
       </GridChakra>
 
-      <Container
+      {/*<Container
         maxW='6xl'
         p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px', '12px 0 31px']}
       >
@@ -289,7 +289,7 @@ const Home = () => {
             </Link>
           </Flex>
         </Flex>
-      </Container>
+      </Container>*/}
 
       <GridChakra
         templateColumns={{
@@ -341,7 +341,7 @@ const Home = () => {
 
       <Player />
 
-      <Flex
+      {/*<Flex
         w='100%'
         alignItems='center'
         justifyContent='center'
@@ -429,8 +429,8 @@ const Home = () => {
         >
           <Image src={Mapa} minH={500} bgSize='100%' />
         </Box>
-      </Flex>
-      <Catalog />
+      </Flex>*/}
+      {/*<Catalog />*/}
       <Contact
         id='duvidas-e-orcamentos'
         title='DÚVIDAS E ORÇAMENTOS'
