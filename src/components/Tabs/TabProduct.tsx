@@ -77,11 +77,11 @@ const TabProduct = ({back}: IProps) => {
       key: 'url',
       render: (a: any, b: any) => (
         <Link
-          href={b.name ? `/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}` : ''}
+          href={b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
           isExternal={true}
           _hover={{ color: 'black', textDecoration: 'none' }}
         >
-          {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).replaceAll(' ', '_')}`}
+          {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}`}
         </Link>
       ),
     },

@@ -91,10 +91,10 @@ const Category = () => {
         
 
 
-        <Text className='h3-preto titulo-categoria'
+        <Heading as={'h2'} className='h3-preto titulo-categoria'
         >
           {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
-        </Text>
+        </Heading>
         <Space size={20}>
           {categ &&
             categ.filter &&

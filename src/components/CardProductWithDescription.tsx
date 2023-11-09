@@ -62,7 +62,7 @@ const CardProductWithDescription = ({
       className='card-produto'
     >
       <Link
-        href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
+        href={`/produto/${replaceNameToUrl(text).toLowerCase().replaceAll(' ', '_')}`}
         _hover={{ color: 'white', textDecoration: 'none' }}
         display='flex'
         flexDirection='column'
@@ -98,7 +98,7 @@ const CardProductWithDescription = ({
         </Text>
         {ocultBottom ? null :
           <Link
-            href={`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`}
+            href={`/produto/${replaceNameToUrl(text).toLowerCase().replaceAll(' ', '_')}`}
             _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
             className='d-none'
           >

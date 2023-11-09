@@ -157,7 +157,7 @@ export const Footer = () => {
                 </HStack>
               )} */}
               <Link
-                href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
+                href={`/category/${el.name.toLowerCase().replaceAll(' ', '_')}#viewCategory`}
                 _hover={{ color: 'white', textDecoration: 'none' }}
               >
                 <Heading as={'h2'} fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
@@ -169,7 +169,7 @@ export const Footer = () => {
                 el.children.map((el2: any, index: any) => (
                   <Fragment key={index}>
                     <Link
-                      href={`/category/${el2.name.replaceAll(' ', '_')}#viewCategory`}
+                      href={`/category/${el2.name.toLowerCase().replaceAll(' ', '_')}#viewCategory`}
                       _hover={{ color: 'white', textDecoration: 'none' }}
                     >
                       <Heading as={'h3'} fontSize='16px' mb='15px' cursor='pointer'>
@@ -181,7 +181,7 @@ export const Footer = () => {
                         el2.children.length > 0 &&
                         el2.children.map((el3: any, index: number) => (
                           <Link
-                            href={`/category/${el3.name.replaceAll(' ', '_')}#viewCategory`}
+                            href={`/category/${el3.name.toLowerCase().replaceAll(' ', '_')}#viewCategory`}
                             _hover={{ color: 'white', textDecoration: 'none' }}
                           >
                             <Heading as={'h3'} key={index} fontSize='16px' cursor='pointer'>

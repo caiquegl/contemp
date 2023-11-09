@@ -127,7 +127,7 @@ export const Favorite = ({ homeTabs }) => {
         }).map((item, index) => (
             <SwiperSlide style={{ width: '100%' }} key={index}>
               <Link
-                href={item.name ? `/produto/${item.name.replaceAll(' ', '_')}` : ''}
+                href={item.name ? `/produto/${item.name.toLowerCase().replaceAll(' ', '_')}` : ''}
                 _hover={{ color: 'black', textDecoration: 'none', lineHeight: '1.15rem',}}
                 onMouseEnter={() => swiperRef.current?.swiper.autoplay.stop()}
                 onMouseLeave={() => swiperRef.current?.swiper.autoplay.start()}

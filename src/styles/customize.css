@@ -69,7 +69,7 @@ a {
 }
 
 .h4-preto {
-    font-size: 1rem;
+    font-size: 1rem !important;
     font-weight: bold;
     text-transform: uppercase;
     line-height: 1.25rem;
@@ -203,7 +203,8 @@ a {
 .calibracao-titulo,
 .suporte-titulo,
 .todososprodutos-titulo,
-.trabalheconosco-titulo {
+.trabalheconosco-titulo,
+.orcamento-titulo {
     font-size: 2.5rem !important;
     font-weight: bold;
     line-height: 2.5rem !important;
@@ -254,7 +255,7 @@ a {
 }
 
 .titulo-categoria {
-    font-size: 1.15rem;
+    font-size: 1.15rem !important;
     font-weight: bold;
     margin-right: auto;
 }
@@ -494,6 +495,22 @@ a {
     font-size: 1.5rem !important;
     font-weight: bold;
     text-transform: uppercase !important;
+}
+
+/* CARRINHO / ORCAMENTO */
+.orcamento-subtitulo {
+    font-size: 1.5rem !important;
+    text-transform: uppercase;
+}
+.chakra-input__group.css-1105bzl,
+.chakra-input__group.css-1jn4ak0 {
+    border-radius: 8px!important;
+    background-color: transparent;
+}
+
+.input-carrinho {
+    border: 2px solid var(--black-primary) !important;
+    border-radius: 8px !important;
 }
 
 

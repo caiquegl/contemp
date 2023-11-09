@@ -28,7 +28,7 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
   return (
     <Flex alignItems={['center', 'flex-start']} width='100%' flexDirection={['column', 'row']}>
       <Link
-        href={`/produto/${products?.name?.replaceAll(' ', '_')}`}
+        href={`/produto/${products?.name?.toLowerCase().replaceAll(/\s+/g, '_')}`}
         _hover={{ color: 'black', textDecoration: 'none' }}
       >
         <Box

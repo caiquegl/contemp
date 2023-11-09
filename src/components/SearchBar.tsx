@@ -38,6 +38,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
       maxW={pxToRem(594)}
       outline='none'
       position='relative'
+      zIndex={'8888'}
       {...containerProps}
     >
       <Input

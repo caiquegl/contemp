@@ -203,9 +203,9 @@ const Product = () => {
               </Breadcrumb>
             </Box>
 
-            <Text className='titulo-produto-individual'>
+            <Heading as={'h2'} className='titulo-produto-individual'>
               {detail.name ? detail.name : ''}
-            </Text>
+            </Heading>
             <Text className='descricao-produto-individual'>
               <Text as='span' noOfLines={4}>
                 {detail.description ? detail.description : ''}{' '}
