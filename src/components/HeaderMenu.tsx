@@ -21,7 +21,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
     <>
       <Menu
         onClick={(evt) => {
-          router.push(`/category/${replaceNameToUrl(evt.keyPath[0].replaceAll(' ', '_'))}`)
+          router.push(`/category/${replaceNameToUrl(evt.keyPath[0].toLowerCase().replaceAll(' ', '_'))}`)
         }}
         mode={'horizontal'}
         subMenuOpenDelay={0.5}

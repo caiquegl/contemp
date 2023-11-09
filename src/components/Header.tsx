@@ -71,11 +71,11 @@ export const Header = () => {
       const listMenu = data.map((el: any) => ({
         ...el,
         onTitleClick: (value: any) => {
-          router.push(`/category/${replaceNameToUrl(el.name).toLowerCase().replaceAll(' ', '_')}#viewCategory`)
+          router.push(`/category/${replaceNameToUrl(el.name).toLowerCase().replaceAll(' ', '_')}`)
         },
         children: el.children ? el.children.map((el2: any) => {
           if(el2.children) el2.onTitleClick = (value: any) => {
-            router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}#viewCategory`)
+            router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}`)
           }
           return el2
         }) : undefined

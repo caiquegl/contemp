@@ -68,8 +68,8 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
           click={(product: any) => {
             router.push(
               product.order_all_products || product.sub_category_id || product.filter
-                ? `/category/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}#viewCategory`
-                : `/produto/${replaceNameToUrl(product.name.replaceAll(' ', '_'))}`
+                ? `/category/${replaceNameToUrl(product.name.toLowerCase().replaceAll(' ', '_'))}`
+                : `/produto/${replaceNameToUrl(product.name.toLowerCase().replaceAll(' ', '_'))}`
             )
             setListProducts([])
           }}
