@@ -49,7 +49,7 @@ const InputsHome = ({
 
   return (
     <Box w="100%">
-      <Text fontSize="20px" mb="10px" color="black.800">
+      <Text className="paragrafo-preto negrito" mb="10px">
         {name}
       </Text>
       <InputGroup

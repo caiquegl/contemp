@@ -483,7 +483,8 @@ a {
 
 /* CALIBRAÇÃO */
 .calibracao-subtitulo,
-.suporte-titulotab {
+.suporte-titulotab,
+.adm-subtitulo {
     font-size: 1.15rem !important;
     font-weight: bold;
     text-transform: uppercase;
@@ -498,7 +499,8 @@ a {
 }
 
 /* CARRINHO / ORCAMENTO */
-.orcamento-subtitulo {
+.orcamento-subtitulo,
+.adm-titulo {
     font-size: 1.5rem !important;
     text-transform: uppercase;
 }

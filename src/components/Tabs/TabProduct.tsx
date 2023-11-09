@@ -154,14 +154,13 @@ const TabProduct = ({back}: IProps) => {
       {step === 1 && (
         <>
           <Box>
-            <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Painel de Produtos</Text>
-            <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Gerencie todos os produtos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua através do painel. Atenção! Ao excluir um produto não  será possivel recupera-lo.</Text>
+            <Heading as={'h3'} className='adm-subtitulo text-black negrito'>Painel de Produtos</Heading>
+            <Text className='paragrafo-preto' mb={'3%'}>Gerencie todos os produtos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua através do painel. Atenção! Ao excluir um produto não  será possivel recupera-lo.</Text>
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
               bg='red.600'
               color='white'
-              fontSize='20px'
               borderRadius='4px'
               w='128px'
               h='47px'

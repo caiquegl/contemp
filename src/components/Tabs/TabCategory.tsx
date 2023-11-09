@@ -362,10 +362,10 @@ const TabCategory = () => {
     <>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
         <Box w={'70%'}>
-          <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>
+          <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
             Categorias & Subcategorias
-          </Text>
-          <Text color='black.800' fontSize={'1rem'} mb={'5%'}>
+          </Heading>
+          <Text className='paragrafo-preto' mb={'3%'}>
             Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma
             prática.
           </Text>

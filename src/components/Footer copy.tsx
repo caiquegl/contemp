@@ -172,7 +172,7 @@ export const Footer = () => {
                       href={`/category/${el2.name.toLowerCase().replaceAll(' ', '_')}`}
                       _hover={{ color: 'white', textDecoration: 'none' }}
                     >
-                      <Heading as={'h3'} fontSize='16px' mb='15px' cursor='pointer'>
+                      <Heading as={'h3'} color='white' fontSize='16px' mb='15px' cursor='pointer'>
                         {el2.name}
                       </Heading>
                     </Link>
@@ -184,7 +184,7 @@ export const Footer = () => {
                             href={`/category/${el3.name.toLowerCase().replaceAll(' ', '_')}`}
                             _hover={{ color: 'white', textDecoration: 'none' }}
                           >
-                            <Heading as={'h3'} key={index} fontSize='16px' cursor='pointer'>
+                            <Heading as={'h4'} color='white' key={index} fontSize='16px' cursor='pointer'>
                               {el3.name}
                             </Heading>
                           </Link>

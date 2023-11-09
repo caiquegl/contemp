@@ -94,7 +94,7 @@ export default function gridListWith() {
       <Container maxW={'1240px'} mt={'2%'} p={'0'}>
         <Flex flexWrap="wrap" gridGap={6} justify="center">
           <Card
-            heading={'Manual Controlador de Temperatura C714'}
+            heading={'Catálogo Contemp 2023'}
             icon={<Icon as={BsFiletypePdf} w={6} h={6} />}
             description={'Baixe o manual acessando o link.'}
             href={'https://contemp.com.br/api/arquivos/temnacontemp.pdf'}

@@ -130,10 +130,10 @@ const TabFiles = () => {
   return (
     <>
       <Box>
-        <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>
+        <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
           Painel de Documentos
-        </Text>
-        <Text color='black.800' fontSize={'1rem'} mb={'5%'}>
+        </Heading>
+        <Text className='paragrafo-preto' mb={'3%'}>
           Gerencie todos os documentos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua
           através do painel. Atenção! Ao excluir um documento não será possivel recupera-lo.
         </Text>
@@ -142,7 +142,6 @@ const TabFiles = () => {
         <Button
           bg='red.600'
           color='white'
-          fontSize='20px'
           borderRadius='4px'
           w='128px'
           isLoading={loading}
