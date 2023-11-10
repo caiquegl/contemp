@@ -271,7 +271,6 @@ const Product = () => {
                         ) : null}
                       </Box>
                     )}
-                    {vr.type_view}
                       {vr.type_view && vr.type_view == 'numerico' && (
                       <Box className='variacao-opcoes'>
                         <Input

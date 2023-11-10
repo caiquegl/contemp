@@ -44,30 +44,6 @@ export function Banner() {
       image:
         'https://contemp.com.br/api/arquivos/bannercontemp.webp',
       links: '#',
-    },
-    {
-      subtitle:'MEDIÇÃO E CONTROLE DE TEMPERATURA EM',
-      title: 'PROCESSOS INDUSTRIAIS',
-      text: "Conheça nossas soluções completas para sua indústria. Fale com nossa equipe de vendas.",
-      image:
-        'https://contemp.com.br/api/arquivos/banner-2.webp',
-        links: '#',
-    },
-    {
-      subtitle:'',
-      title: 'ATENDEMOS O BRASIL E A AMÉRICA LATINA',
-      text: "Temos uma equipe de vendedores-técnicos de prontidão para te atender.",
-      image:
-        'https://contemp.com.br/api/arquivos/banner-3.webp',
-        links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
-    },
-    {
-      subtitle:'',
-      title: 'JÁ CONHECE NOSSO CANAL NO YOUTUBE?',
-      text: "É no canal onde postamos os videos sobre utilização e funcionalidades dos nossos produtos.",
-      image:
-        'https://contemp.com.br/api/arquivos/banner-4.webp',
-        links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
     }
   ]
 
