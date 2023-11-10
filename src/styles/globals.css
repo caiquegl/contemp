@@ -362,8 +362,8 @@ img {
 }
 
 .btn-all-products-bg ul li:hover{
-  background-color: #b60005; 
-  color: #fff !important;
+  /* background-color: #b60005;  */
+  color: #000 !important;
 }
 
 

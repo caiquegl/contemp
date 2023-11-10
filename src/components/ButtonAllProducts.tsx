@@ -14,14 +14,17 @@ interface IProps {
 export const ButtonAllProducts = ({menuItems, render}: IProps) => {
     const router = useRouter()
 
+    console.log(menuItems)
     return (
         <Box>
             <Dropdown
+                // open={true}
                 menu={{
                     items: menuItems || [], style: {
                         color: colors.black[800],
                         backgroundColor: colors.white[0]
                     },
+                    // openKeys: ['SENSORES'],
                     className: 'btn-all-products',
                     rootClassName: 'btn-all-products-bg',   
                     subMenuOpenDelay: 0.5,
