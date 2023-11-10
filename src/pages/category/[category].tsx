@@ -116,7 +116,7 @@ const Category = () => {
                       return
                     }
                     let newList: any = []
-                    list.forEach((pd: any) => {
+                    listOrigin.forEach((pd: any) => {
                       if (pd && pd.length > 0) {
                         pd.forEach((product: any) => {
                           item.products.forEach((pdFilter: any) => {
