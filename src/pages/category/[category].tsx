@@ -151,8 +151,8 @@ const Category = () => {
 
                 return <ListCategory key={index} bg={bg} data={categ} />
               })}
-              {listOrigin.length >= list.length ? null : (
-                <Center>
+              {console.log(listOrigin.length >= list.length)}
+              {listOrigin.length >= list.length && <Center>
                   <Button
                     className='botao-vermelho'
                     maxW={pxToRem(279)}
@@ -168,8 +168,7 @@ const Category = () => {
                   >
                     Carregar Mais
                   </Button>
-                </Center>
-              )}
+                </Center> }
             </>
           )}
         </Box>
