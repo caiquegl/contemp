@@ -146,7 +146,7 @@ const TabFiles = () => {
   }, [list]);
 
   //ADD KEMELIN
-  const handleFileInputChange = async (evt) => {
+  const handleFileInputChange = async (evt: any) => {
     try {
       setLoading(true);
       const files = evt.target.files;
@@ -211,7 +211,7 @@ const TabFiles = () => {
             placeholder: 'Digite o nome do arquivo...',
             onChange: (evt) => {
               const searchTerm = evt.target.value.toLowerCase();
-              const filteredList = listClone.filter((item) =>
+              const filteredList = listClone.filter((item: any) =>
                 item.name.toLowerCase().includes(searchTerm)
               );
               setList(searchTerm ? filteredList : listClone);
