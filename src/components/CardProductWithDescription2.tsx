@@ -77,8 +77,8 @@ const CardProductWithDescription2 = ({
         <Center w='100%' h='100%' flex={1} position='relative'>
           <Image
             src={img ? img : DefaultImg}
-            loading='lazy'
-            quality={100}
+            // loading='lazy'
+            quality={60}
             layout='fill'
             objectFit='cover'
             objectPosition='center'
