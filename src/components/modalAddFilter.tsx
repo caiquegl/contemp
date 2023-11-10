@@ -1,17 +1,11 @@
 import {
   Center,
   useToast,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
   Text,
   Icon,
   Heading,
 } from '@chakra-ui/react'
-import { Button, Form, Input, Select, Modal as ModalAntd, List, Collapse, Popover, Space } from 'antd'
+import { Button, Form, Input, Select, Modal as ModalAntd, List, Collapse, Modal, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { api } from '../lib/axios'
 import { ExclamationCircleFilled } from '@ant-design/icons'
@@ -164,12 +158,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size='2xl'>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader color='black.800'>Adicionar filtro</ModalHeader>
-        <ModalCloseButton color='red.700' />
-        <ModalBody>
+    <Modal open={isOpen} onCancel={onClose} onOk={onClose} title="Adicionar filtro" >
           <Form
             onFinish={addFilter}
             layout='vertical'
@@ -190,6 +179,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
               </Button>
             </Center>
           </Form>
+      
           <Collapse>
             {filter &&
               filter.length > 0 &&
@@ -224,9 +214,9 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                     >
                       <Select
                         mode='multiple'
+                        virtual={false}
                         options={options}
-                        popupClassName='pop-select'
-                        style={{ width: '100%' }}
+                        style={{ width: '100%', maxHeight: '300px', overflow: 'auto' }}
                         filterOption={(input, option) => (option?.label ?? '').includes(input)}
                         filterSort={(optionA, optionB) =>
                           (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
@@ -263,8 +253,7 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                 </Panel>
               ))}
           </Collapse>
-        </ModalBody>
-      </ModalContent>
+
     </Modal>
   )
 }

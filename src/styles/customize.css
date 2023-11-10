@@ -341,6 +341,9 @@ a {
     line-height: 1.15rem;
 }
 
+.popAntd {
+    z-index: 9999999999999999999999999999999999999999999999999999999999999999999 !important;
+}
 /* PRODUTO */
 .container-produto {
     width: 100%;
