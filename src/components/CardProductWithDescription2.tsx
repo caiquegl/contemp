@@ -74,17 +74,18 @@ const CardProductWithDescription2 = ({
       >
         {/*IMAGEM DO PRODUTO*/}
         {/* <LazyLoad> */}
-        <Center w='100%' h='100%' flex={1} position='relative'>
-          <Image
-            src={img ? img : DefaultImg}
-            // loading='lazy'
-            quality={60}
-            layout='fill'
-            objectFit='cover'
-            objectPosition='center'
-            height='100%' // Adicionando uma altura para a imagem
-          />
-        </Center>
+        <Center w='100%' h='100%' flex={1} position="relative">
+  <Image
+    src={img ? img : DefaultImg}
+    // loading='lazy'
+    quality={100}
+    layout="fill"
+    objectFit="cover"
+    objectPosition="center"
+    unoptimized={true}
+  />
+</Center>
+
 
         {/* </LazyLoad> */}
         {/* <Image
