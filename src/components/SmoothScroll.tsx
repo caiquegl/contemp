@@ -24,7 +24,7 @@ export const SmoothScroll = ({ children }: any) => {
         <Spinner size='xl' />
       </Center>
       <>
-        <Box zIndex={9999999999999999999999}>
+        <Box zIndex={999999999999} position={'relative'}>
           <SidebarDrawerProvider>
             <Header />
           </SidebarDrawerProvider>
