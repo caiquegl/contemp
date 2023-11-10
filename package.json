@@ -29,6 +29,7 @@
     "ckeditor5-custom-build": "^0.0.6",
     "firebase": "9.14.0",
     "firebase-admin": "11.3.0",
+    "flatlist-react": "^1.5.14",
     "framer-motion": "8.1.5",
     "fs": "^0.0.1-security",
     "js-cookie": "3.0.1",

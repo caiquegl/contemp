@@ -1,9 +1,9 @@
-import { Box, Container, Flex, Text, Heading } from '@chakra-ui/react'
+import { Box, Container, Flex, Text, Heading, Button, Center } from '@chakra-ui/react'
 import { Contact } from '../../components/Contact'
 import { Footer } from '../../components/Footer'
 import { Player } from '../../components/Player'
 import { SmoothScroll } from '../../components/SmoothScroll'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { ListCategory } from '../../components/ListCategory'
 import Head from 'next/head'
@@ -13,6 +13,8 @@ import { decodeName } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
 import { Space, Tag } from 'antd'
 import { AiOutlineClose } from 'react-icons/ai'
+import FlatList from 'flatlist-react'
+import { pxToRem } from '../../utils/pxToRem'
 
 const Category = () => {
   const router = useRouter()
@@ -21,6 +23,8 @@ const Category = () => {
   const [listOrigin, setListOrigin] = useState<any>([])
   const [categ, setCateg] = useState<any>({})
   const [activeFilter, setActiveFilter] = useState<any>()
+  const [startIndex, setStartIndex] = useState(0)
+  const itemsPerPage = 3
   const dividerList = (listProduct: any) => {
     let list: any = []
 
@@ -40,9 +44,10 @@ const Category = () => {
       }
     })
 
+    const newData = list.slice(startIndex, itemsPerPage)
 
-    setList(list)
- 
+    setList(newData)
+    setStartIndex(3)
     setListOrigin(list)
   }
 
@@ -66,15 +71,15 @@ const Category = () => {
     }
   }, [category])
 
-  // useEffect(() => {
-  //   // window.scrollTo({
-  //   //   top: 230,
-  //   //   behavior: 'smooth',
-  //   // })
-  //   // window.addEventListener('scroll', handleScrollToProductList)
+  useEffect(() => {
+    // window.scrollTo({
+    //   top: 230,
+    //   behavior: 'smooth',
+    // })
+    // window.addEventListener('scroll', handleScrollToProductList)
+    // return () => window.removeEventListener('scroll', handleScrollToProductList)
+  }, [])
 
-  //   // return () => window.removeEventListener('scroll', handleScrollToProductList)
-  // }, [])
   return (
     <SmoothScroll>
       {categ && (
@@ -132,30 +137,43 @@ const Category = () => {
         </Flex>
       </Box>
       <Box w={'100%'} backgroundColor={'white'}>
-
-          <Box className='container-categoria-produtos'>
-            {/* <InfiniteScrollComponent /> */}
-            {list &&
-              list.length > 0 &&
-              list.map((categ: any, index: number) => {
+        <Box className='container-categoria-produtos'>
+          {/* <InfiniteScrollComponent /> */}
+          {list && list.length > 0 && (
+            <>
+              {list.map((categ: any, index: number) => {
                 index = index + 1
                 let bg = 'white'
 
                 if (index % 2 === 0) bg = 'white.500'
-                // if (index % 3 === 0) bg = 'black.800'
-                // if (index % 4 === 0) bg = 'red.600'
+                //   // if (index % 3 === 0) bg = 'black.800'
+                //   // if (index % 4 === 0) bg = 'red.600'
 
                 return <ListCategory key={index} bg={bg} data={categ} />
               })}
-          </Box>
-
+              {listOrigin.length >= list.length ? null : (
+                <Center>
+                  <Button
+                    className='botao-vermelho'
+                    maxW={pxToRem(279)}
+                    w='100%'
+                    mt='20px'
+                    onClick={() => {
+                      console.log('more')
+                      const end = startIndex + itemsPerPage
+                      const newData = listOrigin.slice(startIndex, end)
+                      setStartIndex(end)
+                      setList((prevData: any) => [...prevData, ...newData])
+                    }}
+                  >
+                    Carregar Mais
+                  </Button>
+                </Center>
+              )}
+            </>
+          )}
+        </Box>
       </Box>
-      {/* <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
-        <Container maxW='7xl' p='80px 0'>
-          <AdBanners />
-        </Container>
-      </Flex>*/}
-      {/* <Player /> */}
       <Contact
         id='duvidas-e-orcamentos'
         title='DÚVIDAS E ORÇAMENTOS'

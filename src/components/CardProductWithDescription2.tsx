@@ -22,6 +22,7 @@ interface IProps {
   ocultBottom?: boolean
 }
 
+
 const CardProductWithDescription2 = ({
   bg,
   img,
