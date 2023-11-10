@@ -111,7 +111,9 @@ const Category = () => {
                   className='botao-filtro'
                   onClick={() => {
                     if (activeFilter === index) {
-                      setList([...listOrigin])
+                      setStartIndex(3)
+                      const newData = list.slice(startIndex, itemsPerPage)
+                      setList(newData)
                       setActiveFilter(undefined)
                       return
                     }
@@ -151,7 +153,6 @@ const Category = () => {
 
                 return <ListCategory key={index} bg={bg} data={categ} />
               })}
-              {console.log(listOrigin.length >= list.length)}
               {listOrigin.length >= list.length && <Center>
                   <Button
                     className='botao-vermelho'
