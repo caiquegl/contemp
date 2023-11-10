@@ -112,7 +112,7 @@ const Category = () => {
                   onClick={() => {
                     if (activeFilter === index) {
                       setStartIndex(3)
-                      const newData = list.slice(startIndex, itemsPerPage)
+                      const newData = listOrigin.slice(startIndex, itemsPerPage)
                       setList(newData)
                       setActiveFilter(undefined)
                       return
