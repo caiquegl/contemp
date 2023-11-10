@@ -1,7 +1,8 @@
 import { Flex, Icon, Input, Heading } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
-import { FaRegSave } from "react-icons/fa";
+import { FaRegSave, FaCheck } from "react-icons/fa";
+import { PiPencilSimpleBold } from "react-icons/pi"
 
 export const EditOrderProduct = ({ value, changerOrder }: any) => {
   const [edit, setEdit] = useState(false);
@@ -21,8 +22,9 @@ export const EditOrderProduct = ({ value, changerOrder }: any) => {
             w="60px"
           />
           <Icon
-            as={FaRegSave}
-            fontSize="16px"
+            as={FaCheck}
+            fontSize="1rem"
+            color={'var(--red-primary)'}
             onClick={async () => {
               await changerOrder(parseInt(valueNumber), {
                 ...value,
@@ -38,8 +40,9 @@ export const EditOrderProduct = ({ value, changerOrder }: any) => {
         <>
           {value?.order_all_products}{" "}
           <Icon
-            as={BsPencil}
-            fontSize="16px"
+            as={PiPencilSimpleBold}
+            fontSize="1.15rem"
+            color={'var(--gray-text)'}
             onClick={() => setEdit(true)}
             ml="30px"
             cursor="pointer"

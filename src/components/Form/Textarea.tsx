@@ -5,19 +5,27 @@ import {
   Textarea as Inpt,
   InputGroup,
   TextareaProps as ChakraInputProps,
+  Tooltip,
+  Icon,
+  Box,
 } from "@chakra-ui/react";
-import { forwardRef, ForwardRefRenderFunction } from "react";
+import { forwardRef, ForwardRefRenderFunction, useState } from "react";
 import { FieldError } from "react-hook-form";
+import { FiFile } from "react-icons/fi"; // Importe o ícone necessário
+import { PiInfoDuotone } from "react-icons/pi";
 
 interface InpuptProps extends ChakraInputProps {
   name: string;
   label?: string;
+  question?: string; // Altere o nome da propriedade para 'question'
   error: FieldError;
 }
+
 const InputBase: ForwardRefRenderFunction<HTMLTextAreaElement, InpuptProps> = (
-  { name, label, error, ...rest },
+  { name, label, question, error, ...rest },
   ref
 ) => {
+  const [isTooltipVisible, setTooltipVisibility] = useState(false);
   return (
     <FormControl isInvalid={!!error}>
       {!!label && (
@@ -37,17 +45,17 @@ const InputBase: ForwardRefRenderFunction<HTMLTextAreaElement, InpuptProps> = (
         display="flex"
         alignItems="center"
         justifyContent="center"
+        position="relative"
       >
         <Inpt
           id={name}
           name={name}
           ref={ref}
           w="100%"
-          height="100%"
+          minH="186px"
           border="none"
           borderRadius="21px"
           color="black.800"
-          minH="186px"
           _placeholder={{
             color: "black.50",
           }}
@@ -56,6 +64,29 @@ const InputBase: ForwardRefRenderFunction<HTMLTextAreaElement, InpuptProps> = (
           }}
           {...rest}
         />
+        {!!question && (
+          <Tooltip
+            label={question}
+            isOpen={isTooltipVisible}
+            placement="top-end"
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            hasArrow
+          >
+            <Box
+              position="absolute"
+              right="8px"
+              color="var(--black-primary)"
+              cursor="pointer"
+              aria-label={question}
+              onMouseEnter={() => setTooltipVisibility(true)}
+              onMouseLeave={() => setTooltipVisibility(false)}
+            >
+              <Icon as={PiInfoDuotone} fontSize={'1.15rem'} color={'var(--red-primary)'} />
+            </Box>
+          </Tooltip>
+        )}
       </InputGroup>
       {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>

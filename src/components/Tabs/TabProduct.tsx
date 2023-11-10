@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link, Text, Heading } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import ContainerAddProduct from '../ContainerAddProduct'
@@ -10,15 +10,44 @@ import { pxToRem } from '../../utils/pxToRem'
 import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
 import { EditOrderTabProduct } from '../EditOrderTabProduct'
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { FiCopy } from 'react-icons/fi'
+import { PiInfoDuotone } from "react-icons/pi";
+import { PiPencilSimpleBold } from "react-icons/pi"
+import { FaDeleteLeft } from 'react-icons/fa6'
 
 interface IProps {
   back: any
 }
-const TabProduct = ({back}: IProps) => {
+const TabProduct = ({ back }: IProps) => {
   const toast = useToast({
     duration: 3000,
     isClosable: true,
   })
+  function copiarTexto(texto: string) {
+    // Cria um elemento de input dinamicamente
+    var input = document.createElement('input')
+
+    // Define o valor do input como o texto a ser copiado
+    input.value = texto
+
+    // Adiciona o input ao documento
+    document.body.appendChild(input)
+
+    // Seleciona o conteúdo do input
+    input.select()
+
+    // Copia o conteúdo selecionado para a área de transferência
+    document.execCommand('copy')
+
+    // Remove o input do documento
+    document.body.removeChild(input)
+    toast({
+      title: 'Copiado',
+      description: 'Link copiado com sucesso.',
+      status: 'info',
+    })
+  }
   const [loading, setLoading] = useState<boolean>(false)
 
   const [step, setStep] = useState(1)
@@ -54,7 +83,7 @@ const TabProduct = ({back}: IProps) => {
 
   const column = [
     {
-      title: 'Order',
+      title: 'Ordem',
       width: 100,
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrderTabProduct value={a} changerOrder={changerOrder} />,
@@ -65,7 +94,7 @@ const TabProduct = ({back}: IProps) => {
       key: 'name',
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
-    
+
     {
       title: 'Categoria',
       render: (a: any, b: any) => <p>{a.category.name}</p>,
@@ -76,30 +105,45 @@ const TabProduct = ({back}: IProps) => {
       dataIndex: 'url',
       key: 'url',
       render: (a: any, b: any) => (
-        <Link
+        <Button
+          as={ChakraLink}
+          className='botao-tabelaprodutos'
           href={b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
           isExternal={true}
           _hover={{ color: 'black', textDecoration: 'none' }}
+          rightIcon={<Icon as={ExternalLinkIcon} />}
         >
-          {`https://contemp.com.br/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}`}
-        </Link>
+          {`url`}
+        </Button>
       ),
     },
     {
-      title: 'Ação',
-      render: (a: any) => (
+      title: 'Ações',
+      render: (a: any, b: any) => (
         <HStack spacing='20px'>
           <Icon
             cursor='pointer'
-            as={AiOutlineEdit}
-            fontSize='17px'
+            as={PiPencilSimpleBold}
+            fontSize='1.15rem'
+            color='var(--gray-text)'
             onClick={() => {
               setBody(a)
               setIsUpdate(true)
               setStep(2)
             }}
           />
-          <Icon cursor='pointer' as={AiOutlineClose} fontSize='17px' color='red.500' onClick={() => deleteProduct(a)} />
+          <Tooltip placement='top' title='Copiar'>
+            <FiCopy
+              style={{
+                cursor: 'pointer',
+                color: 'var(--gray-text)',
+              }}
+              onClick={() => copiarTexto(`https://contemp.com.br${b && b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}`)}
+            />
+          </Tooltip>
+          <Icon cursor='pointer' as={FaDeleteLeft}
+                fontSize='1.15rem'
+                color='var(--gray-text)' onClick={() => deleteProduct(a)} />
         </HStack>
       ),
     },
@@ -147,7 +191,7 @@ const TabProduct = ({back}: IProps) => {
   }
 
   useEffect(() => {
-   backTab()
+    backTab()
   }, [back])
   return (
     <>
@@ -159,11 +203,11 @@ const TabProduct = ({back}: IProps) => {
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
             <Button
-              bg='red.600'
-              color='white'
-              borderRadius='4px'
+              bg='var(--red-primary)'
+              color='var(--white-primary)'
+              borderRadius='8px'
               w='128px'
-              h='47px'
+              h='40px'
               _hover={{ transition: 'all 0.4s' }}
               onClick={() => {
                 setStep(2)
@@ -198,7 +242,7 @@ const TabProduct = ({back}: IProps) => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
+            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
           </Box>
         </>
       )}

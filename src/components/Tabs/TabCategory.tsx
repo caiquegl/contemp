@@ -16,10 +16,14 @@ import {
   FormHelperText,
   Tooltip,
   Heading,
+   Link as ChakraLink,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
+import { FaDeleteLeft } from 'react-icons/fa6'
 import { v4 as uuidv4 } from 'uuid'
 import { InputDefault } from '../Form/Input'
 import { Controller, useForm } from 'react-hook-form'
@@ -35,6 +39,9 @@ import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
 import { EditOrderProduct } from '../EditOrderProduct'
 import { BiFilterAlt } from 'react-icons/bi'
+import { FiHelpCircle } from 'react-icons/fi'
+import { PiInfoDuotone } from "react-icons/pi";
+import { PiPencilSimpleBold } from "react-icons/pi"
 import { ModalAddFilter } from '../modalAddFilter'
 
 const { confirm } = Modal
@@ -278,13 +285,13 @@ const TabCategory = () => {
 
   const column = [
     {
-      title: 'Order',
+      title: 'Ordem Geral',
       width: 100,
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
     {
-      title: 'Order todos produtos',
+      title: 'Ordem em todos produtos',
       width: 200,
       sorter: (a: any, b: any) => {
         const orderA = a.order_all_products ?? 999999
@@ -300,17 +307,34 @@ const TabCategory = () => {
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
+      title: 'Url',
+      dataIndex: 'url',
+      key: 'url',
+      render: (a: any, b: any) => (
+        <Button
+          as={ChakraLink}
+          className='botao-tabelaprodutos'
+          href={b.name ? `/category/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
+          isExternal={true}
+          _hover={{ color: 'black', textDecoration: 'none' }}
+          rightIcon={<Icon as={ExternalLinkIcon} />}
+        >
+          {`url`}
+        </Button>
+      ),
+    },
+    {
       title: 'Ações',
       render: (a: any) => (
         <>
           {a.name != 'CATEGORY_SECUNDARY' && (
             <HStack spacing='20px'>
               <Tooltip label='Filtro'>
-                <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' >
+                <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' color='var(--red-primary)' >
                   <Icon
                     cursor='pointer'
                     as={BiFilterAlt}
-                    fontSize='20px'
+                    fontSize='1.15rem'
                     onClick={() => {
                       setSelectCategory(a)
                       setOpenFiter(!openFilter)
@@ -318,12 +342,12 @@ const TabCategory = () => {
                   />
                 </Badge>
               </Tooltip>
-              <Icon cursor='pointer' as={AiOutlineEdit} fontSize='17px' onClick={() => handleOnEditClick(a)} />
+              <Icon cursor='pointer' as={PiPencilSimpleBold} fontSize='1.15rem' onClick={() => handleOnEditClick(a)} color='var(--gray-text)' />
               <Icon
                 cursor='pointer'
-                as={AiOutlineClose}
-                fontSize='17px'
-                color='red.500'
+                as={FaDeleteLeft}
+                fontSize='1.15rem'
+                color='var(--gray-text)'
                 onClick={() => {
                   confirm({
                     title: 'ATENÇÃO',
@@ -395,7 +419,7 @@ const TabCategory = () => {
       </Flex>
       <HStack spacing='20px' alignItems='flex-start'>
         <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-          <Table scroll={{ x: 'fit-content' }} dataSource={loading ? [] : list} columns={column} loading={loading} />
+          <Table id='tabela-categoria' scroll={{ x: 'fit-content' }} dataSource={loading ? [] : list} columns={column} loading={loading} />
         </Box>
         <Box
           borderRadius='8px'
@@ -411,10 +435,10 @@ const TabCategory = () => {
               <InputDefault
                 label='Nome da categoria'
                 type='text'
+                question="O nome da categoria será igual na Url."
                 error={errors.name}
                 {...register('name', { required: 'Nome é obrigatório' })}
               />
-              <FormHelperText>O nome da categoria será igual na Url.</FormHelperText>
             </FormControl>
             <Controller
               control={control}
@@ -424,10 +448,20 @@ const TabCategory = () => {
               }}
               render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
                 <FormControl isInvalid={!!error} id={name}>
-                  <FormLabel fontSize='20px' mb='10px' color='black.800'>
-                    É principal?
-                  </FormLabel>
-
+                  <Tooltip label='Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".' cursor={'pointer'}
+                    placement="top-end"
+                    color={'var(--white-primary)'}
+                    bg={'var(--red-primary)'}
+                    borderRadius={'8px'}
+                    textAlign={'center'}
+                    hasArrow>
+                    <Flex>
+                      <FormLabel className='paragrafo-petro text-black negrito' textTransform={'uppercase'} mb='10px'>
+                        É principal?
+                      </FormLabel>
+                      <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} verticalAlign={'middle'} />
+                    </Flex>
+                  </Tooltip>
                   <InputGroup
                     borderRadius='6px'
                     bg='white.500'
@@ -463,9 +497,6 @@ const TabCategory = () => {
                     </Select>
                   </InputGroup>
                   {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-                  <FormHelperText>
-                    Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".
-                  </FormHelperText>
                 </FormControl>
               )}
             />
@@ -509,36 +540,32 @@ const TabCategory = () => {
             <FormControl>
               <TextareaDefault
                 label='Descrição'
+                question='Essa descrição irá aparecer na página de todos os produtos.'
                 error={errors.description}
                 {...register('description', {
                   required: 'Descrição é obrigatório',
                 })}
               />
-              <FormHelperText>Essa descrição irá aparecer na página de todos os produtos.</FormHelperText>
             </FormControl>
             <FormControl>
               <TextareaDefault
                 label='Descrição SEO'
+                question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
                 error={errors.description_seo}
                 {...register('description_seo', {
                   required: 'Descrição é obrigatório',
                 })}
               />
-              <FormHelperText>
-                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
-              </FormHelperText>
             </FormControl>
             <FormControl>
               <TextareaDefault
                 label='Key Word SEO'
+                question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
                 error={errors.key_word_seo}
                 {...register('key_word_seo', {
                   required: 'Key Word Seo é obrigatório',
                 })}
               />
-              <FormHelperText>
-                Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".
-              </FormHelperText>
             </FormControl>
             <InputsHome
               name='Foto da categoria'
@@ -567,29 +594,46 @@ const TabCategory = () => {
               )}
             </HStack>
             <Box w='100%'>
-              <FormControl>
-                <Checkbox
-                  colorScheme='red'
-                  color='black.800'
-                  mr='auto'
-                  fontSize='20px'
-                  height='17px'
-                  isChecked={isFavorite}
-                  onChange={(evt) => setIsFavorite(evt.target.checked)}
-                >
-                  Categoria destaque
-                </Checkbox>
-                <FormHelperText>
-                  Marque caso queira que a categoria apareça na página de todos os produtos.
-                </FormHelperText>
-              </FormControl>
+              <Flex>
+                <Tooltip label='Marque caso queira que a categoria apareça na página de todos os produtos.' cursor={'pointer'}
+                  placement="top-end"
+                  color={'var(--white-primary)'}
+                  bg={'var(--red-primary)'}
+                  borderRadius={'8px'}
+                  textAlign={'center'}
+                  hasArrow>
+                  <FormControl>
+                    <Checkbox
+                      className='paragrafo-preto text-black negrito'
+                      colorScheme='red'
+                      textTransform={'uppercase'}
+                      mr='auto'
+                      height='17px'
+                      isChecked={isFavorite}
+                      onChange={(evt) => setIsFavorite(evt.target.checked)}
+                    >
+                      Categoria destaque
+                    </Checkbox>
+                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+
+                  </FormControl>
+                </Tooltip>
+              </Flex>
             </Box>
 
             <Box w='100%' mt='10px'>
+              <Flex>
+              <Tooltip label='Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.' cursor={'pointer'}
+                    placement="top-end"
+                    color={'var(--white-primary)'}
+                    bg={'var(--red-primary)'}
+                    borderRadius={'8px'}
+                    textAlign={'center'}
+                    hasArrow>
               <FormControl>
-                <Checkbox
+                <Checkbox className='paragrafo-preto text-preto negrito'
+                textTransform={'uppercase'}
                   colorScheme='red'
-                  color='black.800'
                   mr='auto'
                   fontSize='20px'
                   height='17px'
@@ -598,15 +642,25 @@ const TabCategory = () => {
                 >
                   Ativo
                 </Checkbox>
-                <FormHelperText>
-                  Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada,
-                  mas não ficará online.
-                </FormHelperText>
+                <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
               </FormControl>
+              </Tooltip>
+              </Flex>
             </Box>
             <Box w='100%' mt='10px'>
+              <Flex>
+              <Tooltip label='Marque aqui para a categoria aparecer na página de todos os produtos.' cursor={'pointer'}
+                    placement="top-end"
+                    color={'var(--white-primary)'}
+                    bg={'var(--red-primary)'}
+                    borderRadius={'8px'}
+                    textAlign={'center'}
+                    hasArrow>
+                    
+              
               <FormControl>
-                <Checkbox
+                <Checkbox className='paragrafo-preto negrito'
+                textTransform={'uppercase'}
                   colorScheme='red'
                   color='black.800'
                   mr='auto'
@@ -615,9 +669,12 @@ const TabCategory = () => {
                   isChecked={isAllProduct}
                   onChange={(evt) => setIsAllProduct(evt.target.checked)}
                 >
-                  Aparecer em Todos os Produto
+                  Todos os Produtos
                 </Checkbox>
+                <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
               </FormControl>
+              </Tooltip>
+              </Flex>
             </Box>
           </VStack>
           <Flex
@@ -653,10 +710,11 @@ const TabCategory = () => {
               ml='auto'
               bg='red.600'
               color='white'
-              fontSize='20px'
-              borderRadius='4px'
+              fontSize='1rem'
+              textTransform={'uppercase'}
+              borderRadius='8px'
               w='128px'
-              h='47px'
+              h='40px'
               isLoading={loading}
               _hover={{ transition: 'all 0.4s' }}
               type='submit'

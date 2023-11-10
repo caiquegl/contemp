@@ -49,7 +49,7 @@ const InputsHome = ({
 
   return (
     <Box w="100%">
-      <Text className="paragrafo-preto negrito" mb="10px">
+      <Text className="paragrafo-preto negrito" textTransform={'uppercase'} mb="10px">
         {name}
       </Text>
       <InputGroup

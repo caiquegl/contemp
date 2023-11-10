@@ -498,7 +498,7 @@ a {
     text-transform: uppercase !important;
 }
 
-/* CARRINHO / ORCAMENTO */
+/* CARRINHO / ORCAMENTO / ADMIN */
 .orcamento-subtitulo,
 .adm-titulo {
     font-size: 1.5rem !important;
@@ -514,7 +514,74 @@ a {
     border: 2px solid var(--black-primary) !important;
     border-radius: 8px !important;
 }
+.css-akd4ig {
+    border: 1px solid var(--black-primary) !important;
+    border-radius: 8px !important;
+}
 
+/* TABELA CATEGORIA */
+#tabela-categoria,
+#tabela-produtos,
+#tabela-documentos {
+    font-size: 1rem;
+}
+#tabela-categoria thead tr th,
+#tabela-produtos thead tr th,
+#tabela-documentos thead tr th {
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1rem;
+}
+
+#tabela-categoria tbody tr td,
+#tabela-produtos tbody tr td,
+#tabela-documentos tbody tr td {
+    padding: 10px 16px;
+}
+
+.botao-tabelaprodutos {
+    padding: 1% 5% !important;
+    height: auto !important;
+    font-size: 1rem!important;
+    border-radius: 50px!important;
+    color: var(--red-primary)!important;
+    border: 1px solid var(--red-primary)!important;
+    background-color: #ffe6e7!important;
+    
+}
+
+.ant-pagination-item {
+    border-radius: 8px;
+}
+
+.ant-pagination-item:hover {
+    border-color: var(--red-primary);
+    background: var(--red-primary);
+}
+
+.ant-pagination-item-active {
+    border-color: var(--red-primary);
+    background: var(--red-primary);
+    border-radius: 8px;
+}
+
+.ant-pagination-item-active a {
+    color: var(--white-primary);
+}
+
+.ant-pagination-item a:hover {
+    color: var(--white-primary);
+}
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+    border-radius: 8px;
+}
+
+.ant-pagination-prev .ant-pagination-item-link:hover, .ant-pagination-next:hover .ant-pagination-item-link:hover {
+    border-color: var(--black-primary);
+    background-color: var(--black-primary);
+    color: var(--white-primary);
+}
 
 /* RESPONSIVO */
 @media screen and (min-width: 992px) {
