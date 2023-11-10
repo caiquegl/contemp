@@ -32,8 +32,8 @@ const TabHome = () => {
 
   return (
     <Box>
-      <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>Produtos da Home</Text>
-      <Text color='black.800' fontSize={'1rem'} mb={'5%'}>Adicione e/ou edite aqui os 7 produtos que irão aparecer em destaque na home do site.</Text>
+      <Heading as={'h3'} className='adm-subtitulo text-black negrito'>Produtos da Home</Heading>
+      <Text className='paragrafo-preto' mb={'3%'}>Adicione e/ou edite aqui os 7 produtos que irão aparecer em destaque na home do site.</Text>
     <Tabs variant='unstyled' index={activeTab} onChange={(indexTab) => setActiveTab(indexTab)}>
       <TabList>
         {tabs.map((tabNumber) => (

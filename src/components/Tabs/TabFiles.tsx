@@ -1,10 +1,13 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link, Text, Heading } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Modal, Table, Tooltip } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { api } from '../../lib/axios'
 import { FiCopy } from 'react-icons/fi'
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { FaDeleteLeft } from 'react-icons/fa6'
+import { SearchBar } from '../SearchBar'
 
 const TabFiles = () => {
   const toast = useToast({
@@ -14,6 +17,7 @@ const TabFiles = () => {
   const fileInputRef = useRef<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [list, setList] = useState<any>([])
+  const [listClone, setListClone] = useState<any>([])
   const { confirm } = Modal
 
   function copiarTexto(texto: string) {
@@ -38,6 +42,8 @@ const TabFiles = () => {
       title: 'Copiado',
       description: 'Link copiado com sucesso.',
       status: 'info',
+      duration: 3000,
+      isClosable: true,
     })
   }
 
@@ -53,20 +59,35 @@ const TabFiles = () => {
       dataIndex: 'url',
       key: 'url',
       render: (value: any) => (
-        <Text onClick={() => window.open(`https://${value}`, '_blank')} cursor='pointer'>
-          {`https://${value}`}
-        </Text>
+        <Button
+          as={ChakraLink}
+          className='botao-tabelaprodutos'
+          href={`https://${value}`}
+          isExternal={true}
+          _hover={{ color: 'black', textDecoration: 'none' }}
+          rightIcon={<Icon as={ExternalLinkIcon} />}
+        >
+          {`url`}
+        </Button>
       ),
     },
     {
-      title: 'Ação',
+      title: 'Ações',
       render: (a: any, row: any) => (
         <HStack spacing='20px'>
+          <Tooltip placement='top' title='Copiar'>
+            <FiCopy
+              style={{
+                cursor: 'pointer',
+              }}
+              onClick={() => copiarTexto(`https://${row.url}`)}
+            />
+          </Tooltip>
           <Icon
             cursor='pointer'
-            as={AiOutlineClose}
-            fontSize='17px'
-            color='red.500'
+            as={FaDeleteLeft}
+            fontSize='1.15rem'
+            color='var(--gray-text)'
             onClick={() => {
               confirm({
                 title: 'Deletar',
@@ -94,14 +115,6 @@ const TabFiles = () => {
               })
             }}
           />
-          <Tooltip placement='top' title='Copiar'>
-            <FiCopy
-              style={{
-                cursor: 'pointer',
-              }}
-              onClick={() => copiarTexto(`https://${row.url}`)}
-            />
-          </Tooltip>
         </HStack>
       ),
     },
@@ -112,6 +125,7 @@ const TabFiles = () => {
       setLoading(true)
       const { data } = await api.get('getAllFiles')
       setList(data)
+      setListClone(data);
     } catch (error) {
       toast({
         title: 'Erro',
@@ -127,13 +141,50 @@ const TabFiles = () => {
     listFiles()
   }, [])
 
+  useEffect(() => {
+    setListClone([...list]);
+  }, [list]);
+
+  //ADD KEMELIN
+  const handleFileInputChange = async (evt) => {
+    try {
+      setLoading(true);
+      const files = evt.target.files;
+      if (files) {
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+          formData.append('files', files[i]);
+          formData.append('nameFile', files[i].name);
+        }
+        const { data } = await api.post('upload', formData, {
+          headers: { 'content-type': 'multipart/form-data' },
+        });
+
+        listFiles();
+
+        toast({
+          title: data.status ? 'Sucesso' : 'Erro',
+          description: `${data.status ? 'Sucesso' : 'Erro'} ao subir arquivo.`,
+          status: data.status ? 'success' : 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      // Handle error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <>
       <Box>
-        <Text color='black.800' fontSize={'1.5rem'} fontWeight={'black'}>
+        <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
           Painel de Documentos
-        </Text>
-        <Text color='black.800' fontSize={'1rem'} mb={'5%'}>
+        </Heading>
+        <Text className='paragrafo-preto' mb={'3%'}>
           Gerencie todos os documentos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua
           através do painel. Atenção! Ao excluir um documento não será possivel recupera-lo.
         </Text>
@@ -142,11 +193,10 @@ const TabFiles = () => {
         <Button
           bg='red.600'
           color='white'
-          fontSize='20px'
-          borderRadius='4px'
+          borderRadius='8px'
           w='128px'
           isLoading={loading}
-          h='47px'
+          h='40px'
           _hover={{ transition: 'all 0.4s' }}
           onClick={() => {
             fileInputRef.current.value = null // Remove a seleção atual do arquivo
@@ -156,6 +206,29 @@ const TabFiles = () => {
         >
           Adicionar
         </Button>
+        <SearchBar
+          inputProps={{
+            placeholder: 'Digite o nome do arquivo...',
+            onChange: (evt) => {
+              const searchTerm = evt.target.value.toLowerCase();
+              const filteredList = listClone.filter((item) =>
+                item.name.toLowerCase().includes(searchTerm)
+              );
+              setList(searchTerm ? filteredList : listClone);
+            },
+            _placeholder: {
+              color: 'black.800',
+              opacity: '50%',
+            },
+          }}
+          containerProps={{
+            bg: 'white.500',
+            border: '1px solid',
+            borderColor: 'black.800',
+            color: 'var(--black-primary)',
+            maxW: '18rem',
+          }}
+        />
         <input
           id='cpf_file'
           key={Date.now()} // Adicione uma "key" única para forçar a recriação do elemento input
@@ -192,7 +265,7 @@ const TabFiles = () => {
       </Flex>
 
       <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-        <Table scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
+        <Table id='tabela-documentos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
       </Box>
     </>
   )

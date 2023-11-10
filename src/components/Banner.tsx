@@ -60,6 +60,14 @@ export function Banner() {
       image:
         'https://contemp.com.br/api/arquivos/banner-3.webp',
         links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
+    },
+    {
+      subtitle:'',
+      title: 'JÁ CONHECE NOSSO CANAL NO YOUTUBE?',
+      text: "É no canal onde postamos os videos sobre utilização e funcionalidades dos nossos produtos.",
+      image:
+        'https://contemp.com.br/api/arquivos/banner-4.webp',
+        links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
     }
   ]
 

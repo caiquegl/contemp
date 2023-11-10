@@ -195,7 +195,7 @@ const Product = () => {
                       {index == bradName.length - 1 && <Breadcrumb.Item>{el}</Breadcrumb.Item>}
                       {index != bradName.length - 1 && (
                         <Breadcrumb.Item>
-                          <a href={`/category/${el.replaceAll(' ', '_')}#viewCategory`}>{el}</a>
+                          <a href={`/category/${el.toLowerCase().replaceAll(' ', '_')}`}>{el}</a>
                         </Breadcrumb.Item>
                       )}
                     </Fragment>
@@ -203,9 +203,9 @@ const Product = () => {
               </Breadcrumb>
             </Box>
 
-            <Text className='titulo-produto-individual'>
+            <Heading as={'h2'} className='titulo-produto-individual'>
               {detail.name ? detail.name : ''}
-            </Text>
+            </Heading>
             <Text className='descricao-produto-individual'>
               <Text as='span' noOfLines={4}>
                 {detail.description ? detail.description : ''}{' '}

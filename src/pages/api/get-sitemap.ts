@@ -58,8 +58,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       { loc: "https://contemp.com.br/suporte-tecnico" },
       { loc: "https://contemp.com.br/todosProdutos" },
       { loc: "https://contemp.com.br/trabalhe-conosco" },
-      ...(await getCategory()).map((category:any) => ({loc: "https://contemp.com.br/category/"+ category.name.replaceAll(' ', '_') })),
-      ...(await getAllProducts()).map((product:any) => ({loc: "https://contemp.com.br/produto/"+ product.name.replaceAll(' ', '_') }))
+      ...(await getCategory()).map((category:any) => ({loc: "https://contemp.com.br/category/"+ category.name.toLowerCase().replaceAll(' ', '_') })),
+      ...(await getAllProducts()).map((product:any) => ({loc: "https://contemp.com.br/produto/"+ product.name.toLowerCase().replaceAll(' ', '_') }))
 
   ]
 

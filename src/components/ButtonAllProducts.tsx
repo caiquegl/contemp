@@ -26,8 +26,8 @@ export const ButtonAllProducts = ({menuItems, render}: IProps) => {
                     rootClassName: 'btn-all-products-bg',   
                     subMenuOpenDelay: 0.5,
                     onClick: (info: any) => {
-                       if(info.name) router.push(`/category/${replaceNameToUrl(info.name.replaceAll(' ', '_'))}`)
-                       if(info.key  ) router.push(`/category/${replaceNameToUrl(info.key.replaceAll(' ', '_'))}`)
+                       if(info.name) router.push(`/category/${replaceNameToUrl(info.name.toLowerCase().replaceAll(' ', '_'))}`)
+                       if(info.key  ) router.push(`/category/${replaceNameToUrl(info.key.toLowerCase().replaceAll(' ', '_'))}`)
                     }
                     
                 }}

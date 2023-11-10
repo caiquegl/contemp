@@ -99,7 +99,7 @@ const Adm = () => {
   return (
     <>
       <Container maxW='7xl' p='12px 60px 12px 60px'>
-        <Flex alignItems='center' justifyContent='space-between'>
+        <Flex alignItems='center' maxW={'var(--max-tamanho)'} m={'auto'} justifyContent='space-between'>
           <Link href='/'>
             <Image src={Logo} width={160} height={41} onContextMenu={setContextMenuFalse} />
           </Link>
@@ -120,7 +120,7 @@ const Adm = () => {
               color='black.800'
               fontWeight='bold'
               fontSize='30px'
-              name='Caique'
+              name='Contemp'
               src='https://bit.ly/broken-link'
             />
           </Flex>
@@ -128,9 +128,9 @@ const Adm = () => {
       </Container>
       <Box bg='white.500' w='100%' minH='100vh' p='31px 60px'>
         <Flex alignItems='center' justifyContent='space-between'>
-          <Text fontSize='30px' fontWeight='bold' color='black.800'>
+          <Heading as={'h1'} className='adm-titulo text-black negrito'>
             Painel Administrativo
-          </Text>
+          </Heading>
           <Tabs variant='unstyled' index={activeTab} onChange={(indexTab) => setActiveTab(indexTab)}>
             <TabList>
               {/* <Tab

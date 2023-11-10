@@ -145,9 +145,9 @@ const Orcamento = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['350px', '350px', '160px', '160px', '160px', '160px']}
+        h={['80px']}
       >
-        <Text
+        <Heading as={'h2'} className='orcamento-titulo text-white center'
           fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
           fontWeight='bold'
           textAlign='center'
@@ -155,7 +155,7 @@ const Orcamento = () => {
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
           Solicitar Orçamento
-        </Text>
+        </Heading>
         {/*<Text
           fontSize={'20px'}
           fontWeight='bold'
@@ -189,10 +189,10 @@ const Orcamento = () => {
             md: '861px',
           }}
         >
-          <Text fontSize='30px' fontWeight='bold'>
+          <Heading as={'h3'} className='orcamento-subtitulo text-black negrito'>
             Dados para Contato
-          </Text>
-          <Text fontSize='20px' margin='20px 0 40px 0'>
+          </Heading>
+          <Text className='paragrafo-preto text-black' mb={'3%'}>
             Para enviar sua solicitação basta conferir os produtos do carrinho e preencher o formulário e logo você será
             notificado por e-mail do recebimento.
           </Text>
@@ -200,14 +200,14 @@ const Orcamento = () => {
           <Box as='form' id='carrinho' onSubmit={handleSubmit(saveCart)} ref={formRef}>
             <VStack spacing='20px' w='100%'>
               <HStack spacing={[0, '20px']} w='100%' flexDirection={['column', 'row']}>
-                <InputDefault
+                <InputDefault className='input-carrinho'
                   label='Nome'
                   type='text'
                   error={errors.name}
                   {...register('name', { required: 'Nome é obrigatório' })}
                 />
                 <Box pt={['20px', 0]} w='100%'>
-                  <InputDefault
+                  <InputDefault className='input-carrinho'
                     label='Sobrenome'
                     type='text'
                     error={errors.lastName}
@@ -217,14 +217,14 @@ const Orcamento = () => {
                   />
                 </Box>
               </HStack>
-              <InputDefault
+              <InputDefault className='input-carrinho'
                 label='E-mail'
                 type='text'
                 error={errors.email}
                 {...register('email', { required: 'Email é obrigatório' })}
               />
 
-              <InputDefault
+              <InputDefault className='input-carrinho'
                 label='Telefone'
                 type='text'
                 error={errors.telephone}
@@ -232,14 +232,14 @@ const Orcamento = () => {
                   required: 'Telefone é obrigatório',
                 })}
               />
-              <TextareaDefault label='Observaçao' error={errors.description} {...register('description')} />
+              <TextareaDefault className='input-carrinho' label='Observaçao' error={errors.description} {...register('description')} />
 
               <Box w='100%' pt={['30px', 0]}>
                 <Checkbox
                   colorScheme='red'
                   color='black.800'
                   mr='auto'
-                  fontSize='20px'
+                  fontSize='1rem'
                   height='17px'
                   isChecked={isAprove}
                   onChange={(evt) => setIsAprove(evt.target.checked)}
@@ -250,12 +250,9 @@ const Orcamento = () => {
               </Box>
             </VStack>
             <Flex alignItems='center' justifyContent='flex-end' mt='53px' w='100%'>
-              <Button
+              <Button className='botao-vermelho'
                 ml='auto'
-                bg='red.600'
-                color='white'
-                fontSize='20px'
-                borderRadius='50px'
+                mt={'0% !important'}
                 h='47px'
                 isLoading={loading}
                 _hover={{
@@ -283,9 +280,9 @@ const Orcamento = () => {
             md: pxToRem(30),
           }}
         >
-          <Text fontSize='30px' fontWeight='bold'>
+          <Heading as={'h3'} className='orcamento-subtitulo text-black negrito' mb={'3%'}>
             Produtos selecionados
-          </Text>
+          </Heading>
           <VStack spacing='20px' divider={<Divider />}>
             {cart &&
               cart.length > 0 &&
@@ -312,7 +309,7 @@ const Orcamento = () => {
           </VStack>
         </Box>
       </Flex>
-      <Flex
+      {/*<Flex
         w='100%'
         alignItems='center'
         justifyContent='center'
@@ -419,7 +416,7 @@ const Orcamento = () => {
         >
           <Image src={Mapa} minH={500} bgSize='100%' />
         </Box>
-      </Flex>
+      </Flex>*/}
       <Footer />
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

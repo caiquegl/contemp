@@ -40,7 +40,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
         <Image
           src={img ? img : DefaultImg}
           alt={alt}
-          onClick={() => router.push(`/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}`)}
+          onClick={() => router.push(`/produto/${replaceNameToUrl(text).toLowerCase().replaceAll(' ', '_')}`)}
         />
 
         <Box className='see-more-text' display='none' flex={0.3} textAlign='center'>
@@ -48,7 +48,7 @@ const CardProduct = ({ img, text, alt, categoryName, ...props }: IProps) => {
             {text}
           </Heading>
           <Link
-            href={text ? `/produto/${replaceNameToUrl(text).replaceAll(' ', '_')}` : ''}
+            href={text ? `/produto/${replaceNameToUrl(text).toLowerCase().replaceAll(' ', '_')}` : ''}
             _hover={{ color: 'black', textDecoration: 'none' }}
           >
             <Text fontSize='1rem' color='var(--black-primary)' textTransform={'uppercase'} mt={'4%'} mb={'4%'}
