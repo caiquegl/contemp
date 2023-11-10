@@ -40,14 +40,17 @@ const Category = () => {
       }
     })
 
+
     setList(list)
+ 
     setListOrigin(list)
   }
 
   const getCategoryList = async () => {
     try {
       let nameCategory = ''
-      if (category && typeof category === 'string') nameCategory = decodeName(category).replaceAll('_', ' ').replaceAll('/', '7777')
+      if (category && typeof category === 'string')
+        nameCategory = decodeName(category).replaceAll('_', ' ').replaceAll('/', '7777')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
       setCateg(data.category)
@@ -63,16 +66,15 @@ const Category = () => {
     }
   }, [category])
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 230,
-      behavior: 'smooth',
-    })
-    // window.addEventListener('scroll', handleScrollToProductList)
+  // useEffect(() => {
+  //   // window.scrollTo({
+  //   //   top: 230,
+  //   //   behavior: 'smooth',
+  //   // })
+  //   // window.addEventListener('scroll', handleScrollToProductList)
 
-    // return () => window.removeEventListener('scroll', handleScrollToProductList)
-  }, [])
-
+  //   // return () => window.removeEventListener('scroll', handleScrollToProductList)
+  // }, [])
   return (
     <SmoothScroll>
       {categ && (
@@ -84,69 +86,69 @@ const Category = () => {
         </Head>
       )}
       <Box backgroundColor={'var(--graylight-primary)'} width={'100%'}>
-      <Flex
-        className='card-titulo-categoria'
-      // id="viewCategory"
-      >
-        
-
-
-        <Heading as={'h2'} className='h3-preto titulo-categoria'
+        <Flex
+          className='card-titulo-categoria'
+          // id="viewCategory"
         >
-          {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
-        </Heading>
-        <Space size={20}>
-          {categ &&
-            categ.filter &&
-            categ.filter.length > 0 &&
-            categ.filter.map((item: any, index: number) => (
-              <Box
-                backgroundColor={activeFilter === index ? 'var(--red-primary)' : 'transparent'}
-                border={activeFilter === index ? '2px solid var(--red-primary)' : '2px solid var(--black-primary)'}
-                color={activeFilter === index ? 'var(--white-primary)!important' : 'var(--black-primary)'}
-                className='botao-filtro'
-                onClick={() => {
-                  if(activeFilter === index) {
-                    setList([...listOrigin])
-                    setActiveFilter(undefined)
-                    return
-                  }
-                  let newList: any = []
-                  list.forEach((pd: any) => {
-                    if (pd && pd.length > 0) {
-                      pd.forEach((product: any) => {
-                        item.products.forEach((pdFilter: any) => {
-                          if (product.id === pdFilter) newList.push(product)
-                        })
-                      })
+          <Heading as={'h2'} className='h3-preto titulo-categoria'>
+            {category && typeof category === 'string' ? decodeName(category).replaceAll('_', ' ') : ''}
+          </Heading>
+
+          <Space size={20}>
+            {categ &&
+              categ.filter &&
+              categ.filter.length > 0 &&
+              categ.filter.map((item: any, index: number) => (
+                <Box
+                  backgroundColor={activeFilter === index ? 'var(--red-primary)' : 'transparent'}
+                  border={activeFilter === index ? '2px solid var(--red-primary)' : '2px solid var(--black-primary)'}
+                  color={activeFilter === index ? 'var(--white-primary)!important' : 'var(--black-primary)'}
+                  className='botao-filtro'
+                  onClick={() => {
+                    if (activeFilter === index) {
+                      setList([...listOrigin])
+                      setActiveFilter(undefined)
+                      return
                     }
-                  })
-                  setActiveFilter(index)
-                  setList([[...newList]])
-                }}
-              >
-                <p style={{margin: 0}}>{item.name}</p>
-                {/* {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />} */}
-              </Box>
-            ))}
-        </Space>
-      </Flex>
+                    let newList: any = []
+                    list.forEach((pd: any) => {
+                      if (pd && pd.length > 0) {
+                        pd.forEach((product: any) => {
+                          item.products.forEach((pdFilter: any) => {
+                            if (product.id === pdFilter) newList.push(product)
+                          })
+                        })
+                      }
+                    })
+                    setActiveFilter(index)
+                    setList([[...newList]])
+                  }}
+                >
+                  <p style={{ margin: 0 }}>{item.name}</p>
+                  {/* {activeFilter === index && <AiOutlineClose style={{marginLeft: 5, marginTop: 5}} color="white" fontSize="17px" />} */}
+                </Box>
+              ))}
+          </Space>
+        </Flex>
       </Box>
-      <Box w={'100%'} backgroundColor={'white'} >
-      <Box className='container-categoria-produtos' >
-        {list &&
-          list.length > 0 &&
-          list.map((categ: any, index: number) => {
-            index = index + 1
-            let bg = 'white'
+      <Box w={'100%'} backgroundColor={'white'}>
 
-            if (index % 2 === 0) bg = 'white.500'
-            // if (index % 3 === 0) bg = 'black.800'
-            // if (index % 4 === 0) bg = 'red.600'
+          <Box className='container-categoria-produtos'>
+            {/* <InfiniteScrollComponent /> */}
+            {list &&
+              list.length > 0 &&
+              list.map((categ: any, index: number) => {
+                index = index + 1
+                let bg = 'white'
 
-            return <ListCategory key={index} bg={bg} data={categ} />
-          })}
-      </Box>
+                if (index % 2 === 0) bg = 'white.500'
+                // if (index % 3 === 0) bg = 'black.800'
+                // if (index % 4 === 0) bg = 'red.600'
+
+                return <ListCategory key={index} bg={bg} data={categ} />
+              })}
+          </Box>
+
       </Box>
       {/* <Flex w='100%' alignItems='center' p={['0 20px', '0 20px', '0 20px', '0 20px', '0']} bg='white'>
         <Container maxW='7xl' p='80px 0'>

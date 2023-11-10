@@ -322,6 +322,11 @@ a {
     height: 17.5rem;
 }
 
+.imageSpan > span{
+    height: 17.5rem !important;
+    width: 100% !important;
+}
+
 .imagem-produto-categoria:hover {
     transform: scale(1.1);
     transition: transform 0.4s ease;
