@@ -6,6 +6,7 @@ function creatRedirectObj(source, destination, permanent = true) {
   }
 }
 module.exports = {
+  reactStrictMode: false,
   images: {
     domains: ['contemp.com.br'], // Adicione o domínio do seu host de imagem aqui
   },
