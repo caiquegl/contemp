@@ -49,12 +49,29 @@ export function Banner() {
   // This can be static or loaded from a server
   const cards: any = [
     {
-      subtitle: '',
+      subtitle:'',
       title: '',
-      text: '',
-      image: 'https://contemp.com.br/api/arquivos/bannercontemp.webp',
+      text: "",
+      image:
+        'https://contemp.com.br/api/arquivos/bannercontemp.webp',
       links: '#',
     },
+    {
+      subtitle:'MEDIÇÃO E CONTROLE DE TEMPERATURA EM',
+      title: 'PROCESSOS INDUSTRIAIS',
+      text: "Conheça nossas soluções completas para sua indústria. Fale com nossa equipe de vendas.",
+      image:
+        'https://contemp.com.br/api/arquivos/banner-2.webp',
+        links: '#',
+    },
+    {
+      subtitle:'',
+      title: 'ATENDEMOS O BRASIL E A AMÉRICA LATINA',
+      text: "Temos uma equipe de vendedores-técnicos de prontidão para te atender.",
+      image:
+        'https://contemp.com.br/api/arquivos/banner-3.webp',
+        links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
+    }
   ]
 
   return (
