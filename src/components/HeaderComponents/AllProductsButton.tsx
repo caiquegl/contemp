@@ -11,16 +11,12 @@ export function AllProductsButton({ hasLabel }: AllProductsButtonProps) {
 
   return (
     <Box>
-      <Link
-        href="/todosProdutos"
-        _hover={{ color: '#fff', textDecoration: 'none' }}
-      >
+      <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
         <Button
-          borderRadius="5px"
-          bg="red.600"
+          borderRadius='5px'
+          bg='red.600'
           _hover={{
             bg: 'red.600',
-    
           }}
           width={hasLabel ? '100%' : 0}
         >
@@ -32,12 +28,7 @@ export function AllProductsButton({ hasLabel }: AllProductsButtonProps) {
           >
             Todos os produtos
           </Text>
-          <Icon
-            as={BsThreeDotsVertical}
-            ml={hasLabel ? '10px' : 0}
-            color="white"
-            fontSize="20px"
-          />
+          <Icon as={BsThreeDotsVertical} ml={hasLabel ? '10px' : 0} color='white' fontSize='20px' />
         </Button>
       </Link>
     </Box>

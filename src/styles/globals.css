@@ -318,6 +318,13 @@ img {
   max-width: inherit!important;
 }
 
+.ant-dropdown {
+  z-index: 9999999999;
+}
+
+.ant-dropdown-menu-submenu-popup {
+  z-index: 9999999999;
+}
 
 .btn-all-products {
   background-color: white;

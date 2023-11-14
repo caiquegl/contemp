@@ -73,12 +73,15 @@ export const Header = () => {
         onTitleClick: (value: any) => {
           router.push(`/category/${replaceNameToUrl(el.name).toLowerCase().replaceAll(' ', '_')}`)
         },
-        children: el.children ? el.children.map((el2: any) => {
-          if(el2.children) el2.onTitleClick = (value: any) => {
-            router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}`)
-          }
-          return el2
-        }) : undefined
+        children: el.children
+          ? el.children.map((el2: any) => {
+              if (el2.children)
+                el2.onTitleClick = (value: any) => {
+                  router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}`)
+                }
+              return el2
+            })
+          : undefined,
       }))
       setList(listMenu)
       setLoading(false)
@@ -394,9 +397,7 @@ export const Header = () => {
                   transition: 'all 0',
                 }}
               >
-                <Text className='menu-institucional-item'>
-                  A Contemp
-                </Text>
+                <Text className='menu-institucional-item'>A Contemp</Text>
               </Link>
               <Link
                 className='menu-institucional-item-link'
@@ -408,9 +409,7 @@ export const Header = () => {
                 }}
                 href='/calibracao'
               >
-                <Text className='menu-institucional-item'>
-                  Calibração
-                </Text>
+                <Text className='menu-institucional-item'>Calibração</Text>
               </Link>
               <Link
                 className='menu-institucional-item-link'
@@ -422,9 +421,7 @@ export const Header = () => {
                 }}
                 href='/suporte-tecnico'
               >
-                <Text className='menu-institucional-item'>
-                  Suporte Técnico
-                </Text>
+                <Text className='menu-institucional-item'>Suporte Técnico</Text>
               </Link>
               {/*<Link
                 className='menu-institucional-item-link'
@@ -451,9 +448,7 @@ export const Header = () => {
                 }}
                 href='https://blog.contemp.com.br'
               >
-                <Text className='menu-institucional-item'>
-                  Blog
-                </Text>
+                <Text className='menu-institucional-item'>Blog</Text>
               </Link>
             </HStack>
 
