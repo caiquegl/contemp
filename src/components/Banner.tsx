@@ -36,7 +36,7 @@ export function Banner() {
 
   // This list contains all the data for carousels
   // This can be static or loaded from a server
-  const cards = [
+  const cards: any = [
     {
       subtitle:'',
       title: '',
@@ -102,7 +102,7 @@ export function Banner() {
       </IconButton>
       {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {cards.map((card, index) => (
+        {cards.map((card: any, index: any) => (
           <Box
             key={index}
             position="relative"
