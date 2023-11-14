@@ -16,7 +16,7 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
 
   console.log(menuItems)
   return (
-    <Box>
+    <Box zIndex={1}>
       <Dropdown
         // open={true}
         menu={{
@@ -26,7 +26,7 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
             backgroundColor: colors.white[0],
           },
           // openKeys: ['SENSORES'],
-          className: 'btn-all-products',
+          className: 'btn-all-products text-black negrito',
           rootClassName: 'btn-all-products-bg',
           subMenuOpenDelay: 0.5,
           onClick: (info: any) => {

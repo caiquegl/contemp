@@ -159,7 +159,7 @@ img {
 .editor_button {
   background-color: #b60005;
   padding: 10px 10px;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 50px;
   color: #fff;
@@ -320,20 +320,23 @@ img {
 
 .ant-dropdown {
   z-index: 9999999999;
+  border-radius: 8px;
 }
 
 .ant-dropdown-menu-submenu-popup {
   z-index: 9999999999;
+  border-radius: 4px;
 }
 
 .btn-all-products {
   background-color: white;
-  font-size: 16px;
+  font-size: 1rem;
   color: #242424;
 }
 
 .btn-all-products .ant-dropdown-menu-submenu-expand-icon {
   margin-bottom: 4px !important;
+  font-weight: bold;
 }
 
 .ant-dropdown-menu-submenu:hover > .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-expand-icon .ant-dropdown-menu-submenu-arrow-icon {
@@ -384,7 +387,8 @@ img {
 }
 
  .ant-dropdown-menu-title-content {
-  font-size: 17px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .pop-select {
