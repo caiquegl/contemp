@@ -62,6 +62,11 @@ import { FiPhone, FiMail, FiInstagram, FiLinkedin, FiYoutube } from "react-icons
 import { BsYoutube } from "react-icons/bs";
 import { TbBrandLinkedin } from "react-icons/tb";
 import { FaSquareFacebook } from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa";
+import { HiOutlineDocumentText, HiOutlineDocumentSearch } from "react-icons/hi";
+
+
+
 
 export const Header = () => {
   const router = useRouter()
@@ -400,18 +405,85 @@ export const Header = () => {
               alignItems='center'
               justifyContent='center'
             >
-              <Link
-                href='/a-contemp'
-                className='menu-institucional-item-link'
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  /*leftIcon={<FiPhone />}*/
+                  rightIcon={<FaAngleDown />}
+                  backgroundColor={'transparent'}
+                  fontWeight={'400!important'}
+                  _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                  _expanded={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                >
+                  A Contemp
+                </MenuButton>
+                <MenuList maxWidth={'250px'} className='paragrafo-preto negrito text-black' color={'var(--black-primary!important)'}>
+                <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textAlign={'left'} textTransform={'uppercase'}>Acesse nosso Institucional</Heading>
+                  <Link href='/a-contemp'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'var(--white-primary)',
-                  fontWeight: 'bold',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
                   transition: 'all 0',
                 }}
-              >
-                <Text className='menu-institucional-item'>A Contemp</Text>
-              </Link>
+                  textDecoration={'none'}>
+                  <MenuItem>
+                  Quem somos
+                  </MenuItem>
+                  </Link>
+                  <Link href='/trabalhe-conosco'
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem>
+                 Trabalhe Conosco
+                  </MenuItem>
+                  </Link>
+                  <Link href='https://blog.contemp.com.br/politica-de-privacidade' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem>
+                  Política de Privacidade
+                  </MenuItem>
+                  </Link>
+                  
+                  <MenuDivider />
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textTransform={'uppercase'} textAlign={'left'}>Acesse nossos padrões e conteúdos exclusivos</Heading>
+                  <Link href='https://laboratorio.contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<HiOutlineDocumentSearch />}>
+                  Padrões de Laboratório 
+                  </MenuItem>
+                  </Link>
+                  <Link href='https://blog.contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<HiOutlineDocumentText />}>
+                  Blog 
+                  </MenuItem>
+                  </Link>
+                </MenuList>
+              </Menu>
               <Link
                 className='menu-institucional-item-link'
                 _hover={{
@@ -454,7 +526,8 @@ export const Header = () => {
               <Menu>
                 <MenuButton
                   as={Button}
-                  leftIcon={<FiPhone />}
+                  /*leftIcon={<FiPhone />}*/
+                  rightIcon={<FaAngleDown />}
                   backgroundColor={'transparent'}
                   fontWeight={'400!important'}
                   _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
