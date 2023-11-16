@@ -19,7 +19,7 @@ export function ContempLinks({ ...props }: StackProps) {
           color: 'red.600'
         }}
       >
-        <Text w="max-content" fontSize="18px">
+        <Text w="max-content" fontSize={'1rem'}>
           A Contemp
         </Text>
       </Link>
@@ -30,7 +30,7 @@ export function ContempLinks({ ...props }: StackProps) {
         }}
         href="/calibracao"
       >
-        <Text w="max-content" fontSize="18px">
+        <Text w="max-content" fontSize={'1rem'}>
           Calibração
         </Text>
       </Link>
@@ -41,7 +41,7 @@ export function ContempLinks({ ...props }: StackProps) {
         }}
         href="/suporte-tecnico"
       >
-        <Text w="max-content" fontSize="18px">
+        <Text w="max-content" fontSize={'1rem'}>
           Suporte Técnico
         </Text>
       </Link>
@@ -52,7 +52,7 @@ export function ContempLinks({ ...props }: StackProps) {
         }}
         href="/trabalhe-conosco"
       >
-        <Text w="max-content" fontSize="18px">
+        <Text w="max-content" fontSize={'1rem'}>
           Trabalhe Conosco
         </Text>
       </Link>
@@ -63,7 +63,7 @@ export function ContempLinks({ ...props }: StackProps) {
         }}
         href="https://blog.contemp.com.br"
       >
-        <Text w="max-content" fontSize="18px">
+        <Text w="max-content" fontSize={'1rem'}>
           Blog
         </Text>
       </Link>
