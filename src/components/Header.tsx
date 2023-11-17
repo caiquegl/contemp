@@ -557,7 +557,7 @@ export const Header = () => {
                   transition: 'all 0',
                 }}
                   textDecoration={'none'}>
-                  <MenuItem icon={<FiMail />} textTransform={'lowercase!important'}>
+                  <MenuItem icon={<FiMail />} textTransform="lowercase">
                   vendas@contemp.com.br
                   </MenuItem>
                   </Link>
