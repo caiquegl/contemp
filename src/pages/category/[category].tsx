@@ -44,9 +44,9 @@ const Category = () => {
       }
     })
 
-    const newData = list.slice(startIndex, itemsPerPage)
+    const newData = list.slice(0, itemsPerPage)
 
-    setList(newData)
+    setList([...newData])
     setStartIndex(3)
     setListOrigin(list)
   }
@@ -105,6 +105,7 @@ const Category = () => {
               categ.filter.length > 0 &&
               categ.filter.map((item: any, index: number) => (
                 <Box
+                  key={item.id}
                   backgroundColor={activeFilter === index ? 'var(--red-primary)' : 'transparent'}
                   border={activeFilter === index ? '2px solid var(--red-primary)' : '2px solid var(--black-primary)'}
                   color={activeFilter === index ? 'var(--white-primary)!important' : 'var(--black-primary)'}
