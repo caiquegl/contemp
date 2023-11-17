@@ -14,9 +14,8 @@ interface IProps {
 export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
   const router = useRouter()
 
-  console.log(menuItems)
   return (
-    <Box zIndex={1}>
+    <Box zIndex={999}>
       <Dropdown
         // open={true}
         menu={{
@@ -24,6 +23,7 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
           style: {
             color: colors.black[800],
             backgroundColor: colors.white[0],
+            zIndex: 999
           },
           // openKeys: ['SENSORES'],
           className: 'btn-all-products text-black negrito',
