@@ -44,11 +44,11 @@ const Category = () => {
       }
     })
 
-    const newData = list.slice(startIndex, itemsPerPage)
+    const newData = list.slice(0, itemsPerPage)
 
-    setList(newData)
+    setList([...newData])
     setStartIndex(3)
-    setListOrigin(list)
+    setListOrigin([...list])
   }
 
   const getCategoryList = async () => {
@@ -58,6 +58,7 @@ const Category = () => {
         nameCategory = decodeName(category).replaceAll('_', ' ').replaceAll('/', '7777')
       const { data } = await api.get(`${nameCategory}/getCategory`)
       if (!data.category) return router.push('/404')
+      console.log(data)
       setCateg(data.category)
       dividerList(data.products)
     } catch (error) {
@@ -105,6 +106,7 @@ const Category = () => {
               categ.filter.length > 0 &&
               categ.filter.map((item: any, index: number) => (
                 <Box
+                  key={item.id}
                   backgroundColor={activeFilter === index ? 'var(--red-primary)' : 'transparent'}
                   border={activeFilter === index ? '2px solid var(--red-primary)' : '2px solid var(--black-primary)'}
                   color={activeFilter === index ? 'var(--white-primary)!important' : 'var(--black-primary)'}
@@ -141,6 +143,7 @@ const Category = () => {
       <Box w={'100%'} backgroundColor={'white'}>
         <Box className='container-categoria-produtos'>
           {/* <InfiniteScrollComponent /> */}
+          {console.log(list, 'list')}
           {list && list.length > 0 && (
             <>
               {list.map((categ: any, index: number) => {
