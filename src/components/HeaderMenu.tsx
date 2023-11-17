@@ -42,7 +42,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
           justifyContent: 'space-between',
           // zIndex: 99999999999999999
           margin: 'auto',
-          zIndex: 3
+          zIndex: 999
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>
