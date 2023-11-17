@@ -24,6 +24,14 @@ import {
   useBreakpointValue,
   useDisclosure,
   Heading,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider
 } from '@chakra-ui/react'
 import { Image } from './Image'
 import React, { useEffect, useState } from 'react'
@@ -50,6 +58,15 @@ import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 import { api } from '../lib/axios'
 import { ButtonAllProducts } from './ButtonAllProducts'
 import { Space } from 'antd'
+import { FiPhone, FiMail, FiInstagram, FiLinkedin, FiYoutube } from "react-icons/fi";
+import { BsYoutube } from "react-icons/bs";
+import { TbBrandLinkedin } from "react-icons/tb";
+import { FaSquareFacebook } from "react-icons/fa6";
+import { FaAngleDown } from "react-icons/fa";
+import { HiOutlineDocumentText, HiOutlineDocumentSearch } from "react-icons/hi";
+
+
+
 
 export const Header = () => {
   const router = useRouter()
@@ -59,11 +76,12 @@ export const Header = () => {
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
 
+
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
   })
-
+  
   const listCategory = async () => {
     try {
       const { data } = await api.get('getMenu')
@@ -73,12 +91,15 @@ export const Header = () => {
         onTitleClick: (value: any) => {
           router.push(`/category/${replaceNameToUrl(el.name).toLowerCase().replaceAll(' ', '_')}`)
         },
-        children: el.children ? el.children.map((el2: any) => {
-          if(el2.children) el2.onTitleClick = (value: any) => {
-            router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}`)
-          }
-          return el2
-        }) : undefined
+        children: el.children
+          ? el.children.map((el2: any) => {
+            if (el2.children)
+              el2.onTitleClick = (value: any) => {
+                router.push(`/category/${replaceNameToUrl(el2.name).toLowerCase().replaceAll(' ', '_')}`)
+              }
+            return el2
+          })
+          : undefined,
       }))
       setList(listMenu)
       setLoading(false)
@@ -384,20 +405,85 @@ export const Header = () => {
               alignItems='center'
               justifyContent='center'
             >
-              <Link
-                href='/a-contemp'
-                className='menu-institucional-item-link'
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  /*leftIcon={<FiPhone />}*/
+                  rightIcon={<FaAngleDown />}
+                  backgroundColor={'transparent'}
+                  fontWeight={'400!important'}
+                  _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                  _expanded={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                >
+                  A Contemp
+                </MenuButton>
+                <MenuList maxWidth={'250px'} className='paragrafo-preto negrito text-black' color={'var(--black-primary!important)'}>
+                <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textAlign={'left'} textTransform={'uppercase'}>Acesse nosso Institucional</Heading>
+                  <Link href='/a-contemp'
                 _hover={{
                   textDecoration: 'none',
-                  color: 'var(--white-primary)',
-                  fontWeight: 'bold',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
                   transition: 'all 0',
                 }}
-              >
-                <Text className='menu-institucional-item'>
-                  A Contemp
-                </Text>
-              </Link>
+                  textDecoration={'none'}>
+                  <MenuItem>
+                  Quem somos
+                  </MenuItem>
+                  </Link>
+                  <Link href='/trabalhe-conosco'
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem>
+                 Trabalhe Conosco
+                  </MenuItem>
+                  </Link>
+                  <Link href='https://blog.contemp.com.br/politica-de-privacidade' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem>
+                  Política de Privacidade
+                  </MenuItem>
+                  </Link>
+                  
+                  <MenuDivider />
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textTransform={'uppercase'} textAlign={'left'}>Acesse nossos padrões e conteúdos exclusivos</Heading>
+                  <Link href='https://laboratorio.contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<HiOutlineDocumentSearch />}>
+                  Padrões de Laboratório 
+                  </MenuItem>
+                  </Link>
+                  <Link href='https://blog.contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<HiOutlineDocumentText />}>
+                  Blog 
+                  </MenuItem>
+                  </Link>
+                </MenuList>
+              </Menu>
               <Link
                 className='menu-institucional-item-link'
                 _hover={{
@@ -408,9 +494,7 @@ export const Header = () => {
                 }}
                 href='/calibracao'
               >
-                <Text className='menu-institucional-item'>
-                  Calibração
-                </Text>
+                <Text className='menu-institucional-item'>Calibração</Text>
               </Link>
               <Link
                 className='menu-institucional-item-link'
@@ -422,9 +506,7 @@ export const Header = () => {
                 }}
                 href='/suporte-tecnico'
               >
-                <Text className='menu-institucional-item'>
-                  Suporte Técnico
-                </Text>
+                <Text className='menu-institucional-item'>Suporte Técnico</Text>
               </Link>
               {/*<Link
                 className='menu-institucional-item-link'
@@ -441,20 +523,106 @@ export const Header = () => {
                   Trabalhe Conosco
                 </Text>
               </Link>*/}
-              <Link
-                className='menu-institucional-item-link'
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  /*leftIcon={<FiPhone />}*/
+                  rightIcon={<FaAngleDown />}
+                  backgroundColor={'transparent'}
+                  fontWeight={'400!important'}
+                  _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                  _expanded={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                >
+                  Contatos
+                </MenuButton>
+                <MenuList maxWidth={'100px'} className='paragrafo-preto negrito text-black' color={'var(--black-primary!important)'}>
+                <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>Clique e nos contate</Heading>
+                  <Link href='tel:1142235140' isExternal
                 _hover={{
                   textDecoration: 'none',
-                  color: 'var(--white-primary)',
-                  fontWeight: 'bold',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
                   transition: 'all 0',
                 }}
-                href='https://blog.contemp.com.br'
-              >
-                <Text className='menu-institucional-item'>
-                  Blog
-                </Text>
-              </Link>
+                  textDecoration={'none'}>
+                  <MenuItem icon={<FiPhone />}>
+                  (11) 4223-5140
+                  </MenuItem>
+                  </Link>
+                  <Link href='mailto:vendas@contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<FiMail />} textTransform={'lowercase!important'}>
+                  vendas@contemp.com.br
+                  </MenuItem>
+                  </Link>
+                  <MenuDivider />
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>Siga nossas redes sociais</Heading>
+                  <MenuItem backgroundColor={'white!important'}>
+                  {/* INSTAGRAM */}
+                  <Link
+                  href='https://www.instagram.com/contemp.industria/' isExternal
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'var(--red-primary)',
+                    borderRadius: '4px',
+                    transition: 'all 0',
+                  }}
+                    textDecoration={'none'}
+                    pr={'4%'}
+                  >
+                  <FiInstagram fontSize={'1.5rem'} color='#e90075' />
+                  </Link>
+                  {/* FACEBOOK */}
+                  <Link
+                  href='https://www.facebook.com/Contemp-1001000803330302/' isExternal
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'var(--red-primary)',
+                    borderRadius: '4px',
+                    transition: 'all 0',
+                  }}
+                    textDecoration={'none'}
+                    pr={'4%'}
+                  >
+                  <FaSquareFacebook fontSize={'1.5rem'} color='#0081FB' />
+                  </Link>
+                  {/* YOUTUBE */}
+                  <Link
+                  href='https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ' isExternal
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'var(--red-primary)',
+                    borderRadius: '4px',
+                    transition: 'all 0',
+                  }}
+                    textDecoration={'none'}
+                    pr={'4%'}
+                  >
+                  <BsYoutube fontSize={'1.5rem'} color='#FF0000' />
+                  </Link>
+                  {/* LINKEDIN */}
+                  <Link
+                  href='https://www.linkedin.com/company/contemp/' isExternal
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'var(--red-primary)',
+                    borderRadius: '4px',
+                    transition: 'all 0',
+                  }}
+                    textDecoration={'none'}
+                    pr={'4%'}
+                  >
+                  <FiLinkedin fontSize={'1.5rem'} color='#0077B5' />
+                  </Link>                  
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </HStack>
 
             <Flex alignItems='center'>

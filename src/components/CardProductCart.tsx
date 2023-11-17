@@ -45,16 +45,21 @@ const CardProductCart = ({ data, changeQtd, removeCart, getItem }: any) => {
         </Box>
       </Link>
       <Box ml='10px' w={['100%', 'calc(100% - 118px)']}>
-        <Text fontSize='20px' fontWeight='bold' color='black' textTransform='uppercase'>
+      <Link
+        href={`/produto/${products?.name?.toLowerCase().replaceAll(/\s+/g, '_')}`}
+        _hover={{ color: 'black', textDecoration: 'none' }}
+      >
+        <Text className='paragrafo-preto text-black negrito' textTransform='uppercase'>
           {products.name}
         </Text>
+        </Link>
         {data.variation &&
           Object.keys(data.variation).length > 0 &&
           Object.keys(data.variation).map((key: any, index: any) => (
             <Flex key={index} alignItems='flex-start' m='5px 0' flexDirection='column'>
-              <Tooltip label={key} placement='top'>
+              <Tooltip label={key} placement='top' fontSize={'.75rem'} backgroundColor={'var(--red-primary)'} borderRadius={'8px'}>
                 <Text
-                  fontSize='17px'
+                  fontSize='1rem'
                   color='black.800'
                   textTransform='uppercase'
                   fontWeight='bold'

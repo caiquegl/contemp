@@ -20,6 +20,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
   return (
     <>
       <Menu
+      zIndex={3}
         onClick={(evt) => {
           router.push(`/category/${replaceNameToUrl(evt.keyPath[0].toLowerCase().replaceAll(' ', '_'))}`)
         }}
@@ -30,6 +31,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
         style={{
           background: '#242424',
           border: 'none',
+          borderRadius: '8px',
           fontSize: '1rem',
           display: 'flex',
           transition: '0.2s',
@@ -56,6 +58,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
   const router = useRouter()
   return (
     <Menu
+    zIndex={2}
       onClick={(avt) => {
         onClose()
         router.push(`/category/${replaceNameToUrl(avt.key)}`)
@@ -66,7 +69,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         background: '#242424',
         border: 'none',
         color: '#fff',
-        fontSize: 16,
+        fontSize: '1rem',
       }}
       // theme='dark'
       expandIcon={<Icon icon={AiFillCaretRight} size={30} />}

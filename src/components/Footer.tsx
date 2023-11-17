@@ -92,7 +92,7 @@ export const Footer = () => {
           <Link href='/trabalhe-conosco' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem m={[0, '0 30px']}>Trabalhe Conosco</ListItem>
           </Link>
-          <Link href='/sitemap.xml' _hover={{ color: '#fff', textDecoration: 'none' }}>
+          <Link href='/site-map' _hover={{ color: '#fff', textDecoration: 'none' }}>
             <ListItem>Mapa do Site</ListItem>
           </Link>
         </UnorderedList>

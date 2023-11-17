@@ -56,14 +56,6 @@ const Calibracao = () => {
                 </Text>
               </Box>
             </Flex>
-            <Heading as={'h3'} className='calibracao-subtitulo text-red negrito'>
-              Calibrações efetuadas com símbolo de acreditação – RBC
-            </Heading>
-            <Text className='paragrafo-preto text-black' mt='25px' lineHeight='34px'>
-              Nossos laboratórios possuem equipamentos e padrões que garantem a qualidade e confiabilidade das medições,
-              as calibrações são efetuadas segundo procedimentos de rotina, avaliados periodicamente, nossos técnicos são
-              treinados e avaliados segundo critérios definidos pelo Inmetro.
-            </Text>
           </Container>
         </Box>
         <Box w='100%' bg='white.500' p={['60px 20px', '60px 20px', '60px 20px', '60px 20px', '60px 20px']} pt='100px'>

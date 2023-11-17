@@ -129,7 +129,6 @@ const Orcamento = () => {
         <title>Orçamento</title>
         <link rel='icon' href='/favicon.png' />
 
-
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -137,7 +136,6 @@ const Orcamento = () => {
             `,
           }}>
         </script>
-
 
       </Head>
       <Flex

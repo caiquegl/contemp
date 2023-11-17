@@ -28,7 +28,7 @@ export function CartBag({ cart, totalCart, onOpen }: CartBagProps) {
         <Flex
           p={`${pxToRem(2)} ${pxToRem(5)}`}
           bg="red.600"
-          borderRadius={50}
+          borderRadius={8}
           alignItems="center"
           justifyContent="center"
           fontWeight="bold"

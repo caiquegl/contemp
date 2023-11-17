@@ -3,15 +3,16 @@ const EXTERNAL_DATA_URL = 'https://www.contemp.com.br/api/get-sitemap';
 function generateSiteMap(posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     ${posts
-       .map(({ loc }) => {
-         return `
-       <url>
-           <loc>${`${loc}`}</loc>
-       </url>
-     `;
-       })
-       .join('')}
+   ${posts
+    .map(({ loc }) => {
+      return `
+    <url>
+        <loc>${`${loc}`}</loc>
+    </url>
+  `;
+    })
+    .join('')}
+
    </urlset>
  `;
 }
@@ -36,7 +37,7 @@ export async function getServerSideProps({ res }) {
 
   return {
     props: {
-      sitemap: 'Generated sitemap', // Aqui você pode retornar uma mensagem ou o próprio sitemap
+      sitemap: sitemap, // Aqui você pode retornar uma mensagem ou o próprio sitemap
     },
   };
 }
