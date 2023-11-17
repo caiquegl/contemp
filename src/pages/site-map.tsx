@@ -54,13 +54,13 @@ const SiteMapContainer = ({ data }) => {
           {/* Seção Geral */}
           {gerais.length > 0 && (
             <>
-              <Heading as='h3' className='sitemap-subtitulo negrito text-red' textTransform={'uppercase'} mb='1%' mt='2%'>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
                 Gerais
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
                 {gerais.map((el, index) => {
                   // Verificar se a URL é a página inicial
-                  const nomeGeral = el.loc === 'https://contemp.com.br/' ? 'Home' : el.loc.replace(/^.*[\\\/]/, '').replace(/_/g, ' ');
+                  const nomeGeral = el.loc === 'https://contemp.com.br/' ? 'Home' : el.loc.replace(/^.*[\\\/]/, '').replace(/_/g, ' ').replace(/-/g, ' ');
 
                   return (
                     <GridItem
@@ -71,8 +71,8 @@ const SiteMapContainer = ({ data }) => {
                       className='geral'
                     >
                       <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
-                        <Text className='paragrafo-preto negrito text-black' textTransform={'uppercase'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
-                          {nomeGeral} <Badge>Abrir <ExternalLinkIcon /></Badge>
+                        <Text className='paragrafo-preto negrito text-black' fontWeight={'500!important'} textTransform={'capitalize'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                          {nomeGeral} <Badge className='sitemap-badge'>Abrir <ExternalLinkIcon /></Badge>
                         </Text>
                       </Link>
                     </GridItem>
@@ -85,12 +85,12 @@ const SiteMapContainer = ({ data }) => {
           {/* Seção de Categorias */}
           {categorias.length > 0 && (
             <>
-              <Heading as='h3' className='sitemap-subtitulo negrito text-red' textTransform={'uppercase'} mb='1%' mt='2%'>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
                 Categorias
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
                 {categorias.map((el, index) => {
-                  const nomeCategoria = el.loc.replace('https://contemp.com.br/category/', '').replace(/_/g, ' ');
+                  const nomeCategoria = el.loc.replace('https://contemp.com.br/category/', '').replace(/_/g, ' ').replace(/-/g, ' ');
 
                   return (
                     <GridItem
@@ -101,8 +101,8 @@ const SiteMapContainer = ({ data }) => {
                       className='categoria'
                     >
                       <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
-                        <Text className='paragrafo-preto text-black' textTransform={'uppercase'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
-                          {nomeCategoria} <Badge>Abrir <ExternalLinkIcon /></Badge>
+                        <Text className='paragrafo-preto text-black sitemap-texto' mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                          {nomeCategoria} <Badge className='sitemap-badge'>Abrir <ExternalLinkIcon /></Badge>
                         </Text>
                       </Link>
                     </GridItem>
@@ -115,12 +115,12 @@ const SiteMapContainer = ({ data }) => {
           {/* Seção de Produtos */}
           {produtos.length > 0 && (
             <>
-              <Heading as='h3' className='sitemap-subtitulo negrito text-red' textTransform={'uppercase'} mb='1%' mt='2%'>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
                 Produtos
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
                 {produtos.map((el, index) => {
-                  const nomeProduto = el.loc.replace('https://contemp.com.br/produto/', '').replace(/_/g, ' ');
+                  const nomeProduto = el.loc.replace('https://contemp.com.br/produto/', '').replace(/_/g, ' ').replace(/-/g, ' ');
 
                   return (
                     <GridItem
@@ -131,8 +131,8 @@ const SiteMapContainer = ({ data }) => {
                       className='produto'
                     >
                       <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
-                        <Text className='paragrafo-preto text-black' textTransform={'uppercase'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
-                          {nomeProduto} <Badge>Abrir <ExternalLinkIcon /></Badge>
+                        <Text className='paragrafo-preto text-black sitemap-texto' mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                          {nomeProduto} <Badge className='sitemap-badge'>Abrir <ExternalLinkIcon /></Badge>
                         </Text>
                       </Link>
                     </GridItem>
