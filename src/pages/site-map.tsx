@@ -7,11 +7,11 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 const EXTERNAL_DATA_URL = 'https://www.contemp.com.br/api/get-sitemap';
 
-function generateSiteMap(posts) {
+function generateSiteMap(posts: any) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      ${posts
-      .map(({ loc }) => {
+      .map(({ loc }: any) => {
         return `
        <url>
            <loc>${`${loc}`}</loc>
@@ -23,12 +23,12 @@ function generateSiteMap(posts) {
  `;
 }
 
-const SiteMapContainer = ({ data }) => {
+const SiteMapContainer = ({ data }: any) => {
   const sitemap = data ? generateSiteMap(data) : null;
 
-  const categorias = data ? data.filter(el => el.loc.startsWith('https://contemp.com.br/category/')) : [];
-  const produtos = data ? data.filter(el => el.loc.startsWith('https://contemp.com.br/produto/')) : [];
-  const gerais = data ? data.filter(el => !el.loc.startsWith('https://contemp.com.br/category/') && !el.loc.startsWith('https://contemp.com.br/produto/')) : [];
+  const categorias = data ? data.filter((el: any) => el.loc.startsWith('https://contemp.com.br/category/')) : [];
+  const produtos = data ? data.filter((el: any) => el.loc.startsWith('https://contemp.com.br/produto/')) : [];
+  const gerais = data ? data.filter((el: any) => !el.loc.startsWith('https://contemp.com.br/category/') && !el.loc.startsWith('https://contemp.com.br/produto/')) : [];
 
   return (
     <>
@@ -58,7 +58,7 @@ const SiteMapContainer = ({ data }) => {
                 Gerais
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
-                {gerais.map((el, index) => {
+                {gerais.map((el: any, index: any) => {
                   // Verificar se a URL é a página inicial
                   const nomeGeral = el.loc === 'https://contemp.com.br/' ? 'Home' : el.loc.replace(/^.*[\\\/]/, '').replace(/_/g, ' ').replace(/-/g, ' ');
 
@@ -89,7 +89,7 @@ const SiteMapContainer = ({ data }) => {
                 Categorias
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
-                {categorias.map((el, index) => {
+                {categorias.map((el: any, index: any) => {
                   const nomeCategoria = el.loc.replace('https://contemp.com.br/category/', '').replace(/_/g, ' ').replace(/-/g, ' ');
 
                   return (
@@ -119,7 +119,7 @@ const SiteMapContainer = ({ data }) => {
                 Produtos
               </Heading>
               <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
-                {produtos.map((el, index) => {
+                {produtos.map((el: any, index: any) => {
                   const nomeProduto = el.loc.replace('https://contemp.com.br/produto/', '').replace(/_/g, ' ').replace(/-/g, ' ');
 
                   return (
@@ -157,7 +157,7 @@ export async function getServerSideProps() {
         data,
       },
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching data from API:', error.message);
     return {
       props: {
