@@ -204,7 +204,8 @@ a {
 .suporte-titulo,
 .todososprodutos-titulo,
 .trabalheconosco-titulo,
-.orcamento-titulo {
+.orcamento-titulo
+.sitemap-titulo {
     font-size: 2.5rem !important;
     font-weight: bold;
     line-height: 2.5rem !important;

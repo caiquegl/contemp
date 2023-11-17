@@ -1,73 +1,88 @@
-import { Container, Divider, Flex, Grid, GridItem, Link, Text, Heading } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import { Header } from '../components/Header'
-import { api } from '../lib/axios'
+import { Container, Box, Grid, GridItem, Link, Text, Heading } from '@chakra-ui/react';
+import axios from 'axios';
+import Head from 'next/head';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
-const SiteMapContainer = () => {
-  const [listCategory, setListCategory] = useState<any>([])
+const EXTERNAL_DATA_URL = 'https://www.contemp.com.br/api/get-sitemap';
 
-  const getStatus = async () => {
-    const { data } = await api.get(`getSiteMap`)
-    setListCategory(
-      data.sort(function (a: any, b: any) {
-        return a.Products.length - b.Products.length
+function generateSiteMap(posts) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     ${posts
+      .map(({ loc }) => {
+        return `
+       <url>
+           <loc>${`${loc}`}</loc>
+       </url>
+     `;
       })
-    )
-  }
-  useEffect(() => {
-    getStatus()
-  }, [])
+      .join('')}
+   </urlset>
+ `;
+}
+
+const SiteMapContainer = ({ data }) => {
+  const sitemap = data ? generateSiteMap(data) : null;
 
   return (
     <>
+      <Head>
+        <meta
+          name='description'
+          content='Procurando medição e controle de temperatura em processos industriais? A Contemp é pioneira no Brasil. Confira!'
+        />
+        <meta name='keywords' content='controle de temperatura, Contemp, processos industriais, sitemap' />
+        <title>Sitemap da Contemp</title>
+        <link rel='icon' href='/favicon.png' />
+      </Head>
       <Header />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='180px'>
-        <Text fontSize='45px' fontWeight='bold' textAlign='center'>
-          Site Map
-        </Text>
-      </Flex>
-      <Container
-        maxW='7xl'
-        p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 10px 31px']}
-      >
-        <Grid
-          templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
-          w='100%'
-        >
-          {listCategory &&
-            listCategory.length > 0 &&
-            listCategory.map((el: any, index: number) => (
-              <GridItem w='100%' gap={6} key={index} px='20px'>
-                <Link
-                  href={`/category/${el.name.toLowerCase().toLowerCase().replaceAll(' ', '_')}`}
-                  _hover={{ color: 'white', textDecoration: 'none' }}
-                >
-                  <Text fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
-                    {el.name}
-                  </Text>
-                </Link>
-                {el.Products &&
-                  el.Products.length > 0 &&
-                  el.Products.map((el: any, index: number) => (
-                    <GridItem w='100%' gap={6} key={index}>
-                      <Link
-                        href={`/produto/${el.name.toLowerCase().replaceAll(' ', '_')}`}
-                        _hover={{ color: 'white', textDecoration: 'none' }}
-                      >
-                        <Text fontSize='15px' mb='20px' cursor='pointer'>
-                          {el.name}
-                        </Text>
-                      </Link>
-                    </GridItem>
-                  ))}
-                {listCategory.length - 1 != index && <Divider mb='20px' />}
-              </GridItem>
-            ))}
-        </Grid>
-      </Container>
+      <Box bg='var(--black-primary)' w='100%' py='20px'>
+        <Container maxW='1240px' p='0'>
+          <Heading as='h2' className='sitemap-titulo negrito centro text-white' textTransform={'uppercase'} mt='8' mb='4'>
+            Sitemap da Contemp
+          </Heading>
+        </Container>
+      </Box>
+      <Box bg='white' w='100%' py='20px'>
+        <Container maxW='1240px' p='3% 0%'>
+          {data && data.length > 0 && (
+            <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
+              {data.map((el, index) => (
+                <GridItem key={index} backgroundColor='white' borderRadius='md' overflow='hidden'>
+                  <Link href={el.loc} _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
+                    <Text className='paragrafo-preto negrito text-black' mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)'}}>
+                      {el.loc}
+                    </Text>
+                  </Link>
+                </GridItem>
+              ))}
+            </Grid>
+          )}
+        </Container>
+      </Box>
+      <Footer />
     </>
-  )
+  );
+};
+
+export async function getServerSideProps() {
+  try {
+    const { data } = await axios.get('https://www.contemp.com.br/api/get-sitemap');
+
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data from API:', error.message);
+    return {
+      props: {
+        data: [],
+      },
+    };
+  }
 }
 
-export default SiteMapContainer
+export default SiteMapContainer;
