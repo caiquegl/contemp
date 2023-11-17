@@ -20,7 +20,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
   return (
     <>
       <Menu
-      zIndex={3}
+      
         onClick={(evt) => {
           router.push(`/category/${replaceNameToUrl(evt.keyPath[0].toLowerCase().replaceAll(' ', '_'))}`)
         }}
@@ -42,6 +42,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
           justifyContent: 'space-between',
           // zIndex: 99999999999999999
           margin: 'auto',
+          zIndex: 3
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>
@@ -58,7 +59,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
   const router = useRouter()
   return (
     <Menu
-    zIndex={2}
+    
       onClick={(avt) => {
         onClose()
         router.push(`/category/${replaceNameToUrl(avt.key)}`)
@@ -70,6 +71,7 @@ export const HeaderMenuVertical = ({ menuItems, onClose }: MenuProps) => {
         border: 'none',
         color: '#fff',
         fontSize: '1rem',
+        zIndex: 2
       }}
       // theme='dark'
       expandIcon={<Icon icon={AiFillCaretRight} size={30} />}
