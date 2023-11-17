@@ -493,7 +493,8 @@ a {
 /* CALIBRAÇÃO */
 .calibracao-subtitulo,
 .suporte-titulotab,
-.adm-subtitulo {
+.adm-subtitulo,
+.sitemap-subtitulo {
     font-size: 1.15rem !important;
     font-weight: bold;
     text-transform: uppercase;

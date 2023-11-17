@@ -25,6 +25,10 @@ function generateSiteMap(posts) {
 const SiteMapContainer = ({ data }) => {
   const sitemap = data ? generateSiteMap(data) : null;
 
+  const categorias = data ? data.filter(el => el.loc.startsWith('https://contemp.com.br/category/')) : [];
+  const produtos = data ? data.filter(el => el.loc.startsWith('https://contemp.com.br/produto/')) : [];
+  const gerais = data ? data.filter(el => !el.loc.startsWith('https://contemp.com.br/category/') && !el.loc.startsWith('https://contemp.com.br/produto/')) : [];
+
   return (
     <>
       <Head>
@@ -46,18 +50,81 @@ const SiteMapContainer = ({ data }) => {
       </Box>
       <Box bg='white' w='100%' py='20px'>
         <Container maxW='1240px' p='3% 0%'>
-          {data && data.length > 0 && (
-            <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
-              {data.map((el, index) => (
-                <GridItem key={index} backgroundColor='white' borderRadius='md' overflow='hidden'>
-                  <Link href={el.loc} _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
-                    <Text className='paragrafo-preto negrito text-black' mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)'}}>
-                      {el.loc}
-                    </Text>
-                  </Link>
-                </GridItem>
-              ))}
-            </Grid>
+          {/* Seção Geral */}
+          {gerais.length > 0 && (
+            <>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
+                Gerais
+              </Heading>
+              <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
+                {gerais.map((el, index) => (
+                  <GridItem
+                    key={index}
+                    backgroundColor='white'
+                    borderRadius='md'
+                    overflow='hidden'
+                    className='geral'
+                  >
+                    <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
+                      <Text className='paragrafo-preto text-black' fontWeight={'400!important'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                        {el.loc}
+                      </Text>
+                    </Link>
+                  </GridItem>
+                ))}
+              </Grid>
+            </>
+          )}
+          {/* Seção de Categorias */}
+          {categorias.length > 0 && (
+            <>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
+                Categorias
+              </Heading>
+              <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
+                {categorias.map((el, index) => (
+                  <GridItem
+                    key={index}
+                    backgroundColor='white'
+                    borderRadius='md'
+                    overflow='hidden'
+                    className='categoria'
+                  >
+                    <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
+                      <Text className='paragrafo-preto text-black' fontWeight={'400!important'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                        {el.loc}
+                      </Text>
+                    </Link>
+                  </GridItem>
+                ))}
+              </Grid>
+            </>
+          )}
+
+          {/* Seção de Produtos */}
+          {produtos.length > 0 && (
+            <>
+              <Heading as='h3' className='sitemap-subtitulo negrito' textTransform={'uppercase'} mb='1%' mt='2%'>
+                Produtos
+              </Heading>
+              <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)']} gap={2}>
+                {produtos.map((el, index) => (
+                  <GridItem
+                    key={index}
+                    backgroundColor='white'
+                    borderRadius='md'
+                    overflow='hidden'
+                    className='produto'
+                  >
+                    <Link href={el.loc} target="_blank" _hover={{ color: 'var(--red-primary)', textDecoration: 'none' }}>
+                      <Text className='paragrafo-preto text-black' fontWeight={'400!important'} mb='1%' cursor='pointer' p='0%' _hover={{ color: 'var(--red-primary)' }}>
+                        {el.loc}
+                      </Text>
+                    </Link>
+                  </GridItem>
+                ))}
+              </Grid>
+            </>
           )}
         </Container>
       </Box>
