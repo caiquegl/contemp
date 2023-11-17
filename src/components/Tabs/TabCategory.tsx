@@ -16,7 +16,7 @@ import {
   FormHelperText,
   Tooltip,
   Heading,
-   Link as ChakraLink,
+  Link as ChakraLink,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -43,6 +43,7 @@ import { FiHelpCircle } from 'react-icons/fi'
 import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
 import { ModalAddFilter } from '../modalAddFilter'
+import { FiCopy } from 'react-icons/fi';
 
 const { confirm } = Modal
 
@@ -96,6 +97,31 @@ const TabCategory = () => {
   const formRef = useRef<any>()
   const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
   const { errors } = formState
+
+  function copiarTexto(texto: string) {
+    // Cria um elemento de input dinamicamente
+    var input = document.createElement('input')
+
+    // Define o valor do input como o texto a ser copiado
+    input.value = texto
+
+    // Adiciona o input ao documento
+    document.body.appendChild(input)
+
+    // Seleciona o conteúdo do input
+    input.select()
+
+    // Copia o conteúdo selecionado para a área de transferência
+    document.execCommand('copy')
+
+    // Remove o input do documento
+    document.body.removeChild(input)
+    toast({
+      title: 'Copiado',
+      description: 'Link copiado com sucesso.',
+      status: 'info',
+    })
+  }
 
   const saveCategory = async (bodyForm: any) => {
     try {
@@ -343,6 +369,19 @@ const TabCategory = () => {
                 </Badge>
               </Tooltip>
               <Icon cursor='pointer' as={PiPencilSimpleBold} fontSize='1.15rem' onClick={() => handleOnEditClick(a)} color='var(--gray-text)' />
+              <Tooltip label='Copiar'>
+                <FiCopy
+                  style={{
+                    cursor: 'pointer',
+                    color: 'var(--gray-text)',
+                  }}
+                  onClick={() =>
+                    copiarTexto(
+                      `https://contemp.com.br${a && a.name ? `/category/${replaceNameToUrl(a.name).toLowerCase().replaceAll(' ', '_')}` : ''}`
+                    )
+                  }
+                />
+              </Tooltip>
               <Icon
                 cursor='pointer'
                 as={FaDeleteLeft}
@@ -623,57 +662,57 @@ const TabCategory = () => {
 
             <Box w='100%' mt='10px'>
               <Flex>
-              <Tooltip label='Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.' cursor={'pointer'}
-                    placement="top-end"
-                    color={'var(--white-primary)'}
-                    bg={'var(--red-primary)'}
-                    borderRadius={'8px'}
-                    textAlign={'center'}
-                    hasArrow>
-              <FormControl>
-                <Checkbox className='paragrafo-preto text-preto negrito'
-                textTransform={'uppercase'}
-                  colorScheme='red'
-                  mr='auto'
-                  fontSize='20px'
-                  height='17px'
-                  isChecked={isActive}
-                  onChange={(evt) => setIsActive(evt.target.checked)}
-                >
-                  Ativo
-                </Checkbox>
-                <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
-              </FormControl>
-              </Tooltip>
+                <Tooltip label='Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.' cursor={'pointer'}
+                  placement="top-end"
+                  color={'var(--white-primary)'}
+                  bg={'var(--red-primary)'}
+                  borderRadius={'8px'}
+                  textAlign={'center'}
+                  hasArrow>
+                  <FormControl>
+                    <Checkbox className='paragrafo-preto text-preto negrito'
+                      textTransform={'uppercase'}
+                      colorScheme='red'
+                      mr='auto'
+                      fontSize='20px'
+                      height='17px'
+                      isChecked={isActive}
+                      onChange={(evt) => setIsActive(evt.target.checked)}
+                    >
+                      Ativo
+                    </Checkbox>
+                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+                  </FormControl>
+                </Tooltip>
               </Flex>
             </Box>
             <Box w='100%' mt='10px'>
               <Flex>
-              <Tooltip label='Marque aqui para a categoria aparecer na página de todos os produtos.' cursor={'pointer'}
-                    placement="top-end"
-                    color={'var(--white-primary)'}
-                    bg={'var(--red-primary)'}
-                    borderRadius={'8px'}
-                    textAlign={'center'}
-                    hasArrow>
-                    
-              
-              <FormControl>
-                <Checkbox className='paragrafo-preto negrito'
-                textTransform={'uppercase'}
-                  colorScheme='red'
-                  color='black.800'
-                  mr='auto'
-                  fontSize='20px'
-                  height='17px'
-                  isChecked={isAllProduct}
-                  onChange={(evt) => setIsAllProduct(evt.target.checked)}
-                >
-                  Todos os Produtos
-                </Checkbox>
-                <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
-              </FormControl>
-              </Tooltip>
+                <Tooltip label='Marque aqui para a categoria aparecer na página de todos os produtos.' cursor={'pointer'}
+                  placement="top-end"
+                  color={'var(--white-primary)'}
+                  bg={'var(--red-primary)'}
+                  borderRadius={'8px'}
+                  textAlign={'center'}
+                  hasArrow>
+
+
+                  <FormControl>
+                    <Checkbox className='paragrafo-preto negrito'
+                      textTransform={'uppercase'}
+                      colorScheme='red'
+                      color='black.800'
+                      mr='auto'
+                      fontSize='20px'
+                      height='17px'
+                      isChecked={isAllProduct}
+                      onChange={(evt) => setIsAllProduct(evt.target.checked)}
+                    >
+                      Todos os Produtos
+                    </Checkbox>
+                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+                  </FormControl>
+                </Tooltip>
               </Flex>
             </Box>
           </VStack>
