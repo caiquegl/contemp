@@ -1,11 +1,17 @@
 import { Box, Text, Flex, Icon, Textarea, Heading } from '@chakra-ui/react'
 import { AiFillEye } from 'react-icons/ai'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-const CustomEditor = dynamic(() => import('../CustomEditor'), { ssr: false })
+// import CustomEditor from '../CustomEditor'
+import { useRouter } from 'next/router'
+const CustomEditor = dynamic(() => import('../CustomEditor'), {
+  ssr: false, // Desativa o SSR para este componente
+});
 
 const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
+  const router = useRouter();
   const [see, setSee] = useState(false)
+  const [loadE, setLoadE] = useState<boolean>(false)
   let [value, setValue] = useState(tabs[index]?.text ? tabs[index]?.text : '')
 
   let handleInputChange = (e: any) => {
@@ -15,6 +21,13 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
     newList[index].text = inputValue
     setTabs(newList)
   }
+
+  useEffect(() => {
+      if (router.isReady) {
+        setLoadE(true)
+      }
+  }, [router.isReady]);
+
 
   return (
     <Box>
@@ -48,7 +61,7 @@ const EditTab = ({ tabs, index, setTabs, editorLoaded, load }: any) => {
                 setTabs(newList)
               }}
               value={tabs[index]?.text ? tabs[index]?.text : ''}
-              editorLoaded={editorLoaded}
+              editorLoaded={loadE}
             />
           </div>
         )}

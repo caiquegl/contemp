@@ -48,7 +48,7 @@ const CardCatalog = ({ bg, text, title, color, img, urlPicture }: IProps) => {
 
         <Flex w='100%' alignItems='center' justifyContent='center' mt='20px'>
           <Link
-            href={`/category/${title.replaceAll(' ', '_')}#viewCategory`}
+            href={`/category/${title.toLowerCase().replaceAll(' ', '_')}`}
             textDecoration='none'
             _hover={{
               textDecoration: 'none',

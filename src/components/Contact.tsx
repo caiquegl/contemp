@@ -320,7 +320,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                           <Box w='100%'>
                             <Dragger {...props}>
                               <p className='ant-upload-drag-icon'>
-                                <InboxOutlined />
+                                <InboxOutlined rev={undefined} />
                               </p>
                               <p className='ant-upload-text'>Click ou arraste o arquivo para área de upload</p>
                             </Dragger>

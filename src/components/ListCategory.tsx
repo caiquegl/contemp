@@ -3,6 +3,7 @@ import React, { forwardRef } from 'react'
 import { pxToRem } from '../utils/pxToRem'
 import CardProductWithDescription from './CardProductWithDescription'
 import { v4 as uuidv4 } from 'uuid'
+import CardProductWithDescription2 from './CardProductWithDescription2'
 
 export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
   return (
@@ -25,7 +26,7 @@ export const ListCategory = forwardRef(({ bg, data }: any, ref: any) => {
           return aOrder - bOrder
           
         }).map((catg: any, index: any) => (
-            <CardProductWithDescription
+            <CardProductWithDescription2
               key={index}
               img={catg.urls && catg.urls[0] ? catg.urls[0] : ''}
               text={catg?.name}

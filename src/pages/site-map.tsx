@@ -40,7 +40,7 @@ const SiteMapContainer = () => {
             listCategory.map((el: any, index: number) => (
               <GridItem w='100%' gap={6} key={index} px='20px'>
                 <Link
-                  href={`/category/${el.name.replaceAll(' ', '_')}#viewCategory`}
+                  href={`/category/${el.name.toLowerCase().toLowerCase().replaceAll(' ', '_')}`}
                   _hover={{ color: 'white', textDecoration: 'none' }}
                 >
                   <Text fontWeight='bold' fontSize='20px' mb='20px' cursor='pointer'>
@@ -52,7 +52,7 @@ const SiteMapContainer = () => {
                   el.Products.map((el: any, index: number) => (
                     <GridItem w='100%' gap={6} key={index}>
                       <Link
-                        href={`/produto/${el.name.replaceAll(' ', '_')}`}
+                        href={`/produto/${el.name.toLowerCase().replaceAll(' ', '_')}`}
                         _hover={{ color: 'white', textDecoration: 'none' }}
                       >
                         <Text fontSize='15px' mb='20px' cursor='pointer'>

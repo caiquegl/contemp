@@ -19,21 +19,11 @@ const Home = () => {
         alignItems="center"
         justifyContent="center"
         direction="column"
-        h="160px"
+        h="80px"
       >
-        <Text fontSize="45px" fontWeight="bold" textAlign="center">
-          Trabalhe Conosco
-        </Text>
-        <Box>
-          <Breadcrumb fontSize='20px' color='white' textDecoration={'none'} >
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink _hover={{ color: 'red.600!important', textDecoration: 'none'}} href='/a-contemp' _active={{color:'red',}}>A Contemp</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Box>
+        <Heading as={'h2'} className="trabalheconosco-titulo text-white negrito centro">
+          Trabalhe Conosco 
+        </Heading>
       </Flex>
       
       <Contact

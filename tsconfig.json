@@ -2,7 +2,8 @@
   "compilerOptions": {
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "target": "es5",
+    "target": "esnext",
+    "module": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -10,7 +11,6 @@
     ],
     "strict": true,
     "noEmit": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/ContainerAddProductDescription/index.tsx"
-, "src/components/Favorite.js"  ],
+, "src/components/Favorite.js", "src/components/CustomEditor.js"  ],
   "exclude": [
     "node_modules",
     "u614611595"

@@ -58,7 +58,7 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text cursor={'pointer'}>Calibrações de Termometria</Text>
+          <Heading as={'h3'} className="suporte-titulotab" cursor={'pointer'}>Calibrações de Termometria</Heading>
         </Flex>
         <Flex
           p='16px 20px'
@@ -117,7 +117,7 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text cursor={'pointer'}>Calibrações Dimensionais</Text>
+          <Heading as={'h3'} className="suporte-titulotab" cursor={'pointer'}>Calibrações Dimensionais</Heading>
         </Flex>
         <Flex
           p='16px 20px'
@@ -159,19 +159,19 @@ export const SelectConfigCalibration = () => {
             fontWeight: 'bold',
           }}
         >
-          <Text cursor={'pointer'}>Calibrações de Processos</Text>
+          <Heading as={'h3'} className="suporte-titulotab" cursor={'pointer'}>Calibrações de Processos</Heading>
         </Flex>
       </Box>
 
       <Box w='100%' minH='563px' borderRightRadius='5px' bg='white.500' p='58px'>
         {text.title && (
           <>
-            <Text color='red.600' fontSize='25px' fontWeight='bold' mb='10px'>
+            <Heading as={'h2'} className="suporte-subtitulo negrito text-red" mb='10px'>
               {text.title}
-            </Text>
+            </Heading>
             {text.description.length > 0 &&
               text.description.map((value, index) => (
-                <Text color='black.800' fontSize='20px' mb='10px' key={index}>
+                <Text className="paragrafo-preto text-black" mb='10px' key={index}>
                   {value}
                 </Text>
               ))}

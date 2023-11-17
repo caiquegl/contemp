@@ -91,8 +91,9 @@ export const Favorite = ({ homeTabs }) => {
   }, [])
 
   return (
+    <Box>
     <Container
-      maxW='8xl'
+      maxW='var(--max-tamanho)'
       p={['12px 20px 31px 20px', '12px 20px 31px 20px', '12px 20px 31px 20px', '12px 0 31px', '12px 0 31px']}
       position='relative'
     >
@@ -126,7 +127,7 @@ export const Favorite = ({ homeTabs }) => {
         }).map((item, index) => (
             <SwiperSlide style={{ width: '100%' }} key={index}>
               <Link
-                href={item.name ? `/produto/${item.name.replaceAll(' ', '_')}` : ''}
+                href={item.name ? `/produto/${item.name.toLowerCase().replaceAll(' ', '_')}` : ''}
                 _hover={{ color: 'black', textDecoration: 'none', lineHeight: '1.15rem',}}
                 onMouseEnter={() => swiperRef.current?.swiper.autoplay.stop()}
                 onMouseLeave={() => swiperRef.current?.swiper.autoplay.start()}
@@ -222,5 +223,6 @@ export const Favorite = ({ homeTabs }) => {
         </Flex>
       )}
     </Container>
+    </Box>
   )
 }

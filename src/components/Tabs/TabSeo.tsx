@@ -75,7 +75,6 @@ const TabSeo = () => {
             <Button
               bg="red.600"
               color="white"
-              fontSize="20px"
               borderRadius="4px"
               w="128px"
               h="47px"

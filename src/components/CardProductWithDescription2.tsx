@@ -1,11 +1,13 @@
-import { Button, Grid, GridProps, Link, Text, Tooltip, Heading } from '@chakra-ui/react'
+import { Button, Grid, GridProps, Link, Text, Tooltip, Heading, Box, Center } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Fragment, useState } from 'react'
 import { pxToRem } from '../utils/pxToRem'
-import { Image } from './Image'
+// import { Image } from './Image'
 import DefaultImg from '../assets/images/image-default.webp'
 import { v4 as uuidv4 } from 'uuid'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import LazyLoad from 'react-lazy-load'
+import Image from 'next/image'
 
 interface IProps {
   img: string
@@ -20,7 +22,8 @@ interface IProps {
   ocultBottom?: boolean
 }
 
-const CardProductWithDescription = ({
+
+const CardProductWithDescription2 = ({
   bg,
   img,
   text,
@@ -30,7 +33,7 @@ const CardProductWithDescription = ({
   color,
   buttomBottom,
   containerProps,
-  ocultBottom
+  ocultBottom,
 }: IProps) => {
   const router = useRouter()
   const [_, setIsHovering] = useState(false)
@@ -71,20 +74,32 @@ const CardProductWithDescription = ({
         justifyContent='space-between'
       >
         {/*IMAGEM DO PRODUTO*/}
-        <Image
+        {/* <LazyLoad> */}
+        <Center w='100%' h='100%' flex={1} position="relative">
+  <Image
+    src={img ? img : DefaultImg}
+    loading='lazy'
+    quality={100}
+    layout="fill"
+    objectFit="cover"
+    objectPosition="center"
+    unoptimized={true}
+  />
+</Center>
+
+
+        {/* </LazyLoad> */}
+        {/* <Image
           src={img ? img : DefaultImg}
           alt={alt}
           gridRow={1}
           bgSize='contain'
           className='imagem-produto-categoria'
-        />
-        
+        /> */}
+
         {/*TÍTULO DO PRODUTO*/}
         <Tooltip label={text} placement='top'>
-          <Text
-            gridRow={2}
-            className='h4-preto centro'
-          >
+          <Text gridRow={2} className='h4-preto centro'>
             {text}
           </Text>
         </Tooltip>
@@ -96,7 +111,7 @@ const CardProductWithDescription = ({
               .map((el: any, index: number) => <Fragment key={index}>{index < 100 ? el : ''}</Fragment>)}
           {call_product && call_product.split('').length > 100 ? '...' : ''}
         </Text>
-        {ocultBottom ? null :
+        {ocultBottom ? null : (
           <Link
             href={`/produto/${replaceNameToUrl(text).toLowerCase().replaceAll(' ', '_')}`}
             _hover={{ textDecoration: 'none', color: bg ? hoverColor[bg] : 'white' }}
@@ -114,10 +129,10 @@ const CardProductWithDescription = ({
               Solicitar orçamento
             </Button>
           </Link>
-        }
+        )}
       </Link>
     </Grid>
   )
 }
 
-export default CardProductWithDescription
+export default CardProductWithDescription2

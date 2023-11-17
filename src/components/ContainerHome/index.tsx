@@ -145,7 +145,7 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
             rules={{ required: 'Campo obrigatório' }}
             render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
               <FormControl isInvalid={!!error} id={name} color='black.800'>
-                <FormLabel fontSize='20px' mb='10px' color='black.800'>
+                <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'}>
                   Categoria
                 </FormLabel>
 
@@ -264,10 +264,11 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
           ml='auto'
           bg='red.600'
           color='white'
-          fontSize='20px'
-          borderRadius='4px'
+          fontSize='1rem'
+          textTransform={'uppercase'}
+          borderRadius='8px'
           w='128px'
-          h='47px'
+          h='40px'
           isLoading={loading}
           type='submit'
           _hover={{ transition: 'all 0.4s' }}
