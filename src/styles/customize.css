@@ -204,7 +204,8 @@ a {
 .suporte-titulo,
 .todososprodutos-titulo,
 .trabalheconosco-titulo,
-.orcamento-titulo {
+.orcamento-titulo
+.sitemap-titulo {
     font-size: 2.5rem !important;
     font-weight: bold;
     line-height: 2.5rem !important;
@@ -492,7 +493,8 @@ a {
 /* CALIBRAÇÃO */
 .calibracao-subtitulo,
 .suporte-titulotab,
-.adm-subtitulo {
+.adm-subtitulo,
+.sitemap-subtitulo {
     font-size: 1.15rem !important;
     font-weight: bold;
     text-transform: uppercase;
@@ -589,6 +591,19 @@ a {
     border-color: var(--black-primary);
     background-color: var(--black-primary);
     color: var(--white-primary);
+}
+
+/* SITEMAP */
+
+.sitemap-badge {
+    color: var(--red-primary)!important;
+    border: 1px solid var(--red-primary);
+    background-color: #ffebed!important;
+    border-radius: 4px!important;
+}
+.sitemap-texto {
+    text-transform: capitalize;
+    font-weight: 400!important;
 }
 
 /* RESPONSIVO */
