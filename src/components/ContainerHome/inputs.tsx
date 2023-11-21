@@ -11,9 +11,12 @@ import {
   SelectProps,
   TextareaProps,
   Heading,
+  Tooltip,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FiFile } from "react-icons/fi";
+import { LuUpload } from "react-icons/lu";
+
 import {
   getDownloadURL,
   getStorage,
@@ -22,10 +25,12 @@ import {
 } from "firebase/storage";
 import { app, initFirebase } from "../../utils/db";
 import { v4 as uuidv4 } from 'uuid';
+import { PiInfoDuotone } from "react-icons/pi";
 
 interface IProps extends InputProps {
   name: string;
   typeInput: string;
+  question?: string;
   options?: any;
   selectProps?: SelectProps;
   textareaProps?: TextareaProps;
@@ -36,6 +41,7 @@ interface IProps extends InputProps {
 const InputsHome = ({
   name,
   typeInput,
+  question,
   options,
   selectProps,
   textareaProps,
@@ -46,6 +52,7 @@ const InputsHome = ({
   initFirebase();
   const ref = useRef<any>();
   const refSingle = useRef<any>();
+  const [isTooltipVisible, setTooltipVisibility] = useState(false);
 
   return (
     <Box w="100%">
@@ -106,7 +113,7 @@ const InputsHome = ({
           <>
             <InputRightElement
               pointerEvents="none"
-              children={<Icon as={FiFile} color="black.800" />}
+              children={<Icon as={LuUpload} color="black.800" mr={'85%'} />}
             />
             <input
               type="file"
@@ -195,6 +202,29 @@ const InputsHome = ({
             }}
             {...textareaProps}
           />
+        )}
+        {!!question && (
+          <Tooltip
+            label={question}
+            isOpen={isTooltipVisible}
+            placement="top-end"
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            hasArrow
+          >
+            <Box
+              position="absolute"
+              right="8px"
+              color="var(--black-primary)"
+              cursor="pointer"
+              aria-label={question}
+              onMouseEnter={() => setTooltipVisibility(true)}
+              onMouseLeave={() => setTooltipVisibility(false)}
+            >
+              <Icon as={PiInfoDuotone} fontSize={'1.15rem'} color={'var(--red-primary)'} />
+            </Box>
+          </Tooltip>
         )}
       </InputGroup>
     </Box>

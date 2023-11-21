@@ -14,6 +14,9 @@ import {
   FormErrorMessage,
   FormHelperText,
   Heading,
+  Tooltip,
+  Icon,
+
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from '../ContainerHome/inputs'
@@ -26,6 +29,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
 import { string } from 'yup'
+import { PiInfoDuotone } from "react-icons/pi";
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -177,12 +181,13 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           <FormControl>
             <InputDefault
               label='Nome do produto'
+              question='O nome do produto será o mesmo que na url e apareceça igual em todos os locais do site em que ele se encontrar.
+              '
               type='text'
               placeholder='Nome do produto'
               error={errors.name}
               {...register('name', { required: 'Nome é obrigatório' })}
             />
-            <FormHelperText>O nome do produto será o mesmo que na url e apareceça igual em todos os locais do site em que ele se encontrar.</FormHelperText>
           </FormControl>
           <FormControl>
             <Controller
@@ -191,23 +196,23 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
               rules={{ required: 'Campo obrigatório' }}
               render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
                 <FormControl isInvalid={!!error} id={name} color='black.800'>
-                  <FormLabel fontSize='20px' mb='10px' color='black.800'>
-                    Categoria
-                  </FormLabel>
 
-                  {/* <InputGroup
-                  borderRadius="6px"
-                  bg="white.500"
-                  p="3px 7px"
-                  w="100%"
-                  h="50px"
-                  outline="none"
-                  border="1px solid"
-                  borderColor="black.800"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                > */}
+                  <Flex alignItems={'baseline'}>
+                    <FormLabel fontSize='20px' mb='10px' color='black.800'>
+                      Categoria
+                    </FormLabel>
+                    <Tooltip label='Basta começa a digitar o nome da categoria que ela irá aparecer como opção.' cursor={'pointer'}
+                      placement="right"
+                      color={'var(--white-primary)'}
+                      bg={'var(--red-primary)'}
+                      borderRadius={'8px'}
+                      textAlign={'center'}
+                      hasArrow>
+                      <Flex>
+                        <Icon ml="auto" as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} verticalAlign={'middle'} />
+                      </Flex>
+                    </Tooltip>
+                  </Flex>
                   <AsyncSelect
                     placeholder='Selecione'
                     size='lg'
@@ -229,47 +234,21 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                       }, 1500)
                     }}
                   />
-                  {/* <Select
-                    name={name}
-                    ref={ref}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    w="100%"
-                    height="100%"
-                    border="none"
-                    borderRadius="21px"
-                    color="black.800"
-                    placeholder="Selecione uma opção"
-                  >
-                    {categoryOptions &&
-                      categoryOptions.map((list: any) => (
-                        <option value={list.value} key={uuidv4()}>
-                          {list.name}
-                        </option>
-                      ))}
-                  </Select>
-                </InputGroup> */}
                   {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
                 </FormControl>
               )}
             />
-            <FormHelperText>Basta começa a digitar o nome da categoria que ela irá aparecer como opção.</FormHelperText>
+
           </FormControl>
-          {/* <SelectDefault
-            label="Categoria"
-            error={errors.category}
-            opt={categoryOptions}
-            {...register('category', { required: 'Campo obrigatório' })}
-          /> */}
         </HStack>
         <FormControl>
           <InputsHome
             name='Foto e vídeo do produto'
+            question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
             typeInput='file'
             getUrls={(values: any) => setUrls([...urls, ...values])}
           />
-          <FormHelperText>Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.</FormHelperText>
+          <FormHelperText></FormHelperText>
         </FormControl>
         <HStack spacing='20px' flexWrap='wrap' w='100%' mt='20px'>
           {urls &&
@@ -291,43 +270,44 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
         <FormControl>
           <TextareaDefault
             label='Descrição curta'
+            question='Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.
+            '
             error={errors.description}
             {...register('description', {
               required: 'Descrição é obrigatório',
             })}
           />
-          <FormHelperText>Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.</FormHelperText>
         </FormControl>
         <FormControl>
           <TextareaDefault
             label='Chamada de produto'
+            question='A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.'
             error={errors.call_product}
             {...register('call_product', {
               required: 'Chamada de produto é obrigatório',
             })}
           />
-          <FormHelperText>A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.</FormHelperText>
         </FormControl>
         <HStack spacing='20px' w='100%'>
           <FormControl>
             <TextareaDefault
               label='Descrição SEO'
+              question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
               error={errors.description_seo}
               {...register('description_seo', {
                 required: 'Descrição seo é obrigatório',
               })}
             />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
           </FormControl>
           <FormControl>
             <TextareaDefault
               label='key Word SEO'
+              question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
               error={errors.key_word_seo}
               {...register('key_word_seo', {
                 required: 'Key word seo é obrigatório',
               })}
             />
-            <FormHelperText>Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".</FormHelperText>
           </FormControl>
         </HStack>
         <Flex w='100%'>
@@ -377,7 +357,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       <VStack spacing='30px' divider={<Divider />} w='100%'>
         {hasVariation &&
           Array.isArray(listVariation) && listVariation.map((list: any, index: number) => (
-            <div key={list.id} style={{width: '100%'}}>
+            <div key={list.id} style={{ width: '100%' }}>
               <Variation
                 total={listVariation.length - 1}
                 key={index}
@@ -386,12 +366,12 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 }}
                 removeOptVariation={(indexRemove: any) => {
                   let newList: any = listVariation
-  
+
                   let newListOptions: any = []
                   newList[index].opt.forEach((opt: any, indexOpt: number) => {
                     if (indexRemove != indexOpt) newListOptions.push(opt)
                   })
-  
+
                   newList[index].opt = newListOptions
                   console.log(newList)
                   setListVariation([...newList])
@@ -409,44 +389,44 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   newList[index].name = variation.name
                   delete newList[index].min_value
                   delete newList[index].max_value
-  
+
                   if (!variation.addOpt) return
                   if (newList[index].opt) {
                     newList[index].opt.push(variation.addOpt)
                   } else {
                     newList[index].opt = [variation.addOpt]
                   }
-  
+
                   setListVariation([...newList])
                 }}
                 saveName={(name: string) => {
                   let newList: any = listVariation
                   delete newList[index].opt
-  
+
                   newList[index].name = name
-  
+
                   setListVariation([...newList])
                 }}
                 setType={(type: string) => {
                   let newList: any = listVariation
-  
+
                   newList[index].type_view = type
-  
+
                   setListVariation([...newList])
                 }}
                 addPlaceholder={(value: any) => {
                   console.log(value)
                   let newList: any = listVariation
                   newList[index].placeholder_name = value
-  
+
                   setListVariation([...newList])
                 }}
-  
+
                 addRange={(value: any, type: string) => {
                   let newList: any = listVariation
                   newList[index].type_view = 'Range'
                   newList[index][type] = value
-  
+
                   setListVariation([...newList])
                 }}
                 defaultValues={listVariation[index]}
@@ -466,7 +446,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   newList[index] = down;
                   setListVariation([...newList])
                 }}
-  
+
                 changeOrderOpt={(index: number, opt: string[]) => {
                   let newList: any = listVariation
                   newList[index].opt = opt
@@ -492,7 +472,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           Avançar
         </Button>
       </Flex>
-    </Box>
+    </Box >
   )
 }
 

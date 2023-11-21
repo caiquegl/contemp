@@ -121,29 +121,51 @@ const TabProduct = ({ back }: IProps) => {
       title: 'Ações',
       render: (a: any, b: any) => (
         <HStack spacing='20px'>
-          <Icon
-            cursor='pointer'
-            as={PiPencilSimpleBold}
-            fontSize='1.15rem'
-            color='var(--gray-text)'
-            onClick={() => {
-              setBody(a)
-              setIsUpdate(true)
-              setStep(2)
-            }}
-          />
-          <Tooltip placement='top' title='Copiar'>
-            <FiCopy
-              style={{
-                cursor: 'pointer',
-                color: 'var(--gray-text)',
-              }}
-              onClick={() => copiarTexto(`https://contemp.com.br${b && b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}`)}
-            />
+          <Tooltip placement='top' label='Editar Produto'
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            textAlign={'center'}>
+            <Box>
+              <Icon
+                cursor='pointer'
+                as={PiPencilSimpleBold}
+                fontSize='1.15rem'
+                color='var(--gray-text)'
+                onClick={() => {
+                  setBody(a)
+                  setIsUpdate(true)
+                  setStep(2)
+                }}
+              />
+            </Box>
           </Tooltip>
-          <Icon cursor='pointer' as={FaDeleteLeft}
+          <Tooltip placement='top' label='Copiar'
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            textAlign={'center'}>
+            <Box>
+              <FiCopy
+                style={{
+                  cursor: 'pointer',
+                  color: 'var(--gray-text)',
+                }}
+                onClick={() => copiarTexto(`https://contemp.com.br${b && b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}`)}
+              />
+            </Box>
+          </Tooltip>
+          <Tooltip placement='top' label='Excluir Produto'
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            textAlign={'center'}>
+            <Box>
+              <Icon cursor='pointer' as={FaDeleteLeft}
                 fontSize='1.15rem'
                 color='var(--gray-text)' onClick={() => deleteProduct(a)} />
+            </Box>
+          </Tooltip>
         </HStack>
       ),
     },

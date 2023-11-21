@@ -355,21 +355,42 @@ const TabCategory = () => {
         <>
           {a.name != 'CATEGORY_SECUNDARY' && (
             <HStack spacing='20px'>
-              <Tooltip label='Filtro'>
-                <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' color='var(--red-primary)' >
-                  <Icon
-                    cursor='pointer'
-                    as={BiFilterAlt}
-                    fontSize='1.15rem'
-                    onClick={() => {
-                      setSelectCategory(a)
-                      setOpenFiter(!openFilter)
-                    }}
-                  />
-                </Badge>
+              <Tooltip placement='top' label='Filtros'
+                color={'var(--white-primary)'}
+                bg={'var(--red-primary)'}
+                borderRadius={'8px'}
+                textAlign={'center'}>
+                <Box>
+                  <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' color='var(--red-primary)' >
+                    <Icon
+                      cursor='pointer'
+                      as={BiFilterAlt}
+                      fontSize='1.15rem'
+                      onClick={() => {
+                        setSelectCategory(a)
+                        setOpenFiter(!openFilter)
+                      }}
+                    />
+                  </Badge>
+                </Box>
               </Tooltip>
-              <Icon cursor='pointer' as={PiPencilSimpleBold} fontSize='1.15rem' onClick={() => handleOnEditClick(a)} color='var(--gray-text)' />
-              <Tooltip label='Copiar'>
+
+              <Tooltip placement='top' label='Editar Categoria'
+                color={'var(--white-primary)'}
+                bg={'var(--red-primary)'}
+                borderRadius={'8px'}
+                textAlign={'center'}>
+                <Box>
+                  <Icon cursor='pointer' as={PiPencilSimpleBold} fontSize='1.15rem' onClick={() => handleOnEditClick(a)} color='var(--gray-text)' />
+                </Box>
+              </Tooltip>
+
+              <Tooltip placement='top' label='Copiar'
+                color={'var(--white-primary)'}
+                bg={'var(--red-primary)'}
+                borderRadius={'8px'}
+                textAlign={'center'}>
+                  <Box>
                 <FiCopy
                   style={{
                     cursor: 'pointer',
@@ -381,7 +402,14 @@ const TabCategory = () => {
                     )
                   }
                 />
+                </Box>
               </Tooltip>
+              <Tooltip placement='top' label='Excluir Categoria'
+                color={'var(--white-primary)'}
+                bg={'var(--red-primary)'}
+                borderRadius={'8px'}
+                textAlign={'center'}>
+              <Box>
               <Icon
                 cursor='pointer'
                 as={FaDeleteLeft}
@@ -402,6 +430,8 @@ const TabCategory = () => {
                   })
                 }}
               />
+              </Box>
+              </Tooltip>
             </HStack>
           )}
         </>
