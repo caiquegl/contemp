@@ -722,7 +722,7 @@ export const Header = () => {
                         <Icon as={BsThreeDotsVertical} fontSize='20px' />
                       </Button>
                     </Link> */}
-                    <ButtonAllProducts zIndex={'400'} menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='16px' />} />
+                    <ButtonAllProducts menuItems={list} render={<Icon as={BsThreeDotsVertical} fontSize='16px' />} />
                   </Box>
                   <Box margin='0 0' w='100%'>
                     <HeaderMenu menuItems={list} maxWidth={true} />
