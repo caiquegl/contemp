@@ -389,7 +389,6 @@ export const Header = () => {
             </Link>
 
             <ButtonAllProducts
-            zIndex={10}
               menuItems={list}
               render={
                 <Space>
