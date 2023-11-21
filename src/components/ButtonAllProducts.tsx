@@ -17,7 +17,6 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
   return (
     <Box zIndex={1}>
       <Dropdown
-      zIndex={997}
         // open={true}
         menu={{
           items: menuItems || [],
