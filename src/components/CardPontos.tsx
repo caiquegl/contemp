@@ -20,7 +20,7 @@ import {
 
 import { HiOutlineDocumentText, HiOutlineVideoCamera } from 'react-icons/hi';
 import { FiInstagram, FiFolder } from 'react-icons/fi';
-import { TbPhotoSensor3 } from 'react-icons/tb';
+import { TbPhotoSensor3, TbAlignBoxLeftTop } from 'react-icons/tb';
 import { BsFiletypePdf } from 'react-icons/bs';
 
 
@@ -106,16 +106,16 @@ export default function gridListWith() {
             href={'/category/SENSORES'}
           />
           <Card
-            heading={'Padrões de Laboratório'}
-            icon={<Icon as={FiFolder} w={6} h={6} />}
+            heading={'Câmeras Termográficas Óptris'}
+            icon={<Icon as={HiOutlineVideoCamera} w={6} h={6} />}
             description={'Confira através do link.'}
-            href={'https://laboratorio.contemp.com.br'}
+            href={'https://contemp.com.br/category/câmeras_termográficas_fixas'}
           />
           <Card
-            heading={'Nos siga no Instagram'}
-            icon={<Icon as={FiInstagram} w={6} h={6} />}
-            description={'Conheça o instagram da Contemp.'}
-            href={'https://instagram.com/contemp.industria'}
+            heading={'Controladores de Potência'}
+            icon={<Icon as={TbAlignBoxLeftTop} w={6} h={6} />}
+            description={'Conheça nossa linha completa.'}
+            href={'https://contemp.com.br/category/controladores_de_potência'}
           />
         </Flex>
       </Container>
