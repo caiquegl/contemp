@@ -15,15 +15,16 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
   const router = useRouter()
 
   return (
-    <Box zIndex={999}>
+    <Box zIndex={1}>
       <Dropdown
+      zIndex={997}
         // open={true}
         menu={{
           items: menuItems || [],
           style: {
             color: colors.black[800],
             backgroundColor: colors.white[0],
-            zIndex: 999
+            zIndex: 998
           },
           // openKeys: ['SENSORES'],
           className: 'btn-all-products text-black negrito',

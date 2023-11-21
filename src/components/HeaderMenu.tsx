@@ -27,7 +27,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
         mode={'horizontal'}
         subMenuOpenDelay={0.5}
         items={menuItems}
-        expandIcon={<Icon icon={AiFillCaretRight} size={17} />}
+        expandIcon={<Icon icon={AiFillCaretRight} size={16} />}
         style={{
           background: '#242424',
           border: 'none',
@@ -42,7 +42,7 @@ export const HeaderMenu = ({ menuItems, maxWidth }: MenuProps) => {
           justifyContent: 'space-between',
           // zIndex: 99999999999999999
           margin: 'auto',
-          zIndex: 999
+          // zIndex: 999
         }}
         overflowedIndicator={
           <Box as={'p'} _hover={{ color: 'white' }}>
