@@ -84,7 +84,7 @@ export const Footer = () => {
             <ListItem>Todos os Produtos</ListItem>
           </Link>
           <Link
-            href='https://blog.contemp.com.br/politica-de-privacidade'
+            href='https://contemp.com.br/politica-de-privacidade'
             _hover={{ color: '#fff', textDecoration: 'none' }}
           >
             <ListItem m={[0, '0 0 0 30px']}>Politica de Privacidade</ListItem>
