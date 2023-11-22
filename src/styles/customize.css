@@ -168,6 +168,22 @@ a {
     text-decoration: none !important;
 }
 
+.botao-preto-outline {
+    background-color: transparent !important;
+    color: var(--black-primary);
+    text-transform: uppercase;
+    margin-top: 5% !important;
+    text-decoration: none !important;
+    border: solid 2px var(--black-primary) !important;
+}
+.botao-preto-outline:hover {
+    background-color: var(--black-primary)!important;
+    color: var(--white-primary);
+    text-transform: uppercase;
+    text-decoration: none !important;
+    border: solid 2px var(--black-primary) !important;
+}
+
 /* HEADER */
 .container-menu {
     width: 100%;
