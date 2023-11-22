@@ -198,7 +198,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                 <FormControl isInvalid={!!error} id={name} color='black.800'>
 
                   <Flex alignItems={'baseline'}>
-                    <FormLabel fontSize='20px' mb='10px' color='black.800'>
+                    <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'} mb='10px'>
                       Categoria
                     </FormLabel>
                     <Tooltip label='Basta começa a digitar o nome da categoria que ela irá aparecer como opção.' cursor={'pointer'}

@@ -18,7 +18,7 @@ const InputBase: ForwardRefRenderFunction<HTMLSelectElement, InpuptProps> = (
   return (
     <FormControl>
       {!!label && (
-        <FormLabel fontSize='20px' mb='10px' color='black.800'>
+        <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'}>
           {label}
         </FormLabel>
       )}

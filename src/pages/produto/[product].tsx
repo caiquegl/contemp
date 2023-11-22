@@ -126,15 +126,15 @@ const Product = () => {
 
   // ...
 
-const generateBreadcrumbUrl = (index: number) => {
-  // Construa a URL com base nas etapas anteriores do Breadcrumb
-  const path = bradName.slice(0, index + 1).map((el: string) => el.toLowerCase().replaceAll(' ', '_')).join('/');
+  const generateBreadcrumbUrl = (index: number) => {
+    // Construa a URL com base nas etapas anteriores do Breadcrumb
+    const path = bradName.slice(0, index + 1).map((el: string) => el.toLowerCase().replaceAll(' ', '_')).join('/');
 
-  // Adicione o prefixo da categoria principal (ou o caminho da categoria principal, dependendo da sua estrutura de URLs)
-  return index === 0 ? `/category/${path}` : `/category/${path.split('/').pop()}`;
-};
+    // Adicione o prefixo da categoria principal (ou o caminho da categoria principal, dependendo da sua estrutura de URLs)
+    return index === 0 ? `/category/${path}` : `/category/${path.split('/').pop()}`;
+  };
 
-  
+
 
 
   useEffect(() => {
@@ -421,6 +421,9 @@ const generateBreadcrumbUrl = (index: number) => {
                     </Text>
                     <NumberInput
                       defaultValue='1'
+                      min={1}
+                      max={50}
+                      clampValueOnBlur={false}
                       className='quantidade-input'
                       value={qtd}
                       onChange={(evt: any) => {
@@ -446,22 +449,36 @@ const generateBreadcrumbUrl = (index: number) => {
                       maxW={pxToRem(279)}
                       w='100%'
                       onClick={() => {
+                        // Verifique se qtd é maior que 0 antes de adicionar ao orçamento
+                        if (qtd <= 0) {
+                          toast({
+                            title: 'Erro',
+                            description: 'A quantidade deve ser maior que zero.',
+                            status: 'error',
+                            duration: 3000,
+                            isClosable: true,
+                          });
+                          return; // Impede a execução do restante do código
+                        }
+
                         addCart({
                           product_id: detail.id,
                           variation: variation,
                           qtd,
-                        })
+                        });
+
                         toast({
                           title: 'Sucesso',
                           description: 'Produto adicionado com sucesso.',
                           status: 'success',
                           duration: 3000,
                           isClosable: true,
-                        })
+                        });
                       }}
                     >
                       <Center>Adicionar ao orçamento</Center>
                     </Button>
+
                   </Flex>
                 </Flex>
               </Flex>

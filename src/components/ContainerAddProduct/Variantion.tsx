@@ -183,7 +183,7 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
         <Flex alignItems='center' justifyContent='space-between' w='100%'>
           <Flex alignItems='center' verticalAlign={'middle'}>
             <Box w='400px'>
-              <InputDefault label='Adicionar opção' placeholder='Adicionar opção' question='Adicione a opção e  clique no botão ao lado.' type='text' error={errors.addOpt} {...register('addOpt')} />
+              <InputDefault label='Adicionar opção' placeholder='Adicione a opção e confirme' question='Adicione a opção e clique no botão ao lado.' type='text' error={errors.addOpt} {...register('addOpt')} />
             </Box>
             <IconButton className='botao-preto' aria-label='' icon={<FaCheck />} mt={'6%'} ml={'2%'} onClick={() => formRefOpt.current?.requestSubmit()}>
               Confirmar e Adicionar
@@ -221,13 +221,13 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
                         <Icon as={AiOutlineArrowDown} fontWeight={'bold'} fontSize='1rem' cursor='pointer'
                           onClick={() => downOpt(indexOpt)}
                           color={'var(--gray-text)'}
-                          _hover={{ bg: 'red.500' }} />
+                          _hover={{ color: 'var(--red-primary)' }} />
                       )}
                       {indexOpt !== 0 && (
                         <Icon as={AiOutlineArrowUp} fontWeight={'bold'} fontSize='1rem' cursor='pointer'
                           onClick={() => upOpt(indexOpt)}
                           color={'var(--gray-text)'}
-                          _hover={{ bg: 'green.500' }} />
+                          _hover={{ color: 'green.500' }} />
                       )}
                     </Flex>
                   </Badge>
