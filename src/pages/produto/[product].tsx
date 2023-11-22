@@ -452,7 +452,7 @@ const Product = () => {
                         // Verifique se qtd é maior que 0 antes de adicionar ao orçamento
                         if (qtd <= 0) {
                           toast({
-                            title: 'Erro',
+                            title: 'Erro ao adicionar produto',
                             description: 'A quantidade deve ser maior que zero.',
                             status: 'error',
                             duration: 3000,
