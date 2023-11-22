@@ -16,6 +16,8 @@ import {
 import { useRef, useState } from "react";
 import { FiFile } from "react-icons/fi";
 import { LuUpload } from "react-icons/lu";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+
 
 import {
   getDownloadURL,
@@ -155,7 +157,7 @@ const InputsHome = ({
           <>
             <InputRightElement
               pointerEvents="none"
-              children={<Icon as={FiFile} color="black.800" />}
+              children={<Icon as={MdOutlineAddPhotoAlternate} color="black.800" />}
             />
             <input
               type="file"

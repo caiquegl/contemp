@@ -517,20 +517,22 @@ const TabCategory = () => {
               }}
               render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
                 <FormControl isInvalid={!!error} id={name}>
-                  <Tooltip label='Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".' cursor={'pointer'}
-                    placement="top-end"
+                    <Flex>
+                      <FormLabel className='paragrafo-petro text-black negrito' textTransform={'uppercase'} mb='10px'>
+                        É principal?
+                      </FormLabel>
+                      <Tooltip label='Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".' cursor={'pointer'}
+                    placement="top"
                     color={'var(--white-primary)'}
                     bg={'var(--red-primary)'}
                     borderRadius={'8px'}
                     textAlign={'center'}
                     hasArrow>
-                    <Flex>
-                      <FormLabel className='paragrafo-petro text-black negrito' textTransform={'uppercase'} mb='10px'>
-                        É principal?
-                      </FormLabel>
+                      <Box>
                       <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} verticalAlign={'middle'} />
+                      </Box>
+                      </Tooltip>
                     </Flex>
-                  </Tooltip>
                   <InputGroup
                     borderRadius='6px'
                     bg='white.500'
