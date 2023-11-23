@@ -21,65 +21,26 @@ export default async function handler(
       }
     })
 
-
     if (!allCategoryActives) return res.status(201).json([])
 
-    let category_ids: number[] = []
+    const category_ids: number[] = [allCategoryActives.id]
 
-    const allSubCategory = await prisma.categories.findMany({
-      select: {
-        id: true
-      },
-      where: {
-        is_active: true,
-        sub_category_id: allCategoryActives.id
-      }
-    })
-
-    
-    const allSubCategory2 = await prisma.categories.findMany({
-      select: {
-        id: true
-      },
-      where: {
-        is_active: true,
-        sub_category_id: {
-         in: allSubCategory.map((cg) => cg.id)
+    const fetchSubcategories = async (categoryId: number) => {
+      const subcategories = await prisma.categories.findMany({
+        select: {
+          id: true
+        },
+        where: {
+          is_active: true,
+          sub_category_id: categoryId
         }
-      }
-    })
+      })
+      category_ids.push(...subcategories.map((cg) => cg.id))
+      await Promise.all(subcategories.map(async (subCat) => await fetchSubcategories(subCat.id)))
+    }
 
-    const allSubCategory3 = await prisma.categories.findMany({
-      select: {
-        id: true
-      },
-      where: {
-        is_active: true,
-        sub_category_id: {
-         in: allSubCategory2.map((cg) => cg.id)
-        }
-      }
-    })
+    await fetchSubcategories(allCategoryActives.id)
 
-
-    
-    const allSubCategory4 = await prisma.categories.findMany({
-      select: {
-        id: true
-      },
-      where: {
-        is_active: true,
-        sub_category_id: {
-         in: allSubCategory3.map((cg) => cg.id)
-        }
-      }
-    })
-
-    allSubCategory.forEach((cg) => category_ids.push(cg.id))
-    allSubCategory2.forEach((cg) => category_ids.push(cg.id))
-    allSubCategory3.forEach((cg) => category_ids.push(cg.id))
-    allSubCategory4.forEach((cg) => category_ids.push(cg.id))
-    
     const products = await prisma.products.findMany({
       where: {
         isActive: true,
@@ -92,9 +53,9 @@ export default async function handler(
       }
     })
 
-    return res.status(201).json({ products: products, category: allCategoryActives })
+    return res.status(201).json({ products, category: allCategoryActives })
   } catch (error) {
     console.log(error)
-    return res.status(201).json([])
+    return res.status(500).json({ error: 'Internal Server Error' })
   }
 }
