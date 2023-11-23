@@ -7,7 +7,7 @@ export default async function handler(
   ) {
     try {
       const logs = await prisma.logs.findMany({
-        take: 120,
+        //take: 5000,
         orderBy: {
           created_at: 'desc'
         },
