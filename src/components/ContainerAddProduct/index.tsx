@@ -132,7 +132,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     }
   })
 
-  const handleMoveUp = (index) => {
+  const handleMoveUp = (index: number) => {
     if (index > 0) {
       const updatedUrls = [...urls];
       const temp = updatedUrls[index];
@@ -142,7 +142,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     }
   };
 
-  const handleMoveDown = (index) => {
+  const handleMoveDown = (index: number) => {
     if (index < urls.length - 1) {
       const updatedUrls = [...urls];
       const temp = updatedUrls[index];
