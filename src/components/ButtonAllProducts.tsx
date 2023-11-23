@@ -39,7 +39,7 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
         overlayStyle={{
           color: colors.black[800],
           backgroundColor: colors.white[0],
-          zIndex: 999
+          zIndex: 9999999999
         }}
       >
         <Button
