@@ -17,6 +17,7 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Heading,
+  Button,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -33,6 +34,8 @@ import { api } from '../../lib/axios';
 import { parseCookies } from 'nookies';
 import { getFormattedDateTime } from '../../utils/countdown';
 import TabFiles from '../../components/Tabs/TabFiles';
+import { saveAs } from 'file-saver';
+import { DownloadOutlined } from '@ant-design/icons';
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,6 +43,22 @@ const Adm = () => {
   const [logs, setLogs] = useState<any[]>([]);
   const [back, setBack] = useState<boolean>(true);
   const [user, setUser] = useState<any>({});
+  const [exportedData, setExportedData] = useState([]);
+
+  // Função para lidar com a ação de exportação
+  const handleExportCSV = () => {
+    // Crie uma string CSV a partir dos dados de logs
+    const csvContent = [
+      'Timestamp,User,Log Description', // Cabeçalho do CSV
+      ...logs.map((log) => `${moment(log.created_at).format('YYYY-MM-DD HH:mm:ss')},${log.user},${log.description}`),
+    ].join('\n');
+
+    // Converta a string CSV em um Blob
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo
+    saveAs(blob, 'logs_export.csv');
+  };
 
   const Role = {
     MARKETING: 'Marketing',
@@ -142,6 +161,19 @@ const Adm = () => {
             />
           </Link>
           <Flex alignItems='center'>
+            {/* BOTÃO DE EXPORTAR LOGS */}
+            <Box mr='20px'>
+              <Tooltip color='var(--red-primary)' placement='top' className='botao-preto-outline' title='Exportar CSV'>
+                <Button
+                  onClick={handleExportCSV}
+                  leftIcon={<DownloadOutlined />}
+                  size='sm'
+                  colorScheme='blue'
+                >
+                  Exportar Log's
+                </Button>
+              </Tooltip>
+            </Box>
             <Box
               mr='20px'
               pr='20px'
