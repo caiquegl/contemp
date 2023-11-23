@@ -34,7 +34,7 @@ import { api } from '../../lib/axios';
 import { parseCookies } from 'nookies';
 import { getFormattedDateTime } from '../../utils/countdown';
 import TabFiles from '../../components/Tabs/TabFiles';
-import { saveAs } from 'file-saver';
+import saveAs from 'file-saver';
 import { DownloadOutlined } from '@ant-design/icons';
 
 const Adm = () => {
