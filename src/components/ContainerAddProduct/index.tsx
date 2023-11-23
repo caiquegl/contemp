@@ -132,6 +132,26 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     }
   })
 
+  const handleMoveUp = (index) => {
+    if (index > 0) {
+      const updatedUrls = [...urls];
+      const temp = updatedUrls[index];
+      updatedUrls[index] = updatedUrls[index - 1];
+      updatedUrls[index - 1] = temp;
+      setUrls(updatedUrls);
+    }
+  };
+
+  const handleMoveDown = (index) => {
+    if (index < urls.length - 1) {
+      const updatedUrls = [...urls];
+      const temp = updatedUrls[index];
+      updatedUrls[index] = updatedUrls[index + 1];
+      updatedUrls[index + 1] = temp;
+      setUrls(updatedUrls);
+    }
+  };
+
   useEffect(() => {
     console.log(defaultValues)
     setValue('name', defaultValues?.name)
@@ -250,22 +270,23 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           />
           <FormHelperText></FormHelperText>
         </FormControl>
-        <HStack spacing='20px' flexWrap='wrap' w='100%' mt='20px'>
-          {urls &&
-            urls.length > 0 &&
-            urls.map((value: any, index: number) => (
-              <ViewImage
-                key={index}
-                url={value}
-                remove={() => {
-                  let newList: any = []
-                  urls.forEach((value: any, indexRemove: number) => {
-                    if (index != indexRemove) newList.push(value)
-                  })
-                  setUrls(newList)
-                }}
-              />
-            ))}
+        <HStack spacing='20px' w='100%' mt='20px'>
+          {urls.map((value, index) => (
+            <ViewImage
+              key={index}
+              url={value}
+              order={index + 1}
+              remove={() => {
+                let newList: any = []
+                urls.forEach((value: any, indexRemove: number) => {
+                  if (index != indexRemove) newList.push(value)
+                })
+                setUrls(newList)
+              }}
+              moveUp={() => handleMoveUp(index)}
+              moveDown={() => handleMoveDown(index)}
+            />
+          ))}
         </HStack>
         <FormControl>
           <TextareaDefault
