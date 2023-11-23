@@ -271,7 +271,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           <FormHelperText></FormHelperText>
         </FormControl>
         <HStack spacing='20px' w='100%' mt='20px'>
-          {urls.map((value, index) => (
+          {urls.map((value: string, index: number) => (
             <ViewImage
               key={index}
               url={value}
@@ -288,6 +288,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             />
           ))}
         </HStack>
+
         <FormControl>
           <TextareaDefault
             label='Descrição curta'
