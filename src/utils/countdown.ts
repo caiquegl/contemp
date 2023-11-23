@@ -7,6 +7,7 @@ export function getFormattedDateTime(): string {
   const year = now.format('YYYY');
   const hour = now.format('HH');
   const minute = now.format('mm');
+  const second = now.format('ss'); // Adicionando os segundos
 
-  return `${day}/${month}/${year} - ${hour}:${minute}`;
+  return `${day}/${month}/${year} - ${hour}:${minute}:${second}`;
 }
