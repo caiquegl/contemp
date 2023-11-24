@@ -199,6 +199,7 @@ const TabFiles = () => {
           h='40px'
           _hover={{ transition: 'all 0.4s' }}
           onClick={() => {
+            console.log("aqui")
             fileInputRef.current.value = null // Remove a seleção atual do arquivo
             fileInputRef.current.key = Date.now() // Adiciona uma "key" única para forçar a recriação do elemento input
             fileInputRef.current.click()
@@ -230,13 +231,14 @@ const TabFiles = () => {
           }}
         />
         <input
-          id='cpf_file'
-          key={Date.now()} // Adicione uma "key" única para forçar a recriação do elemento input
+          // id='cpf_file'
+          // key={Date.now()} // Adicione uma "key" única para forçar a recriação do elemento input
           type='file'
           multiple={true}
           ref={fileInputRef}
           style={{ display: 'none' }}
-          onChange={async (evt: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={async (evt: any) => {
+            console.log('iniciou aqui')
             setLoading(true)
             const files = evt.target.files
             if (files) {
