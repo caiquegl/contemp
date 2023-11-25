@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip, Input } from '@chakra-ui/react'
+import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import ContainerAddProduct from '../ContainerAddProduct'
@@ -50,9 +50,6 @@ const TabProduct = ({ back }: IProps) => {
   }
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [categoriasSelecionadas, setCategoriasSelecionadas] = useState<string[]>([]);
-  const [mostrarSlider, setMostrarSlider] = useState<boolean>(false);
-
   const [step, setStep] = useState(1)
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
@@ -100,39 +97,7 @@ const TabProduct = ({ back }: IProps) => {
 
     {
       title: 'Categoria',
-      dataIndex: 'category.name',
-      key: 'category',
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
-        <Box p={5}>
-          <Input
-            placeholder="Filtrar Categoria"
-            value={selectedKeys[0]}
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            mb={2}
-          />
-          <Flex>
-          <Button
-          className='botao-vermelho'
-            colorScheme="teal"
-            size="sm"
-            mt={'0!important'}
-            onClick={() => confirm()}
-          >
-            Filtrar
-          </Button>
-          <Button
-            size="sm"
-            onClick={() => clearFilters()}
-            ml={'auto'}
-          >
-            Limpar
-          </Button>
-          </Flex>
-        </Box>
-      ),
-      onFilter: (value: any, record: any) =>
-        record.category.name.toLowerCase().includes(value.toLowerCase()),
-      render: (text: any, record: any) => <p>{record.category.name}</p>,
+      render: (a: any, b: any) => <p>{a.category.name}</p>,
       sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
     },
     {

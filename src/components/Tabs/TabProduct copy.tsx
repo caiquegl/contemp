@@ -50,9 +50,6 @@ const TabProduct = ({ back }: IProps) => {
   }
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [categoriasSelecionadas, setCategoriasSelecionadas] = useState<string[]>([]);
-  const [mostrarSlider, setMostrarSlider] = useState<boolean>(false);
-
   const [step, setStep] = useState(1)
   const [list, setList] = useState<any>([])
   const [listClone, setListClone] = useState<any>([])
@@ -103,54 +100,33 @@ const TabProduct = ({ back }: IProps) => {
       dataIndex: 'category.name',
       key: 'category',
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
-        <Box p={5}>
+        <Flex direction="column" align="start" p={4}>
           <Input
             placeholder="Filtrar Categoria"
             value={selectedKeys[0]}
             onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
             mb={2}
           />
-          <Flex>
           <Button
-          className='botao-vermelho'
             colorScheme="teal"
             size="sm"
-            mt={'0!important'}
             onClick={() => confirm()}
+            mb={2}
           >
             Filtrar
           </Button>
           <Button
             size="sm"
             onClick={() => clearFilters()}
-            ml={'auto'}
           >
             Limpar
           </Button>
-          </Flex>
-        </Box>
+        </Flex>
       ),
       onFilter: (value: any, record: any) =>
         record.category.name.toLowerCase().includes(value.toLowerCase()),
       render: (text: any, record: any) => <p>{record.category.name}</p>,
       sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
-    },
-    {
-      title: 'Url',
-      dataIndex: 'url',
-      key: 'url',
-      render: (a: any, b: any) => (
-        <Button
-          as={ChakraLink}
-          className='botao-tabelaprodutos'
-          href={b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
-          isExternal={true}
-          _hover={{ color: 'black', textDecoration: 'none' }}
-          rightIcon={<Icon as={ExternalLinkIcon} />}
-        >
-          {`url`}
-        </Button>
-      ),
     },
     {
       title: 'Ações',
