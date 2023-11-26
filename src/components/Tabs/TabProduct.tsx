@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import ContainerAddProduct from '../ContainerAddProduct'
 import ContainerAddProductDescription from '../ContainerAddProductDescription'
-import { Table } from 'antd'
+import { Table, Select } from 'antd'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
@@ -15,6 +15,7 @@ import { FiCopy } from 'react-icons/fi'
 import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
 import { FaDeleteLeft } from 'react-icons/fa6'
+
 
 interface IProps {
   back: any
@@ -102,34 +103,58 @@ const TabProduct = ({ back }: IProps) => {
       title: 'Categoria',
       dataIndex: 'category.name',
       key: 'category',
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
-        <Box p={5}>
-          <Input
-            placeholder="Filtrar Categoria"
-            value={selectedKeys[0]}
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            mb={2}
-          />
-          <Flex>
-          <Button
-          className='botao-vermelho'
-            colorScheme="teal"
-            size="sm"
-            mt={'0!important'}
-            onClick={() => confirm()}
-          >
-            Filtrar
-          </Button>
-          <Button
-            size="sm"
-            onClick={() => clearFilters()}
-            ml={'auto'}
-          >
-            Limpar
-          </Button>
-          </Flex>
-        </Box>
-      ),
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => {
+        const { Option } = Select;
+
+        const uniqueCategories = [...new Set(list.map((item: any) => item.category.name))];
+
+        return (
+          <Box p={5} position="relative"> {/* Adicione a propriedade position="relative" */}
+            <Select
+              showSearch
+              placeholder="Filtrar Categoria"
+              optionFilterProp="children"
+              value={selectedKeys[0]}
+              onChange={(value: string | string[]) => setSelectedKeys(value ? [value] : [])}
+              filterOption={(input: string, option: any) =>
+                option.children && typeof option.children === 'string'
+                  ? option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  : false
+              }
+              dropdownStyle={{ position: "absolute", zIndex: 1000 }}
+              style={{ minWidth: '200px' }}
+            >
+              {Array.isArray(uniqueCategories) &&
+                uniqueCategories.map((category: string, index: number, array: string[]) => (
+                  <Option key={category} value={category}>
+                    {category}
+                  </Option>
+                ))}
+
+
+
+            </Select>
+
+
+
+
+            <Flex>
+              <Button
+                className='botao-vermelho'
+                colorScheme="teal"
+                size="sm"
+                mt={'0!important'}
+                onClick={() => confirm()}
+              >
+                Filtrar
+              </Button>
+              <Button size="sm" onClick={() => clearFilters()} ml={'auto'}>
+                Limpar
+              </Button>
+            </Flex>
+          </Box>
+        );
+      },
       onFilter: (value: any, record: any) =>
         record.category.name.toLowerCase().includes(value.toLowerCase()),
       render: (text: any, record: any) => <p>{record.category.name}</p>,
