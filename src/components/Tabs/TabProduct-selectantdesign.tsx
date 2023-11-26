@@ -105,27 +105,24 @@ const TabProduct = ({ back }: IProps) => {
       key: 'category',
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => {
         const { Option } = Select;
-    
+
         const uniqueCategories = [...new Set(list.map((item: any) => item.category.name))];
-    
+
         return (
-          <>
+          <Box p={5} position="relative"> {/* Adicione a propriedade position="relative" */}
             <Select
               showSearch
               placeholder="Filtrar Categoria"
               optionFilterProp="children"
               value={selectedKeys[0]}
-              onChange={(value: string | string[]) => {
-                setSelectedKeys(value ? [value] : []);
-                confirm();
-              }}
+              onChange={(value: string | string[]) => setSelectedKeys(value ? [value] : [])}
               filterOption={(input: string, option: any) =>
                 option.children && typeof option.children === 'string'
                   ? option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   : false
               }
               dropdownStyle={{ position: "absolute", zIndex: 1000 }}
-              style={{ minWidth: '250px' }}
+              style={{ minWidth: '200px' }}
             >
               {Array.isArray(uniqueCategories) &&
                 uniqueCategories.map((category: string, index: number, array: string[]) => (
@@ -133,8 +130,29 @@ const TabProduct = ({ back }: IProps) => {
                     {category}
                   </Option>
                 ))}
+
+
+
             </Select>
-          </>
+
+
+
+
+            <Flex>
+              <Button
+                className='botao-vermelho'
+                colorScheme="teal"
+                size="sm"
+                mt={'0!important'}
+                onClick={() => confirm()}
+              >
+                Filtrar
+              </Button>
+              <Button size="sm" onClick={() => clearFilters()} ml={'auto'}>
+                Limpar
+              </Button>
+            </Flex>
+          </Box>
         );
       },
       onFilter: (value: any, record: any) =>
@@ -142,7 +160,6 @@ const TabProduct = ({ back }: IProps) => {
       render: (text: any, record: any) => <p>{record.category.name}</p>,
       sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
     },
-    
     {
       title: 'Url',
       dataIndex: 'url',
