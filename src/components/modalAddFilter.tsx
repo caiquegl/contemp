@@ -217,8 +217,8 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
                         virtual={false}
                         options={options}
                         style={{ width: '100%', maxHeight: '300px', overflow: 'auto' }}
-                        filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                        filterSort={(optionA, optionB) =>
+                        filterOption={(input: any, option: any) => (option?.label ?? '').includes(input)}
+                        filterSort={(optionA: any, optionB: any) =>
                           (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                         }
                       />

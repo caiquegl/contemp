@@ -328,6 +328,10 @@ img {
   border-radius: 4px;
 }
 
+.btn-all-products-bg {
+  z-index: 9999999999 !important;
+}
+
 .btn-all-products {
   background-color: white;
   font-size: 1rem;
