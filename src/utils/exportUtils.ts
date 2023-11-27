@@ -1,6 +1,8 @@
 // exportUtils.ts
 
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
 
 export const exportPDF = (list: any[]) => {
   const pdf = new jsPDF();
