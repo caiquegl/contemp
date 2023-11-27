@@ -324,7 +324,7 @@ img {
 }
 
 .ant-dropdown-menu-submenu-popup {
-  z-index: 9999999999;
+  z-index: 999999999999999999999999999999;
   border-radius: 4px;
 }
 
