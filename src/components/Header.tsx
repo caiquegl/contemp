@@ -667,7 +667,7 @@ export const Header = () => {
           </Flex>
 
           <HeaderMenu menuItems={list} />
-          <Modal isOpen={oOpen} onClose={oClose}>
+          <Modal isOpen={open} onClose={oClose}>
             <ModalOverlay />
             <ModalContent zIndex={9999999999} className="indexModal">
               <ModalCloseButton color='red' />
