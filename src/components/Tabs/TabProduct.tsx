@@ -1,4 +1,21 @@
-import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip, Input } from '@chakra-ui/react'
+import {
+  Box,
+  HStack,
+  Icon,
+  Flex,
+  Button,
+  useToast,
+  Link as ChakraLink,
+  Text,
+  Heading,
+  Tooltip,
+  Stack,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
+} from '@chakra-ui/react';
+
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 import ContainerAddProduct from '../ContainerAddProduct'
@@ -14,8 +31,15 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { FiCopy } from 'react-icons/fi'
 import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
+import { FaAngleDown } from "react-icons/fa";
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 import { CheckboxOptionType } from 'antd/lib/checkbox/Group';  // Adicionada a importação aqui
+import saveAs from 'file-saver';
+import ExcelJS from 'exceljs';
+import { exportPDF } from '../../utils/exportUtils';
+import 'jspdf-autotable';
+import { DownloadOutlined } from '@ant-design/icons';
+
 
 
 const { SubMenu } = Menu;
@@ -99,23 +123,23 @@ const TabProduct = ({ back }: IProps) => {
 
         const menu = (
           <Menu mode='vertical' style={{ maxWidth: '300px', width: '100%', borderRadius: '8px!important', padding: '3%', minHeight: '400px', }}>
-              <Heading as={'h4'} fontSize={'1rem'} mb={'3%'}>Categorias</Heading>
-              <Checkbox key="all"
-                style={{marginBottom: '2%',}}
-                indeterminate={selectedKeys.length > 0 && selectedKeys.length < uniqueCategories.length}
-                checked={selectedKeys.length === uniqueCategories.length}
-                onChange={() => {
-                  const newSelectedKeys = selectedKeys.length === uniqueCategories.length ? [] : uniqueCategories;
-                  setSelectedKeys(newSelectedKeys);
-                  confirm();
-                }}
-              >
-                Todas as Categorias
-              </Checkbox>
+            <Heading as={'h4'} fontSize={'1rem'} mb={'3%'}>Categorias</Heading>
+            <Checkbox key="all"
+              style={{ marginBottom: '2%', }}
+              indeterminate={selectedKeys.length > 0 && selectedKeys.length < uniqueCategories.length}
+              checked={selectedKeys.length === uniqueCategories.length}
+              onChange={() => {
+                const newSelectedKeys = selectedKeys.length === uniqueCategories.length ? [] : uniqueCategories;
+                setSelectedKeys(newSelectedKeys);
+                confirm();
+              }}
+            >
+              Todas as Categorias
+            </Checkbox>
             <Menu.Divider />
             <Box>
               <CheckboxGroup
-              style={{marginTop: '3%',}}
+                style={{ marginTop: '3%', }}
                 options={(uniqueCategories.map((category) => ({
                   label: category,
                   value: category,
@@ -264,6 +288,50 @@ const TabProduct = ({ back }: IProps) => {
     backTab();
   }, [back]);
 
+  const handleExportCSV = () => {
+    // Crie uma string CSV a partir dos dados da lista de produtos
+    const csvContent = [
+      'Ordem, Nome, Categoria, Url', // Cabeçalho do CSV
+      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
+    ].join('\n');
+    
+
+    // Converta a string CSV em um Blob
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo
+    saveAs(blob, 'products_export.csv');
+  };
+
+  const handleExportExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Produtos');
+  
+    // Adicione cabeçalhos
+    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'URL']);
+  
+    // Adicione dadoss
+    list.forEach((product: any) => {
+      sheet.addRow([product.order, product.name, product.category.name, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
+    });
+    
+  
+    // Crie um Blob a partir do workbook
+    const blob = await workbook.xlsx.writeBuffer();
+  
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
+  };
+  
+
+  const handleExportPDF = () => {
+    exportPDF(list);
+  };
+  
+  
+  
+
+
   return (
     <>
       {step === 1 && (
@@ -277,20 +345,49 @@ const TabProduct = ({ back }: IProps) => {
             </Text>
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-            <Button
-              bg='var(--red-primary)'
-              color='var(--white-primary)'
-              borderRadius='8px'
-              w='128px'
-              h='40px'
-              _hover={{ transition: 'all 0.4s' }}
-              onClick={() => {
-                setStep(2);
-                setIsUpdate(false);
-              }}
-            >
-              Adicionar
-            </Button>
+            
+              <Button
+                bg='var(--red-primary)'
+                color='var(--white-primary)'
+                borderRadius='8px'
+                w='128px'
+                h='40px'
+                _hover={{ transition: 'all 0.4s' }}
+                onClick={() => {
+                  setStep(2);
+                  setIsUpdate(false);
+                }}
+              >
+                Adicionar
+              </Button>
+              <Stack direction='row' spacing={6}>
+              <ChakraMenu>
+                <ChakraMenuButton
+                  as={Button}
+                  bg='var(--red-primary)'
+                  color='var(--white-primary)'
+                  borderRadius='8px'
+                  w='280px'
+                  h='40px'
+                  rightIcon={<FaAngleDown />}
+                  _hover={{ transition: 'all 0.4s' }}
+                  _focus={{backgroundColor: 'var(--red-primary)!important',}}
+                >
+                  Exportar Produtos
+                </ChakraMenuButton>
+                <ChakraMenuList color={'#242424'}>
+                  <ChakraMenuItem onClick={() => handleExportCSV()}>
+                    Exportar em CSV
+                  </ChakraMenuItem>
+                  <ChakraMenuItem onClick={() => handleExportExcel()}>
+                    Exportar em XSLX
+                  </ChakraMenuItem>
+                  <ChakraMenuItem onClick={() => handleExportPDF()}>
+                    Exportar em PDF
+                  </ChakraMenuItem>
+                </ChakraMenuList>
+              </ChakraMenu>
+            
 
             <SearchBar
               inputProps={{
@@ -312,6 +409,7 @@ const TabProduct = ({ back }: IProps) => {
                 maxW: pxToRem(288),
               }}
             />
+            </Stack>
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
