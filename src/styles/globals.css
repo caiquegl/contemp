@@ -8,6 +8,14 @@
 }
 
 
+.chakra-modal__content-container {
+  z-index: 2 !important;
+}
+
+.chakra-modal__content {
+  z-index: 2 !important;
+}
+
 html,
 body {
   padding: 0;
@@ -332,6 +340,10 @@ img {
   z-index: 9999999999 !important;
 }
 
+.indexModal {
+  z-index: 9999999999 !important;
+}
+
 .btn-all-products {
   background-color: white;
   font-size: 1rem;
@@ -416,13 +428,7 @@ img {
   z-index: 1 !important;
 }
 
-.chakra-modal__content-container {
-  z-index: 2 !important;
-}
 
-.chakra-modal__content {
-  z-index: 2 !important;
-}
 
 .btn-all-products .ant-dropdown-menu-submenu-title:hover {
   color: #fff !important;

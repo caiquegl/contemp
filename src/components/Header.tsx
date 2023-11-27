@@ -301,7 +301,7 @@ export const Header = () => {
         </Drawer>
         <Modal isOpen={open} onClose={oClose}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent className="indexModal">
             <ModalCloseButton color='red' />
             <ModalBody p='20px' mt='20px'>
               <Flex alignItems='center'>
@@ -667,9 +667,9 @@ export const Header = () => {
           </Flex>
 
           <HeaderMenu menuItems={list} />
-          <Modal isOpen={open} onClose={oClose}>
+          <Modal isOpen={true} onClose={oClose}>
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent zIndex={9999999999} className="indexModal">
               <ModalCloseButton color='red' />
               <ModalBody p='20px' mt='20px'>
                 <Flex alignItems='center'>
@@ -759,7 +759,7 @@ export const Header = () => {
                 </Flex>
                 <Modal isOpen={open} onClose={oClose}>
                   <ModalOverlay />
-                  <ModalContent>
+                  <ModalContent className="indexModal">
                     <ModalCloseButton color='red' />
                     <ModalBody p='20px' mt='20px'>
                       <Flex alignItems='center'>

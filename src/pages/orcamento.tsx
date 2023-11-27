@@ -420,7 +420,7 @@ const Orcamento = () => {
       <Footer />
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent className="indexModal">
           <ModalCloseButton color='red' />
           <ModalBody p='20px' mt='20px'>
             <Flex alignItems='center'>
