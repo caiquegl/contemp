@@ -9,11 +9,11 @@
 
 
 .chakra-modal__content-container {
-  z-index: 2 !important;
+  z-index: 9999999999 !important;
 }
 
 .chakra-modal__content {
-  z-index: 2 !important;
+  z-index: 9999999999 !important;
 }
 
 html,
