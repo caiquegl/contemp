@@ -13,10 +13,11 @@ import {
   useToast,
   VStack,
   Text,
-  FormHelperText,
   Tooltip,
   Heading,
+  Stack,
   Link as ChakraLink,
+  Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -44,6 +45,10 @@ import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
 import { ModalAddFilter } from '../modalAddFilter'
 import { FiCopy } from 'react-icons/fi';
+import { FaAngleDown } from "react-icons/fa";
+import saveAs from 'file-saver';
+import ExcelJS from 'exceljs';
+
 
 const { confirm } = Modal
 
@@ -451,18 +456,92 @@ const TabCategory = () => {
     { name: 'NÃO', value: 'false' },
   ]
 
+  const exportarCSV = () => {
+    // Obtenha os dados das categorias
+    const categorias = listClone;
+  
+    // Crie o conteúdo CSV
+    const csvContent = [
+      'Ordem Geral,Ordem em todos produtos,Nome,Url',
+      ...categorias.map((categoria: any) => `${categoria.order},${categoria.order_all_products},${categoria.name},https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')},`),
+    ].join('\n');
+    
+  
+    // Crie um Blob com o conteúdo CSV
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  
+    // Crie um link de download e clique nele para baixar o arquivo
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "categorias.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
+  const exportExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Categorias');
+  
+    // Adicione cabeçalhos
+    sheet.addRow(['Ordem Geral', 'Ordem em todos produtos', 'Nome', 'Url']);
+  
+    // Adicione dados
+    list.forEach((categoria: any) => {
+      sheet.addRow([
+        categoria.order,
+        categoria.order_all_products,
+        categoria.name,
+        `https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')}`,
+      ]);
+    });
+  
+    // Crie um Blob a partir do workbook
+    const blob = await workbook.xlsx.writeBuffer();
+  
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'categorias_export.xlsx');
+  };
+  
+
   return (
     <>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-        <Box w={'70%'}>
+        <Box w={'60%'}>
           <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
             Categorias & Subcategorias
           </Heading>
-          <Text className='paragrafo-preto' mb={'3%'}>
+          <Text className='paragrafo-preto' mb={'3%'} mr={'5%'}>
             Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma
             prática.
           </Text>
         </Box>
+        <Stack direction='row' spacing={6}>
+        <ChakraMenu>
+                <ChakraMenuButton
+                  as={Button}
+                  bg='var(--red-primary)'
+                  color='var(--white-primary)'
+                  borderRadius='8px'
+                  w='280px'
+                  h='40px'
+                  rightIcon={<FaAngleDown />}
+                  _hover={{ transition: 'all 0.4s' }}
+                  _focus={{backgroundColor: 'var(--red-primary)!important',}}
+                >
+                  Exportar Produtos 
+                </ChakraMenuButton>
+                <ChakraMenuList color={'#242424'}>
+                  <ChakraMenuItem onClick={() => exportarCSV()}>
+                    Exportar em CSV
+                  </ChakraMenuItem>
+                  <ChakraMenuItem onClick={() => exportExcel()}>
+                    Exportar XSLX
+                  </ChakraMenuItem>
+                </ChakraMenuList>
+              </ChakraMenu>
         <SearchBar
           inputProps={{
             placeholder: 'Digite a categoria...',
@@ -485,6 +564,7 @@ const TabCategory = () => {
             maxW: pxToRem(288),
           }}
         />
+        </Stack>
       </Flex>
       <HStack spacing='20px' alignItems='flex-start'>
         <Box borderRadius='8px' bg='white' p='30px' w='100%'>

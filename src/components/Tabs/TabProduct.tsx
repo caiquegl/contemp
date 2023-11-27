@@ -10,9 +10,6 @@ import {
   Heading,
   Tooltip,
   Stack,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
 } from '@chakra-ui/react';
 
