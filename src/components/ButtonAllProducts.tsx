@@ -25,7 +25,7 @@ export const ButtonAllProducts = ({ menuItems, render }: IProps) => {
             backgroundColor: colors.white[0],
             zIndex: 998
           },
-          // openKeys: ['SENSORES'],
+          // openKeys: ['CONTROLADORES DE PROCESSOS'],
           className: 'btn-all-products text-black negrito',
           rootClassName: 'btn-all-products-bg',
           subMenuOpenDelay: 0.5,
