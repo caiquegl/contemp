@@ -167,6 +167,8 @@ module.exports = {
       creatRedirectObj ('/category/PIRÔMETROS_FIXOS_OPTRIS', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       creatRedirectObj ('/category/PIR%C3%94METROS_FIXOS_OPTRIS', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       creatRedirectObj ('/category/TERMOPAR', '/category/TERMOPARES'),
+      creatRedirectObj ('/category/CONTADOR_%7C_TEMPORIZADOR_%7C_VELOC%C3%8DMETRO', '/category/contador,_temporizador_,_velocÍmetro'),
+      creatRedirectObj ('/temporizadores/contadores/', '/category/contador,_temporizador_,_velocÍmetro'),
       // creatRedirectObj ('', ''),
     ]
   },
