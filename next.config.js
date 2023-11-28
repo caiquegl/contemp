@@ -165,6 +165,7 @@ module.exports = {
       creatRedirectObj ('/pirometros/infravermelho', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       creatRedirectObj ('/sensores/ir', '/category/SENSORES'),
       creatRedirectObj ('/category/PIRÔMETROS_FIXOS_OPTRIS', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
+      creatRedirectObj ('/category/PIR%C3%94METROS_FIXOS_OPTRIS', '/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS'),
       // creatRedirectObj ('', ''),
     ]
   },
