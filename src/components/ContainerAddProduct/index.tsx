@@ -268,7 +268,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             typeInput='file'
             getUrls={(values: any) => setUrls([...urls, ...values])}
           />
-          <FormHelperText></FormHelperText>
         </FormControl>
         <HStack spacing='20px' w='100%' mt='20px'>
           {urls.map((value: string, index: number) => (

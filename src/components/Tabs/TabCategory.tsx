@@ -48,7 +48,8 @@ import { FiCopy } from 'react-icons/fi';
 import { FaAngleDown } from "react-icons/fa";
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
-
+//import { jsPDF } from 'jspdf';
+//import 'jspdf-autotable';
 
 const { confirm } = Modal
 
@@ -504,6 +505,60 @@ const TabCategory = () => {
     // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'categorias_export.xlsx');
   };
+
+ {/* const exportarPDF = () => {
+    const columns = ['Ordem Geral', 'Ordem em todos produtos', 'Nome', 'Url'];
+    const data = listClone.map((categoria: any) => [
+      categoria.order?.toString() ?? '',
+      categoria.order_all_products?.toString() ?? '',
+      categoria.name ?? '',
+      `https://contemp.com.br/category/${replaceNameToUrl(categoria.name)
+        .toLowerCase()
+        .replaceAll(' ', '_')}`,
+    ]);
+  
+    const pdf = new jsPDF({
+
+    });
+  
+    pdf.text('Relatório de Categorias', 10, 10);
+  
+    pdf.autoTable({
+      head: [columns],
+      body: data,
+      theme: 'grid',
+      styles: { cellPadding: 2, fontSize: 10 },
+      margin: { top: 20 },
+      columnStyles: {
+        0: { cellWidth: 15 },
+        1: { cellWidth: 40 },
+        2: { cellWidth: 40 },
+        3: { cellWidth: 80 },
+      },
+      bodyStyles: { minCellHeight: 10 },
+      startY: 20,
+      pageBreak: 'auto',
+      headStyles: { fillColor: [182, 0, 5], textColor: [255, 255, 255] },
+      didDrawPage: (data) => {
+        const pageCount = pdf.internal.getNumberOfPages();
+        pdf.text(`Página ${data.pageNumber} de ${pageCount}`, data.settings.margin.left, pdf.internal.pageSize.height - 10);
+      },
+    });
+  
+    // Salvar PDF
+    pdf.save('categorias.pdf');
+  };*/}
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
   
 
   return (
