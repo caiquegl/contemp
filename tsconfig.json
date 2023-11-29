@@ -2,7 +2,7 @@
   "compilerOptions": {
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "target": "esnext",
+    "target": "esnext", // Item 3
     "module": "esnext",
     "lib": [
       "dom",
@@ -13,24 +13,28 @@
     "noEmit": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": true, // Item 6
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "allowJs": true,
+    "allowJs": true, // Item 7
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "removeComments": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/ContainerAddProductDescription/index.tsx"
-, "src/components/Favorite.js", "src/components/CustomEditor.js"  ],
+    "src/components/ContainerAddProductDescription/index.tsx",
+    "src/components/Favorite.js",
+    "src/components/CustomEditor.js"
+  ],
   "exclude": [
     "node_modules",
     "u614611595"
   ]
 }
+

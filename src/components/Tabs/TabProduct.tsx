@@ -10,6 +10,7 @@ import {
   Heading,
   Tooltip,
   Stack,
+  IconButton,
   Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
 } from '@chakra-ui/react';
 
@@ -28,9 +29,10 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { FiCopy } from 'react-icons/fi'
 import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaStar } from "react-icons/fa";
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 import { CheckboxOptionType } from 'antd/lib/checkbox/Group';  // Adicionada a importação aqui
+import { prisma } from '../../pages/api/toggleDestaqueProduct';
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
 //import jsPDF from 'jspdf';
@@ -157,6 +159,34 @@ const TabProduct = ({ back }: IProps) => {
         record.category.name.toLowerCase().includes(value.toLowerCase()),
       render: (text: any, record: any) => <p>{record.category.name}</p>,
       sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
+    },
+    {
+      title: (
+        <Tooltip
+          placement="top"
+          label="Destaque"
+          color={'var(--white-primary)'}
+          bg={'var(--red-primary)'}
+          borderRadius={'8px'}
+          textAlign={'center'}
+        >
+          <Box>
+            <Icon as={FaStar} fontSize="1.25rem" color="var(--gray-text)" />
+          </Box>
+        </Tooltip>
+      ),
+      dataIndex: 'destaque',
+      key: 'destaque',
+      sorter: (a: any, b: any) => a.destaque - b.destaque,
+      render: (destaque: boolean, product: any) => (
+        <IconButton
+          aria-label='Alternar Destaque'
+          icon={<FaStar />}
+          color={destaque ? 'yellow.400' : 'gray.400'}
+          onClick={() => toggleDestaque(product.id, destaque)}
+        />
+
+      ),
     },
     {
       title: 'Url',
@@ -288,10 +318,9 @@ const TabProduct = ({ back }: IProps) => {
   const handleExportCSV = () => {
     // Crie uma string CSV a partir dos dados da lista de produtos
     const csvContent = [
-      'Ordem, Nome, Categoria, Url', // Cabeçalho do CSV
-      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
+      'Ordem, Nome, Categoria, Destaque, Url', // Updated header
+      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.destaque ? 'Destaque' : 'Não Destaque'},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
     ].join('\n');
-    
 
     // Converta a string CSV em um Blob
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
@@ -303,25 +332,24 @@ const TabProduct = ({ back }: IProps) => {
   const handleExportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-  
-    // Adicione cabeçalhos
-    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'URL']);
-  
-    // Adicione dadoss
+
+    // Adicione cabeçalhos, incluindo o novo campo 'Destaque'
+    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Destaque', 'URL']);
+
+    // Adicione dados, incluindo o novo campo 'Destaque'
     list.forEach((product: any) => {
-      sheet.addRow([product.order, product.name, product.category.name, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
+      sheet.addRow([product.order, product.name, product.category.name, product.destaque ? 'Destaque' : 'Não Destaque', `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-    
-  
+
     // Crie um Blob a partir do workbook
     const blob = await workbook.xlsx.writeBuffer();
-  
+
     // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
   };
-  
 
- {/*} const handleExportPDF = () => {
+
+  {/*} const handleExportPDF = () => {
     const pdf = new jsPDF();
     
     // Adiciona o conteúdo da tabela no PDF
@@ -378,9 +406,37 @@ const TabProduct = ({ back }: IProps) => {
     // Salva o arquivo PDF
     pdf.save('produtos-contemp.pdf');
   };*/}
-  
-  
-  
+
+  const toggleDestaque = async (productId: number, currentDestaque: boolean) => {
+    try {
+      // Use a função fetch para chamar sua API
+      const response = await fetch('/api/toggleDestaqueProduct', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, destaque: currentDestaque }),
+      });
+
+      const data = await response.json();
+
+      toast({
+        title: 'Sucesso',
+        description: data.msg,
+        status: 'success',
+      });
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar destaque',
+        status: 'error',
+      });
+    } finally {
+      setLoading(false);
+      await listProduct();
+    }
+  };
+
 
 
   return (
@@ -396,22 +452,22 @@ const TabProduct = ({ back }: IProps) => {
             </Text>
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-            
-              <Button
-                bg='var(--red-primary)'
-                color='var(--white-primary)'
-                borderRadius='8px'
-                w='128px'
-                h='40px'
-                _hover={{ transition: 'all 0.4s' }}
-                onClick={() => {
-                  setStep(2);
-                  setIsUpdate(false);
-                }}
-              >
-                Adicionar
-              </Button>
-              <Stack direction='row' spacing={6}>
+
+            <Button
+              bg='var(--red-primary)'
+              color='var(--white-primary)'
+              borderRadius='8px'
+              w='128px'
+              h='40px'
+              _hover={{ transition: 'all 0.4s' }}
+              onClick={() => {
+                setStep(2);
+                setIsUpdate(false);
+              }}
+            >
+              Adicionar
+            </Button>
+            <Stack direction='row' spacing={6}>
               <ChakraMenu>
                 <ChakraMenuButton
                   as={Button}
@@ -422,7 +478,7 @@ const TabProduct = ({ back }: IProps) => {
                   h='40px'
                   rightIcon={<FaAngleDown />}
                   _hover={{ transition: 'all 0.4s' }}
-                  _focus={{backgroundColor: 'var(--red-primary)!important',}}
+                  _focus={{ backgroundColor: 'var(--red-primary)!important', }}
                 >
                   Exportar Produtos
                 </ChakraMenuButton>
@@ -435,28 +491,28 @@ const TabProduct = ({ back }: IProps) => {
                   </ChakraMenuItem>
                 </ChakraMenuList>
               </ChakraMenu>
-            
 
-            <SearchBar
-              inputProps={{
-                placeholder: 'Digite o produto...',
-                onChange: (evt) => {
-                  let newList = listClone.filter((item: any) => item.name.toLowerCase().includes(evt.target.value.toLowerCase()));
-                  setList([...newList]);
-                },
-                _placeholder: {
-                  color: 'black.800',
-                  opacity: '50%',
-                },
-              }}
-              containerProps={{
-                bg: 'white.500',
-                border: '1px solid',
-                borderColor: 'black.800',
-                color: colors.black[800],
-                maxW: pxToRem(288),
-              }}
-            />
+
+              <SearchBar
+                inputProps={{
+                  placeholder: 'Digite o produto...',
+                  onChange: (evt) => {
+                    let newList = listClone.filter((item: any) => item.name.toLowerCase().includes(evt.target.value.toLowerCase()));
+                    setList([...newList]);
+                  },
+                  _placeholder: {
+                    color: 'black.800',
+                    opacity: '50%',
+                  },
+                }}
+                containerProps={{
+                  bg: 'white.500',
+                  border: '1px solid',
+                  borderColor: 'black.800',
+                  color: colors.black[800],
+                  maxW: pxToRem(288),
+                }}
+              />
             </Stack>
           </Flex>
 
