@@ -177,6 +177,17 @@ const TabFiles = () => {
     }
   };
 
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10, // Número padrão de itens por página
+  });
+
+  const handleTableChange = (pagination: any) => {
+    setPagination({
+      ...pagination,
+    });
+  };
+
 
   return (
     <>
@@ -267,7 +278,28 @@ const TabFiles = () => {
       </Flex>
 
       <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-        <Table id='tabela-documentos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
+      <Table
+          id='tabela-documentos'
+          loading={loading}
+          scroll={{ x: 'fit-content' }}
+          dataSource={list}
+          columns={column}
+          word-wrap={'break-word'}
+          pagination={{
+            ...pagination,
+            showSizeChanger: true,
+            showQuickJumper: false,
+            pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
+            onShowSizeChange: (current: number, pageSize: number) => {
+              setPagination({
+                ...pagination,
+                current,
+                pageSize,
+              });
+            },
+          }}
+          onChange={handleTableChange}
+        />
       </Box>
     </>
   )
