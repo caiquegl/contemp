@@ -32,7 +32,7 @@ import { PiPencilSimpleBold } from "react-icons/pi"
 import { FaAngleDown, FaStar } from "react-icons/fa";
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 import { CheckboxOptionType } from 'antd/lib/checkbox/Group';  // Adicionada a importação aqui
-import { prisma } from '../../pages/api/toggleDestaqueProduct';
+import toggleDestaqueProduct from '../../pages/api/toggleDestaqueProduct';
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
 //import jsPDF from 'jspdf';
