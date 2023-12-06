@@ -243,7 +243,7 @@ const TabFiles = () => {
         />
         <input
           // id='cpf_file'
-          key={Date.now()}
+          // key={Date.now()}
           type='file'
           multiple={true}
           ref={fileInputRef}
