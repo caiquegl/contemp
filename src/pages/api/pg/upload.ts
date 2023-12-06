@@ -13,7 +13,7 @@ const upload = multer({
       const slugOptions: SlugifyOptions = {
         replacementChar: '_',
         removePunctuation: true,
-        maxLength: 255, // Ajuste conforme necessário
+        maxLength: 1500, // Ajuste conforme necessário
       };
 
       // Criar um nome de arquivo slugificado usando a função
@@ -49,7 +49,7 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
       const nameFile = createSlug(file.originalname, {
         replacementChar: '_',
         removePunctuation: true,
-        maxLength: 255, // Ajuste conforme necessário
+        maxLength: 25000, // Ajuste conforme necessário
       });
 
       // Construir a URL do arquivo com base no nome slugificado

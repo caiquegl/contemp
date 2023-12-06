@@ -243,7 +243,7 @@ const TabFiles = () => {
         />
         <input
           // id='cpf_file'
-          // key={Date.now()} // Adicione uma "key" única para forçar a recriação do elemento input
+          key={Date.now()}
           type='file'
           multiple={true}
           ref={fileInputRef}
