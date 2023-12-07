@@ -235,7 +235,6 @@ module.exports = {
       creatRedirectObj ('/produtos/aquisitores-registradores-sistemas-supervisorios/', '/category/aquisitores'),
       creatRedirectObj ('/produtos/conversor-rs485-rs232-e-vice-versa', '/category/transmissores_e_conversores'),
       creatRedirectObj ('/produtos/aquisitores-de-dados', '/category/aquisitores'),
-      creatRedirectObj ('/produtos/categoria?id=23', '/category/controladores_de_processos'),
       creatRedirectObj ('/produtos/registradores-graficos-com-papel', '/category/controladores_de_processos'),
       creatRedirectObj ('/produtos/reles-ssr-estado-solido-monofasicos', '/category/relés_de_estado_sólido_ssr'),
       creatRedirectObj ('/produtos/controladores-de-potencia-tiristorizados-cargas-resistivas', '/category/controladores_de_potÊncia'),
