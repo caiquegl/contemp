@@ -233,7 +233,6 @@ module.exports = {
       creatRedirectObj ('/produtos/aquisitores-registradores-sistemas-supervisorios/aquisitores-de-dados-8-canais/aquisitor-de-dados-a202-com-software-masterlogger', '/category/aquisitores'),
       creatRedirectObj ('/produtos/sistemas-supervisorios-contempview-full', '/category/controladores_de_processos'),
       creatRedirectObj ('/produtos/aquisitores-registradores-sistemas-supervisorios/', '/category/aquisitores'),
-      creatRedirectObj ('/lista_produtos.php?area=1&segmento=1&categoria=1&tiposegmento=0', '/todosProdutos'),
       creatRedirectObj ('/produtos/conversor-rs485-rs232-e-vice-versa', '/category/transmissores_e_conversores'),
       creatRedirectObj ('/produtos/aquisitores-de-dados', '/category/aquisitores'),
       creatRedirectObj ('/produtos/categoria?id=23', '/category/controladores_de_processos'),
