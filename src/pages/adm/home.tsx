@@ -34,6 +34,7 @@ import { api } from '../../lib/axios';
 import { parseCookies } from 'nookies';
 import { getFormattedDateTime } from '../../utils/countdown';
 import TabFiles from '../../components/Tabs/TabFiles';
+import TabRedirects from '../../components/Tabs/TabRedirects';
 import saveAs from 'file-saver';
 import { DownloadOutlined } from '@ant-design/icons';
 
@@ -135,6 +136,7 @@ const Adm = () => {
     <TabCategory />,
     <TabProduct back={back} />,
     <TabFiles />,
+    //<TabRedirects />,
   ];
 
   const emails: any = {
