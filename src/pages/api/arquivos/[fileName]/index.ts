@@ -12,7 +12,7 @@ export default function handler(req: any, res: any) {
       return;
     }
 
-    const matchingFiles = files.filter((file) => file.startsWith(fileName.replaceAll('_', ' ')));
+    const matchingFiles = files.filter((file) => file.replaceAll('_', ' ').startsWith(fileName.replaceAll('_', ' ')));
     console.log(matchingFiles, fileName.replaceAll('_', ' '))
     if (matchingFiles.length > 0) {
       const filePath = path.join(directoryPath, matchingFiles[0]);
