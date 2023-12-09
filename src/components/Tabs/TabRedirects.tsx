@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading } from '@chakra-ui/react'
-import { Table, Tooltip, Space, message, Modal, Form, Input } from 'antd';
+import { Table, Tooltip, Space, message, Modal, Form, Input, Button as BtnAtd } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { api } from '../../lib/axios';
 import { useRouter } from 'next/router';
@@ -84,24 +84,23 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
       render: (text: any, record: any) => (
         <Space size="middle">
           <Tooltip title="Editar">
-            <Button
+            <BtnAtd
               type="primary"
               icon={<EditOutlined />}
               size="small"
               onClick={() => handleEditRedirect(record.id)}
             >
               Editar
-            </Button>
+            </BtnAtd>
           </Tooltip>
           <Tooltip title="Excluir">
-            <Button
-              type="danger"
+            <BtnAtd
               icon={<DeleteOutlined />}
               size="small"
               onClick={() => handleDeleteRedirect(record.id)}
             >
               Excluir
-            </Button>
+            </BtnAtd>
           </Tooltip>
         </Space>
       ),
