@@ -86,6 +86,9 @@ module.exports = {
       creatRedirectObj('/wp-content/uploads/2012/04/Contemp-P501-1.jpg', 'https://contemp.com.br'),
       creatRedirectObj('/ukzzv-17538-procesador-SLGTE-Intel-Core-Duo-E7500', 'https://contemp.com.br'),
       creatRedirectObj('/allProduct', '/todosProdutos'),
+      //ASSINATURA DE E-MAIL
+      creatRedirectObj('/logo-assinaturas-emails.png', '/api/arquivos/assinatura-contemp.png'),
+
       //Erro de redirecionamento Google Search
       creatRedirectObj('/cjbeewii-154907-DTAP-pour-câble-de-montage-DSLR-Utilisation-de/', '/todosProdutos'),
       creatRedirectObj('/lhnab-3642-quilates-ohrhänger-pendiente-Aretes-chysopras/', '/todosProdutos'),

@@ -68,6 +68,7 @@
     "react-simple-typewriter": "4.0.5",
     "react-slick": "^0.29.0",
     "sib-api-v3-sdk": "8.5.0",
+    "slick-carousel": "^1.8.1",
     "swiper": "8.4.4",
     "uuid": "9.0.0",
     "winston": "^3.11.0",
