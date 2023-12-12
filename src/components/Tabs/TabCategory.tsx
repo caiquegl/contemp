@@ -365,7 +365,8 @@ const TabCategory = () => {
                 color={'var(--white-primary)'}
                 bg={'var(--red-primary)'}
                 borderRadius={'8px'}
-                textAlign={'center'}>
+                textAlign={'center'}
+                hasArrow>
                 <Box>
                   <Badge count={Array.isArray(a.filter) ? a.filter.length : 0} size='small' color='var(--red-primary)' >
                     <Icon
@@ -385,7 +386,8 @@ const TabCategory = () => {
                 color={'var(--white-primary)'}
                 bg={'var(--red-primary)'}
                 borderRadius={'8px'}
-                textAlign={'center'}>
+                textAlign={'center'}
+                hasArrow>
                 <Box>
                   <Icon cursor='pointer' as={PiPencilSimpleBold} fontSize='1.15rem' onClick={() => handleOnEditClick(a)} color='var(--gray-text)' />
                 </Box>
@@ -395,7 +397,8 @@ const TabCategory = () => {
                 color={'var(--white-primary)'}
                 bg={'var(--red-primary)'}
                 borderRadius={'8px'}
-                textAlign={'center'}>
+                textAlign={'center'}
+                hasArrow>
                   <Box>
                 <FiCopy
                   style={{
@@ -414,7 +417,8 @@ const TabCategory = () => {
                 color={'var(--white-primary)'}
                 bg={'var(--red-primary)'}
                 borderRadius={'8px'}
-                textAlign={'center'}>
+                textAlign={'center'}
+                hasArrow>
               <Box>
               <Icon
                 cursor='pointer'

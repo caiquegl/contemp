@@ -28,7 +28,6 @@ import { ViewImage } from './ViewImage'
 import { v4 as uuidv4 } from 'uuid'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
-import { string } from 'yup'
 import { PiInfoDuotone } from "react-icons/pi";
 
 const asyncComponents = {

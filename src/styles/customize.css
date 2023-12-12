@@ -19,6 +19,11 @@ body {
 
 p {
     font-size: 1rem;
+    margin-bottom: 0%;
+}
+dd,
+ol, ul, dl {
+    margin-bottom: 0%;
 }
 
 button,
@@ -34,6 +39,18 @@ Link,
 a {
     text-decoration: none;
     font-weight: bold;
+}
+
+.css-pnkb2c,
+.css-1quev4s,
+.css-1bjs4f9,
+.css-kcau31 {
+    color: var(--white-primary) !important;
+}
+
+.css-1bjs4f9:hover,
+.css-kcau31:hover {
+    color: var(--black-primary) !important;
 }
 
 .d-none {
@@ -183,6 +200,9 @@ a {
     text-decoration: none !important;
     border: solid 2px var(--black-primary) !important;
 }
+.custom-tooltip {
+    border-radius: 8px !important;
+  }
 
 /* HEADER */
 .container-menu {

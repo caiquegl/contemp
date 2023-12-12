@@ -227,6 +227,7 @@
               bg={'var(--red-primary)'}
               borderRadius={'8px'}
               textAlign={'center'}
+              hasArrow
             >
               <Box>
                 <Icon
@@ -249,6 +250,7 @@
               bg={'var(--red-primary)'}
               borderRadius={'8px'}
               textAlign={'center'}
+              hasArrow
             >
               <Box>
                 <FiCopy
@@ -271,6 +273,7 @@
               bg={'var(--red-primary)'}
               borderRadius={'8px'}
               textAlign={'center'}
+              hasArrow
             >
               <Box>
                 <Icon cursor='pointer' as={FaDeleteLeft} fontSize='1.15rem' color='var(--gray-text)' onClick={() => openDeleteAlert(a)} />
@@ -620,7 +623,7 @@
           onClose={closeDeleteAlert}
         >
           <AlertDialogOverlay>
-            <AlertDialogContent p={'1%'}>
+            <AlertDialogContent p={'1%'} backgroundColor={'var(--white-primary)'}>
               <AlertDialogHeader className='paragrafo-preto text-black negrito' fontSize="1.15rem" textTransform={'uppercase'} mb={'0'}>
                 Confirmar exclusão
               </AlertDialogHeader>

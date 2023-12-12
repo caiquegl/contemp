@@ -136,7 +136,7 @@ const Adm = () => {
     <TabCategory />,
     <TabProduct back={back} />,
     <TabFiles />,
-    //<TabRedirects />,
+    <TabRedirects />,
   ];
 
   const emails: any = {
@@ -147,7 +147,7 @@ const Adm = () => {
 
   return (
     <>
-      <Container maxW='7xl' p='12px 60px 12px 60px'>
+      <Container maxW='100%' p='12px 60px 12px 60px'>
         <Flex
           alignItems='center'
           maxW={'100%'}
@@ -266,6 +266,18 @@ const Adm = () => {
                 color='black.800'
               >
                 Arquivos
+              </Tab>
+              <Tab
+                _selected={{
+                  bg: 'red.600',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  borderRadius: '5px',
+                }}
+                w='133px'
+                color='black.800'
+              >
+                Url's
               </Tab>
             </TabList>
           </Tabs>

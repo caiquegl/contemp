@@ -1,44 +1,76 @@
 // pages/api/redirects.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import * as Joi from 'joi';
 
 const redirectsPath = path.resolve(__dirname, './next.config.js');
 
+interface Redirect {
+  source: string;
+  destination: string;
+}
+
+const redirectSchema = Joi.object({
+  source: Joi.string().required(),
+  destination: Joi.string().required(),
+});
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    // Lógica para obter redirecionamentos do next.config.js
-    const nextConfig = fs.readFileSync(redirectsPath, 'utf-8');
-    const redirects = parseRedirects(nextConfig);
-    res.status(200).json({ redirects });
+    try {
+      const nextConfig = await fs.readFile(redirectsPath, 'utf-8');
+      const redirects = parseRedirects(nextConfig);
+      res.status(200).json({ redirects });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: 'Erro ao obter redirecionamentos' });
+    }
   } else if (req.method === 'POST') {
-    // Lógica para adicionar ou editar redirecionamento no next.config.js
-    const { source, destination } = req.body as { source: string; destination: string };
-    const nextConfig = fs.readFileSync(redirectsPath, 'utf-8');
-    const updatedConfig = addOrUpdateRedirect(nextConfig, { source, destination });
-    fs.writeFileSync(redirectsPath, updatedConfig);
-    res.status(201).json({ msg: 'Redirecionamento adicionado/editado com sucesso' });
+    const { source, destination } = req.body;
+    const validationResult = redirectSchema.validate({ source, destination });
+
+    if (validationResult.error) {
+      res.status(400).json({ msg: 'Erro de validação' });
+      return;
+    }
+
+    try {
+      const nextConfig = await fs.readFile(redirectsPath, 'utf-8');
+      const updatedConfig = addOrUpdateRedirect(nextConfig, { source, destination });
+      await fs.writeFile(redirectsPath, updatedConfig);
+      res.status(201).json({
+        id: 1,
+        message: 'Redirecionamento adicionado/editado com sucesso',
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: 'Erro ao processar a solicitação' });
+    }
   } else if (req.method === 'DELETE') {
-    // Lógica para excluir redirecionamento no next.config.js
     const { source } = req.query;
-    const nextConfig = fs.readFileSync(redirectsPath, 'utf-8');
-    const updatedConfig = deleteRedirect(nextConfig, source as string);
-    fs.writeFileSync(redirectsPath, updatedConfig);
-    res.status(201).json({ msg: 'Redirecionamento excluído com sucesso' });
+
+    try {
+      const nextConfig = await fs.readFile(redirectsPath, 'utf-8');
+      const updatedConfig = deleteRedirect(nextConfig, source as string);
+      await fs.writeFile(redirectsPath, updatedConfig);
+      res.status(201).json({ msg: 'Redirecionamento excluído com sucesso' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: 'Erro ao processar a solicitação' });
+    }
   } else {
     res.status(405).json({ msg: 'Método não permitido' });
   }
 }
 
-function parseRedirects(config: string) {
-  const redirects: { source: string; destination: string }[] = [];
+function parseRedirects(config: string): Redirect[] {
+  const redirects: Redirect[] = [];
 
-  // Use expressão regular para encontrar as configurações de redirecionamento
   const redirectRegex = /redirects\s*:\s*\[\s*{([^}]+)}\s*\]/;
   const match = config.match(redirectRegex);
 
   if (match) {
-    // Se houver uma correspondência, analise as configurações de redirecionamento encontradas
     const redirectConfig = match[1];
     const redirectPairs = redirectConfig.split(',').map((pair) => pair.trim());
 
@@ -50,14 +82,14 @@ function parseRedirects(config: string) {
     });
   }
 
+  console.log('redirects:', redirects);
+
   return redirects;
 }
 
-function addOrUpdateRedirect(config: string, { source, destination }: { source: string; destination: string }) {
-  // Verifica se o redirecionamento já existe
+function addOrUpdateRedirect(config: string, { source, destination }: Redirect): string {
   const existingRedirect = parseRedirects(config).find((redirect) => redirect.source === source);
 
-  // Se o redirecionamento existir, atualiza a configuração
   if (existingRedirect) {
     const updatedConfig = config.replace(
       `${existingRedirect.source}: ${existingRedirect.destination}`,
@@ -66,7 +98,6 @@ function addOrUpdateRedirect(config: string, { source, destination }: { source: 
     return updatedConfig;
   }
 
-  // Se o redirecionamento não existir, adiciona à configuração
   const newConfig = config.replace(
     /redirects\s*:\s*\[\s*{/,
     `redirects: [{ '${source}': '${destination}',`
@@ -74,17 +105,14 @@ function addOrUpdateRedirect(config: string, { source, destination }: { source: 
   return newConfig;
 }
 
-function deleteRedirect(config: string, source: string) {
+function deleteRedirect(config: string, source: string): string {
   const redirects = parseRedirects(config);
 
-  // Verifica se o redirecionamento a ser excluído existe
   const redirectIndex = redirects.findIndex((redirect) => redirect.source === source);
 
-  // Se o redirecionamento existe, exclua-o da lista de redirecionamentos
   if (redirectIndex !== -1) {
     redirects.splice(redirectIndex, 1);
 
-    // Reconstrua a string de configuração com os redirecionamentos atualizados
     const updatedConfig = config.replace(
       /redirects\s*:\s*\[\s*{([^}]+)}\s*\]/,
       `redirects: [${formatRedirects(redirects)}]`
@@ -92,12 +120,9 @@ function deleteRedirect(config: string, source: string) {
     return updatedConfig;
   }
 
-  // Se o redirecionamento não existir, retorne o config original
   return config;
 }
 
-// Função auxiliar para formatar os redirecionamentos para a string de configuração
-function formatRedirects(redirects: { source: string; destination: string }[]) {
+function formatRedirects(redirects: Redirect[]): string {
   return redirects.map((redirect) => `'{ ${redirect.source} }': '{ ${redirect.destination} }'`).join(', ');
 }
- 

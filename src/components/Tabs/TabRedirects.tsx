@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading } from '@chakra-ui/react'
-import { Table, Tooltip, Space, message, Modal, Form, Input, Button as BtnAtd } from 'antd';
+import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip } from '@chakra-ui/react'
+import { Table, Space, message, Modal, Form, Input, Button as BtnAtd } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { api } from '../../lib/axios';
 import { useRouter } from 'next/router';
+import * as path from 'path';
+import { PiPencilSimpleBold } from "react-icons/pi"
+import { FaAngleDown, FaStar } from "react-icons/fa";
+import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 
 const { Item } = Form;
 
 interface TabRedirectsProps { }
+
+const redirectsPath = path.resolve(__dirname, '../../next.config.js'); // ajuste o caminho conforme necessário
 
 const TabRedirects: React.FC<TabRedirectsProps> = () => {
   const router = useRouter();
@@ -20,9 +26,9 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
   const fetchRedirects = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/redirects'); // Verifique se a rota está correta
-      const data = await response.json();
-      setRedirects(data.redirects); // Observe que estou usando data.redirects porque sua API retorna um objeto { redirects: [...] }
+      const response = await api.get('/api/redirects');
+      const redirectsData = response.data.redirects;
+      setRedirects(redirectsData);
     } catch (error) {
       console.error(error);
       message.error('Erro ao obter redirecionamentos');
@@ -30,8 +36,29 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
       setLoading(false);
     }
   };
-  
 
+  function parseRedirects(config: string) {
+    const redirects: { source: string; destination: string }[] = [];
+  
+    const redirectRegex = /redirects\s*:\s*\[\s*{\s*([^}]+)\s*}\s*]/;
+    const match = config.match(redirectRegex);
+  
+    if (match) {
+      const redirectConfig = match[1];
+      const redirectPairs = redirectConfig.split(',').map((pair) => pair.trim());
+  
+      redirectPairs.forEach((pair) => {
+        const [key, value] = pair.split(':').map((item) => item.trim().replace(/'/g, ''));
+        if (key && value) {
+          redirects.push({ source: key, destination: value });
+        }
+      });
+    }
+  
+    console.log('redirects:', redirects);
+  
+    return redirects;
+  }
 
   useEffect(() => {
     fetchRedirects();
@@ -82,31 +109,42 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
       title: 'Ações',
       key: 'actions',
       render: (text: any, record: any) => (
-        <Space size="middle">
-          <Tooltip title="Editar">
-            <BtnAtd
-              type="primary"
-              icon={<EditOutlined />}
-              size="small"
+        <HStack spacing='20px'>
+        <Tooltip
+          placement='top'
+          label='Editar Produto'
+          color={'var(--white-primary)'}
+          bg={'var(--red-primary)'}
+          borderRadius={'8px'}
+          textAlign={'center'}
+        >
+          <Box>
+            <Icon
+              cursor='pointer'
+              as={PiPencilSimpleBold}
+              fontSize='1.15rem'
+              color='var(--gray-text)'
               onClick={() => handleEditRedirect(record.id)}
-            >
-              Editar
-            </BtnAtd>
-          </Tooltip>
-          <Tooltip title="Excluir">
-            <BtnAtd
-              icon={<DeleteOutlined />}
-              size="small"
-              onClick={() => handleDeleteRedirect(record.id)}
-            >
-              Excluir
-            </BtnAtd>
-          </Tooltip>
-        </Space>
+            />
+          </Box>
+        </Tooltip>
+
+        <Tooltip
+          placement='top'
+          label='Excluir Produto'
+          color={'var(--white-primary)'}
+          bg={'var(--red-primary)'}
+          borderRadius={'8px'}
+          textAlign={'center'}
+        >
+          <Box>
+            <Icon cursor='pointer' as={FaDeleteLeft} fontSize='1.15rem' color='var(--gray-text)' onClick={() => handleDeleteRedirect(record.id)} />
+          </Box>
+        </Tooltip>
+      </HStack>
       ),
     },
   ];
-
 
   const [pagination, setPagination] = useState({
     current: 1,
@@ -129,32 +167,40 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
         </Text>
       </Box>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-      <Button bg='red.600'
+        <Button 
+          bg='red.600'
           color='white'
           borderRadius='8px'
           w='250px'
           isLoading={loading}
           h='40px'
-          _hover={{ transition: 'all 0.4s' }} onClick={handleAddRedirect}>
+          _hover={{ transition: 'all 0.4s' }} 
+          onClick={handleAddRedirect}
+        >
           Adicionar Redirecionamento
         </Button>
       </Flex>
-      <Table columns={columns} dataSource={redirects} loading={loading} scroll={{ x: 'fit-content' }} word-wrap={'break-word'}
-       pagination={{
-        ...pagination,
-        showSizeChanger: true,
-        showQuickJumper: false,
-        pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
-        onShowSizeChange: (current: number, pageSize: number) => {
-          setPagination({
-            ...pagination,
-            current,
-            pageSize,
-          });
-        },
-      }}
-      onChange={handleTableChange}
-       />
+      <Table 
+        columns={columns} 
+        dataSource={redirects} 
+        loading={loading} 
+        scroll={{ x: 'fit-content' }} 
+        word-wrap={'break-word'}
+        pagination={{
+          ...pagination,
+          showSizeChanger: true,
+          showQuickJumper: false,
+          pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
+          onShowSizeChange: (current: number, pageSize: number) => {
+            setPagination({
+              ...pagination,
+              current,
+              pageSize,
+            });
+          },
+        }}
+        onChange={handleTableChange}
+      />
     </>
   );
 };

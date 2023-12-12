@@ -75,7 +75,8 @@ const TabFiles = () => {
       title: 'Ações',
       render: (a: any, row: any) => (
         <HStack spacing='20px'>
-          <Tooltip placement='top' title='Copiar'>
+          <Tooltip placement='top' title='Copiar'
+          color={'var(--red-primary)'}>
             <FiCopy
               style={{
                 cursor: 'pointer',
