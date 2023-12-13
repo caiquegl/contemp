@@ -519,6 +519,10 @@ a {
     color: var(--red-primary);
 }
 
+.produto-tabs[aria-selected=false] {
+    color: #242424 !important;
+}
+
 /* PLAYER */
 
 /* BRASIL */
