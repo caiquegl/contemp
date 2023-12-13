@@ -59,9 +59,9 @@ export default async function handler(
         }
       })
 
-      return res.status(201).json({msg: 'Sucesso ao criar item na home.'})
+      return res.status(201).json({msg: 'Sucesso ao criar/atualizar item na home.'})
     } catch (error) {
       console.log(error)
-      return res.status(500).json({msg: 'Erro ao criar item na home.'})
+      return res.status(500).json({msg: 'Erro ao criar/atualizar item na home.'})
     }
   }

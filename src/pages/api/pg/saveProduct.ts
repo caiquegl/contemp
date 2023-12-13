@@ -47,9 +47,9 @@ export default async function handler(
         }
       })
 
-      return res.status(201).json({msg: 'Sucesso ao criar produto.'})
+      return res.status(201).json({msg: 'Sucesso ao criar/atualizar produto.'})
     } catch (error) {
       console.log(error)
-      return res.status(500).json({msg: 'Erro ao criar produto.'})
+      return res.status(500).json({msg: 'Erro ao criar/atualizar produto.'})
     }
   }

@@ -63,9 +63,9 @@ export default async function handler(
 
      
 
-      return res.status(201).json({msg: 'Sucesso ao criar categoria.'})
+      return res.status(201).json({msg: 'Sucesso ao criar/atualizar categoria.'})
     } catch (error) {
       console.log(error)
-      return res.status(500).json({msg: 'Erro ao criar categoria.'})
+      return res.status(500).json({msg: 'Erro ao criar/atualizar categoria.'})
     }
   }
