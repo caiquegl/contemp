@@ -9,15 +9,18 @@ const upload = multer({
   storage: multer.diskStorage({
     destination: process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos',
     filename: (req, file, cb) => {
+      console.log('aquiiii')
       // Opções para a função de criação de slug
       const slugOptions: SlugifyOptions = {
         replacementChar: '_',
         removePunctuation: true,
         maxLength: 1500, // Ajuste conforme necessário
       };
+      console.log('aquiiii multer')
 
       // Criar um nome de arquivo slugificado usando a função
       const slugifiedName = createSlug(file.originalname, slugOptions);
+      console.log('aquiiii multer 3')
       cb(null, slugifiedName);
     },
   }),
@@ -43,6 +46,7 @@ apiRoute.use(upload.array('files'));
 
 // Manipulador de postagem para a rota API
 apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
+  console.log('aquiiii 2')
   const files = req.files;
 
   try {
