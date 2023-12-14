@@ -21,6 +21,9 @@ const upload = multer({
       cb(null, slugifiedName);
     },
   }),
+  limits: {
+    fileSize: 1073741824, // 10 megabytes (ajuste conforme necessário)
+  },
 });
 
 // Configuração da rota API
