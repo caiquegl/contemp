@@ -98,7 +98,14 @@ const CardProductWithDescription2 = ({
         /> */}
 
         {/*TÍTULO DO PRODUTO*/}
-        <Tooltip label={text} placement='top'>
+        <Tooltip
+            placement="top"
+            label={text}
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            textAlign={'center'}
+          >
           <Text gridRow={2} className='h4-preto centro'>
             {text}
           </Text>
