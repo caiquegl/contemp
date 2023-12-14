@@ -38,7 +38,8 @@ export default async function handler(
           listVariation: body.listVariation ? body.listVariation : undefined,
           tab: body.tab,
           urls: body.urls,
-          call_product: body.call_product
+          call_product: body.call_product,
+          updated_at: new Date(),
         }
       })
 

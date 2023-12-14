@@ -14,6 +14,7 @@ export default async function handler(
           order: 'asc'
         }
       })
+      console.log(list[0])
       return res.status(201).json(list)
     } catch (error) {
       console.log(error)

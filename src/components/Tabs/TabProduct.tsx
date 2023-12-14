@@ -45,6 +45,7 @@
   //import jsPDF from 'jspdf';
   //import 'jspdf-autotable';
   import { DownloadOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 
 
@@ -215,6 +216,18 @@
             {`url`}
           </Button>
         ),
+      },
+      {
+        title: 'Criado em',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        render: (a: any) => moment(a).format('DD/MM/YYYY H:mm:s')
+      },
+      {
+        title: 'Atualizado em',
+        dataIndex: 'updated_at',
+        key: 'updated_at',
+        render: (a: any) => moment(a).format('DD/MM/YYYY H:mm:s')
       },
       {
         title: 'Ações',

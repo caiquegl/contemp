@@ -67,6 +67,8 @@ model Products {
   isActive        Boolean    @default(true)
   key_word_seo    String
   name            String     @unique
+  created_at            DateTime     @default(now())
+  updated_at            DateTime     @default(now())
   listVariation   Json?
   tab             Json?
   urls            Json?

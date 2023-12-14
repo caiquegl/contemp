@@ -33,7 +33,9 @@ export default async function handler(
           isActive: el.is_active,
           listVariation: el.listVariation,
           tab: el.tab,
-          call_product: el.call_product
+          call_product: el.call_product,
+          created_at: new Date(),
+          updated_at: new Date(),
         }
       })
       let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
