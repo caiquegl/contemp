@@ -1,6 +1,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Autoplay, Navigation, Pagination } from 'swiper'
 
 export function Banner() {
   const cards = [
@@ -31,8 +33,16 @@ export function Banner() {
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      navigation
+      autoplay={{
+        delay: 2000,
+        pauseOnMouseEnter: true,
+        waitForTransition: true,
+      }}
+      speed={1000}
+      navigation={true}
       pagination={{ clickable: true }}
+      modules={[Autoplay, Pagination, Navigation]}
+      className='mySwiper'
     >
       {cards.map((card, index) => (
         <SwiperSlide key={`slide-${index + 1}`} id={`slide-${index + 1}`}>
