@@ -2,6 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 
 export function Banner() {
@@ -10,8 +11,15 @@ export function Banner() {
       subtitle: '',
       title: '',
       text: '',
+      image: 'https://contemp.com.br/api/arquivos/bannerfinalcontempreport.png',
+      links: 'https://www.contemp.com.br/produto/software_-_contemp_report',
+    },
+    {
+      subtitle: '',
+      title: '',
+      text: '',
       image: 'https://contemp.com.br/api/arquivos/bannercontemp.webp',
-      links: '#',
+      links: 'https://www.contemp.com.br/produto/pir%C3%B4metro_fixo_csvision_r2m',
     },
     {
       subtitle: 'MEDIÇÃO E CONTROLE DE TEMPERATURA EM',
@@ -40,9 +48,11 @@ export function Banner() {
       }}
       speed={1000}
       navigation={true}
-      pagination={{ clickable: true }}
-      modules={[Autoplay, Pagination, Navigation]}
-      className='mySwiper'
+      //pagination={{ clickable: true }}
+      modules={[Autoplay, Navigation]}
+      className='mySwiper banner-desktop'
+      
+      
     >
       {cards.map((card, index) => (
         <SwiperSlide key={`slide-${index + 1}`} id={`slide-${index + 1}`}>
@@ -67,8 +77,8 @@ export function Banner() {
                   color: '#fff',
                 }}
               >
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px' }}>{card.subtitle}</h3>
-                <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '10px' }}>{card.title}</h2>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '10px', color: 'var(--white-primary)' }}>{card.subtitle}</h3>
+                <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '10px', color: 'var(--white-primary)' }}>{card.title}</h2>
                 <p style={{ fontSize: '1rem' }}>{card.text}</p>
               </div>
           </div>

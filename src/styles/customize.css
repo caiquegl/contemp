@@ -279,6 +279,30 @@ a {
 .bannerhome-subtitulo {
     font-size: 1.5rem !important;
 }
+.swiper-button-prev,
+.swiper-button-next {
+    padding: 1.25%;
+    background-color: #ffffff51;
+    border-radius: 8px;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    padding: 1.25%;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.button-next:after, .swiper-button-prev:after,
+.swiper-button-next:after, .swiper-button-prev:after {
+    color: var(--red-primary)!important;
+    font-size: 1rem!important;
+    font-weight: bold;
+}
+
+.banner-mobile {
+    display: none!important;
+    }
+
 
 /* PONTOS */
 .pontos-titulo {
@@ -688,4 +712,10 @@ a {
     .bannerhome-subtitulo {
         font-size: 1rem !important;
     }
+    .banner-desktop {
+    display: none!important;
+    }
+    .banner-mobile {
+        display: block!important;
+        }
 }
