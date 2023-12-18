@@ -39,14 +39,14 @@ export function BannerMobile() {
 
   return (
     <Swiper
-      spaceBetween={50}
+      spaceBetween={0}
       slidesPerView={1}
       autoplay={{
         delay: 2000,
         pauseOnMouseEnter: true,
         waitForTransition: true,
       }}
-      speed={1000}
+      speed={2000}
       navigation={true}
       //pagination={{ clickable: true }}
       modules={[Autoplay, Navigation]}
