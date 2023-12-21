@@ -149,8 +149,10 @@ const Product = () => {
         {detail && (
           <Head>
             <meta name='description' content={detail.description_seo} />
+            <meta property='og:description' content={detail.description_seo} />
             <meta name='keywords' content={detail.key_word_seo} />
             <title>{detail.name}</title>
+            <meta property='og:title' content={detail.name} />
             <link rel='icon' href='/favicon.png' />
           </Head>
         )}

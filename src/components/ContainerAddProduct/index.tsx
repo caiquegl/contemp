@@ -16,7 +16,7 @@ import {
   Heading,
   Tooltip,
   Icon,
-
+  CheckboxGroup,
 } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import InputsHome from '../ContainerHome/inputs'
@@ -60,6 +60,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const [listVariation, setListVariation] = useState<any>([{ id: 1 }])
   const [list, setList] = useState<any>([])
   const [urls, setUrls] = useState<any>([])
+  const [selectedLayouts, setSelectedLayouts] = useState<string[]>([]);
 
   const { register, handleSubmit, formState, setValue, reset, control } = useForm({})
 
@@ -73,6 +74,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       destaque,
       is_active: isActive,
       category: bodyForm.category.value,
+      layouts: selectedLayouts,
     }
 
     if (hasVariation) {
@@ -87,7 +89,7 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       if (falt || more) {
         toast({
           title: 'Erro',
-          description: falt ? 'Preencha todos os nome de variações' : 'Adicione ao menos uma opção',
+          description: falt ? 'Preencha todos os nomes de variações' : 'Adicione ao menos uma opção',
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -259,6 +261,20 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
             />
 
           </FormControl>
+          <FormControl>
+          <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'}>Layout</FormLabel>
+          <CheckboxGroup
+            value={selectedLayouts}
+            onChange={(values) => setSelectedLayouts(values.map(String))}
+          >
+            <HStack>
+              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="default">Padrão</Checkbox>
+              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="layout1">Personalizado 1</Checkbox>
+              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="layout2">Personalizado 2</Checkbox>
+              {/* Adicione mais checkboxes conforme necessário */}
+            </HStack>
+          </CheckboxGroup>
+        </FormControl>
         </HStack>
         <FormControl>
           <InputsHome
@@ -287,27 +303,29 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
           ))}
         </HStack>
 
-        <FormControl>
-          <TextareaDefault
-            label='Descrição curta'
-            question='Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.
+        <HStack spacing='20px' w='100%'>
+          <FormControl>
+            <TextareaDefault
+              label='Descrição curta'
+              question='Coloque aqui o texto que irá aparecer na descrição curta do produto. Limite de 166 caracteres contando com espaços.
             '
-            error={errors.description}
-            {...register('description', {
-              required: 'Descrição é obrigatório',
-            })}
-          />
-        </FormControl>
-        <FormControl>
-          <TextareaDefault
-            label='Chamada de produto'
-            question='A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.'
-            error={errors.call_product}
-            {...register('call_product', {
-              required: 'Chamada de produto é obrigatório',
-            })}
-          />
-        </FormControl>
+              error={errors.description}
+              {...register('description', {
+                required: 'Descrição é obrigatório',
+              })}
+            />
+          </FormControl>
+          <FormControl>
+            <TextareaDefault
+              label='Chamada de produto'
+              question='A chamada de produto irá aparecer no card (voltada para vendas) e deve ter até 100 caracteres.'
+              error={errors.call_product}
+              {...register('call_product', {
+                required: 'Chamada de produto é obrigatório',
+              })}
+            />
+          </FormControl>
+        </HStack>
         <HStack spacing='20px' w='100%'>
           <FormControl>
             <TextareaDefault

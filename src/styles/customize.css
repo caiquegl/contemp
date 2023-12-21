@@ -83,7 +83,7 @@ a {
     font-weight: bold !important;
 }
 .h3-preto {
-    font-size: 1.15rem;
+    font-size: 1.15rem !important;
     color: var(--black-primary);
     font-weight: bold;
     text-transform: uppercase;
@@ -93,27 +93,27 @@ a {
     font-size: 1rem !important;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1.25rem;
+    line-height: 1.25rem!important;
     width: 100%;
     color: var(--black-primary);
     margin-bottom: 0%;
 }
 
 .h4-branco {
-    font-size: 1rem;
+    font-size: 1rem !important;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1.25rem;
+    line-height: 1.25rem !important;
     width: 100%;
     color: var(--white-primary);
     margin-bottom: 0%;
 }
 
 .h4-branco {
-    font-size: 1rem;
+    font-size: 1rem !important;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1.25rem;
+    line-height: 1.25rem !important;
     width: 100%;
     color: var(--red-primary);
     margin-bottom: 0%;
@@ -136,19 +136,19 @@ a {
 }
 
 .paragrafo-preto {
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: var(--black-primary);
-    line-height: 1.15rem;
+    line-height: 1.15rem !important;
     text-align: justify;
 }
 
 .paragrafo-cinza {
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: var(--gray-text);
 }
 
 .paragrafo-branco {
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: var(--white-primary) !important;
 }
 
@@ -259,16 +259,16 @@ a {
     text-transform: uppercase !important;
 }
 .home-produto-categoria {
-    font-size: 1rem;
-    line-height: 1rem;
-    margin-right: 1rem;
+    font-size: 1rem !important;
+    line-height: 1rem !important;
+    margin-right: 1rem !important;
 }
 .home-produto-descricao,
 .player-descricao,
 .catalogo-descricao,
 .contato-descricao,
 .calibracao-descricao {
-    font-size: 1rem;
+    font-size: 1rem !important;
     text-align: justify;
 }
 
@@ -437,8 +437,8 @@ a {
 }
 
 .titulo-produto-individual {
-    font-size: 1.35rem;
-    line-height: 1.5rem;
+    font-size: 1.35rem !important;
+    line-height: 1.5rem !important;
     font-weight: bold;
     text-transform: uppercase;
     color: var(--black-primary);
@@ -446,7 +446,7 @@ a {
 }
 
 .descricao-produto-individual {
-    line-height: 1.25rem;
+    line-height: 1.25rem !important;
     max-width: 829px;
     margin-bottom: 3%;
     color: var(--black-primary);
@@ -608,14 +608,14 @@ a {
 #tabela-categoria,
 #tabela-produtos,
 #tabela-documentos {
-    font-size: 1rem;
+    font-size: 1rem !important;
 }
 #tabela-categoria thead tr th,
 #tabela-produtos thead tr th,
 #tabela-documentos thead tr th {
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1rem;
+    line-height: 1rem !important;
 }
 
 #tabela-categoria tbody tr td,
@@ -699,8 +699,8 @@ a {
     .favoritos-titulo,
     .brasil-titulo,
     .sobre-titulo {
-        font-size: 1.75rem;
-        line-height: 1.75rem;
+        font-size: 1.75rem !important;
+        line-height: 1.75rem !important;
         font-weight: bold !important;
     }
     .section-brasil {
