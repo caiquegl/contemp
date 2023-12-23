@@ -682,7 +682,8 @@ a {
 }
 
 /* VWO */
-.is-detached-mode.log-open {
+.is-detached-mode.log-open,
+body.is-detached-mode.log-open {
     display: none!important;
 }
 
