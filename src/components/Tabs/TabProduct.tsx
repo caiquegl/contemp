@@ -47,6 +47,7 @@ import ExcelJS from 'exceljs';
 //import 'jspdf-autotable';
 import { DownloadOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 
 
@@ -87,6 +88,7 @@ const TabProduct = ({ back }: IProps) => {
   const [listClone, setListClone] = useState<any>([]);
   const [body, setBody] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
+  const [selectedStatusFilters, setSelectedStatusFilters] = useState<string[]>([]);
 
   const changerOrder = async (order: number, category: any) => {
     try {
@@ -177,20 +179,32 @@ const TabProduct = ({ back }: IProps) => {
       title: 'Status',
       dataIndex: 'isActive',
       key: 'status',
+      filters: [
+        { text: 'Ativo', value: 'Ativo' },
+        { text: 'Inativo', value: 'Inativo' },
+      ],
+      onFilter: (value: any, record: any) => {
+        if (typeof value === 'string') {
+          return (record.isActive ? 'Ativo' : 'Inativo') === value;
+        }
+        return false; // Caso não seja uma string, não filtra
+      },
+      filterMultiple: false,
       render: (isActive: boolean) => (
         <Badge
-        colorScheme={isActive ? 'green' : 'red'}
-        borderRadius={'8px'}
+          colorScheme={isActive ? 'green' : 'red'}
+          borderRadius={'8px'}
         >
           {isActive ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
       sorter: (a: any, b: any) => {
-        const statusA = a.isActive ? 1 : 0;
-        const statusB = b.isActive ? 1 : 0;
-        return statusA - statusB;
+        const statusA = a.isActive ? 'Ativo' : 'Inativo';
+        const statusB = b.isActive ? 'Ativo' : 'Inativo';
+        return statusA.localeCompare(statusB);
       },
-    },
+      width: 150,
+    },      
     {
       title: 'Criado em',
       dataIndex: 'created_at',
@@ -386,35 +400,37 @@ const TabProduct = ({ back }: IProps) => {
   const handleExportCSV = () => {
     // Crie uma string CSV a partir dos dados da lista de produtos
     const csvContent = [
-      'Ordem, Nome, Categoria, Criado em, Atualizado em, Destaque, Url', // Updated header
-      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
+      'Ordem, Nome, Categoria, Status, Criado em, Atualizado em, Destaque, Url', // Updated header
+      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.isActive ? 'Ativo' : 'Inativo'},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
     ].join('\n');
-
+  
     // Converta a string CSV em um Blob
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-
+  
     // Use a biblioteca file-saver para salvar o Blob como um arquivo
     saveAs(blob, 'products_export.csv');
   };
+  
 
   const handleExportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-
-    // Adicione cabeçalhos, incluindo os novos campos 'Criado em' e 'Atualizado em'
-    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Criado em', 'Atualizado em', 'Destaque', 'URL']);
-
-    // Adicione dados, incluindo os novos campos 'Criado em' e 'Atualizado em'
+  
+    // Adicione cabeçalhos, incluindo o novo campo 'Status'
+    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'URL']);
+  
+    // Adicione dados, incluindo o novo campo 'Status'
     list.forEach((product: any) => {
-      sheet.addRow([product.order, product.name, product.category.name, moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
+      sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-
+  
     // Crie um Blob a partir do workbook
     const blob = await workbook.xlsx.writeBuffer();
-
+  
     // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
   };
+  
 
 
 
@@ -587,7 +603,7 @@ const TabProduct = ({ back }: IProps) => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
+            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
           </Box>
         </>
       )}
