@@ -17,6 +17,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Badge,
   Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
 } from '@chakra-ui/react';
 
@@ -171,6 +172,24 @@ const TabProduct = ({ back }: IProps) => {
         record.category.name.toLowerCase().includes(value.toLowerCase()),
       render: (text: any, record: any) => <p>{record.category.name}</p>,
       sorter: (a: any, b: any) => a.category.name.localeCompare(b.category.name),
+    },
+    {
+      title: 'Status',
+      dataIndex: 'isActive',
+      key: 'status',
+      render: (isActive: boolean) => (
+        <Badge
+        colorScheme={isActive ? 'green' : 'red'}
+        borderRadius={'8px'}
+        >
+          {isActive ? 'Ativo' : 'Inativo'}
+        </Badge>
+      ),
+      sorter: (a: any, b: any) => {
+        const statusA = a.isActive ? 1 : 0;
+        const statusB = b.isActive ? 1 : 0;
+        return statusA - statusB;
+      },
     },
     {
       title: 'Criado em',

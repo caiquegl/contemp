@@ -44,6 +44,7 @@ const Card = ({ heading, description, icon, href }: CardProps) => {
       borderRadius="8px"
       overflow="hidden"
       p={5}
+      mt={'-5%'}
     >
       <Stack align={'start'} spacing={2}>
         <Flex verticalAlign={'middle'}>
