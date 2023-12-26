@@ -209,6 +209,11 @@ a {
 .imagem-transicao:hover {
     transform: scale(1.1);
 }
+.sombra {
+    background-color: var(--white-primary) !important;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px -3px rgba(0,0,0,0.08) !important;
+}
 
 
 /* HEADER */

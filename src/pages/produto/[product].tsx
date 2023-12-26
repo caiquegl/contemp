@@ -25,7 +25,6 @@ import {
   NumberInputField,
   Textarea,
   Heading,
-  IconButton,
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -54,8 +53,6 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { decodeName } from '../../utils/replaceNameToUrl'
 import { api } from '../../lib/axios'
-import { FiShare2 } from "react-icons/fi";
-import { BsWhatsapp, BsQrCode } from "react-icons/bs";
 
 const Product = () => {
   const router = useRouter()
@@ -160,73 +157,6 @@ const Product = () => {
           </Head>
         )}
         <Box className='container-produto'>
-          <Flex className='card-produto-individual'
-            maxW={'1240px'}
-            m={'auto'}
-            mb={'0%'}
-            pb={'0%'}
-          >
-            <Box w='100%' mb='30px'>
-              <Breadcrumb>
-                {bradName &&
-                  bradName.map((el: any, index: number) => (
-                    <Fragment key={index}>
-                      <Breadcrumb.Item>
-                        <NextLink href={generateBreadcrumbUrl(index)} passHref>
-                          <a>{el}</a>
-                        </NextLink>
-                      </Breadcrumb.Item>
-                    </Fragment>
-                  ))}
-              </Breadcrumb>
-            </Box>
-            <Box w='100%' mb='30px' ml='auto'>
-              <Flex>
-                <Button
-                  rightIcon={<FiShare2 />}
-                  ml={'auto'}
-                  mr={'1%'}
-                  onClick={() => {
-                    // Copiar o link para a área de transferência
-                    const url = window.location.href;
-                    navigator.clipboard.writeText(url);
-
-                    // Exibir uma mensagem de sucesso ou usar o toast
-                    toast({
-                      title: 'Link copiado com sucesso!',
-                      status: 'success',
-                      duration: 3000,
-                      isClosable: true,
-                    });
-                  }}
-                >
-                  Compartilhar
-                </Button>
-                <IconButton
-                  icon={<BsWhatsapp />}
-                  aria-label='Compartilhar no WhatsApp'
-                  mr={'1%'}
-                  onClick={() => {
-                    // Compartilhar no WhatsApp
-                    const url = window.location.href;
-                    const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
-
-                    // Abrir o link no WhatsApp
-                    window.open(whatsappLink, '_blank');
-                  }}
-                >
-                </IconButton>
-                <IconButton
-                icon={<BsQrCode />}
-                aria-label='Gerar QrCode'
-                mr={'0%'}
-                >
-                </IconButton>
-              </Flex>
-            </Box>
-
-
-          </Flex>
           <Flex
             className='card-produto-individual'
             maxW={'1240px'}
@@ -273,6 +203,21 @@ const Product = () => {
             </Center>
 
             <Box m={`${pxToRem(10)} auto`} ml={{ lg: 20 }}>
+              <Box w='100%' mb='30px'>
+                <Breadcrumb>
+                  {bradName &&
+                    bradName.map((el: any, index: number) => (
+                      <Fragment key={index}>
+                        <Breadcrumb.Item>
+                          <NextLink href={generateBreadcrumbUrl(index)} passHref>
+                            <a>{el}</a>
+                          </NextLink>
+                        </Breadcrumb.Item>
+                      </Fragment>
+                    ))}
+                </Breadcrumb>
+              </Box>
+
               <Heading as={'h2'} className='titulo-produto-individual'>
                 {detail.name ? detail.name : ''}
               </Heading>
