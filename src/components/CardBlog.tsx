@@ -37,7 +37,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
       <Box
         w='100%'
         maxW={pxToRem(474)}
-        minH={[pxToRem(100), pxToRem(150)]}
+        minH={'30rem'}
         borderRadius='8px'
         border='2px solid'
         h={[pxToRem(400), pxToRem(530)]}
@@ -51,7 +51,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
           <Box h={['10.625rem', '18.75rem']} w='100%' borderRadius='8px' position='relative'>
             <Image
               src={img}
-              alt='Descrição da imagem'
+              alt='Blog da Contemp'
               layout='fill'
               objectFit='cover'
               style={{ borderRadius: 8 }}
@@ -60,9 +60,9 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
           </Box>
           {/* <Image src={img} height={200} width={200}/> */}
           {/* <Image objectFit='cover' h={[pxToRem(170), pxToRem(300)]}  w={['100%']} src={img} borderRadius="8px"/> */}
-          <Text lineHeight={pxToRem(30)} fontWeight='bold' fontSize={pxToRem(20)} mt={['5px', '15px']} color={color}>
+          <Heading as={'h3'} lineHeight={'1.2rem'} fontWeight='bold' textTransform={'uppercase'} fontSize={'1.15rem'} mt={['5px', '15px']} color={color}>
             {title}
-          </Text>
+          </Heading>
         </Box>
         {/* <Text fontSize={["14px","18px"]} mt={["5px","15px"]} color={color}>
           <div dangerouslySetInnerHTML={{__html: text}} />
@@ -85,7 +85,7 @@ export const CardBlog = ({ bg, color, title, text, img, hrefButton }: IProps) =>
               transition: 'all 0.3s',
             }}
           >
-            Ir para o blog
+            Ler Conteúdo
           </Button>
         </Link>
       </Box>

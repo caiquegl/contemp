@@ -7,7 +7,7 @@ import { dbBlog } from './database';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
 
-    const [ posts ] = await dbBlog.raw(`
+    const [posts] = await dbBlog.raw(`
       SELECT
       post_title,
           (
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       order by post_date
       DESC limit 3
     `)
-    
+
     return res.json(posts)
   } catch (err) {
     console.error(err)

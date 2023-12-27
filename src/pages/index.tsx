@@ -461,9 +461,9 @@ const Home = () => {
       BLOG AREA
       <Flex w='100%' mt='-100px' bg='white' alignItems='center' justifyContent='center'>
         <Container maxW={['100%', '100%', '8xl', '8xl', '8xl']} mb='50px'>
-        <Text color='black' fontSize='40px' fontWeight='bold' textAlign='center' mt={"5%"} mb={"5%"}>
+        <Heading as={'h2'} className='favoritos-titulo centro' mt={"5%"} mb={"3%"}>
         Acompanhe nosso Blog
-      </Text>
+      </Heading>
           <Flex h={[pxToRem(500), pxToRem(660)]}>
             {isMobile && (
               <Swiper
