@@ -613,7 +613,7 @@ a {
 #tabela-categoria,
 #tabela-produtos,
 #tabela-documentos {
-    font-size: 1rem !important;
+    font-size: .85rem !important;
 }
 #tabela-categoria thead tr th,
 #tabela-produtos thead tr th,

@@ -66,7 +66,8 @@ const TabProduct = ({ back }: IProps) => {
 
   const [quantidadeProdutos, setQuantidadeProdutos] = useState<number>(0);
   const [quantidadeProdutosDestacados, setQuantidadeProdutosDestacados] = useState<number>(0);
-
+  const [quantidadeProdutosDesativados, setQuantidadeProdutosDesativados] = useState<number>(0);
+  const [quantidadeProdutosAno, setQuantidadeProdutosAno] = useState<number>(0);
 
   function copiarTexto(texto: string) {
     var input = document.createElement('input');
@@ -338,9 +339,23 @@ const TabProduct = ({ back }: IProps) => {
       setList(data);
       setListClone(data);
       setQuantidadeProdutos(data.length);
-      if (data) { // Verificar se data está definido antes de acessá-lo
+  
+      if (data) {
         const quantidadeDestacados = data.filter((product: any) => product.destaque).length;
         setQuantidadeProdutosDestacados(quantidadeDestacados);
+  
+        // Adicione o cálculo para a quantidade de produtos desativados
+        const quantidadeDesativados = data.filter((product: any) => !product.isActive).length;
+        setQuantidadeProdutosDesativados(quantidadeDesativados);
+  
+        // Adicione o cálculo para a quantidade de produtos cadastrados no ano
+        const currentYear = new Date().getFullYear();
+        const quantidadeProdutosAno = data.filter((product: any) => {
+          const productYear = new Date(product.created_at).getFullYear();
+          return productYear === currentYear;
+        }).length;
+  
+        setQuantidadeProdutosAno(quantidadeProdutosAno);
       }
     } catch (error) {
       toast({
@@ -350,6 +365,7 @@ const TabProduct = ({ back }: IProps) => {
       });
     }
   };
+  
 
   const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
   const cancelRef = useRef<HTMLButtonElement | null>(null);
@@ -535,7 +551,7 @@ const TabProduct = ({ back }: IProps) => {
             <Text className='paragrafo-preto' mb={'3%'}>
               Gerencie todos os produtos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua através do painel. Atenção! Ao excluir um produto não será possível recupera-lo.
             </Text>
-            <StaticsProducts quantidadeProdutos={quantidadeProdutos} quantidadeProdutosDestaque={quantidadeProdutosDestacados} />
+            <StaticsProducts quantidadeProdutos={quantidadeProdutos} quantidadeProdutosDestaque={quantidadeProdutosDestacados} quantidadeProdutosDesativados={quantidadeProdutosDesativados} quantidadeProdutosAno={quantidadeProdutosAno} />
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
 

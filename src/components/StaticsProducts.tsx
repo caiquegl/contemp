@@ -10,7 +10,8 @@ import {
 } from '@chakra-ui/react';
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BiSolidBox } from "react-icons/bi";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaCalendarAlt } from "react-icons/fa";
+import { MdReportOff } from "react-icons/md";
 
 interface StatsCardProps {
     title: string;
@@ -37,7 +38,7 @@ function StatsCard(props: StatsCardProps) {
                             {icon}
                         </Box>
                         <Box>
-                            <StatLabel mb={'-3%'} className='titulo-produto-individual negrito'>
+                            <StatLabel mb={'-3%'} className='text-black negrito' fontSize={'1.15rem'} textTransform={'uppercase'} lineHeight={'1.15rem'} >
                                 {title}
                             </StatLabel>
                             <StatNumber mt={'0%'} className='text-red negrito' fontSize={'1.5rem'}>
@@ -55,9 +56,11 @@ function StatsCard(props: StatsCardProps) {
 interface StaticsProductsProps {
     quantidadeProdutos: number;
     quantidadeProdutosDestaque: number;
+    quantidadeProdutosDesativados: number;
+    quantidadeProdutosAno: number;
 }
 
-export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutosDestaque }: StaticsProductsProps) {
+export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutosDestaque, quantidadeProdutosDesativados, quantidadeProdutosAno }: StaticsProductsProps) {
     return (
         <Box maxW="5xl" mb={'2%'}>
             <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
@@ -67,6 +70,8 @@ export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutos
                     stat={typeof quantidadeProdutosDestaque === 'number' ? quantidadeProdutosDestaque.toString() : ''}
                     icon={<FaStar />}
                 />
+                <StatsCard title={'Desativados'} stat={quantidadeProdutosDesativados.toString()} icon={<MdReportOff />}/>
+                <StatsCard title={'Adicionados'} stat={quantidadeProdutosAno.toString()} icon={<FaCalendarAlt />} />
 
             </SimpleGrid>
         </Box>
