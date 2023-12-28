@@ -170,50 +170,53 @@ const AllProduct = () => {
         <AdBanners />
       </Box>*/}
 <Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
-      <Container maxW='7xl' p='80px 0'>
-        <Heading
-          as={'h3'}
-          className='todososprodutos-titulo text-black negrito'
-          mb='31px'
-          p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-        >
-          Navegue por Categoria
-        </Heading>
-        <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
-          {categories &&
-            categories.length > 0 &&
-            categories
-              .filter((categ: any) => categ.all_product)
-              .sort((a: any, b: any) => {
-                const orderA = a.order_all_products ?? 999999;
-                const orderB = b.order_all_products ?? 999999;
-                return orderA - orderB;
-              })
-              .map((categ: any, index: number) => {
-                const cardIndex = index + 1;
-                const bgColors = ['var(--black-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)'];
+  <Container maxW='7xl' p='80px 0'>
+    <Heading
+      as={'h3'}
+      className='todososprodutos-titulo text-black negrito'
+      mb='31px'
+      p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
+    >
+      Navegue por Categoria
+    </Heading>
+    <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
+      {categories &&
+        categories.length > 0 &&
+        categories
+          .filter((categ: any) => categ.all_product)
+          .sort((a: any, b: any) => {
+            const orderA = a.order_all_products ?? 999999;
+            const orderB = b.order_all_products ?? 999999;
+            return orderA - orderB;
+          })
+          .map((categ: any, index: number) => {
+            const firstLineColors = ['var(--black-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)', 'var(--black-primary)'];
+            const secondLineColors = ['var(--red-primary)', 'var(--gray-primary)', 'var(--black-primary)', 'var(--white-primary)'];
 
-                // Se o índice for maior que a quantidade de cores disponíveis, recomece a partir do início
-                const bgIndex = index % bgColors.length;
+            // Alternar as cores com base no índice da linha
+            const colors = index % 1 === 0 ? firstLineColors : secondLineColors;
 
-                const bg = bgColors[bgIndex];
-                const color = (bg === 'var(--red-primary)' || bg === 'var(--black-primary)') ? 'var(--white-primary)' : 'var(--black-primary)';
+            // Calcular o índice da cor para evitar repetição em sequência
+            const bgIndex = Math.floor(index / 1) % colors.length;
 
-                return (
-                  <CardCatalog
-                    key={index}
-                    bg={bg}
-                    color={color}
-                    title={categ.name}
-                    text={categ.description}
-                    img={categ.url}
-                    urlPicture={categ.urlPicture}
-                  />
-                );
-              })}
-        </Grid>
-      </Container>
-    </Flex>
+            const bg = colors[bgIndex];
+            const color = (bg === 'var(--red-primary)' || bg === 'var(--black-primary)') ? 'var(--white-primary)' : 'var(--black-primary)';
+
+            return (
+              <CardCatalog
+                key={index}
+                bg={bg}
+                color={color}
+                title={categ.name}
+                text={categ.description}
+                img={categ.url}
+                urlPicture={categ.urlPicture}
+              />
+            );
+          })}
+    </Grid>
+  </Container>
+</Flex>
       {/* <Player /> */}
       {/*<Contact
         id='duvidas-e-orcamentos'

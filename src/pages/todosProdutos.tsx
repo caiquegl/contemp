@@ -17,6 +17,7 @@ import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
 import { SearchBar } from '../components/SearchBar'
+import { random } from 'lodash';
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([])
@@ -58,11 +59,11 @@ const AllProduct = () => {
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth
 
-      ;[].forEach.call(document.querySelectorAll('*'), function (element: HTMLElement) {
-        if (element.offsetWidth > docWidth) {
-          console.log(element)
-        }
-      })
+        ;[].forEach.call(document.querySelectorAll('*'), function (element: HTMLElement) {
+          if (element.offsetWidth > docWidth) {
+            console.log(element)
+          }
+        })
     }
     findOverflowingElements()
   }, [])
@@ -96,15 +97,15 @@ const AllProduct = () => {
           Soluções para medição, controle e monitoramento para os mais variados processos industriais.
         </Heading>
         <SearchBar
-            inputProps={{
-              placeholder: 'Procure aqui seu produto...',
-            }}
-            containerProps={{
-              bg: 'transparent',
-              border: '2px solid var(--white-primary)',
-            }}
-            searchCard='100%'
-          />
+          inputProps={{
+            placeholder: 'Procure aqui seu produto...',
+          }}
+          containerProps={{
+            bg: 'transparent',
+            border: '2px solid var(--white-primary)',
+          }}
+          searchCard='100%'
+        />
       </Flex>
       {favorites &&
         favorites.length > 0 &&
@@ -168,53 +169,54 @@ const AllProduct = () => {
       {/*<Box bg='var(--white-primary)' w='100%' p='20px' pt='100px'>
         <AdBanners />
       </Box>*/}
-      <Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
-        <Container maxW='7xl' p='80px 0'>
-          <Heading as={'h3'} className='todososprodutos-titulo text-black negrito'
-            mb='31px'
-            p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-          >
-            Navegue por Categoria
-          </Heading>
-          <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
-            {categories &&
-              categories.length > 0 &&
-              categories
-                .filter((categ: any) => categ.all_product)
-                .sort((a: any, b: any) => {
-                  const orderA = a.order_all_products ?? 999999
-                  const orderB = b.order_all_products ?? 999999
-                  return orderA - orderB
-                })
-                .map((categ: any, index: number) => {
-                  const cardIndex = index + 1
-                  let bg = 'var(--black-primary)'
-                  let color = 'var(--white-primary)'
+<Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
+  <Container maxW='7xl' p='80px 0'>
+    <Heading
+      as={'h3'}
+      className='todososprodutos-titulo text-black negrito'
+      mb='31px'
+      p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
+    >
+      Navegue por Categoria
+    </Heading>
+    <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
+      {categories &&
+        categories.length > 0 &&
+        categories
+          .filter((categ: any) => categ.all_product)
+          .sort((a: any, b: any) => {
+            const orderA = a.order_all_products ?? 999999;
+            const orderB = b.order_all_products ?? 999999;
+            return orderA - orderB;
+          })
+          .map((categ: any, index: number) => {
+            const firstLineColors = ['var(--black-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)', 'var(--black-primary)'];
+            const secondLineColors = ['var(--red-primary)', 'var(--gray-primary)', 'var(--black-primary)', 'var(--white-primary)'];
 
-                  if (cardIndex % 2 === 0) {
-                    bg = 'var(--white-primary)'
-                    color = 'var(--black-primary)'
-                  }
-                  if (cardIndex % 3 === 0) {
-                    bg = 'var(--red-primary)'
-                    color = 'var(--white-primary)'
-                  }
+            // Alternar as cores com base no índice da linha
+            const colors = index % 1 === 0 ? firstLineColors : secondLineColors;
 
-                  return (
-                    <CardCatalog
-                      key={index}
-                      bg={bg}
-                      color={color}
-                      title={categ.name}
-                      text={categ.description}
-                      img={categ.url}
-                      urlPicture={categ.urlPicture}
-                    />
-                  )
-                })}
-          </Grid>
-        </Container>
-      </Flex>
+            // Calcular o índice da cor para evitar repetição em sequência
+            const bgIndex = Math.floor(index / 1) % colors.length;
+
+            const bg = colors[bgIndex];
+            const color = (bg === 'var(--red-primary)' || bg === 'var(--black-primary)') ? 'var(--white-primary)' : 'var(--black-primary)';
+
+            return (
+              <CardCatalog
+                key={index}
+                bg={bg}
+                color={color}
+                title={categ.name}
+                text={categ.description}
+                img={categ.url}
+                urlPicture={categ.urlPicture}
+              />
+            );
+          })}
+    </Grid>
+  </Container>
+</Flex>
       {/* <Player /> */}
       {/*<Contact
         id='duvidas-e-orcamentos'
