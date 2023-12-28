@@ -54,7 +54,7 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
                   onContextMenu={setContextMenuFalse}
                 />
               )}
-              <Text fontSize="20px" fontWeight="bold" ml="10px">
+              <Text fontSize="1rem" fontWeight="bold" ml="10px">
                 {el.name}
               </Text>
             </Flex>

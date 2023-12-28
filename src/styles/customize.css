@@ -324,9 +324,10 @@ a {
 .card-todososprodutos {
     background-color: var(--white-primary);
     border-radius: 8px;
-    border-color: var(--black-primary);
+    border: solid 2px var(--black-primary);
     height: auto;
-    padding: 3%;
+    padding: 6%;
+    vertical-align: middle;
 }
 .imagem-card-todososprodutos {
     border-radius: 8px;
@@ -334,7 +335,7 @@ a {
 }
 
 .imagem-card-todososprodutos:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 .card-titulo-categoria {
@@ -590,11 +591,18 @@ a {
 .calibracao-subtitulo,
 .suporte-titulotab,
 .adm-subtitulo,
-.sitemap-subtitulo,
-.titulo-card-todososprodutos {
+.sitemap-subtitulo {
     font-size: 1.15rem !important;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.titulo-card-todososprodutos {
+    font-size: 1rem !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    vertical-align: middle;
 }
 
 /* TODOS OS PRODUTOS */

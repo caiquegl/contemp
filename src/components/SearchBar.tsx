@@ -31,7 +31,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
   return (
     <InputGroup
       borderRadius='8px'
-      bg='black.200'
+      bg='var(--black-primary)'
       p='3px 7px'
       w='100%'
       h={pxToRem(42)}

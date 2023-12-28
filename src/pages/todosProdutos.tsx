@@ -16,6 +16,7 @@ import { AdBanners } from '../components/AdBanners'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
+import { SearchBar } from '../components/SearchBar'
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([])
@@ -94,6 +95,16 @@ const AllProduct = () => {
         >
           Soluções para medição, controle e monitoramento para os mais variados processos industriais.
         </Heading>
+        <SearchBar
+            inputProps={{
+              placeholder: 'Procure aqui seu produto...',
+            }}
+            containerProps={{
+              bg: 'transparent',
+              border: '2px solid var(--white-primary)',
+            }}
+            searchCard='100%'
+          />
       </Flex>
       {favorites &&
         favorites.length > 0 &&

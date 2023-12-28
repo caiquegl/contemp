@@ -16,6 +16,8 @@ import { AdBanners } from '../components/AdBanners'
 import { customSwiperBullets } from '../utils/customSwiperBullets'
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
+import { SearchBar } from '../components/SearchBar'
+import { random } from 'lodash';
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([])
@@ -57,11 +59,11 @@ const AllProduct = () => {
     function findOverflowingElements() {
       const docWidth = document.documentElement.offsetWidth
 
-      ;[].forEach.call(document.querySelectorAll('*'), function (element: HTMLElement) {
-        if (element.offsetWidth > docWidth) {
-          console.log(element)
-        }
-      })
+        ;[].forEach.call(document.querySelectorAll('*'), function (element: HTMLElement) {
+          if (element.offsetWidth > docWidth) {
+            console.log(element)
+          }
+        })
     }
     findOverflowingElements()
   }, [])
@@ -88,15 +90,22 @@ const AllProduct = () => {
         direction='column'
         h={['350px', '350px', '180px', '180px', '180px', '180px']}
       >
-        <Text
-          fontSize={['30px', '30px', '40px', '40px', '40px', '40px']}
-          fontWeight='bold'
-          textAlign='center'
+        <Heading as={'h2'} className='todososprodutos-titulo negrito text-white centro'
           maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
           Soluções para medição, controle e monitoramento para os mais variados processos industriais.
-        </Text>
+        </Heading>
+        <SearchBar
+          inputProps={{
+            placeholder: 'Procure aqui seu produto...',
+          }}
+          containerProps={{
+            bg: 'transparent',
+            border: '2px solid var(--white-primary)',
+          }}
+          searchCard='100%'
+        />
       </Flex>
       {favorites &&
         favorites.length > 0 &&
@@ -105,12 +114,12 @@ const AllProduct = () => {
             key={index}
             w='100%'
             alignItems={'center'}
-            bg='white'
+            bg='var(--white-primary)'
             p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}
           >
             <Container maxW='7xl' p='130px 0'>
               <Flex alignItems={['flex-start', 'center']} flexDirection={['column', 'row']}>
-                <Text color='black.800' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
+                <Text color='var(--black-primary)' fontSize={['35px', '45px']} fontWeight='bold' ml='15px' lineHeight={['40px']}>
                   {fv.category_name}
                 </Text>
               </Flex>
@@ -136,66 +145,75 @@ const AllProduct = () => {
                 >
                   {fv.products &&
                     fv.products.length > 0 &&
-                    fv.products.map((item: any, index: any) => (
-                      <SwiperSlide key={index}>
-                        <CardProductWithDescription
-                          img={item.urls[0]}
-                          text={item.name}
-                          description={item.description}
-                          call_product={item.call_product}
-                        />
-                      </SwiperSlide>
-                    ))}
+                    fv.products
+                      .sort((a: any, b: any) => {
+                        let aOrder = a.order || 999999
+                        let bOrder = b.order || 999999
+                        return aOrder - bOrder
+                      })
+                      .map((item: any, index: any) => (
+                        <SwiperSlide key={index}>
+                          <CardProductWithDescription
+                            img={item.urls ? item.urls[0] : ''}
+                            text={item.name}
+                            description={item.description}
+                            call_product={item.call_product}
+                          />
+                        </SwiperSlide>
+                      ))}
                 </Swiper>
               </Box>
             </Container>
           </Flex>
         ))}
-      {/*<Box bg='white' w='100%' p='20px' pt='100px'>
+      {/*<Box bg='var(--white-primary)' w='100%' p='20px' pt='100px'>
         <AdBanners />
       </Box>*/}
-      <Flex w='100%' alignItems='center' bg='white.500' p='0 20px'>
-        <Container maxW='7xl' p='80px 0'>
-          <Text
-            color='black.800'
-            fontSize='45px'
-            fontWeight='bold'
-            mb='31px'
-            p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-          >
-            Navegue por Categoria
-          </Text>
-          {/* <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
-            {categories &&
-              categories.length > 0 &&
-              categories.map((categ: any, index: number) => {
-                const cardIndex = index + 1
-                let bg = 'black.800'
-                let color = 'white'
+<Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
+      <Container maxW='7xl' p='80px 0'>
+        <Heading
+          as={'h3'}
+          className='todososprodutos-titulo text-black negrito'
+          mb='31px'
+          p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
+        >
+          Navegue por Categoria
+        </Heading>
+        <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
+          {categories &&
+            categories.length > 0 &&
+            categories
+              .filter((categ: any) => categ.all_product)
+              .sort((a: any, b: any) => {
+                const orderA = a.order_all_products ?? 999999;
+                const orderB = b.order_all_products ?? 999999;
+                return orderA - orderB;
+              })
+              .map((categ: any, index: number) => {
+                const cardIndex = index + 1;
+                const bgColors = ['var(--black-primary)', 'var(--white-primary)', 'var(--red-primary)', 'var(--gray-primary)'];
 
-                if (cardIndex % 2 === 0) {
-                  bg = 'white'
-                  color = 'black.800'
-                }
-                if (cardIndex % 3 === 0) {
-                  bg = 'red.600'
-                  color = 'white'
-                }
+                // Se o índice for maior que a quantidade de cores disponíveis, recomece a partir do início
+                const bgIndex = index % bgColors.length;
+
+                const bg = bgColors[bgIndex];
+                const color = (bg === 'var(--red-primary)' || bg === 'var(--black-primary)') ? 'var(--white-primary)' : 'var(--black-primary)';
 
                 return (
                   <CardCatalog
-                    key={uuidv4()}
+                    key={index}
                     bg={bg}
                     color={color}
                     title={categ.name}
                     text={categ.description}
                     img={categ.url}
+                    urlPicture={categ.urlPicture}
                   />
-                )
+                );
               })}
-          </Grid> */}
-        </Container>
-      </Flex>
+        </Grid>
+      </Container>
+    </Flex>
       {/* <Player /> */}
       {/*<Contact
         id='duvidas-e-orcamentos'

@@ -1,5 +1,6 @@
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
+import { SearchBar } from '../components/SearchBar'
 import {
   Box,
   Button,
@@ -27,7 +28,8 @@ import {
   Textarea,
   Heading,
   SimpleGrid,
-  Image
+  Image,
+  transform
 } from '@chakra-ui/react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -70,28 +72,285 @@ const TodosProdutosContemp = () => {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <Header />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='90px'>
-        <Heading as={'h2'} className='sobre-titulo negrito text-white'>
+      <Box backgroundColor={'var(--graylight-primary)'}>
+      <Flex maxWidth={'1240px'} p={'0 15px'} m={'auto'} alignItems='center' justifyContent='space-between' direction='row' h='90px' gap={'3'}>
+        <Heading as={'h2'} className='sobre-titulo negrito text-white' mb={'0%'} color={'var(--black-primary)'}>
           Todos os Produtos
         </Heading>
+        <SearchBar
+            inputProps={{
+              placeholder: 'Procure aqui seu produto...',
+            }}
+            containerProps={{
+              bg: 'var(--gray-text)',
+            }}
+            searchCard='100%'
+          />
       </Flex>
-      <Box className='container-produto'>
-        <Box className='card-produto-individual'
-          maxW={'1240px'}
-          m={'auto'}>
-        <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
-            <Box className='card-todososprodutos'>
-              <Image
-              alt={'nome-do-produto'}
-              src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
-              objectFit={'cover'}
-              className='imagem-card-todososprodutos'
-              />
-              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto</Heading>
-            </Box>
-          </SimpleGrid>
-          </Box>
       </Box>
+      <Flex className='container-produto'>
+        <Flex
+        maxW={'1240px'}
+          m={'auto'}>
+        <Box className='card-produto-individual' w={'100%'}>
+          <SimpleGrid columns={4} spacingX='20px' spacingY='20px'>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            <Box className='card-todososprodutos'
+            cursor={'pointer'}>
+              <Flex w={'100%'} gap='2'>
+                <Box w={'25%'}>
+              <Image
+                alt={'nome-do-produto'}
+                src={'https://contemp.com.br/api/arquivos/imagedefault.webp'}
+                objectFit={'cover'}
+                className='imagem-card-todososprodutos'
+                cursor={'pointer'}
+                _hover={{
+                  transform: 'scale(1.5)',
+                  transition: 'transform 0.3s ease-in-out',
+                }}
+              />
+              </Box>
+                <Box w={'75%'} >
+              <Heading as={'h2'} className='titulo-card-todososprodutos'>Nome do Produto Completo c/ mais de duas linhas</Heading>
+              </Box>
+              </Flex>
+            </Box>
+            
+          </SimpleGrid>
+        </Box>
+        </Flex>
+      </Flex>
       <Footer />
     </>
   )
