@@ -634,6 +634,19 @@ a {
     border-radius: 8px !important;
 }
 
+.bagdetabela-default {
+    border: solid 2px var(--gray-primary) !important;
+    border-radius: 50px !important;
+    color: var(--gray-text) !important;
+    background-color: var(--graylight-primary) !important;
+    font-size: 0.75rem !important;;
+}
+.checkboxtabela:checked,
+.ant-checkbox-checked {
+    background-color: var(--red-primary)!important;
+    fill: var(--red-primary)!important;
+}
+
 /* TABELA CATEGORIA */
 #tabela-categoria,
 #tabela-produtos,

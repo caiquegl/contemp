@@ -68,6 +68,9 @@ const TabProduct = ({ back }: IProps) => {
   const [quantidadeProdutosDestacados, setQuantidadeProdutosDestacados] = useState<number>(0);
   const [quantidadeProdutosDesativados, setQuantidadeProdutosDesativados] = useState<number>(0);
   const [quantidadeProdutosAno, setQuantidadeProdutosAno] = useState<number>(0);
+  const [quantidadeAtualizadosAno, setquantidadeAtualizadosAno] = useState<number>(0);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+
 
   function copiarTexto(texto: string) {
     var input = document.createElement('input');
@@ -116,7 +119,51 @@ const TabProduct = ({ back }: IProps) => {
     }
   };
 
+  const onSelectChange = (selectedKeys: any) => {
+    setSelectedRowKeys(selectedKeys);
+    showToast(selectedKeys.length);
+  };
+
+  const onSelectAllChange = (e: any) => {
+    const allRowKeys = list.map((record: any) => record.id);
+    setSelectedRowKeys(e.target.checked ? allRowKeys : []);
+    showToast(e.target.checked ? allRowKeys.length : 0);
+  };
+
+  const showToast = (selectedCount: number) => {
+    toast({
+      title: 'Produtos Selecionados',
+      description: `Você selecionou ${selectedCount} produto(s).`,
+      status: 'info',
+    });
+  };
+
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const column = [
+    {
+      title: (
+        <Checkbox
+          onChange={onSelectAllChange}
+          checked={selectedRowKeys.length === list.length}
+        />
+      ),
+      key: 'selectAll',
+      width: 50,
+      render: (record: any) => (
+        <Checkbox
+        onChange={(e) => onSelectChange(e.target.checked ? [...selectedRowKeys, record.id] : selectedRowKeys.filter(key => key !== record.id))}
+        checked={selectedRowKeys.includes(record.id)}
+        style={{
+          color: selectedRowKeys.includes(record.id) ? 'red' : 'inherit',
+        }}
+        />
+      ),
+    },
     {
       title: 'Ordem',
       width: 100,
@@ -205,7 +252,68 @@ const TabProduct = ({ back }: IProps) => {
         return statusA.localeCompare(statusB);
       },
       width: 150,
-    },      
+    },
+    {
+      title: 'Url',
+      dataIndex: 'url',
+      key: 'url',
+      render: (a: any, b: any) => (
+        <Button
+          as={ChakraLink}
+          className='botao-tabelaprodutos'
+          fontWeight={'400'}
+          href={b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
+          isExternal={true}
+          _hover={{ color: 'black', textDecoration: 'none' }}
+          rightIcon={<Icon as={ExternalLinkIcon} />}
+        >
+          {`Abrir`}
+        </Button>
+      ),
+    },
+    {
+      title: (
+        <Tooltip
+          placement="top"
+          label="Destaque"
+          color={'var(--white-primary)'}
+          bg={'var(--red-primary)'}
+          borderRadius={'8px'}
+          textAlign={'center'}
+        >
+          <Box>
+            <Icon as={FaStar} fontSize="1rem" color="var(--black-primary)" />
+          </Box>
+        </Tooltip>
+      ),
+      dataIndex: 'destaque',
+      key: 'destaque',
+      sorter: (a: any, b: any) => a.destaque - b.destaque,
+      render: (destaque: boolean, product: any) => (
+        <IconButton
+          aria-label='Alternar Destaque'
+          icon={<FaStar />}
+          color={destaque ? 'yellow.400' : 'gray.400'}
+          onClick={() => handleToggleDestaque(product.id, destaque)}
+          backgroundColor={'transparent'}
+        />
+      ),
+    },
+    {
+      title: 'Layout',
+      dataIndex: 'layout_in',
+      key: 'layout_in',
+      render: (layout: string) => (
+        <Badge
+          className='bagdetabela-default'
+          variant="subtle"
+          fontSize="0.875rem"
+        >
+          Layout 1
+        </Badge>
+      ),
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
+    },
     {
       title: 'Criado em',
       dataIndex: 'created_at',
@@ -219,51 +327,6 @@ const TabProduct = ({ back }: IProps) => {
       key: 'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
-    },
-    {
-      title: (
-        <Tooltip
-          placement="top"
-          label="Destaque"
-          color={'var(--white-primary)'}
-          bg={'var(--red-primary)'}
-          borderRadius={'8px'}
-          textAlign={'center'}
-        >
-          <Box>
-            <Icon as={FaStar} fontSize="1.25rem" color="var(--gray-text)" />
-          </Box>
-        </Tooltip>
-      ),
-      dataIndex: 'destaque',
-      key: 'destaque',
-      sorter: (a: any, b: any) => a.destaque - b.destaque,
-      render: (destaque: boolean, product: any) => (
-        <IconButton
-          aria-label='Alternar Destaque'
-          icon={<FaStar />}
-          color={destaque ? 'yellow.400' : 'gray.400'}
-          onClick={() => toggleDestaque(product.id, destaque)}
-        />
-
-      ),
-    },
-    {
-      title: 'Url',
-      dataIndex: 'url',
-      key: 'url',
-      render: (a: any, b: any) => (
-        <Button
-          as={ChakraLink}
-          className='botao-tabelaprodutos'
-          href={b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
-          isExternal={true}
-          _hover={{ color: 'black', textDecoration: 'none' }}
-          rightIcon={<Icon as={ExternalLinkIcon} />}
-        >
-          {`url`}
-        </Button>
-      ),
     },
     {
       title: 'Ações',
@@ -339,23 +402,30 @@ const TabProduct = ({ back }: IProps) => {
       setList(data);
       setListClone(data);
       setQuantidadeProdutos(data.length);
-  
+
       if (data) {
         const quantidadeDestacados = data.filter((product: any) => product.destaque).length;
         setQuantidadeProdutosDestacados(quantidadeDestacados);
-  
-        // Adicione o cálculo para a quantidade de produtos desativados
+
         const quantidadeDesativados = data.filter((product: any) => !product.isActive).length;
         setQuantidadeProdutosDesativados(quantidadeDesativados);
-  
-        // Adicione o cálculo para a quantidade de produtos cadastrados no ano
+
         const currentYear = new Date().getFullYear();
+
         const quantidadeProdutosAno = data.filter((product: any) => {
           const productYear = new Date(product.created_at).getFullYear();
           return productYear === currentYear;
         }).length;
-  
+
         setQuantidadeProdutosAno(quantidadeProdutosAno);
+
+        // Calcular o número de produtos atualizados no ano atual
+        const quantidadeAtualizadosAno = data.filter((product: any) => {
+          const productYear = new Date(product.updated_at).getFullYear();
+          return productYear === currentYear;
+        }).length;
+
+        setquantidadeAtualizadosAno(quantidadeAtualizadosAno);
       }
     } catch (error) {
       toast({
@@ -365,7 +435,7 @@ const TabProduct = ({ back }: IProps) => {
       });
     }
   };
-  
+
 
   const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
   const cancelRef = useRef<HTMLButtonElement | null>(null);
@@ -419,34 +489,34 @@ const TabProduct = ({ back }: IProps) => {
       'Ordem, Nome, Categoria, Status, Criado em, Atualizado em, Destaque, Url', // Updated header
       ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.isActive ? 'Ativo' : 'Inativo'},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
     ].join('\n');
-  
+
     // Converta a string CSV em um Blob
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-  
+
     // Use a biblioteca file-saver para salvar o Blob como um arquivo
     saveAs(blob, 'products_export.csv');
   };
-  
+
 
   const handleExportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-  
+
     // Adicione cabeçalhos, incluindo o novo campo 'Status'
     sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'URL']);
-  
+
     // Adicione dados, incluindo o novo campo 'Status'
     list.forEach((product: any) => {
       sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-  
+
     // Crie um Blob a partir do workbook
     const blob = await workbook.xlsx.writeBuffer();
-  
+
     // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
   };
-  
+
 
 
 
@@ -508,35 +578,43 @@ const TabProduct = ({ back }: IProps) => {
       pdf.save('produtos-contemp.pdf');
     };*/}
 
-  const toggleDestaque = async (productId: number, currentDestaque: boolean) => {
-    try {
-      // Use a função fetch para chamar sua API
-      const response = await fetch('/api/toggleDestaqueProduct', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId, destaque: currentDestaque }),
-      });
+    const toggleDestaque = async (productId: number, currentDestaque: boolean) => {
+      try {
+        // Use a função fetch para chamar sua API
+        const response = await fetch('../../pages/api/toggleDestaqueProduct', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ productId, destaque: currentDestaque }),
+        });
+  
+        const data = await response.json();
+  
+        toast({
+          title: 'Sucesso',
+          description: data.msg,
+          status: 'success',
+        });
+  
+        // Atualize o estado da lista após a alteração do destaque
+        listProduct();
+      } catch (err) {
+        toast({
+          title: 'Erro',
+          description: 'Erro ao alterar destaque',
+          status: 'error',
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+  
 
-      const data = await response.json();
-
-      toast({
-        title: 'Sucesso',
-        description: data.msg,
-        status: 'success',
-      });
-    } catch (err) {
-      toast({
-        title: 'Erro',
-        description: 'Erro ao alterar destaque',
-        status: 'error',
-      });
-    } finally {
-      setLoading(false);
-      await listProduct();
-    }
-  };
+    const handleToggleDestaque = (productId: number, currentDestaque: boolean) => {
+      // Chame a função toggleDestaque
+      toggleDestaque(productId, currentDestaque);
+    };
 
 
 
@@ -551,7 +629,7 @@ const TabProduct = ({ back }: IProps) => {
             <Text className='paragrafo-preto' mb={'3%'}>
               Gerencie todos os produtos da Contemp de forma prática. Adicione, edite, ative, desative, pesquise ou exclua através do painel. Atenção! Ao excluir um produto não será possível recupera-lo.
             </Text>
-            <StaticsProducts quantidadeProdutos={quantidadeProdutos} quantidadeProdutosDestaque={quantidadeProdutosDestacados} quantidadeProdutosDesativados={quantidadeProdutosDesativados} quantidadeProdutosAno={quantidadeProdutosAno} />
+            <StaticsProducts quantidadeProdutos={quantidadeProdutos} quantidadeProdutosDestaque={quantidadeProdutosDestacados} quantidadeProdutosDesativados={quantidadeProdutosDesativados} quantidadeProdutosAno={quantidadeProdutosAno} quantidadeAtualizadosAno={quantidadeAtualizadosAno} />
           </Box>
           <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
 
@@ -619,7 +697,7 @@ const TabProduct = ({ back }: IProps) => {
           </Flex>
 
           <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'}/>
+            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
           </Box>
         </>
       )}

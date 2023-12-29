@@ -11,7 +11,7 @@ import {
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BiSolidBox } from "react-icons/bi";
 import { FaStar, FaCalendarAlt } from "react-icons/fa";
-import { MdReportOff } from "react-icons/md";
+import { MdReportOff, MdOutlineUpdate, MdAccessTimeFilled } from "react-icons/md";
 
 interface StatsCardProps {
     title: string;
@@ -58,12 +58,13 @@ interface StaticsProductsProps {
     quantidadeProdutosDestaque: number;
     quantidadeProdutosDesativados: number;
     quantidadeProdutosAno: number;
+    quantidadeAtualizadosAno: number;
 }
 
-export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutosDestaque, quantidadeProdutosDesativados, quantidadeProdutosAno }: StaticsProductsProps) {
+export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutosDestaque, quantidadeProdutosDesativados, quantidadeProdutosAno, quantidadeAtualizadosAno }: StaticsProductsProps) {
     return (
-        <Box maxW="5xl" mb={'2%'}>
-            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
+        <Box maxW="6xl" mb={'2%'}>
+            <SimpleGrid columns={{ base: 1, md: 5 }} spacing={{ base: 7, lg: 8 }}>
                 <StatsCard title={'Produtos'} stat={quantidadeProdutos.toString()} icon={<BiSolidBox />} />
                 <StatsCard
                     title={'Destaques'}
@@ -72,6 +73,7 @@ export default function StaticsProducts({ quantidadeProdutos, quantidadeProdutos
                 />
                 <StatsCard title={'Desativados'} stat={quantidadeProdutosDesativados.toString()} icon={<MdReportOff />}/>
                 <StatsCard title={'Adicionados'} stat={quantidadeProdutosAno.toString()} icon={<FaCalendarAlt />} />
+                <StatsCard title={'Atualizados'} stat={quantidadeAtualizadosAno.toString()} icon={<MdAccessTimeFilled />} />
 
             </SimpleGrid>
         </Box>
