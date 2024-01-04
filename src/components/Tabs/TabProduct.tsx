@@ -301,15 +301,16 @@ const TabProduct = ({ back }: IProps) => {
     },
     {
       title: 'Layout',
-      dataIndex: 'layout_in',
-      key: 'layout_in',
-      render: (layout: string) => (
+      dataIndex: 'layout',
+      key: 'layout',
+      sorter: (a: any, b: any) => a.layout - b.layout,
+      render: (layout: number) => (
         <Badge
           className='bagdetabela-default'
           variant="subtle"
           fontSize="0.875rem"
         >
-          Layout 1
+          Layout {layout ? layout : 1}
         </Badge>
       ),
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),

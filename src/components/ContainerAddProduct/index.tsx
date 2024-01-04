@@ -29,6 +29,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { AsyncSelect, chakraComponents } from 'chakra-react-select'
 import { api } from '../../lib/axios'
 import { PiInfoDuotone } from "react-icons/pi";
+import { SelectDefault } from '../Form/Select'
 
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
@@ -60,7 +61,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   const [listVariation, setListVariation] = useState<any>([{ id: 1 }])
   const [list, setList] = useState<any>([])
   const [urls, setUrls] = useState<any>([])
-  const [selectedLayouts, setSelectedLayouts] = useState<string[]>([]);
 
   const { register, handleSubmit, formState, setValue, reset, control } = useForm({})
 
@@ -74,7 +74,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
       destaque,
       is_active: isActive,
       category: bodyForm.category.value,
-      layouts: selectedLayouts,
     }
 
     if (hasVariation) {
@@ -161,6 +160,10 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
     setValue('call_product', defaultValues?.call_product)
     setValue('key_word_seo', defaultValues?.key_word_seo)
     setValue('description_seo', defaultValues?.description_seo)
+    if(defaultValues.layout) {
+
+      setValue('layout', defaultValues.layout)
+    }
     setHasVariation(defaultValues && defaultValues.hasVariation ? true : false)
     setDestaque(defaultValues && defaultValues.destaque ? true : false)
     setIsActive(defaultValues && defaultValues.isActive ? true : false)
@@ -262,19 +265,30 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
 
           </FormControl>
           <FormControl>
-          <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'}>Layout</FormLabel>
-          <CheckboxGroup
-            value={selectedLayouts}
-            onChange={(values) => setSelectedLayouts(values.map(String))}
-          >
-            <HStack>
-              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="default">Padrão</Checkbox>
-              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="layout1">Personalizado 1</Checkbox>
-              <Checkbox colorScheme='red' variant={'outline'} className='paragrafo-preto' value="layout2">Personalizado 2</Checkbox>
-              {/* Adicione mais checkboxes conforme necessário */}
-            </HStack>
-          </CheckboxGroup>
-        </FormControl>
+            <Controller
+              control={control}
+              name='layout'
+              rules={{ required: 'Campo obrigatório' }}
+              render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
+                <FormControl isInvalid={!!error} id={name} color='black.800'>
+
+                  <Flex alignItems={'baseline'}>
+                    <FormLabel className='paragrafo-preto negrito' textTransform={'uppercase'} mb='10px'>
+                      Layout
+                    </FormLabel>
+                  </Flex>
+                  <Select placeholder='Selecione o layout' onChange={(evt) => onChange(evt.target.value)} value={value} name={name} ref={ref}>
+                    <option value='1'>Padrão</option>
+                    <option value='2'>Layout 2</option>
+                    <option value='3'>Layout 3</option>
+                    <option value='4'>Layout 4</option>
+                  </Select>
+                  {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                </FormControl>
+              )}
+            />
+
+          </FormControl>
         </HStack>
         <FormControl>
           <InputsHome

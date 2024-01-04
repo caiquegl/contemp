@@ -73,8 +73,9 @@ model Products {
   category_id     Int
   call_product    String
   order           Int?       @unique
-  created_at      DateTime   @default(now())
-  updated_at      DateTime   @default(now())
+  created_at      DateTime?   @default(now())
+  updated_at      DateTime?   @default(now())
+  layout          Int?
   category        Categories @relation(fields: [category_id], references: [id])
 
   @@map("products")

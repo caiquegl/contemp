@@ -1,9 +1,7 @@
-import { Footer } from '../../components/Footer'
 import {
   Box,
   Button,
   Center,
-  Container,
   Flex,
   Input,
   InputGroup,
@@ -16,7 +14,6 @@ import {
   Tabs,
   Text,
   VStack,
-  useBreakpointValue,
   useToast,
   NumberInput,
   NumberInputStepper,
@@ -30,101 +27,31 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import DefaultImg from '../../assets/images/image-default.webp'
-import { v4 as uuidv4 } from 'uuid'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import ReactHtmlParser from 'react-html-parser'
-import { Contact } from '../../components/Contact'
-import { Player } from '../../components/Player'
 import { pxToRem } from '../../utils/pxToRem'
-import CardProductWithDescription from '../../components/CardProductWithDescription'
-import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { initFirebase } from '../../utils/db'
 import { useAuth } from '../../contextAuth/authContext'
-import Head from 'next/head'
 import { Breadcrumb, Slider } from 'antd'
-import { customSwiperBullets } from '../../utils/customSwiperBullets'
-import { SmoothScroll } from '../../components/SmoothScroll'
 import Image from 'next/image'
 import NextLink from 'next/link'
-import { decodeName } from '../../utils/replaceNameToUrl'
-import { api } from '../../lib/axios'
 
-const Product = () => {
-  const router = useRouter()
+interface IProps {
+    detail: any;
+    bradName: any;
+}
+
+const Product1 = ({detail, bradName}: IProps) => {
   initFirebase()
   const toast = useToast()
   const { addCart } = useAuth()
 
-  const { product } = router.query
-  const [detail, setDetail] = useState<any>({})
   const [variation, setVariation] = useState<any>({})
-  const [bradName, setBradeName] = useState<any>([])
-  const [products, setProducts] = useState<any>([])
   const [qtd, setQtd] = useState(1)
-  const isTablet = useBreakpointValue({
-    base: true,
-    lg: false,
-  })
 
-  const isMobile = useBreakpointValue({
-    base: true,
-    md: false,
-  })
-
-  const getProduct = async () => {
-    try {
-      let produto = ''
-      if (product && typeof product == 'string') produto = decodeName(product).replaceAll('_', ' ').replaceAll('/', '333')
-      const { data } = await api.get(`${produto}/getProduct`)
-
-      if (!data.bradName) return router.push('/404')
-      setBradeName(data.bradName)
-
-      const changeText = (txt: string) => {
-        if (!txt) return
-        let val = txt
-        val = val.toString().replace('<a', '<a target="_blank"')
-        if (val.indexOf(`<figure class=\"media\"><oembed url=`) > -1) {
-          val = val.toString().replace('<figure class="media"><oembed url=', '<iframe src=')
-          val = val.toString().replace('watch?v=', 'embed/')
-          val = val
-            .toString()
-            .replace(
-              '></oembed></figure>',
-              'width="560" height="315" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-            )
-        }
-
-        let result = txt.substring(0, 2)
-        let result2 = txt.substring(0, 5)
-        if (result == '<a' || result2 == '<p><a') {
-          if (val.indexOf('class=') == -1) {
-            val = val.toString().replace('<a', '<a class="editor_button"')
-          }
-        }
-
-        return val
-      }
-
-      setDetail({
-        ...data.detail,
-        tab: data.detail.tab.map((t: any) => ({
-          ...t,
-          text: changeText(t.text),
-        })),
-      })
-      setProducts(data.allProducts)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  // ...
 
   const generateBreadcrumbUrl = (index: number) => {
     // Construa a URL com base nas etapas anteriores do Breadcrumb
@@ -135,27 +62,9 @@ const Product = () => {
   };
 
 
-
-
-  useEffect(() => {
-    if (product) {
-      getProduct()
-    }
-  }, [product])
-
   return (
     <>
-      <SmoothScroll>
-        {detail && (
-          <Head>
-            <meta name='description' content={detail.description_seo} />
-            <meta property='og:description' content={detail.description_seo} />
-            <meta name='keywords' content={detail.key_word_seo} />
-            <title>{detail.name}</title>
-            <meta property='og:title' content={detail.name} />
-            <link rel='icon' href='/favicon.png' />
-          </Head>
-        )}
+
         <Box className='container-produto'>
           <Flex
             className='card-produto-individual'
@@ -487,9 +396,6 @@ const Product = () => {
             </Box>
           </Flex>
 
-
-          {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/XxNKL39UnA0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
-
           <Flex id='description' className='container-produto-tabs' px='10px'>
             <Tabs variant='enclosed' maxW='var(--max-tamanho)' w='100%' overflowX='auto'>
               <TabList>
@@ -528,56 +434,9 @@ const Product = () => {
             </Tabs>
           </Flex>
         </Box>
-        {/* CARROSSEL TEM NA CONTEMP */}
-        {/* <Flex w='100%' alignItems='center' bg='white' p={['0 20px', '0 20px', '0 20px', '0 20px', '0 20px']}>
-          <Container maxW='7xl' p='80px 0'>
-            <Flex alignItems='center' mb={'-5%'}>
-              <Text color='black.800' fontSize={'2rem'} fontWeight='bold' ml='15px'>
-                #temnacontemp
-              </Text>
-            </Flex>
-            <Flex alignItems='center' h={pxToRem(970)} mt='31px'>
-              <Swiper
-                slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
-                spaceBetween={30}
-                autoplay={{
-                  delay: 2000,
-                  pauseOnMouseEnter: true,
-                }}
-                pagination={{
-                  enabled: true,
-                  clickable: true,
-                  renderBullet: customSwiperBullets,
-                }}
-                modules={[Autoplay, Pagination]}
-                className='mySwiper'
-                speed={1000}
-              >
-                {products.sort((a: any, b: any) => {
-                  let aOrder = a.order || 999999
-                  let bOrder = b.order || 999999
-                  return aOrder - bOrder
-
-                }).map((item: any, key: number) => (
-                  <SwiperSlide key={key}>
-                    <CardProductWithDescription
-                      img={item.urls && item.urls.length > 0 ? item.urls[0] : ''}
-                      text={item.name}
-                      description={item.description}
-                      call_product={item.call_product}
-                      ocultBottom={true}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Flex>
-          </Container>
-        </Flex>*/}
-        {/* <Player /> */}
-        <Footer />
-      </SmoothScroll>
+      
     </>
   )
 }
 
-export default Product
+export default Product1
