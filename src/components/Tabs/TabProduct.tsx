@@ -313,7 +313,6 @@ const TabProduct = ({ back }: IProps) => {
           Layout {layout ? layout : 1}
         </Badge>
       ),
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
       title: 'Criado em',
