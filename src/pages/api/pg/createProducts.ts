@@ -34,7 +34,6 @@ export default async function handler(
           listVariation: el.listVariation,
           tab: el.tab,
           call_product: el.call_product,
-          layout: el.layout ? parseInt(el.layout) : undefined,
           created_at: new Date(),
           updated_at: new Date(),
         }
