@@ -8,6 +8,7 @@ import { pxToRem } from '../../utils/pxToRem'
 import { api } from '../../lib/axios'
 import { useRouter } from 'next/router'
 import * as path from 'path'
+import moment from 'moment';
 import { PiPencilSimpleBold } from 'react-icons/pi'
 import { FaAngleDown, FaStar } from 'react-icons/fa'
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
@@ -129,12 +130,41 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
       title: 'Origem',
       dataIndex: 'source',
       key: 'source',
+      render: (source: string) => (
+        <a href={`https://contemp.com.br${source}`} target="_blank" rel="noopener noreferrer">
+          {`${source}`}
+        </a>
+      ),
+      sorter: (a: any, b: any) => (a.source || '').localeCompare(b.source || ''),
     },
     {
       title: 'Destino',
       dataIndex: 'destination',
       key: 'destination',
+      render: (destination: string) => (
+        <a href={`https://contemp.com.br${destination}`} target="_blank" rel="noopener noreferrer">
+          {`${destination}`}
+        </a>
+      ),
+      sorter: (a: any, b: any) => (a.destination || '').localeCompare(b.destination || ''),
     },
+    {
+      title: 'Adicionado em',
+      dataIndex: 'createdestination_at',
+      key:'createdestination_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      width: '8%',
+    },
+    {
+      title: 'Atualizado em',
+      dataIndex: 'updatedestination_at',
+      key:'updatedestination_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      width: '8%',
+    },
+
     {
       title: 'Ações',
       key: 'actions',
@@ -147,6 +177,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
             bg={'var(--red-primary)'}
             borderRadius={'8px'}
             textAlign={'center'}
+            hasArrow
           >
             <Box>
               <Icon
@@ -172,6 +203,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
             bg={'var(--red-primary)'}
             borderRadius={'8px'}
             textAlign={'center'}
+            hasArrow
           >
             <Box>
               <Icon
@@ -253,6 +285,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
         />
       </Flex>
       <Table
+      id='tabela-description'
         columns={columns}
         dataSource={redirects}
         loading={loading}

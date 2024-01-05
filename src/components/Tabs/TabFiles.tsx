@@ -8,6 +8,8 @@ import { FiCopy } from 'react-icons/fi'
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { FaDeleteLeft } from 'react-icons/fa6'
 import { SearchBar } from '../SearchBar'
+import { colors } from '../../styles/theme'
+import { pxToRem } from '../../utils/pxToRem'
 
 const TabFiles = () => {
   const toast = useToast({
@@ -17,8 +19,9 @@ const TabFiles = () => {
   const fileInputRef = useRef<any>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [list, setList] = useState<any>([])
-  const [listClone, setListClone] = useState<any>([])
+  const [listClone, setListClone] = useState<any[]>([])
   const { confirm } = Modal
+  const [filteredFiles, setFilteredFiles] = useState<any[]>([]);
 
   function copiarTexto(texto: string) {
     // Cria um elemento de input dinamicamente
@@ -58,6 +61,7 @@ const TabFiles = () => {
       title: 'URL',
       dataIndex: 'url',
       key: 'url',
+      width:'8%',
       render: (value: any) => (
         <Button
           as={ChakraLink}
@@ -73,6 +77,7 @@ const TabFiles = () => {
     },
     {
       title: 'Ações',
+      width: '5%',
       render: (a: any, row: any) => (
         <HStack spacing='20px'>
           <Tooltip placement='top' title='Copiar'
@@ -84,6 +89,8 @@ const TabFiles = () => {
               onClick={() => copiarTexto(`https://${row.url}`)}
             />
           </Tooltip>
+          <Tooltip placement='top' title='Excluir Arquivo'
+          color={'var(--red-primary)'}>
           <Icon
             cursor='pointer'
             as={FaDeleteLeft}
@@ -116,6 +123,7 @@ const TabFiles = () => {
               })
             }}
           />
+          </Tooltip>
         </HStack>
       ),
     },
@@ -139,11 +147,12 @@ const TabFiles = () => {
   }
 
   useEffect(() => {
-    listFiles()
-  }, [])
+    listFiles();
+  }, []);
 
   useEffect(() => {
     setListClone([...list]);
+    setFilteredFiles([...list]);
   }, [list]);
 
   //ADD KEMELIN
@@ -220,28 +229,25 @@ const TabFiles = () => {
           Adicionar
         </Button>
         <SearchBar
-          inputProps={{
-            placeholder: 'Digite o nome do arquivo...',
-            onChange: (evt) => {
-              const searchTerm = evt.target.value.toLowerCase();
-              const filteredList = listClone.filter((item: any) =>
-                item.name.toLowerCase().includes(searchTerm)
-              );
-              setList(searchTerm ? filteredList : listClone);
-            },
-            _placeholder: {
-              color: 'black.800',
-              opacity: '50%',
-            },
-          }}
-          containerProps={{
-            bg: 'white.500',
-            border: '1px solid',
-            borderColor: 'black.800',
-            color: 'var(--black-primary)',
-            maxW: '18rem',
-          }}
-        />
+                inputProps={{
+                  placeholder: 'Digite o nome do arquivo...',
+                  onChange: (evt) => {
+                    let newList = listClone.filter((item: any) => item.name.toLowerCase().includes(evt.target.value.toLowerCase()));
+                    setList([...newList]);
+                  },
+                  _placeholder: {
+                    color: 'black.800',
+                    opacity: '50%',
+                  },
+                }}
+                containerProps={{
+                  bg: 'white.500',
+                  border: '1px solid',
+                  borderColor: 'black.800',
+                  color: colors.black[800],
+                  maxW: pxToRem(288),
+                }}
+              />
         <input
           // id='cpf_file'
           // key={Date.now()}
