@@ -15,6 +15,7 @@ export default async function handler(
         'products.description_seo',
         'products.destaque',
         'products.hasVariation',
+        'products.listVariation',
         'products.isActive',
         'products.key_word_seo',
         'products.name',
@@ -23,6 +24,9 @@ export default async function handler(
         'products.category_id',
         'products.order',
         'products.layout',
+        'products.call_product',
+        'products.tab',
+        'products.urls',
         'categories.id as category_id',
         'categories.description as category_description',
         'categories.description_seo as category_description_seo',
@@ -54,7 +58,7 @@ export default async function handler(
           description_seo: item.description_seo,
           destaque: item.destaque,
           hasVariation: item.hasVariation,
-          id: item.hasVariation,
+          id: item.id,
           isActive: item.isActive,
           key_word_seo: item.key_word_seo,
           listVariation: item.listVariation,
@@ -104,7 +108,7 @@ export default async function handler(
       //     order: 'asc'
       //   }
       // })
-      // console.log(list[0])
+
       return res.status(201).json(list)
     } catch (error) {
       console.log(error)
