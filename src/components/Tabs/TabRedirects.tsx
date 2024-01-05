@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip } from '@chakra-ui/react'
 import { Table, Space, message, Modal, Form, Input, Button as BtnAtd } from 'antd'
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
+import { SearchBar } from '../SearchBar'
+import { colors } from '../../styles/theme'
+import { pxToRem } from '../../utils/pxToRem'
 import { api } from '../../lib/axios'
 import { useRouter } from 'next/router'
 import * as path from 'path'
@@ -11,17 +14,19 @@ import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 
 const { Item } = Form
 
-interface TabRedirectsProps {}
+interface TabRedirectsProps { }
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
 
 const TabRedirects: React.FC<TabRedirectsProps> = () => {
   const router = useRouter()
+  const [listClone, setListClone] = useState<any[]>([])
   const [redirects, setRedirects] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [selectItem, setSelectItem] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [modalVisibleCreate, setModalVisibleCreate] = useState<boolean>(false)
+
 
   const [form] = Form.useForm()
 
@@ -40,8 +45,23 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
   }
 
   useEffect(() => {
-    fetchRedirects()
-  }, [])
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get('/getAllUrls');
+        const redirectsData = response.data;
+        setListClone(redirectsData); // Defina listClone ao buscar redirecionamentos
+        setRedirects(redirectsData);
+      } catch (error) {
+        console.error(error);
+        message.error('Erro ao obter redirecionamentos');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
   const handleDeleteRedirect = async (redirectId: number) => {
@@ -202,6 +222,35 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
         >
           Adicionar Redirecionamento
         </Button>
+
+        <SearchBar
+          inputProps={{
+            placeholder: 'Digite url ou trecho dela...',
+            onChange: (evt) => {
+              let newList = listClone.filter((item: any) => {
+                // Adicionamos uma verificação para garantir que item.source e item.destination estejam definidos
+                return (
+                  item.source &&
+                  item.destination &&
+                  (item.source.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+                    item.destination.toLowerCase().includes(evt.target.value.toLowerCase()))
+                );
+              });
+              setRedirects([...newList]);
+            },
+            _placeholder: {
+              color: 'black.800',
+              opacity: '50%',
+            },
+          }}
+          containerProps={{
+            bg: 'white.500',
+            border: '1px solid',
+            borderColor: 'black.800',
+            color: colors.black[800],
+            maxW: pxToRem(288),
+          }}
+        />
       </Flex>
       <Table
         columns={columns}
@@ -225,76 +274,76 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
         onChange={handleTableChange}
       />
 
-    {modalVisible &&
-      <Modal
-        open={modalVisible}
-        onCancel={() => {
-          setSelectItem(null)
-          setModalVisible(false)
-        }}
-        onOk={() => {
-          setSelectItem(null)
-          setModalVisible(false)
-        }}
-        footer={null}
-        title='Editar URL'
-        destroyOnClose={true}
-        
-      >
-        <Form
-          key={selectItem?.id}
-          layout="horizontal"
-          form={form}
-          onFinish={updateRedirect} 
+      {modalVisible &&
+        <Modal
+          open={modalVisible}
+          onCancel={() => {
+            setSelectItem(null)
+            setModalVisible(false)
+          }}
+          onOk={() => {
+            setSelectItem(null)
+            setModalVisible(false)
+          }}
+          footer={null}
+          title='Editar URL'
+          destroyOnClose={true}
+
         >
-          <Form.Item  label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
-            <Input />
-          </Form.Item>
-          <Form.Item label='Destino'rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
-            <Input />
-          </Form.Item>
+          <Form
+            key={selectItem?.id}
+            layout="horizontal"
+            form={form}
+            onFinish={updateRedirect}
+          >
+            <Form.Item label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
+              <Input />
+            </Form.Item>
+            <Form.Item label='Destino' rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
+              <Input />
+            </Form.Item>
 
-          <Button type='submit'>
-          Atualizar
-        </Button>
-        </Form>
-      </Modal>
-    }
+            <Button type='submit'>
+              Atualizar
+            </Button>
+          </Form>
+        </Modal>
+      }
 
-{modalVisibleCreate &&
-      <Modal
-        open={modalVisibleCreate}
-        onCancel={() => {
-          setSelectItem(null)
-          setModalVisibleCreate(false)
-        }}
-        onOk={() => {
-          setSelectItem(null)
-          setModalVisibleCreate(false)
-        }}
-        footer={null}
-        title='Criar URL'
-        destroyOnClose={true}
-        
-      >
-        <Form
-          layout="horizontal"
-          form={form}
-          onFinish={createRedirect} 
+      {modalVisibleCreate &&
+        <Modal
+          open={modalVisibleCreate}
+          onCancel={() => {
+            setSelectItem(null)
+            setModalVisibleCreate(false)
+          }}
+          onOk={() => {
+            setSelectItem(null)
+            setModalVisibleCreate(false)
+          }}
+          footer={null}
+          title='Criar URL'
+          destroyOnClose={true}
+
         >
-          <Form.Item  label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
-            <Input />
-          </Form.Item>
-          <Form.Item label='Destino'rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
-            <Input />
-          </Form.Item>
+          <Form
+            layout="horizontal"
+            form={form}
+            onFinish={createRedirect}
+          >
+            <Form.Item label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
+              <Input />
+            </Form.Item>
+            <Form.Item label='Destino' rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
+              <Input />
+            </Form.Item>
 
-          <Button type='submit'>
-          Criar
-        </Button>
-        </Form>
-      </Modal>
-    }
+            <Button type='submit'>
+              Criar
+            </Button>
+          </Form>
+        </Modal>
+      }
     </>
   )
 }

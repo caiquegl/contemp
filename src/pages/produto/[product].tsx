@@ -157,6 +157,7 @@ const Product = () => {
             <meta name='keywords' content={detail.key_word_seo} />
             <title>{detail.name}</title>
             <meta property='og:title' content={detail.name} />
+            <meta property="og:image" content={detail.img} />
             <link rel='icon' href='/favicon.png' />
           </Head>
         )}
