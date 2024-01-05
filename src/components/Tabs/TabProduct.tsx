@@ -484,38 +484,34 @@ const TabProduct = ({ back }: IProps) => {
   }, [back]);
 
   const handleExportCSV = () => {
-    // Crie uma string CSV a partir dos dados da lista de produtos
+    // Cabeçalho atualizado com a coluna "Layout"
     const csvContent = [
-      'Ordem, Nome, Categoria, Status, Criado em, Atualizado em, Destaque, Url', // Updated header
-      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.isActive ? 'Ativo' : 'Inativo'},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'},https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
+      'Ordem, Nome, Categoria, Status, Criado em, Atualizado em, Destaque, Layout, Url', // Cabeçalho atualizado
+      ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.isActive ? 'Ativo' : 'Inativo'},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'}, Layout ${product.layout ? product.layout : 1}, https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
     ].join('\n');
-
-    // Converta a string CSV em um Blob
+  
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-
-    // Use a biblioteca file-saver para salvar o Blob como um arquivo
     saveAs(blob, 'products_export.csv');
   };
+  
 
 
   const handleExportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-
-    // Adicione cabeçalhos, incluindo o novo campo 'Status'
-    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'URL']);
-
-    // Adicione dados, incluindo o novo campo 'Status'
+  
+    // Cabeçalho atualizado com a coluna "Layout"
+    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL']);
+  
     list.forEach((product: any) => {
-      sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
+      // Adiciona a coluna "Layout" a cada linha
+      sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `Layout ${product.layout ? product.layout : 1}`, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-
-    // Crie um Blob a partir do workbook
+  
     const blob = await workbook.xlsx.writeBuffer();
-
-    // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
   };
+  
 
 
 
