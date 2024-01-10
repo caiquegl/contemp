@@ -16,8 +16,10 @@ import {
   Tooltip,
   Heading,
   Stack,
+  IconButton,
   Link as ChakraLink,
-  Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
+  Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList,
+  Badge as ChakraBadge,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -45,9 +47,10 @@ import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
 import { ModalAddFilter } from '../modalAddFilter'
 import { FiCopy } from 'react-icons/fi';
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaStar } from "react-icons/fa";
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
+import StaticsCategorys from '../StaticsCategorys'
 //import { jsPDF } from 'jspdf';
 //import 'jspdf-autotable';
 
@@ -88,6 +91,12 @@ const TabCategory = () => {
     duration: 3000,
     isClosable: true,
   })
+  const [quantidadeCategorias, setQuantidadeCategorias] = useState<number>(0);
+  const [quantidadeCategoriasDestaque, setQuantidadeCategoriasDestaque] = useState<number>(0);
+  const [quantidadeCategoriasDesativadas, setQuantidadeCategoriasAno] = useState<number>(0);
+  const [quantidadeCategoriasAno, setQuantidadeCategoriasDesativadas] = useState<number>(0);
+  const [quantidadeAtualizadasAno, setquantidadeAtualizadasAno] = useState<number>(0);
+
   const [openFilter, setOpenFiter] = useState<boolean>(false)
   const [update, setUpdate] = useState<any>({})
   const [loading, setLoading] = useState(false)
@@ -202,24 +211,45 @@ const TabCategory = () => {
     }
   }
 
-  const listCategory = async (list?: any) => {
+  const listCategory = async () => {
     try {
-      const { data } = await api.get('getAllCategory')
+      const { data } = await api.get('getAllCategory');
+      
+      setList(data);
+      setListClone(data);
+  
+      setQuantidadeCategorias(data.length);
+  
+      if (data) { 
+        const quantidadeCategoriasDesativadas = data.filter((category: any) => !category.is_active).length;
+        setQuantidadeCategoriasDesativadas(quantidadeCategoriasDesativadas);
 
-      let newList = list
-        ? list.sort((a: any, b: any) => a.order < b.order)
-        : data.sort((a: any, b: any) => a.order < b.order)
-      setListClone([...newList])
-      setList([...newList])
+        const quantidadeCategoriasDestaque = data.filter((category: any) => category.favorite).length;
+        setQuantidadeCategoriasDestaque(quantidadeCategoriasDestaque);
+  
+        const anoAtual = new Date().getFullYear();
+        const quantidadeCategoriasAno = data.filter((category: any) => {
+          const categoryYear = new Date(category.created_at).getFullYear();
+          return categoryYear === anoAtual;
+        }).length;
+        setQuantidadeCategoriasAno(quantidadeCategoriasAno);
+  
+        const quantidadeAtualizadasAno = data.filter((category: any) => {
+          const categoryYear = new Date(category.updated_at).getFullYear();
+          return categoryYear === anoAtual;
+        }).length;
+        setquantidadeAtualizadasAno(quantidadeAtualizadasAno);
+      }
     } catch (error) {
       toast({
         title: 'Erro',
-        description: 'Erro ao listar categoria',
+        description: 'Erro ao listar categorias',
         status: 'error',
-      })
+      });
     }
-  }
-
+  };
+  
+  
   const deleteAllCategory = async (category: any) => {
     setLoading(true)
     const { data, status } = await api.post(`deleteCategory`, category)
@@ -318,13 +348,13 @@ const TabCategory = () => {
   const column = [
     {
       title: 'Ordem Geral',
-      width: 100,
+      width: '6%',
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
     {
       title: 'Ordem em todos produtos',
-      width: 200,
+      width: '12%',
       sorter: (a: any, b: any) => {
         const orderA = a.order_all_products ?? 999999
         const orderB = b.order_all_products ?? 999999
@@ -339,9 +369,68 @@ const TabCategory = () => {
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
     },
     {
+      title: 'Status',
+      dataIndex: 'is_active',
+      key: 'status',
+      width: '7%',
+      filters: [
+        { text: 'Ativa', value: 'Ativa' },
+        { text: 'Inativa', value: 'Inativa' },
+      ],
+      onFilter: (value: any, record: any) => {
+        if (typeof value === 'string') {
+          return (record.is_active ? 'Ativa' : 'Inativa') === value;
+        }
+        return false; // Caso não seja uma string, não filtra
+      },
+      filterMultiple: false,
+      render: (is_active: boolean) => (
+        <ChakraBadge
+          colorScheme={is_active ? 'green' : 'red'}
+          borderRadius={'8px'}
+        >
+          {is_active ? 'Ativa' : 'Inativa'}
+        </ChakraBadge>
+      ),
+      sorter: (a: any, b: any) => {
+        const statusA = a.is_active ? 'Ativa' : 'Inativa';
+        const statusB = b.is_active ? 'Ativa' : 'Inativa';
+        return statusA.localeCompare(statusB);
+      },
+    },
+    {
+      title: (
+        <Tooltip
+          placement="top"
+          label="Categoria Destaque"
+          color={'var(--white-primary)'}
+          bg={'var(--red-primary)'}
+          borderRadius={'8px'}
+          textAlign={'center'}
+        >
+          <Box>
+            <Icon as={FaStar} fontSize="1rem" color="var(--black-primary)" />
+          </Box>
+        </Tooltip>
+      ),
+      dataIndex: 'favorite',
+      key: 'favorite',
+      width: '5%',
+      sorter: (a: any, b: any) => a.favorite - b.favorite,
+      render: (favorite: boolean, category: any) => (
+        <IconButton
+          aria-label='Categoria Favorita'
+          icon={<FaStar />}
+          color={favorite ? 'yellow.400' : 'gray.400'}
+          backgroundColor={'transparent'}
+        />
+      ),
+    },
+    {
       title: 'Url',
       dataIndex: 'url',
       key: 'url',
+      width: '5%',
       render: (a: any, b: any) => (
         <Button
           as={ChakraLink}
@@ -357,6 +446,7 @@ const TabCategory = () => {
     },
     {
       title: 'Ações',
+      width:'10%',
       render: (a: any) => (
         <>
           {a.name != 'CATEGORY_SECUNDARY' && (
@@ -576,6 +666,8 @@ const TabCategory = () => {
             Gerencie todas as categorias do site. Aqui pode adicionar, ativar, desativar, exluir ou editar de forma
             prática.
           </Text>
+          <StaticsCategorys quantidadeCategorias={quantidadeCategorias} quantidadeCategoriasDesativadas={quantidadeCategoriasDesativadas} quantidadeCategoriasDestaque={quantidadeCategoriasDestaque} quantidadeCategoriasAno={quantidadeCategoriasAno} quantidadeAtualizadasAno={quantidadeAtualizadasAno}
+/>
         </Box>
         <Stack direction='row' spacing={6}>
         <ChakraMenu>
@@ -590,7 +682,7 @@ const TabCategory = () => {
                   _hover={{ transition: 'all 0.4s' }}
                   _focus={{backgroundColor: 'var(--red-primary)!important',}}
                 >
-                  Exportar Produtos 
+                  Exportar Categorias
                 </ChakraMenuButton>
                 <ChakraMenuList color={'#242424'}>
                   <ChakraMenuItem onClick={() => exportarCSV()}>

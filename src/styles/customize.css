@@ -41,6 +41,10 @@ a {
     font-weight: bold;
 }
 
+a:hover {
+    color: var(--red-primary)!important;
+}
+
 .css-pnkb2c,
 .css-1quev4s,
 .css-1bjs4f9,
@@ -650,12 +654,14 @@ a {
 /* TABELA CATEGORIA */
 #tabela-categoria,
 #tabela-produtos,
-#tabela-documentos {
+#tabela-documentos,
+#tabela-description {
     font-size: .85rem !important;
 }
 #tabela-categoria thead tr th,
 #tabela-produtos thead tr th,
-#tabela-documentos thead tr th {
+#tabela-documentos thead tr th,
+#tabela-description thead tr th {
     font-weight: bold;
     text-transform: uppercase;
     line-height: 1rem !important;
@@ -663,7 +669,9 @@ a {
 
 #tabela-categoria tbody tr td,
 #tabela-produtos tbody tr td,
-#tabela-documentos tbody tr td {
+#tabela-documentos tbody tr td,
+#tabela-produtos tbody tr td,
+#tabela-description tbody tr td{
     padding: 10px 16px;
 }
 

@@ -458,6 +458,7 @@ const Home = () => {
           },
         ]}
       />
+      {/*
       BLOG AREA
       <Flex w='100%' mt='-100px' bg='white' alignItems='center' justifyContent='center'>
         <Container maxW={['100%', '100%', '8xl', '8xl', '8xl']} mb='50px'>
@@ -518,6 +519,7 @@ const Home = () => {
           </Flex>
         </Container>
       </Flex>
+              */}
 
       <Footer />
     </SmoothScroll>

@@ -100,10 +100,6 @@ const AllProduct = () => {
           inputProps={{
             placeholder: 'Procure aqui seu produto...',
           }}
-          containerProps={{
-            bg: 'transparent',
-            border: '2px solid var(--white-primary)',
-          }}
           searchCard='100%'
         />
       </Flex>

@@ -18,6 +18,7 @@ import {
   useDisclosure,
   Heading,
   Button,
+  IconButton,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -165,15 +166,17 @@ const Adm = () => {
           <Flex alignItems='center'>
             {/* BOTÃO DE EXPORTAR LOGS */}
             <Box mr='20px'>
-              <Tooltip color='var(--red-primary)' placement='top' className='botao-preto-outline' title='Exportar CSV'>
-                <Button
+              <Tooltip color='var(--white-primary)!important' placement='top' className='botao-preto-outline' title='Exportar CSV'>
+                <IconButton
+                  aria-label={'Exportar Logs'}
                   onClick={handleExportCSV}
-                  leftIcon={<DownloadOutlined />}
+                  icon={<DownloadOutlined />}
                   size='sm'
-                  colorScheme='blue'
+                  colorScheme='red'
+                  color={'var(--white-primary)!important'}
+                  fontSize={'1.25rem!important'}
                 >
-                  Exportar Log's
-                </Button>
+                </IconButton>
               </Tooltip>
             </Box>
             <Box

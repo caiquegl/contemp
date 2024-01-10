@@ -1145,13 +1145,13 @@
     "permanent": true
   },
   {
-    "source": "/produtos/c/termopares-e-termorresistencias/",
-    "destination": "/category/sensores",
+    "source": "/produto/C714",
+    "destination": "/produto/controlador_de_temperatura_e_processos_-_c714",
     "permanent": true
   },
   {
-    "source": "/produto/C714",
-    "destination": "/produto/controlador_de_temperatura_e_processos_-_c714",
+    "source": "/produtos/c/termopares-e-termorresistencias",
+    "destination": "/category/sensores",
     "permanent": true
   },
   {
