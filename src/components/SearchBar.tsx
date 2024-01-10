@@ -32,7 +32,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
     <InputGroup
       borderRadius='8px'
       bg='var(--black-primary)'
-      p='3px 7px'
+      p='1px 7px'
       w='100%'
       h={pxToRem(42)}
       maxW={pxToRem(594)}
@@ -44,8 +44,8 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
       <Input
         w='100%'
         height='100%'
-        border='none'
-        borderRadius='21px'
+        border='solid 2px var(--white-primary)'
+        borderRadius='8px'
         _focusVisible={{
           outline: 'none',
         }}
