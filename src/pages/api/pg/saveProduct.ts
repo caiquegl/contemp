@@ -49,7 +49,7 @@ export default async function handler(
           isActive: body.is_active,
           listVariation: body.listVariation ? JSON.stringify(body.listVariation) : undefined,
           tab: body.tab ? JSON.stringify(body.tab) : undefined,
-          urls: body.urls ? JSON.stringify(body.url) : undefined,
+          urls: body.urls ? JSON.stringify(body.urls) : undefined,
           call_product: body.call_product,
           layout: body.layout ? parseInt(body.layout) : undefined,
           updated_at: new Date(),
