@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
-import { dbContemp } from '../database_contemp'
 
 export default async function handler(
     req: NextApiRequest,
@@ -10,12 +9,22 @@ export default async function handler(
         if (req.method !== 'POST') {
             return res.status(405).end()
           }
+
+          
     
       const body = req.body
-      await dbContemp('redirect_urls').where('id', body.id).update({
-        source: !body.source.startsWith('/') ? `/${body.source.replaceAll(' ', '')}` : body.source.replaceAll(' ', '') ,
-        destination: !body.destination.startsWith('/') ? `/${body.destination.replaceAll(' ', '')}` : body.destination.replaceAll(' ', '') 
+
+      await prisma.redirectsUrls.update({
+        where: {
+          id: body.id
+        },
+        data: {
+          source: !body.source.startsWith('/') ? `/${body.source.replaceAll(' ', '')}` : body.source.replaceAll(' ', '') ,
+          destination: !body.destination.startsWith('/') ? `/${body.destination.replaceAll(' ', '')}` : body.destination.replaceAll(' ', '') ,
+          updated_at: new Date(),
+        }
       })
+
       return res.status(201).json([])
     } catch (error) {
       console.log(error)

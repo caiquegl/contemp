@@ -150,18 +150,18 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
     },
     {
       title: 'Adicionado em',
-      dataIndex: 'createdestination_at',
-      key:'createdestination_at',
+      dataIndex: 'created_at',
+      key:'created_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
       width: '8%',
     },
     {
       title: 'Atualizado em',
-      dataIndex: 'updatedestination_at',
-      key:'updatedestination_at',
+      dataIndex: 'updated_at',
+      key:'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
-      sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
       width: '8%',
     },
 

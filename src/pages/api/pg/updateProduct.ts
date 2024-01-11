@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
-import { dbContemp } from '../database_contemp'
 
 export default async function handler(
     req: NextApiRequest,
@@ -23,30 +22,12 @@ export default async function handler(
       })
 
       if(exist) return res.status(500).json({msg: 'Nome já existe'})
-      // await prisma.products.update({
-      //   where: {
-      //     id: body.id
-      //   },
-      //   data: {
-      //     description: body.description,
-      //     description_seo: body.description_seo,
-      //     key_word_seo: body.key_word_seo,
-      //     name: body.name,
-      //     category_id: body.category,
-      //     destaque: body.destaque,
-      //     hasVariation: body.hasVariation,
-      //     isActive: body.is_active,
-      //     listVariation: body.listVariation ? body.listVariation : undefined,
-      //     tab: body.tab,
-      //     urls: body.urls,
-      //     call_product: body.call_product,
-      //     layout: body.layout,
-      //     updated_at: new Date(),
-      //   }
-      // })
-
-      await dbContemp('products').update({
-        description: body.description,
+      await prisma.products.update({
+        where: {
+          id: body.id
+        },
+        data: {
+          description: body.description,
           description_seo: body.description_seo,
           key_word_seo: body.key_word_seo,
           name: body.name,
@@ -54,13 +35,14 @@ export default async function handler(
           destaque: body.destaque,
           hasVariation: body.hasVariation,
           isActive: body.is_active,
-          listVariation: body.listVariation ? JSON.stringify(body.listVariation) : undefined,
-          tab: body.tab ? JSON.stringify(body.tab) : undefined,
-          urls: body.urls ? JSON.stringify(body.urls) : undefined,
+          listVariation: body.listVariation ? body.listVariation : undefined,
+          tab: body.tab,
+          urls: body.urls,
           call_product: body.call_product,
-          layout: body.layout ? parseInt(body.layout) : undefined,
-          updated_at: new Date()
-      }).where('id', '=', body.id)
+          layout: body.layout ? parseInt(body.layout) : null,
+          updated_at: new Date(),
+        }
+      })
 
       let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
       user = user?.body?.email || ''

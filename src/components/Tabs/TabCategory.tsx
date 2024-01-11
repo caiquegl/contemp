@@ -51,6 +51,7 @@ import { FaAngleDown, FaStar } from "react-icons/fa";
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
 import StaticsCategorys from '../StaticsCategorys'
+import moment from 'moment';
 //import { jsPDF } from 'jspdf';
 //import 'jspdf-autotable';
 
@@ -443,6 +444,22 @@ const TabCategory = () => {
           {`url`}
         </Button>
       ),
+    },
+    {
+      title: 'Adicionado em',
+      dataIndex: 'created_at',
+      key:'created_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      width: '8%',
+    },
+    {
+      title: 'Atualizado em',
+      dataIndex: 'updated_at',
+      key:'updated_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
+      width: '8%',
     },
     {
       title: 'Ações',

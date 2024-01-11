@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
-import { dbContemp } from '../database_contemp'
 
 export default async function handler(
     req: NextApiRequest,
@@ -12,9 +11,12 @@ export default async function handler(
           }
     
       const body = req.body
-      await dbContemp('redirect_urls').insert({
-        source: !body.source.startsWith('/') ? `/${body.source.replaceAll(' ', '')}` : body.source.replaceAll(' ', '') ,
-        destination: !body.destination.startsWith('/') ? `/${body.destination.replaceAll(' ', '')}` : body.destination.replaceAll(' ', '') 
+
+      await prisma.redirectsUrls.create({
+        data: {
+          source: !body.source.startsWith('/') ? `/${body.source.replaceAll(' ', '')}` : body.source.replaceAll(' ', '') ,
+          destination: !body.destination.startsWith('/') ? `/${body.destination.replaceAll(' ', '')}` : body.destination.replaceAll(' ', '')
+        }
       })
       return res.status(201).json([])
     } catch (error) {

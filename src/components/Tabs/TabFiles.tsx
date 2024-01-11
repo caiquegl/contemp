@@ -10,6 +10,7 @@ import { FaDeleteLeft } from 'react-icons/fa6'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
+import moment from 'moment'
 
 const TabFiles = () => {
   const toast = useToast({
@@ -74,6 +75,22 @@ const TabFiles = () => {
           {`url`}
         </Button>
       ),
+    },
+    {
+      title: 'Adicionado em',
+      dataIndex: 'created_at',
+      key:'created_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      width: '8%',
+    },
+    {
+      title: 'Atualizado em',
+      dataIndex: 'updated_at',
+      key:'updated_at',
+      render: (a: any) => moment(a).format('DD/MM/YYYY'),
+      sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
+      width: '8%',
     },
     {
       title: 'Ações',

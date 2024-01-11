@@ -30,7 +30,8 @@ export default async function handler(
         data: {
           ...body,
           is_main: body.is_main === 'true' || body.is_main === true ? true : false,
-          sub_category_id: body.is_main === 'true' || body.is_main === true ? null : body.sub_category_id ? body.sub_category_id : null
+          sub_category_id: body.is_main === 'true' || body.is_main === true ? null : body.sub_category_id ? body.sub_category_id : null,
+          updated_at: new Date(),
         }
       })
 

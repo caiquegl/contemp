@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
-import { dbContemp } from '../database_contemp'
 
 export default async function handler(
     req: NextApiRequest,
@@ -8,7 +7,8 @@ export default async function handler(
   ) {
     try {
       
-      let list = await dbContemp('redirect_urls').orderBy('id', 'desc')
+      let list = await prisma.redirectsUrls.findMany()
+
       return res.status(201).json(list)
     } catch (error) {
       console.log(error)
