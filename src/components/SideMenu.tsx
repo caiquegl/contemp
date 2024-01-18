@@ -61,8 +61,19 @@ import React from 'react';
 import { FaCaretDown, FaCaretUp, FaRegUserCircle } from "react-icons/fa";
 import { PiCardholderDuotone } from "react-icons/pi";
 
+interface SideMenuProps {
+  user: {
+    name: string;
+    photo: string;
+  };
+  date: string;
+  handleExportCSV: () => void;
+  setActiveTab: (tabIndex: number) => void;
+  onOpen: () => void;
+}
 
-const SideMenu = ({ user, date, handleExportCSV, setActiveTab, onOpen }) => {
+
+const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setActiveTab, onOpen }) => {
 
   const [activeSubTab, setActiveSubTab] = useState('');
   const [isActive, setIsActive] = useState(false);
