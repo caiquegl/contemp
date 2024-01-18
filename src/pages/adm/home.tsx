@@ -19,6 +19,7 @@ import {
   Heading,
   Button,
   IconButton,
+  VStack,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -38,6 +39,7 @@ import TabFiles from '../../components/Tabs/TabFiles';
 import TabRedirects from '../../components/Tabs/TabRedirects';
 import saveAs from 'file-saver';
 import { DownloadOutlined } from '@ant-design/icons';
+import SideMenu from '../../components/SideMenu';
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -148,197 +150,69 @@ const Adm = () => {
 
   return (
     <>
-      <Container maxW='100%' p='12px 60px 12px 60px'>
-        <Flex
-          alignItems='center'
-          maxW={'100%'}
-          m={'auto'}
-          justifyContent='space-between'
-        >
-          <Link href='/'>
-            <Image
-              src={Logo}
-              width={160}
-              height={41}
-              onContextMenu={setContextMenuFalse}
-            />
-          </Link>
-          <Flex alignItems='center'>
-            {/* BOTÃO DE EXPORTAR LOGS */}
-            <Box mr='20px'>
-              <Tooltip color='var(--white-primary)!important' placement='top' className='botao-preto-outline' title='Exportar CSV'>
-                <IconButton
-                  aria-label={'Exportar Logs'}
-                  onClick={handleExportCSV}
-                  icon={<DownloadOutlined />}
-                  size='sm'
-                  colorScheme='red'
-                  color={'var(--white-primary)!important'}
-                  fontSize={'1.25rem!important'}
-                >
-                </IconButton>
-              </Tooltip>
-            </Box>
-            <Box
-              mr='20px'
-              pr='20px'
-              borderRight='1px solid #eee'
-              h='100%'
+
+      <Flex>
+        <Box>
+          <SideMenu user={user} date={date} handleExportCSV={handleExportCSV} setActiveTab={setActiveTab} onOpen={onOpen} />
+        </Box>
+        <Box bg='white.500' w='100%' minH='100vh' p='31px 60px' ml="250px">
+          {componentsTab[activeTab]}
+          <Box>
+            <Flex
+              alignItems='center'
+              justifyContent='flex-end'
+              bg='white.500'
+              w='100%'
             >
-              <Tooltip title='Logs'>
-                <AiOutlineHistory
-                  size={22}
-                  onClick={onOpen}
-                  style={{ cursor: 'pointer' }}
-                />
-              </Tooltip>
-            </Box>
-            <Box mr='16px'>
-              <Text fontWeight='bold' fontSize='1rem' textAlign='right'>
-                Olá, {user.name ? user.name : user.email}
-              </Text>
-              <Text fontSize='.85rem'>{date}</Text>
-            </Box>
-            <Avatar
-              bg='white'
-              color='black.800'
-              fontWeight='bold'
-              fontSize='30px'
-              name={user.name ? user.name : 'Contemp'}
-              src={user.photo}
-            />
-          </Flex>
-        </Flex>
-      </Container>
-      <Box bg='white.500' w='100%' minH='100vh' p='31px 60px'>
-        <Flex alignItems='center' justifyContent='space-between'>
-          <Heading as={'h1'} className='adm-titulo text-black negrito'>
-            Painel Administrativo
-          </Heading>
-          <Tabs
-            variant='unstyled'
-            index={activeTab}
-            onChange={(indexTab) => setActiveTab(indexTab)}
-          >
-            <TabList>
-              <Tab
-                _selected={{
-                  bg: 'red.600',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderRadius: '5px',
-                }}
-                w='133px'
-                color='black.800'
+              <Link
+                mr={'5%'}
+                mb={'3%'}
+                isExternal
+                href='https://3hub.co/'
+                _hover={{ textDecoration: 'none', color: 'black.800' }}
               >
-                Home
-              </Tab>
-              <Tab
-                _selected={{
-                  bg: 'red.600',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderRadius: '5px',
-                }}
-                w='133px'
-                color='black.800'
-              >
-                Categorias
-              </Tab>
-              <Tab
-                _selected={{
-                  bg: 'red.600',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderRadius: '5px',
-                }}
-                w='133px'
-                color='black.800'
-                onClick={() => setBack(!back)}
-              >
-                Produtos
-              </Tab>
-              <Tab
-                _selected={{
-                  bg: 'red.600',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderRadius: '5px',
-                }}
-                w='133px'
-                color='black.800'
-              >
-                Arquivos
-              </Tab>
-              <Tab
-                _selected={{
-                  bg: 'red.600',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  borderRadius: '5px',
-                }}
-                w='133px'
-                color='black.800'
-              >
-                Url's
-              </Tab>
-            </TabList>
-          </Tabs>
-        </Flex>
-        <Divider mt='20px' mb='20px' bg='black.800' />
-        {componentsTab[activeTab]}
-      </Box>
-      <Flex
-        alignItems='center'
-        justifyContent='flex-end'
-        bg='white.500'
-        w='100%'
-      >
-        <Link
-          mr={'5%'}
-          mb={'3%'}
-          isExternal
-          href='https://3hub.co/'
-          _hover={{ textDecoration: 'none', color: 'black.800' }}
+                <Text fontSize='20px' color='black.800'>
+                  Desenvolvido por{' '}
+                  <Text as='span' color='red.600' fontWeight='bold'>
+                    3Hub
+                  </Text>
+                </Text>
+              </Link>
+            </Flex>
+          </Box>
+        </Box>
+
+        <Drawer
+          size={'lg'}
+          isOpen={isOpen}
+          placement='right'
+          onClose={onClose}
+          finalFocusRef={btnRef}
         >
-          <Text fontSize='20px' color='black.800'>
-            Desenvolvido por{' '}
-            <Text as='span' color='red.600' fontWeight='bold'>
-              3Hub
-            </Text>
-          </Text>
-        </Link>
+          <DrawerOverlay />
+          <DrawerContent bg={'white'}>
+            <DrawerCloseButton color={'#ccc'} />
+            <DrawerHeader color={'#000'}>Logs de atividades</DrawerHeader>
+
+            <DrawerBody>
+              <Table
+                columns={[
+                  {
+                    title: '#',
+                    width: 170,
+                    dataIndex: 'created_at',
+                    render: (item) => moment(item).fromNow(),
+                  },
+                  { title: 'Usuário', width: 200, dataIndex: 'user', ellipsis: true },
+                  { title: 'Log', dataIndex: 'description', ellipsis: true },
+                ]}
+                dataSource={logs}
+              />
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
       </Flex>
 
-      <Drawer
-        size={'lg'}
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton color={'#ccc'} />
-          <DrawerHeader color={'#000'}>Logs de atividades</DrawerHeader>
-
-          <DrawerBody>
-            <Table
-              columns={[
-                {
-                  title: '#',
-                  width: 170,
-                  dataIndex: 'created_at',
-                  render: (item) => moment(item).fromNow(),
-                },
-                { title: 'Usuário', width: 200, dataIndex: 'user', ellipsis: true },
-                { title: 'Log', dataIndex: 'description', ellipsis: true },
-              ]}
-              dataSource={logs}
-            />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };

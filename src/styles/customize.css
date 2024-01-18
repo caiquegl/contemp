@@ -618,8 +618,7 @@ a:hover {
 }
 
 /* CARRINHO / ORCAMENTO / ADMIN */
-.orcamento-subtitulo,
-.adm-titulo {
+.orcamento-subtitulo {
     font-size: 1.5rem !important;
     text-transform: uppercase;
 }
@@ -627,6 +626,18 @@ a:hover {
 .chakra-input__group.css-1jn4ak0 {
     border-radius: 8px!important;
     background-color: transparent;
+}
+
+.adm-titulo {
+    font-size: 1rem !important;
+    text-transform: uppercase;
+}
+
+.adm-botao-sidemenu {
+    font-weight: 500 !important;
+    color-scheme: gray !important;
+    justify-content: start !important;
+    width: 100% !important;
 }
 
 .input-carrinho {
