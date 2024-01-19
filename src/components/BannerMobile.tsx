@@ -26,14 +26,14 @@ export function BannerMobile() {
       title: 'PROCESSOS INDUSTRIAIS',
       text: 'Conheça nossas soluções completas para sua indústria. Fale com nossa equipe de vendas.',
       image: 'https://contemp.com.br/api/arquivos/banner-2.webp',
-      links: '#',
+      links: 'https://www.contemp.com.br/todosProdutos',
     },
     {
       subtitle: '',
       title: 'ATENDEMOS O BRASIL E A AMÉRICA LATINA',
       text: 'Temos uma equipe de vendedores-técnicos de prontidão para te atender.',
       image: 'https://contemp.com.br/api/arquivos/banner-3.webp',
-      links: 'https://contemp.com.br/category/PIRÔMETROS_INFRAVERMELHOS_FIXOS',
+      links: 'https://www.contemp.com.br/a-contemp',
     },
   ];
 

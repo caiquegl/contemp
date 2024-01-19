@@ -20,6 +20,7 @@
     "@hotjar/browser": "1.0.6",
     "@prisma/client": "4.10.1",
     "@sendgrid/mail": "7.7.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/react-infinite-scroller": "^1.2.5",
     "@types/react-slick": "^0.23.12",
     "@types/uuid": "9.0.0",

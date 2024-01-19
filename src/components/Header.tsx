@@ -44,7 +44,7 @@ import Youtube from '../assets/icons/youtube.svg'
 import Logo from '../assets/icons/Logo-Contemp.svg'
 import ImageNext from 'next/image'
 import { DownOutlined } from '@ant-design/icons'
-import { BsBag, BsThreeDotsVertical } from 'react-icons/bs'
+import { BsBag, BsThreeDotsVertical, BsWhatsapp } from 'react-icons/bs'
 import { AiOutlineClose } from 'react-icons/ai'
 import { AiFillLinkedin, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai'
 import { useAuth } from '../contextAuth/authContext'
@@ -560,6 +560,18 @@ export const Header = () => {
                   vendas@contemp.com.br
                   </MenuItem>
                   </Link>
+                  <Link href='mailto:vendas@contemp.com.br' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem className='minusculo' textTransform={'lowercase'} icon={<BsWhatsapp />}>
+                  Canal do WhatsApp
+                  </MenuItem>
+                  </Link>
                   <MenuDivider />
                   <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>Siga nossas redes sociais</Heading>
                   <MenuItem backgroundColor={'white!important'}>
@@ -618,7 +630,21 @@ export const Header = () => {
                     pr={'4%'}
                   >
                   <FiLinkedin fontSize={'1.5rem'} color='#0077B5' />
-                  </Link>                  
+                  </Link>
+                  {/* CANAL DO WHATSAPP */}
+                  <Link
+                  href='https://whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c' isExternal
+                  _hover={{
+                    textDecoration: 'none',
+                    color: 'var(--red-primary)',
+                    borderRadius: '4px',
+                    transition: 'all 0',
+                  }}
+                    textDecoration={'none'}
+                    pr={'4%'}
+                  >
+                  <BsWhatsapp fontSize={'1.5rem'} color='#25d366' />
+                  </Link>                   
                   </MenuItem>
                 </MenuList>
               </Menu>
