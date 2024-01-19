@@ -233,21 +233,20 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   {isExpanded && <Text ml="2">Produtos</Text>}
                 </Flex>
               </Button>
-              {user.super_adm &&
 
-                  <Button
-                  className="adm-botao-sidemenu"
-                  variant="ghost"
-                  width="100%"
-                  onClick={() => setActiveTab(3)}
-                  justifyContent="start"
-                >
-                  <Flex justifyContent="start" alignItems="center">
-                    <BsArchive />
-                    {isExpanded && <Text ml="2">Arquivos</Text>}
-                  </Flex>
-                </Button>
-              }
+              <Button
+                className="adm-botao-sidemenu"
+                variant="ghost"
+                width="100%"
+                onClick={() => setActiveTab(3)}
+                justifyContent="start"
+              >
+                <Flex justifyContent="start" alignItems="center">
+                  <BsArchive />
+                  {isExpanded && <Text ml="2">Arquivos</Text>}
+                </Flex>
+              </Button>
+
               {user.super_adm &&
                 <Button
                   className="adm-botao-sidemenu"
