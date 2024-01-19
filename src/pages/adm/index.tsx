@@ -23,7 +23,7 @@ const Adm = () => {
     try {
       setLoading(true)
       const {data} = await api.post(`login`, { email: body.email, password: body.password })
-      setCookie(
+      /*setCookie(
         undefined,
         'nextAuth.contemp',
         JSON.stringify({
@@ -31,7 +31,7 @@ const Adm = () => {
           body,
         })
       )
-      await router.push('/adm/home')
+      await router.push('/adm/home')*/
     } catch (error: any) {
       console.log(error)
       toast({
