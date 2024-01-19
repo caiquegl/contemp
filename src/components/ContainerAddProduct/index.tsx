@@ -153,7 +153,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
   };
 
   useEffect(() => {
-    console.log(defaultValues)
     setValue('name', defaultValues?.name)
     setValue('name', defaultValues?.name)
     setValue('description', defaultValues?.description)
@@ -425,7 +424,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   })
 
                   newList[index].opt = newListOptions
-                  console.log(newList)
                   setListVariation([...newList])
                 }}
                 removeVariation={() => {
@@ -467,7 +465,6 @@ const ContainerAddProduct = ({ nextStep, defaultValues }: any) => {
                   setListVariation([...newList])
                 }}
                 addPlaceholder={(value: any) => {
-                  console.log(value)
                   let newList: any = listVariation
                   newList[index].placeholder_name = value
 

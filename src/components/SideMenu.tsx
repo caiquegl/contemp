@@ -188,7 +188,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
             <Button leftIcon={<FiCompass />} className="adm-botao-sidemenu" variant="ghost" onClick={() => setActiveTab(4)}>
               URLs
             </Button>
-            <Button leftIcon={<FaRegUserCircle />} className="adm-botao-sidemenu" variant="ghost">
+            <Button leftIcon={<FaRegUserCircle />} className="adm-botao-sidemenu" variant="ghost" onClick={() => setActiveTab(5)}>
               Usuários
             </Button>
           </VStack>

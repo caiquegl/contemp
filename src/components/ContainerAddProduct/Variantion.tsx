@@ -23,7 +23,6 @@ const Variation = ({ index, addVariation, changeOrderOpt, defaultValues, newVari
     let neO = opt
     neO.push(variation.addOpt)
     // setOpt(neO)
-    console.log(variation, 'variation')
 
   }
 

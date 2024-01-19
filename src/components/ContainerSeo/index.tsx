@@ -69,7 +69,6 @@ const ContainerSeo = ({ nextStep, defaultValues }: any) => {
       }
       nextStep()
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao salvar SEO',

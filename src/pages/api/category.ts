@@ -19,7 +19,6 @@ export default async function category (req: any, response: any) {
 
 
           await db('categories').insert(obj)
-          console.log(`${i} | ${body.length}`)
         }
 
         return response.json({ status: true });

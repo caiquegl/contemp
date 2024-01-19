@@ -33,10 +33,8 @@ const initCron = async () => {
       })
   
       fs.writeFileSync('routes.json', JSON.stringify(createJson, null, 2));
-      console.log('Arquivo de redirecionamento de links criado/atualizado.')
       return true
     } catch (error) {
-      console.log(error)
       return true
     }
 };

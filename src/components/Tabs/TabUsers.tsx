@@ -15,14 +15,13 @@ import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 
 const { Item } = Form
 
-interface TabRedirectsProps { }
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
 
-const TabRedirects: React.FC<TabRedirectsProps> = () => {
+const TabUsers: React.FC = () => {
   const router = useRouter()
   const [listClone, setListClone] = useState<any[]>([])
-  const [redirects, setRedirects] = useState<any[]>([])
+  const [redirects, setUsers] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [selectItem, setSelectItem] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
@@ -31,15 +30,15 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
 
   const [form] = Form.useForm()
 
-  const fetchRedirects = async () => {
+  const fetchUser = async () => {
     try {
       setLoading(true)
-      const response = await api.get('/getAllUrls')
-      const redirectsData = response.data
-      setRedirects(redirectsData)
+      const response = await api.get('/getAllUsers')
+      const usersData = response.data
+      setUsers(usersData)
     } catch (error) {
       console.error(error)
-      message.error('Erro ao obter redirecionamentos')
+      message.error('Erro ao obter usuários')
     } finally {
       setLoading(false)
     }
@@ -49,10 +48,10 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await api.get('/getAllUrls');
+        const response = await api.get('/getAllUsers');
         const redirectsData = response.data;
         setListClone(redirectsData); // Defina listClone ao buscar redirecionamentos
-        setRedirects(redirectsData);
+        setUsers(redirectsData);
       } catch (error) {
         console.error(error);
         message.error('Erro ao obter redirecionamentos');
@@ -68,39 +67,43 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
   const handleDeleteRedirect = async (redirectId: number) => {
     try {
       setLoading(true)
-      await api.post(`deleteRedirect`, { id: redirectId })
-      message.success('Sucesso ao apagar url')
-      fetchRedirects()
+      await api.post(`deleteUser`, { id: redirectId })
+      message.success('Sucesso ao apagar usuário')
+      fetchUser()
     } catch (error) {
-      message.error('Erro ao excluir redirecionamento')
+      message.error('Erro ao excluir usuário')
     } finally {
       setLoading(false)
     }
   }
 
-  const updateRedirect = async (redirect: any) => {
+  const updateUser = async (user: any) => {
     try {
       setLoading(true)
-      await api.post(`updateRedirect`, { id: selectItem.id, ...redirect })
-      message.success('Sucesso ao atualizar url')
-      fetchRedirects()
+      await api.post(`updateUser`, { id: selectItem.id, ...user })
+      message.success('Sucesso ao atualizar usuário')
+      fetchUser()
       setModalVisible(false)
       setSelectItem(null)
+      form.resetFields(['name', 'email'])
+
     } catch (error) {
-      message.error('Erro ao atualizar redirecionamento')
+      message.error('Erro ao atualizar usuário')
     } finally {
       setLoading(false)
     }
   }
 
-  const createRedirect = async (redirect: any) => {
+  const createUser = async (user: any) => {
     try {
+
       setLoading(true)
-      await api.post(`createRedirect`, redirect)
-      message.success('Sucesso ao criar url')
-      fetchRedirects()
+      await api.post(`createUser`, user)
+      message.success('Sucesso ao criar usuário')
+      fetchUser()
       setModalVisibleCreate(false)
       setSelectItem(null)
+      form.resetFields(['name', 'password', 'email'])
     } catch (error) {
       message.error('Erro ao criar redirecionamento')
     } finally {
@@ -108,43 +111,19 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
     }
   }
 
-  const handleAddRedirect = async () => {
-    try {
-      setLoading(true)
-      const { data } = await api.post('addRedirect', {
-        /* Dados do novo redirecionamento */
-      })
-      message.success(data.msg)
-      fetchRedirects()
-    } catch (error) {
-      message.error('Erro ao adicionar redirecionamento')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const columns = [
     {
-      title: 'Origem',
-      dataIndex: 'source',
-      key: 'source',
-      render: (source: string) => (
-        <a href={`https://contemp.com.br${source}`} target="_blank" rel="noopener noreferrer">
-          {`${source}`}
-        </a>
-      ),
-      sorter: (a: any, b: any) => (a.source || '').localeCompare(b.source || ''),
+      title: 'Nome',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: any, b: any) => (a.name || '').localeCompare(b.name || ''),
     },
     {
-      title: 'Destino',
-      dataIndex: 'destination',
-      key: 'destination',
-      render: (destination: string) => (
-        <a href={`https://contemp.com.br${destination}`} target="_blank" rel="noopener noreferrer">
-          {`${destination}`}
-        </a>
-      ),
-      sorter: (a: any, b: any) => (a.destination || '').localeCompare(b.destination || ''),
+      title: 'E-mail',
+      dataIndex: 'email',
+      key: 'email',
+      sorter: (a: any, b: any) => (a.email || '').localeCompare(b.email || ''),
     },
     {
       title: 'Adicionado em',
@@ -162,11 +141,10 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
       width: '8%',
     },
-
     {
       title: 'Ações',
       key: 'actions',
-      render: (text: any, record: any) => (
+      render: (text: any, user: any) => (
         <HStack spacing='20px'>
           <Tooltip
             placement='top'
@@ -184,10 +162,9 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
                 fontSize='1.15rem'
                 color='var(--gray-text)'
                 onClick={() => {
-                  setSelectItem(record)
-                  form.setFieldValue('destination', record.destination)
-                  form.setFieldValue('source', record.source)
-                  form.setFieldValue('id', record.id)
+                  setSelectItem(user)
+                  form.setFieldValue('name', user.name)
+                  form.setFieldValue('email', user.email)
                   setModalVisible(true)
                 }}
               />
@@ -196,7 +173,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
 
           <Tooltip
             placement='top'
-            label='Excluir Produto'
+            label='Excluir usuário'
             color={'var(--white-primary)'}
             bg={'var(--red-primary)'}
             borderRadius={'8px'}
@@ -209,7 +186,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
                 as={FaDeleteLeft}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-                onClick={() => handleDeleteRedirect(record.id)}
+                onClick={() => handleDeleteRedirect(user.id)}
               />
             </Box>
           </Tooltip>
@@ -233,10 +210,10 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
     <>
       <Box w={'60%'}>
         <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
-          Redirecionamentos
+          Usuários
         </Heading>
         <Text className='paragrafo-preto' mb={'3%'} mr={'5%'}>
-          Gerencie todos os redirecionamentos do site. Aqui pode adicionar, editar ou excluir de forma prática.
+          Gerencie todos os usuários do site. Aqui pode adicionar, editar ou excluir de forma prática.
         </Text>
       </Box>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
@@ -250,23 +227,23 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
           _hover={{ transition: 'all 0.4s' }}
           onClick={() => setModalVisibleCreate(true)}
         >
-          Adicionar Redirecionamento
+          Adicionar usuário
         </Button>
 
         <SearchBar
           inputProps={{
-            placeholder: 'Digite url ou trecho dela...',
+            placeholder: 'Digite nome ou email...',
             onChange: (evt) => {
               let newList = listClone.filter((item: any) => {
                 // Adicionamos uma verificação para garantir que item.source e item.destination estejam definidos
                 return (
-                  item.source &&
-                  item.destination &&
-                  (item.source.toLowerCase().includes(evt.target.value.toLowerCase()) ||
-                    item.destination.toLowerCase().includes(evt.target.value.toLowerCase()))
+                  item.name &&
+                  item.email &&
+                  (item.name.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+                    item.email.toLowerCase().includes(evt.target.value.toLowerCase()))
                 );
               });
-              setRedirects([...newList]);
+              setUsers([...newList]);
             },
             _placeholder: {
               color: 'black.800',
@@ -317,7 +294,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
             setModalVisible(false)
           }}
           footer={null}
-          title='Editar URL'
+          title='Editar usuário'
           destroyOnClose={true}
 
         >
@@ -325,13 +302,13 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
             key={selectItem?.id}
             layout="horizontal"
             form={form}
-            onFinish={updateRedirect}
+            onFinish={updateUser}
           >
-            <Form.Item label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
+            <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
               <Input />
             </Form.Item>
-            <Form.Item label='Destino' rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
-              <Input />
+            <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
+              <Input type='email'/>
             </Form.Item>
 
             <Button type='submit'>
@@ -353,22 +330,24 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
             setModalVisibleCreate(false)
           }}
           footer={null}
-          title='Criar URL'
+          title='Criar usuário'
           destroyOnClose={true}
 
         >
           <Form
             layout="horizontal"
             form={form}
-            onFinish={createRedirect}
+            onFinish={createUser}
           >
-            <Form.Item label='Origem' rules={[{ required: true, message: 'Campo obrigatório' }]} name="source">
+            <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
               <Input />
             </Form.Item>
-            <Form.Item label='Destino' rules={[{ required: true, message: 'Campo obrigatório' }]} name="destination">
-              <Input />
+            <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
+              <Input type='email'/>
             </Form.Item>
-
+            <Form.Item label='Senha' rules={[{ required: true, message: 'Campo obrigatório' }]} name="password">
+              <Input type='password'/>
+            </Form.Item>
             <Button type='submit'>
               Criar
             </Button>
@@ -379,4 +358,4 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
   )
 }
 
-export default TabRedirects
+export default TabUsers

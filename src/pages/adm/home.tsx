@@ -40,6 +40,7 @@ import TabRedirects from '../../components/Tabs/TabRedirects';
 import saveAs from 'file-saver';
 import { DownloadOutlined } from '@ant-design/icons';
 import SideMenu from '../../components/SideMenu';
+import TabUsers from '../../components/Tabs/TabUsers'
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -140,6 +141,7 @@ const Adm = () => {
     <TabProduct back={back} />,
     <TabFiles />,
     <TabRedirects />,
+    <TabUsers />,
   ];
 
   const emails: any = {

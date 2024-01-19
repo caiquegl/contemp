@@ -68,7 +68,6 @@ const ContainerHome = ({ indexProduct, defaultValues, reset }: any) => {
         status: status == 201 ? 'success' : 'error',
       })
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao salvar produto',

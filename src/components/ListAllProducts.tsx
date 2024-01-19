@@ -20,8 +20,6 @@ export const ListAllProducts = forwardRef(({ bg, data }: any, ref: any) => {
     return acc;
   }, []);
 
-  console.log('All Products:', allProducts);
-
   return (
     <Flex w='100%' bg={bg} ref={ref}>
       <Grid
@@ -34,7 +32,6 @@ export const ListAllProducts = forwardRef(({ bg, data }: any, ref: any) => {
         w='100%'
       >
         {allProducts.map((product: any, index: any) => {
-          console.log('Mapped Product:', product);
 
           return (
             <CardProductWithDescription3

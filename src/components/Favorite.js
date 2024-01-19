@@ -75,7 +75,6 @@ export const Favorite = ({ homeTabs }) => {
       const { data } = await api.get('getProductsDestaque')
       setProducts(data)
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao listar destaques',

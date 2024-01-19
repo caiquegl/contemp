@@ -48,7 +48,6 @@ export const ModalAddFilter = ({ isOpen, onClose, category, reload }: IProps) =>
     let exist = false
 
     body.products = []
-    console.log(filter)
     filter.forEach((item: any) => {
       if (item.name === body.name) exist = true
     })

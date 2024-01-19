@@ -14,8 +14,6 @@ export default async function handler(
         }
       })
 
-      console.log(req.body)
-
       fs.rmSync(`${process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos'}/${req.body.name}`)
 
       let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)

@@ -104,7 +104,6 @@ export const Header = () => {
       setList(listMenu)
       setLoading(false)
     } catch (error) {
-      console.log(error)
     }
   }
 

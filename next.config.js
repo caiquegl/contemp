@@ -2,7 +2,6 @@ const routes = require('./routes.json');
 
 async function creatRedirectObj(source, destination, permanent = true) {
   const exist = await prisma.products.findFirst()
-  console.log(exist, 'exist')
 
   return {
     source,

@@ -14,7 +14,6 @@ const CustomEditor = ({ onChange, editorLoaded, name, value }) => {
           mediaEmbed={{ previewsInData: true }}
           onChange={(event, editor) => {
             const data = editor.getData();
-            console.log(data);
             onChange(data);
           }}
           style={{ height: 200 }}

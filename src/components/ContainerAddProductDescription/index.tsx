@@ -95,7 +95,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
       reset()
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao salvar produto',
@@ -120,7 +119,6 @@ const ContainerAddProductDescription = ({ values, reset, isUpdate }: any) => {
 
       reset()
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao atualizar produto',

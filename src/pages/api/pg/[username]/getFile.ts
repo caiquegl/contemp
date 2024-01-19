@@ -10,7 +10,6 @@ export default async function handler(
     
     const filename = String(req.query.username)
   
-    console.log(filename)
     if (!filename) {
       return res.status(400).send('É necessário fornecer um nome de arquivo.');
     }

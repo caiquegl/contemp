@@ -199,7 +199,6 @@ const TabCategory = () => {
       setIdSelected(undefined)
       setUpdate({} as IBody)
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro',
         description: 'Erro ao atualizar categoria',
@@ -542,7 +541,6 @@ const TabCategory = () => {
                       deleteAllCategory(a)
                     },
                     onCancel() {
-                      console.log('Cancel')
                     },
                   })
                 }}

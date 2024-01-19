@@ -11,7 +11,6 @@ export default async function handler(
       }
 
       const body = req.body
-      console.log(body)
       const exist = await prisma.home.findFirst({
         where: {
           indexProduct: body.indexProduct
