@@ -3,56 +3,21 @@ import {
   Flex,
   Text,
   Link,
-  Container,
   Avatar,
   Divider,
-  Tabs,
-  TabList,
-  Tab,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
   Heading,
   Button,
   IconButton,
   VStack,
   Stack,
-  Spacer,
-  HStack,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import Logo from '../assets/icons/Logo-Contemp.svg';
-import TabCategory from '../components/Tabs/TabCategory';
-import TabHome from '../components/Tabs/TabHome';
-import TabProduct from '../components/Tabs/TabProduct';
-import moment from 'moment';
-import { setContextMenuFalse } from '../utils/setContextMenuFalse';
-import { withSSRAuth } from '../utils/withSSRAuth';
 import { AiOutlineHistory } from 'react-icons/ai';
-import { Table, Tooltip } from 'antd';
-import { api } from '../lib/axios';
-import { parseCookies } from 'nookies';
-import { getFormattedDateTime } from '../utils/countdown';
-import TabFiles from '../components/Tabs/TabFiles';
-import TabRedirects from '../components/Tabs/TabRedirects';
-import saveAs from 'file-saver';
 import { DownloadOutlined } from '@ant-design/icons';
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { BsArchive } from "react-icons/bs";
-import { LuMousePointer2 } from "react-icons/lu";
 import { BiExport, BiCarousel } from "react-icons/bi";
 import { GoHome } from "react-icons/go";
 import { FiCompass, FiHexagon } from "react-icons/fi";
@@ -73,10 +38,11 @@ interface SideMenuProps {
   handleExportCSV: () => void;
   setActiveTab: (tabIndex: number) => void;
   onOpen: () => void;
+  onToggleMenu: (isExpanded: boolean) => void;
 }
 
 
-const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setActiveTab, onOpen }) => {
+const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setActiveTab, onOpen, onToggleMenu }) => {
 
   const [activeSubTab, setActiveSubTab] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -86,6 +52,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
 
   const toggleMenu = () => {
     setIsExpanded(!isExpanded);  // Alterna entre expandido e contraído
+    onToggleMenu(!isExpanded); // Chamada da função callback com o novo estado
   };
 
   const handleHomeClick = () => {
@@ -112,9 +79,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
         aria-label="Toggle Menu"
         icon={isExpanded ? <RiCloseCircleLine /> : <RxHamburgerMenu />}
         onClick={toggleMenu}
-        position="absolute"
+        position="fixed"
         top="2"
-        left={isExpanded ? "260px" : "90px"} // Ajuste a posição com base no estado do menu
+        left={isExpanded ? "calc(250px + 10px)" : "calc(80px + 10px)"}
         zIndex="sticky"
       />
 

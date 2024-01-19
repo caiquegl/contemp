@@ -49,6 +49,7 @@ const Adm = () => {
   const [back, setBack] = useState<boolean>(true);
   const [user, setUser] = useState<any>({});
   const [exportedData, setExportedData] = useState([]);
+  const [menuExpanded, setMenuExpanded] = useState(true);
 
   // Função para lidar com a ação de exportação
   const handleExportCSV = () => {
@@ -160,9 +161,9 @@ const Adm = () => {
 
       <Flex>
         <Box>
-          <SideMenu user={user} date={date} handleExportCSV={handleExportCSV} setActiveTab={setActiveTab} onOpen={onOpen} />
+          <SideMenu user={user} date={date} handleExportCSV={handleExportCSV} setActiveTab={setActiveTab} onOpen={onOpen} onToggleMenu={setMenuExpanded} />
         </Box>
-        <Box bg='white.500' w='100%' minH='100vh' p='31px 60px' ml="250px">
+        <Box bg='white.500' w='100%' minH='100vh' p='31px 60px' ml={menuExpanded ? "250px" : "80px"}>
           {componentsTab[activeTab]}
           <Box>
             <Flex
