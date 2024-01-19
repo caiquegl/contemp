@@ -27,7 +27,7 @@ function StatsCard(props: StatsCardCategorysProps) {
             px={{ base: 2, md: 4 }}
             py={'3'}
             boxShadow={'0px 4px 10px rgba(0, 0, 0, 0.1)'}
-            backgroundColor={'var(white-primary)'}
+            backgroundColor={'white'}
             rounded={'8px'}
             mt={'-10%'}
         >
@@ -63,8 +63,8 @@ interface StaticsCategorysProps {
 
 export default function StaticsCategorys({ quantidadeCategorias, quantidadeCategoriasDestaque, quantidadeCategoriasDesativadas, quantidadeCategoriasAno, quantidadeAtualizadasAno }: StaticsCategorysProps) {
     return (
-        <Box maxW="6xl" mb={'2%'}>
-            <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ base: 7, lg: 8 }}>
+        <Box maxW="8xl" mb={'2%'}>
+            <SimpleGrid columns={{ base: 1, md: 4, lg: 5 }} spacing={{ base: 7, md: 4, lg: 6 }}>
                 <StatsCard title={'Categorias'} stat={quantidadeCategorias.toString()} icon={<BiSolidBox />} />
                 <StatsCard title={'Favoritas'} stat={quantidadeCategoriasDestaque.toString()} icon={<FaStar />} />
                 <StatsCard title={'Desativadas'} stat={quantidadeCategoriasDesativadas.toString()} icon={<MdReportOff />}/>

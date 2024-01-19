@@ -18,8 +18,17 @@ import {
   Stack,
   IconButton,
   Link as ChakraLink,
-  Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList,
+  Menu as ChakraMenu,
+  MenuItem as ChakraMenuItem,
+  MenuButton as ChakraMenuButton,
+  MenuList as ChakraMenuList,
   Badge as ChakraBadge,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -66,6 +75,10 @@ interface IBody {
   favorite: boolean
 }
 
+interface TabCategoryProps {
+  menuExpanded: boolean;
+}
+
 const asyncComponents = {
   LoadingIndicator: (props: any) => (
     <chakraComponents.LoadingIndicator
@@ -87,11 +100,16 @@ const asyncComponents = {
   ),
 }
 
-const TabCategory = () => {
+const TabCategory: React.FC<TabCategoryProps> = ({ menuExpanded }) => {
   const toast = useToast({
     duration: 3000,
     isClosable: true,
   })
+
+  const menuResponsivo = menuExpanded ? { maxWidth: '100%' } : { maxWidth: '100%' };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const [quantidadeCategorias, setQuantidadeCategorias] = useState<number>(0);
   const [quantidadeCategoriasDestaque, setQuantidadeCategoriasDestaque] = useState<number>(0);
   const [quantidadeCategoriasDesativadas, setQuantidadeCategoriasAno] = useState<number>(0);
@@ -214,26 +232,26 @@ const TabCategory = () => {
   const listCategory = async () => {
     try {
       const { data } = await api.get('getAllCategory');
-      
+
       setList(data);
       setListClone(data);
-  
+
       setQuantidadeCategorias(data.length);
-  
-      if (data) { 
+
+      if (data) {
         const quantidadeCategoriasDesativadas = data.filter((category: any) => !category.is_active).length;
         setQuantidadeCategoriasDesativadas(quantidadeCategoriasDesativadas);
 
         const quantidadeCategoriasDestaque = data.filter((category: any) => category.favorite).length;
         setQuantidadeCategoriasDestaque(quantidadeCategoriasDestaque);
-  
+
         const anoAtual = new Date().getFullYear();
         const quantidadeCategoriasAno = data.filter((category: any) => {
           const categoryYear = new Date(category.created_at).getFullYear();
           return categoryYear === anoAtual;
         }).length;
         setQuantidadeCategoriasAno(quantidadeCategoriasAno);
-  
+
         const quantidadeAtualizadasAno = data.filter((category: any) => {
           const categoryYear = new Date(category.updated_at).getFullYear();
           return categoryYear === anoAtual;
@@ -248,8 +266,8 @@ const TabCategory = () => {
       });
     }
   };
-  
-  
+
+
   const deleteAllCategory = async (category: any) => {
     setLoading(true)
     const { data, status } = await api.post(`deleteCategory`, category)
@@ -324,25 +342,31 @@ const TabCategory = () => {
   }, [])
 
   const handleOnEditClick = async (category: any) => {
-    setValue('name', category.name)
-    setValue('is_main', category.is_main.toString())
-    setValue('description', category.description)
-    setValue('favorite', category.favorite)
-    setValue('key_word_seo', category.key_word_seo)
-    setValue('description_seo', category.description_seo)
-    setIsFavorite(category.favorite)
-    setIsActive(category.is_active)
-    setIsAllProduct(category.all_product)
-    setUpdate(category)
-    setUrl(category.url ? category.url : '')
-    setUrlPicture(category.urlPicture ? category.urlPicture : '')
-    setIdSelected(category.id)
+    // Configura o formulário com os dados da categoria selecionada
+    setValue('name', category.name);
+    setValue('is_main', category.is_main.toString());
+    setValue('description', category.description);
+    setValue('favorite', category.favorite);
+    setValue('key_word_seo', category.key_word_seo);
+    setValue('description_seo', category.description_seo);
+    setIsFavorite(category.favorite);
+    setIsActive(category.is_active);
+    setIsAllProduct(category.all_product);
+    setUpdate(category);
+    setIsDrawerOpen(true);
+    setUrl(category.url ? category.url : '');
+    setUrlPicture(category.urlPicture ? category.urlPicture : '');
+    setIdSelected(category.id);
 
-    const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`)
+    // Consulta para obter mais dados da categoria se necessário
+    const { data } = await api.get(`${category?.sub_category_id}/getCategoryById`);
 
     if (data.id) {
-      setValue('sub_category_id', { value: data.id, label: data.name })
+      setValue('sub_category_id', { value: data.id, label: data.name });
     }
+
+    // Abre o Drawer
+    onOpen();
   }
 
   const column = [
@@ -447,7 +471,7 @@ const TabCategory = () => {
     {
       title: 'Adicionado em',
       dataIndex: 'created_at',
-      key:'created_at',
+      key: 'created_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
       width: '8%',
@@ -455,14 +479,14 @@ const TabCategory = () => {
     {
       title: 'Atualizado em',
       dataIndex: 'updated_at',
-      key:'updated_at',
+      key: 'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
       width: '8%',
     },
     {
       title: 'Ações',
-      width:'10%',
+      width: '10%',
       render: (a: any) => (
         <>
           {a.name != 'CATEGORY_SECUNDARY' && (
@@ -505,18 +529,18 @@ const TabCategory = () => {
                 borderRadius={'8px'}
                 textAlign={'center'}
                 hasArrow>
-                  <Box>
-                <FiCopy
-                  style={{
-                    cursor: 'pointer',
-                    color: 'var(--gray-text)',
-                  }}
-                  onClick={() =>
-                    copiarTexto(
-                      `https://contemp.com.br${a && a.name ? `/category/${replaceNameToUrl(a.name).toLowerCase().replaceAll(' ', '_')}` : ''}`
-                    )
-                  }
-                />
+                <Box>
+                  <FiCopy
+                    style={{
+                      cursor: 'pointer',
+                      color: 'var(--gray-text)',
+                    }}
+                    onClick={() =>
+                      copiarTexto(
+                        `https://contemp.com.br${a && a.name ? `/category/${replaceNameToUrl(a.name).toLowerCase().replaceAll(' ', '_')}` : ''}`
+                      )
+                    }
+                  />
                 </Box>
               </Tooltip>
               <Tooltip placement='top' label='Excluir Categoria'
@@ -525,27 +549,27 @@ const TabCategory = () => {
                 borderRadius={'8px'}
                 textAlign={'center'}
                 hasArrow>
-              <Box>
-              <Icon
-                cursor='pointer'
-                as={FaDeleteLeft}
-                fontSize='1.15rem'
-                color='var(--gray-text)'
-                onClick={() => {
-                  confirm({
-                    title: 'ATENÇÃO',
-                    icon: <ExclamationCircleOutlined />,
-                    content:
-                      'Você está prestes a pagar todas as sub categorias e produtos vinculados a essa categoria, você tem certeza disso ?',
-                    onOk() {
-                      deleteAllCategory(a)
-                    },
-                    onCancel() {
-                    },
-                  })
-                }}
-              />
-              </Box>
+                <Box>
+                  <Icon
+                    cursor='pointer'
+                    as={FaDeleteLeft}
+                    fontSize='1.15rem'
+                    color='var(--gray-text)'
+                    onClick={() => {
+                      confirm({
+                        title: 'ATENÇÃO',
+                        icon: <ExclamationCircleOutlined />,
+                        content:
+                          'Você está prestes a pagar todas as sub categorias e produtos vinculados a essa categoria, você tem certeza disso ?',
+                        onOk() {
+                          deleteAllCategory(a)
+                        },
+                        onCancel() {
+                        },
+                      })
+                    }}
+                  />
+                </Box>
               </Tooltip>
             </HStack>
           )}
@@ -569,17 +593,17 @@ const TabCategory = () => {
   const exportarCSV = () => {
     // Obtenha os dados das categorias
     const categorias = listClone;
-  
+
     // Crie o conteúdo CSV
     const csvContent = [
       'Ordem Geral,Ordem em todos produtos,Nome,Url',
       ...categorias.map((categoria: any) => `${categoria.order},${categoria.order_all_products},${categoria.name},https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')},`),
     ].join('\n');
-    
-  
+
+
     // Crie um Blob com o conteúdo CSV
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  
+
     // Crie um link de download e clique nele para baixar o arquivo
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
@@ -590,14 +614,14 @@ const TabCategory = () => {
     link.click();
     document.body.removeChild(link);
   };
-  
+
   const exportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Categorias');
-  
+
     // Adicione cabeçalhos
     sheet.addRow(['Ordem Geral', 'Ordem em todos produtos', 'Nome', 'Url']);
-  
+
     // Adicione dados
     list.forEach((categoria: any) => {
       sheet.addRow([
@@ -607,15 +631,15 @@ const TabCategory = () => {
         `https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')}`,
       ]);
     });
-  
+
     // Crie um Blob a partir do workbook
     const blob = await workbook.xlsx.writeBuffer();
-  
+
     // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'categorias_export.xlsx');
   };
 
- {/* const exportarPDF = () => {
+  {/* const exportarPDF = () => {
     const columns = ['Ordem Geral', 'Ordem em todos produtos', 'Nome', 'Url'];
     const data = listClone.map((categoria: any) => [
       categoria.order?.toString() ?? '',
@@ -657,23 +681,23 @@ const TabCategory = () => {
     // Salvar PDF
     pdf.save('categorias.pdf');
   };*/}
-  
-  
-  
 
-  
-  
-  
-  
-  
 
-  
-  
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
-      <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-        <Box w={'60%'}>
+      <Flex style={menuResponsivo} w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
+        <Box w={'100%'}>
           <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
             Categorias & Subcategorias
           </Heading>
@@ -682,364 +706,388 @@ const TabCategory = () => {
             prática.
           </Text>
           <StaticsCategorys quantidadeCategorias={quantidadeCategorias} quantidadeCategoriasDesativadas={quantidadeCategoriasDesativadas} quantidadeCategoriasDestaque={quantidadeCategoriasDestaque} quantidadeCategoriasAno={quantidadeCategoriasAno} quantidadeAtualizadasAno={quantidadeAtualizadasAno}
-/>
+          />
         </Box>
+      </Flex>
+      <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
         <Stack direction='row' spacing={6}>
-        <ChakraMenu>
-                <ChakraMenuButton
-                  as={Button}
-                  bg='var(--red-primary)'
-                  color='var(--white-primary)'
-                  borderRadius='8px'
-                  w='280px'
-                  h='40px'
-                  rightIcon={<FaAngleDown />}
-                  _hover={{ transition: 'all 0.4s' }}
-                  _focus={{backgroundColor: 'var(--red-primary)!important',}}
-                >
-                  Exportar Categorias
-                </ChakraMenuButton>
-                <ChakraMenuList color={'#242424'}>
-                  <ChakraMenuItem onClick={() => exportarCSV()}>
-                    Exportar em CSV
-                  </ChakraMenuItem>
-                  <ChakraMenuItem onClick={() => exportExcel()}>
-                    Exportar XSLX
-                  </ChakraMenuItem>
-                </ChakraMenuList>
-              </ChakraMenu>
-        <SearchBar
-          inputProps={{
-            placeholder: 'Digite a categoria...',
-            onChange: (evt) => {
-              let newList = listClone.filter((item: any) =>
-                item.name.toLowerCase().includes(evt.target.value.toLowerCase())
-              )
-              setList(newList)
-            },
-            _placeholder: {
-              color: 'black.800',
-              opacity: '50%',
-            },
-          }}
-          containerProps={{
-            bg: 'white.500',
-            border: '1px solid',
-            borderColor: 'black.800',
-            color: colors.black[800],
-            maxW: pxToRem(288),
-          }}
-        />
+          <ChakraMenu>
+            <Button
+              onClick={onOpen}
+              bg='var(--black-primary)'
+              color='var(--white-primary)'
+              borderRadius='8px'
+              w='230px'
+              h='40px'
+              _hover={{ transition: 'all 0.4s' }}
+              _focus={{ backgroundColor: 'var(--red-primary)!important', }}
+            >
+              Adicionar Categoria
+            </Button>
+            <ChakraMenuButton
+              as={Button}
+              bg='var(--red-primary)'
+              color='var(--white-primary)'
+              borderRadius='8px'
+              w='280px'
+              h='40px'
+              ml={'370px'}
+              rightIcon={<FaAngleDown />}
+              _hover={{ transition: 'all 0.4s' }}
+              _focus={{ backgroundColor: 'var(--red-primary)!important', }}
+            >
+              Exportar Categorias
+            </ChakraMenuButton>
+            <ChakraMenuList color={'#242424'}>
+              <ChakraMenuItem onClick={() => exportarCSV()}>
+                Exportar em CSV
+              </ChakraMenuItem>
+              <ChakraMenuItem onClick={() => exportExcel()}>
+                Exportar XSLX
+              </ChakraMenuItem>
+            </ChakraMenuList>
+          </ChakraMenu>
+          <SearchBar
+            inputProps={{
+              placeholder: 'Digite a categoria...',
+              onChange: (evt) => {
+                let newList = listClone.filter((item: any) =>
+                  item.name.toLowerCase().includes(evt.target.value.toLowerCase())
+                )
+                setList(newList)
+              },
+              _placeholder: {
+                color: 'black.800',
+                opacity: '50%',
+              },
+            }}
+            containerProps={{
+              bg: 'white.500',
+              border: '1px solid',
+              borderColor: 'black.800',
+              color: colors.black[800],
+              maxW: pxToRem(288),
+            }}
+          />
         </Stack>
       </Flex>
       <HStack spacing='20px' alignItems='flex-start'>
-        <Box borderRadius='8px' bg='white' p='30px' w='100%'>
+        <Box borderRadius='8px' bg='white' p='30px'>
           <Table id='tabela-categoria' scroll={{ x: 'fit-content' }} dataSource={loading ? [] : list} columns={column} loading={loading} />
         </Box>
-        <Box
-          borderRadius='8px'
-          bg='white'
-          p='30px'
-          w='379px'
-          as='form'
-          onSubmit={handleSubmit(saveCategory)}
-          ref={formRef}
-        >
-          <VStack spacing='20px' w='100%'>
-            <FormControl>
-              <InputDefault
-                label='Nome da categoria'
-                type='text'
-                question="O nome da categoria será igual na Url."
-                error={errors.name}
-                {...register('name', { required: 'Nome é obrigatório' })}
-              />
-            </FormControl>
-            <Controller
-              control={control}
-              name='is_main'
-              rules={{
-                required: 'Campo obrigatório',
-              }}
-              render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
-                <FormControl isInvalid={!!error} id={name}>
+        <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+          <DrawerOverlay />
+          <DrawerContent bg={'white'}>
+            <DrawerHeader color={'var(--black-primary)'}>Adicionar/Atualizar Categoria</DrawerHeader>
+            <DrawerBody>
+              <Box
+                borderRadius='8px'
+                bg='white'
+                p='30px'
+                w='100%'
+                as='form'
+                onSubmit={handleSubmit(saveCategory)}
+                ref={formRef}
+              >
+                <VStack spacing='20px' w='100%'>
+                  <FormControl>
+                    <InputDefault
+                      label='Nome da categoria'
+                      type='text'
+                      question="O nome da categoria será igual na Url."
+                      error={errors.name}
+                      {...register('name', { required: 'Nome é obrigatório' })}
+                    />
+                  </FormControl>
+                  <Controller
+                    control={control}
+                    name='is_main'
+                    rules={{
+                      required: 'Campo obrigatório',
+                    }}
+                    render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
+                      <FormControl isInvalid={!!error} id={name}>
+                        <Flex>
+                          <FormLabel className='paragrafo-petro text-black negrito' textTransform={'uppercase'} mb='10px'>
+                            É principal?
+                          </FormLabel>
+                          <Tooltip label='Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".' cursor={'pointer'}
+                            placement="top"
+                            color={'var(--white-primary)'}
+                            bg={'var(--red-primary)'}
+                            borderRadius={'8px'}
+                            textAlign={'center'}
+                            hasArrow>
+                            <Box>
+                              <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} verticalAlign={'middle'} />
+                            </Box>
+                          </Tooltip>
+                        </Flex>
+                        <InputGroup
+                          borderRadius='6px'
+                          bg='white.500'
+                          p='3px 7px'
+                          w='100%'
+                          h='50px'
+                          outline='none'
+                          border='1px solid'
+                          borderColor='black.800'
+                          display='flex'
+                          alignItems='center'
+                          justifyContent='center'
+                        >
+                          <Select
+                            name={name}
+                            ref={ref}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            value={value}
+                            w='100%'
+                            height='100%'
+                            border='none'
+                            borderRadius='21px'
+                            color='black.800'
+                            placeholder='Selecione uma opção'
+                          >
+                            {isMainOptions &&
+                              isMainOptions.map((list: any, index: any) => (
+                                <option value={list.value} key={index}>
+                                  {list.name}
+                                </option>
+                              ))}
+                          </Select>
+                        </InputGroup>
+                        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                      </FormControl>
+                    )}
+                  />
+
+                  {watch().is_main === 'false' && (
+                    <Controller
+                      control={control}
+                      name='sub_category_id'
+                      rules={{ required: 'Campo obrigatório' }}
+                      render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
+                        <FormControl isInvalid={!!error} id={name} color='black.800'>
+                          <FormLabel fontSize='20px' mb='10px' color='black.800'>
+                            Selecione a categoria
+                          </FormLabel>
+                          <AsyncSelect
+                            placeholder='Selecione'
+                            size='lg'
+                            name={name}
+                            ref={ref}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            value={value}
+                            components={asyncComponents}
+                            useBasicStyles
+                            options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
+                            loadOptions={(inputValue, callback) => {
+                              setTimeout(() => {
+                                let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
+                                const values = filter.filter((option: any) =>
+                                  option.label.toLowerCase().includes(inputValue.toLowerCase())
+                                )
+                                callback(values)
+                              }, 1500)
+                            }}
+                          />
+                          {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+                        </FormControl>
+                      )}
+                    />
+                  )}
+                  <FormControl>
+                    <TextareaDefault
+                      label='Descrição'
+                      question='Essa descrição irá aparecer na página de todos os produtos.'
+                      error={errors.description}
+                      {...register('description', {
+                        required: 'Descrição é obrigatório',
+                      })}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextareaDefault
+                      label='Descrição SEO'
+                      question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
+                      error={errors.description_seo}
+                      {...register('description_seo', {
+                        required: 'Descrição é obrigatório',
+                      })}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextareaDefault
+                      label='Key Word SEO'
+                      question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
+                      error={errors.key_word_seo}
+                      {...register('key_word_seo', {
+                        required: 'Key Word Seo é obrigatório',
+                      })}
+                    />
+                  </FormControl>
+                  <InputsHome
+                    name='Foto da categoria'
+                    typeInput='fileSingle'
+                    getUrls={(values: any) => setUrlPicture(values)}
+                  />
+                  <HStack spacing='20px' flexWrap='wrap' w='100%'>
+                    {urlPicture && (
+                      <ViewImage
+                        url={urlPicture}
+                        remove={() => {
+                          setUrlPicture('')
+                        }}
+                      />
+                    )}
+                  </HStack>
+                  <InputsHome name='Foto do icone' typeInput='fileSingle' getUrls={(values: any) => setUrl(values)} />
+                  <HStack spacing='20px' flexWrap='wrap' w='100%'>
+                    {url && (
+                      <ViewImage
+                        url={url}
+                        remove={() => {
+                          setUrl('')
+                        }}
+                      />
+                    )}
+                  </HStack>
+                  <Box w='100%'>
                     <Flex>
-                      <FormLabel className='paragrafo-petro text-black negrito' textTransform={'uppercase'} mb='10px'>
-                        É principal?
-                      </FormLabel>
-                      <Tooltip label='Se for Categoria selecione "SIM", se for Subcategoria selecione "NÃO".' cursor={'pointer'}
-                    placement="top"
-                    color={'var(--white-primary)'}
-                    bg={'var(--red-primary)'}
-                    borderRadius={'8px'}
-                    textAlign={'center'}
-                    hasArrow>
-                      <Box>
-                      <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} verticalAlign={'middle'} />
-                      </Box>
+                      <Tooltip label='Marque caso queira que a categoria apareça na página de todos os produtos.' cursor={'pointer'}
+                        placement="top-end"
+                        color={'var(--white-primary)'}
+                        bg={'var(--red-primary)'}
+                        borderRadius={'8px'}
+                        textAlign={'center'}
+                        hasArrow>
+                        <FormControl>
+                          <Checkbox
+                            className='paragrafo-preto text-black negrito'
+                            colorScheme='red'
+                            textTransform={'uppercase'}
+                            mr='auto'
+                            height='17px'
+                            isChecked={isFavorite}
+                            onChange={(evt) => setIsFavorite(evt.target.checked)}
+                          >
+                            Categoria destaque
+                          </Checkbox>
+                          <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+
+                        </FormControl>
                       </Tooltip>
                     </Flex>
-                  <InputGroup
-                    borderRadius='6px'
-                    bg='white.500'
-                    p='3px 7px'
-                    w='100%'
-                    h='50px'
-                    outline='none'
-                    border='1px solid'
-                    borderColor='black.800'
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='center'
-                  >
-                    <Select
-                      name={name}
-                      ref={ref}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      value={value}
-                      w='100%'
-                      height='100%'
-                      border='none'
-                      borderRadius='21px'
-                      color='black.800'
-                      placeholder='Selecione uma opção'
-                    >
-                      {isMainOptions &&
-                        isMainOptions.map((list: any, index: any) => (
-                          <option value={list.value} key={index}>
-                            {list.name}
-                          </option>
-                        ))}
-                    </Select>
-                  </InputGroup>
-                  {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-                </FormControl>
-              )}
-            />
+                  </Box>
 
-            {watch().is_main === 'false' && (
-              <Controller
-                control={control}
-                name='sub_category_id'
-                rules={{ required: 'Campo obrigatório' }}
-                render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
-                  <FormControl isInvalid={!!error} id={name} color='black.800'>
-                    <FormLabel fontSize='20px' mb='10px' color='black.800'>
-                      Selecione a categoria
-                    </FormLabel>
-                    <AsyncSelect
-                      placeholder='Selecione'
-                      size='lg'
-                      name={name}
-                      ref={ref}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      value={value}
-                      components={asyncComponents}
-                      useBasicStyles
-                      options={categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))}
-                      loadOptions={(inputValue, callback) => {
-                        setTimeout(() => {
-                          let filter = categoryOptions.map((el: any) => ({ label: el.name, value: el.value }))
-                          const values = filter.filter((option: any) =>
-                            option.label.toLowerCase().includes(inputValue.toLowerCase())
-                          )
-                          callback(values)
-                        }, 1500)
+                  <Box w='100%' mt='10px'>
+                    <Flex>
+                      <Tooltip label='Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.' cursor={'pointer'}
+                        placement="top-end"
+                        color={'var(--white-primary)'}
+                        bg={'var(--red-primary)'}
+                        borderRadius={'8px'}
+                        textAlign={'center'}
+                        hasArrow>
+                        <FormControl>
+                          <Checkbox className='paragrafo-preto text-preto negrito'
+                            textTransform={'uppercase'}
+                            colorScheme='red'
+                            mr='auto'
+                            fontSize='20px'
+                            height='17px'
+                            isChecked={isActive}
+                            onChange={(evt) => setIsActive(evt.target.checked)}
+                          >
+                            Ativo
+                          </Checkbox>
+                          <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+                        </FormControl>
+                      </Tooltip>
+                    </Flex>
+                  </Box>
+                  <Box w='100%' mt='10px'>
+                    <Flex>
+                      <Tooltip label='Marque aqui para a categoria aparecer na página de todos os produtos.' cursor={'pointer'}
+                        placement="top-end"
+                        color={'var(--white-primary)'}
+                        bg={'var(--red-primary)'}
+                        borderRadius={'8px'}
+                        textAlign={'center'}
+                        hasArrow>
+
+
+                        <FormControl>
+                          <Checkbox className='paragrafo-preto negrito'
+                            textTransform={'uppercase'}
+                            colorScheme='red'
+                            color='black.800'
+                            mr='auto'
+                            fontSize='20px'
+                            height='17px'
+                            isChecked={isAllProduct}
+                            onChange={(evt) => setIsAllProduct(evt.target.checked)}
+                          >
+                            Todos os Produtos
+                          </Checkbox>
+                          <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+                        </FormControl>
+                      </Tooltip>
+                    </Flex>
+                  </Box>
+                </VStack>
+                <Flex
+                  alignItems='center'
+                  justifyContent={Object.keys(update).length > 0 ? 'space-between' : 'flex-end'}
+                  mt='53px'
+                  w='100%'
+                >
+                  {Object.keys(update).length > 0 && (
+                    <Button
+                      ml='auto'
+                      bg='black'
+                      color='black !important'
+                      fontSize='1rem'
+                      borderRadius='4px'
+                      borderColor='black.800'
+                      borderWidth='1px'
+                      w='88px'
+                      h='47px'
+                      isLoading={loading}
+                      _hover={{ transition: 'all 0.4s' }}
+                      onClick={() => {
+                        setUpdate({})
+                        setUrl('')
+                        reset()
                       }}
-                    />
-                    {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-                  </FormControl>
-                )}
-              />
-            )}
-            <FormControl>
-              <TextareaDefault
-                label='Descrição'
-                question='Essa descrição irá aparecer na página de todos os produtos.'
-                error={errors.description}
-                {...register('description', {
-                  required: 'Descrição é obrigatório',
-                })}
-              />
-            </FormControl>
-            <FormControl>
-              <TextareaDefault
-                label='Descrição SEO'
-                question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
-                error={errors.description_seo}
-                {...register('description_seo', {
-                  required: 'Descrição é obrigatório',
-                })}
-              />
-            </FormControl>
-            <FormControl>
-              <TextareaDefault
-                label='Key Word SEO'
-                question='Esse campo deve ser preenchido pela agência de marketing. Pode colocar "teste".'
-                error={errors.key_word_seo}
-                {...register('key_word_seo', {
-                  required: 'Key Word Seo é obrigatório',
-                })}
-              />
-            </FormControl>
-            <InputsHome
-              name='Foto da categoria'
-              typeInput='fileSingle'
-              getUrls={(values: any) => setUrlPicture(values)}
-            />
-            <HStack spacing='20px' flexWrap='wrap' w='100%'>
-              {urlPicture && (
-                <ViewImage
-                  url={urlPicture}
-                  remove={() => {
-                    setUrlPicture('')
-                  }}
-                />
-              )}
-            </HStack>
-            <InputsHome name='Foto do icone' typeInput='fileSingle' getUrls={(values: any) => setUrl(values)} />
-            <HStack spacing='20px' flexWrap='wrap' w='100%'>
-              {url && (
-                <ViewImage
-                  url={url}
-                  remove={() => {
-                    setUrl('')
-                  }}
-                />
-              )}
-            </HStack>
-            <Box w='100%'>
-              <Flex>
-                <Tooltip label='Marque caso queira que a categoria apareça na página de todos os produtos.' cursor={'pointer'}
-                  placement="top-end"
-                  color={'var(--white-primary)'}
-                  bg={'var(--red-primary)'}
-                  borderRadius={'8px'}
-                  textAlign={'center'}
-                  hasArrow>
-                  <FormControl>
-                    <Checkbox
-                      className='paragrafo-preto text-black negrito'
-                      colorScheme='red'
-                      textTransform={'uppercase'}
-                      mr='auto'
-                      height='17px'
-                      isChecked={isFavorite}
-                      onChange={(evt) => setIsFavorite(evt.target.checked)}
+                      type='button'
                     >
-                      Categoria destaque
-                    </Checkbox>
-                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
+                      Cancelar
+                    </Button>
+                  )}
+                  <Button
+                    ml='auto'
+                    bg='red.600'
+                    color='white'
+                    fontSize='1rem'
+                    textTransform={'uppercase'}
+                    borderRadius='8px'
+                    w='128px'
+                    h='40px'
+                    isLoading={loading}
+                    _hover={{ transition: 'all 0.4s' }}
+                    type='submit'
+                  >
+                    Salvar
+                  </Button>
+                </Flex>
+              </Box>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
 
-                  </FormControl>
-                </Tooltip>
-              </Flex>
-            </Box>
-
-            <Box w='100%' mt='10px'>
-              <Flex>
-                <Tooltip label='Marque aqui para que a categoria apareça no site. Caso deixe desmarcado a categoria será cadastrada, mas não ficará online.' cursor={'pointer'}
-                  placement="top-end"
-                  color={'var(--white-primary)'}
-                  bg={'var(--red-primary)'}
-                  borderRadius={'8px'}
-                  textAlign={'center'}
-                  hasArrow>
-                  <FormControl>
-                    <Checkbox className='paragrafo-preto text-preto negrito'
-                      textTransform={'uppercase'}
-                      colorScheme='red'
-                      mr='auto'
-                      fontSize='20px'
-                      height='17px'
-                      isChecked={isActive}
-                      onChange={(evt) => setIsActive(evt.target.checked)}
-                    >
-                      Ativo
-                    </Checkbox>
-                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
-                  </FormControl>
-                </Tooltip>
-              </Flex>
-            </Box>
-            <Box w='100%' mt='10px'>
-              <Flex>
-                <Tooltip label='Marque aqui para a categoria aparecer na página de todos os produtos.' cursor={'pointer'}
-                  placement="top-end"
-                  color={'var(--white-primary)'}
-                  bg={'var(--red-primary)'}
-                  borderRadius={'8px'}
-                  textAlign={'center'}
-                  hasArrow>
-
-
-                  <FormControl>
-                    <Checkbox className='paragrafo-preto negrito'
-                      textTransform={'uppercase'}
-                      colorScheme='red'
-                      color='black.800'
-                      mr='auto'
-                      fontSize='20px'
-                      height='17px'
-                      isChecked={isAllProduct}
-                      onChange={(evt) => setIsAllProduct(evt.target.checked)}
-                    >
-                      Todos os Produtos
-                    </Checkbox>
-                    <Icon as={PiInfoDuotone} cursor={'pointer'} fontSize={'1.15rem'} color={'var(--red-primary)'} ml={'2%'} />
-                  </FormControl>
-                </Tooltip>
-              </Flex>
-            </Box>
-          </VStack>
-          <Flex
-            alignItems='center'
-            justifyContent={Object.keys(update).length > 0 ? 'space-between' : 'flex-end'}
-            mt='53px'
-            w='100%'
-          >
-            {Object.keys(update).length > 0 && (
-              <Button
-                ml='auto'
-                bg='transparent'
-                color='black.800'
-                fontSize='20px'
-                borderRadius='4px'
-                borderColor='black.800'
-                borderWidth='1px'
-                w='88px'
-                h='47px'
-                isLoading={loading}
-                _hover={{ transition: 'all 0.4s' }}
-                onClick={() => {
-                  setUpdate({})
-                  setUrl('')
-                  reset()
-                }}
-                type='button'
-              >
-                Cancelar
-              </Button>
-            )}
-            <Button
-              ml='auto'
-              bg='red.600'
-              color='white'
-              fontSize='1rem'
-              textTransform={'uppercase'}
-              borderRadius='8px'
-              w='128px'
-              h='40px'
-              isLoading={loading}
-              _hover={{ transition: 'all 0.4s' }}
-              type='submit'
-            >
-              Salvar
-            </Button>
-          </Flex>
-        </Box>
       </HStack>
       <ModalAddFilter
         isOpen={openFilter}

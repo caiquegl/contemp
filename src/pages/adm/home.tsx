@@ -143,7 +143,7 @@ const Adm = () => {
 
   const componentsTab = [
     <TabHome />,
-    <TabCategory />,
+    <TabCategory menuExpanded={menuExpanded} />,
     <TabProduct back={back} />,
     <TabFiles />,
     <TabRedirects />,
