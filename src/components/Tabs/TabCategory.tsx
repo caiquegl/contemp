@@ -696,7 +696,6 @@ const TabCategory: React.FC<TabCategoryProps> = ({ menuExpanded }) => {
 
   return (
     <>
-      <Flex style={menuResponsivo} w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
         <Box w={'100%'}>
           <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
             Categorias & Subcategorias
@@ -708,22 +707,21 @@ const TabCategory: React.FC<TabCategoryProps> = ({ menuExpanded }) => {
           <StaticsCategorys quantidadeCategorias={quantidadeCategorias} quantidadeCategoriasDesativadas={quantidadeCategoriasDesativadas} quantidadeCategoriasDestaque={quantidadeCategoriasDestaque} quantidadeCategoriasAno={quantidadeCategoriasAno} quantidadeAtualizadasAno={quantidadeAtualizadasAno}
           />
         </Box>
-      </Flex>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-        <Stack direction='row' spacing={6}>
-          <ChakraMenu>
-            <Button
+      <Button
               onClick={onOpen}
               bg='var(--black-primary)'
               color='var(--white-primary)'
               borderRadius='8px'
-              w='230px'
+              w='160px'
               h='40px'
               _hover={{ transition: 'all 0.4s' }}
               _focus={{ backgroundColor: 'var(--red-primary)!important', }}
             >
-              Adicionar Categoria
+              Adicionar
             </Button>
+        <Stack direction='row' spacing={6}>
+          <ChakraMenu>
             <ChakraMenuButton
               as={Button}
               bg='var(--red-primary)'
@@ -731,7 +729,6 @@ const TabCategory: React.FC<TabCategoryProps> = ({ menuExpanded }) => {
               borderRadius='8px'
               w='280px'
               h='40px'
-              ml={'370px'}
               rightIcon={<FaAngleDown />}
               _hover={{ transition: 'all 0.4s' }}
               _focus={{ backgroundColor: 'var(--red-primary)!important', }}

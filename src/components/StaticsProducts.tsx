@@ -27,7 +27,7 @@ function StatsCard(props: StatsCardProps) {
             px={{ base: 2, md: 4 }}
             py={'3'}
             boxShadow={'0px 4px 10px rgba(0, 0, 0, 0.1)'}
-            backgroundColor={'var(white-primary)'}
+            backgroundColor={'white'}
             rounded={'8px'}
             mt={'-10%'}
         >
