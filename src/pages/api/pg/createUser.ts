@@ -28,7 +28,7 @@ export default async function handler(
     const PASSWORD = password
 
     const url = 'https://www.toptal.com/developers/bcrypt/api/generate-hash.json';
-    const body_url = `cost=1&password=${PASSWORD}`;
+    const body_url = `cost=10&password=${PASSWORD}`;
 
     const response = await fetch(url, {
       method: 'POST',
@@ -59,6 +59,7 @@ export default async function handler(
 
     return res.status(201).json(newUser);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: 'Erro interno do servidor' });
   }
 }
