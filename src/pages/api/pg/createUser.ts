@@ -11,7 +11,7 @@ export default async function handler(
       return res.status(405).end();
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password, picture } = req.body;
 
     // Verificar se o email já existe
     const userExists = await prisma.users.findMany({
@@ -34,6 +34,7 @@ export default async function handler(
       data: {
         name,
         email,
+        picture,
         password: hash,
         super_adm: false
       }

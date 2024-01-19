@@ -120,16 +120,21 @@ const Adm = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
+  const getSueprAdmin = async () => {
     const cookies = parseCookies();
     let userJson = JSON.parse(cookies['nextAuth.contemp']);
-    const userEmail = userJson.body.email;
+    const { data } = await api.post(`getSuperAdm`, { id: userJson.data.id })
 
     setUser({
-      ...userJson.body,
-      name: userMappings[userEmail]?.name || userEmail,
-      photo: photos[userEmail] || 'https://contemp.com.br/api/arquivos/2.png',
+      name: data.name,
+      email: data.email,
+      super_adm: data.super_adm,
+      photo: data.picture || 'https://contemp.com.br/api/arquivos/2.png',
     });
+  }
+
+  useEffect(() => {
+    getSueprAdmin()
   }, []);
 
   const btnRef = useRef<any>();

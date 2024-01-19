@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Box, HStack, Icon, Flex, Button, useToast, Link as ChakraLink, Text, Heading, Tooltip } from '@chakra-ui/react'
-import { Table, Space, message, Modal, Form, Input, Button as BtnAtd } from 'antd'
+import {
+  Box,
+  HStack,
+  Icon,
+  Flex,
+  Button,
+  useToast,
+  Link as ChakraLink,
+  Text,
+  Heading,
+  Tooltip,
+  FormControl
+} from '@chakra-ui/react'
+import { Table, Space, message, Modal, Form, Input, Button as BtnAtd, Avatar } from 'antd'
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
@@ -10,8 +22,11 @@ import { useRouter } from 'next/router'
 import * as path from 'path'
 import moment from 'moment';
 import { PiPencilSimpleBold } from 'react-icons/pi'
+import { IoPersonRemoveOutline, IoPersonAddOutline, IoAlert } from "react-icons/io5";
 import { FaAngleDown, FaStar } from 'react-icons/fa'
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
+import InputsHome from '../ContainerHome/inputs'
+import { ViewImage } from '../ContainerAddProduct/ViewImage'
 
 const { Item } = Form
 
@@ -85,7 +100,7 @@ const TabUsers: React.FC = () => {
       fetchUser()
       setModalVisible(false)
       setSelectItem(null)
-      form.resetFields(['name', 'email'])
+      form.resetFields(['name', 'email', 'picture'])
 
     } catch (error) {
       message.error('Erro ao atualizar usuário')
@@ -103,7 +118,7 @@ const TabUsers: React.FC = () => {
       fetchUser()
       setModalVisibleCreate(false)
       setSelectItem(null)
-      form.resetFields(['name', 'password', 'email'])
+      form.resetFields(['name', 'password', 'email', 'picture'])
     } catch (error) {
       message.error('Erro ao criar redirecionamento')
     } finally {
@@ -113,6 +128,18 @@ const TabUsers: React.FC = () => {
 
 
   const columns = [
+    {
+      title: 'Avatar',
+      dataIndex: 'picture',
+      key: 'picture',
+      render: (picture: any) =>  (
+        <>
+          {picture &&
+            <Avatar src={picture} />
+          }
+        </>
+      )
+    },
     {
       title: 'Nome',
       dataIndex: 'name',
@@ -124,6 +151,21 @@ const TabUsers: React.FC = () => {
       dataIndex: 'email',
       key: 'email',
       sorter: (a: any, b: any) => (a.email || '').localeCompare(b.email || ''),
+    },
+    {
+      title: 'Super Admin',
+      dataIndex: 'super_adm',
+      key: 'super_adm',
+      sorter: (a: any, b: any) => (a.super_adm || '').localeCompare(b.super_adm || ''),
+      render: (adm: any) =>  (
+        <>
+          {adm ?
+            <FaCheck />
+            : <IoAlert />
+
+          }
+        </>
+      )
     },
     {
       title: 'Adicionado em',
@@ -146,9 +188,31 @@ const TabUsers: React.FC = () => {
       key: 'actions',
       render: (text: any, user: any) => (
         <HStack spacing='20px'>
+            <Tooltip
+              placement='top'
+              label={user.super_adm ? 'Remover super admin' : 'Tornar super admin'}
+              color={'var(--white-primary)'}
+              bg={'var(--red-primary)'}
+              borderRadius={'8px'}
+              textAlign={'center'}
+              hasArrow
+            >
+              <Box>
+                <Icon
+                  cursor='pointer'
+                  as={user.super_adm ? IoPersonRemoveOutline : IoPersonAddOutline}
+                  fontSize='1.15rem'
+                  color='var(--gray-text)'
+                  onClick={() => {
+                    updateSuperAdmin(user.id, !user.super_adm)
+                  }}
+                />
+              </Box>
+            </Tooltip>
+
           <Tooltip
             placement='top'
-            label='Editar url'
+            label='Editar usuário'
             color={'var(--white-primary)'}
             bg={'var(--red-primary)'}
             borderRadius={'8px'}
@@ -194,6 +258,22 @@ const TabUsers: React.FC = () => {
       ),
     },
   ]
+
+  const updateSuperAdmin = async (user_id: any, super_adm: any) => {
+    try {
+      setLoading(true)
+      await api.post(`updateSuperAdmin`, { id: user_id, super_adm })
+      message.success('Sucesso ao atualizar usuário')
+      fetchUser()
+      setModalVisible(false)
+      setSelectItem(null)
+
+    } catch (error) {
+      message.error('Erro ao atualizar usuário')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const [pagination, setPagination] = useState({
     current: 1,
@@ -311,6 +391,14 @@ const TabUsers: React.FC = () => {
               <Input type='email'/>
             </Form.Item>
 
+            <Form.Item label='Foto'  name="picture">
+              <InputsHome
+                name=''
+                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
+                typeInput='fileSingle'
+                getUrls={(value: any) => form.setFieldValue('picture', value)}
+              />
+            </Form.Item>
             <Button type='submit'>
               Atualizar
             </Button>
@@ -347,6 +435,14 @@ const TabUsers: React.FC = () => {
             </Form.Item>
             <Form.Item label='Senha' rules={[{ required: true, message: 'Campo obrigatório' }]} name="password">
               <Input type='password'/>
+            </Form.Item>
+            <Form.Item label='Foto'  name="picture">
+              <InputsHome
+                name=''
+                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
+                typeInput='fileSingle'
+                getUrls={(value: any) => form.setFieldValue('picture', value)}
+              />
             </Form.Item>
             <Button type='submit'>
               Criar

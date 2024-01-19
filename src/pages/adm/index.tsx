@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { setCookie } from 'nookies'
 import { withSSRAuthRedirect } from '../../utils/withSSRAuthRedirect'
+import { api } from '../../lib/axios'
 
 const Adm = () => {
   const router = useRouter()
@@ -21,7 +22,7 @@ const Adm = () => {
   const signIn = async () => {
     try {
       setLoading(true)
-      const data = await signInWithEmailAndPassword(auth, body.email, body.password)
+      const {data} = await api.post(`login`, { email: body.email, password: body.password })
       setCookie(
         undefined,
         'nextAuth.contemp',

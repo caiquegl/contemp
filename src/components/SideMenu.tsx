@@ -66,6 +66,8 @@ interface SideMenuProps {
   user: {
     name: string;
     photo: string;
+    email: string;
+    super_adm: boolean;
   };
   date: string;
   handleExportCSV: () => void;
@@ -159,7 +161,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 </Flex>
               </Button>
               {/* Submenu para 'Home' */}
-              {activeSubTab === 'home' && (
+              {activeSubTab === 'home' && user.super_adm && (
                 <VStack spacing={2} align="stretch" mt="3">
                   <Button
                     className="adm-botao-sidemenu"
@@ -231,42 +233,49 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   {isExpanded && <Text ml="2">Produtos</Text>}
                 </Flex>
               </Button>
-              <Button
-                className="adm-botao-sidemenu"
-                variant="ghost"
-                width="100%"
-                onClick={() => setActiveTab(3)}
-                justifyContent="start"
-              >
-                <Flex justifyContent="start" alignItems="center">
-                  <BsArchive />
-                  {isExpanded && <Text ml="2">Arquivos</Text>}
-                </Flex>
-              </Button>
-              <Button
-                className="adm-botao-sidemenu"
-                variant="ghost"
-                width="100%"
-                onClick={() => setActiveTab(4)}
-                justifyContent="start"
-              >
-                <Flex justifyContent="start" alignItems="center">
-                  <FiCompass />
-                  {isExpanded && <Text ml="2">URL's</Text>}
-                </Flex>
-              </Button>
-              <Button
-                className="adm-botao-sidemenu"
-                variant="ghost"
-                width="100%"
-                onClick={() => setActiveTab(5)}
-                justifyContent="start"
-              >
-                <Flex justifyContent="start" alignItems="center">
-                  <FaRegUserCircle />
-                  {isExpanded && <Text ml="2">Usuários</Text>}
-                </Flex>
-              </Button>
+              {user.super_adm &&
+
+                  <Button
+                  className="adm-botao-sidemenu"
+                  variant="ghost"
+                  width="100%"
+                  onClick={() => setActiveTab(3)}
+                  justifyContent="start"
+                >
+                  <Flex justifyContent="start" alignItems="center">
+                    <BsArchive />
+                    {isExpanded && <Text ml="2">Arquivos</Text>}
+                  </Flex>
+                </Button>
+              }
+              {user.super_adm &&
+                <Button
+                  className="adm-botao-sidemenu"
+                  variant="ghost"
+                  width="100%"
+                  onClick={() => setActiveTab(4)}
+                  justifyContent="start"
+                >
+                  <Flex justifyContent="start" alignItems="center">
+                    <FiCompass />
+                    {isExpanded && <Text ml="2">URL's</Text>}
+                  </Flex>
+                </Button>
+              }
+              {user.super_adm &&
+                <Button
+                  className="adm-botao-sidemenu"
+                  variant="ghost"
+                  width="100%"
+                  onClick={() => setActiveTab(5)}
+                  justifyContent="start"
+                >
+                  <Flex justifyContent="start" alignItems="center">
+                    <FaRegUserCircle />
+                    {isExpanded && <Text ml="2">Usuários</Text>}
+                  </Flex>
+                </Button>
+              }
             </VStack>
 
 
