@@ -196,7 +196,7 @@ const TabRedirects: React.FC<TabRedirectsProps> = () => {
 
           <Tooltip
             placement='top'
-            label='Excluir Produto'
+            label='Excluir Url'
             color={'var(--white-primary)'}
             bg={'var(--red-primary)'}
             borderRadius={'8px'}

@@ -58,6 +58,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isHomeActive, setIsHomeActive] = useState(false);
   const [isCategoriaActive, setIsCategoriaActive] = useState(false);
   const [isProdutoActive, setIsProdutoActive] = useState(false);
+  const [isRedirecionamentoActive, setIsRedirecionamentoActive] = useState(false);
+  const [isFileActive, setIsFileActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleMenu = () => {
@@ -86,6 +88,17 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsProdutoActive(!isProdutoActive);
     setActiveTab(2);
     setActiveSubTab(activeSubTab === 'produto' ? '' : 'produto');
+  };
+
+  const toggleRedirecionamentosSubmenu = () => {
+    setIsRedirecionamentoActive(!isRedirecionamentoActive);
+    setActiveTab(4);
+    setActiveSubTab(activeSubTab === 'url' ? '' : 'url');
+  };
+  const toggleFilesSubmenu = () => {
+    setIsFileActive(!isFileActive);
+    setActiveTab(3);
+    setActiveSubTab(activeSubTab === 'arquivo' ? '' : 'arquivo');
   };
 
   const exportarCSV = async () => {
@@ -153,6 +166,64 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     }
   };
 
+  const MenuExportUrlCSV = async () => {
+    try {
+      const { data } = await api.get('/getAllUrls');
+
+      const csvContent = [
+        'Id,Origem,Destino, Adicionado em, Atualizado em',
+        ...data.map((record: any) => [
+          record.id,
+          record.source,
+          record.destination,
+          moment(record.created_at).format('DD/MM/YYYY'),
+          moment(record.updated_at).format('DD/MM/YYYY')
+        ].join(',')),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "redirecionamentos-contemp.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Erro ao exportar redirecionamentos:");
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+
+  const MenuExportFileCSV = async () => {
+    try {
+      const { data } = await api.get('getAllFiles');
+
+      const csvContent = [
+        'Id, Nome, Url, Adicionado em, Atualizado em',
+        ...data.map((file: any) => [
+          file.id,
+          file.name,
+          `https://contemp.com.br/api/arquivos/${replaceNameToUrl(file.name).toLowerCase().replaceAll(' ', '_')}`,
+          moment(file.created_at).format('DD/MM/YYYY'),
+          moment(file.updated_at).format('DD/MM/YYYY')
+        ].join(',')),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "arquivos-contemp.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Erro ao exportar arquivos:");
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+
   const exportExcel = async () => {
     const { data } = await api.get('getAllCategory');
     const workbook = new ExcelJS.Workbook();
@@ -186,17 +257,47 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     const { data } = await api.get('getAllProductsWidthCategory');
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-  
+
     // Cabeçalho atualizado com a coluna "Layout"
     sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL']);
-  
+
     data.map((product: any) => {
       // Adiciona a coluna "Layout" a cada linha
       sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `Layout ${product.layout ? product.layout : 1}`, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-  
+
     const blob = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
+  };
+
+  const MenuExportUrlExcel = async () => {
+    const { data } = await api.get('/getAllUrls');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Urls');
+
+    sheet.addRow(['Id', 'Origem', 'Destino', 'Adicionado em', 'Atualizado em']);
+
+    data.map((record: any) => {
+      sheet.addRow([record.id, record.source, record.destination, moment(record.created_at).format('DD/MM/YYYY'), moment(record.updated_at).format('DD/MM/YYYY')]);
+    });
+
+    const blob = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'exportar-urls-contemp.xlsx');
+  };
+
+  const MenuExportFileExcel = async () => {
+    const { data } = await api.get('getAllFiles');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Urls');
+
+    sheet.addRow(['Id', 'Nome', 'Adicionado em', 'Atualizado em', 'Url']);
+
+    data.map((file: any) => {
+      sheet.addRow([file.id, file.name, moment(file.created_at).format('DD/MM/YYYY'), moment(file.updated_at).format('DD/MM/YYYY'), `https://contemp.com.br/produto/${replaceNameToUrl(file.name).toLowerCase().replaceAll(' ', '_')}`]);
+    });
+
+    const blob = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'exportar-arquivos-contemp.xlsx');
   };
 
 
@@ -486,13 +587,13 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
 
                 </VStack>
               )}
-              
+
 
               <Button
                 className="adm-botao-sidemenu"
                 variant="ghost"
                 width="100%"
-                onClick={() => setActiveTab(3)}
+                onClick={toggleFilesSubmenu}
                 justifyContent="start"
               >
                 <Flex justifyContent="space-between" width="100%" alignItems="center">
@@ -510,37 +611,155 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
+                  {isFileActive ? <FaCaretUp /> : <FaCaretDown />}
                 </Flex>
               </Button>
 
+              {/* Submenu para 'Arquivos' */}
+              {activeSubTab === 'arquivo' && (
+                <VStack spacing={2} align="stretch" mt="3">
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportFileCSV}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar Arquivos CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar CSV</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+                  {/*Exportar Produto em Arquivos*/}
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportFileExcel}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar Arquivos em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar XSLXl</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
 
-              {user.super_adm &&
-                <Button
-                  className="adm-botao-sidemenu"
-                  variant="ghost"
-                  width="100%"
-                  onClick={() => setActiveTab(4)}
-                  justifyContent="start"
-                >
-                  <Flex justifyContent="space-between" width="100%" alignItems="center">
-                    <Box display="flex" alignItems="center">
-                      {!isExpanded ? (
-                        <Tooltip label="URL's" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
-                          <span>
+                </VStack>
+              )}
+
+
+              {
+                user.super_adm && (
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={toggleRedirecionamentosSubmenu}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="URL's" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <FiCompass />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
                             <FiCompass />
-                          </span>
-                        </Tooltip>
-                      ) : (
-                        <>
-                          <FiCompass />
-                          <Text ml="2">URL's</Text>
-                        </>
-                      )}
-                    </Box>
-                  </Flex>
-                </Button>
-
+                            <Text ml="2">URL's</Text>
+                          </>
+                        )}
+                      </Box>
+                      {isRedirecionamentoActive ? <FaCaretUp /> : <FaCaretDown />}
+                    </Flex>
+                  </Button>
+                )
               }
+
+              {/* Submenu para 'Redirecionamentos' */}
+              {
+                activeSubTab === 'url' && (
+                  <VStack spacing={2} align="stretch" mt="3">
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={MenuExportUrlCSV}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Exportar CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <RiFileExcel2Line />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <RiFileExcel2Line />
+                              <Text ml="2">Exportar CSV</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+
+                    {/* Exportar Redirecionamentos em Excel */}
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={MenuExportUrlExcel}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Exportar em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <RiFileExcel2Line />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <RiFileExcel2Line />
+                              <Text ml="2">Exportar XSLX</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+                  </VStack>
+                )
+              }
+
               {user.super_adm &&
                 <Button
                   className="adm-botao-sidemenu"
