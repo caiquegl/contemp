@@ -654,7 +654,7 @@ a:hover {
     border-radius: 50px !important;
     color: var(--gray-text) !important;
     background-color: var(--graylight-primary) !important;
-    font-size: 0.75rem !important;;
+    font-size: 0.75rem !important;
 }
 .checkboxtabela:checked,
 .ant-checkbox-checked {
@@ -666,15 +666,17 @@ a:hover {
 #tabela-categoria,
 #tabela-produtos,
 #tabela-documentos,
-#tabela-description {
+#tabela-description,
+#tabela-banners {
     font-size: .85rem !important;
 }
 #tabela-categoria thead tr th,
 #tabela-produtos thead tr th,
 #tabela-documentos thead tr th,
-#tabela-description thead tr th {
-    font-weight: bold;
-    text-transform: uppercase;
+#tabela-description thead tr th,
+#tabela-banners thead tr th{
+    font-weight: bold !important;
+    text-transform: uppercase !important;
     line-height: 1rem !important;
 }
 
@@ -682,7 +684,8 @@ a:hover {
 #tabela-produtos tbody tr td,
 #tabela-documentos tbody tr td,
 #tabela-produtos tbody tr td,
-#tabela-description tbody tr td{
+#tabela-description tbody tr td,
+#tabela-banners tbody tr td {
     padding: 10px 16px;
 }
 

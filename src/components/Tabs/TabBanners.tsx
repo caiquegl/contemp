@@ -75,12 +75,12 @@ const TabUsers: React.FC = () => {
   const columns = [
     {
       title: (
-        <Checkbox/>
+        <Checkbox />
       ),
       key: 'selectAll',
       width: 50,
       render: (record: any) => (
-        <Checkbox/>
+        <Checkbox />
       ),
     },
     {
@@ -92,7 +92,7 @@ const TabUsers: React.FC = () => {
       title: 'Imagem',
       dataIndex: 'picture',
       key: 'picture',
-      render: (picture: any) =>  (
+      render: (picture: any) => (
         <>
           {picture &&
             <Avatar src={'https://contemp.com.br/api/arquivos/2.png'} />
@@ -117,18 +117,18 @@ const TabUsers: React.FC = () => {
           Desktop
         </Badge>
       ),
-    },    
+    },
     {
       title: 'Adicionado em',
       dataIndex: '',
-      key:'',
+      key: '',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
     },
     {
       title: 'Atualizado em',
       dataIndex: 'updated_at',
-      key:'updated_at',
+      key: 'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
     },
@@ -152,12 +152,12 @@ const TabUsers: React.FC = () => {
                 as={PiPencilSimpleBold}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-                //onClick={() => {
-                  //setSelectItem(user)
-                  //form.setFieldValue('name', user.name)
-                 // form.setFieldValue('email', user.email)
-                  //setModalVisible(true)
-                //}}
+              //onClick={() => {
+              //setSelectItem(user)
+              //form.setFieldValue('name', user.name)
+              // form.setFieldValue('email', user.email)
+              //setModalVisible(true)
+              //}}
               />
             </Box>
           </Tooltip>
@@ -177,7 +177,7 @@ const TabUsers: React.FC = () => {
                 as={FaDeleteLeft}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-                //onClick={() => handleDeleteRedirect(user.id)}
+              //onClick={() => handleDeleteRedirect(user.id)}
               />
             </Box>
           </Tooltip>
@@ -221,28 +221,61 @@ const TabUsers: React.FC = () => {
           Adicionar banner
         </Button>
       </Flex>
-      <Table
-      id='tabela-description'
-        columns={columns}
-        dataSource={redirects}
-        loading={loading}
-        scroll={{ x: 'fit-content' }}
-        word-wrap={'break-word'}
-        pagination={{
-          ...pagination,
-          showSizeChanger: true,
-          showQuickJumper: false,
-          pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
-          onShowSizeChange: (current: number, pageSize: number) => {
-            setPagination({
-              ...pagination,
-              current,
-              pageSize,
-            })
-          },
-        }}
-        onChange={handleTableChange}
-      />
+      <Tabs mt={'5%'}>
+        <TabList>
+          <Tab
+            _selected={{
+              bg: 'red.600',
+              color: 'white',
+              fontWeight: 'bold',
+              borderRadius: '8px',
+            }}
+            w={pxToRem(133)}
+            color='black.800'>
+            Desktop
+          </Tab>
+          <Tab
+            _selected={{
+              bg: 'red.600',
+              color: 'white',
+              fontWeight: 'bold',
+              borderRadius: '8px',
+            }}
+            w={pxToRem(133)}
+            color='black.800'>
+            Mobile
+          </Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
+              Banners Desktop
+            </Heading>
+            <Table
+              id='tabela-banners'
+              columns={columns}
+              dataSource={redirects}
+              loading={loading}
+              scroll={{ x: 'fit-content' }}
+              word-wrap={'break-word'}
+              pagination={{
+                ...pagination,
+                showSizeChanger: true,
+                showQuickJumper: false,
+                pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
+                onShowSizeChange: (current: number, pageSize: number) => {
+                  setPagination({
+                    ...pagination,
+                    current,
+                    pageSize,
+                  })
+                },
+              }}
+              onChange={handleTableChange}
+            />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       {modalVisible &&
         <Modal
@@ -264,16 +297,16 @@ const TabUsers: React.FC = () => {
             key={selectItem?.id}
             layout="horizontal"
             form={form}
-            //onFinish={updateBanner}
+          //onFinish={updateBanner}
           >
             <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
               <Input />
             </Form.Item>
             <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
-              <Input type='email'/>
+              <Input type='email' />
             </Form.Item>
 
-            <Form.Item label='Imagem'  name="picture">
+            <Form.Item label='Imagem' name="picture">
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
@@ -307,18 +340,18 @@ const TabUsers: React.FC = () => {
           <Form
             layout="horizontal"
             form={form}
-            //onFinish={createBanner}
+          //onFinish={createBanner}
           >
             <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
               <Input />
             </Form.Item>
             <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
-              <Input type='email'/>
+              <Input type='email' />
             </Form.Item>
             <Form.Item label='Senha' rules={[{ required: true, message: 'Campo obrigatório' }]} name="password">
-              <Input type='password'/>
+              <Input type='password' />
             </Form.Item>
-            <Form.Item label='Foto'  name="picture">
+            <Form.Item label='Foto' name="picture">
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'

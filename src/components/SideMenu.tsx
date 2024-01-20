@@ -142,30 +142,59 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
               {/* Submenu para 'Home' */}
               {activeSubTab === 'home' && user.super_adm && (
                 <VStack spacing={2} align="stretch" mt="3">
-                  <Button
-                    className="adm-botao-sidemenu"
-                    variant="ghost"
-                    width="100%"
-                    onClick={() => setActiveTab(6)}
-                    justifyContent="start"
-                  >
-                    <Flex justifyContent="start" alignItems="center">
-                      {isExpanded ? <BiCarousel /> : <BiCarousel />}
-                      {isExpanded && <Text ml="2">Banner Home</Text>}
-                    </Flex>
-                  </Button>
-                  <Button
-                    className="adm-botao-sidemenu"
-                    variant="ghost"
-                    width="100%"
-                    onClick={() => setActiveTab(2)}
-                    justifyContent="start"
-                  >
-                    <Flex justifyContent="start" alignItems="center">
-                      {isExpanded ? <FiHexagon /> : <FiHexagon />}
-                      {isExpanded && <Text ml="2">Cards Home</Text>}
-                    </Flex>
-                  </Button>
+                  {user.super_adm &&
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={() => setActiveTab(6)}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Banner Home" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <BiCarousel />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <BiCarousel />
+                              <Text ml="2">Banner Home</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+                  }
+                  {user.super_adm &&
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={() => setActiveTab(2)}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Cards Home" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <FiHexagon />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <FiHexagon />
+                              <Text ml="2">Cards Home</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+                  }
+
                 </VStack>
               )}
               <Button
@@ -177,12 +206,23 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
               >
                 <Flex justifyContent="space-between" width="100%" alignItems="center">
                   <Box display="flex" alignItems="center">
-                    <PiCardholderDuotone />
-                    {isExpanded && <Text ml="2">Categorias</Text>}
+                    {!isExpanded ? (
+                      <Tooltip label="Categorias" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                        <span>
+                          <PiCardholderDuotone />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <PiCardholderDuotone />
+                        <Text ml="2">Categorias</Text>
+                      </>
+                    )}
                   </Box>
                   {isCategoriaActive ? <FaCaretUp /> : <FaCaretDown />}
                 </Flex>
               </Button>
+
               {/* Submenu para 'Categorias' */}
               {activeSubTab === 'categoria' && (
                 <VStack spacing={2} align="stretch" mt="3">
@@ -193,11 +233,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     onClick={() => alert('Exportar CSV')}
                     justifyContent="start"
                   >
-                    <Flex justifyContent="start" alignItems="center">
-                      {isExpanded ? <RiFileExcel2Line /> : <RiFileExcel2Line />}
-                      {isExpanded && <Text ml="2">Exportar em CSV</Text>}
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar em CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar em CSV</Text>
+                          </>
+                        )}
+                      </Box>
                     </Flex>
                   </Button>
+
                 </VStack>
               )}
               <Button
@@ -207,9 +260,21 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 onClick={() => setActiveTab(2)}
                 justifyContent="start"
               >
-                <Flex justifyContent="start" alignItems="center">
-                  <MdOutlineProductionQuantityLimits />
-                  {isExpanded && <Text ml="2">Produtos</Text>}
+                <Flex justifyContent="space-between" width="100%" alignItems="center">
+                  <Box display="flex" alignItems="center">
+                    {!isExpanded ? (
+                      <Tooltip label="Produtos" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                        <span>
+                          <MdOutlineProductionQuantityLimits />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <MdOutlineProductionQuantityLimits />
+                        <Text ml="2">Produtos</Text>
+                      </>
+                    )}
+                  </Box>
                 </Flex>
               </Button>
 
@@ -220,11 +285,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 onClick={() => setActiveTab(3)}
                 justifyContent="start"
               >
-                <Flex justifyContent="start" alignItems="center">
-                  <BsArchive />
-                  {isExpanded && <Text ml="2">Arquivos</Text>}
+                <Flex justifyContent="space-between" width="100%" alignItems="center">
+                  <Box display="flex" alignItems="center">
+                    {!isExpanded ? (
+                      <Tooltip label="Arquivos" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                        <span>
+                          <BsArchive />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <BsArchive />
+                        <Text ml="2">Arquivos</Text>
+                      </>
+                    )}
+                  </Box>
                 </Flex>
               </Button>
+
 
               {user.super_adm &&
                 <Button
@@ -234,11 +312,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   onClick={() => setActiveTab(4)}
                   justifyContent="start"
                 >
-                  <Flex justifyContent="start" alignItems="center">
-                    <FiCompass />
-                    {isExpanded && <Text ml="2">URL's</Text>}
+                  <Flex justifyContent="space-between" width="100%" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                      {!isExpanded ? (
+                        <Tooltip label="URL's" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                          <span>
+                            <FiCompass />
+                          </span>
+                        </Tooltip>
+                      ) : (
+                        <>
+                          <FiCompass />
+                          <Text ml="2">URL's</Text>
+                        </>
+                      )}
+                    </Box>
                   </Flex>
                 </Button>
+
               }
               {user.super_adm &&
                 <Button
@@ -248,11 +339,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   onClick={() => setActiveTab(5)}
                   justifyContent="start"
                 >
-                  <Flex justifyContent="start" alignItems="center">
-                    <FaRegUserCircle />
-                    {isExpanded && <Text ml="2">Usuários</Text>}
+                  <Flex justifyContent="space-between" width="100%" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                      {!isExpanded ? (
+                        <Tooltip label="Usuários" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                          <span>
+                            <FaRegUserCircle />
+                          </span>
+                        </Tooltip>
+                      ) : (
+                        <>
+                          <FaRegUserCircle />
+                          <Text ml="2">Usuários</Text>
+                        </>
+                      )}
+                    </Box>
                   </Flex>
                 </Button>
+
               }
             </VStack>
 
@@ -272,11 +376,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 onClick={handleExportCSV}
                 justifyContent="start"
               >
-                <Flex justifyContent="start" alignItems="center">
-                  <DownloadOutlined />
-                  {isExpanded && <Text ml="2">Baixar Logs</Text>}
+                <Flex justifyContent="space-between" width="100%" alignItems="center">
+                  <Box display="flex" alignItems="center">
+                    {!isExpanded ? (
+                      <Tooltip label="Baixar Logs" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                        <span>
+                          <DownloadOutlined />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <DownloadOutlined />
+                        <Text ml="2">Baixar Logs</Text>
+                      </>
+                    )}
+                  </Box>
                 </Flex>
               </Button>
+
               <Button
                 className="adm-botao-sidemenu"
                 variant="ghost"
@@ -284,11 +401,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 onClick={onOpen}
                 justifyContent="start"
               >
-                <Flex justifyContent="start" alignItems="center">
-                  <AiOutlineHistory />
-                  {isExpanded && <Text ml="2">Ver Logs</Text>}
+                <Flex justifyContent="space-between" width="100%" alignItems="center">
+                  <Box display="flex" alignItems="center">
+                    {!isExpanded ? (
+                      <Tooltip label="Ver Logs" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                        <span>
+                          <AiOutlineHistory />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <AiOutlineHistory />
+                        <Text ml="2">Ver Logs</Text>
+                      </>
+                    )}
+                  </Box>
                 </Flex>
               </Button>
+
             </Stack>
           </VStack>
           <Box textAlign="center">
