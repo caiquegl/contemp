@@ -10,6 +10,7 @@ import {
   IconButton,
   VStack,
   Stack,
+  Tooltip,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -83,9 +84,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
         top="2"
         left={isExpanded ? "calc(250px + 10px)" : "calc(80px + 10px)"}
         zIndex="sticky"
+        backgroundColor={'white'}
       />
 
-      <Box bg="#fff" width={isExpanded ? "250px" : "80px"} height="100vh" overflowY="auto" position="fixed" zIndex="sticky">
+      <Box bg="#fff" width={isExpanded ? "250px" : "80px"} height="100vh" overflowY="auto" position="fixed" zIndex="sticky" boxShadow={'8px 0px 63px -9px rgba(0,0,0,0.1)'}>
         <Flex direction="column" height="100%" p="3">
           <VStack w={'100%'} flex="1" spacing={4}>
             <Flex align="center" mb="0" justifyContent='space-between'>
@@ -117,12 +119,22 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 variant="ghost"
                 width="100%"
                 onClick={toggleHomeSubmenu}
-                justifyContent="start" // Alinha o conteúdo à esquerda
+                justifyContent="start"
               >
                 <Flex justifyContent="space-between" width="100%" alignItems="center">
                   <Box display="flex" alignItems="center">
-                    <GoHome />
-                    {isExpanded && <Text ml="2">Home</Text>}
+                    {!isExpanded ? (
+                      <Tooltip label="Home" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'} >
+                        <span>
+                          <GoHome />
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <>
+                        <GoHome />
+                        <Text ml="2">Home</Text>
+                      </>
+                    )}
                   </Box>
                   {isHomeActive ? <FaCaretUp /> : <FaCaretDown />}
                 </Flex>
@@ -134,7 +146,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     className="adm-botao-sidemenu"
                     variant="ghost"
                     width="100%"
-                    onClick={() => alert('Ação Carrossel Home')}
+                    onClick={() => setActiveTab(6)}
                     justifyContent="start"
                   >
                     <Flex justifyContent="start" alignItems="center">
@@ -146,7 +158,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     className="adm-botao-sidemenu"
                     variant="ghost"
                     width="100%"
-                    onClick={() => alert('Ação Cards Home')}
+                    onClick={() => setActiveTab(2)}
                     justifyContent="start"
                   >
                     <Flex justifyContent="start" alignItems="center">
