@@ -682,18 +682,6 @@ const TabCategory: React.FC<TabCategoryProps> = ({ menuExpanded }) => {
     pdf.save('categorias.pdf');
   };*/}
 
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <>
         <Box w={'100%'}>

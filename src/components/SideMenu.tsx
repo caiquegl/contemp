@@ -24,6 +24,11 @@ import { GoHome } from "react-icons/go";
 import { FiCompass, FiHexagon } from "react-icons/fi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import React from 'react';
+import { api } from '../lib/axios'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import moment from 'moment';
+import saveAs from 'file-saver';
+import ExcelJS from 'exceljs';
 import { FaCaretDown, FaCaretUp, FaRegUserCircle, FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { PiCardholderDuotone } from "react-icons/pi";
 import { RiFileExcel2Line, RiCloseCircleLine } from "react-icons/ri";
@@ -72,6 +77,39 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setActiveTab(1);
     setActiveSubTab(activeSubTab === 'categoria' ? '' : 'categoria');
   };
+
+  const exportarCSV = async () => {
+    try {
+      const { data } = await api.get('getAllCategory');
+  
+      const csvContent = [
+        'Ordem Geral,Ordem em todos produtos,Nome,Status,Categoria Destaque,Url,Adicionado em,Atualizado em',
+        ...data.map((categoria: any) => [
+          categoria.order,
+          categoria.order_all_products ?? '',
+          categoria.name,
+          categoria.is_active ? 'Ativa' : 'Inativa',
+          categoria.favorite ? 'Sim' : 'Não',
+          `https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')}`,
+          moment(categoria.created_at).format('DD/MM/YYYY'),
+          moment(categoria.updated_at).format('DD/MM/YYYY')
+        ].join(',')),
+      ].join('\n');
+  
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "categorias.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Erro ao exportar categorias:", error);
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+  
 
   return (
     <Flex direction="column" position="relative" height="100vh">
@@ -230,7 +268,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     className="adm-botao-sidemenu"
                     variant="ghost"
                     width="100%"
-                    onClick={() => alert('Exportar CSV')}
+                    onClick={exportarCSV}
                     justifyContent="start"
                   >
                     <Flex justifyContent="space-between" width="100%" alignItems="center">
