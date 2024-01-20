@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import Logo from '../assets/icons/Logo-Contemp.svg';
 import LogoCinza from '../assets/icons/Logo-Contemp-Cinza.svg';
 import LogoIcone from '../assets/icons/Logo-Contemp-Icone.svg';
@@ -28,6 +28,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import React from 'react';
 import { api } from '../lib/axios'
 import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import InputsHome from './ContainerHome/inputs'
 import moment from 'moment';
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
@@ -56,6 +57,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isActive, setIsActive] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
   const [isCategoriaActive, setIsCategoriaActive] = useState(false);
+  const [isProdutoActive, setIsProdutoActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleMenu = () => {
@@ -78,6 +80,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsCategoriaActive(!isCategoriaActive);
     setActiveTab(1);
     setActiveSubTab(activeSubTab === 'categoria' ? '' : 'categoria');
+  };
+
+  const toggleProdutosSubmenu = () => {
+    setIsProdutoActive(!isProdutoActive);
+    setActiveTab(2);
+    setActiveSubTab(activeSubTab === 'produto' ? '' : 'produto');
   };
 
   const exportarCSV = async () => {
@@ -112,6 +120,39 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     }
   };
 
+  const MenuExportProdutoCSV = async () => {
+    try {
+      const { data } = await api.get('getAllProductsWidthCategory');
+
+      const csvContent = [
+        'Ordem,Nome,Categoria,Status,Criado em, Atualizado em,Destaque,Layout,Url',
+        ...data.map((product: any) => [
+          product.order,
+          product.name,
+          product.category.name,
+          product.isActive ? 'Ativo' : 'Inativo',
+          product.destaque ? 'Destaque' : 'Não Destaque',
+          product.layout,
+          `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`,
+          moment(product.created_at).format('DD/MM/YYYY'),
+          moment(product.updated_at).format('DD/MM/YYYY')
+        ].join(',')),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "produtos-contemp.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Erro ao exportar produtos:");
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+
   const exportExcel = async () => {
     const { data } = await api.get('getAllCategory');
     const workbook = new ExcelJS.Workbook();
@@ -141,6 +182,23 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'categorias_export.xlsx');
   };
 
+  const MenuExportProdutoExcel = async () => {
+    const { data } = await api.get('getAllProductsWidthCategory');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Produtos');
+  
+    // Cabeçalho atualizado com a coluna "Layout"
+    sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL']);
+  
+    data.map((product: any) => {
+      // Adiciona a coluna "Layout" a cada linha
+      sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `Layout ${product.layout ? product.layout : 1}`, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
+    });
+  
+    const blob = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
+  };
+
 
   return (
     <Flex direction="column" position="relative" height="100vh">
@@ -166,7 +224,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 {isExpanded && <Text color="#212121" fontSize="sm" noOfLines={1}> {date} </Text>}
               </VStack>
               {isExpanded && <IconButton
-                aria-label="Opções"
+                aria-label="EditarMeuPerfil"
+                id='EditarMeuPerfil'
                 icon={<RxHamburgerMenu />}
                 variant="ghost"
                 colorScheme="gray"
@@ -350,7 +409,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                 className="adm-botao-sidemenu"
                 variant="ghost"
                 width="100%"
-                onClick={() => setActiveTab(2)}
+                onClick={toggleProdutosSubmenu}
                 justifyContent="start"
               >
                 <Flex justifyContent="space-between" width="100%" alignItems="center">
@@ -368,8 +427,66 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
+                  {isProdutoActive ? <FaCaretUp /> : <FaCaretDown />}
                 </Flex>
               </Button>
+
+              {/* Submenu para 'Produtos' */}
+              {activeSubTab === 'produto' && (
+                <VStack spacing={2} align="stretch" mt="3">
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportProdutoCSV}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar CSV</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+                  {/*Exportar Produto em Excel*/}
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportProdutoExcel}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar XSLXl</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+
+                </VStack>
+              )}
+              
 
               <Button
                 className="adm-botao-sidemenu"
@@ -530,3 +647,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
 };
 
 export default SideMenu;
+
+function setIsProdutoActive(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
