@@ -221,7 +221,7 @@ const TabUsers: React.FC = () => {
           Adicionar banner
         </Button>
       </Flex>
-      <Tabs mt={'5%'}>
+      <Tabs mt={'5%'} variant='unstyled'>
         <TabList>
           <Tab
             _selected={{

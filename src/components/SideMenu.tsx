@@ -15,6 +15,8 @@ import {
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import Logo from '../assets/icons/Logo-Contemp.svg';
+import LogoCinza from '../assets/icons/Logo-Contemp-Cinza.svg';
+import LogoIcone from '../assets/icons/Logo-Contemp-Icone.svg';
 import { AiOutlineHistory } from 'react-icons/ai';
 import { DownloadOutlined } from '@ant-design/icons';
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -81,7 +83,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const exportarCSV = async () => {
     try {
       const { data } = await api.get('getAllCategory');
-  
+
       const csvContent = [
         'Ordem Geral,Ordem em todos produtos,Nome,Status,Categoria Destaque,Url,Adicionado em,Atualizado em',
         ...data.map((categoria: any) => [
@@ -95,7 +97,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
           moment(categoria.updated_at).format('DD/MM/YYYY')
         ].join(',')),
       ].join('\n');
-  
+
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -109,7 +111,36 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
       // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
     }
   };
-  
+
+  const exportExcel = async () => {
+    const { data } = await api.get('getAllCategory');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Categorias');
+
+    // Adicione cabeçalhos
+    sheet.addRow(['Ordem Geral', 'Ordem em todos produtos', 'Nome', 'Status', 'Destaque', 'Url', 'Adicionado em', 'Atualizado em']);
+
+    // Adicione dados
+    data.map((categoria: any) => {
+      sheet.addRow([
+        categoria.order,
+        categoria.order_all_products ?? '',
+        categoria.name,
+        categoria.is_active ? 'Ativa' : 'Inativa',
+        categoria.favorite ? 'Sim' : 'Não',
+        `https://contemp.com.br/category/${replaceNameToUrl(categoria.name).toLowerCase().replaceAll(' ', '_')}`,
+        moment(categoria.created_at).format('DD/MM/YYYY'),
+        moment(categoria.updated_at).format('DD/MM/YYYY')
+      ]);
+    });
+
+    // Crie um Blob a partir do workbook
+    const blob = await workbook.xlsx.writeBuffer();
+
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'categorias_export.xlsx');
+  };
+
 
   return (
     <Flex direction="column" position="relative" height="100vh">
@@ -274,7 +305,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     <Flex justifyContent="space-between" width="100%" alignItems="center">
                       <Box display="flex" alignItems="center">
                         {!isExpanded ? (
-                          <Tooltip label="Exportar em CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                          <Tooltip label="Exportar CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
                             <span>
                               <RiFileExcel2Line />
                             </span>
@@ -282,7 +313,31 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                         ) : (
                           <>
                             <RiFileExcel2Line />
-                            <Text ml="2">Exportar em CSV</Text>
+                            <Text ml="2">Exportar CSV</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={exportExcel}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar XSLXl</Text>
                           </>
                         )}
                       </Box>
@@ -459,12 +514,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
 
             </Stack>
           </VStack>
-          <Box textAlign="center">
+          <Box textAlign="center" mb="10">
             <Divider my="4" />
-            {isExpanded && <Link href='/' mb="5">
-              <Image src={Logo} width={160} height={41} />
-            </Link>}
-
+            <Link href='/'>
+              {isExpanded
+                ? <Image src={LogoCinza} width={120} height={40} />
+                : <Image src={LogoIcone} width={160} height={80} />
+              }
+            </Link>
           </Box>
         </Flex>
       </Box>
