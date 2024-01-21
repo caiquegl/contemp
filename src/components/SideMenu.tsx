@@ -29,16 +29,16 @@ import moment from 'moment';
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
 import RotatingIcon from '../components/RotatingIcon';
-import { FaCaretDown, FaCaretUp, FaRegUserCircle, FaCaretLeft, FaCaretRight } from "react-icons/fa";
-import { PiCardholderDuotone } from "react-icons/pi";
 import { RiFileExcel2Line, RiCloseCircleLine } from "react-icons/ri";
 import { AiOutlineHistory } from 'react-icons/ai';
 import { DownloadOutlined } from '@ant-design/icons';
 import { BiExport, BiCarousel } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { LuMailOpen, LuUser, LuCompass, LuHexagon, LuArchive, LuShirt, LuHome, LuLogOut, LuYoutube } from "react-icons/lu";
+import { LuMailOpen, LuUser, LuCompass, LuHexagon, LuArchive, LuShirt, LuHome, LuLogOut, LuYoutube, LuLayoutDashboard } from "react-icons/lu";
 import { PiCardholderBold } from "react-icons/pi";
 import { TbPencil } from "react-icons/tb";
+import { FaMeta } from "react-icons/fa6";
+import { SiGoogleanalytics } from "react-icons/si";
 
 interface SideMenuProps {
   user: {
@@ -64,6 +64,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isProdutoActive, setIsProdutoActive] = useState(false);
   const [isRedirecionamentoActive, setIsRedirecionamentoActive] = useState(false);
   const [isFileActive, setIsFileActive] = useState(false);
+  const [isDashActive, setIsDashActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleMenu = () => {
@@ -103,6 +104,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsFileActive(!isFileActive);
     setActiveTab(3);
     setActiveSubTab(activeSubTab === 'arquivo' ? '' : 'arquivo');
+  };
+
+  const toggleDashsSubmenu = () => {
+    setIsDashActive(!isDashActive);
+    setActiveTab(4);
+    setActiveSubTab(activeSubTab === 'dash' ? '' : 'dash');
   };
 
   const exportarCSV = async () => {
@@ -320,22 +327,22 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
       />
 
       <Box bg="#fff" width={isExpanded ? "250px" : "80px"} height="100vh" overflowY="auto" position="fixed" zIndex="sticky" boxShadow={'8px 0px 63px -9px rgba(0,0,0,0.1)'}
-      sx={{
-        '&::-webkit-scrollbar': {
-          width: '6px',
-        },
-        '&::-webkit-scrollbar-track': {
-          width: '6px',
-          background: '#fafafa',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'lightgrey',
-          borderRadius: '24px',
-        },
-        '&::-webkit-scrollbar-thumb:hover': {
-          background: '#b3b3b3',
-        },
-      }}
+        sx={{
+          '&::-webkit-scrollbar': {
+            width: '6px',
+          },
+          '&::-webkit-scrollbar-track': {
+            width: '6px',
+            background: '#fafafa',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'lightgrey',
+            borderRadius: '24px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#b3b3b3',
+          },
+        }}
       >
         <Flex direction="column" height="100%" p="3">
           <VStack w={'100%'} flex="1" spacing={4}>
@@ -371,18 +378,18 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     </MenuItem>
                     <Divider my="4" />
                     <MenuItem
-                    color={'#242424'}
-                    fontSize={'1rem'}
-                    onClick={onOpen}
-                    icon={<AiOutlineHistory />}
+                      color={'#242424'}
+                      fontSize={'1rem'}
+                      onClick={onOpen}
+                      icon={<AiOutlineHistory />}
                     >
                       Ver Log's
                     </MenuItem>
                     <MenuItem
-                    color={'#242424'}
-                    fontSize={'1rem'}
-                    onClick={handleExportCSV}
-                    icon={<DownloadOutlined />}
+                      color={'#242424'}
+                      fontSize={'1rem'}
+                      onClick={handleExportCSV}
+                      icon={<DownloadOutlined />}
                     >
                       Baixar Log's
                     </MenuItem>
@@ -398,9 +405,100 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   </MenuList>
                 </Menu>
               )}
-
-
             </Flex>
+
+            {
+              user.super_adm && (
+                <VStack w={'90%'} spacing={2} align="stretch" mb={'0%'}>
+                  <Divider my="4" />
+                  <Box>
+                    <Flex alignItems='center' justifyContent='space-between'>
+                      {isExpanded && <Heading as={'h1'} className='adm-titulo text-black negrito' textAlign={'left'}>Painel Master</Heading>}
+                    </Flex>
+                  </Box>
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={toggleDashsSubmenu}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Dashboard" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <LuLayoutDashboard />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <LuLayoutDashboard />
+                            <Text ml="2">Dashboard</Text>
+                          </>
+                        )}
+                      </Box>
+                      {isExpanded && <RotatingIcon isActive={isDashActive} />}
+                    </Flex>
+                  </Button>
+                  {/* Submenu para 'Dashboard' */}
+                  {
+                    activeSubTab === 'dash' && (
+                      <VStack spacing={2} align="stretch" mt="3">
+                        <Button
+                          className="adm-botao-sidemenu"
+                          variant="ghost"
+                          width="100%"
+                          justifyContent="start"
+                        >
+                          <Flex justifyContent="space-between" width="100%" alignItems="center">
+                            <Box display="flex" alignItems="center">
+                              {!isExpanded ? (
+                                <Tooltip label="Dados Instagram e Facebook" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                                  <span>
+                                    <FaMeta />
+                                  </span>
+                                </Tooltip>
+                              ) : (
+                                <>
+                                  <FaMeta />
+                                  <Text ml="2">Dados Meta</Text>
+                                </>
+                              )}
+                            </Box>
+                          </Flex>
+                        </Button>
+
+                        {/* Exportar Redirecionamentos em Excel */}
+                        <Button
+                          className="adm-botao-sidemenu"
+                          variant="ghost"
+                          width="100%"
+                          justifyContent="start"
+                        >
+                          <Flex justifyContent="space-between" width="100%" alignItems="center">
+                            <Box display="flex" alignItems="center">
+                              {!isExpanded ? (
+                                <Tooltip label="Dados Site" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                                  <span>
+                                    <SiGoogleanalytics />
+                                  </span>
+                                </Tooltip>
+                              ) : (
+                                <>
+                                  <SiGoogleanalytics />
+                                  <Text ml="2">Dados Site</Text>
+                                </>
+                              )}
+                            </Box>
+                          </Flex>
+                        </Button>
+                      </VStack>
+                    )
+                  }
+                </VStack>
+              )
+            }
 
             <VStack w={'90%'} spacing={2} align="stretch" mb={'0%'}>
               <Divider my="4" />
@@ -502,12 +600,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                           {!isExpanded ? (
                             <Tooltip label="Video Yt" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
                               <span>
-                               <LuYoutube />
+                                <LuYoutube />
                               </span>
                             </Tooltip>
                           ) : (
                             <>
-                             <LuYoutube />
+                              <LuYoutube />
                               <Text ml="2">Video Yt</Text>
                             </>
                           )}
