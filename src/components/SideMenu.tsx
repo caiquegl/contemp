@@ -28,6 +28,7 @@ import InputsHome from './ContainerHome/inputs'
 import moment from 'moment';
 import saveAs from 'file-saver';
 import ExcelJS from 'exceljs';
+import RotatingIcon from '../components/RotatingIcon';
 import { FaCaretDown, FaCaretUp, FaRegUserCircle, FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { PiCardholderDuotone } from "react-icons/pi";
 import { RiFileExcel2Line, RiCloseCircleLine } from "react-icons/ri";
@@ -430,7 +431,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
-                  {isHomeActive ? <FaCaretUp /> : <FaCaretDown />}
+                  {isExpanded && <RotatingIcon isActive={isHomeActive} />}
                 </Flex>
               </Button>
               {/* Submenu para 'Home' */}
@@ -539,7 +540,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
-                  {isCategoriaActive ? <FaCaretUp /> : <FaCaretDown />}
+                  {isExpanded && <RotatingIcon isActive={isCategoriaActive} />}
                 </Flex>
               </Button>
 
@@ -619,7 +620,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
-                  {isProdutoActive ? <FaCaretUp /> : <FaCaretDown />}
+                  {isExpanded && <RotatingIcon isActive={isProdutoActive} />}
                 </Flex>
               </Button>
 
@@ -702,7 +703,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </>
                     )}
                   </Box>
-                  {isFileActive ? <FaCaretUp /> : <FaCaretDown />}
+                  {isExpanded && <RotatingIcon isActive={isFileActive} />}
                 </Flex>
               </Button>
 
@@ -787,7 +788,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                           </>
                         )}
                       </Box>
-                      {isRedirecionamentoActive ? <FaCaretUp /> : <FaCaretDown />}
+                      {isExpanded && <RotatingIcon isActive={isRedirecionamentoActive} />}
                     </Flex>
                   </Button>
                 )
