@@ -18,6 +18,10 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Badge,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
   Menu as ChakraMenu, MenuItem as ChakraMenuItem, MenuButton as ChakraMenuButton, MenuList as ChakraMenuList
 } from '@chakra-ui/react';
 
@@ -37,8 +41,8 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { FiCopy } from 'react-icons/fi'
 import { PiInfoDuotone } from "react-icons/pi";
 import { PiPencilSimpleBold } from "react-icons/pi"
-import { FaAngleDown, FaStar } from "react-icons/fa";
-import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
+import { FaAngleDown, FaStar, FaEllipsisV, FaEdit, FaCopy, FaTrashAlt } from "react-icons/fa";
+import { FaDeleteLeft, FaCheck, FaEllipsisVertical } from 'react-icons/fa6'
 import { CheckboxOptionType } from 'antd/lib/checkbox/Group';  // Adicionada a importação aqui
 import toggleDestaqueProduct from '../../pages/api/toggleDestaqueProduct';
 import saveAs from 'file-saver';
@@ -144,6 +148,36 @@ const TabProduct = ({ back }: IProps) => {
     onChange: onSelectChange,
   };
 
+  interface AcoesPopoverProps {
+    onEdit: () => void;
+    onCopy: () => void;
+    onDelete: () => void;
+  }
+
+  const AcoesPopover: React.FC<AcoesPopoverProps> = ({ onEdit, onCopy, onDelete }) => {
+    return (
+      <Popover>
+        <PopoverTrigger>
+          <IconButton
+            aria-label="Mais opções"
+            icon={<FaEllipsisVertical />}
+            size="sm"
+            variant="ghost"
+          />
+        </PopoverTrigger>
+        <PopoverContent maxWidth={'120px'} backgroundColor={'var(--white-primary)'}>
+          <PopoverBody>
+            <HStack spacing={4}>
+              <Icon as={PiPencilSimpleBold} w={5} h={5} onClick={onEdit} cursor="pointer" />
+              <Icon as={FiCopy} w={5} h={5} onClick={onCopy} cursor="pointer" />
+              <Icon as={FaDeleteLeft} w={5} h={5} onClick={onDelete} cursor="pointer" />
+            </HStack>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+    );
+  };
+
   const column = [
     {
       title: (
@@ -156,11 +190,11 @@ const TabProduct = ({ back }: IProps) => {
       width: 50,
       render: (record: any) => (
         <Checkbox
-        onChange={(e) => onSelectChange(e.target.checked ? [...selectedRowKeys, record.id] : selectedRowKeys.filter(key => key !== record.id))}
-        checked={selectedRowKeys.includes(record.id)}
-        style={{
-          color: selectedRowKeys.includes(record.id) ? 'red' : 'inherit',
-        }}
+          onChange={(e) => onSelectChange(e.target.checked ? [...selectedRowKeys, record.id] : selectedRowKeys.filter(key => key !== record.id))}
+          checked={selectedRowKeys.includes(record.id)}
+          style={{
+            color: selectedRowKeys.includes(record.id) ? 'red' : 'inherit',
+          }}
         />
       ),
     },
@@ -331,70 +365,25 @@ const TabProduct = ({ back }: IProps) => {
     {
       title: 'Ações',
       render: (a: any, b: any) => (
-        <HStack spacing='20px'>
-          <Tooltip
-            placement='top'
-            label='Editar Produto'
-            color={'var(--white-primary)'}
-            bg={'var(--red-primary)'}
-            borderRadius={'8px'}
-            textAlign={'center'}
-            hasArrow
-          >
-            <Box>
-              <Icon
-                cursor='pointer'
-                as={PiPencilSimpleBold}
-                fontSize='1.15rem'
-                color='var(--gray-text)'
-                onClick={() => {
-                  setBody(a);
-                  setIsUpdate(true);
-                  setStep(2);
-                }}
-              />
-            </Box>
-          </Tooltip>
-          <Tooltip
-            placement='top'
-            label='Copiar'
-            color={'var(--white-primary)'}
-            bg={'var(--red-primary)'}
-            borderRadius={'8px'}
-            textAlign={'center'}
-            hasArrow
-          >
-            <Box>
-              <FiCopy
-                style={{
-                  cursor: 'pointer',
-                  color: 'var(--gray-text)',
-                }}
-                onClick={() =>
-                  copiarTexto(
-                    `https://contemp.com.br${b && b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}`
-                  )
-                }
-              />
-            </Box>
-          </Tooltip>
-          <Tooltip
-            placement='top'
-            label='Excluir Produto'
-            color={'var(--white-primary)'}
-            bg={'var(--red-primary)'}
-            borderRadius={'8px'}
-            textAlign={'center'}
-            hasArrow
-          >
-            <Box>
-              <Icon cursor='pointer' as={FaDeleteLeft} fontSize='1.15rem' color='var(--gray-text)' onClick={() => openDeleteAlert(a)} />
-            </Box>
-          </Tooltip>
-        </HStack>
+        <AcoesPopover
+          onEdit={() => {
+            setBody(a);
+            setIsUpdate(true);
+            setStep(2);
+          }}
+          onCopy={() => {
+            copiarTexto(
+              `https://contemp.com.br${b && b.name ? `/produto/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}`
+            );
+          }}
+          onDelete={() => {
+            openDeleteAlert(a);
+          }}
+        />
       ),
-    },
+    }
   ];
+
 
   const listProduct = async () => {
     try {
@@ -489,29 +478,29 @@ const TabProduct = ({ back }: IProps) => {
       'Ordem, Nome, Categoria, Status, Criado em, Atualizado em, Destaque, Layout, Url', // Cabeçalho atualizado
       ...list.map((product: any) => `${product.order},${product.name},${product.category.name},${product.isActive ? 'Ativo' : 'Inativo'},${moment(product.created_at).format('DD/MM/YYYY H:mm:s')},${moment(product.updated_at).format('DD/MM/YYYY H:mm:s')},${product.destaque ? 'Destaque' : 'Não Destaque'}, Layout ${product.layout ? product.layout : 1}, https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`),
     ].join('\n');
-  
+
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
     saveAs(blob, 'exportar-produtos.csv');
   };
-  
+
 
 
   const handleExportExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Produtos');
-  
+
     // Cabeçalho atualizado com a coluna "Layout"
     sheet.addRow(['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL']);
-  
+
     list.forEach((product: any) => {
       // Adiciona a coluna "Layout" a cada linha
       sheet.addRow([product.order, product.name, product.category.name, product.isActive ? 'Ativo' : 'Inativo', moment(product.created_at).format('DD/MM/YYYY H:mm:s'), moment(product.updated_at).format('DD/MM/YYYY H:mm:s'), product.destaque ? 'Destaque' : 'Não Destaque', `Layout ${product.layout ? product.layout : 1}`, `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`]);
     });
-  
+
     const blob = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'products_export.xlsx');
   };
-  
+
 
 
 
@@ -574,43 +563,43 @@ const TabProduct = ({ back }: IProps) => {
       pdf.save('produtos-contemp.pdf');
     };*/}
 
-    const toggleDestaque = async (productId: number, currentDestaque: boolean) => {
-      try {
-        // Use a função fetch para chamar sua API
-        const response = await fetch('../../pages/api/toggleDestaqueProduct', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ productId, destaque: currentDestaque }),
-        });
-  
-        const data = await response.json();
-  
-        toast({
-          title: 'Sucesso',
-          description: data.msg,
-          status: 'success',
-        });
-  
-        // Atualize o estado da lista após a alteração do destaque
-        listProduct();
-      } catch (err) {
-        toast({
-          title: 'Erro',
-          description: 'Erro ao alterar destaque',
-          status: 'error',
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-  
+  const toggleDestaque = async (productId: number, currentDestaque: boolean) => {
+    try {
+      // Use a função fetch para chamar sua API
+      const response = await fetch('../../pages/api/toggleDestaqueProduct', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, destaque: currentDestaque }),
+      });
 
-    const handleToggleDestaque = (productId: number, currentDestaque: boolean) => {
-      // Chame a função toggleDestaque
-      toggleDestaque(productId, currentDestaque);
-    };
+      const data = await response.json();
+
+      toast({
+        title: 'Sucesso',
+        description: data.msg,
+        status: 'success',
+      });
+
+      // Atualize o estado da lista após a alteração do destaque
+      listProduct();
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar destaque',
+        status: 'error',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const handleToggleDestaque = (productId: number, currentDestaque: boolean) => {
+    // Chame a função toggleDestaque
+    toggleDestaque(productId, currentDestaque);
+  };
 
 
 
@@ -692,8 +681,8 @@ const TabProduct = ({ back }: IProps) => {
             </Stack>
           </Flex>
 
-          <Box borderRadius='8px' bg='white' p='30px' w='100%'>
-            <Table id='tabela-produtos' loading={loading} scroll={{ x: 'fit-content' }} dataSource={list} columns={column} word-wrap={'break-word'} />
+          <Box borderRadius='8px' bg='white' p='10px' w='100%'>
+            <Table id='tabela-produtos' loading={loading} dataSource={list} columns={column} word-wrap={'break-word'} />
           </Box>
         </>
       )}
