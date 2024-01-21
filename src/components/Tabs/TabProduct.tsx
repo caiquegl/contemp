@@ -491,7 +491,7 @@ const TabProduct = ({ back }: IProps) => {
     ].join('\n');
   
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-    saveAs(blob, 'products_export.csv');
+    saveAs(blob, 'exportar-produtos.csv');
   };
   
 

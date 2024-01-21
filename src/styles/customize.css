@@ -74,14 +74,14 @@ a:hover {
 }
 
 .text-white {
-    color: var(--white-primary);
+    color: var(--white-primary) !important;
 }
 
 .text-black {
-    color: var(--black-primary);
+    color: var(--black-primary) !important;
 }
 .text-red {
-    color: var(--red-primary);
+    color: var(--red-primary) !important;
 }
 .negrito {
     font-weight: bold !important;
