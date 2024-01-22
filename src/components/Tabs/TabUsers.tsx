@@ -13,7 +13,6 @@ import {
   FormControl
 } from '@chakra-ui/react'
 import { Table, Space, message, Modal, Form, Input, Button as BtnAtd, Avatar } from 'antd'
-import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
 import { pxToRem } from '../../utils/pxToRem'
@@ -21,9 +20,10 @@ import { api } from '../../lib/axios'
 import { useRouter } from 'next/router'
 import * as path from 'path'
 import moment from 'moment';
-import { PiPencilSimpleBold } from 'react-icons/pi'
+import { PiPencilSimpleBold, PiCrownSimpleFill } from 'react-icons/pi'
 import { IoPersonRemoveOutline, IoPersonAddOutline, IoAlert } from "react-icons/io5";
 import { FaAngleDown, FaStar } from 'react-icons/fa'
+import { TbCrownOff } from "react-icons/tb";
 import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
@@ -156,12 +156,16 @@ const TabUsers: React.FC = () => {
       title: 'Super Admin',
       dataIndex: 'super_adm',
       key: 'super_adm',
+      width: '3%',
       sorter: (a: any, b: any) => (a.super_adm || '').localeCompare(b.super_adm || ''),
       render: (adm: any) =>  (
         <>
           {adm ?
-            <FaCheck />
-            : <IoAlert />
+            <PiCrownSimpleFill
+            color={'var(--chakra-colors-yellow-400)'}
+            fill={'var(--chakra-colors-yellow-400)'}
+            />
+            : <TbCrownOff />
 
           }
         </>
