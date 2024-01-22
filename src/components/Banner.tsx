@@ -35,13 +35,6 @@ export function Banner() {
       image: 'https://contemp.com.br/api/arquivos/banner-3.webp',
       links: 'https://www.contemp.com.br/a-contemp',
     },
-    {
-      subtitle: '',
-      title: '',
-      text: '',
-      image: 'https://contemp.com.br/api/arquivos/bannerwhatsappcontemp.png',
-      links: 'https://whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c',
-    },
   ];
 
   return (
