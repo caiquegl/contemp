@@ -32,7 +32,7 @@ import moment from 'moment';
 import { PiPencilSimpleBold } from 'react-icons/pi'
 import { IoPersonRemoveOutline, IoPersonAddOutline, IoAlert } from "react-icons/io5";
 import { FaAngleDown, FaStar } from 'react-icons/fa'
-import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
+import { FaDeleteLeft, FaTrash } from 'react-icons/fa6'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { CgScreen } from "react-icons/cg";
@@ -123,6 +123,30 @@ const TabBanners: React.FC = () => {
       toast({
         title: 'Erro',
         description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await fetchData()
+    }
+  }
+
+  const deleteBanner = async (id: number) => {
+    try {
+      setLoading(true)
+      const { data } = await api.put(`deleteBanner`, {
+        id,
+      })
+
+      toast({
+        title: 'Sucesso',
+        description: 'Sucesso ao deletar banner',
+        status: 'success',
+      })
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao deletar banner',
         status: 'error',
       })
     } finally {
@@ -250,6 +274,25 @@ const TabBanners: React.FC = () => {
                 fontSize='1.15rem'
                 color='var(--gray-text)'
                 onClick={() => changeActiveBanner(banner.id, !banner.status)}
+              />
+            </Box>
+          </Tooltip>
+          <Tooltip
+            placement='top'
+            label="Deletar banner"
+            color={'var(--white-primary)'}
+            bg={'var(--red-primary)'}
+            borderRadius={'8px'}
+            textAlign={'center'}
+            hasArrow
+          >
+            <Box>
+              <Icon
+                cursor='pointer'
+                as={FaTrash}
+                fontSize='1.15rem'
+                color='var(--gray-text)'
+                onClick={() => deleteBanner(banner.id)}
               />
             </Box>
           </Tooltip>
