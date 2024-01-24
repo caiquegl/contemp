@@ -18,10 +18,10 @@ import {
   FcManager,
 } from 'react-icons/fc';
 
-import { HiOutlineDocumentText, HiOutlineVideoCamera } from 'react-icons/hi';
-import { FiInstagram, FiFolder } from 'react-icons/fi';
-import { TbPhotoSensor3, TbAlignBoxLeftTop } from 'react-icons/tb';
+import { HiOutlineVideoCamera } from 'react-icons/hi';
+import { TbPhotoSensor3, TbAlignBoxLeftTop, TbPlusMinus } from 'react-icons/tb';
 import { BsFiletypePdf } from 'react-icons/bs';
+import { IoIosFlash } from "react-icons/io";
 
 
 interface CardProps {
@@ -102,7 +102,7 @@ export default function gridListWith() {
           />
           <Card
             heading={'NOVA CATEGORIA DE SENSORES'}
-            icon={<Icon as={TbPhotoSensor3} w={6} h={6} />}
+            icon={<Icon as={TbPlusMinus} w={6} h={6} />}
             description={'Acesse e saiba mais detalhes.'}
             href={'/category/SENSORES'}
           />
@@ -114,7 +114,7 @@ export default function gridListWith() {
           />
           <Card
             heading={'Controladores de Potência'}
-            icon={<Icon as={TbAlignBoxLeftTop} w={6} h={6} />}
+            icon={<Icon as={IoIosFlash} w={6} h={6} />}
             description={'Conheça nossa linha completa.'}
             href={'https://contemp.com.br/category/controladores_de_potência'}
           />

@@ -255,7 +255,7 @@ export const HtmlOrcamento = (
     <body>
         <div class="container">
             <div class="header">
-                Novo contato
+                Novo Oportunidade de Vendas
             </div>
             <div class="containerBody">
                 <p class="big" style="margin-bottom: 20px;">
@@ -391,7 +391,7 @@ export const HtmlRecover = (name?: string, link?: string) => {
     <body>
         <div class="container">
             <div class="header">
-                Novo contato
+                Nova Senha
             </div>
             <div class="containerBody">
                 <p class="big" style="margin-bottom: 20px;">
