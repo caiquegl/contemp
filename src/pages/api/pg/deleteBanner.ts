@@ -12,7 +12,7 @@ export default async function handler(
 
         const body = req.body
 
-      await prisma.users.banners({
+      await prisma.banners.delete({
         where: {
           id: body.id
         }

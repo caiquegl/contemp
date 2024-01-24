@@ -134,7 +134,7 @@ const TabBanners: React.FC = () => {
   const deleteBanner = async (id: number) => {
     try {
       setLoading(true)
-      const { data } = await api.put(`deleteBanner`, {
+      const { data } = await api.post(`deleteBanner`, {
         id,
       })
 
