@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Autoplay, Navigation, Pagination } from 'swiper'
+import { api } from '../lib/axios'
+import { Image } from '@chakra-ui/react'
 
 export function BannerMobile() {
-  const cards = [
+  const [cards, setCards] = useState<any>([])
+ /* const cards = [
     {
       subtitle: '',
       title: '',
@@ -36,8 +39,33 @@ export function BannerMobile() {
       links: 'https://www.contemp.com.br/a-contemp',
     },
   ];
+*/
+  const getBanners = async () => {
+    try {
+      const { data } = await api.post('/getAllBanners', {
+        tabActive: 'Mobile',
+      });
+
+      let actives = data.filter((item: any) => item.status == true).sort((a: any, b: any) => a.order - b.order)
+
+      setCards(actives.map((item: any) => ({
+        subtitle: item.subtitle || '',
+        title: item.title || '',
+        text: item.description || '',
+        image: item.url,
+        links: item.redirect || '',
+      })))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getBanners()
+  }, [])
 
   return (
+    <>
     <Swiper
       spaceBetween={0}
       slidesPerView={1}
@@ -51,19 +79,33 @@ export function BannerMobile() {
       //pagination={{ clickable: true }}
       modules={[Autoplay, Navigation]}
       className='mySwiper banner-mobile'
-      
-      
+
+
     >
-      {cards.map((card, index) => (
+      {cards.map((card: any, index: any) => (
         <SwiperSlide key={`slide-${index + 1}`} id={`slide-${index + 1}`}>
-              <a href={card.links} target="_blank" rel="noopener noreferrer">
+              <a href={card.links} target="_blank" rel="noopener noreferrer"  style={{position: 'relative'}}>
+                <Image
+                  alt={'nome-do-produto'}
+                  src={card.image}
+                  objectFit={'cover'}
+                  className='imagem-card-todososprodutos'
+                  height="450px"
+                  width="100%"
+                  position="absolute"
+                  cursor={'pointer'}
+                  _hover={{
+                    transform: 'scale(1.5)',
+                    transition: 'transform 0.3s ease-in-out',
+                  }}
+                />
           <div
             style={{
-              position: 'relative',
+/*              position: 'relative',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
-              backgroundImage: `url(${card.image})`,
+              backgroundImage: `url(${card.image})`,*/
               height: '450px',
             }}
           >
@@ -86,5 +128,6 @@ export function BannerMobile() {
         </SwiperSlide>
       ))}
     </Swiper>
+    </>
   );
 }

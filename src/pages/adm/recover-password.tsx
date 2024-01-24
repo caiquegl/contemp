@@ -6,13 +6,37 @@ import {
   InputGroup,
   Input,
   Link,
-  Heading,
+  Heading, useToast
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import Logo from '../../assets/icons/logo.png'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
+import { api } from '../../lib/axios'
+import { useState } from 'react'
 
 const Adm = () => {
+  const toast = useToast()
+  const [loading, setLoading] = useState(false)
+  const [body, setBody] = useState({ email: '', password: '' })
+
+  const recover = async () => {
+    try {
+      setLoading(true)
+      const {data} = await api.post(`recover`, { email: body.email })
+
+    } catch (error: any) {
+      toast({
+        title: 'Erro',
+        description: 'E-mail não encontrado',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <Flex
       alignItems="center"
@@ -65,6 +89,7 @@ const Adm = () => {
             border="none"
             borderRadius="21px"
             placeholder="Email"
+            onChange={(value) => setBody({ ...body, email: value.target.value })}
             _focusVisible={{
               outline: 'none'
             }}
@@ -89,6 +114,8 @@ const Adm = () => {
             borderRadius="25px"
             bg="red.600"
             color="white"
+            isLoading={loading}
+            onClick={recover}
             textAlign="center"
             _hover={{
               transition: 'all 0.4s',

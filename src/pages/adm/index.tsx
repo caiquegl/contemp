@@ -2,9 +2,6 @@ import { Box, Flex, Text, Button, InputGroup, Input, Link, useToast, Heading } f
 import Image from 'next/image'
 import { useState } from 'react'
 import Logo from '../../assets/images/170x41.png'
-import { initFirebase } from '../../utils/db/index'
-import 'firebase/compat/auth'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { setContextMenuFalse } from '../../utils/setContextMenuFalse'
 import { setCookie } from 'nookies'
@@ -14,8 +11,6 @@ import { api } from '../../lib/axios'
 const Adm = () => {
   const router = useRouter()
   const toast = useToast()
-  initFirebase()
-  const auth = getAuth()
   const [loading, setLoading] = useState(false)
   const [body, setBody] = useState({ email: '', password: '' })
 
@@ -31,7 +26,9 @@ const Adm = () => {
           body,
         })
       )
-      await router.push('/adm/home')
+      console.log('aqui')
+      router.push('/adm/home')
+      console.log('aqui 2')
     } catch (error: any) {
       console.log(error)
       toast({
@@ -45,6 +42,7 @@ const Adm = () => {
       setLoading(false)
     }
   }
+
   return (
     <Flex
       alignItems='center'
@@ -79,6 +77,7 @@ const Adm = () => {
             height='100%'
             border='none'
             borderRadius='21px'
+            autoComplete="off"
             placeholder='Email'
             onChange={(value) => setBody({ ...body, email: value.target.value })}
             _focusVisible={{
@@ -105,6 +104,7 @@ const Adm = () => {
             borderRadius='21px'
             placeholder='Senha'
             type='password'
+            autoComplete="off"
             onChange={(value) => setBody({ ...body, password: value.target.value })}
             _focusVisible={{
               outline: 'none',

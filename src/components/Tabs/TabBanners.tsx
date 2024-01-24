@@ -17,9 +17,10 @@ import {
   TabList,
   TabPanels,
   Tab,
-  TabPanel,
+  TabPanel
+
 } from '@chakra-ui/react'
-import { Table, Space, message, Modal, Form, Input, Button as BtnAtd, Avatar } from 'antd'
+import { Table, Space, message, Modal, Form, Input, Button as BtnAtd, Avatar, Select } from 'antd'
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import { SearchBar } from '../SearchBar'
 import { colors } from '../../styles/theme'
@@ -35,13 +36,18 @@ import { FaDeleteLeft, FaCheck } from 'react-icons/fa6'
 import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { CgScreen } from "react-icons/cg";
+import { EditOrder } from '../EditOrder'
 
 const { Item } = Form
 
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
 
-const TabUsers: React.FC = () => {
+const TabBanners: React.FC = () => {
+  const toast = useToast({
+    duration: 3000,
+    isClosable: true,
+  })
   const router = useRouter()
   const [listClone, setListClone] = useState<any[]>([])
   const [redirects, setUsers] = useState<any[]>([])
@@ -49,63 +55,108 @@ const TabUsers: React.FC = () => {
   const [selectItem, setSelectItem] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [modalVisibleCreate, setModalVisibleCreate] = useState<boolean>(false)
+  const [tabActive, setTab] = useState<'Desktop' | 'Mobile'>('Desktop')
 
 
   const [form] = Form.useForm()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/getAllUsers');
-        const redirectsData = response.data;
-        setListClone(redirectsData); // Defina listClone ao buscar redirecionamentos
-        setUsers(redirectsData);
-      } catch (error) {
-        console.error(error);
-        message.error('Erro ao obter Banners');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await api.post('/getAllBanners', {
+        tabActive
+      });
+      const redirectsData = response.data;
+      setListClone(redirectsData); // Defina listClone ao buscar redirecionamentos
+      setUsers(redirectsData);
+    } catch (error) {
+      console.error(error);
+      message.error('Erro ao obter Banners');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [tabActive]);
+
+  const changerOrder = async (order: number, banner: any) => {
+    try {
+      setLoading(true)
+      const { data, status } = await api.put(`changeOrderBanner`, {
+        order,
+        banner: banner,
+      })
+
+      toast({
+        title: status == 201 ? 'Sucesso' : 'Erro',
+        description: data.msg,
+        status: status == 201 ? 'success' : 'error',
+      })
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await fetchData()
+    }
+  }
+
+  const changeActiveBanner = async (id: number, status: any) => {
+    try {
+      setLoading(true)
+      const { data } = await api.put(`changeActiveBanner`, {
+        id,
+        status,
+      })
+
+      toast({
+        title: 'Sucesso',
+        description: 'Sucesso ao atualizar banner',
+        status: 'success',
+      })
+    } catch (err) {
+      toast({
+        title: 'Erro',
+        description: 'Erro ao alterar ordem',
+        status: 'error',
+      })
+    } finally {
+      setLoading(false)
+      await fetchData()
+    }
+  }
+
 
   const columns = [
     {
-      title: (
-        <Checkbox />
-      ),
-      key: 'selectAll',
-      width: 50,
-      render: (record: any) => (
-        <Checkbox />
-      ),
-    },
-    {
-      title: 'Ordem',
-      width: 100,
+      title: 'Ordem Geral',
+      width: '6%',
       sorter: (a: any, b: any) => a.order - b.order,
+      render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
     {
       title: 'Imagem',
-      dataIndex: 'picture',
-      key: 'picture',
-      render: (picture: any) => (
+      dataIndex: 'url',
+      key: 'url',
+      render: (url: any) => (
         <>
-          {picture &&
-            <Avatar src={'https://contemp.com.br/api/arquivos/2.png'} />
+          {url &&
+            <Avatar src={url} />
           }
         </>
       )
     },
     {
       title: 'Tipo',
-      dataIndex: 'Tipo',
-      key: 'tipo',
+      dataIndex: 'type',
+      key: 'type',
       //sorter: '()',
-      render: () => (
+      render: (type: any) => (
         <Badge
           className='bagdetabela-default'
           variant="subtle"
@@ -114,7 +165,24 @@ const TabUsers: React.FC = () => {
           style={{ display: 'flex', alignItems: 'center' }}
         >
           <CgScreen style={{ marginRight: '5px' }} />
-          Desktop
+          {type}
+        </Badge>
+      ),
+    },
+    {
+      title: 'Ativo',
+      dataIndex: 'status',
+      key: 'status',
+      //sorter: '()',
+      render: (status: any) => (
+        <Badge
+          className='bagdetabela-default'
+          variant="subtle"
+          fontSize="0.875rem"
+          maxW={'80px'}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          {status ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
     },
@@ -135,7 +203,7 @@ const TabUsers: React.FC = () => {
     {
       title: 'Ações',
       key: 'actions',
-      render: (text: any, user: any) => (
+      render: (text: any, banner: any) => (
         <HStack spacing='20px'>
           <Tooltip
             placement='top'
@@ -152,19 +220,23 @@ const TabUsers: React.FC = () => {
                 as={PiPencilSimpleBold}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-              //onClick={() => {
-              //setSelectItem(user)
-              //form.setFieldValue('name', user.name)
-              // form.setFieldValue('email', user.email)
-              //setModalVisible(true)
-              //}}
+                onClick={() => {
+                  setSelectItem(banner)
+                  form.setFieldValue('url_file', banner.url)
+                  form.setFieldValue('type', banner.type)
+                  form.setFieldValue('title', banner.title)
+                  form.setFieldValue('subtitle', banner.subtitle)
+                  form.setFieldValue('description', banner.description)
+                  form.setFieldValue('redirect', banner.redirect)
+                  setModalVisible(true)
+                }}
               />
             </Box>
           </Tooltip>
 
           <Tooltip
             placement='top'
-            label='Excluir banner'
+            label={`${banner.status ? 'Inativar' : 'Ativar'} banner`}
             color={'var(--white-primary)'}
             bg={'var(--red-primary)'}
             borderRadius={'8px'}
@@ -177,7 +249,7 @@ const TabUsers: React.FC = () => {
                 as={FaDeleteLeft}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-              //onClick={() => handleDeleteRedirect(user.id)}
+                onClick={() => changeActiveBanner(banner.id, !banner.status)}
               />
             </Box>
           </Tooltip>
@@ -190,6 +262,40 @@ const TabUsers: React.FC = () => {
     current: 1,
     pageSize: 10, // Número padrão de itens por página
   })
+
+  const createBanner = async (banner: any) => {
+    try {
+
+      setLoading(true)
+      await api.post(`createBanner`, banner)
+      message.success('Sucesso ao criar banner')
+      fetchData()
+      setModalVisibleCreate(false)
+      setSelectItem(null)
+      form.resetFields(['url_file', 'type', 'title', 'subtitle', 'description', 'redirect'])
+    } catch (error) {
+      message.error('Erro ao criar banner')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateBanner = async (banner: any) => {
+    try {
+
+      setLoading(true)
+      await api.post(`updateBanner`, { ...banner, id: selectItem.id })
+      message.success('Sucesso ao criar banner')
+      fetchData()
+      setModalVisible(false)
+      setSelectItem(null)
+      form.resetFields(['url_file', 'type', 'title', 'subtitle', 'description', 'redirect'])
+    } catch (error) {
+      message.error('Erro ao criar banner')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleTableChange = (pagination: any) => {
     setPagination({
@@ -221,7 +327,7 @@ const TabUsers: React.FC = () => {
           Adicionar banner
         </Button>
       </Flex>
-      <Tabs mt={'5%'} variant='unstyled'>
+      <Tabs mt={'5%'} variant='unstyled' onChange={(evt) => setTab(evt == 0 ? 'Desktop' : 'Mobile')}>
         <TabList>
           <Tab
             _selected={{
@@ -231,7 +337,8 @@ const TabUsers: React.FC = () => {
               borderRadius: '8px',
             }}
             w={pxToRem(133)}
-            color='black.800'>
+            color='black.800'
+          >
             Desktop
           </Tab>
           <Tab
@@ -274,6 +381,33 @@ const TabUsers: React.FC = () => {
               onChange={handleTableChange}
             />
           </TabPanel>
+          <TabPanel>
+            <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
+              Banners mobile
+            </Heading>
+            <Table
+              id='tabela-banners'
+              columns={columns}
+              dataSource={redirects}
+              loading={loading}
+              scroll={{ x: 'fit-content' }}
+              word-wrap={'break-word'}
+              pagination={{
+                ...pagination,
+                showSizeChanger: true,
+                showQuickJumper: false,
+                pageSizeOptions: ['10', '20', '50', '100'], // Opções de quantidade de itens por página
+                onShowSizeChange: (current: number, pageSize: number) => {
+                  setPagination({
+                    ...pagination,
+                    current,
+                    pageSize,
+                  })
+                },
+              }}
+              onChange={handleTableChange}
+            />
+          </TabPanel>
         </TabPanels>
       </Tabs>
 
@@ -289,7 +423,7 @@ const TabUsers: React.FC = () => {
             setModalVisible(false)
           }}
           footer={null}
-          title='Editar usuário'
+          title='Editar banner'
           destroyOnClose={true}
 
         >
@@ -297,22 +431,33 @@ const TabUsers: React.FC = () => {
             key={selectItem?.id}
             layout="horizontal"
             form={form}
-          //onFinish={updateBanner}
+            onFinish={updateBanner}
           >
-            <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
-              <Input />
-            </Form.Item>
-            <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
-              <Input type='email' />
-            </Form.Item>
-
-            <Form.Item label='Imagem' name="picture">
+            <Form.Item label='Foto' name="url_file" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
-                getUrls={(value: any) => form.setFieldValue('picture', value)}
+                getUrls={(value: any) => form.setFieldValue('url_file', value)}
               />
+            </Form.Item>
+            <Form.Item label="Tipo" name="type" rules={[{ required: true, message: 'Campo obrigatório' }]}>
+              <Select>
+                <Select.Option value="Desktop">Desktop</Select.Option>
+                <Select.Option value="Mobile">Mobile</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label='Título' name="title" >
+              <Input />
+            </Form.Item>
+            <Form.Item label='Subtitulo' name="subtitle" >
+              <Input />
+            </Form.Item>
+            <Form.Item label='Description' name="description">
+              <Input />
+            </Form.Item>
+            <Form.Item label='Redirecionamento' name="redirect">
+              <Input />
             </Form.Item>
             <Button type='submit'>
               Atualizar
@@ -333,31 +478,40 @@ const TabUsers: React.FC = () => {
             setModalVisibleCreate(false)
           }}
           footer={null}
-          title='Criar usuário'
+          title='Criar banner'
           destroyOnClose={true}
 
         >
           <Form
             layout="horizontal"
             form={form}
-          //onFinish={createBanner}
+            onFinish={createBanner}
           >
-            <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
-              <Input />
-            </Form.Item>
-            <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
-              <Input type='email' />
-            </Form.Item>
-            <Form.Item label='Senha' rules={[{ required: true, message: 'Campo obrigatório' }]} name="password">
-              <Input type='password' />
-            </Form.Item>
-            <Form.Item label='Foto' name="picture">
+            <Form.Item label='Foto' name="url_file" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
-                getUrls={(value: any) => form.setFieldValue('picture', value)}
+                getUrls={(value: any) => form.setFieldValue('url_file', value)}
               />
+            </Form.Item>
+            <Form.Item label="Tipo" name="type" rules={[{ required: true, message: 'Campo obrigatório' }]}>
+              <Select>
+                <Select.Option value="Desktop">Desktop</Select.Option>
+                <Select.Option value="Mobile">Mobile</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label='Título' name="title" >
+              <Input />
+            </Form.Item>
+            <Form.Item label='Subtitulo' name="subtitle" >
+              <Input />
+            </Form.Item>
+            <Form.Item label='Description' name="description">
+              <Input />
+            </Form.Item>
+            <Form.Item label='Redirecionamento' name="redirect">
+              <Input />
             </Form.Item>
             <Button type='submit'>
               Criar
@@ -369,4 +523,4 @@ const TabUsers: React.FC = () => {
   )
 }
 
-export default TabUsers
+export default TabBanners

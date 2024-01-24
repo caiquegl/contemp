@@ -35,198 +35,188 @@
     "permanent": true
   },
   {
-    "source": "/2022/04/12/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria/",
-    "destination": "https://blog.contemp.com.br/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria/",
-    "permanent": true
-  },
-  {
-    "source": "/produto/instrumentos/placas-controladoras-de-temperatura-e-processo/c130-controlador-de-temperatura/",
+    "source": "/produto/instrumentos/placas-controladoras-de-temperatura-e-processo/c130-controlador-de-temperatura",
     "destination": "/produto/placa_controladora_-_c130",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/transmissores-de-temperatura-trilho-din/s211-transmissor-de-temperatura-isolado-cabecote/",
+    "source": "/produto/instrumentos/transmissores-de-temperatura-trilho-din/s211-transmissor-de-temperatura-isolado-cabecote",
     "destination": "/produto/transmissor_de_sinais_-_s211e",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c414-controlador-de-processos-linha-economica/",
+    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c414-controlador-de-processos-linha-economica",
     "destination": "/produto/controlador_de_temperatura_-_c414",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/cta3-conversor-de-sinais-e-isolador-galvanico/",
+    "source": "/produto/instrumentos/cta3-conversor-de-sinais-e-isolador-galvanico",
     "destination": "/produto/transmissor_de_sinais_-_cta",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr1dc-rele-de-estado-solido-monofasico-comando-dc/",
+    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr1dc-rele-de-estado-solido-monofasico-comando-dc",
     "destination": "/category/RELÉS_DE_ESTADO_SÓLIDO_SSR",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-termorresistencia-3x24-awg/",
+    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-termorresistencia-3x24-awg",
     "destination": "/category/cabos_de_extensão",
     "permanent": true
   },
   {
-    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/ctlaser-05m-pirometro-fixo-optris-para-metais-e-metais-fundidos",
-    "destination": "/produto/CTLaser_05M",
-    "permanent": true
-  },
-  {
-    "source": "/produto/sensores/termopares/tccl-termopar-cabecote-e-tubo-protecao-ceramico-10mm-luva-metalica-85-mm/",
+    "source": "/produto/sensores/termopares/tccl-termopar-cabecote-e-tubo-protecao-ceramico-10mm-luva-metalica-85-mm",
     "destination": "/category/TERMOPARES",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/indicadores-de-temperatura-e-processo/i414-indicador-de-processos-linha-economica/",
+    "source": "/produto/instrumentos/indicadores-de-temperatura-e-processo/i414-indicador-de-processos-linha-economica",
     "destination": "/produto/indicador_de_processos_-_i414",
     "permanent": true
   },
   {
-    "source": "/2022/03/10/controladores-de-temperatura-o-que-sao/",
-    "destination": "/controladores-de-temperatura-o-que-sao-2/",
+    "source": "/2022/03/10/controladores-de-temperatura-o-que-sao",
+    "destination": "/controladores-de-temperatura-o-que-sao-2",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-k-2x24-awg/",
+    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-k-2x24-awg",
     "destination": "/produto/cabo_extensão_tipo_k",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/termopares/tmcm-termopar-mineral-conector-macho-standard/",
+    "source": "/produto/sensores/termopares/tmcm-termopar-mineral-conector-macho-standard",
     "destination": "/category/TERMOPARES",
     "permanent": true
   },
   {
-    "source": "/2022/03/10/termopar-onde-utilizar/",
-    "destination": "/termopar-onde-utilizar-2/",
+    "source": "/2022/03/10/termopar-onde-utilizar",
+    "destination": "/termopar-onde-utilizar-2",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada-duas-fases-300a/",
-    "destination": "/category/linha_avançada_-_p501",
+    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/csvideo-3m-pirometro-fixo-optris-para-metais",
+    "destination": "/produto/pirômetro_fixo_-_csvideo_3m_para_metal",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-compensacao-termopar-n-2x24-awg/",
-    "destination": "/category/TIPO_%22N%22",
-    "permanent": true
-  },
-  {
-    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/csvideo-3m-pirometro-fixo-optris-para-metais/",
-    "destination": "/produto/CSvideo_3M_para_metal",
-    "permanent": true
-  },
-  {
-    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr1ac-rele-de-estado-solido-monofasico-comando-ac/",
+    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr1ac-rele-de-estado-solido-monofasico-comando-ac",
     "destination": "/category/REL%C3%89S_DE_ESTADO_S%C3%93LIDO_SSR",
     "permanent": true
   },
   {
-    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-compacta/ctlt-pirometro-fixo-optris-compacto-para-espacos-limitados/",
+    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-compacta/ctlt-pirometro-fixo-optris-compacto-para-espacos-limitados",
     "destination": "/category/PIR%C3%94METROS_FIXOS_OPTRIS",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada/",
+    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada",
     "destination": "/category/linha_avançada_-_p501",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-t-2x24-awg/",
+    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-t-2x24-awg",
     "destination": "/category/TIPO_%22T%22",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/contadores-e-temporizadores/k304-contador-e-totalizador/",
+    "source": "/produto/instrumentos/contadores-e-temporizadores/k304-contador-e-totalizador",
     "destination": "/produto/contador_-_k304",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-desempenho/",
+    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-desempenho",
     "destination": "/category/linha_avançada_-_p501",
     "permanent": true
   },
   {
-    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-compacta/cslt-pirometro-fixo-optris-para-fabricantes-de-maquinas/",
+    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-compacta/cslt-pirometro-fixo-optris-para-fabricantes-de-maquinas",
     "destination": "/produto/CSLT",
     "permanent": true
   },
   {
-    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-j-2x24-awg/",
+    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-extensao-termopar-j-2x24-awg",
     "destination": "/produto/cabo_extensão_tipo_j",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/transmissores-de-umidade-e-temperatura/s501a-transmissor-de-temperatura-e-umidade/",
+    "source": "/produto/instrumentos/transmissores-de-umidade-e-temperatura/s501a-transmissor-de-temperatura-e-umidade",
     "destination": "/produto/transmissor_de_temperatura_e_umidade_-_s501",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c719-controlador-de-temperatura-e-processos-linha-avancada/",
+    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c719-controlador-de-temperatura-e-processos-linha-avancada",
     "destination": "/produto/controlador_de_temperatura_e_processos_-_c719",
     "permanent": true
   },
   {
-    "source": "/2022/03/11/monitoramento-termico-na-transferencia-forno-panela/",
+    "source": "/2022/03/11/monitoramento-termico-na-transferencia-forno-panela",
     "destination": "/category/controladores_de_processos",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/registradores-graficos-e-insumos/phz1002-cabeca-impressora-phe9-phc-pha/",
+    "source": "/produto/instrumentos/registradores-graficos-e-insumos/phz1002-cabeca-impressora-phe9-phc-pha",
     "destination": "/category/controladores_de_processos",
     "permanent": true
   },
   {
-    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/ctlaser-4m-pirometro-fixo-optris-para-metais-oxidos-metais-e-ceramica/",
+    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/ctlaser-4m-pirometro-fixo-optris-para-metais-oxidos-metais-e-ceramica",
     "destination": "/produto/pirômetro_fixo_-_ctlaser_4m",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr3-linear-rele-de-estado-solido-trifasico-comando-linear-0a10v-ou-4a20ma/",
+    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr3-linear-rele-de-estado-solido-trifasico-comando-linear-0a10v-ou-4a20ma",
     "destination": "/produto/relé_de_estado_sólido_trifásico_-_cr3_ln",
     "permanent": true
   },
   {
-    "source": "/2022/03/10/cameras-de-infravermelho-optris/",
+    "source": "/2022/03/10/cameras-de-infravermelho-optris",
     "destination": "/category/cÂmeras_termogrÁficas_fixas",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/transmissores-de-temperatura-cabecote-tc-tr/s201-transmissor-de-temperatura/",
+    "source": "/produto/instrumentos/transmissores-de-temperatura-cabecote-tc-tr/s201-transmissor-de-temperatura",
     "destination": "/produto/transmissor_de_sinais_-_s202e",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/controladores-de-potencia/p301-controlador-de-potencia/",
+    "source": "/produto/potencia/controladores-de-potencia/p301-controlador-de-potencia",
     "destination": "/category/linha_desempenho_-_p301",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/placas-controladoras-de-temperatura-e-processo/etc-lcd-controlador-de-processos/",
+    "source": "/produto/instrumentos/placas-controladoras-de-temperatura-e-processo/etc-lcd-controlador-de-processos",
     "destination": "/produto/placa_controladora_-_etc_lcd",
     "permanent": true
   },
   {
-    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr3ac-rele-de-estado-solido-trifasico-comando-ac/",
+    "source": "/produto/potencia/reles-de-estado-solido-ssr/cr3ac-rele-de-estado-solido-trifasico-comando-ac",
     "destination": "/category/RELÉS_DE_ESTADO_SÓLIDO_SSR",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c715-controlador-de-processos-linha-avancada/",
+    "source": "/produto/instrumentos/controladores-de-temperatura-e-processo/c715-controlador-de-processos-linha-avancada",
     "destination": "/produto/controlador_de_temperatura_e_processos_-_c715",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/indicadores-de-temperatura-e-processo/i716-linha-avancada-indicador-de-temperatura-e-processo/",
+    "source": "/produto/instrumentos/indicadores-de-temperatura-e-processo/i716-linha-avancada-indicador-de-temperatura-e-processo",
     "destination": "/produto/indicador_de_processos_-_i716",
     "permanent": true
   },
   {
-    "source": "/produto/instrumentos/transmissores-de-temperatura-cabecote-tc-tr/s222-transmissor-de-temperatura-trilho-din/",
-    "destination": "/produto/S222TRANSMISSOR DE SINAIS - S222",
+    "source": "/produto/instrumentos/transmissores-de-temperatura-cabecote-tc-tr/s222-transmissor-de-temperatura-trilho-din",
+    "destination": "/produto/S222TRANSMISSORDESINAIS-S222",
+    "permanent": true
+  },
+  {
+    "source": "/produto/imageamento-termico-industrial/pirometros-fixos-optris-serie-alta-performance/ctlaser-05m-pirometro-fixo-optris-para-metais-e-metais-fundidos",
+    "destination": "/produto/pirômetro_fixo_-_ctlaser_g5",
+    "permanent": true
+  },
+  {
+    "source": "/produto/sensores/cabos-de-extensao-tc-tr/cabo-de-compensacao-termopar-n-2x24-awg",
+    "destination": "/produto/cabo_compensação__tipo_\"n\"",
     "permanent": true
   },
   {
@@ -1157,6 +1147,16 @@
   {
     "source": "/produto/h401",
     "destination": "/produto/ihm_-_h401_7\"_ethernet_-_ftp_-_modbus_-_tcp",
+    "permanent": true
+  },
+  {
+    "source": "/produto/potencia/controladores-de-potencia/p501-controlador-de-potencia-linha-avancada-duas-fases-300a",
+    "destination": "/category/linha_avançada_-_p501",
+    "permanent": true
+  },
+  {
+    "source": "/2022/04/12/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria",
+    "destination": "https://blog.contemp.com.br/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria/",
     "permanent": true
   }
 ]

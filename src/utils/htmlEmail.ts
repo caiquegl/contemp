@@ -305,3 +305,115 @@ export const HtmlOrcamento = (
 
     return msg
 }
+
+
+export const HtmlRecover = (name?: string, link?: string) => {
+    let msg = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contemp</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #F7F7F7;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .container {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+    
+        .header {
+            width: 100%;
+            height: 108px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/Banner%20Contemp%402x.png?alt=media&token=a496a2da-26a1-4bbd-9b1a-909f94d62a65");
+            color: #fff;
+            font-size: 33px;
+            font-weight: bold;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+    
+        .containerBody {
+            padding: 30px;
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+    
+        p{
+            font-size: 16px;
+        }
+    
+        .bRed{
+            color: #B60005;
+        }
+    
+        .big {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    
+        .bold {
+            font-weight: bold;
+        }
+    
+        .divider {
+            width: 100%;
+            border-bottom: 1px solid lightslategray;
+        }
+    
+        .footer {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="header">
+                Novo contato
+            </div>
+            <div class="containerBody">
+                <p class="big" style="margin-bottom: 20px;">
+                    Olá, <b class="bRed">${name || ''}</b>
+                </p>
+                <p style="margin-bottom: 30px;">
+                    Você solicitou para recuperar a senha e o acesso ao painel admin do site da Contemp, então estamos te enviando esse link para cadastrar uma nova senha. Acesse o link abaixo ou copie e cole o link no navegador para criar uma nova senha.
+                </p>
+                <a href="${link}" style="margin-bottom: 10px;">
+                    ${link}
+                </a>
+                
+                <div class="divider"> </div>
+                
+                <div class="footer">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/LOGO%20SVG.svg?alt=media&token=75b0595b-4fc3-4c1f-917f-3ed895dbc984" alt="">
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>`
+
+    return msg
+}
+

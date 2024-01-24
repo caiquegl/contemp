@@ -14,7 +14,7 @@ model Categories {
   favorite           Boolean    @default(false)
   is_active          Boolean    @default(true)
   is_main            Boolean    @default(false)
-  key_word_seo       String?    
+  key_word_seo       String?
   name               String     @unique
   firebase_id        String?
   sub_category_id    Int?
@@ -130,4 +130,20 @@ model Users {
   updated_at DateTime? @default(now())
 
   @@map("users")
+}
+
+model Banners {
+  id         Int       @id @default(autoincrement())
+  url        String
+  type       String?
+  order      Int        @unique
+  title      String?
+  subtitle   String?
+  description   String?
+  redirect   String?
+  status   Boolean? @default(true)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("banners")
 }
