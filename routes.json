@@ -1158,5 +1158,35 @@
     "source": "/2022/04/12/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria",
     "destination": "https://blog.contemp.com.br/sensor-pt-100-como-ele-auxilia-os-processos-da-sua-industria/",
     "permanent": true
+  },
+  {
+    "source": "/category/software_-_contemp_bridge",
+    "destination": "/produto/software_-_contemp_bridge",
+    "permanent": true
+  },
+  {
+    "source": "/category/software_-_contemp_connect",
+    "destination": "/produto/software_gratuito_-_contemp_connect",
+    "permanent": true
+  },
+  {
+    "source": "/category/software_gratuito_-_contemp_connect",
+    "destination": "/produto/software_gratuito_-_contemp_connect",
+    "permanent": true
+  },
+  {
+    "source": "/category/software_gratuito_-_s200_connect",
+    "destination": "/produto/software_gratuito_-_s200_connect",
+    "permanent": true
+  },
+  {
+    "source": "/category/software_gratuito_-_contemp_tools",
+    "destination": "/produto/software_gratuito_-_contemp_tools",
+    "permanent": true
+  },
+  {
+    "source": "/category/software_-_contemp_report",
+    "destination": "/produto/software_-_contemp_report",
+    "permanent": true
   }
 ]
