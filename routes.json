@@ -1220,11 +1220,6 @@
     "permanent": true
   },
   {
-    "source": "//wp-content/uploads/2010/12/Manual-ETC46.pdf",
-    "destination": "/produto/placa_controladora_-_etc_46",
-    "permanent": true
-  },
-  {
     "source": "/cameras-fixas-infravermelho-contemp",
     "destination": "/category/cÂmeras_termogrÁficas_fixas",
     "permanent": true
@@ -1242,6 +1237,11 @@
   {
     "source": "/monitoramento-termico-na-secagem-de-sucata-na-reciclagem-de-aluminio",
     "destination": "https://blog.contemp.com.br/medindo-temperaturas-com-precisao-pirometros-infravermelhos-fixos",
+    "permanent": true
+  },
+  {
+    "source": "/wp-content/uploads/2010/12/Manual-ETC46.pdf",
+    "destination": "/produto/placa_controladora_-_etc_46",
     "permanent": true
   }
 ]
