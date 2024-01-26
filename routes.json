@@ -1188,5 +1188,60 @@
     "source": "/category/software_-_contemp_report",
     "destination": "/produto/software_-_contemp_report",
     "permanent": true
+  },
+  {
+    "source": "/wp-content/uploads/2015/04/Catalogo-geral-Contemp-Atualizado-03.pdf",
+    "destination": "/api/arquivos/temnacontemp.pdf",
+    "permanent": true
+  },
+  {
+    "source": "/produto/TERMOPAR_FeCo_TIPO_%22J%22_",
+    "destination": "/produto/cabo_extensão_tipo_\"j\"",
+    "permanent": true
+  },
+  {
+    "source": "/produto/TERMOPAR_CrCo__TIPO_%22E%22",
+    "destination": "/produto/smcr_-_termopar_isolação_mineral_com_cabeçote_de_ligação_e_rosca_de_fixação_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/AQUISITOR_DE_DADOS",
+    "destination": "/category/aquisitores",
+    "permanent": true
+  },
+  {
+    "source": "/bmqjtpld-106492-única-novedad-Mundo-Warcraft-Horde",
+    "destination": "/todosProdutos",
+    "permanent": true
+  },
+  {
+    "source": "/produto/cr3dc-reles-de-estado-solido-trifasico-dc/",
+    "destination": "/produto/relé_de_estado_sólido_trifásico_-_cr3_dc",
+    "permanent": true
+  },
+  {
+    "source": "//wp-content/uploads/2010/12/Manual-ETC46.pdf",
+    "destination": "/produto/placa_controladora_-_etc_46",
+    "permanent": true
+  },
+  {
+    "source": "/cameras-fixas-infravermelho-contemp",
+    "destination": "/category/cÂmeras_termogrÁficas_fixas",
+    "permanent": true
+  },
+  {
+    "source": "/produto-tag/coel",
+    "destination": "/todosProdutos",
+    "permanent": true
+  },
+  {
+    "source": "/produto/calibracao-rbc",
+    "destination": "/todosProdutos",
+    "permanent": true
+  },
+  {
+    "source": "/monitoramento-termico-na-secagem-de-sucata-na-reciclagem-de-aluminio",
+    "destination": "https://blog.contemp.com.br/medindo-temperaturas-com-precisao-pirometros-infravermelhos-fixos",
+    "permanent": true
   }
 ]
