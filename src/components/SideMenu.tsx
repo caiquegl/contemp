@@ -39,6 +39,7 @@ import { PiCardholderBold } from "react-icons/pi";
 import { TbPencil } from "react-icons/tb";
 import { FaMeta } from "react-icons/fa6";
 import { SiGoogleanalytics } from "react-icons/si";
+import { PDFDocument, rgb } from 'pdf-lib';
 
 interface SideMenuProps {
   user: {
@@ -52,6 +53,17 @@ interface SideMenuProps {
   setActiveTab: (tabIndex: number) => void;
   onOpen: () => void;
   onToggleMenu: (isExpanded: boolean) => void;
+}
+
+interface Product {
+  order: number;
+  name: string;
+  category: { name: string };
+  isActive: boolean;
+  created_at: string; // ou Date, dependendo de como você os recebe
+  updated_at: string; // ou Date
+  destaque: boolean;
+  layout: number; // ou number, dependendo de como você os recebe
 }
 
 
@@ -156,7 +168,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
           product.category.name,
           product.isActive ? 'Ativo' : 'Inativo',
           product.destaque ? 'Destaque' : 'Não Destaque',
-          product.layout,
+          `Layout ${product.layout.toString()}`,
           `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`,
           moment(product.created_at).format('DD/MM/YYYY'),
           moment(product.updated_at).format('DD/MM/YYYY')
@@ -311,7 +323,71 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'exportar-arquivos-contemp.xlsx');
   };
 
-
+  const exportarProdutosPDF = async () => {
+    try {
+      const { data } = await api.get('getAllProductsWidthCategory');
+  
+      const pdfDoc = await PDFDocument.create();
+      // Cria uma página com layout horizontal (paisagem)
+      const page = pdfDoc.addPage([842, 595]); // Substitua 'width' e 'height' pelos valores desejados
+  
+      const fontSize = 10;
+      let currentY = page.getHeight() - 40; // Inicia no topo da página
+  
+      // Cabeçalhos
+      const headers = ['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL'];
+      headers.forEach((header, index) => {
+        page.drawText(header, {
+          x: 50 + index * 50,
+          y: currentY,
+          size: fontSize,
+          color: rgb(0, 0, 0),
+        });
+      });
+  
+      currentY -= 20;
+  
+      // Dados dos produtos
+      data.forEach((product : any) => {
+        const productData = [
+          product.order,
+          product.name,
+          product.category.name,
+          product.isActive ? 'Ativo' : 'Inativo',
+          moment(product.created_at).format('DD/MM/YYYY'),
+          moment(product.updated_at).format('DD/MM/YYYY'),
+          product.destaque ? 'Destaque' : 'Não Destaque',
+          `Layout ${product.layout}`,
+          `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`,
+        ];
+  
+        productData.forEach((text, index) => {
+          page.drawText(text, {
+            x: 50 + index * 50,
+            y: currentY,
+            size: fontSize,
+            color: rgb(0, 0, 0),
+          });
+        });
+  
+        currentY -= 20;
+      });
+  
+      const pdfBytes = await pdfDoc.save();
+  
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'produtos-contemp.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Erro ao exportar produtos em PDF:", error);
+      alert("Erro ao exportar produtos em PDF.");
+    }
+  };
+  
   return (
     <Flex direction="column" position="relative" height="100vh">
       {/* Botão Flutuante para Alternar a Expansão/Contração do Menu */}
@@ -774,6 +850,32 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       </Box>
                     </Flex>
                   </Button>
+                  {/*Exportar Produto em PDF*/}
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={exportarProdutosPDF}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar em PDF" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar PDF</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+
 
                 </VStack>
               )}

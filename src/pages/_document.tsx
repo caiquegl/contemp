@@ -137,6 +137,19 @@ export default class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
+              type="text/javascript">
+              script = document.createElement('script')
+              script.src = 'https://static.wdgtsrc.com/assets/loader.js';
+              script.async = true;
+              script.setAttribute("data-chats-widget-id",'1805cf20-1f1f-4176-8763-205893047c07');
+              document.head.appendChild(script);
+              `,
+            }}
+          />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
             async
             src="https://static.wdgtsrc.com/assets/loader.js"
             data-chats-widget-id="1805cf20-1f1f-4176-8763-205893047c07"
