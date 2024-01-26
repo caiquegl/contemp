@@ -134,6 +134,16 @@ export default class MyDocument extends Document {
             }}
           />
 
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            async
+            src="https://static.wdgtsrc.com/assets/loader.js"
+            data-chats-widget-id="1805cf20-1f1f-4176-8763-205893047c07"
+            `,
+            }}
+          />
+
           {/*<script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-24615402-1"
