@@ -83,11 +83,7 @@ const Home = () => {
             <Box mb={['20px', '20px', '0', '0', '0']}>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mr='40px'></Text>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mt='0px'>
-                Sua história é uma trajetória de conquistas que se iniciou em 1984 e continua nos dias atuais. A
-                experiência que adquiriu ao longo desse caminho está presente nos processos das principais indústrias,
-                dos mais diversos segmentos, o que contribuiu para formação de importantes alianças e parcerias de
-                confiança. Cada passo visa fazer de seus produtos sinônimos de credibilidade, transparecendo segurança e
-                satisfação para o cliente.
+              A certificação ISO 9001 é um testemunho do nosso compromisso com a qualidade, transparência e melhoria contínua. Na Contemp, cada membro da nossa equipe se orgulha de contribuir para uma cultura organizacional que busca constantemente elevar os padrões, garantindo que nossos clientes recebam sempre o melhor em produtos e serviços. Estamos comprometidos em ser a escolha confiável para aqueles que valorizam a qualidade em cada processo.
               </Text>
             </Box>
             <Box ml='40px' backgroundColor={'#ededed'} padding={'44px 60px'} borderRadius={'8px'}>
@@ -114,6 +110,7 @@ const Home = () => {
                   mr='24px'
                   bg='red.600'
                   fontSize='20px'
+                  color='white'
                   _hover={{
                     textDecoration: 'none',
                     transition: 'all 0.5s',
