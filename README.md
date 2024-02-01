@@ -32,3 +32,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Backup Database
+Para usar a data backup. Entre na pasta de database-backup lá terá o banco de dados em zip da data de backcup.
+APAGUE A PASTA ANTES DE SUBIR EM PRODUÇÃO.
