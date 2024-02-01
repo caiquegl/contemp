@@ -183,14 +183,15 @@ const TabCards: React.FC = () => {
           variant="subtle"
           fontSize="0.875rem"
           maxW={'80px'}
+          colorScheme={is_active ? 'green' : 'red'}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           {is_active ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
-    },
+    },    
     {
-      title: 'Redirecionamento',
+      title: 'Link',
       dataIndex: 'redirection',
       key: 'redirection',
       render: (redirect: any) => (
@@ -209,8 +210,9 @@ const TabCards: React.FC = () => {
     },
     {
       title: 'Adicionado em',
-      dataIndex: '',
-      key: '',
+      dataIndex: 'created_at',
+      key: 'created_at',
+      with: '2%',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
     },
@@ -218,6 +220,7 @@ const TabCards: React.FC = () => {
       title: 'Atualizado em',
       dataIndex: 'updated_at',
       key: 'updated_at',
+      with: '2%',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
     },
@@ -411,7 +414,7 @@ const TabCards: React.FC = () => {
             form={form}
             onFinish={updateCard}
           >
-            <Form.Item label='Foto' name="icon" rules={[{ required: true, message: 'Campo obrigatório' }]}>
+            <Form.Item label='Ícone' name="icon" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
@@ -419,13 +422,13 @@ const TabCards: React.FC = () => {
                 getUrls={(value: any) => form.setFieldValue('icon', value)}
               />
             </Form.Item>
-            <Form.Item label='Título' name="title" >
+            <Form.Item label='Título' name="title"  rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label='Description' name="description">
+            <Form.Item label='Texto' name="description" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label='Redirecionamento' name="redirect">
+            <Form.Item label='Link' name="redirect">
               <Input />
             </Form.Item>
             <Button type='submit'>
@@ -456,7 +459,7 @@ const TabCards: React.FC = () => {
             form={form}
             onFinish={createCard}
           >
-            <Form.Item label='Foto' name="icon" rules={[{ required: true, message: 'Campo obrigatório' }]}>
+            <Form.Item label='Ícone' name="icon" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
                 question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
@@ -464,13 +467,13 @@ const TabCards: React.FC = () => {
                 getUrls={(value: any) => form.setFieldValue('icon', value)}
               />
             </Form.Item>
-            <Form.Item label='Título' name="title" >
+            <Form.Item label='Título' name="title"  rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label='Description' name="description">
+            <Form.Item label='Texto' name="description" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <Input />
             </Form.Item>
-            <Form.Item label='Redirecionamento' name="redirect">
+            <Form.Item label='Link' name="redirect">
               <Input />
             </Form.Item>
             <Button type='submit'>
