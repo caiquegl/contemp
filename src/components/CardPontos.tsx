@@ -106,7 +106,7 @@ export default function gridListWith() {
   }, [])
   return (
     <Box p={4}>
-      <Container maxW={'1240px'} mt={'2%'} p={'0'}>
+      <Container maxW={'1240px'} mt={'-2%'} p={'0'}>
         <Flex flexWrap="wrap" gridGap={6} justify="center">
           {cards && cards.length > 0 && cards.map((item: any) => (
             <Card

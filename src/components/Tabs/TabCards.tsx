@@ -204,7 +204,7 @@ const TabCards: React.FC = () => {
           _hover={{ color: 'black', textDecoration: 'none' }}
           rightIcon={<Icon as={ExternalLinkIcon} />}
         >
-          {redirect}
+        Abrir
         </Button>
       ),
     },

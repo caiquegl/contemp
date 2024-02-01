@@ -212,8 +212,8 @@ const TabBanners: React.FC = () => {
     },
     {
       title: 'Adicionado em',
-      dataIndex: '',
-      key: '',
+      dataIndex: 'created_at',
+      key: 'created_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
     },
