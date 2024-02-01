@@ -26,9 +26,7 @@ const Adm = () => {
           body,
         })
       )
-      console.log('aqui')
       router.push('/adm/home')
-      console.log('aqui 2')
     } catch (error: any) {
       console.log(error)
       toast({

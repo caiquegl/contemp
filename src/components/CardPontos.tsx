@@ -7,9 +7,10 @@ import {
   Icon,
   Stack,
   Text,
+  Image,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react'
 import {
   FcAbout,
   FcAssistant,
@@ -22,6 +23,7 @@ import { HiOutlineVideoCamera } from 'react-icons/hi';
 import { TbPhotoSensor3, TbAlignBoxLeftTop, TbPlusMinus } from 'react-icons/tb';
 import { BsFiletypePdf } from 'react-icons/bs';
 import { IoIosFlash } from "react-icons/io";
+import { api } from '../lib/axios'
 
 
 interface CardProps {
@@ -44,7 +46,7 @@ const Card = ({ heading, description, icon, href }: CardProps) => {
       borderRadius="8px"
       overflow="hidden"
       p={5}
-      mt={'-5%'}
+
     >
       <Stack align={'start'} spacing={2}>
         <Flex verticalAlign={'middle'}>
@@ -60,7 +62,7 @@ const Card = ({ heading, description, icon, href }: CardProps) => {
           >
             {icon}
           </Flex>
-          <Box>
+          <Box ml={2}>
             <Box>
               <Heading as={'h3'} className="pontos-titulo text-white">
                 {heading}
@@ -69,7 +71,7 @@ const Card = ({ heading, description, icon, href }: CardProps) => {
           </Box>
         </Flex>
         <Box>
-          <Text mt={1} className="paragrafo-branco" lineHeight={'1rem'}>
+          <Text mt={1} className="paragrafo-branco" mb={1} lineHeight={'1rem'}>
             {description}
           </Text>
           <Button
@@ -90,34 +92,32 @@ const Card = ({ heading, description, icon, href }: CardProps) => {
 };
 
 export default function gridListWith() {
+  const [cards, setCards] = useState<any>([])
+
+  const getCards = async () => {
+    const { data } = await api.post('getAllCards', {
+      is_active: true
+    });
+    setCards(data.sort((a: any, b: any) => a.order - b.order));
+  };
+
+  useEffect(() => {
+    getCards()
+  }, [])
   return (
     <Box p={4}>
       <Container maxW={'1240px'} mt={'2%'} p={'0'}>
         <Flex flexWrap="wrap" gridGap={6} justify="center">
-          <Card
-            heading={'Catálogo Contemp 2023'}
-            icon={<Icon as={BsFiletypePdf} w={6} h={6} />}
-            description={'Baixe o manual acessando o link.'}
-            href={'https://contemp.com.br/api/arquivos/temnacontemp.pdf'}
-          />
-          <Card
-            heading={'NOVA CATEGORIA DE SENSORES'}
-            icon={<Icon as={TbPlusMinus} w={6} h={6} />}
-            description={'Acesse e saiba mais detalhes.'}
-            href={'/category/SENSORES'}
-          />
-          <Card
-            heading={'Câmeras Termográficas Óptris'}
-            icon={<Icon as={HiOutlineVideoCamera} w={6} h={6} />}
-            description={'Confira através do link.'}
-            href={'https://contemp.com.br/category/câmeras_termográficas_fixas'}
-          />
-          <Card
-            heading={'Controladores de Potência'}
-            icon={<Icon as={IoIosFlash} w={6} h={6} />}
-            description={'Conheça nossa linha completa.'}
-            href={'https://contemp.com.br/category/controladores_de_potência'}
-          />
+          {cards && cards.length > 0 && cards.map((item: any) => (
+            <Card
+              heading={item.title}
+              icon={<Image src={item.icon} w={6} h={6} />}
+              description={item.description}
+              href={item.redirect}
+            />
+          ))}
+
+
         </Flex>
       </Container>
     </Box>

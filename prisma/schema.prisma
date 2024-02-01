@@ -147,3 +147,17 @@ model Banners {
 
   @@map("banners")
 }
+
+model Cards {
+  id         Int       @id @default(autoincrement())
+  icon        String
+  title       String
+  description      String
+  redirect   String
+  order      Int        @unique
+  is_active   Boolean? @default(true)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("cards")
+}

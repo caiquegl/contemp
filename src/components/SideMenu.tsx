@@ -15,7 +15,17 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-} from '@chakra-ui/react';
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  FormControl,
+  FormLabel,
+  Icon,
+  InputGroup,
+  Select, FormErrorMessage, HStack, Checkbox
+} from '@chakra-ui/react'
 import Image from 'next/image';
 import { useEffect, useRef, useState, useContext } from 'react';
 import Logo from '../assets/icons/Logo-Contemp.svg';
@@ -35,11 +45,19 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { BiExport, BiCarousel } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { LuMailOpen, LuUser, LuCompass, LuHexagon, LuArchive, LuShirt, LuHome, LuLogOut, LuYoutube, LuLayoutDashboard } from "react-icons/lu";
-import { PiCardholderBold } from "react-icons/pi";
+import { PiCardholderBold, PiInfoDuotone } from 'react-icons/pi'
 import { TbPencil } from "react-icons/tb";
 import { FaMeta } from "react-icons/fa6";
 import { SiGoogleanalytics } from "react-icons/si";
 import { PDFDocument, rgb } from 'pdf-lib';
+import { destroyCookie, parseCookies } from 'nookies'
+import { useRouter } from 'next/router'
+import { InputDefault } from './Form/Input'
+import { Controller } from 'react-hook-form'
+import { AsyncSelect } from 'chakra-react-select'
+import { TextareaDefault } from './Form/Textarea'
+import { ViewImage } from './ContainerAddProduct/ViewImage'
+import { Form, Input, message } from 'antd'
 
 interface SideMenuProps {
   user: {
@@ -68,16 +86,32 @@ interface Product {
 
 
 const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setActiveTab, onOpen, onToggleMenu }) => {
+  const router = useRouter()
 
   const [activeSubTab, setActiveSubTab] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
   const [isCategoriaActive, setIsCategoriaActive] = useState(false);
   const [isProdutoActive, setIsProdutoActive] = useState(false);
   const [isRedirecionamentoActive, setIsRedirecionamentoActive] = useState(false);
   const [isFileActive, setIsFileActive] = useState(false);
   const [isDashActive, setIsDashActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
+  const [form] = Form.useForm()
+
+  const updateUser = async (user: any) => {
+    try {
+      await api.post(`updateUser`, { id: user.id, ...user })
+      message.success('Sucesso ao atualizar usuário')
+      form.resetFields(['name', 'email', 'picture', 'id'])
+      location.reload();
+
+    } catch (error) {
+      message.error('Erro ao atualizar usuário')
+    } finally {
+    }
+  }
 
   const toggleMenu = () => {
     setIsExpanded(!isExpanded);  // Alterna entre expandido e contraído
@@ -326,14 +360,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const exportarProdutosPDF = async () => {
     try {
       const { data } = await api.get('getAllProductsWidthCategory');
-  
+
       const pdfDoc = await PDFDocument.create();
       // Cria uma página com layout horizontal (paisagem)
       const page = pdfDoc.addPage([842, 595]); // Substitua 'width' e 'height' pelos valores desejados
-  
+
       const fontSize = 10;
       let currentY = page.getHeight() - 40; // Inicia no topo da página
-  
+
       // Cabeçalhos
       const headers = ['Ordem', 'Nome', 'Categoria', 'Status', 'Criado em', 'Atualizado em', 'Destaque', 'Layout', 'URL'];
       headers.forEach((header, index) => {
@@ -344,9 +378,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
           color: rgb(0, 0, 0),
         });
       });
-  
+
       currentY -= 20;
-  
+
       // Dados dos produtos
       data.forEach((product : any) => {
         const productData = [
@@ -360,7 +394,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
           `Layout ${product.layout}`,
           `https://contemp.com.br/produto/${replaceNameToUrl(product.name).toLowerCase().replaceAll(' ', '_')}`,
         ];
-  
+
         productData.forEach((text, index) => {
           page.drawText(text, {
             x: 50 + index * 50,
@@ -369,12 +403,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
             color: rgb(0, 0, 0),
           });
         });
-  
+
         currentY -= 20;
       });
-  
+
       const pdfBytes = await pdfDoc.save();
-  
+
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -387,7 +421,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
       alert("Erro ao exportar produtos em PDF.");
     }
   };
-  
+
   return (
     <Flex direction="column" position="relative" height="100vh">
       {/* Botão Flutuante para Alternar a Expansão/Contração do Menu */}
@@ -445,7 +479,18 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     </Box>
                     <Divider my="4" />
                     <MenuItem
-                      onClick={() => alert('Bora editar o perfil, somente se for admin!')}
+                      onClick={async () => {
+                        const cookies = parseCookies();
+                        let userJson = JSON.parse(cookies['nextAuth.contemp']);
+                        const { data } = await api.post(`getSuperAdm`, { id: userJson.data.id })
+
+                        form.setFieldValue('name', data.name)
+                        form.setFieldValue('email', data.email)
+                        form.setFieldValue('id', userJson.data.id)
+                        form.setFieldValue('picture', data.picture)
+
+                        setOpenUpdate(!openUpdate)
+                      }}
                       color={'#242424'}
                       fontSize={'1rem'}
                       icon={<TbPencil />}
@@ -471,7 +516,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                     </MenuItem>
                     <Divider my="4" />
                     <MenuItem
-                      onClick={() => alert('Sair da conta! É mais seguro.')}
+                      onClick={() => {
+                        destroyCookie({}, 'nextAuth.contemp', { path: '/' })
+                        router.push('/adm')
+                      }}
                       color={'#242424'}
                       fontSize={'1rem'}
                       icon={<LuLogOut />}
@@ -642,7 +690,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                       className="adm-botao-sidemenu"
                       variant="ghost"
                       width="100%"
-                      onClick={() => setActiveTab(2)}
+                      onClick={() => setActiveTab(7)}
                       justifyContent="start"
                     >
                       <Flex justifyContent="space-between" width="100%" alignItems="center">
@@ -1120,6 +1168,45 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
           </Box>
         </Flex>
       </Box>
+      <Drawer isOpen={openUpdate} placement="right" onClose={() => {
+        setOpenUpdate(!openUpdate)
+        form.resetFields(['name', 'email', 'id', 'picture'])
+      }}>
+        <DrawerOverlay />
+        <DrawerContent bg={'white'}>
+          <DrawerHeader color={'var(--black-primary)'}>Atualizar dados</DrawerHeader>
+          <DrawerBody>
+            <Form
+
+              layout="vertical"
+              form={form}
+              onFinish={updateUser}
+            >
+              <Form.Item label='Nome' rules={[{ required: true, message: 'Campo obrigatório' }]} name="name">
+                <Input />
+              </Form.Item>
+              <Form.Item label='Email' rules={[{ required: true, message: 'Campo obrigatório' }]} name="email">
+                <Input type='email'/>
+              </Form.Item>
+              <Form.Item label='Foto'  name="picture">
+                <InputsHome
+                  name=''
+                  question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
+                  typeInput='fileSingle'
+                  getUrls={(value: any) => form.setFieldValue('picture', value)}
+                />
+              </Form.Item>
+              <Form.Item label='id' rules={[{ required: true, message: 'Campo obrigatório' }]} name="id" style={{opacity: 0}}>
+                <Input  disabled={true}/>
+              </Form.Item>
+              <Button type='submit' style={{width: '100%'}}>
+                Atualizar
+              </Button>
+            </Form>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
     </Flex>
   );
 };

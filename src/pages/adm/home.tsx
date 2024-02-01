@@ -42,6 +42,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 import SideMenu from '../../components/SideMenu';
 import TabUsers from '../../components/Tabs/TabUsers'
 import TabBanners from '../../components/Tabs/TabBanners'
+import TabCards from '../../components/Tabs/TabCards'
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -150,6 +151,7 @@ const Adm = () => {
     <TabRedirects />,
     <TabUsers />,
     <TabBanners />,
+    <TabCards />,
   ];
 
   const emails: any = {
