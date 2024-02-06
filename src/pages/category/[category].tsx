@@ -154,14 +154,13 @@ const Category = () => {
 
                 return <ListCategory key={index} bg={bg} data={categ} />
               })}
-              {listOrigin.length >= list.length && <Center>
+              {list.length < listOrigin.length && isNaN(activeFilter) && <Center>
                   <Button
                     className='botao-vermelho'
                     maxW={pxToRem(279)}
                     w='100%'
                     mt='20px'
                     onClick={() => {
-                      console.log('more')
                       const end = startIndex + itemsPerPage
                       const newData = listOrigin.slice(startIndex, end)
                       setStartIndex(end)
