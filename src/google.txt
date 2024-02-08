@@ -1,0 +1,18 @@
+const { google } = require('googleapis');
+
+// Substitua 'credentials/meu-arquivo-de-servico.json' pelo caminho até seu arquivo JSON
+const key = require('../credentials/contemp-413621-8b4bd83ae9a3.json');
+
+const scopes = ['https://www.googleapis.com/auth/analytics.readonly'];
+
+// Autenticando com a conta de serviço
+const jwt = new google.auth.JWT(key.client_email, null, key.private_key, scopes);
+
+jwt.authorize((err, response) => {
+  if (err) {
+    console.log('Erro na autenticação:', err);
+    return;
+  }
+  console.log('Autenticado com sucesso!');
+  // Aqui você pode fazer chamadas à API
+});
