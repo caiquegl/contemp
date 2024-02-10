@@ -2,6 +2,7 @@ import { Container, Flex, Text, Link, Breadcrumb, BreadcrumbItem, BreadcrumbLink
 import { Header } from '../components/Header'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Player } from '../components/Player'
 import { SelectConfig } from '../components/SelectConfig'
 import Head from 'next/head'
@@ -105,7 +106,7 @@ const Support = () => {
           },
         ]}
       />
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Grid, Text, useBreakpointValue, Heading } from '@chakra-ui/react'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Player } from '../components/Player'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -241,7 +242,7 @@ const AllProduct = () => {
           },
         ]}
       />*/}
-      <Footer />
+      <FooterCompleto />
     </SmoothScroll>
   )
 }

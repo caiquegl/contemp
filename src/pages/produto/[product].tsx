@@ -1,4 +1,5 @@
 import { Footer } from '../../components/Footer'
+import { FooterCompleto } from '../../components/FooterCompleto'
 import {
   Box,
   Button,
@@ -166,7 +167,7 @@ const Product = () => {
         {detail?.layout == 2 && <Product2 bradName={bradName} detail={detail} />}
         {detail?.layout == 3 && <Product3 bradName={bradName} detail={detail} />}
         {detail?.layout == 4 && <Product4 bradName={bradName} detail={detail} />}
-        <Footer />
+        <FooterCompleto />
       </SmoothScroll>
     </>
   )

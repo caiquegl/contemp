@@ -1,4 +1,5 @@
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Header } from '../components/Header'
 import { SearchBar } from '../components/SearchBar'
 import {
@@ -351,7 +352,7 @@ const TodosProdutosContemp = () => {
         </Box>
         </Flex>
       </Flex>
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

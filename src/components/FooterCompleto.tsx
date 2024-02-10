@@ -36,48 +36,51 @@ export const FooterCompleto = () => {
   }, [])
 
   return (
-    <Container
-      maxW='7xl'
-      p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
-    >
-      <Flex
-        alignItems='center'
-        justifyContent='space-between'
-        marginBottom='32px'
-        flexDirection={['column', 'column', 'row', 'row', 'row']}
+    <>
+      <Flex>
+      </Flex>
+      <Container
+        maxW='7xl'
+        p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
       >
         <Flex
-          w='100%'
-          justifyContent='space-between'
           alignItems='center'
+          justifyContent='space-between'
+          marginBottom='32px'
           flexDirection={['column', 'column', 'row', 'row', 'row']}
         >
-          <Box>
-            <Text fontWeight='bold' fontSize='20px' mb='15px'>
-              Procure o produto que deseja aqui
-            </Text>
-            <Text fontSize='1rem' mb='15px'>
-              Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.
-            </Text>
-          </Box>
-          <SearchBar
-            inputProps={{
-              placeholder: 'Procure aqui seu produto...',
-            }}
-          />
+          <Flex
+            w='100%'
+            justifyContent='space-between'
+            alignItems='center'
+            flexDirection={['column', 'column', 'row', 'row', 'row']}
+          >
+            <Box>
+              <Text fontWeight='bold' fontSize='20px' mb='15px'>
+                Procure o produto que deseja aqui
+              </Text>
+              <Text fontSize='1rem' mb='15px'>
+                Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.
+              </Text>
+            </Box>
+            <SearchBar
+              inputProps={{
+                placeholder: 'Procure aqui seu produto...',
+              }}
+            />
+          </Flex>
         </Flex>
-      </Flex>
-      <Divider mb='3%' />
-      <Heading as={'h3'} fontSize={'1.5rem'} textTransform={'uppercase'} color={'white'} mb={'3%'}>Todos os Nossos Produtos</Heading>
-      <Grid
-        templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
-        w='100%'
-      >
-        {list &&
-          list.length > 0 &&
-          list.map((el: any, index: number) => (
-            <GridItem w='100%' gap={6} key={index} px='20px'>
-              {/* {index === 2 && (
+        <Divider mb='3%' />
+        <Heading as={'h3'} fontSize={'1.5rem'} textTransform={'uppercase'} color={'white'} mb={'3%'}>Todos os Nossos Produtos</Heading>
+        <Grid
+          templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+          w='100%'
+        >
+          {list &&
+            list.length > 0 &&
+            list.map((el: any, index: number) => (
+              <GridItem w='100%' gap={6} key={index} px='20px'>
+                {/* {index === 2 && (
                 <HStack spacing="20px" mb="40px" >
                   <Link
                     href="https://www.linkedin.com/company/contemp/"
@@ -157,75 +160,76 @@ export const FooterCompleto = () => {
                   </Link>
                 </HStack>
               )} */}
-              <Link
-                href={`/category/${el.name.toLowerCase().replaceAll(' ', '_')}`}
-                _hover={{ color: 'white', textDecoration: 'none' }}
-              >
-                <Heading as={'h2'} color='white' fontWeight={'bold'} fontSize='1rem' mb='2%' cursor='pointer'>
-                  {el.name}
-                </Heading>
-              </Link>
-              {el.children &&
-                el.children.length > 0 &&
-                el.children.map((el2: any, index: any) => (
-                  <Fragment key={index}>
-                    <Link
-                      href={`/category/${el2.name.toLowerCase().replaceAll(' ', '_')}`}
-                      _hover={{ color: 'white', textDecoration: 'none' }}
-                    >
-                      <Heading as={'h3'} color='white' fontWeight={'bold'} fontSize='0.85rem' mb='15px' cursor='pointer'>
-                        {el2.name}
-                      </Heading>
-                    </Link>
-                    <Box mb='20px'>
-                      {el2.children &&
-                        el2.children.length > 0 &&
-                        el2.children.map((el3: any, index: number) => (
-                          <Link
-                            href={`/category/${el3.name.toLowerCase().replaceAll(' ', '_')}`}
-                            _hover={{ color: 'white', textDecoration: 'none' }}
-                          >
-                            <Heading as={'h4'} color='white' key={index} fontWeight='400' fontSize='0.85rem' cursor='pointer'>
-                              {el3.name}
-                            </Heading>
-                          </Link>
-                        ))}
-                    </Box>
-                  </Fragment>
-                ))}
-            </GridItem>
-          ))}
-      </Grid>
-      <Divider mb='3%' />
-      <Flex
-        direction={['column-reverse', 'row']}
-        alignItems={['flex-start', 'center']}
-        justifyContent='space-between'
-        fontSize='1rem'
-        flexWrap='wrap'
-      >
-        <Text color='white' fontSize='1rem'>
-          Copyright © 2022 - 2024 Contemp. Todos os direitos reservados, feito por <Link href='https://3hub.co'
-            _hover={{ color: '#fff', textDecoration: 'none' }}>3 Hub</Link>.
-        </Text>
-        <UnorderedList color='white' fontSize='16px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
-          <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
-            <ListItem>Todos os Produtos</ListItem>
-          </Link>
-          <Link
-            href='https://contemp.com.br/politica-de-privacidade'
-            _hover={{ color: '#fff', textDecoration: 'none' }}
-          >
-            <ListItem m={[0, '0 0 0 30px']}>Politica de Privacidade</ListItem>
-          </Link>
-          <Link href='/trabalhe-conosco' _hover={{ color: '#fff', textDecoration: 'none' }}>
-            <ListItem m={[0, '0 30px']}>Trabalhe Conosco</ListItem>
-          </Link>
-          <Link href='/site-map' _hover={{ color: '#fff', textDecoration: 'none' }}>
-            <ListItem>Mapa do Site</ListItem>
-          </Link>
-        </UnorderedList>
-      </Flex>
-    </Container>
+                <Link
+                  href={`/category/${el.name.toLowerCase().replaceAll(' ', '_')}`}
+                  _hover={{ color: 'white', textDecoration: 'none' }}
+                >
+                  <Heading as={'h2'} color='white' fontWeight={'bold'} fontSize='1rem' mb='2%' cursor='pointer'>
+                    {el.name}
+                  </Heading>
+                </Link>
+                {el.children &&
+                  el.children.length > 0 &&
+                  el.children.map((el2: any, index: any) => (
+                    <Fragment key={index}>
+                      <Link
+                        href={`/category/${el2.name.toLowerCase().replaceAll(' ', '_')}`}
+                        _hover={{ color: 'white', textDecoration: 'none' }}
+                      >
+                        <Heading as={'h3'} color='white' fontWeight={'bold'} fontSize='0.85rem' mb='15px' cursor='pointer'>
+                          {el2.name}
+                        </Heading>
+                      </Link>
+                      <Box mb='20px'>
+                        {el2.children &&
+                          el2.children.length > 0 &&
+                          el2.children.map((el3: any, index: number) => (
+                            <Link
+                              href={`/category/${el3.name.toLowerCase().replaceAll(' ', '_')}`}
+                              _hover={{ color: 'white', textDecoration: 'none' }}
+                            >
+                              <Heading as={'h4'} color='white' key={index} fontWeight='400' fontSize='0.85rem' cursor='pointer'>
+                                {el3.name}
+                              </Heading>
+                            </Link>
+                          ))}
+                      </Box>
+                    </Fragment>
+                  ))}
+              </GridItem>
+            ))}
+        </Grid>
+        <Divider mb='3%' />
+        <Flex
+          direction={['column-reverse', 'row']}
+          alignItems={['flex-start', 'center']}
+          justifyContent='space-between'
+          fontSize='1rem'
+          flexWrap='wrap'
+        >
+          <Text color='white' fontSize='1rem'>
+            Copyright © 2022 - 2024 Contemp. Todos os direitos reservados, feito por <Link href='https://3hub.co'
+              _hover={{ color: '#fff', textDecoration: 'none' }}>3 Hub</Link>.
+          </Text>
+          <UnorderedList color='white' fontSize='16px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
+            <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
+              <ListItem>Todos os Produtos</ListItem>
+            </Link>
+            <Link
+              href='https://contemp.com.br/politica-de-privacidade'
+              _hover={{ color: '#fff', textDecoration: 'none' }}
+            >
+              <ListItem m={[0, '0 0 0 30px']}>Politica de Privacidade</ListItem>
+            </Link>
+            <Link href='/trabalhe-conosco' _hover={{ color: '#fff', textDecoration: 'none' }}>
+              <ListItem m={[0, '0 30px']}>Trabalhe Conosco</ListItem>
+            </Link>
+            <Link href='/site-map' _hover={{ color: '#fff', textDecoration: 'none' }}>
+              <ListItem>Mapa do Site</ListItem>
+            </Link>
+          </UnorderedList>
+        </Flex>
+      </Container>
+    </>
   )
 }

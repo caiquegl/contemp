@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Header } from '../components/Header'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
+import GTranslateWrapper from '../components/GTranslateWrapper';
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Player } from '../components/Player'
 import { BiTargetLock } from 'react-icons/bi'
 import { AiOutlineLike } from 'react-icons/ai'
@@ -28,6 +30,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <Header />
+      <GTranslateWrapper />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
         <Heading as={'h2'} className='sobre-titulo negrito text-white'>
           Sobre nós
@@ -54,19 +57,19 @@ const Home = () => {
           >
             <Box>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px'>
-              Sua história é uma trajetória de conquistas que se iniciou em 1984 e continua nos dias atuais.
-              A experiência que adquiriu ao longo desse caminho está presente nos processos das principais indústrias,
-              dos mais diversos segmentos, o que contribuiu para formação de importantes alianças e parcerias de confiança.
-              Cada passo visa fazer de seus produtos sinônimos de credibilidade, transparecendo segurança e satisfação para o cliente.
+                Sua história é uma trajetória de conquistas que se iniciou em 1984 e continua nos dias atuais.
+                A experiência que adquiriu ao longo desse caminho está presente nos processos das principais indústrias,
+                dos mais diversos segmentos, o que contribuiu para formação de importantes alianças e parcerias de confiança.
+                Cada passo visa fazer de seus produtos sinônimos de credibilidade, transparecendo segurança e satisfação para o cliente.
               </Text>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px' mt='15px'>
-              A certeza de poder confiar sua linha de produção aos produtos e serviços da Contemp é algo que não surgiu por acaso. Desde 1984,
-              trazendo competência, dedicação e conhecimento para a criação de soluções para medição, controle e monitoramento para os mais variados processos industriais
+                A certeza de poder confiar sua linha de produção aos produtos e serviços da Contemp é algo que não surgiu por acaso. Desde 1984,
+                trazendo competência, dedicação e conhecimento para a criação de soluções para medição, controle e monitoramento para os mais variados processos industriais
               </Text>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px' mt='15px'>
-              Além disso, você acrescenta a qualidade, a facilidade de operação, o atendimento personalizado e o suporte diferenciado.
-              A Contemp sabe que tudo isso não tem preço! Dessa forma,cobra-se por aquilo que considera a principal razão de sua
-              existência: assegurar a tranquilidade dos seus clientes.
+                Além disso, você acrescenta a qualidade, a facilidade de operação, o atendimento personalizado e o suporte diferenciado.
+                A Contemp sabe que tudo isso não tem preço! Dessa forma,cobra-se por aquilo que considera a principal razão de sua
+                existência: assegurar a tranquilidade dos seus clientes.
               </Text>
             </Box>
 
@@ -83,7 +86,7 @@ const Home = () => {
             <Box mb={['20px', '20px', '0', '0', '0']}>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mr='40px'></Text>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mt='0px'>
-              A certificação ISO 9001 é um testemunho do nosso compromisso com a qualidade, transparência e melhoria contínua. Na Contemp, cada membro da nossa equipe se orgulha de contribuir para uma cultura organizacional que busca constantemente elevar os padrões, garantindo que nossos clientes recebam sempre o melhor em produtos e serviços. Estamos comprometidos em ser a escolha confiável para aqueles que valorizam a qualidade em cada processo.
+                A certificação ISO 9001 é um testemunho do nosso compromisso com a qualidade, transparência e melhoria contínua. Na Contemp, cada membro da nossa equipe se orgulha de contribuir para uma cultura organizacional que busca constantemente elevar os padrões, garantindo que nossos clientes recebam sempre o melhor em produtos e serviços. Estamos comprometidos em ser a escolha confiável para aqueles que valorizam a qualidade em cada processo.
               </Text>
             </Box>
             <Box ml='40px' backgroundColor={'#ededed'} padding={'44px 60px'} borderRadius={'8px'}>
@@ -268,7 +271,7 @@ const Home = () => {
           },
         ]}
       />
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

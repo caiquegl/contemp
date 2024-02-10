@@ -1,6 +1,7 @@
 import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList, Heading } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
 import { SearchBar } from './SearchBar'
+import GTranslateWrapper from './GTranslateWrapper';
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
 
@@ -40,6 +41,7 @@ export const Footer = () => {
       maxW='7xl'
       p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
     >
+       <GTranslateWrapper />
       <Flex
         alignItems='center'
         justifyContent='space-between'

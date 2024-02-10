@@ -2,6 +2,7 @@ import { Box, Button, Center, Container, Flex, Link, Text, Heading, UnorderedLis
 import Head from 'next/head'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 
 const PrivacyPolicy = () => {
   return (
@@ -189,7 +190,7 @@ const PrivacyPolicy = () => {
           </Box>
         </Container>
       </Box>
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

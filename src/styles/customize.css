@@ -791,6 +791,10 @@ body.is-detached-mode.log-open {
     display: none !important;
 }
 
+.gtranslate_wrapper {
+    z-index: 999999999998!important;
+}
+
 /* RESPONSIVO */
 @media screen and (min-width: 992px) {
     .imagem-produto-individual {

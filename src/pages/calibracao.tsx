@@ -2,6 +2,7 @@ import { Box, Button, Center, Container, Flex, Link, ListItem, Text, UnorderedLi
 import { Header } from '../components/Header'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Player } from '../components/Player'
 import { SelectConfigCalibration } from '../components/SelectConfigCalibration'
 import Head from 'next/head'
@@ -278,7 +279,7 @@ const Calibracao = () => {
           },
         ]}
       />
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

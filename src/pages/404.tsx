@@ -1,6 +1,7 @@
 import { Button, Center, Flex, Text, HStack, Heading } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Header } from '../components/Header'
 
 const Page404 = () => {
@@ -86,7 +87,7 @@ const Page404 = () => {
           </HStack>
         </Center>
       </Flex>
-      <Footer />
+      <FooterCompleto />
     </>
   )
 }

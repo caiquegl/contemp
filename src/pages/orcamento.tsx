@@ -21,6 +21,7 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 import Mapa from '../assets/images/MAPA.png'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { BiPhone } from 'react-icons/bi'
 import { AiOutlineMail } from 'react-icons/ai'
 import { Image } from '../components/Image'
@@ -417,7 +418,7 @@ const Orcamento = () => {
           <Image src={Mapa} minH={500} bgSize='100%' />
         </Box>
       </Flex>*/}
-      <Footer />
+      <FooterCompleto />
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent className="indexModal">

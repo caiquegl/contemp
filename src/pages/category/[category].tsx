@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Text, Heading, Button, Center } from '@chakra-ui/react'
 import { Contact } from '../../components/Contact'
 import { Footer } from '../../components/Footer'
+import { FooterCompleto } from '../../components/FooterCompleto'
 import { Player } from '../../components/Player'
 import { SmoothScroll } from '../../components/SmoothScroll'
 import { useEffect, useRef, useState } from 'react'
@@ -201,7 +202,7 @@ const Category = () => {
           },
         ]}
       />
-      <Footer />
+      <FooterCompleto />
     </SmoothScroll>
   )
 }

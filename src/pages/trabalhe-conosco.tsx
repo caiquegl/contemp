@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
+import { FooterCompleto } from "../components/FooterCompleto";
 import { Flex, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Box, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -58,7 +59,7 @@ const Home = () => {
           },
         ]}
       />
-      <Footer />
+      <FooterCompleto />
     </>
   );
 };
