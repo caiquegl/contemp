@@ -94,13 +94,28 @@ export default class MyDocument extends Document {
             `,
             }}>
           </script>
+          <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
           <script type='text/javascript'
             dangerouslySetInnerHTML={{
               __html: `window.gtranslateSettings = {"default_language":"pt","native_language_names":true,"detect_browser_language":true,"languages":["pt","es","de","en"],"wrapper_selector":".gtranslate_wrapper","float_switcher_open_direction":"right","alt_flags":{"en":"usa","pt":"brazil"}}`,
             }}
           >
           </script>
-          <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+          {/* TRADUTOR PAGO */}
+          <script src="//cdn.conveythis.com/javascript/conveythis-initializer.js"></script>
+          <script type='text/javascript'
+          dangerouslySetInnerHTML={{
+            __html: `
+            document.addEventListener("DOMContentLoaded", function(e) {
+              ConveyThis_Initializer.init({
+                api_key: "pub_37af060f92e50b65b8e6f51f053c7ba1"
+              });
+	          });
+            `,
+          }}
+            >
+          </script>
 
         </Head>
         <body>
