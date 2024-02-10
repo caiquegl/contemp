@@ -1,6 +1,6 @@
 export const HtmlDefault = (name?: string, email?: string, empresa?: string, telefone?: string, mensagem?: string, file?: string, area?: string) => {
     let msg = `<!DOCTYPE html>
-    <html lang="en">
+    <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -157,7 +157,7 @@ export const HtmlOrcamento = (
     })
 
     let msg = `<!DOCTYPE html>
-    <html lang="en">
+    <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -309,7 +309,7 @@ export const HtmlOrcamento = (
 
 export const HtmlRecover = (name?: string, link?: string) => {
     let msg = `<!DOCTYPE html>
-    <html lang="en">
+    <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
