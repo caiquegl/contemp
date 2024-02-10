@@ -22,6 +22,7 @@ import { BannerMobile } from '../components/BannerMobile'
 import { Favorite } from '../components/Favorite'
 import { Contact } from '../components/Contact'
 import { Footer } from '../components/Footer'
+import { FooterCompleto } from '../components/FooterCompleto'
 import { Player } from '../components/Player'
 import DescriptionProduct from '../components/DescriptionProduct'
 import { pxToRem } from '../utils/pxToRem'
@@ -521,7 +522,7 @@ const Home = () => {
       </Flex>
               */}
 
-      <Footer />
+      <FooterCompleto />
     </SmoothScroll>
   )
 }
