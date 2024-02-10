@@ -31,7 +31,7 @@ const Home = () => {
       </Head>
       <Header />
       <GTranslateWrapper />
-      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='160px'>
+      <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='80px'>
         <Heading as={'h2'} className='sobre-titulo negrito text-white'>
           Sobre nós
         </Heading>

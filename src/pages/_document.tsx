@@ -99,21 +99,6 @@ export default class MyDocument extends Document {
           >
           </script>
 
-          {/* TRADUTOR PAGO */}
-          <script src="//cdn.conveythis.com/javascript/conveythis-initializer.js"></script>
-          <script type='text/javascript'
-          dangerouslySetInnerHTML={{
-            __html: `
-            document.addEventListener("DOMContentLoaded", function(e) {
-              ConveyThis_Initializer.init({
-                api_key: "pub_37af060f92e50b65b8e6f51f053c7ba1"
-              });
-	          });
-            `,
-          }}
-            >
-          </script>
-
         </Head>
         <body>
           <noscript>

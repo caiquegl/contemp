@@ -176,7 +176,7 @@ export function SidebarDrawer({
                   Calibração
                 </Text>
               </Link>
-              <Link href="https://blog.contemp.com.br/politica-de-privacidade/">
+              <Link href="/politica-de-privacidade">
                 <Text mb="15px" fontSize="18px">
                   Política de Privacidade
                 </Text>

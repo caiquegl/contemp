@@ -266,7 +266,7 @@ export const Header = () => {
                     Calibração
                   </Text>
                 </Link>
-                <Link href='https://blog.contemp.com.br/politica-de-privacidade/'>
+                <Link href='/politica-de-privacidade'>
                   <Text mb='15px' fontSize='18px'>
                     Política de Privacidade
                   </Text>
@@ -442,7 +442,7 @@ export const Header = () => {
                  Trabalhe Conosco
                   </MenuItem>
                   </Link>
-                  <Link href='https://blog.contemp.com.br/politica-de-privacidade' isExternal
+                  <Link href='/politica-de-privacidade'
                 _hover={{
                   textDecoration: 'none',
                   color: 'var(--red-primary)',
