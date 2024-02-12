@@ -10,6 +10,7 @@ import Hotjar from '@hotjar/browser';
 import { useEffect } from "react";
 import Head from "next/head";
 import { ParallaxProvider } from 'react-scroll-parallax';
+import "../i18n/index";
 
 const siteId = 3290469;
 const hotjarVersion = 6;

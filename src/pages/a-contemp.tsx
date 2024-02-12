@@ -16,8 +16,11 @@ import Head from 'next/head'
 import Banner1 from '../assets/images/contemp-fachada.webp'
 import Banner2 from '../assets/images/contemp-sobre.webp'
 import { setContextMenuFalse } from '../utils/setContextMenuFalse'
+import { useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const  { t } = useTranslation();
   return (
     <>
       <Head>
@@ -33,7 +36,7 @@ const Home = () => {
       <GTranslateWrapper />
       <Flex w='100%' alignItems='center' justifyContent='center' direction='column' h='80px'>
         <Heading as={'h2'} className='sobre-titulo negrito text-white'>
-          Sobre nós
+          {t("titulopagina-sobre")}
         </Heading>
       </Flex>
       <Flex
@@ -57,19 +60,13 @@ const Home = () => {
           >
             <Box>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px'>
-                Sua história é uma trajetória de conquistas que se iniciou em 1984 e continua nos dias atuais.
-                A experiência que adquiriu ao longo desse caminho está presente nos processos das principais indústrias,
-                dos mais diversos segmentos, o que contribuiu para formação de importantes alianças e parcerias de confiança.
-                Cada passo visa fazer de seus produtos sinônimos de credibilidade, transparecendo segurança e satisfação para o cliente.
+              {t("paragrafo1-sobre")}
               </Text>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px' mt='15px'>
-                A certeza de poder confiar sua linha de produção aos produtos e serviços da Contemp é algo que não surgiu por acaso. Desde 1984,
-                trazendo competência, dedicação e conhecimento para a criação de soluções para medição, controle e monitoramento para os mais variados processos industriais
+              {t("paragrafo2-sobre")}
               </Text>
               <Text fontSize='1rem' maxW='535px' color='black.900' textAlign='justify' mr='40px' mt='15px'>
-                Além disso, você acrescenta a qualidade, a facilidade de operação, o atendimento personalizado e o suporte diferenciado.
-                A Contemp sabe que tudo isso não tem preço! Dessa forma,cobra-se por aquilo que considera a principal razão de sua
-                existência: assegurar a tranquilidade dos seus clientes.
+              {t("paragrafo3-sobre")}
               </Text>
             </Box>
 
@@ -86,19 +83,19 @@ const Home = () => {
             <Box mb={['20px', '20px', '0', '0', '0']}>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mr='40px'></Text>
               <Text fontSize='1rem' maxW='931px' color='black.900' textAlign='justify' mt='0px'>
-                A certificação ISO 9001 é um testemunho do nosso compromisso com a qualidade, transparência e melhoria contínua. Na Contemp, cada membro da nossa equipe se orgulha de contribuir para uma cultura organizacional que busca constantemente elevar os padrões, garantindo que nossos clientes recebam sempre o melhor em produtos e serviços. Estamos comprometidos em ser a escolha confiável para aqueles que valorizam a qualidade em cada processo.
+              {t("paragrafo4-sobre")}
               </Text>
             </Box>
             <Box ml='40px' backgroundColor={'#ededed'} padding={'44px 60px'} borderRadius={'8px'}>
               <Heading as={'h3'} fontSize='20px' fontWeight='bold' mb='10px' color='black.900'>
-                QUALIFICAÇÃO
+              {t("titulo-iso")}
               </Heading>
               <HStack spacing='23px'>
                 <Box w='115px' h='115px'>
                   <Image src={Iso} width='115px' height='115px' onContextMenu={setContextMenuFalse} />
                 </Box>
                 <Text fontSize='1rem' color='black.900' marginTop={'-9%'}>
-                  Sistema de Gestão da Qualidade Certificado ISO 9001
+                {t("descricao-iso")}
                 </Text>
               </HStack>
               <Link
@@ -121,7 +118,7 @@ const Home = () => {
                     color: 'white',
                   }}
                 >
-                  Certificado ISO 9001
+                  {t("botao-iso")}
                 </Button>
               </Link>
             </Box>
@@ -144,9 +141,7 @@ const Home = () => {
           <Flex justifyContent='space-between' mb='60px' flexDirection={['column', 'column', 'row', 'row', 'row']}>
             <Box mt='38px'>
               <Text className='paragrafo-branco text-white'>
-                A Contemp disponibiliza uma gama de soluções adequadas para diversos segmentos da indústria, e também
-                para fabricantes de máquinas e equipamentos, integradores e revendedores, atendendo às necessidades e
-                especificidades de cada cliente.
+              {t("paragrafo5-sobre")}
               </Text>
             </Box>
           </Flex>
@@ -161,11 +156,10 @@ const Home = () => {
 
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
                   <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='1rem' mb='10px'>
-                    MISSÃO
+                  {t("titulo-missao")}
                   </Heading>
                   <Text className='paragrafo-branco text-white' maxW={['100%', '100%', '100%', '530px', '530px']}>
-                    Garantir a melhor solução para medição e controle de temperatura em processos industriais, com
-                    excelência técnica em produtos e atendimento.
+                  {t("descricao-missao")}
                   </Text>
                 </Box>
               </Flex>
@@ -177,11 +171,10 @@ const Home = () => {
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
                   <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='1rem' mb='10px'>
-                    VALORES
+                  {t("titulo-valores")}
                   </Heading>
                   <Text className='paragrafo-branco text-white' maxW={['100%', '100%', '100%', '530px', '500px']}>
-                    Conhecimento técnico, experiência na indústria, sabe ouvir, ética e transparência nas atitudes,
-                    engajamento para entregar o combinado, comprometimento e persistência para atingir a excelência.
+                  {t("descricao-valores")}
                   </Text>
                 </Box>
               </Flex>
@@ -195,11 +188,10 @@ const Home = () => {
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
                   <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='1rem' mb='10px'>
-                    ESTRUTURA EFICIENTE
+                  {t("titulo-estruturaeficiente")}
                   </Heading>
                   <Text className='paragrafo-branco text-white' maxW={['100%', '100%', '100%', '530px', '500px']}>
-                    É notável o cumprimento de metas da Contemp. Sua eficiência corresponde a uma estrutura com forte
-                    capacidade de resposta ao setor.
+                  {t("descricao-estruturaeficiente")}
                   </Text>
                 </Box>
               </Flex>
@@ -211,12 +203,10 @@ const Home = () => {
                 </Box>
                 <Box ml='20px' w='100%' maxW={['100%', '100%', '100%', '400px', '500px']}>
                   <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='1rem' mb='10px'>
-                    RESPONSABILIDADE AMBIENTAL
+                  {t("titulo-responsabilidadeambiental")}
                   </Heading>
                   <Text className='paragrafo-branco text-white' maxW={['100%', '100%', '100%', '530px', '500px']}>
-                    Todo o descarte de lixo eletrônico feito pela Contemp é através de empresa especializada que atua na
-                    reciclagem de eletrônicos, os quais, se entrarem em decomposição no meio ambiente, contaminam o solo
-                    e os lençóis freáticos.
+                  {t("descricao-responsabilidadeambiental")}
                   </Text>
                 </Box>
               </Flex>
@@ -231,13 +221,10 @@ const Home = () => {
             </Box>
             <Box ml='20px' w='calc(100% - 76px)'>
               <Heading as={'h3'} color='var(--white-primary)' fontWeight='bold' fontSize='1rem' mb='10px'>
-                POLÍTICA DA QUALIDADE
+              {t("titulo-politicadequalidade")}
               </Heading>
               <Text className='paragrafo-branco text-white'>
-                Manter e melhorar continuamente o sistema de gestão da qualidade conforme norma NBR ISO 9001. Fornecer
-                produtos e serviços que atendam às normas aplicáveis e aos requisitos acordados com nossos clientes.
-                Proporcionar o crescimento da organização através do comprometimento de todos os envolvidos e
-                participantes do plano de direcionamento estratégico da Contemp.
+              {t("descricao-politicadequalidade")}
               </Text>
             </Box>
           </Flex>
@@ -246,8 +233,8 @@ const Home = () => {
       {/* <Player /> */}
       <Contact
         id='duvidas-e-orcamentos'
-        title='DÚVIDAS E ORÇAMENTOS'
-        description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
+        title={t("contact-title")}
+        description={t("contact-description")}
         form={[
           {
             name: 'Nome',
