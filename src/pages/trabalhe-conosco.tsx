@@ -4,8 +4,11 @@ import { Footer } from "../components/Footer";
 import { FooterCompleto } from "../components/FooterCompleto";
 import { Flex, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Box, Heading } from "@chakra-ui/react";
 import Head from "next/head";
+import { useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const  { t } = useTranslation();
   return (
     <>
       <Head>
@@ -23,14 +26,14 @@ const Home = () => {
         h="80px"
       >
         <Heading as={'h2'} className="trabalheconosco-titulo text-white negrito centro">
-          Trabalhe Conosco 
+        {t("titulopagina-trabalheconosco")}
         </Heading>
       </Flex>
       
       <Contact
         id="vagas"
-        title="VENHA FAZER PARTE DA EQUIPE CONTEMP"
-        description="Estamos sempre em busca dos melhores profissionais do Brasil. Preencha o formulário e aguarde a oportunidade mais próxima."
+        title={t("contact-title-trabalheconosco")}
+        description={t("contact-description-trabalheconosco")}
         ocultAddres={true}
         form={[
           {
