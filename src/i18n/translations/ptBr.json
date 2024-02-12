@@ -1,9 +1,27 @@
 {
     "translation": {
+        "label-nome": "Nome",
+        "label-email": "E-mail",
+        "label-empresa": "Empresa",
+        "label-telefone": "Telefone",
+        "label-mensagem": "Mensagem",
+        "label-area-desejada": "Área Desejada",
+        "option-administracao": "Administração",
+        "option-marketing": "Marketing",
+        "option-vendas": "Vendas",
+        "option-outros": "Outras",
+
         "toast-sucesso-titulo": "Sucesso",
         "toast-sucesso-email-descricao": "Sucesso ao enviar email",
         "toast-erro-titulo": "Erro",
         "toast-erro-email-descricao": "Erro ao enviar email",
+        "toast-erro-destaques-descricao": "Erro ao listar destaques",
+
+        "contact-titulo-home": "DÚVIDAS E ORÇAMENTO",
+        "contact-descricao-home": "Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.",
+        "titulo-novidades-home": "Confira nossas Novidades",
+        "botao-produto1-home": "Veja mais",
+        "botao-todososprodutos-home": "Veja todos os produtos",
 
         "titulopagina-sobre": "SOBRE NÓS",
         "paragrafo1-sobre": "Sua história é uma trajetória de conquistas que se iniciou em 1984 e continua nos dias atuais. A experiência que adquiriu ao longo desse caminho está presente nos processos das principais indústrias, dos mais diversos segmentos, o que contribuiu para formação de importantes alianças e parcerias de confiança. Cada passo visa fazer de seus produtos sinônimos de credibilidade, transparecendo segurança e satisfação para o cliente.",
@@ -130,7 +148,10 @@
         "paragrafo5-suportetecnico": "O que a garantia não cobre, despesas indiretas como: fretes, viagens e estadias. A Contemp não assume nenhuma responsabilidade por qualquer tipo de perda, dano, acidente, ou lucro cessante decorrentes de falha ou defeito no equipamento, tão somente se comprometendo a consertar ou repor os componentes defeituosos quando comprovado o uso dentro das especificações técnicas.",
         "paragrafo6-suportetecnico": "A perda de garantia se processará caso haja algum defeito no equipamento e seja constatado que tal fato ocorreu devido à instalação elétrica inadequada e/ou o equipamento ter sido utilizado em ambiente agressivo, modificado sem autorização, sofrido violação ou utilizado fora das especificações técnicas.",
         "contact-titulo-suportetecnico": "DÚVIDAS E ORÇAMENTO",
-        "contact-descricao-suportetecnico": "Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail."
+        "contact-descricao-suportetecnico": "Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.",
+    
+        "titulo-video-home": "Nova P501 Upgrade",
+        "descricao-video-home": "A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta."
     }
 }
         

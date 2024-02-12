@@ -35,6 +35,8 @@ import { Upload } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import type { UploadProps } from 'antd'
 const { Dragger } = Upload
+import { useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   title: string
@@ -51,6 +53,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
   const [file, setFile] = useState('')
   const { register, handleSubmit, formState, reset, watch, setValue, control } = useForm({})
   const { errors } = formState
+  const { t } = useTranslation();
 
   const sendMail = async (bodyForm: any) => {
     try {
@@ -72,16 +75,16 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
       })
       reset()
       toast({
-        title: 'Sucesso',
-        description: 'Sucesso ao enviar email',
+        title: t('toast-sucesso-titulo'),
+        description: t('toast-sucesso-email-descricao'),
         status: 'success',
         duration: 3000,
         isClosable: true,
       })
     } catch (error) {
       toast({
-        title: 'Erro',
-        description: 'Erro ao enviar email',
+        title: t('toast-erro-titulo'),
+        description: t('toast-erro-email-descricao'),
         status: 'error',
         duration: 3000,
         isClosable: true,

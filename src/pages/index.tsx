@@ -39,6 +39,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
 import { collection, getDocs } from 'firebase/firestore'
 import { database } from '../utils/db'
+import { useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Post = {
   post_title: string
@@ -48,6 +50,7 @@ type Post = {
 }
 
 const Home = () => {
+  const { t } = useTranslation();
   const [listTab, setListtAB] = useState<any>([])
   const [post, setPost] = useState<Post[]>([])
   const isTablet = useBreakpointValue({
@@ -335,7 +338,7 @@ const Home = () => {
               transition: 'all 0.4s',
             }}
           >
-            Veja todos os produtos
+            {t('botao-todososprodutos-home')}
           </Button>
         </Link>
       </Flex>
@@ -434,27 +437,27 @@ const Home = () => {
       {/*<Catalog />*/}
       <Contact
         id='duvidas-e-orcamentos'
-        title='DÚVIDAS E ORÇAMENTOS'
-        description='Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.'
+        title={t('contact-titulo-home')}
+        description={t('contact-descricao-home')}
         form={[
           {
-            name: 'Nome',
+            name: t('label-nome'),
             type: 'text',
           },
           {
-            name: 'E-mail',
+            name: t('label-email'),
             type: 'text',
           },
           {
-            name: 'Empresa',
+            name: t('label-empresa'),
             type: 'text',
           },
           {
-            name: 'Telefone',
+            name: t('label-telefone'),
             type: 'text',
           },
           {
-            name: 'Mensagem',
+            name: t('label-mensagem'),
             type: 'textArea',
           },
         ]}

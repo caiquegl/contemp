@@ -37,30 +37,36 @@ const Home = () => {
         ocultAddres={true}
         form={[
           {
-            name: "Nome",
-            type: "text",
+            name: t('label-nome'),
+            type: 'text',
           },
           {
-            name: "E-mail",
-            type: "text",
+            name: t('label-email'),
+            type: 'text',
           },
           {
-            name: "Telefone",
-            type: "text",
+            name: t('label-telefone'),
+            type: 'text',
           },
           {
-            name: "Área desejada",
-            type: "select",
-            options: ["Administração","Marketing","Vendas", "Outros"],
+            name: t('label-area-desejada'),
+            type: 'select',
+            options: [
+              t('option-administracao'),
+              t('option-marketing'),
+              t('option-vendas'),
+              t('option-outros'),
+            ],
           },
           {
-            type: "upload",
+            type: 'upload',
           },
           {
-            name: "Mensagem",
-            type: "textArea",
+            name: t('label-mensagem'),
+            type: 'textArea',
           },
         ]}
+        
       />
       <FooterCompleto />
     </>

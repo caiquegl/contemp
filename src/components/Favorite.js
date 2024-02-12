@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { v4 as uuidv4 } from 'uuid'
 import { useWindowSize } from '../utils/useWindowSize'
 import { api } from '../lib/axios'
+import { useTranslation } from 'react-i18next';
 
 export const Favorite = ({ homeTabs }) => {
   const swiperRef = useRef(null)
@@ -18,6 +19,7 @@ export const Favorite = ({ homeTabs }) => {
 
   const [maxWidth] = useState(930)
   const [width, setWidth] = useState(0)
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (windowSize) {
@@ -76,8 +78,8 @@ export const Favorite = ({ homeTabs }) => {
       setProducts(data)
     } catch (error) {
       toast({
-        title: 'Erro',
-        description: 'Erro ao listar destaques',
+        title: t('toast-erro-titulo'),
+        description: t('toast-erro-destaques-descricao'),
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -97,7 +99,7 @@ export const Favorite = ({ homeTabs }) => {
       position='relative'
     >
       <Heading as={'h2'} color='white' className='favoritos-titulo text-white centro' mt={width > maxWidth ? '50px' : '20px'} mb={['5%', '3%']}>
-        Confira nossas Novidades
+        {t('titulo-novidades-home')}
       </Heading>
       <Flex h={pxToRem(250)} w='100%'>
         <Swiper
@@ -214,7 +216,7 @@ export const Favorite = ({ homeTabs }) => {
                     transition: 'all 0.3s',
                   }}
                 >
-                  Veja mais
+                  {t('botao-produto1-home')}
                 </Button>
               </Link>
             </Flex>

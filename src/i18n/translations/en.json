@@ -1,5 +1,24 @@
 {
     "translation": {
+        "label-nome": "Name",
+        "label-email": "Email",
+        "label-empresa": "Company",
+        "label-telefone": "Phone",
+        "label-mensagem": "Message",
+        "label-area-desejada": "Desired Area",
+        "option-administracao": "Administration",
+        "option-marketing": "Marketing",
+        "option-vendas": "Sales",
+        "option-outros": "Others",
+
+        "toast-sucesso-titulo": "Success",
+        "toast-sucesso-email-descricao": "Email sent successfully",
+        "toast-erro-titulo": "Error",
+        "toast-erro-email-descricao": "Error sending email",
+
+        "contact-titulo-home": "QUESTIONS AND QUOTES",
+        "contact-descricao-home": "Speak with our experts through the channels below or send us an email.",
+
         "titulopagina-sobre": "ABOUT US",
         "paragrafo1-sobre": "Your story is a journey of achievements that began in 1984 and continues to this day. The experience gained along this path is present in the processes of the leading industries, across various segments, which contributed to the formation of important alliances and trust partnerships. Each step aims to make its products synonymous with credibility, conveying security and satisfaction to the customer.",
         "paragrafo2-sobre": "The assurance of being able to entrust your production line to Contemp's products and services didn't come by chance. Since 1984, bringing competence, dedication, and knowledge in creating solutions for measurement, control, and monitoring for the most varied industrial processes.",

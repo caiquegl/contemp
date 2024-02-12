@@ -20,10 +20,12 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import { pxToRem } from '../utils/pxToRem'
+import { useTranslation } from 'react-i18next';
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 export const Player = () => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpen2, onOpen: onOpen2, onClose: onClose2 } = useDisclosure()
   const isMobile = useBreakpointValue({
@@ -45,10 +47,10 @@ export const Player = () => {
       )}
       <Grid maxW={pxToRem(359)} templateRows='1fr 0.73fr 1fr'>
         <Heading as={'h3'} className='text-white player-titulo' mb={[0, 0]}>
-          Nova P501 Upgrade
+          {t('titulo-video-home')}
         </Heading>
         <Text className='player-descricao' mb={'15px'} mt={'-30%'} textAlign={'justify'}>
-          A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.
+          {t('descricao-video-home')}
         </Text>
         {isMobile ? (
           <VStack spacing={pxToRem(20)} alignItems='center'>
