@@ -1,5 +1,8 @@
 {
     "translation": {
+        "botao-salvar": "Save",
+        "botao-enviar-form": "Send",
+
         "label-nome": "Name",
         "label-email": "Email",
         "label-empresa": "Company",
@@ -15,9 +18,14 @@
         "toast-sucesso-email-descricao": "Email sent successfully",
         "toast-erro-titulo": "Error",
         "toast-erro-email-descricao": "Error sending email",
+        "toast-erro-destaques-descricao": "Error listing highlights",
+        "toast-erro-nomevazio-descricao": "Error, the name cannot be empty.",
 
         "contact-titulo-home": "QUESTIONS AND QUOTES",
         "contact-descricao-home": "Speak with our experts through the channels below or send us an email.",
+        "titulo-novidades-home": "Check out our News",
+        "botao-produto1-home": "See more",
+        "botao-todososprodutos-home": "See all products",
 
         "titulopagina-sobre": "ABOUT US",
         "paragrafo1-sobre": "Your story is a journey of achievements that began in 1984 and continues to this day. The experience gained along this path is present in the processes of the leading industries, across various segments, which contributed to the formation of important alliances and trust partnerships. Each step aims to make its products synonymous with credibility, conveying security and satisfaction to the customer.",
@@ -144,6 +152,9 @@
         "paragrafo5-suportetecnico": "What the warranty does not cover: indirect expenses such as freight, travel, and accommodations. Contemp assumes no responsibility for any kind of loss, damage, accident, or loss of profit resulting from equipment failure or defect, only committing to repair or replace defective components when the use within the technical specifications is proven.",
         "paragrafo6-suportetecnico": "The warranty will be voided if there is any defect in the equipment and it is found that this occurred due to inadequate electrical installation and/or the equipment being used in an aggressive environment, modified without authorization, tampered with, or used outside the technical specifications.",
         "contact-titulo-suportetecnico": "QUESTIONS AND QUOTES",
-        "contact-descricao-suportetecnico": "Talk to our specialists through the channels below or send us an email."
+        "contact-descricao-suportetecnico": "Talk to our specialists through the channels below or send us an email.",
+    
+        "titulo-video-home": "New P501 Upgrade",
+        "descricao-video-home": "The new P501 Upgrade represents a significant leap in terms of temperature and power control, making it the perfect equipment for various applications in different industrial sectors. If you are seeking maximum efficiency in processes involving temperature and power control, the P501 Upgrade is your answer."
     }
 }

@@ -5,9 +5,11 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 import { api } from '../lib/axios'
 import { useToast, Heading } from '@chakra-ui/react'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
+import { useTranslation } from 'react-i18next';
 
 const ConfigModalFilter = ({ filter, setFilter, index, category, length }: any) => {
   const toast = useToast()
+  const  { t } = useTranslation();
 
   const [editName, setEditName] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)
@@ -92,8 +94,8 @@ const ConfigModalFilter = ({ filter, setFilter, index, category, length }: any) 
                 onClick={async () => {
                   if (!editName)
                     return toast({
-                      title: 'Erro',
-                      description: 'Erro, o nome não pode ser vazio.',
+                      title: t('toast-erro-titulo'),
+                      description: t('toast-erro-nomevazio-descricao'),
                       status: 'error',
                       duration: 3000,
                       isClosable: true,
@@ -111,12 +113,12 @@ const ConfigModalFilter = ({ filter, setFilter, index, category, length }: any) 
                   margin: 'auto',
                 }}
               >
-                Salvar
+                {t('botao-salvar')}
               </Button>
             </div>
           </>
         )}
-        title='Editar título'
+        title={t('titulo-modalfilter')}
         zIndex={999999999999999999999999999999999999999999999999}
       >
         <SettingOutlined onClick={() => setOpen(!open)} />

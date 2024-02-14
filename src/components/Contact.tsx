@@ -377,7 +377,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
                       isLoading={loading}
                     >
                       <Icon as={TbSend} mr='10px' />
-                      Enviar
+                      {t('botao-enviar-form')}
                     </Button>
                   </Flex>
                 </VStack>

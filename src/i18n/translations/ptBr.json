@@ -1,5 +1,8 @@
 {
     "translation": {
+        "botao-salvar": "Salvar",
+        "botao-enviar-form": "Enviar",
+
         "label-nome": "Nome",
         "label-email": "E-mail",
         "label-empresa": "Empresa",
@@ -16,6 +19,7 @@
         "toast-erro-titulo": "Erro",
         "toast-erro-email-descricao": "Erro ao enviar email",
         "toast-erro-destaques-descricao": "Erro ao listar destaques",
+        "toast-erro-nomevazio-descricao": "Erro, o nome não pode ser vazio.",
 
         "contact-titulo-home": "DÚVIDAS E ORÇAMENTO",
         "contact-descricao-home": "Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.",
@@ -82,7 +86,8 @@
         "titulo14-privacidade": "• Cookies de preferências do site",
         "paragrafo17-privacidade": "Para proporcionar uma ótima experiência neste site, fornecemos a funcionalidade para definir suas preferências de como esse site é executado quando você o usa. Para lembrar suas preferências, precisamos definir cookies para que essas informações possam ser chamadas sempre que você interagir com uma página for afetada por suas referências.",
         "titulo15-privacidade": "COOKIES DE TERCEIROS",
-        "paragrafo18-privacidade": "Em alguns casos, contamos com cookies de terceiros confiáveis, como o Google Analytics e Google AdSense, para análise de desempenho e exibição de anúncios relevantes. Recomendamos a consulta às políticas de privacidade desses terceiros para obter informações detalhadas sobre o uso de cookies.",
+        "paragrafo18-privacidade": "Em alguns casos, contamos com cookies de terceiros confiáveis, como o Google Analytics e Google AdSense",
+        "paragrafo18.1-privacidade": ", para análise de desempenho e exibição de anúncios relevantes. Recomendamos a consulta às políticas de privacidade desses terceiros para obter informações detalhadas sobre o uso de cookies.",
         "paragrafo19-privacidade": "Este site usa o Google Analytics, que é uma das soluções de análise mais difundidas e confiáveis ​​da Web, para nos ajudar a entender como você usa o site e como podemos melhorar sua experiência. Esses cookies podem rastrear itens como quanto tempo você gasta no site e as páginas visitadas, para que possamos continuar produzindo conteúdo atraente.",
         "paragrafo20-privacidade": "Para mais informações sobre cookies do Google Analytics, consulte a página oficial do Google Analytics.",
         "paragrafo21-privacidade": "As análises de terceiros são usadas para rastrear e medir o uso deste site, para que possamos continuar produzindo conteúdo atrativo. Esses cookies podem rastrear itens como o tempo que você passa no site ou as páginas visitadas, o que nos ajuda a entender como podemos melhorar o site para você.",
@@ -151,7 +156,8 @@
         "contact-descricao-suportetecnico": "Fale com nossos especialistas pelos canais abaixo ou nos envie um e-mail.",
     
         "titulo-video-home": "Nova P501 Upgrade",
-        "descricao-video-home": "A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta."
+        "descricao-video-home": "A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.",
+        "titulo-modalfilter": "Editar Título"
     }
 }
         

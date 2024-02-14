@@ -132,7 +132,7 @@ const PrivacyPolicy = () => {
               {t("titulo15-privacidade")}
             </Heading>
             <Text className='paragrafo-preto text-black' mt='25px' lineHeight='34px'>
-              {t("paragrafo18-privacidade")}
+              {t("paragrafo18-privacidade")} {t("paragrafo18.1-privacidade")}
             </Text>
             <UnorderedList className='paragrafo-preto text-black' lineHeight='34px'>
               <ListItem>
