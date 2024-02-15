@@ -1,8 +1,10 @@
-import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList, Heading } from '@chakra-ui/react'
+import { Box, Container, Divider, Flex, Grid, GridItem, Link, ListItem, Text, UnorderedList, Heading, Button } from '@chakra-ui/react'
 import React, { Fragment, useEffect, useState } from 'react'
 import { SearchBar } from './SearchBar'
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
+import { LanguageSwitcher } from '../components/LanguageSwitcher/index';
+import dynamic from 'next/dynamic';
 
 export const FooterCompleto = () => {
   const [list, setList] = useState<any>([])
@@ -43,6 +45,7 @@ export const FooterCompleto = () => {
         maxW='7xl'
         p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
       >
+        < LanguageSwitcher />
         <Flex
           alignItems='center'
           justifyContent='space-between'

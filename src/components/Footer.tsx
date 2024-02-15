@@ -4,6 +4,7 @@ import { SearchBar } from './SearchBar'
 import GTranslateWrapper from './GTranslateWrapper';
 import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
+import { LanguageSwitcher } from '../components/LanguageSwitcher/index';
 
 export const Footer = () => {
   const [list, setList] = useState<any>([])
@@ -41,6 +42,7 @@ export const Footer = () => {
       maxW='7xl'
       p={['40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '40px 20px 31px', '100px 10px 31px']}
     >
+        < LanguageSwitcher/>
        <GTranslateWrapper />
       <Flex
         alignItems='center'
