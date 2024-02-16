@@ -31,6 +31,10 @@ export const theme = extendTheme({
         bg: "black.900",
         color: "white",
       },
+      "::selection": {
+        backgroundColor: "red.600", // Use uma cor do seu tema
+        color: "white.0",
+      },
     },
   },
 });
