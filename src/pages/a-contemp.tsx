@@ -237,23 +237,23 @@ const Home = () => {
         description={t("contact-description")}
         form={[
           {
-            name: 'Nome',
+            name: t('label-nome'),
             type: 'text',
           },
           {
-            name: 'E-mail',
+            name: t('label-email'),
             type: 'text',
           },
           {
-            name: 'Empresa',
+            name: t('label-empresa'),
             type: 'text',
           },
           {
-            name: 'Telefone',
+            name: t('label-telefone'),
             type: 'text',
           },
           {
-            name: 'Mensagem',
+            name: t('label-mensagem'),
             type: 'textArea',
           },
         ]}

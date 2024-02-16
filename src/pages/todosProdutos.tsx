@@ -19,10 +19,12 @@ import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
 import { SearchBar } from '../components/SearchBar'
 import { random } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 const AllProduct = () => {
   const [favorites, setFavorites] = useState<any>([])
   const [categories, setCategories] = useState<any>([])
+  const { t } = useTranslation();
 
   const isTablet = useBreakpointValue({
     base: true,
@@ -95,11 +97,11 @@ const AllProduct = () => {
           maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
-          Soluções para medição, controle e monitoramento para os mais variados processos industriais.
+          {t('todososprodutos-titulo')}
         </Heading>
         <SearchBar
           inputProps={{
-            placeholder: 'Procure aqui seu produto...',
+            placeholder: t('placeholder-search'),
           }}
           searchCard='100%'
         />
@@ -174,7 +176,7 @@ const AllProduct = () => {
       mb='31px'
       p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
     >
-      Navegue por Categoria
+      {t('todososprodutos-titulo2')}
     </Heading>
     <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
       {categories &&

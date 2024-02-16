@@ -1,5 +1,6 @@
 import { Box, Button, Link, Icon, Text, Heading } from '@chakra-ui/react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { useTranslation } from 'react-i18next';
 
 export type AllProductsButtonProps = {
   hasLabel?: boolean
@@ -8,6 +9,7 @@ export type AllProductsButtonProps = {
 export function AllProductsButton({ hasLabel }: AllProductsButtonProps) {
   const noLabelTransition = 'opacity 0.5s, width 1s'
   const hasLabelTransition = 'opacity 0.5s, width 1s'
+  const { t } = useTranslation();
 
   return (
     <Box>
@@ -26,7 +28,7 @@ export function AllProductsButton({ hasLabel }: AllProductsButtonProps) {
             display={hasLabel ? 'initial' : 'none'}
             transition={hasLabel ? hasLabelTransition : noLabelTransition}
           >
-            Todos os produtos
+            {t('botao-todososprodutos')}
           </Text>
           <Icon as={BsThreeDotsVertical} ml={hasLabel ? '10px' : 0} color='white' fontSize='20px' />
         </Button>

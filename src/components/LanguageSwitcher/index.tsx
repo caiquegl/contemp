@@ -17,6 +17,16 @@ const languageOptions = [
         value: 'en',
         flag: 'https://contemp.com.br/api/arquivos/usa.jpg'
     },
+    {
+        name: "Es",
+        value: 'es',
+        flag: 'https://contemp.com.br/api/arquivos/espanha.png'
+    },
+    {
+        name: "De",
+        value: 'de',
+        flag: 'https://contemp.com.br/api/arquivos/germany.png'
+    },
 ];
 
 export const LanguageSwitcher = () => {

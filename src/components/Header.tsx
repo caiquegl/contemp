@@ -64,6 +64,7 @@ import { TbBrandLinkedin } from "react-icons/tb";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa";
 import { HiOutlineDocumentText, HiOutlineDocumentSearch } from "react-icons/hi";
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -75,13 +76,14 @@ export const Header = () => {
   const [loading, setLoading] = useState(true)
   const { isOpen: open, onOpen: oOpen, onClose: oClose } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
+  const { t } = useTranslation();
 
 
   const isDrawerSiderbar = useBreakpointValue({
     base: true,
     lg: false,
   })
-  
+
   const listCategory = async () => {
     try {
       const { data } = await api.get('getMenu')
@@ -229,7 +231,7 @@ export const Header = () => {
                       color: 'black.800',
                     }}
                   >
-                    Todos os produtos
+                    {t('botao-todososprodutos')}
                     <Icon as={BsThreeDotsVertical} ml='10px' color='white' fontSize='20px' />
                   </Button>
                 </Link>
@@ -391,7 +393,7 @@ export const Header = () => {
               menuItems={list}
               render={
                 <Space>
-                  TODOS OS PRODUTOS
+                  {t('botao-todososprodutos')}
                   <DownOutlined />
                 </Space>
               }
@@ -411,75 +413,79 @@ export const Header = () => {
                   rightIcon={<FaAngleDown />}
                   backgroundColor={'transparent'}
                   fontWeight={'400!important'}
-                  _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
-                  _expanded={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                  _hover={{ bg: 'var(--white-primary)', color: 'var(--black-primary)' }}
+                  _expanded={{ bg: 'var(--white-primary)', color: 'var(--black-primary)' }}
                 >
-                  A Contemp
+                  {t('menuinstitucional-acontemp1')}
                 </MenuButton>
                 <MenuList maxWidth={'250px'} className='paragrafo-preto negrito text-black' color={'var(--black-primary!important)'}>
-                <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textAlign={'left'} textTransform={'uppercase'}>Acesse nosso Institucional</Heading>
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textAlign={'left'} textTransform={'uppercase'}>
+                    {t('menuinstitucional-acontemp2')}
+                  </Heading>
                   <Link href='/a-contemp'
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem>
-                  Quem somos
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem>
+                      {t('menuinstitucional-acontemp3')}
+                    </MenuItem>
                   </Link>
                   <Link href='/trabalhe-conosco'
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem>
-                 Trabalhe Conosco
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem>
+                      {t('menuinstitucional-acontemp4')}
+                    </MenuItem>
                   </Link>
                   <Link href='/politica-de-privacidade'
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem>
-                  Política de Privacidade
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem>
+                      {t('menuinstitucional-acontemp5')}
+                    </MenuItem>
                   </Link>
-                  
+
                   <MenuDivider />
-                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textTransform={'uppercase'} textAlign={'left'}>Acesse nossos padrões e conteúdos exclusivos</Heading>
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textTransform={'uppercase'} textAlign={'left'}>
+                    {t('menuinstitucional-acontemp6')}
+                  </Heading>
                   <Link href='https://laboratorio.contemp.com.br' isExternal
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem icon={<HiOutlineDocumentSearch />}>
-                  Padrões de Laboratório 
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem icon={<HiOutlineDocumentSearch />}>
+                      {t('menuinstitucional-acontemp7')}
+                    </MenuItem>
                   </Link>
                   <Link href='https://blog.contemp.com.br' isExternal
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem icon={<HiOutlineDocumentText />}>
-                  Blog 
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem icon={<HiOutlineDocumentText />}>
+                      {t('menuinstitucional-acontemp8')}
+                    </MenuItem>
                   </Link>
                 </MenuList>
               </Menu>
@@ -493,7 +499,9 @@ export const Header = () => {
                 }}
                 href='/calibracao'
               >
-                <Text className='menu-institucional-item'>Calibração</Text>
+                <Text className='menu-institucional-item'>
+                  {t('menuinstitucional-calibracao')}
+                </Text>
               </Link>
               <Link
                 className='menu-institucional-item-link'
@@ -505,7 +513,9 @@ export const Header = () => {
                 }}
                 href='/suporte-tecnico'
               >
-                <Text className='menu-institucional-item'>Suporte Técnico</Text>
+                <Text className='menu-institucional-item'>
+                  {t('menuinstitucional-suportetecnico')}
+                </Text>
               </Link>
               {/*<Link
                 className='menu-institucional-item-link'
@@ -529,122 +539,126 @@ export const Header = () => {
                   rightIcon={<FaAngleDown />}
                   backgroundColor={'transparent'}
                   fontWeight={'400!important'}
-                  _hover={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
-                  _expanded={{ bg: 'var(--white-primary)', color:'var(--black-primary)' }}
+                  _hover={{ bg: 'var(--white-primary)', color: 'var(--black-primary)' }}
+                  _expanded={{ bg: 'var(--white-primary)', color: 'var(--black-primary)' }}
                 >
-                  Contatos
+                  {t('menuinstitucional-contatos1')}
                 </MenuButton>
                 <MenuList maxWidth={'100px'} className='paragrafo-preto negrito text-black' color={'var(--black-primary!important)'}>
-                <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>Clique e nos contate</Heading>
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>
+                    {t('menuinstitucional-contatos2')}
+                  </Heading>
                   <Link href='tel:1142235140' isExternal
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem icon={<FiPhone />}>
-                  (11) 4223-5140
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem icon={<FiPhone />}>
+                      (11) 4223-5140
+                    </MenuItem>
                   </Link>
                   <Link href='mailto:vendas@contemp.com.br' isExternal
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem className='minusculo' textTransform={'lowercase'} icon={<FiMail />}>
-                  vendas@contemp.com.br
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem className='minusculo' textTransform={'lowercase'} icon={<FiMail />}>
+                      vendas@contemp.com.br
+                    </MenuItem>
                   </Link>
                   <Link href='mailto:vendas@contemp.com.br' isExternal
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'var(--red-primary)',
-                  borderRadius: '4px',
-                  transition: 'all 0',
-                }}
-                  textDecoration={'none'}>
-                  <MenuItem className='minusculo' textTransform={'lowercase'} icon={<BsWhatsapp />}>
-                  Canal do WhatsApp
-                  </MenuItem>
+                    _hover={{
+                      textDecoration: 'none',
+                      color: 'var(--red-primary)',
+                      borderRadius: '4px',
+                      transition: 'all 0',
+                    }}
+                    textDecoration={'none'}>
+                    <MenuItem className='minusculo' textTransform={'lowercase'} icon={<BsWhatsapp />}>
+                      {t('menuinstitucional-contatos3')}
+                    </MenuItem>
                   </Link>
                   <MenuDivider />
-                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>Siga nossas redes sociais</Heading>
+                  <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'}>
+                    {t('menuinstitucional-contatos4')}
+                  </Heading>
                   <MenuItem backgroundColor={'white!important'}>
-                  {/* INSTAGRAM */}
-                  <Link
-                  href='https://www.instagram.com/contemp.industria/' isExternal
-                  _hover={{
-                    textDecoration: 'none',
-                    color: 'var(--red-primary)',
-                    borderRadius: '4px',
-                    transition: 'all 0',
-                  }}
-                    textDecoration={'none'}
-                    pr={'4%'}
-                  >
-                  <FiInstagram fontSize={'1.5rem'} color='#e90075' />
-                  </Link>
-                  {/* FACEBOOK */}
-                  <Link
-                  href='https://www.facebook.com/Contemp-1001000803330302/' isExternal
-                  _hover={{
-                    textDecoration: 'none',
-                    color: 'var(--red-primary)',
-                    borderRadius: '4px',
-                    transition: 'all 0',
-                  }}
-                    textDecoration={'none'}
-                    pr={'4%'}
-                  >
-                  <FaSquareFacebook fontSize={'1.5rem'} color='#0081FB' />
-                  </Link>
-                  {/* YOUTUBE */}
-                  <Link
-                  href='https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ' isExternal
-                  _hover={{
-                    textDecoration: 'none',
-                    color: 'var(--red-primary)',
-                    borderRadius: '4px',
-                    transition: 'all 0',
-                  }}
-                    textDecoration={'none'}
-                    pr={'4%'}
-                  >
-                  <BsYoutube fontSize={'1.5rem'} color='#FF0000' />
-                  </Link>
-                  {/* LINKEDIN */}
-                  <Link
-                  href='https://www.linkedin.com/company/contemp/' isExternal
-                  _hover={{
-                    textDecoration: 'none',
-                    color: 'var(--red-primary)',
-                    borderRadius: '4px',
-                    transition: 'all 0',
-                  }}
-                    textDecoration={'none'}
-                    pr={'4%'}
-                  >
-                  <FiLinkedin fontSize={'1.5rem'} color='#0077B5' />
-                  </Link>
-                  {/* CANAL DO WHATSAPP */}
-                  <Link
-                  href='https://whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c' isExternal
-                  _hover={{
-                    textDecoration: 'none',
-                    color: 'var(--red-primary)',
-                    borderRadius: '4px',
-                    transition: 'all 0',
-                  }}
-                    textDecoration={'none'}
-                    pr={'4%'}
-                  >
-                  <BsWhatsapp fontSize={'1.5rem'} color='#25d366' />
-                  </Link>                   
+                    {/* INSTAGRAM */}
+                    <Link
+                      href='https://www.instagram.com/contemp.industria/' isExternal
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'var(--red-primary)',
+                        borderRadius: '4px',
+                        transition: 'all 0',
+                      }}
+                      textDecoration={'none'}
+                      pr={'4%'}
+                    >
+                      <FiInstagram fontSize={'1.5rem'} color='#e90075' />
+                    </Link>
+                    {/* FACEBOOK */}
+                    <Link
+                      href='https://www.facebook.com/Contemp-1001000803330302/' isExternal
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'var(--red-primary)',
+                        borderRadius: '4px',
+                        transition: 'all 0',
+                      }}
+                      textDecoration={'none'}
+                      pr={'4%'}
+                    >
+                      <FaSquareFacebook fontSize={'1.5rem'} color='#0081FB' />
+                    </Link>
+                    {/* YOUTUBE */}
+                    <Link
+                      href='https://www.youtube.com/channel/UC3zq85OUOJLysT-4c_NmDNQ' isExternal
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'var(--red-primary)',
+                        borderRadius: '4px',
+                        transition: 'all 0',
+                      }}
+                      textDecoration={'none'}
+                      pr={'4%'}
+                    >
+                      <BsYoutube fontSize={'1.5rem'} color='#FF0000' />
+                    </Link>
+                    {/* LINKEDIN */}
+                    <Link
+                      href='https://www.linkedin.com/company/contemp/' isExternal
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'var(--red-primary)',
+                        borderRadius: '4px',
+                        transition: 'all 0',
+                      }}
+                      textDecoration={'none'}
+                      pr={'4%'}
+                    >
+                      <FiLinkedin fontSize={'1.5rem'} color='#0077B5' />
+                    </Link>
+                    {/* CANAL DO WHATSAPP */}
+                    <Link
+                      href='https://whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c' isExternal
+                      _hover={{
+                        textDecoration: 'none',
+                        color: 'var(--red-primary)',
+                        borderRadius: '4px',
+                        transition: 'all 0',
+                      }}
+                      textDecoration={'none'}
+                      pr={'4%'}
+                    >
+                      <BsWhatsapp fontSize={'1.5rem'} color='#25d366' />
+                    </Link>
                   </MenuItem>
                 </MenuList>
               </Menu>

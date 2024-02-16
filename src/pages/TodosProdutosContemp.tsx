@@ -41,6 +41,7 @@ import { v4 as uuidv4 } from 'uuid'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { useTranslation } from 'react-i18next';
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import ReactHtmlParser from 'react-html-parser'
 import { Contact } from '../components/Contact'
@@ -61,6 +62,7 @@ import { api } from '../lib/axios'
 import { ListAllProducts } from '../components/ListAllProducts'
 
 const TodosProdutosContemp = () => {
+  const { t } = useTranslation();
 
   return (
     <>
@@ -80,7 +82,7 @@ const TodosProdutosContemp = () => {
         </Heading>
         <SearchBar
             inputProps={{
-              placeholder: 'Procure aqui seu produto...',
+              placeholder: t('placeholder-search'),
             }}
             containerProps={{
               bg: 'var(--gray-text)',

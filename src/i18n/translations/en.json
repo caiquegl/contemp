@@ -2,6 +2,7 @@
     "translation": {
         "botao-salvar": "Save",
         "botao-enviar-form": "Send",
+        "botao-todososprodutos": "ALL PRODUCTS",
 
         "label-nome": "Name",
         "label-email": "Email",
@@ -155,6 +156,20 @@
         "contact-descricao-suportetecnico": "Talk to our specialists through the channels below or send us an email.",
     
         "titulo-video-home": "New P501 Upgrade",
-        "descricao-video-home": "The new P501 Upgrade represents a significant leap in terms of temperature and power control, making it the perfect equipment for various applications in different industrial sectors. If you are seeking maximum efficiency in processes involving temperature and power control, the P501 Upgrade is your answer."
+        "descricao-video-home": "The new P501 Upgrade represents a significant leap in terms of temperature and power control, making it the perfect equipment for various applications in different industrial sectors. If you are seeking maximum efficiency in processes involving temperature and power control, the P501 Upgrade is your answer.",
+        "titulo-modalfilter": "Edit Title",
+
+        "footer-titulo": "Search for the product you want here",
+        "footer-titulo2": "ALL OUR PRODUCTS",
+        "footer-paragrafo": "If you still haven't found the product you're looking for, just type it on the side.",
+        "footer-todososprodutos": "All Products",
+        "footer-privacidade": "Privacy Policy",
+        "footer-trabalheconosco": "Join Our Team",
+        "footer-mapadosite": "Site Map",
+        "footer-copywrite": "Copyright © 2022 - 2024 Contemp. All rights reserved, made by ",
+        "placeholder-search": "Search for your product here...",
+
+        "todososprodutos-titulo": "SOLUTIONS FOR MEASUREMENT, CONTROL, AND MONITORING FOR THE MOST VARIED INDUSTRIAL PROCESSES.",
+        "todososprodutos-titulo2": "BROWSE BY CATEGORY"
     }
 }

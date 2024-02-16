@@ -2,6 +2,7 @@
     "translation": {
         "botao-salvar": "Salvar",
         "botao-enviar-form": "Enviar",
+        "botao-todososprodutos": "TODOS OS PRODUTOS",
 
         "label-nome": "Nome",
         "label-email": "E-mail",
@@ -157,7 +158,35 @@
     
         "titulo-video-home": "Nova P501 Upgrade",
         "descricao-video-home": "A nova P501 Upgrade representa um salto significativo em termos de controle de temperatura e potência, tornando-a o equipamento perfeito para diversas aplicações em diferentes setores industriais. Se você está buscando a máxima eficiência nos processos que envolvem controle de temperatura e potência, a P501 Upgrade é a sua resposta.",
-        "titulo-modalfilter": "Editar Título"
+        "titulo-modalfilter": "Editar Título",
+
+        "footer-titulo": "Procure o produto que deseja aqui",
+        "footer-titulo2": "TODOS OS NOSSOS PRODUTOS",
+        "footer-paragrafo": "Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.",
+        "footer-todososprodutos": "Todos os Produtos",
+        "footer-privacidade": "Política de Privacidade",
+        "footer-trabalheconosco": "Trabalhe Conosco",
+        "footer-mapadosite": "Mapa do Site",
+        "footer-copywrite": "Copyright © 2022 - 2024 Contemp. Todos os direitos reservados, feito por ",
+        "placeholder-search": "Procure aqui seu produto...",
+
+        "todososprodutos-titulo": "SOLUÇÕES PARA MEDIÇÃO, CONTROLE E MONITORAMENTO PARA OS MAIS VARIADOS PROCESSOS INDUSTRIAIS.",
+        "todososprodutos-titulo2": "NAVEGUE POR CATEGORIA",
+
+        "menuinstitucional-acontemp1": "A Contemp",
+        "menuinstitucional-acontemp2": "Acesse nosso Institucional",
+        "menuinstitucional-acontemp3": "Quem somos",
+        "menuinstitucional-acontemp4": "Trabalhe Conosco",
+        "menuinstitucional-acontemp5": "Política de Privacidade",
+        "menuinstitucional-acontemp6": "ACESSE NOSSOS PADRÕES E CONTEÚDOS EXCLUSIVOS",
+        "menuinstitucional-acontemp7": "Padrões de Laboratório ",
+        "menuinstitucional-acontemp8": "Blog",
+        "menuinstitucional-calibracao": "Calibração",
+        "menuinstitucional-suportetecnico": "Suporte Técnico",
+        "menuinstitucional-contatos1": "Contatos",
+        "menuinstitucional-contatos2": "Clique e nos contate",
+        "menuinstitucional-contatos3": "Canal do WhatsApp",
+        "menuinstitucional-contatos4": "Siga nossas redes sociais"
     }
 }
         

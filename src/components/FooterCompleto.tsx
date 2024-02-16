@@ -5,9 +5,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { api } from '../lib/axios'
 import { LanguageSwitcher } from '../components/LanguageSwitcher/index';
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'react-i18next';
 
 export const FooterCompleto = () => {
   const [list, setList] = useState<any>([])
+  const { t } = useTranslation();
 
   const listFooter = async () => {
     const { data } = await api.get('getMenu')
@@ -60,21 +62,23 @@ export const FooterCompleto = () => {
           >
             <Box>
               <Text fontWeight='bold' fontSize='20px' mb='15px'>
-                Procure o produto que deseja aqui
+                {t('footer-titulo')}
               </Text>
               <Text fontSize='1rem' mb='15px'>
-                Se ainda não encontrou o produto que esteja procurando é só digitar ao lado.
+                {t('footer-paragrafo')}
               </Text>
             </Box>
             <SearchBar
               inputProps={{
-                placeholder: 'Procure aqui seu produto...',
+                placeholder: t('placeholder-search'),
               }}
             />
           </Flex>
         </Flex>
         <Divider mb='3%' />
-        <Heading as={'h3'} fontSize={'1.5rem'} textTransform={'uppercase'} color={'white'} mb={'3%'}>Todos os Nossos Produtos</Heading>
+        <Heading as={'h3'} fontSize={'1.5rem'} textTransform={'uppercase'} color={'white'} mb={'3%'}>
+          {t('footer-titulo2')}
+        </Heading>
         <Grid
           templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
           w='100%'
@@ -211,24 +215,25 @@ export const FooterCompleto = () => {
           flexWrap='wrap'
         >
           <Text color='white' fontSize='1rem'>
-            Copyright © 2022 - 2024 Contemp. Todos os direitos reservados, feito por <Link href='https://3hub.co'
+            {t('footer-copywrite')}
+            <Link href='https://3hub.co'
               _hover={{ color: '#fff', textDecoration: 'none' }}>3 Hub</Link>.
           </Text>
           <UnorderedList color='white' fontSize='16px' display='flex' mb={['20px', 0]} flexDirection={['column', 'row']}>
             <Link href='/todosProdutos' _hover={{ color: '#fff', textDecoration: 'none' }}>
-              <ListItem>Todos os Produtos</ListItem>
+              <ListItem>{t('footer-todososprodutos')}</ListItem>
             </Link>
             <Link
               href='https://contemp.com.br/politica-de-privacidade'
               _hover={{ color: '#fff', textDecoration: 'none' }}
             >
-              <ListItem m={[0, '0 0 0 30px']}>Politica de Privacidade</ListItem>
+              <ListItem m={[0, '0 0 0 30px']}>{t('footer-privacidade')}</ListItem>
             </Link>
             <Link href='/trabalhe-conosco' _hover={{ color: '#fff', textDecoration: 'none' }}>
-              <ListItem m={[0, '0 30px']}>Trabalhe Conosco</ListItem>
+              <ListItem m={[0, '0 30px']}>{t('footer-trabalheconosco')}</ListItem>
             </Link>
             <Link href='/site-map' _hover={{ color: '#fff', textDecoration: 'none' }}>
-              <ListItem>Mapa do Site</ListItem>
+              <ListItem>{t('footer-mapadosite')}</ListItem>
             </Link>
           </UnorderedList>
         </Flex>
