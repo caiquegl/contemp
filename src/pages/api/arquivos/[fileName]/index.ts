@@ -3,7 +3,7 @@ import path from 'path';
 
 export default function handler(req: any, res: any) {
   const { fileName } = req.query;
-  const directoryPath = process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos';
+  const directoryPath = process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos';
 
   fs.readdir(directoryPath, (err, files) => {
     if (err) {
