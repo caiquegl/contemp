@@ -43,40 +43,44 @@ export default async function handler(req: any, res: any) {
 
       let update: any = {}
 
-      if(!exist.backup_icon) update.backup_icon = exist.icon
-      if(!exist.backup_url) update.backup_url = JSON.stringify(exist.urls)
+      if (!exist.backup_icon) update.backup_icon = exist.icon
+      if (!exist.backup_url) update.backup_url = JSON.stringify(exist.urls)
 
       await dbContemp('home')
         .update({
-          'backup_icon': exist.backup_icon ? undefined :  exist.icon,
+          'backup_icon': exist.backup_icon ? undefined : exist.icon,
           'backup_url': exist.backup_url ? undefined : JSON.stringify(exist.urls)
 
         })
         .where('id', exist.id);
 
-      const iconUrl = exist.icon;
-      const fileName = getFileNameFromUrl(iconUrl);
-      const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
-      await downloadFile(iconUrl, localFilePath);
-
-      const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
-      await dbContemp('home')
-        .update('icon', `${baseUrl}api/pictures/${fileName}`)
-        .where('id', exist.id);
-
-      let newUrls = [];
-
-      for await (let item of exist.urls) {
-        const old_url = item;
-        const fileName = getFileNameFromUrl(old_url);
+      if (exist.icon){
+        const iconUrl = exist.icon;
+        const fileName = getFileNameFromUrl(iconUrl);
         const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
-        await downloadFile(old_url, localFilePath);
+        await downloadFile(iconUrl, localFilePath);
+
         const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
-        newUrls.push(`${baseUrl}api/pictures/${fileName}`);
+        await dbContemp('home')
+          .update('icon', `${baseUrl}api/pictures/${fileName}`)
+          .where('id', exist.id);
       }
-      await dbContemp('home')
-        .update('urls', JSON.stringify(newUrls))
-        .where('id', exist.id);
+
+      if(exist.urls) {
+        let newUrls = [];
+
+        for await (let item of exist.urls) {
+          const old_url = item;
+          const fileName = getFileNameFromUrl(old_url);
+          const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
+          await downloadFile(old_url, localFilePath);
+          const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
+          newUrls.push(`${baseUrl}api/pictures/${fileName}`);
+        }
+        await dbContemp('home')
+          .update('urls', JSON.stringify(newUrls))
+          .where('id', exist.id);
+      }
     }
     return res.json({ success: true });
   } catch (err) {
