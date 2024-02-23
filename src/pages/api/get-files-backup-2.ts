@@ -50,27 +50,29 @@ export default async function handler(req: any, res: any) {
         .update(update)
         .where('id', exist.id);
 
-      const url = exist.urlPicture;
-      const fileName = getFileNameFromUrl(url);
-      const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
-      await downloadFile(url, localFilePath);
+      if(exist.urlPicture) {
+        const url = exist.urlPicture;
+        const fileName = getFileNameFromUrl(url);
+        const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
+        await downloadFile(url, localFilePath);
 
-      const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
-      await dbContemp('categories')
-        .update('urlPicture', `${baseUrl}api/pictures/${fileName}`)
-        .where('id', exist.id);
+        const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
+        await dbContemp('categories')
+          .update('urlPicture', `${baseUrl}api/pictures/${fileName}`)
+          .where('id', exist.id);
+      }
 
+      if( exist.url) {
+        const url2 = exist.url;
+        const fileName2 = getFileNameFromUrl(url2);
+        const localFilePath2 = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName2);
+        await downloadFile(url2, localFilePath2);
+        const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
 
-
-      const url2 = exist.url;
-      const fileName2 = getFileNameFromUrl(url2);
-      const localFilePath2 = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName2);
-      await downloadFile(url2, localFilePath2);
-
-      await dbContemp('categories')
-        .update('urlPicture', `${baseUrl}api/pictures/${fileName2}`)
-        .where('id', exist.id);
-
+        await dbContemp('categories')
+          .update('urlPicture', `${baseUrl}api/pictures/${fileName2}`)
+          .where('id', exist.id);
+      }
     }
     return res.json({ success: true });
   } catch (err) {
