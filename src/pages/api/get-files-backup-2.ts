@@ -70,7 +70,7 @@ export default async function handler(req: any, res: any) {
         const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/';
 
         await dbContemp('categories')
-          .update('urlPicture', `${baseUrl}api/pictures/${fileName2}`)
+          .update('url', `${baseUrl}api/pictures/${fileName2}`)
           .where('id', exist.id);
       }
     }
