@@ -31,7 +31,7 @@ const upload = multer({
 });
 
 // Função para baixar um arquivo de uma URL e salvá-lo localmente
-async function downloadFile(url, localPath) {
+async function downloadFile(url: any, localPath: any) {
   const writer = fs.createWriteStream(localPath);
 
   const response = await axios({
