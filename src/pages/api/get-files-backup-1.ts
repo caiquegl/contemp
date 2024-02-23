@@ -46,13 +46,13 @@ export default async function handler(req: any, res: any) {
       if (!exist.backup_icon) update.backup_icon = exist.icon
       if (!exist.backup_url) update.backup_url = JSON.stringify(exist.urls)
 
-      await dbContemp('home')
-        .update({
-          'backup_icon': exist.backup_icon ? undefined : exist.icon,
-          'backup_url': exist.backup_url ? undefined : JSON.stringify(exist.urls)
+      if(Object.keys(update).length > 0) {
+        await dbContemp('home')
+          .update(update)
+          .where('id', exist.id);
+      }
 
-        })
-        .where('id', exist.id);
+
 
       if (exist.icon){
         const iconUrl = exist.icon;
