@@ -4,7 +4,7 @@ import path from 'path';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { dbContemp } from './database_contemp';
 
-async function downloadFile(url, localPath) {
+async function downloadFile(url: string, localPath: string) {
   const writer = fs.createWriteStream(localPath);
 
   const response = await axios({
@@ -21,7 +21,7 @@ async function downloadFile(url, localPath) {
   });
 }
 
-function getFileNameFromUrl(url) {
+function getFileNameFromUrl(url: string) {
   const filenameMatch = url.match(/\/([^\/?#]+)[^\/]*$/);
   if (!filenameMatch) {
     throw new Error('Não foi possível extrair o nome do arquivo da URL.');
@@ -32,7 +32,7 @@ function getFileNameFromUrl(url) {
   return `${fileNameDecoded}.${extension}`;
 }
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   try {
     const all = await dbContemp('home');
 

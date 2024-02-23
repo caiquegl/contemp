@@ -159,16 +159,18 @@ const InputsHome = ({
               multiple={false}
               onChange={async (evt) => {
                 const files = evt.target.files
-                const formData = new FormData()
-                formData.append('files', files[0])
-                formData.append('picture', 'true')
-                formData.append('nameFile', `${files[0].name}-${new Date()}`)
+                if(files) {
+                  const formData = new FormData()
+                  formData.append('files', files[0])
+                  formData.append('picture', 'true')
+                  formData.append('nameFile', `${files[0].name}-${new Date()}`)
 
-                const { data } = await api.post('upload', formData, {
-                  headers: { 'content-type': 'multipart/form-data' },
-                })
+                  const { data } = await api.post('upload', formData, {
+                    headers: { 'content-type': 'multipart/form-data' },
+                  })
 
-                getUrls(data.url)
+                  getUrls(data.url)
+                }
 
 
               }}
