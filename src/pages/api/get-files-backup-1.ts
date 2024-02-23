@@ -41,6 +41,11 @@ export default async function handler(req: any, res: any) {
         throw new Error('Nenhum registro encontrado');
       }
 
+      let update: any = {}
+
+      if(!exist.backup_icon) update.backup_icon = exist.icon
+      if(!exist.backup_url) update.backup_url = JSON.stringify(exist.urls)
+
       await dbContemp('home')
         .update({
           'backup_icon': exist.backup_icon ? undefined :  exist.icon,

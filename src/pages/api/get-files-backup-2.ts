@@ -41,7 +41,7 @@ export default async function handler(req: any, res: any) {
         throw new Error('Nenhum registro encontrado');
       }
 
-      let update = {}
+      let update: any = {}
 
       if(!exist.backup_urlPicture) update.backup_urlPicture = exist.urlPicture
       if(!exist.backup_url) update.backup_url = exist.url
