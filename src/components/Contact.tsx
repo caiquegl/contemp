@@ -28,12 +28,12 @@ import { useForm } from 'react-hook-form'
 import { InputDefault } from './Form/Input'
 import { TextareaDefault } from './Form/Textarea'
 import { SelectDefault } from './Form/Select'
-import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '../utils/db'
 import { v4 as uuidv4 } from 'uuid'
 import { Upload } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import type { UploadProps } from 'antd'
+import { api } from '../lib/axios'
 const { Dragger } = Upload
 
 interface IProps {
@@ -93,82 +93,39 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
 
   const onDrop = useCallback(async (acceptedFiles: any) => {
     acceptedFiles.forEach(async (file: any) => {
-      const imageRef = ref(storage, `${id}/${file.name}`)
 
-      const uploadTask = uploadBytesResumable(imageRef, file)
-      setLoadingUpload(true)
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-        },
-        (error) => {
-          toast({
-            title: 'Erro',
-            description: 'Erro ao fazer upload de arquivo',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-          })
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // toast({
-            //   title: "Sucesso",
-            //   description: "Upload completo",
-            //   status: "success",
-            //   duration: 3000,
-            //   isClosable: true,
-            // });
-            setLoadingUpload(false)
-            setFile(downloadURL)
-          })
-        }
-      )
+      const formData = new FormData()
+      formData.append('files', file)
+      formData.append('picture', true)
+      formData.append('nameFile', `${file.name}-${new Date()}`)
+
+      const { data } = await api.post('upload', formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      })
+
+      setLoadingUpload(false)
+      setFile(data.url)
+
     })
   }, [])
 
   const props: UploadProps = {
     name: 'file',
     multiple: false,
-    // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info: any) {
+    async onChange(info: any) {
       const { status, name } = info.file
-      const imageRef = ref(storage, `${id}/${name}`)
 
-      const uploadTask = uploadBytesResumable(imageRef, info.file.originFileObj)
-      setLoadingUpload(true)
+      const formData = new FormData()
+      formData.append('files', info.file)
+      formData.append('picture', true)
+      formData.append('nameFile', `${name}-${new Date()}`)
 
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-        },
-        (error) => {
-          setLoadingUpload(false)
+      const { data } = await api.post('upload', formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      })
 
-          toast({
-            title: 'Erro',
-            description: 'Erro ao fazer upload de arquivo',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-          })
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // toast({
-            //   title: "Sucesso",
-            //   description: "Upload completo",
-            //   status: "success",
-            //   duration: 3000,
-            //   isClosable: true,
-            // });
-            setFile(downloadURL)
-            setLoadingUpload(false)
-          })
-        }
-      )
+      setFile(data.url)
+
     },
 
     // if (status !== 'uploading') {
@@ -179,44 +136,19 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
     // } else if (status === 'error') {
     //   message.error(`${info.file.name} file upload failed.`);
     // }
-    onDrop(e: any) {
-      const { status, name } = e.dataTransfer.files[0]
-      const imageRef = ref(storage, `${id}/${name}`)
+    async onDrop(e: any) {
+      const { status, name } = info.file
 
-      const uploadTask = uploadBytesResumable(imageRef, e.dataTransfer.files[0].originFileObj)
-      setLoadingUpload(true)
+      const formData = new FormData()
+      formData.append('files', info.file)
+      formData.append('picture', true)
+      formData.append('nameFile', `${name}-${new Date()}`)
 
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-        },
-        (error) => {
-          setLoadingUpload(false)
+      const { data } = await api.post('upload', formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      })
 
-          toast({
-            title: 'Erro',
-            description: 'Erro ao fazer upload de arquivo',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-          })
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // toast({
-            //   title: "Sucesso",
-            //   description: "Upload completo",
-            //   status: "success",
-            //   duration: 3000,
-            //   isClosable: true,
-            // });
-            setLoadingUpload(false)
-
-            setFile(downloadURL)
-          })
-        }
-      )
+      setFile(data.url)
     },
   }
 

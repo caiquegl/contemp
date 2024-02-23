@@ -19,15 +19,10 @@ import { LuUpload } from "react-icons/lu";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 
-import {
-  getDownloadURL,
-  getStorage,
-  ref as refStorage,
-  uploadBytes,
-} from "firebase/storage";
 import { app, initFirebase } from "../../utils/db";
 import { v4 as uuidv4 } from 'uuid';
 import { PiInfoDuotone } from "react-icons/pi";
+import { api } from '../../lib/axios'
 
 interface IProps extends InputProps {
   name: string;
@@ -124,24 +119,21 @@ const InputsHome = ({
               ref={ref}
               multiple={true}
               onChange={async (evt) => {
-                let file = getStorage(app, "gs://contemp-1e58c.appspot.com");
                 let files: any = evt.target.files;
                 let urls: any = [];
 
                 for await (let el of files) {
-                  const storageRef = refStorage(
-                    file,
-                    `${el.name}-${new Date()}`
-                  );
+                  const formData = new FormData()
+                  formData.append('files', el)
+                  formData.append('picture', true)
+                  formData.append('nameFile', `${el.name}-${new Date()}`)
 
-                  const uploadTask = uploadBytes(storageRef, el).then(
-                    (snapshot) => {
-                      getDownloadURL(snapshot.ref).then((downloadURL) => {
-                        urls.push(downloadURL);
-                        getUrls(urls);
-                      });
-                    }
-                  );
+                  const { data } = await api.post('upload', formData, {
+                    headers: { 'content-type': 'multipart/form-data' },
+                  })
+
+                  urls.push(data.url)
+                  getUrls(data.url)
                 }
               }}
             />
@@ -166,17 +158,19 @@ const InputsHome = ({
               ref={refSingle}
               multiple={false}
               onChange={async (evt) => {
-                let file = getStorage(app, "gs://contemp-1e58c.appspot.com");
-                let files: any = evt.target.files;
-                const storageRef = refStorage(
-                  file,
-                  `${files[0].name}-${new Date()}`
-                );
-                await uploadBytes(storageRef, files[0]).then((snapshot) => {
-                  getDownloadURL(snapshot.ref).then((downloadURL) => {
-                    getUrls(downloadURL);
-                  });
-                });
+                const files = evt.target.files
+                const formData = new FormData()
+                formData.append('files', files[0])
+                formData.append('picture', true)
+                formData.append('nameFile', `${files[0].name}-${new Date()}`)
+
+                const { data } = await api.post('upload', formData, {
+                  headers: { 'content-type': 'multipart/form-data' },
+                })
+
+                getUrls(data.url)
+
+
               }}
             />
             <Input
