@@ -52,7 +52,6 @@ async function downloadFile(url, localPath) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const all = await dbContemp('home')
-      .where('id', 1)
 
     for await (let exist of all) {
       if (!exist) {
