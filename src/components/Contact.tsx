@@ -136,7 +136,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
     // } else if (status === 'error') {
     //   message.error(`${info.file.name} file upload failed.`);
     // }
-    async onDrop(e: any) {
+    async onDrop(info: any) {
       const { status, name } = info.file
 
       const formData = new FormData()
