@@ -10,6 +10,7 @@ import Hotjar from '@hotjar/browser';
 import { useEffect } from "react";
 import Head from "next/head";
 import { ParallaxProvider } from 'react-scroll-parallax';
+import GTranslateComponent from '../components/translate'
 
 const siteId = 3290469;
 const hotjarVersion = 6;
@@ -21,6 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
 
+
+
+
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
@@ -28,7 +32,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Contemp</title>
         </Head>
         <ParallaxProvider>
-        <Component {...pageProps} />
+          <GTranslateComponent /> {/* Add the GTranslateComponent here */}
+          <Component {...pageProps} />
         </ParallaxProvider>
       </AuthProvider>
     </ChakraProvider>
