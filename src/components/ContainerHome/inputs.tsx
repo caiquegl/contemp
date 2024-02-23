@@ -125,7 +125,7 @@ const InputsHome = ({
                 for await (let el of files) {
                   const formData = new FormData()
                   formData.append('files', el)
-                  formData.append('picture', true)
+                  formData.append('picture', 'true')
                   formData.append('nameFile', `${el.name}-${new Date()}`)
 
                   const { data } = await api.post('upload', formData, {
@@ -161,7 +161,7 @@ const InputsHome = ({
                 const files = evt.target.files
                 const formData = new FormData()
                 formData.append('files', files[0])
-                formData.append('picture', true)
+                formData.append('picture', 'true')
                 formData.append('nameFile', `${files[0].name}-${new Date()}`)
 
                 const { data } = await api.post('upload', formData, {

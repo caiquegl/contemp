@@ -96,7 +96,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
 
       const formData = new FormData()
       formData.append('files', file)
-      formData.append('picture', true)
+      formData.append('picture', 'true')
       formData.append('nameFile', `${file.name}-${new Date()}`)
 
       const { data } = await api.post('upload', formData, {
@@ -117,7 +117,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
 
       const formData = new FormData()
       formData.append('files', info.file)
-      formData.append('picture', true)
+      formData.append('picture', 'true')
       formData.append('nameFile', `${name}-${new Date()}`)
 
       const { data } = await api.post('upload', formData, {
@@ -141,7 +141,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
 
       const formData = new FormData()
       formData.append('files', info.file)
-      formData.append('picture', true)
+      formData.append('picture', 'true')
       formData.append('nameFile', `${name}-${new Date()}`)
 
       const { data } = await api.post('upload', formData, {
