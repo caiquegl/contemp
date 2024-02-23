@@ -7,7 +7,7 @@ import { createSlug, SlugifyOptions } from '../pg/slugfyfile'; // Importe a fun�
 // Configuração do multer para o armazenamento de arquivos
 const upload = multer({
   storage: multer.diskStorage({
-    destination: process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos',
+    destination: process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos',
     filename: (req, file, cb) => {
       console.log('aquiiii')
       // Opções para a função de criação de slug
