@@ -25,6 +25,7 @@ export default function handler(req: any, res: any) {
       // Define o tipo de conteúdo com base no tipo de arquivo
       const fileExtension = path.extname(filename).toLowerCase();
       const contentType = getContentType(fileExtension);
+      console.log('Content-Type', contentType)
       res.setHeader('Content-Type', contentType);
 
       fileStream.pipe(res);

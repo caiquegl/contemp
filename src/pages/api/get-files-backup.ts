@@ -52,6 +52,7 @@ async function downloadFile(url: any, localPath: any) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const all = await dbContemp('home')
+      .where('id', 1)
 
     for await (let exist of all) {
       if (!exist) {
@@ -86,8 +87,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const localFilePath = path.join(process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos', fileName);
       await downloadFile(iconUrl, localFilePath);
 
+      const baseUrl = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br/' : 'https://contemp.com.br/'
       await dbContemp('home')
-        .update('icon', `contemp.com.br/api/arquivos/${fileName}`)
+        .update('icon', `${baseUrl}api/pictures/${fileName}`)
         .where('id', exist.id)
     }
     return res.json({ success: true });
