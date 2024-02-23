@@ -8,6 +8,6 @@ export const dbContemp = knex({
     port: 5432,
     user: 'webadmin',
     password: 'AOKeha61664',
-    database: 'contemp_hmg',
+    database: 'contemp_prod',
   },
 }) as Knex
