@@ -43,6 +43,8 @@ function getContentType(fileExtension: string): string {
       return 'application/zip';
     case '.rar':
       return 'application/x-rar-compressed';
+    case '.svg':
+      return 'image/svg+xml';
     // Adicione outros tipos de arquivo conforme necessário
     default:
       return 'application/octet-stream';
