@@ -5,11 +5,12 @@ export default function handler(req: any, res: any) {
   const { fileName } = req.query;
   const directoryPath = process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos';
 
+  let extension = fileName.split('.')
   // Lê o conteúdo do arquivo
   const conteudo = fs.readFileSync(path.join(directoryPath, fileName));
 
   // Define o tipo de conteúdo como imagem
-  res.setHeader('Content-Type', 'image/png'); // Aqui você pode ajustar o tipo conforme necessário
+  res.setHeader('Content-Type', getContentType(extension[extension.length - 1])); // Aqui você pode ajustar o tipo conforme necessário
 
   // Retorna o conteúdo do arquivo como resposta
   res.end(conteudo);
@@ -24,26 +25,26 @@ export default function handler(req: any, res: any) {
 // Função auxiliar para obter o tipo de conteúdo com base na extensão do arquivo
 function getContentType(fileExtension: string): string {
   switch (fileExtension) {
-    case '.pdf':
+    case 'pdf':
       return 'application/pdf';
-    case '.jpg':
-    case '.jpeg':
+    case 'jpg':
+    case 'jpeg':
       return 'image/jpeg';
-    case '.png':
+    case 'png':
       return 'image/png';
-    case '.webp':
+    case 'webp':
       return 'image/webp';
-    case '.mp4':
+    case 'mp4':
       return 'video/mp4';
-    case '.exe':
+    case 'exe':
       return 'application/octet-stream';
-    case '.mp3':
+    case 'mp3':
       return 'audio/mpeg';
-    case '.zip':
+    case 'zip':
       return 'application/zip';
-    case '.rar':
+    case 'rar':
       return 'application/x-rar-compressed';
-    case '.svg':
+    case 'svg':
       return 'image/svg+xml';
     // Adicione outros tipos de arquivo conforme necessário
     default:
