@@ -11,6 +11,11 @@ async function creatRedirectObj(source, destination, permanent = true) {
 }
 module.exports = {
   reactStrictMode: false,
+  api: {
+    bodyParser: {
+      sizeLimit: '500mb',
+    },
+  },
   images: {
     domains: ['contemp.com.br'], // Adicione o domínio do seu host de imagem aqui
   },
