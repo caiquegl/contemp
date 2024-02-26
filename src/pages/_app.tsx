@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Contemp</title>
         </Head>
         <ParallaxProvider>
-          <GTranslateComponent /> {/* Add the GTranslateComponent here */}
+          {/*<GTranslateComponent /> /!* Add the GTranslateComponent here *!/*/}
           <Component {...pageProps} />
         </ParallaxProvider>
       </AuthProvider>
