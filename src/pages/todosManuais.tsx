@@ -1,4 +1,4 @@
-import {  Container, Flex, Grid,  useBreakpointValue, Heading } from '@chakra-ui/react'
+import { Container, Flex, Grid, useBreakpointValue, Heading, InputGroup, Input } from '@chakra-ui/react'
 import { FooterCompleto } from '../components/FooterCompleto'
 import CardCatalog from '../components/CardCatalog'
 import { pxToRem } from '../utils/pxToRem'
@@ -8,15 +8,21 @@ import Head from 'next/head'
 import { api } from '../lib/axios'
 import { SearchBar } from '../components/SearchBar'
 import CardMenu from '../components/CardMenu'
+import { ContainerSearch } from '../components/ContainerSearch'
+import { replaceNameToUrl } from '../utils/replaceNameToUrl'
+import Icon from '../components/Icon'
+import { BsSearch } from 'react-icons/bs'
 
 const AllMenus = () => {
   const [menus, setMenus] = useState<any>([])
+  const [menusOrigin, setMenusOrigin] = useState<any>([])
 
 
   const getMenus = async () => {
     try {
       const { data } = await api.get('getMenuActive')
       setMenus(data)
+      setMenusOrigin(data)
     } catch (error) {
       console.log(error)
     }
@@ -65,12 +71,47 @@ const AllMenus = () => {
         >
           Soluções para medição, controle e monitoramento para os mais variados processos industriais.
         </Heading>
-        <SearchBar
-          inputProps={{
-            placeholder: 'Procure aqui seu manual...',
-          }}
-          searchCard='100%'
-        />
+        <InputGroup
+          borderRadius='8px'
+          bg='var(--black-primary)'
+          p='1px 7px'
+          w='100%'
+          h={pxToRem(42)}
+          maxW={pxToRem(594)}
+          outline='none'
+          position='relative'
+        >
+          <Input
+            w='100%'
+            height='100%'
+            border='solid 2px var(--white-primary)'
+            borderRadius='8px'
+            placeholder="Pesquisa aqui todos os manuais"
+            _focusVisible={{
+              outline: 'none',
+            }}
+            onChange={(evt) => {
+              let value = evt.target.value.toLowerCase();
+              if(!value || value == '') return setMenus([...menusOrigin])
+
+              let newMenus = menusOrigin.filter((item: any) => item.name.toLowerCase().includes(value));
+              setMenus([...newMenus])
+
+            }}
+            _placeholder={{ color: 'white.500', opacity: '50%' }}
+          />
+
+          <Icon
+            icon={BsSearch}
+            size={20}
+            iconStyle={{
+              position: 'absolute',
+              right: pxToRem(16),
+              top: pxToRem(11),
+            }}
+            color={'white'}
+          />
+        </InputGroup>
       </Flex>
 <Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
   <Container maxW='7xl' p='80px 0'>
