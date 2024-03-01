@@ -22,6 +22,8 @@ export default async function handler(
       }
     });
 
+    if(!findMenu) throw new Error('Menu não encontrado')
+
     await prisma.menus.update({
       where: {
         id: id
@@ -47,7 +49,7 @@ export default async function handler(
 
     let key = process.env.SENDBLUE
 
-    if(findMenu && name != findMenu.name || url != findMenu.url) {
+    if(name != findMenu.name || url != findMenu.url) {
 
       let newUrl = `/category/${replaceNameToUrl(name).toLowerCase().replaceAll(' ', '_')}`
       let oldUrl = `/category/${replaceNameToUrl(findMenu.name).toLowerCase().replaceAll(' ', '_')}`
