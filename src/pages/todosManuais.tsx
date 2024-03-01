@@ -69,7 +69,7 @@ const AllMenus = () => {
           maxW='1037px'
           p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
         >
-          Soluções para medição, controle e monitoramento para os mais variados processos industriais.
+          MANUAIS CONTEMP
         </Heading>
         <InputGroup
           borderRadius='8px'
