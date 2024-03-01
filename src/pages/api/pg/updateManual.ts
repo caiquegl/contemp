@@ -22,7 +22,7 @@ export default async function handler(
       }
     });
 
-    if(!findMenu) throw new Error('Menu não encontrado')
+    if(!findMenu || !findMenu.name) throw new Error('Menu não encontrado')
 
     await prisma.menus.update({
       where: {
@@ -52,7 +52,7 @@ export default async function handler(
     if(name != findMenu.name || url != findMenu.url) {
 
       let newUrl = `/category/${replaceNameToUrl(name).toLowerCase().replaceAll(' ', '_')}`
-      let oldUrl = `/category/${replaceNameToUrl(findMenu.name).toLowerCase().replaceAll(' ', '_')}`
+      let oldUrl = `/category/${replaceNameToUrl(findMenu?.name).toLowerCase().replaceAll(' ', '_')}`
 
       if (key) {
         SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = key
