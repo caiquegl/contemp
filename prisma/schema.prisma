@@ -148,6 +148,19 @@ model Banners {
   @@map("banners")
 }
 
+model Menus {
+  id         Int       @id @default(autoincrement())
+  url        String
+  order      Int        @unique
+  name       String?
+  picture       String?
+  status   Boolean? @default(true)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("menus")
+}
+
 model Cards {
   id         Int       @id @default(autoincrement())
   icon        String

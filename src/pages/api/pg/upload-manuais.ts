@@ -7,7 +7,7 @@ import { createSlug, SlugifyOptions } from '../pg/slugfyfile'; // Importe a fun�
 // Configuração do multer para o armazenamento de arquivos
 const upload = multer({
   storage: multer.diskStorage({
-    destination: process.env.STATUS === 'HMG' ? '/var/www/html/arquivos_hmg' : '/var/www/html/arquivos',
+    destination: process.env.STATUS === 'HMG' ? '/var/www/html/manuais_hmg' : '/var/www/html/manuais',
     filename: (req, file, cb) => {
       // Opções para a função de criação de slug
       const slugOptions: SlugifyOptions = {
@@ -61,7 +61,7 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
 
       // Construir a URL do arquivo com base no nome slugificado
       let baseFile = process.env.STATUS === 'HMG' ? 'https://hmg.contemp.com.br' : 'https://contemp.com.br'
-      url = `${baseFile}/api/arquivos/${nameFile}`;
+      url = `${baseFile}/api/manuais/${nameFile}`;
       if(!picture) {
         // Verificar se o arquivo já existe no banco de dados
         const exist = await prisma.files.findMany({

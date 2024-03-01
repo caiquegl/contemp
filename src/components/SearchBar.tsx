@@ -20,7 +20,7 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
   const router = useRouter()
 
   const getList = async () => {
-    const { data } = await api.get(`getProductAndCategory`)
+    const { data } = await api.get(`getProductAndCategoryAndMenu`)
     setListProductsClone(data)
   }
 
@@ -66,7 +66,15 @@ export const SearchBar = ({ containerProps, inputProps, searchCard }: SearchBarP
           list={listProducts}
           searchCard={searchCard}
           click={(product: any) => {
+
+            if(product.status) {
+              window.open(product.url, '_blank');
+              console.log('aquiiii')
+              return
+            }
+
             router.push(
+              
               product.order_all_products || product.sub_category_id || product.filter
                 ? `/category/${replaceNameToUrl(product.name.toLowerCase().replaceAll(' ', '_'))}`
                 : `/produto/${replaceNameToUrl(product.name.toLowerCase().replaceAll(' ', '_'))}`

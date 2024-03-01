@@ -1105,6 +1105,34 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   className="adm-botao-sidemenu"
                   variant="ghost"
                   width="100%"
+                  onClick={() => setActiveTab(8)}
+                  justifyContent="start"
+                >
+                  <Flex justifyContent="space-between" width="100%" alignItems="center">
+                    <Box display="flex" alignItems="center">
+                      {!isExpanded ? (
+                        <Tooltip label="Manuais" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                          <span>
+                            <LuUser />
+                          </span>
+                        </Tooltip>
+                      ) : (
+                        <>
+                          <LuArchive />
+                          <Text ml="2">Manuais</Text>
+                        </>
+                      )}
+                    </Box>
+                  </Flex>
+                </Button>
+
+              }
+
+              {user.super_adm &&
+                <Button
+                  className="adm-botao-sidemenu"
+                  variant="ghost"
+                  width="100%"
                   onClick={() => setActiveTab(5)}
                   justifyContent="start"
                 >

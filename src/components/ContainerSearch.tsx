@@ -39,7 +39,15 @@ export const ContainerSearch = ({ list, searchCard, click }: any) => {
             >
               {el.urls && el.urls.length > 0 ? (
                 <Image
-                  src={el.urls && el.urls.length > 0 ? el.urls[0] : ''}
+                  src={el.urls[0]}
+                  w="60px"
+                  h="60px"
+                  alt={el.name}
+                  onContextMenu={setContextMenuFalse}
+                />
+              ) : el.picture ? (
+                <Image
+                  src={el.picture || ''}
                   w="60px"
                   h="60px"
                   alt={el.name}

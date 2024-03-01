@@ -29,6 +29,7 @@ interface IProps extends InputProps {
   typeInput: string;
   question?: string;
   options?: any;
+  folder?: string;
   selectProps?: SelectProps;
   textareaProps?: TextareaProps;
   fileProps?: TextareaProps;
@@ -44,6 +45,7 @@ const InputsHome = ({
   textareaProps,
   fileProps,
   getUrls,
+  folder,
   ...rest
 }: IProps) => {
   initFirebase();
@@ -165,7 +167,7 @@ const InputsHome = ({
                   formData.append('picture', 'true')
                   formData.append('nameFile', `${files[0].name}-${new Date()}`)
 
-                  const { data } = await api.post('upload', formData, {
+                  const { data } = await api.post(folder || 'upload', formData, {
                     headers: { 'content-type': 'multipart/form-data' },
                   })
 
