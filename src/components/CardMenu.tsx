@@ -18,6 +18,14 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
 
   return (
     <GridItem w={'100%'} bg={bg} borderRadius='8px' p='27px 17px' maxW="300px">
+      <Link
+            href={url}
+            textDecoration='none'
+            isExternal
+            _hover={{
+              textDecoration: 'none',
+            }}
+          >
       <Flex h='100%' justifyContent='space-between' flexDirection='column'>
         <Box>
           <Box mb="20px">
@@ -37,14 +45,6 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
 
         </Box>
 
-        <Link
-            href={url}
-            textDecoration='none'
-            isExternal
-            _hover={{
-              textDecoration: 'none',
-            }}
-          >
         <Flex w='100%' alignItems='center' justifyContent='center' mt='20px'>
           <Link
             href={url}
@@ -74,8 +74,8 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
             </Button>
           </Link>
         </Flex>
-        </Link>
       </Flex>
+      </Link>
     </GridItem>
   )
 }
