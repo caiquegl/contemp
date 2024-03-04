@@ -86,7 +86,7 @@ const AllMenus = () => {
             height='100%'
             border='solid 2px var(--white-primary)'
             borderRadius='8px'
-            placeholder="Pesquisa aqui todos os manuais"
+            placeholder="Pesquise aqui o manual do seu produto..."
             _focusVisible={{
               outline: 'none',
             }}
@@ -115,14 +115,6 @@ const AllMenus = () => {
       </Flex>
 <Flex w='100%' alignItems='center' bg='var(--graylight-primary)' p='0 20px'>
   <Container maxW='7xl' p='80px 0'>
-    <Heading
-      as={'h3'}
-      className='todososprodutos-titulo text-black negrito'
-      mb='31px'
-      p={['0 20px', '0 20px', '0 20px', '0 20px', '0']}
-    >
-      Todos manuais
-    </Heading>
     <Grid templateColumns='repeat(auto-fit, minmax(260px, 1fr))' gap={pxToRem(15)} padding={`0 ${pxToRem(10)}`}>
       {menus &&
         menus.length > 0 &&

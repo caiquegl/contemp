@@ -30,7 +30,7 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
             />
           </Box>
           <Box mb={'1%'}>
-            <Heading as={'h3'} className='todososprodutos-subtitulo negrito' color={color}>
+            <Heading as={'h3'} className='todososprodutos-subtitulo negrito' textAlign={'center'} color={color}>
               {title}
             </Heading>
           </Box>
