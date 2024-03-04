@@ -37,6 +37,14 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
 
         </Box>
 
+        <Link
+            href={url}
+            textDecoration='none'
+            isExternal
+            _hover={{
+              textDecoration: 'none',
+            }}
+          >
         <Flex w='100%' alignItems='center' justifyContent='center' mt='20px'>
           <Link
             href={url}
@@ -66,6 +74,7 @@ const CardMenu = ({ bg, url, title, color, urlPicture }: IProps) => {
             </Button>
           </Link>
         </Flex>
+        </Link>
       </Flex>
     </GridItem>
   )

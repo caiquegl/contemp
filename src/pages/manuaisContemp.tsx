@@ -48,13 +48,13 @@ const AllMenus = () => {
       <Head>
         <meta
           name='description'
-          content='Encontre tudo em soluções para medição, controle e monitoramento para os mais variados processos industrais.'
+          content='Encontre diversos manuais dos produtos da Contemp de forma prática.'
         />
         <meta
           name='keywords'
-          content='soluções para medição, medição, controle de temperatura, monitoramento, processos industriais'
+          content='contemp. manual, c514, controlador de potencia, manuais contemp'
         />
-        <title>Todos os manuais</title>
+        <title>Manuais da Contemp</title>
         <link rel='icon' href='/favicon.png' />
       </Head>
 
