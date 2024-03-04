@@ -36,6 +36,7 @@ import InputsHome from '../ContainerHome/inputs'
 import { ViewImage } from '../ContainerAddProduct/ViewImage'
 import { CgScreen } from "react-icons/cg";
 import { EditOrder } from '../EditOrder'
+import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 
 const { Item } = Form
 import { ExternalLinkIcon } from '@chakra-ui/icons';
@@ -181,7 +182,7 @@ const TabManuais: React.FC = () => {
   const columns = [
     {
       title: 'Ordem Geral',
-      width: '6%',
+      width: '14%',
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
@@ -189,23 +190,26 @@ const TabManuais: React.FC = () => {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
+      width: '240px',
     },
     {
       title: 'Ativo',
-      dataIndex: 'status',
+      dataIndex: 'isActive',
       key: 'status',
-      //sorter: '()',
-      render: (status: any) => (
+      render: (isActive: boolean) => (
         <Badge
-          className='bagdetabela-default'
-          variant="subtle"
-          fontSize="0.875rem"
-          maxW={'80px'}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          colorScheme={isActive ? 'green' : 'red'}
+          borderRadius={'8px'}
         >
-          {status ? 'Ativo' : 'Inativo'}
+          {isActive ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
+      sorter: (a: any, b: any) => {
+        const statusA = a.isActive ? 'Ativo' : 'Inativo';
+        const statusB = b.isActive ? 'Ativo' : 'Inativo';
+        return statusA.localeCompare(statusB);
+      },
+      width: 120,
     },
     {
       title: 'Url',
@@ -217,7 +221,7 @@ const TabManuais: React.FC = () => {
           as={ChakraLink}
           className='botao-tabelaprodutos'
           fontWeight={'400'}
-          href={a.url}
+          href={b.name ? `/api/manuais/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
           isExternal={true}
           _hover={{ color: 'black', textDecoration: 'none' }}
           rightIcon={<Icon as={ExternalLinkIcon} />}
@@ -225,6 +229,7 @@ const TabManuais: React.FC = () => {
           {`Abrir`}
         </Button>
       ),
+      width: 110,
     },
 
     {
@@ -233,6 +238,7 @@ const TabManuais: React.FC = () => {
       key: 'created_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.created_at).unix() - moment(b.created_at).unix(),
+      width: 140,
     },
     {
       title: 'Atualizado em',
@@ -240,6 +246,7 @@ const TabManuais: React.FC = () => {
       key: 'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
       sorter: (a: any, b: any) => moment(a.updated_at).unix() - moment(b.updated_at).unix(),
+      width: 140,
     },
     {
       title: 'Ações',
