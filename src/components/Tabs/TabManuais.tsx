@@ -182,7 +182,7 @@ const TabManuais: React.FC = () => {
   const columns = [
     {
       title: 'Ordem Geral',
-      width: '14%',
+      width: '11%',
       sorter: (a: any, b: any) => a.order - b.order,
       render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
@@ -190,7 +190,7 @@ const TabManuais: React.FC = () => {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
-      width: '240px',
+      width: '400px',
     },
     {
       title: 'Ativo',
