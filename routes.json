@@ -1268,5 +1268,405 @@
     "source": "/produto/software_gratuito_-_contemp_tools",
     "destination": "/produto/contemp_tools_-_app_android_para_configura%c3%87%c3%83o_de_produtos_contemp_via_nfc",
     "permanent": true
+  },
+  {
+    "source": "/category/C%C3%82MERAS_TERMOGR%C3%81FICAS_OPTRIS",
+    "destination": "/category/cÂmeras_termogrÁficas_fixas",
+    "permanent": true
+  },
+  {
+    "source": "/produto/Controlador_de_Pot%C3%AAncia_1_Fase_controlada_100A,_150A,_200A_e_250A_-_P501",
+    "destination": "/produto/controlador_de_potência_1,_2,_3_fases_controladas_100a_e_150a_-_p501",
+    "permanent": true
+  },
+  {
+    "source": "/produto/TERMOPAR_PLATINA_TIPO_%22B%22",
+    "destination": "/category/termopares",
+    "permanent": true
+  },
+  {
+    "source": "/produto/PT100_-_Termorresist%C3%AAncia_Sensor_com_Cabe%C3%A7ote_com_prote%C3%A7%C3%A3o_Met%C3%A1lico_(SMCR_+_SMCL)",
+    "destination": "/produto/smcl_-_termopar_isolação_mineral_com_cabeçote_de_ligação_e_bucim_de_fixação_e_ajuste_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/ct_g5_para_vidro",
+    "destination": "/produto/pir%c3%94metro_para_vidro_optris_-_ct_g5",
+    "permanent": true
+  },
+  {
+    "source": "/produto/PT100_-_Termorresist%C3%AAncia_Sensor_com_Conector_F%C3%AAmea_(Standand_ou_Miniatura)_(TMCF_+_TMMF)_",
+    "destination": "/produto/tmcf_-_termopar_com_conector_compensado_e_haste_metálica",
+    "permanent": true
+  },
+  {
+    "source": "/produto/TERMOPAR_CuCo_TIPO_%22T%22_",
+    "destination": "/category/termopares",
+    "permanent": true
+  },
+  {
+    "source": "/produtos",
+    "destination": "/todosProdutos",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_avan%c3%87ada_-_p501",
+    "destination": "/category/controlador_de_pot%c3%8ancia_-_linha_avan%c3%87ada_-_p501",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_desempenho_-_p301",
+    "destination": "/category/controlador_de_pot%c3%8ancia_-_linha_desempenho_-_p301",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_avan%c3%87ada_-_c71x",
+    "destination": "/category/controladores_de_processos_-_linha_avan%c3%87ada_-_c71x",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_desempenho_-_c51x",
+    "destination": "/category/controladores_de_processos_-_linha_desempenho_-_c51x",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_econ%c3%94mica_-_c41x",
+    "destination": "/category/controladores_de_temperatura_-_linha_econ%c3%94mica_-_c41x",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_performance_-_optris",
+    "destination": "/category/optris_-_linha_performance",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_desempenho_-_optris",
+    "destination": "/category/optris_-_linha_desempenho",
+    "permanent": true
+  },
+  {
+    "source": "/category/controladores_de_processos_-_linha_avan%c3%87ada_-_c71x",
+    "destination": "/category/controladores_de_temperatura_e_processos_-_linha_avan%c3%87ada_-_c71x",
+    "permanent": true
+  },
+  {
+    "source": "/category/controladores_de_processos_-_linha_desempenho_-_c51x",
+    "destination": "/category/controladores_de_temperatura_e_processos_-_linha_desempenho_-_c51x",
+    "permanent": true
+  },
+  {
+    "source": "/category/compacta_-_optris",
+    "destination": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_compacta",
+    "permanent": true
+  },
+  {
+    "source": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_compacta",
+    "destination": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_linha_compacta",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_precis%c3%83o_-_optris",
+    "destination": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_linha_precis%c3%83o",
+    "permanent": true
+  },
+  {
+    "source": "/category/optris_-_linha_desempenho",
+    "destination": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_linha_desempenho",
+    "permanent": true
+  },
+  {
+    "source": "/category/optris_-_linha_performance",
+    "destination": "/category/pir%c3%94metros_infravermelhos_fixos_optris_-_linha_performance",
+    "permanent": true
+  },
+  {
+    "source": "/category/linha_compacta_-_optris",
+    "destination": "/category/pir%c3%94metros_infravermelhos_fixos_optris_-_linha_compacta",
+    "permanent": true
+  },
+  {
+    "source": "/category/performance_-_optris",
+    "destination": "/category/pir%c3%94metros_port%c3%81teis_optris_-_linha_performance",
+    "permanent": true
+  },
+  {
+    "source": "/category/pir%c3%94metros_port%c3%81teis_optris_-_linha_performance",
+    "destination": "/category/pir%c3%94metros_port%c3%81teis_ir_optris_-_linha_performance",
+    "permanent": true
+  },
+  {
+    "source": "/category/c%c3%82meras_termogr%c3%81ficas_fixas_optris_-_linha_compacta",
+    "destination": "/category/pir%c3%94metros_port%c3%81teis_ir_optris_-_linha_compacta",
+    "permanent": true
+  },
+  {
+    "source": "/category/multicanais",
+    "destination": "/category/aquisitores_multicanais",
+    "permanent": true
+  },
+  {
+    "source": "/category/controladores",
+    "destination": "/category/controladores_de_temperatura_e_processos",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi640i",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa__optris_-_pi640i",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi640i_g7",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris-_pi640i_g7",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_xi400",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_xi400",
+    "permanent": true
+  },
+  {
+    "source": "/produto/sistema_de_monitoramento_vidro_-_gis",
+    "destination": "/produto/sistema_de_monitoramento_vidro_optris_-_gis",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_xi80",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_xi80",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi05m",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi05m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi08m",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi08m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi_1m",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi_1m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_xi410",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_xi410",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi450i_g7",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi450i_g7",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_xi_400cm",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_xi_400cm",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi400i",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi400i",
+    "permanent": true
+  },
+  {
+    "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_-_pi450i",
+    "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi450i",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_lt-ltf",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_lt-ltf",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_mt",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_mt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_4m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_4m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ct_4ml_alta_velocidade",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ct_4ml_alta_velocidade",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctratio_2m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctratio_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_cslaser_g5hf",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_cslaser_g5hf",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctvideo_1m-2m_para_metal",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctvideo_1m-2m_para_metal",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ct_p3_para_pl%c3%a1stico",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ct_p3_para_pl%c3%a1stico",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_csmicro_3m",
+    "destination": "/produto/pir%c3%94metro_fixo_pir%c3%94metro_-_csmicro_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_pir%c3%94metro_-_csmicro_3m",
+    "destination": "/produto/pir%c3%94metro_fixo_pir%c3%94metro_optris_-_csmicro_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctratio_1m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctratio_1m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_g5",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_g5",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_f2",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_f2",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_csmicro_lt-lth",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_csmicro_lt-lth",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_csvision_r2m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_csvision_r2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-__ct_g5_para_vidro",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-__ct_g5_para_vidro",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-__ct_g5_para_vidro",
+    "destination": "/produto/pir%c3%94metro_fixo_para_vidro_optris_-_ct_g5",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_port%c3%81til_-_p20_1m-2m_para_metal",
+    "destination": "/produto/pir%c3%94metro_port%c3%81til_para_medi%c3%87%c3%83o_de_metal_optris_-_p20_1m-2m_",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_-_csvideo_3m",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-__ct_1m-_2m_para_metal",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-__ct_1m-_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ct_3m_para_metal",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_ct_3m_",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_csvideo_2m_para_metal",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_-_csvideo_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_-_csvideo_2m",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_csvideo_3m_para_metal",
+    "destination": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_-_csvideo_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_g7",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_g7",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_cslaser_hs_lt",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_cslaser_hs_lt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ct_p7_para_pl%c3%a1stico",
+    "destination": "/produto/pir%c3%94metro_fixo_para_pl%c3%81stico_optris_-_ct_p7",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_csmicro_2m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_csmicro_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_csvision_r1m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_csvision_r1m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_1m-2m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_1m-2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ct_lt",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ct_lt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_cslt",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_cslt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctlaser_p7_para_pl%c3%a1stico",
+    "destination": "/produto/pir%c3%94metro_fixo_para_pl%c3%81stico_optris_-_ctlaser_p7",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctvideo_3m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctvideo_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_port%c3%81til_-_p20_lt",
+    "destination": "/produto/pir%c3%94metro_port%c3%81til_optris_-_p20_lt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_ctfast_lt",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_ctfast_lt",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_pir%c3%94metro_optris_-_csmicro_3m",
+    "destination": "/produto/pir%c3%94metro_fixo_optris_-_csmicro_3m",
+    "permanent": true
+  },
+  {
+    "source": "/category/controlador_de_temperatura_e_processos_-_c514",
+    "destination": "/category/manual_controlador_de_temperatura_e_processos_-_c514",
+    "permanent": true
+  },
+  {
+    "source": "/todosManuais",
+    "destination": "/manuaisContemp",
+    "permanent": true
   }
 ]
