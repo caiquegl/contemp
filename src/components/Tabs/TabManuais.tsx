@@ -44,7 +44,7 @@ import { FiCopy } from 'react-icons/fi'
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
 
-const TabMenus: React.FC = () => {
+const TabManuais: React.FC = () => {
   const toast = useToast({
     duration: 3000,
     isClosable: true,
@@ -519,4 +519,4 @@ const TabMenus: React.FC = () => {
   )
 }
 
-export default TabMenus
+export default TabManuais

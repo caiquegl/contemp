@@ -43,7 +43,7 @@ import SideMenu from '../../components/SideMenu';
 import TabUsers from '../../components/Tabs/TabUsers'
 import TabBanners from '../../components/Tabs/TabBanners'
 import TabCards from '../../components/Tabs/TabCards'
-import TabMenus from '../../components/Tabs/TabMenus'
+import TabManuais from '../../components/Tabs/TabManuais'
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -153,7 +153,7 @@ const Adm = () => {
     <TabUsers />,
     <TabBanners />,
     <TabCards />,
-    <TabMenus />,
+    <TabManuais />,
   ];
 
   const emails: any = {
