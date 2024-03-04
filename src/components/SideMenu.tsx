@@ -97,6 +97,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isRedirecionamentoActive, setIsRedirecionamentoActive] = useState(false);
   const [isFileActive, setIsFileActive] = useState(false);
   const [isDashActive, setIsDashActive] = useState(false);
+  const [isManuaisActive, setIsManuaisActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [form] = Form.useForm()
 
@@ -156,6 +157,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsDashActive(!isDashActive);
     setActiveTab(4);
     setActiveSubTab(activeSubTab === 'dash' ? '' : 'dash');
+  };
+
+  const toggleManuaisSubmenu = () => {
+    setIsManuaisActive(!isManuaisActive);
+    setActiveTab(8);
+    setActiveSubTab(activeSubTab === 'manuais' ? '' : 'manuais');
   };
 
   const exportarCSV = async () => {
@@ -279,6 +286,63 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
       alert("Erro ao exportar arquivos:");
       // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
     }
+  };
+
+  const MenuExportManuaisCSV = async () => {
+    try {
+      const { data } = await api.get('/getAllManuais');
+
+      const csvContent = [
+        'Ordem, Nome, Ativo, Url, Adicionado em, Atualizado em',
+        ...data.map((manual: any) => [
+          manual.order,
+          manual.name,
+          manual.is_active ? 'Ativo' : 'Inativo',
+          `https://contemp.com.br/api/manuais/${replaceNameToUrl(manual.name).toLowerCase().replaceAll(' ', '_')}`,
+          moment(manual.created_at).format('DD/MM/YYYY'),
+          moment(manual.updated_at).format('DD/MM/YYYY')
+        ].join(',')),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "manuais-contemp.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Erro ao exportar manuais:");
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+
+  const exportManuaisExcel = async () => {
+    const { data } = await api.get('getAllManuais');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Manuais');
+
+    // Adicione cabeçalhos
+    sheet.addRow(['Ordem', 'Nome', 'Status', 'Url', 'Adicionado em', 'Atualizado em']);
+
+    // Adicione dados
+    data.map((manual: any) => {
+      sheet.addRow([
+        manual.order,
+        manual.name,
+        manual.is_active ? 'Ativo' : 'Inativo',
+        `https://contemp.com.br/api/manuais/${replaceNameToUrl(manual.name).toLowerCase().replaceAll(' ', '_')}`,
+        moment(manual.created_at).format('DD/MM/YYYY'),
+        moment(manual.updated_at).format('DD/MM/YYYY')
+      ]);
+    });
+
+    // Crie um Blob a partir do workbook
+    const blob = await workbook.xlsx.writeBuffer();
+
+    // Use a biblioteca file-saver para salvar o Blob como um arquivo Excel
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'manuais_export.xlsx');
   };
 
   const exportExcel = async () => {
@@ -1105,7 +1169,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   className="adm-botao-sidemenu"
                   variant="ghost"
                   width="100%"
-                  onClick={() => setActiveTab(8)}
+                  onClick={toggleManuaisSubmenu}
                   justifyContent="start"
                 >
                   <Flex justifyContent="space-between" width="100%" alignItems="center">
@@ -1123,9 +1187,68 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                         </>
                       )}
                     </Box>
+                    {isExpanded && <RotatingIcon isActive={isManuaisActive} />}
                   </Flex>
                 </Button>
 
+              }
+
+              {/* Submenu para 'Manuais' */}
+              {
+                activeSubTab === 'manuais' && (
+                  <VStack spacing={2} align="stretch" mt="3">
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={MenuExportManuaisCSV}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Exportar CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <BiExport />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <BiExport />
+                              <Text ml="2">Exportar CSV</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+
+                    {/* Exportar Redirecionamentos em Excel */}
+                    <Button
+                      className="adm-botao-sidemenu"
+                      variant="ghost"
+                      width="100%"
+                      onClick={exportManuaisExcel}
+                      justifyContent="start"
+                    >
+                      <Flex justifyContent="space-between" width="100%" alignItems="center">
+                        <Box display="flex" alignItems="center">
+                          {!isExpanded ? (
+                            <Tooltip label="Exportar em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                              <span>
+                                <RiFileExcel2Line />
+                              </span>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              <RiFileExcel2Line />
+                              <Text ml="2">Exportar XSLX</Text>
+                            </>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Button>
+                  </VStack>
+                )
               }
 
               {user.super_adm &&
