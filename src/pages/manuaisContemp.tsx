@@ -63,7 +63,7 @@ const AllMenus = () => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        h={['350px', '350px', '180px', '180px', '180px', '180px']}
+        h={['350px', '350px', '120px', '120px', '120px', '120px']}
       >
         <Heading as={'h2'} className='todososprodutos-titulo negrito text-white centro'
           maxW='1037px'
