@@ -457,6 +457,18 @@ export const Header = () => {
                   
                   <MenuDivider />
                   <Heading as={'h4'} fontSize={'1rem'} p={'2% 5%'} textTransform={'uppercase'} textAlign={'left'}>Acesse nossos padrões e conteúdos exclusivos</Heading>
+                  <Link href='https://contemp.com.br/manuaisContemp' isExternal
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'var(--red-primary)',
+                  borderRadius: '4px',
+                  transition: 'all 0',
+                }}
+                  textDecoration={'none'}>
+                  <MenuItem icon={<HiOutlineDocumentText />}>
+                  Manuais Contemp 
+                  </MenuItem>
+                  </Link>
                   <Link href='https://laboratorio.contemp.com.br' isExternal
                 _hover={{
                   textDecoration: 'none',
