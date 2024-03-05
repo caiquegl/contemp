@@ -41,6 +41,7 @@ import { replaceNameToUrl } from '../../utils/replaceNameToUrl'
 const { Item } = Form
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { FiCopy } from 'react-icons/fi'
+import { url } from 'inspector'
 
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
@@ -194,19 +195,19 @@ const TabManuais: React.FC = () => {
     },
     {
       title: 'Ativo',
-      dataIndex: 'isActive',
+      dataIndex: 'is_active',
       key: 'status',
-      render: (isActive: boolean) => (
+      render: (is_active: boolean) => (
         <Badge
-          colorScheme={isActive ? 'green' : 'red'}
+          colorScheme={is_active ? 'green' : 'red'}
           borderRadius={'8px'}
         >
-          {isActive ? 'Ativo' : 'Inativo'}
+          {is_active ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
       sorter: (a: any, b: any) => {
-        const statusA = a.isActive ? 'Ativo' : 'Inativo';
-        const statusB = b.isActive ? 'Ativo' : 'Inativo';
+        const statusA = a.is_active ? 'Ativo' : 'Inativo';
+        const statusB = b.is_active ? 'Ativo' : 'Inativo';
         return statusA.localeCompare(statusB);
       },
       width: 120,
@@ -221,7 +222,7 @@ const TabManuais: React.FC = () => {
           as={ChakraLink}
           className='botao-tabelaprodutos'
           fontWeight={'400'}
-          href={b.name ? `/api/manuais/${replaceNameToUrl(b.name).toLowerCase().replaceAll(' ', '_')}` : ''}
+          href={b.url}
           isExternal={true}
           _hover={{ color: 'black', textDecoration: 'none' }}
           rightIcon={<Icon as={ExternalLinkIcon} />}
@@ -358,13 +359,13 @@ const TabManuais: React.FC = () => {
 
       setLoading(true)
       await api.post(`updateManual`, { ...manual, id: selectItem.id })
-      message.success('Sucesso ao criar manual')
+      message.success('Sucesso ao atualizar manual')
       fetchData()
       setModalVisible(false)
       setSelectItem(null)
       form.resetFields(['url', 'picture', 'name'])
     } catch (error) {
-      message.error('Erro ao criar manual')
+      message.error('Erro ao atualizar manual')
     } finally {
       setLoading(false)
     }
@@ -449,7 +450,6 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Foto' name="picture" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
-                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
                 getUrls={(value: any) => form.setFieldValue('picture', value)}
               />
@@ -458,7 +458,6 @@ const TabManuais: React.FC = () => {
               <InputsHome
                 name=''
                 folder="upload-manuais"
-                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
                 getUrls={(value: any) => form.setFieldValue('url', value)}
               />
@@ -466,7 +465,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name" >
               <Input />
             </Form.Item>
-            <Button type='submit'>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
               Atualizar
             </Button>
           </Form>
@@ -499,7 +498,6 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Foto' name="picture" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
-                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
                 getUrls={(value: any) => form.setFieldValue('picture', value)}
               />
@@ -507,7 +505,6 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Manual' name="url" rules={[{ required: true, message: 'Campo obrigatório' }]}>
               <InputsHome
                 name=''
-                question='Não tem limite para adicionar fotos e videos, porém recomendamos comprimir em alta as fotos para reduzir o tempo de carregamento da página. Coloque na ordem que deve aparecer na página do produto.'
                 typeInput='fileSingle'
                 folder="upload-manuais"
                 getUrls={(value: any) => form.setFieldValue('url', value)}
@@ -516,7 +513,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name">
               <Input />
             </Form.Item>
-            <Button type='submit'>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
               Criar
             </Button>
           </Form>
