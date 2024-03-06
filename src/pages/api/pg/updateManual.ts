@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
 import { replaceNameToUrl } from '../../../utils/replaceNameToUrl'
 import SibApiV3Sdk from 'sib-api-v3-sdk'
-import { UpdateCategory } from '../../../utils/htmlEmail'
+import { UpdateManual } from '../../../utils/htmlEmail'
 import moment from 'moment'
 
 export default async function handler(
@@ -22,7 +22,7 @@ export default async function handler(
       }
     });
 
-    if(!findMenu || !findMenu.name) throw new Error('Menu não encontrado')
+    if(!findMenu || !findMenu.name) throw new Error('Manual não encontrado')
 
     await prisma.menus.update({
       where: {
@@ -60,7 +60,7 @@ export default async function handler(
         let send = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
           "sender": { "email": "marketing@contemp.digital", "name": "Contemp" },
           "subject": 'Atualização de manual',
-          "htmlContent": UpdateCategory(
+          "htmlContent": UpdateManual(
             findMenu.name,
             name,
             oldUrl,
@@ -71,7 +71,7 @@ export default async function handler(
           "messageVersions": [
             {
               "to": [{ "email": 'marketing@contemp.digital', name: 'Atualização de manual' }],
-              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemilin' }, {
+              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemelin' }, {
                 "email": 'arq.caique@hotmail.com',
                 name: 'caique'
               }],
