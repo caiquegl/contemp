@@ -135,8 +135,8 @@ const InputsHome = ({
                   })
 
                   urls.push(data.url)
-                  getUrls(data.url)
                 }
+                  getUrls(urls)
               }}
             />
             <Input
