@@ -15,11 +15,9 @@ const upload = multer({
         removePunctuation: true,
         maxLength: 1500, // Ajuste conforme necessário
       };
-      console.log('aquiiii multer')
 
       // Criar um nome de arquivo slugificado usando a função
       const slugifiedName = createSlug(file.originalname, slugOptions);
-      console.log('aquiiii multer 3')
       cb(null, slugifiedName);
     },
   }),
