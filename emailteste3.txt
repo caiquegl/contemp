@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualização de Produto Contemp</title>
+    <title>Atualização de Categoria Contemp</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     }
 
     body {
-        background-color: #1f1f1f;
+        background-color: #242424;
         width: 100%;
         height: 100%;
         display: flex;
@@ -31,8 +31,8 @@
     .container {
         width: 100%;
         max-width: 600px;
-        border-radius: 8px;
-        background-color: #242424;
+        border-radius: 14px;
+        background-color: #b60005;
     }
 
     .header {
@@ -41,7 +41,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url("https://contemp.com.br/api/arquivos/produto_atualizado_2.png");
+        background-image: url("https://contemp.com.br/api/arquivos/categoria_atualizada.png");
         background-size: cover;
         background-position: center;
         color: #fff;
@@ -98,7 +98,7 @@
     .botao-contemp-preto {
         background-color: #242424;
         color: #fff;
-        border: solid 2px #fff;
+        border: solid 2px #242424;
         margin: 0% auto;
         padding: 2% 5%;
         border-radius: 8px;
@@ -125,7 +125,7 @@
 
     .divider {
         width: 100%;
-        border-bottom: 1px solid #444444;
+        border-bottom: 1px solid #d3d3d3;
     }
 
     .info-text {
@@ -171,13 +171,13 @@
 <body>
     <div class="container">
         <div class="header"></div>
-        <div class="containerBody" style="margin-top: 0%;">
+        <div class="containerBody">
             <div class="containerBodyespace">
                 <p class="big" style="margin-bottom: 0px;">
                     Olá 👋!
                 </p>
                 <p style="margin-bottom: 30px;">
-                    O produto a seguir foi atualizado:
+                    A categoria a seguir foi atualizada:
                 </p>
                 <p style="margin-bottom: 10px;">
                     <b>Nome Anterior:</b> ${old_name || ''}
@@ -198,12 +198,9 @@
                     <b>Quem Alterou:</b> ${by || ''}
                 </p>
                 <div style="display: flex; align-items: center; flex-direction: column;">
-                    <a class="botao-contemp" href="https://contemp.com.br/todosProdutos" target="_blank">Acessar Todos os Produtos</a>
                     <a class="botao-contemp-preto" href="https://contemp.com.br/adm" target="_blank">Verificar Alterações</a>
                 </div>
             </div>
-            <div class="divider"></div>
-
             <div class="text-footer">
                 <p class="info-text">Não responda diretamente esse e-mail. Ele é somente informativo e não tem caixa
                     de entrada! Caso precise falar com a 3hub envie um e-mail para <a
