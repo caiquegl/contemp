@@ -428,229 +428,164 @@ export const UpdateProduct = (old_name: string, new_name: string, old_url: strin
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualização de Produto Contemp</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+        body,
+        table,
+        td,
+        a {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #242424;
+            margin: 0;
+            padding: 0;
+        }
+
+        p,
+        b,
+        a,
+        .im {
+            color: #fff;
+        }
+
+        .gt a {
+            color: #fff!important;
+        }
+
+        .botao-contemp-preto,
+        .botao-contemp {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .botao-contemp-preto {
+            background-color: #242424;
+            border: 2px solid #242424;
+            color: #fff;
+        }
+
+        .botao-contemp-preto:hover {
+            background-color: #fff;
+            color: #B60005;
+            border-color: #fff;
+        }
+
+        .botao-contemp {
+            background-color: #B60005;
+            color: #fff;
+            border: 2px solid #B60005;
+        }
+
+        .botao-contemp:hover {
+            color: #242424;
+            background-color: #fff;
+            border-color: #242424;
+        }
+
+        .info-text {
+            font-size: small;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-
-    * {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-        background-color: #1f1f1f;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow-x: hidden;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 600px;
-        border-radius: 8px;
-        background-color: #242424;
-    }
-
-    .header {
-        width: 100%;
-        height: 245px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url("https://contemp.com.br/api/arquivos/produto_atualizado_2.png");
-        background-size: cover;
-        background-position: center;
-        color: #fff;
-        font-size: 33px;
-        font-weight: bold;
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
-    }
-
-    .containerBody {
-        border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 8px;
-        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.04);
-    }
-
-    .containerBodyespace {
-        padding: 30px;
-    }
-
-    p {
-        font-size: 16px;
-        color: #fff;
-    }
-
-    a {
-        font-weight: bold;
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .bRed {
-        color: #B60005;
-    }
-
-    .botao-contemp {
-        background-color: #B60005;
-        color: #fff;
-        border: solid 2px #B60005;
-        margin: 5% auto;
-        padding: 2% 5%;
-        border-radius: 8px;
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .botao-contemp:hover {
-        color: #242424;
-        background-color: #fff;
-        border-color: #242424;
-    }
-
-    .botao-contemp-preto {
-        background-color: #242424;
-        color: #fff;
-        border: solid 2px #fff;
-        margin: 0% auto;
-        padding: 2% 5%;
-        border-radius: 8px;
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .botao-contemp-preto:hover {
-        color: #B60005;
-        background-color: #fff;
-        border-color: #fff;
-    }
-
-    .big {
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    .bold {
-        font-weight: bold;
-    }
-
-    .divider {
-        width: 100%;
-        border-bottom: 1px solid #444444;
-    }
-
-    .info-text {
-        font-size: small;
-        font-style: italic;
-        text-align: center;
-    }
-
-    .detalhe-footer {
-        background-image: url("https://contemp.com.br/api/arquivos/contempfundo.png");
-        background-size: cover;
-        background-position: center;
-        width: 100%;
-        height: 35px;
-    }
-
-    .text-footer,
-    .footer {
-        padding: 0px 30px;
-    }
-
-    .footer {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logo-3hub {
-        width: 20%;
-        margin: auto;
-        margin-top: 0%;
-    }
-
-    .conteudo-3hub {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-    }
-</style>
 
 <body>
-    <div class="container">
-        <div class="header"></div>
-        <div class="containerBody" style="margin-top: 0%;">
-            <div class="containerBodyespace">
-                <p class="big" style="margin-bottom: 0px;">
-                    Olá 👋!
-                </p>
-                <p style="margin-bottom: 30px;">
-                    O produto a seguir foi atualizado:
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Nome Anterior:</b> ${old_name || ''}
-                </p>
-                <p style="margin-bottom: 30px;">
-                    <b>Nome Atual:</b> ${new_name || ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Url Anterior:</b> ${old_url || ''}
-                </p>
-                <p style="margin-bottom: 30px;">
-                    <b>Url Atual:</b> ${new_url || ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Data da Modificação:</b> ${date || ''}
-                </p>
-                <p style="margin-bottom: 30px;">
-                    <b>Quem Alterou:</b> ${by || ''}
-                </p>
-                <div style="display: flex; align-items: center; flex-direction: column;">
-                    <a class="botao-contemp" href="https://contemp.com.br/todosProdutos" target="_blank">Acessar Todos os Produtos</a>
-                    <a class="botao-contemp-preto" href="https://contemp.com.br/adm" target="_blank">Verificar Alterações</a>
-                </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="text-footer">
-                <p class="info-text">Não responda diretamente esse e-mail. Ele é somente informativo e não tem caixa
-                    de entrada! Caso precise falar com a 3hub envie um e-mail para <a
-                        href="mailto:suporte@3hub.co">suporte@3hub.co</a> ou fale no nosso <a
-                        href="https://api.whatsapp.com/send?phone=5511987328670">WhatsApp</a>.</p>
-            </div>
-
-            <div class="footer">
-                <img src="https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/LOGO%20SVG.svg?alt=media&token=75b0595b-4fc3-4c1f-917f-3ed895dbc984"
-                    alt="">
-            </div>
-            <div class="detalhe-footer"></div>
-        </div>
-    </div>
-    </div>
-    <div class="conteudo-3hub">
-        <p style="font-size: 14px;">Copyright ©️ 2024 - <a href="https://3hub.co">3Hub</a> | Todos os direitos
-            reservados</p>
-        <a href="https://3hub.co" target="_blank">
-            <img class="logo-3hub" src="https://contemp.com.br/api/arquivos/logo_3_2x.png" alt="Logo 3Hub">
-        </a>
-    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#171717" style="padding: 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#242424"
+                    style="border-radius: 14px; overflow: hidden; box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.08);">
+                    <tr>
+                        <td
+                            style="background-image: url('https://contemp.com.br/api/arquivos/produto_atualizado_2.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
+                            <!-- Colocar conteúdo do header aqui, se necessário -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff;">
+                            <p style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center;">
+                                NOTIFICAÇÃO AUTOMÁTICA</p>
+                            <p style="margin-bottom: 0px; margin-top: 20px;"><b>Olá 👋, administrador!</b></p>
+                            <p style="margin-bottom: 10px;">Você está recebendo esse e-mail porque está cadastrado no
+                                painel administrativo da Contemp.</p>
+                            <p style="margin-top: 40px; margin-bottom: 20px; font-weight: bold;">O produto a seguir foi atualizado:</p>
+                            <p style="margin-bottom: 0px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Nome Atual:</b> ${new_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Url Anterior:</b> https://contemp.com.br${old_url || ''}</p>
+                            <p style="margin-bottom: 40px;"><b>Url Atual:</b> https://contemp.com.br${new_url || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Data da Modificação:</b> ${date || ''}</p>
+                            <p style="margin-bottom: 20px;"><b>Quem Alterou:</b> ${by || ''}</p>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" style="padding: 10px;">
+                                        <a href="https://contemp.com.br${new_url || ''}" target="_blank" class="botao-contemp-preto" style="background-color: #242424; color: #fff; border: 2px solid #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; text-transform: uppercase; font-weight: bold; font-size: 14px;">
+                                            Ver Produto
+                                        </a>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td align="center" style="padding: 20px;">
+                                        </a>
+                                        <a href="https://contemp.com.br/adm" target="_blank" class="botao-contemp-preto"
+                                            style="background-color: #B60005; color: #fff; border: 2px solid #B60005; padding: 10px 20px; border-radius: 8px; text-decoration: none; text-transform: uppercase; font-weight: bold; font-size: 14px;">Verificar
+                                            Alterações</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: 1px solid #d3d3d3; height: 1px; line-height: 1px; font-size: 1px;">
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                            <p style="font-size: small; font-style: italic; text-align: center; margin-top: 30px;">Não
+                                responda diretamente esse e-mail. Ele é somente informativo e não tem caixa de entrada!
+                                Caso precise falar com a 3hub envie um e-mail para <a href="mailto:suporte@3hub.co"
+                                    style="color: #fff; text-decoration: underline;">suporte@3hub.co</a> ou fale no
+                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670" target="_blank"
+                                    style="color: #fff; text-decoration: underline;">WhatsApp</a>.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo.png'); background-size: cover; background-position: center; height: 35px;">
+                            <!-- Footer detalhe -->
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" style="padding-top: 20px;">
+                <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="font-size: 14px; text-align: center; color: #fff;">
+                            <!-- Conteúdo de copyright e logo -->
+                            Copyright ©️ 2024 - <a href="https://3hub.co" style="color: #fff;">3Hub</a> | Todos os
+                            direitos reservados
+                            <br>
+                            <a href="https://3hub.co" target="_blank">
+                                <img src="https://contemp.com.br/api/arquivos/logo_3_2x.png" alt="Logo 3Hub"
+                                    style="margin-top: 10px; width: 10%;">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 
-</html>\`
+</html>
     `
 }
 
@@ -1034,6 +969,10 @@ export const UpdateCategory = (old_name: string, new_name: string, old_url: stri
             color: #fff;
         }
 
+        .gt a {
+            color: #fff!important;
+        }
+
         .botao-contemp-preto,
         .botao-contemp {
             display: inline-block;
@@ -1094,17 +1033,17 @@ export const UpdateCategory = (old_name: string, new_name: string, old_url: stri
                         <td
                             style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff;">
                             <p style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center;">
-                                NOTIFICAÇÃO</p>
+                                NOTIFICAÇÃO AUTOMÁTICA</p>
                             <p style="margin-bottom: 0px; margin-top: 20px;"><b>Olá 👋, administrador!</b></p>
                             <p style="margin-bottom: 10px;">Você está recebendo esse e-mail porque está cadastrado no
                                 painel administrativo da Contemp.</p>
-                            <p style="margin-top: 20px; margin-bottom: 20px;">A categoria a seguir foi atualizada:</p>
-                            <p style="margin-bottom: 10px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
-                            <p style="margin-bottom: 20px;"><b>Nome Atual:</b> ${new_name || ''}</p>
-                            <p style="margin-bottom: 10px;"><b>Url Anterior:</b> <a href="https://contemp.com.br${old_url || ''}" target="_blank">${old_url || ''}</a></p>
-                            <p style="margin-bottom: 20px;"><b>Url Atual:</b> <a href="https://contemp.com.br${new_url || ''}" target="_blank">${new_url || ''}</a></p>
-                            <p style="margin-bottom: 10px;"><b>Data da Modificação:</b> ${date || ''}</p>
-                            <p style="margin-bottom: 30px;"><b>Quem Alterou:</b> ${by || ''}</p>
+                            <p style="margin-top: 40px; margin-bottom: 20px; font-weight: bold;"><b>A categoria a seguir foi atualizada:</b></p>
+                            <p style="margin-bottom: 0px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Nome Atual:</b> ${new_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Url Anterior:</b> <a href="https://contemp.com.br${old_url || ''}" target="_blank">${old_url || ''}</a></p>
+                            <p style="margin-bottom: 40px;"><b>Url Atual:</b> <a href="https://contemp.com.br${new_url || ''}" target="_blank">${new_url || ''}</a></p>
+                            <p style="margin-bottom: 0px;"><b>Data da Modificação:</b> ${date || ''}</p>
+                            <p style="margin-bottom: 20px;"><b>Quem Alterou:</b> ${by || ''}</p>
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td align="center" style="padding: 20px;">
@@ -1123,7 +1062,7 @@ export const UpdateCategory = (old_name: string, new_name: string, old_url: stri
                                 responda diretamente esse e-mail. Ele é somente informativo e não tem caixa de entrada!
                                 Caso precise falar com a 3hub envie um e-mail para <a href="mailto:suporte@3hub.co"
                                     style="color: #fff; text-decoration: underline;">suporte@3hub.co</a> ou fale no
-                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670"
+                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670" target="_blank"
                                     style="color: #fff; text-decoration: underline;">WhatsApp</a>.</p>
                         </td>
                     </tr>
