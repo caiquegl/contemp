@@ -195,8 +195,8 @@
                     <b>Quem Alterou:</b> ${by || ''}
                 </p>
                 <div style="display: flex; align-items: center; flex-direction: column;">
-                    <a class="botao-contemp" href="">Acessar Todos os Manuais</a>
-                    <a class="botao-contemp-preto" href="">Verificar Alterações</a>
+                    <a class="botao-contemp" href="https://contemp.com.br/manuaisContemp" target="_blank">Acessar Todos os Manuais</a>
+                    <a class="botao-contemp-preto" href="https://contemp.com.br/adm" target="_blank">Verificar Alterações</a>
                 </div>
             </div>
             <div class="divider" style="color: #F7F7F7;"></div>
