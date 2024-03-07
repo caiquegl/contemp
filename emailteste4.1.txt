@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualização de Categoria Contemp</title>
+    <title>Atualização de Produto Contemp</title>
     <style type="text/css">
         body,
         table,
@@ -76,14 +76,14 @@
 </head>
 
 <body>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#242424" style="padding: 20px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#171717" style="padding: 20px;">
         <tr>
             <td align="center">
-                <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#b60005"
+                <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#242424"
                     style="border-radius: 14px; overflow: hidden; box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.08);">
                     <tr>
                         <td
-                            style="background-image: url('https://contemp.com.br/api/arquivos/categoria_atualizada.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
+                            style="background-image: url('https://contemp.com.br/api/arquivos/produto_atualizado_2.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
                             <!-- Colocar conteúdo do header aqui, se necessário -->
                         </td>
                     </tr>
@@ -91,42 +91,51 @@
                         <td
                             style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #fff;">
                             <p style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center;">
-                                NOTIFICAÇÃO</p>
+                                NOTIFICAÇÃO AUTOMÁTICA</p>
                             <p style="margin-bottom: 0px; margin-top: 20px;"><b>Olá 👋, administrador!</b></p>
                             <p style="margin-bottom: 10px;">Você está recebendo esse e-mail porque está cadastrado no
                                 painel administrativo da Contemp.</p>
-                            <p style="margin-top: 20px; margin-bottom: 20px;">A categoria a seguir foi atualizada:</p>
-                            <p style="margin-bottom: 10px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
-                            <p style="margin-bottom: 20px;"><b>Nome Atual:</b> ${new_name || ''}</p>
-                            <p style="margin-bottom: 10px;"><b>Url Anterior:</b> https://contemp.com.br${old_url || ''}</p>
-                            <p style="margin-bottom: 20px;"><b>Url Atual:</b> https://contemp.com.br${new_url || ''}</p>
-                            <p style="margin-bottom: 10px;"><b>Data da Modificação:</b> ${date || ''}</p>
-                            <p style="margin-bottom: 30px;"><b>Quem Alterou:</b> ${by || ''}</p>
+                            <p style="margin-top: 40px; margin-bottom: 20px; font-weight: bold;">O produto a seguir foi atualizado:</p>
+                            <p style="margin-bottom: 0px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Nome Atual:</b> ${new_name || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Url Anterior:</b> https://contemp.com.br${old_url || ''}</p>
+                            <p style="margin-bottom: 40px;"><b>Url Atual:</b> https://contemp.com.br${new_url || ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Data da Modificação:</b> ${date || ''}</p>
+                            <p style="margin-bottom: 20px;"><b>Quem Alterou:</b> ${by || ''}</p>
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
+                                    <td align="center" style="padding: 10px;">
+                                        <a href="https://contemp.com.br${new_url || ''}" target="_blank" class="botao-contemp-preto" style="background-color: #242424; color: #fff; border: 2px solid #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; text-transform: uppercase; font-weight: bold; font-size: 14px;">
+                                            Ver Produto
+                                        </a>
+                                    </td>
+                                </tr>                                
+                                <tr>
                                     <td align="center" style="padding: 20px;">
+                                        </a>
                                         <a href="https://contemp.com.br/adm" target="_blank" class="botao-contemp-preto"
-                                            style="background-color: #242424; color: #fff; border: 2px solid #242424; padding: 10px 20px; border-radius: 8px; text-decoration: none; text-transform: uppercase; font-weight: bold; font-size: 14px;">Verificar
+                                            style="background-color: #B60005; color: #fff; border: 2px solid #B60005; padding: 10px 20px; border-radius: 8px; text-decoration: none; text-transform: uppercase; font-weight: bold; font-size: 14px;">Verificar
                                             Alterações</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td
                                         style="border-bottom: 1px solid #d3d3d3; height: 1px; line-height: 1px; font-size: 1px;">
-                                        &nbsp;</td>
+                                        &nbsp;
+                                    </td>
                                 </tr>
                             </table>
                             <p style="font-size: small; font-style: italic; text-align: center; margin-top: 30px;">Não
                                 responda diretamente esse e-mail. Ele é somente informativo e não tem caixa de entrada!
                                 Caso precise falar com a 3hub envie um e-mail para <a href="mailto:suporte@3hub.co"
                                     style="color: #fff; text-decoration: underline;">suporte@3hub.co</a> ou fale no
-                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670"
+                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670" target="_blank"
                                     style="color: #fff; text-decoration: underline;">WhatsApp</a>.</p>
                         </td>
                     </tr>
                     <tr>
                         <td
-                            style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo_2.png'); background-size: cover; background-position: center; height: 35px;">
+                            style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo.png'); background-size: cover; background-position: center; height: 35px;">
                             <!-- Footer detalhe -->
                         </td>
                     </tr>
