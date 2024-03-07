@@ -76,7 +76,7 @@ export default async function handler(
 
         let send = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
           "sender": { "email": "marketing@contemp.digital", "name": "Contemp" },
-          "subject": 'Atualização de produto',
+          "subject": 'Atualização de produto - Contemp',
           "htmlContent": UpdateProduct(
             findProduct.name,
             body.name,
@@ -88,7 +88,7 @@ export default async function handler(
           "messageVersions": [
             {
               "to": [{ "email": 'marketing@contemp.digital', name: 'Atualização de produto' }],
-              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemilin' }],
+              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemelin' }],
             }
           ]
         })

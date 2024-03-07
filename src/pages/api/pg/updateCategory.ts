@@ -79,7 +79,7 @@ export default async function handler(
           "messageVersions": [
             {
               "to": [{ "email": 'marketing@contemp.digital', name: 'Atualização de categoria' }],
-              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemilin' }, { "email": 'arq.caique@hotmail.com', name: 'caique' }],
+              "cc": [{ "email": 'kemelin@3hub.co', name: 'Kemelin' }, { "email": 'arq.caique@hotmail.com', name: 'Caique' }],
             }
           ]
         })
