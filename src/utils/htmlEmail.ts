@@ -601,7 +601,7 @@ export const UpdateManual = (old_name: string, new_name: string, old_url: string
     .containerBody {
         border-bottom-right-radius: 8px;
         border-bottom-left-radius: 8px;
-        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.04);
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.04);
     }
 
     .containerBodyespace {
@@ -632,6 +632,7 @@ export const UpdateManual = (old_name: string, new_name: string, old_url: string
         cursor: pointer;
         text-transform: uppercase;
         font-weight: bold;
+        font-size: 14px;
     }
 
     .botao-contemp:hover {
@@ -650,6 +651,7 @@ export const UpdateManual = (old_name: string, new_name: string, old_url: string
         cursor: pointer;
         text-transform: uppercase;
         font-weight: bold;
+        font-size: 14px;
     }
 
     .botao-contemp-preto:hover {
@@ -697,11 +699,13 @@ export const UpdateManual = (old_name: string, new_name: string, old_url: string
         align-items: center;
         justify-content: center;
     }
+
     .logo-3hub {
         width: 20%;
         margin: auto;
         margin-top: -3%;
     }
+
     .conteudo-3hub {
         display: flex;
         flex-direction: column;
@@ -737,33 +741,36 @@ export const UpdateManual = (old_name: string, new_name: string, old_url: string
                     <b>Quem Alterou:</b> ${by || ''}
                 </p>
                 <div style="display: flex; align-items: center; flex-direction: column;">
-                    <button type="button" class="botao-contemp">Acessar Todos os Manuais</button>
-                    <button type="button" class="botao-contemp-preto">Verfiricar Alterações</button>
+                    <a class="botao-contemp" href="https://contemp.com.br/manuaisContemp" target="_blank">Acessar Todos os Manuais</a>
+                    <a class="botao-contemp-preto" href="https://contemp.com.br/adm" target="_blank">Verificar Alterações</a>
                 </div>
             </div>
             <div class="divider" style="color: #F7F7F7;"></div>
 
-                <div class="text-footer">
-                    <p class="info-text">Não responda diretamente esse e-mail. Ele é somente informativo e não tem caixa
-                        de entrada! Caso precise falar com a 3hub envie um e-mail para <a
-                            href="mailto:suporte@3hub.co">suporte@3hub.co</a> ou fale no nosso <a
-                            href="https://api.whatsapp.com/send?phone=5511987328670">WhatsApp</a>.</p>
-                </div>
+            <div class="text-footer">
+                <p class="info-text">Não responda diretamente esse e-mail. Ele é somente informativo e não tem caixa
+                    de entrada! Caso precise falar com a 3hub envie um e-mail para <a
+                        href="mailto:suporte@3hub.co">suporte@3hub.co</a> ou fale no nosso <a
+                        href="https://api.whatsapp.com/send?phone=5511987328670">WhatsApp</a>.</p>
+            </div>
 
-                <div class="footer">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/LOGO%20SVG.svg?alt=media&token=75b0595b-4fc3-4c1f-917f-3ed895dbc984"
-                        alt="">
-                </div>
+            <div class="footer">
+                <img src="https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/LOGO%20SVG.svg?alt=media&token=75b0595b-4fc3-4c1f-917f-3ed895dbc984"
+                    alt="">
+            </div>
             <div class="detalhe-footer"></div>
         </div>
     </div>
     <div class="conteudo-3hub">
-        <p style="font-size: 14px;">Copyright ©️ 2024 - <a href="https://3hub.co">3Hub</a> | Todos os direitos reservados</p>
-        <img class="logo-3hub" src="https://contemp.com.br/api/arquivos/icone3hub.png" alt="Logo 3Hub">
+        <p style="font-size: 14px;">Copyright ©️ 2024 - <a href="https://3hub.co">3Hub</a> | Todos os direitos
+            reservados</p>
+        <a href="https://3hub.co" target="_blank">
+            <img class="logo-3hub" src="https://contemp.com.br/api/arquivos/icone3hub.png" alt="Logo 3Hub">
+        </a>
     </div>
 </body>
 
-</html>\`
+</html>
     `
 }
 
