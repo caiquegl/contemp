@@ -36,7 +36,7 @@ export default async function handler(
         "messageVersions": [
           {
             "to": [{ "email": userExists.email, name: userExists.name }],
-            "cc": [{ "email": 'backup.contemp.digital@gmail.com', name: 'Kemilin' }],
+            "cc": [{ "email": 'backup.contemp.digital@gmail.com', name: 'Kemelin' }],
           }
         ]
       })
