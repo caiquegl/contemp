@@ -1101,8 +1101,8 @@ export const UpdateCategory = (old_name: string, new_name: string, old_url: stri
                             <p style="margin-top: 20px; margin-bottom: 20px;">A categoria a seguir foi atualizada:</p>
                             <p style="margin-bottom: 10px;"><b>Nome Anterior:</b> ${old_name || ''}</p>
                             <p style="margin-bottom: 20px;"><b>Nome Atual:</b> ${new_name || ''}</p>
-                            <p style="margin-bottom: 10px;"><b>Url Anterior:</b> <a href="https://contemp.com.br/category/${encodeURIComponent(old_url || '')}" target="_blank">${old_url || ''}</a></p>
-                            <p style="margin-bottom: 20px;"><b>Url Atual:</b> <a href="https://contemp.com.br/category/${encodeURIComponent(new_url || '')}" target="_blank">${new_url || ''}</a></p>
+                            <p style="margin-bottom: 10px;"><b>Url Anterior:</b> <a href="https://contemp.com.br${old_url || ''}" target="_blank">${old_url || ''}</a></p>
+                            <p style="margin-bottom: 20px;"><b>Url Atual:</b> <a href="https://contemp.com.br${new_url || ''}" target="_blank">${new_url || ''}</a></p>
                             <p style="margin-bottom: 10px;"><b>Data da Modificação:</b> ${date || ''}</p>
                             <p style="margin-bottom: 30px;"><b>Quem Alterou:</b> ${by || ''}</p>
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
