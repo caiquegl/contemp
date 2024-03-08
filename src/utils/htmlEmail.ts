@@ -6,7 +6,7 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pedido de Novo Orçamentoo - Contemp</title>
+        <title>Pedido de Contato - Contemp</title>
         <style type="text/css">
             body,
             table,
@@ -105,9 +105,9 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
                                 <p style="margin-bottom: 0px;"><b>Telefone:</b> ${telefone ? telefone : ''}</p>
                                 <p style="margin-bottom: 0px;"><b>Empresa:</b> ${empresa ? empresa : ''}</p>
                                 ${area ? `<p style="margin-bottom: 10px;">
-                                    <b>Área desejada:</b> ${area ? area : ''}
+                                    <b>Área desejada:</b> ${area ? area : 'Não selecionado.'}
                                 </p>` : ''}
-                                <p style="margin-bottom: 0px;"><b></b> ${file ? file : ''}</p>
+                                <p style="margin-bottom: 0px;"><b>Arquivo:</b> ${file ? file : 'Não enviado.'}</p>
                                 <p style="margin-bottom: 0px;"><b>Mensagem:</b></p>
                                 <p style="margin-bottom: 30px;">
                                     ${mensagem ? mensagem : ''}
@@ -130,7 +130,7 @@ export const HtmlDefault = (name?: string, email?: string, empresa?: string, tel
                         </tr>
                         <tr>
                             <td
-                                style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo.png'); background-size: cover; background-position: center; height: 35px;">
+                                style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo_3.png'); background-size: cover; background-position: center; height: 35px;">
                             </td>
                         </tr>
                     </table>
@@ -191,149 +191,191 @@ export const HtmlOrcamento = (
 
     let msg = `<!DOCTYPE html>
     <html lang="pt-br">
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contemp</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <title>Pedido de Novo Orçamento - Contemp</title>
+        <style type="text/css">
+            body,
+            table,
+            td,
+            a {
+                font-family: 'Poppins', sans-serif;
+            }
+    
+            body {
+                background-color: #F7F7F7;
+                margin: 0;
+                padding: 0;
+            }
+    
+            p,
+            b,
+            a,
+            .im {
+                color: #242424;
+            }
+    
+            .gt a {
+                color: #242424 !important;
+            }
+    
+            .botao-contemp-preto,
+            .botao-contemp {
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+    
+            .botao-contemp-preto {
+                background-color: #242424;
+                border: 2px solid #242424;
+                color: #fff;
+            }
+    
+            .botao-contemp-preto:hover {
+                background-color: #fff;
+                color: #B60005;
+                border-color: #fff;
+            }
+    
+            .botao-contemp {
+                background-color: #B60005;
+                color: #fff;
+                border: 2px solid #B60005;
+            }
+    
+            .botao-contemp:hover {
+                color: #fff;
+                background-color: #242424;
+                border-color: #fff;
+            }
+    
+            .info-text {
+                font-size: small;
+                font-style: italic;
+                text-align: center;
+            }
+    
+            .products-table {
+                width: 100%;
+                text-align: left;
+                margin-top: 20px;
+                text-align: center;
+                border: 1px solid #242424;
+                margin-bottom: 30px;
+            }
+    
+            .products-table tr th {
+                border: 1px solid #fff;
+                background-color: #B60005;
+                color: #fff;
+            }
+    
+            .products-table td td {
+                border: 1px solid #242424;
+            }
+        </style>
     </head>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-        *{
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background-color: #F7F7F7;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
     
-        .container {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-    
-        .header {
-            width: 100%;
-            height: 108px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: url("https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/Banner%20Contemp%402x.png?alt=media&token=a496a2da-26a1-4bbd-9b1a-909f94d62a65");
-            color: #fff;
-            font-size: 33px;
-            font-weight: bold;
-            border-top-right-radius: 8px;
-            border-top-left-radius: 8px;
-        }
-    
-        .containerBody {
-            padding: 30px;
-            border-bottom-right-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
-    
-        p{
-            font-size: 16px;
-        }
-    
-        .bRed{
-            color: #B60005;
-        }
-    
-        .big {
-            font-size: 24px;
-            font-weight: bold;
-        }
-    
-        .bold {
-            font-weight: bold;
-        }
-    
-        .divider {
-            width: 100%;
-            border-bottom: 1px solid lightslategray;
-        }
-    
-        .footer {
-            margin-top: 20px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .table {
-            width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-    
-        .table tr th {
-            border: 2px solid lightgrey;
-            background-color: rgb(184, 184, 184);
-        }
-    
-        .table tr td {
-            border: 2px solid lightgrey;
-        }
-    </style>
     <body>
-        <div class="container">
-            <div class="header">
-                Novo Oportunidade de Vendas
-            </div>
-            <div class="containerBody">
-                <p class="big" style="margin-bottom: 20px;">
-                    Olá, <b class="bRed">Equipe de vendas!</b>
-                </p>
-                <p style="margin-bottom: 30px;">
-                    Você recebeu uma nova solicitação de contato através do site da Contemp. Esses são os dados:
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Nome:</b> ${name ? name : ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>E-mail:</b>  ${email ? email : ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Empresa:</b>  ${empresa ? empresa : ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Telefone:</b>  ${telefone ? telefone : ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Arquivo:</b>  ${file ? file : ''}
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>Mensagem:</b>
-                </p>
-                <p style="margin-bottom: 30px;">
-                ${mensagem ? mensagem : ''}
-                </p>
-                <table class="table">
-                    <tr>
-                    <th>Produto</th>
-                    <th>Variação</th>
-                    <th>Qnt.</th>
-                    </tr>
-                    ${stringProd}
-                </table>
-                <div class="divider"> </div>
-                
-                <div class="footer">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/contemp-1e58c.appspot.com/o/LOGO%20SVG.svg?alt=media&token=75b0595b-4fc3-4c1f-917f-3ed895dbc984" alt="">
-                </div>
-            </div>
-        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F7F7F7" style="padding: 20px;">
+            <tr>
+                <td align="center">
+                    <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#fff"
+                        style="border-radius: 14px; overflow: hidden; box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.08);">
+                        <tr>
+                            <td
+                                style="background-image: url('https://contemp.com.br/api/arquivos/novo_pedido_carrinho_de_compras.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
+                                <!-- Colocar conteúdo do header aqui, se necessário -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                                style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #242424;">
+                                <p
+                                    style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center; color: #B60005;">
+                                    NOVA SOLICITAÇÃO</p>
+                                <p style="margin-bottom: 0px; margin-top: 20px;"><b>Olá 👋, Equipe de Vendas!</b></p>
+                                <p style="margin-bottom: 10px;">Vocês receberam solicitação de orçamento pelo site.
+                                    Respondam
+                                    o quanto antes.</p>
+                                <p
+                                    style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: #242424; text-align: center;">
+                                    Esse são os dados para o orçamento:</p>
+    
+                                <p style="margin-bottom: 0px;"><b>Nome:</b>${name ? name : ''}</p>
+                                <p style="margin-bottom: 0px;"><b>E-mail:</b> ${email ? email : ''}</p>
+                                <p style="margin-bottom: 0px;"><b>Telefone:</b> ${telefone ? telefone : ''}</p>
+                                <p style="margin-bottom: 0px;"><b>Empresa:</b> ${empresa ? empresa : ''}</p>
+                                <p style="margin-bottom: 0px;"><b>Arquivo:</b> ${file ? file : 'Não enviado.'}</p>
+                                <p style="margin-bottom: 0px;"><b>Mensagem:</b></p>
+                                <p style="margin-bottom: 30px;">
+                                    ${mensagem ? mensagem : ''}
+                                </p>
+                                <table class="products-table" width="100%" border="1" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Produto
+                                        </th>
+                                        <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Variação
+                                        </th>
+                                        <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Qnt.
+                                        </th>
+                                    </tr>
+                                    ${stringProd}
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td
+                                            style="border-bottom: 1px solid #d3d3d3; height: 1px; line-height: 1px; font-size: 1px;">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p style="font-size: 16px; font-style: italic; font-weight: bold; text-align: center; margin-top: 30px; margin-bottom: -3%;">Você
+                                    sabia que a Contemp tem um Canal no WhatsApp?</p>
+                            </td>
+                            <tr>
+                                <td align="center"><a class="botao-contemp" href="https://www.whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c" target="_blank"
+                                    style="color: #fff; text-decoration: none; align-items: center; margin-bottom: 30px;">Acessar Canal do WhatsApp da Contemp</a></td>
+                            </tr>
+                        </tr>
+                        <tr>
+                            <td
+                                style="background-image: url('https://contemp.com.br/api/arquivos/contempfundo_3.png'); background-size: cover; background-position: center; height: 35px;">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="padding-top: 20px;">
+                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td style="font-size: 14px; text-align: center; color: #242424;">
+                                <!-- Conteúdo de copyright e logo -->
+                                Copyright ©️ 2024 - <a href="https://3hub.co" style="color: #242424;">3Hub</a> | Todos os
+                                direitos reservados
+                                <br>
+                                <a href="https://3hub.co" target="_blank">
+                                    <img src="https://contemp.com.br/api/arquivos/icone3hub.png" alt="Logo 3Hub"
+                                        style="margin-top: 10px; width: 15%;">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </body>
+    
     </html>`
 
     return msg
