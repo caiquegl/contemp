@@ -62,15 +62,34 @@
         }
 
         .botao-contemp:hover {
-            color: #242424;
-            background-color: #fff;
-            border-color: #242424;
+            color: #fff;
+            background-color: #242424;
+            border-color: #fff;
         }
 
         .info-text {
             font-size: small;
             font-style: italic;
             text-align: center;
+        }
+
+        .products-table {
+            width: 100%;
+            text-align: left;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #242424;
+            margin-bottom: 30px;
+        }
+
+        .products-table tr th {
+            border: 1px solid #fff;
+            background-color: #B60005;
+            color: #fff;
+        }
+
+        .products-table td td {
+            border: 1px solid #242424;
         }
     </style>
 </head>
@@ -83,7 +102,7 @@
                     style="border-radius: 14px; overflow: hidden; box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.08);">
                     <tr>
                         <td
-                            style="background-image: url('https://contemp.com.br/api/arquivos/novo_pedido.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
+                            style="background-image: url('https://contemp.com.br/api/arquivos/novo_pedido_carrinho_de_compras.png'); height: 245px; background-size: cover; background-position: center; color: #fff; font-size: 33px; font-weight: bold; text-align: center;">
                             <!-- Colocar conteúdo do header aqui, se necessário -->
                         </td>
                     </tr>
@@ -94,23 +113,33 @@
                                 style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center; color: #B60005;">
                                 NOVA SOLICITAÇÃO</p>
                             <p style="margin-bottom: 0px; margin-top: 20px;"><b>Olá 👋, Equipe de Vendas!</b></p>
-                            <p style="margin-bottom: 10px;">Vocês receberam solicitação de contato pelo site. Respondam
+                            <p style="margin-bottom: 10px;">Vocês receberam solicitação de orçamento pelo site.
+                                Respondam
                                 o quanto antes.</p>
                             <p
                                 style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: #242424; text-align: center;">
-                                Esse são os dados da solicitação:</p>
+                                Esse são os dados para o orçamento:</p>
+
                             <p style="margin-bottom: 0px;"><b>Nome:</b>${name ? name : ''}</p>
                             <p style="margin-bottom: 0px;"><b>E-mail:</b> ${email ? email : ''}</p>
                             <p style="margin-bottom: 0px;"><b>Telefone:</b> ${telefone ? telefone : ''}</p>
                             <p style="margin-bottom: 0px;"><b>Empresa:</b> ${empresa ? empresa : ''}</p>
-                            ${area ? `<p style="margin-bottom: 10px;">
-                                <b>Área desejada:</b> ${area ? area : ''}
-                            </p>` : ''}
-                            <p style="margin-bottom: 0px;"><b></b> ${file ? file : ''}</p>
+                            <p style="margin-bottom: 0px;"><b>Arquivo:</b> ${file ? file : 'Não enviado.'}</p>
                             <p style="margin-bottom: 0px;"><b>Mensagem:</b></p>
                             <p style="margin-bottom: 30px;">
                                 ${mensagem ? mensagem : ''}
                             </p>
+                            <table class="products-table" width="100%" border="1" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Produto
+                                    </th>
+                                    <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Variação
+                                    </th>
+                                    <th style="color: #fff; background-color: #B60005; border: 1px solid #fff;">Qnt.
+                                    </th>
+                                </tr>
+                                ${stringProd}
+                            </table>
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td
@@ -119,13 +148,13 @@
                                     </td>
                                 </tr>
                             </table>
-                            <p style="font-size: small; font-style: italic; text-align: center; margin-top: 30px;">Não
-                                responda diretamente esse e-mail. Ele é somente informativo e não tem caixa de entrada!
-                                Caso precise falar com a 3hub envie um e-mail para <a href="mailto:suporte@3hub.co"
-                                    style="color: #242424; text-decoration: underline;">suporte@3hub.co</a> ou fale no
-                                nosso <a href="https://api.whatsapp.com/send?phone=5511987328670" target="_blank"
-                                    style="color: #242424; text-decoration: underline;">WhatsApp</a>.</p>
+                            <p style="font-size: 16px; font-style: italic; font-weight: bold; text-align: center; margin-top: 30px; margin-bottom: -3%;">Você
+                                sabia que a Contemp tem um Canal no WhatsApp?</p>
                         </td>
+                        <tr>
+                            <td align="center"><a class="botao-contemp" href="https://www.whatsapp.com/channel/0029VaKJtjj5Ui2Xk7PNOI1c" target="_blank"
+                                style="color: #fff; text-decoration: none; align-items: center; margin-bottom: 30px;">Acessar Canal do WhatsApp da Contemp</a></td>
+                        </tr>
                     </tr>
                     <tr>
                         <td
