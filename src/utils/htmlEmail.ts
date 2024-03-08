@@ -476,11 +476,6 @@ export const HtmlRecover = (name?: string, link?: string) => {
             .products-table td td {
                 border: 1px solid #242424;
             }
-    
-            .td-flex {
-                display: flex;
-                flex-direction: column;
-            }
         </style>
     </head>
     
@@ -497,8 +492,8 @@ export const HtmlRecover = (name?: string, link?: string) => {
                             </td>
                         </tr>
                         <tr>
-                            <td class="td-flex"
-                                style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #242424; display: flex; flex-direction: column;">
+                            <td 
+                                style="padding: 30px; padding-top: 1%; font-family: 'Poppins', sans-serif; font-size: 16px; color: #242424;">
                                 <p
                                     style="margin-bottom: 10px; font-size: 22px; font-weight: bold; text-align: center; color: #B60005;">
                                     NOVA SENHA!</p>
