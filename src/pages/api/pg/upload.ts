@@ -44,11 +44,13 @@ apiRoute.use(upload.array('files'));
 // Manipulador de postagem para a rota API
 apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
   const files = req.files;
-  let picture = req.picture
+  let picture = req.picture || false
 
   let url = ''
   try {
     // Iterar sobre os arquivos enviados
+
+    console.log(req)
     for await (let file of files) {
       // Criar um nome de arquivo slugificado usando a função
       const nameFile = createSlug(file.originalname, {
@@ -84,19 +86,24 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
       }
     }
 
-    // Obter informações do usuário a partir do cookie
-    let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string);
-    user = user?.body?.email || '';
+    try {
+      // Obter informações do usuário a partir do cookie
+      let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string);
+      user = user?.body?.email || '';
 
-    if(!picture) {
-      // Registrar a ação de upload nos logs
-      await prisma.logs.create({
-        data: {
-          user: user,
-          description: `Arquivos enviados`,
-        },
-      });
+      if(!picture) {
+        // Registrar a ação de upload nos logs
+        await prisma.logs.create({
+          data: {
+            user: user,
+            description: `Arquivos enviados`,
+          },
+        });
+      }
+    } catch (e) {
+
     }
+
 
     // Responder com status de sucesso
     return res.status(201).json({

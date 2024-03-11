@@ -55,6 +55,7 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
   const sendMail = async (bodyForm: any) => {
     try {
       setLoading(true)
+
       let newBody: any = { body: bodyForm, id }
       if (file) newBody.arquivo = file
       await fetch(`api/mail`, {
@@ -114,9 +115,9 @@ export const Contact = ({ title, description, ocultAddres, form, id }: IProps) =
     multiple: false,
     async onChange(info: any) {
       const { status, name } = info.file
-
+      console.log(info.file, 'info.file')
       const formData = new FormData()
-      formData.append('files', info.file)
+      formData.append('files', info.file.originFileObj)
       formData.append('picture', 'true')
       formData.append('nameFile', `${name}-${new Date()}`)
 
