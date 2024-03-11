@@ -67,7 +67,7 @@ const TabFiles = () => {
         <Button
           as={ChakraLink}
           className='botao-tabelaprodutos'
-          href={`https://${value}`}
+          href={value.startsWith("https://") ? value : `https://${value}`}
           isExternal={true}
           _hover={{ color: 'black', textDecoration: 'none' }}
           rightIcon={<Icon as={ExternalLinkIcon} />}
@@ -103,7 +103,7 @@ const TabFiles = () => {
               style={{
                 cursor: 'pointer',
               }}
-              onClick={() => copiarTexto(`https://${row.url}`)}
+              onClick={() => copiarTexto(value.startsWith("https://") ? value :`https://${row.url}`)}
             />
           </Tooltip>
           <Tooltip placement='top' title='Excluir Arquivo'
