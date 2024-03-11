@@ -103,7 +103,7 @@ const TabFiles = () => {
               style={{
                 cursor: 'pointer',
               }}
-              onClick={() => copiarTexto(value.startsWith("https://") ? value :`https://${row.url}`)}
+              onClick={() => copiarTexto(row.url.startsWith("https://") ? row.url :`https://${row.url}`)}
             />
           </Tooltip>
           <Tooltip placement='top' title='Excluir Arquivo'
