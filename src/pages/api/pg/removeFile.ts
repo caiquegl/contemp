@@ -13,8 +13,12 @@ export default async function handler(
           id: req.body.id
         }
       })
+      try {
+        fs.rmSync(`${process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos'}/${req.body.name}`)
+      } catch (e) {
 
-      fs.rmSync(`${process.env.STATUS === 'HMG' ? '/var/www/arquivos_hmg' : '/var/www/arquivos'}/${req.body.name}`)
+      }
+
 
       let user: any = JSON.parse(req.cookies['nextAuth.contemp'] as string)
       user = user?.body?.email || ''

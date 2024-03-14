@@ -195,19 +195,19 @@ const TabManuais: React.FC = () => {
     },
     {
       title: 'Ativo',
-      dataIndex: 'is_active',
+      dataIndex: 'status',
       key: 'status',
-      render: (is_active: boolean) => (
+      render: (status: boolean) => (
         <Badge
-          colorScheme={is_active ? 'green' : 'red'}
+          colorScheme={status ? 'green' : 'red'}
           borderRadius={'8px'}
         >
-          {is_active ? 'Ativo' : 'Inativo'}
+          {status ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
       sorter: (a: any, b: any) => {
-        const statusA = a.is_active ? 'Ativo' : 'Inativo';
-        const statusB = b.is_active ? 'Ativo' : 'Inativo';
+        const statusA = a.status ? 'Ativo' : 'Inativo';
+        const statusB = b.status ? 'Ativo' : 'Inativo';
         return statusA.localeCompare(statusB);
       },
       width: 120,

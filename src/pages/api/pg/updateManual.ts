@@ -56,6 +56,7 @@ export default async function handler(
 
       if (key) {
         SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = key
+        console.log('entrou')
 
         let send = await new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
           "sender": { "email": "marketing@contemp.digital", "name": "Contemp" },
