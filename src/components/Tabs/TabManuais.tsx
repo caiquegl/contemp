@@ -54,6 +54,7 @@ const TabManuais: React.FC = () => {
   const router = useRouter()
   const [listClone, setListClone] = useState<any[]>([])
   const [redirects, setUsers] = useState<any[]>([])
+  const [manuais, setManuais] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [selectItem, setSelectItem] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
@@ -195,19 +196,19 @@ const TabManuais: React.FC = () => {
     },
     {
       title: 'Ativo',
-      dataIndex: 'is_active',
+      dataIndex: 'status',
       key: 'status',
-      render: (is_active: boolean) => (
+      render: (status: boolean) => (
         <Badge
-          colorScheme={is_active ? 'green' : 'red'}
+          colorScheme={status ? 'green' : 'red'}
           borderRadius={'8px'}
         >
-          {is_active ? 'Ativo' : 'Inativo'}
+          {status ? 'Ativo' : 'Inativo'}
         </Badge>
       ),
       sorter: (a: any, b: any) => {
-        const statusA = a.is_active ? 'Ativo' : 'Inativo';
-        const statusB = b.is_active ? 'Ativo' : 'Inativo';
+        const statusA = a.status ? 'Ativo' : 'Inativo';
+        const statusB = b.status ? 'Ativo' : 'Inativo';
         return statusA.localeCompare(statusB);
       },
       width: 120,
@@ -255,7 +256,7 @@ const TabManuais: React.FC = () => {
       render: (text: any, manual: any) => (
         <HStack spacing='20px'>
           <Tooltip placement='top' title='Copiar'
-                   color={'var(--red-primary)'}>
+            color={'var(--red-primary)'}>
             <FiCopy
               style={{
                 cursor: 'pointer',
@@ -400,6 +401,31 @@ const TabManuais: React.FC = () => {
         >
           Adicionar manual
         </Button>
+        <SearchBar
+          inputProps={{
+            placeholder: 'Digite nome do manual...',
+            onChange: (evt) => {
+              let newList = listClone.filter((manual: any) => {
+                return (
+                  manual.name.toLowerCase().includes(evt.target.value.toLowerCase())
+                );
+              });
+              setManuais([...newList]);
+            },
+            _placeholder: {
+              color: 'black.800',
+              opacity: '50%',
+            },
+          }}
+          containerProps={{
+            bg: 'white.500',
+            border: '1px solid',
+            borderColor: 'black.800',
+            color: colors.black[800],
+            maxW: pxToRem(288),
+            marginLeft: 'auto',
+          }}
+        />
       </Flex>
       <Table
         id='tabela-manuais'
@@ -465,7 +491,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name" >
               <Input />
             </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
               Atualizar
             </Button>
           </Form>
@@ -513,7 +539,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name">
               <Input />
             </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
               Criar
             </Button>
           </Form>

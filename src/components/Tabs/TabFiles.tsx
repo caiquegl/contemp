@@ -247,6 +247,8 @@ const TabFiles = () => {
                 inputProps={{
                   placeholder: 'Digite o nome do arquivo...',
                   onChange: (evt) => {
+                    if(!evt.target.value) return setList([...listClone])
+
                     let newList = listClone.filter((item: any) => item.name.toLowerCase().includes(evt.target.value.toLowerCase()));
                     setList([...newList]);
                   },

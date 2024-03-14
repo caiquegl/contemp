@@ -50,7 +50,6 @@ apiRoute.post(async (req: any, res: NextApiResponse<any>) => {
   try {
     // Iterar sobre os arquivos enviados
 
-    console.log(req)
     for await (let file of files) {
       // Criar um nome de arquivo slugificado usando a função
       const nameFile = createSlug(file.originalname, {
