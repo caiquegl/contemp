@@ -284,9 +284,7 @@ const TabEmails: React.FC = () => {
           maxW: pxToRem(288),
           marginLeft: 'auto',
         }}
-        >
-          
-        </SearchBar>
+        />
       </Flex>
       <Table
         id='tabela-manuais'
