@@ -44,6 +44,7 @@ import TabUsers from '../../components/Tabs/TabUsers'
 import TabBanners from '../../components/Tabs/TabBanners'
 import TabCards from '../../components/Tabs/TabCards'
 import TabManuais from '../../components/Tabs/TabManuais'
+import TabEmails from '../../components/Tabs/TabEmails'
 
 const Adm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -154,6 +155,7 @@ const Adm = () => {
     <TabBanners />,
     <TabCards />,
     <TabManuais />,
+    <TabEmails />,
   ];
 
   const emails: any = {
