@@ -81,60 +81,11 @@ const TabEmails: React.FC = () => {
     fetchData();
   }, []);
 
-  const changerOrder = async (order: number, manual: any) => {
+
+  const deleteEmail = async (id: number) => {
     try {
       setLoading(true)
-      const { data, status } = await api.put(`changeOrderManual`, {
-        order,
-        manual: manual,
-      })
-
-      toast({
-        title: status == 201 ? 'Sucesso' : 'Erro',
-        description: data.msg,
-        status: status == 201 ? 'success' : 'error',
-      })
-    } catch (err) {
-      toast({
-        title: 'Erro',
-        description: 'Erro ao alterar ordem',
-        status: 'error',
-      })
-    } finally {
-      setLoading(false)
-      await fetchData()
-    }
-  }
-
-  const changeActiveManual = async (id: number, status: any) => {
-    try {
-      setLoading(true)
-      const { data } = await api.put(`changeActiveManual`, {
-        id,
-        status,
-      })
-
-      toast({
-        title: 'Sucesso',
-        description: 'Sucesso ao atualizar manual',
-        status: 'success',
-      })
-    } catch (err) {
-      toast({
-        title: 'Erro',
-        description: 'Erro ao alterar ordem',
-        status: 'error',
-      })
-    } finally {
-      setLoading(false)
-      await fetchData()
-    }
-  }
-
-  const deleteManual = async (id: number) => {
-    try {
-      setLoading(true)
-      const { data } = await api.post(`deleteManual`, {
+      const { data } = await api.post(`deleteEmail`, {
         id,
       })
 
@@ -155,7 +106,7 @@ const TabEmails: React.FC = () => {
     }
   }
 
-  function copiarTexto(texto: string) {
+  function copiarEmail(texto: string) {
     // Cria um elemento de input dinamicamente
     var input = document.createElement('input')
 
@@ -182,40 +133,23 @@ const TabEmails: React.FC = () => {
 
   const columns = [
     {
-      title: 'Ordem Geral',
-      width: '11%',
+      title: 'ID',
+      width: '8%',
+      dataIndex: 'name',
+      key: 'name',
       sorter: (a: any, b: any) => a.order - b.order,
-      render: (a: any) => <EditOrder value={a} changerOrder={changerOrder} />,
     },
     {
       title: 'Nome',
       dataIndex: 'name',
       key: 'name',
-      width: '400px',
+      width: '300px',
     },
     {
-      title: 'Ativo',
-      dataIndex: 'is_active',
-      key: 'status',
-      render: (is_active: boolean) => (
-        <Badge
-          colorScheme={is_active ? 'green' : 'red'}
-          borderRadius={'8px'}
-        >
-          {is_active ? 'Ativo' : 'Inativo'}
-        </Badge>
-      ),
-      sorter: (a: any, b: any) => {
-        const statusA = a.is_active ? 'Ativo' : 'Inativo';
-        const statusB = b.is_active ? 'Ativo' : 'Inativo';
-        return statusA.localeCompare(statusB);
-      },
-      width: 120,
-    },
-    {
-      title: 'Url',
+      title: 'E-mail',
       dataIndex: 'url',
       key: 'url',
+      width: '380px',
       //sorter: '()',
       render: (a: any, b: any) => (
         <Button
@@ -230,11 +164,10 @@ const TabEmails: React.FC = () => {
           {`Abrir`}
         </Button>
       ),
-      width: 110,
     },
 
     {
-      title: 'Adicionado em',
+      title: 'Recebido em',
       dataIndex: 'created_at',
       key: 'created_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
@@ -242,7 +175,7 @@ const TabEmails: React.FC = () => {
       width: 140,
     },
     {
-      title: 'Atualizado em',
+      title: 'Reenviado em',
       dataIndex: 'updated_at',
       key: 'updated_at',
       render: (a: any) => moment(a).format('DD/MM/YYYY'),
@@ -252,7 +185,7 @@ const TabEmails: React.FC = () => {
     {
       title: 'Ações',
       key: 'actions',
-      render: (text: any, manual: any) => (
+      render: (text: any, email: any) => (
         <HStack spacing='20px'>
           <Tooltip placement='top' title='Copiar'
                    color={'var(--red-primary)'}>
@@ -260,7 +193,7 @@ const TabEmails: React.FC = () => {
               style={{
                 cursor: 'pointer',
               }}
-              onClick={() => copiarTexto(manual.url)}
+              onClick={() => copiarEmail(email.url)}
             />
           </Tooltip>
           <Tooltip
@@ -279,35 +212,16 @@ const TabEmails: React.FC = () => {
                 fontSize='1.15rem'
                 color='var(--gray-text)'
                 onClick={() => {
-                  setSelectItem(manual)
-                  form.setFieldValue('url', manual.url)
-                  form.setFieldValue('picture', manual.picture)
-                  form.setFieldValue('name', manual.name)
+                  setSelectItem(email)
+                  form.setFieldValue('url', email.url)
+                  form.setFieldValue('picture', email.picture)
+                  form.setFieldValue('name', email.name)
                   setModalVisible(true)
                 }}
               />
             </Box>
           </Tooltip>
 
-          <Tooltip
-            placement='top'
-            label={`${manual.status ? 'Inativar' : 'Ativar'} manual`}
-            color={'var(--white-primary)'}
-            bg={'var(--red-primary)'}
-            borderRadius={'8px'}
-            textAlign={'center'}
-            hasArrow
-          >
-            <Box>
-              <Icon
-                cursor='pointer'
-                as={FaDeleteLeft}
-                fontSize='1.15rem'
-                color='var(--gray-text)'
-                onClick={() => changeActiveManual(manual.id, !manual.status)}
-              />
-            </Box>
-          </Tooltip>
           <Tooltip
             placement='top'
             label="Deletar manual"
@@ -323,7 +237,7 @@ const TabEmails: React.FC = () => {
                 as={FaTrash}
                 fontSize='1.15rem'
                 color='var(--gray-text)'
-                onClick={() => deleteManual(manual.id)}
+                onClick={() => deleteEmail(email.id)}
               />
             </Box>
           </Tooltip>
@@ -337,40 +251,6 @@ const TabEmails: React.FC = () => {
     pageSize: 10, // Número padrão de itens por página
   })
 
-  const createManual = async (manual: any) => {
-    try {
-
-      setLoading(true)
-      await api.post(`createManual`, manual)
-      message.success('Sucesso ao criar manual')
-      fetchData()
-      setModalVisibleCreate(false)
-      setSelectItem(null)
-      form.resetFields(['url', 'picture', 'name'])
-    } catch (error) {
-      message.error('Erro ao criar manual')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const updateManual = async (manual: any) => {
-    try {
-
-      setLoading(true)
-      await api.post(`updateManual`, { ...manual, id: selectItem.id })
-      message.success('Sucesso ao atualizar manual')
-      fetchData()
-      setModalVisible(false)
-      setSelectItem(null)
-      form.resetFields(['url', 'picture', 'name'])
-    } catch (error) {
-      message.error('Erro ao atualizar manual')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const handleTableChange = (pagination: any) => {
     setPagination({
       ...pagination,
@@ -381,25 +261,32 @@ const TabEmails: React.FC = () => {
     <>
       <Box w={'60%'}>
         <Heading as={'h3'} className='adm-subtitulo text-black negrito'>
-          Manuais
+          E-mails Recebidos
         </Heading>
         <Text className='paragrafo-preto' mb={'3%'} mr={'5%'}>
-          Adicione, edite e exclua manuais da home do site.
+          Gerencie os e-mails rececibos no site.
         </Text>
       </Box>
       <Flex w='100%' alignItems='center' justifyContent='space-between' mb='18px'>
-        <Button
-          bg='red.600'
-          color='white'
-          borderRadius='8px'
-          w='180px'
-          isLoading={loading}
-          h='40px'
-          _hover={{ transition: 'all 0.4s' }}
-          onClick={() => setModalVisibleCreate(true)}
+        <SearchBar
+        inputProps={{
+          placeholder: 'Digite o id, nome ou e-mail...',
+          _placeholder: {
+            color: 'black.800',
+            opacity: '50%',
+          },
+        }}
+        containerProps={{
+          bg: 'white.500',
+          border: '1px solid',
+          borderColor: 'black.800',
+          color: colors.black[800],
+          maxW: pxToRem(288),
+          marginLeft: 'auto',
+        }}
         >
-          Adicionar manual
-        </Button>
+          
+        </SearchBar>
       </Flex>
       <Table
         id='tabela-manuais'
@@ -423,102 +310,6 @@ const TabEmails: React.FC = () => {
         }}
         onChange={handleTableChange}
       />
-      {modalVisible &&
-        <Modal
-          open={modalVisible}
-          onCancel={() => {
-            form.resetFields(['url', 'picture', 'name'])
-            setSelectItem(null)
-            setModalVisible(false)
-          }}
-          onOk={() => {
-            form.resetFields(['url', 'picture', 'name'])
-            setSelectItem(null)
-            setModalVisible(false)
-          }}
-          footer={null}
-          title='Editar manual'
-          destroyOnClose={true}
-
-        >
-          <Form
-            key={selectItem?.id}
-            layout="horizontal"
-            form={form}
-            onFinish={updateManual}
-          >
-            <Form.Item label='Foto' name="picture" rules={[{ required: true, message: 'Campo obrigatório' }]}>
-              <InputsHome
-                name=''
-                typeInput='fileSingle'
-                getUrls={(value: any) => form.setFieldValue('picture', value)}
-              />
-            </Form.Item>
-            <Form.Item label='Manual' name="url" rules={[{ required: true, message: 'Campo obrigatório' }]}>
-              <InputsHome
-                name=''
-                folder="upload-manuais"
-                typeInput='fileSingle'
-                getUrls={(value: any) => form.setFieldValue('url', value)}
-              />
-            </Form.Item>
-            <Form.Item label='Nome' name="name" >
-              <Input />
-            </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
-              Atualizar
-            </Button>
-          </Form>
-        </Modal>
-      }
-
-      {modalVisibleCreate &&
-        <Modal
-          open={modalVisibleCreate}
-          onCancel={() => {
-            form.resetFields(['url', 'picture', 'name'])
-            setSelectItem(null)
-            setModalVisibleCreate(false)
-          }}
-          onOk={() => {
-            form.resetFields(['url', 'picture', 'name'])
-            setSelectItem(null)
-            setModalVisibleCreate(false)
-          }}
-          footer={null}
-          title='Criar manual'
-          destroyOnClose={true}
-
-        >
-          <Form
-            layout="horizontal"
-            form={form}
-            onFinish={createManual}
-          >
-            <Form.Item label='Foto' name="picture" rules={[{ required: true, message: 'Campo obrigatório' }]}>
-              <InputsHome
-                name=''
-                typeInput='fileSingle'
-                getUrls={(value: any) => form.setFieldValue('picture', value)}
-              />
-            </Form.Item>
-            <Form.Item label='Manual' name="url" rules={[{ required: true, message: 'Campo obrigatório' }]}>
-              <InputsHome
-                name=''
-                typeInput='fileSingle'
-                folder="upload-manuais"
-                getUrls={(value: any) => form.setFieldValue('url', value)}
-              />
-            </Form.Item>
-            <Form.Item label='Nome' name="name">
-              <Input />
-            </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
-              Criar
-            </Button>
-          </Form>
-        </Modal>
-      }
     </>
   )
 }
