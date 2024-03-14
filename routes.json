@@ -1688,5 +1688,55 @@
     "source": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_-_pi08m",
     "destination": "/produto/c%c3%82mera_termogr%c3%81fica_fixa_optris_pi08m",
     "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_csvision_r2m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_csvision_r2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_csmicro_lt-lth",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_csmicro_lt-lth",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_lt-ltf",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_ctlaser_lt-ltf",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_ctlaser_4m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_ctlaser_4m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_ctvideo_1m-2m_para_metal",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_ctvideo_1m-2m_para_metal",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_2m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_2m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_3m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_para_medi%c3%87%c3%83o_de_metal_optris_-_csvideo_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_optris_-_ctvideo_3m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_optris_-_ctvideo_3m",
+    "permanent": true
+  },
+  {
+    "source": "/produto/pir%c3%94metro_fixo_-_cslaser_2m",
+    "destination": "/produto/pir%c3%94metro_infravermelho_fixo_-_cslaser_2m",
+    "permanent": true
+  },
+  {
+    "source": "/category/test",
+    "destination": "/category/testww",
+    "permanent": true
   }
 ]
