@@ -98,6 +98,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isFileActive, setIsFileActive] = useState(false);
   const [isDashActive, setIsDashActive] = useState(false);
   const [isManuaisActive, setIsManuaisActive] = useState(false);
+  const [isEmailsActive, setIsEmailsActive] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const [form] = Form.useForm()
 
@@ -163,6 +164,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsManuaisActive(!isManuaisActive);
     setActiveTab(8);
     setActiveSubTab(activeSubTab === 'manuais' ? '' : 'manuais');
+  };
+
+  const toggleEmailsSubmenu = () => {
+    setIsManuaisActive(!isEmailsActive);
+    setActiveTab(9);
+    setActiveSubTab(activeSubTab === 'emails' ? '' : 'emails');
   };
 
   const exportarCSV = async () => {
@@ -1284,7 +1291,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   className="adm-botao-sidemenu"
                   variant="ghost"
                   width="100%"
-                  onClick={() => setActiveTab(5)}
+                  onClick={() => setActiveTab(9)}
                   justifyContent="start"
                 >
                   <Flex justifyContent="space-between" width="100%" alignItems="center">

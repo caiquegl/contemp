@@ -46,7 +46,7 @@ import { url } from 'inspector'
 
 const redirectsPath = path.resolve(__dirname, '../../next.config.js') // ajuste o caminho conforme necessário
 
-const TabManuais: React.FC = () => {
+const TabEmails: React.FC = () => {
   const toast = useToast({
     duration: 3000,
     isClosable: true,
@@ -54,7 +54,6 @@ const TabManuais: React.FC = () => {
   const router = useRouter()
   const [listClone, setListClone] = useState<any[]>([])
   const [redirects, setUsers] = useState<any[]>([])
-  const [manuais, setManuais] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [selectItem, setSelectItem] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
@@ -256,7 +255,7 @@ const TabManuais: React.FC = () => {
       render: (text: any, manual: any) => (
         <HStack spacing='20px'>
           <Tooltip placement='top' title='Copiar'
-            color={'var(--red-primary)'}>
+                   color={'var(--red-primary)'}>
             <FiCopy
               style={{
                 cursor: 'pointer',
@@ -401,31 +400,6 @@ const TabManuais: React.FC = () => {
         >
           Adicionar manual
         </Button>
-        <SearchBar
-          inputProps={{
-            placeholder: 'Digite nome do manual...',
-            onChange: (evt) => {
-              let newList = listClone.filter((manual: any) => {
-                return (
-                  manual.name.toLowerCase().includes(evt.target.value.toLowerCase())
-                );
-              });
-              setManuais([...newList]);
-            },
-            _placeholder: {
-              color: 'black.800',
-              opacity: '50%',
-            },
-          }}
-          containerProps={{
-            bg: 'white.500',
-            border: '1px solid',
-            borderColor: 'black.800',
-            color: colors.black[800],
-            maxW: pxToRem(288),
-            marginLeft: 'auto',
-          }}
-        />
       </Flex>
       <Table
         id='tabela-manuais'
@@ -491,7 +465,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name" >
               <Input />
             </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
               Atualizar
             </Button>
           </Form>
@@ -539,7 +513,7 @@ const TabManuais: React.FC = () => {
             <Form.Item label='Nome' name="name">
               <Input />
             </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
+            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424',}}>
               Criar
             </Button>
           </Form>
@@ -549,4 +523,4 @@ const TabManuais: React.FC = () => {
   )
 }
 
-export default TabManuais
+export default TabEmails
