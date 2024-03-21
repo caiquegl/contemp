@@ -96,6 +96,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
   const [isProdutoActive, setIsProdutoActive] = useState(false);
   const [isRedirecionamentoActive, setIsRedirecionamentoActive] = useState(false);
   const [isFileActive, setIsFileActive] = useState(false);
+  const [isEmailActive, setIsEmailActive] = useState(false);
   const [isDashActive, setIsDashActive] = useState(false);
   const [isManuaisActive, setIsManuaisActive] = useState(false);
   const [isEmailsActive, setIsEmailsActive] = useState(false);
@@ -154,6 +155,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setActiveSubTab(activeSubTab === 'arquivo' ? '' : 'arquivo');
   };
 
+  const toggleEmailsSubmenu = () => {
+    setIsEmailActive(!isEmailActive);
+    setActiveTab(9);
+    setActiveSubTab(activeSubTab === 'emails' ? '' : 'emails');
+  };
+
   const toggleDashsSubmenu = () => {
     setIsDashActive(!isDashActive);
     setActiveTab(4);
@@ -164,12 +171,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
     setIsManuaisActive(!isManuaisActive);
     setActiveTab(8);
     setActiveSubTab(activeSubTab === 'manuais' ? '' : 'manuais');
-  };
-
-  const toggleEmailsSubmenu = () => {
-    setIsManuaisActive(!isEmailsActive);
-    setActiveTab(9);
-    setActiveSubTab(activeSubTab === 'emails' ? '' : 'emails');
   };
 
   const exportarCSV = async () => {
@@ -293,6 +294,51 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
       alert("Erro ao exportar arquivos:");
       // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
     }
+  };
+
+
+  const MenuExportEmailsCSV = async () => {
+    try {
+      const { data } = await api.get('getAllEmails');
+
+      const csvContent = [
+        'Id, Tipo de e-mail, Parametros, Enviado em, Reenviado em',
+        ...data.map((file: any) => [
+          file.id,
+          file.type,
+          file.params,
+          moment(file.created_at).format('DD/MM/YYYY'),
+          file.resend ? moment(file.resend).format('DD/MM/YYYY') : null
+        ].join(',')),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "emails-contemp.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Erro ao exportar arquivos:");
+      // Adicione aqui o tratamento de erros, como mostrar uma mensagem para o usuário
+    }
+  };
+
+  const MenuExportEmailsExcel = async () => {
+    const { data } = await api.get('getAllEmails');
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet('Urls');
+
+    sheet.addRow(['Id', 'Tipo de e-mail', 'Parametros', 'Enviado em', 'Reenviado em']);
+
+    data.map((file: any) => {
+      sheet.addRow([file.id, file.type, file.params ,moment(file.created_at).format('DD/MM/YYYY'), file.resend ? moment(file.resend).format('DD/MM/YYYY') : null]);
+    });
+
+    const blob = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([blob], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), 'exportar-emails-contemp.xlsx');
   };
 
   const MenuExportManuaisCSV = async () => {
@@ -1291,7 +1337,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                   className="adm-botao-sidemenu"
                   variant="ghost"
                   width="100%"
-                  onClick={() => setActiveTab(9)}
+                  onClick={toggleEmailsSubmenu}
                   justifyContent="start"
                 >
                   <Flex justifyContent="space-between" width="100%" alignItems="center">
@@ -1309,10 +1355,64 @@ const SideMenu: React.FC<SideMenuProps> = ({ user, date, handleExportCSV, setAct
                         </>
                       )}
                     </Box>
+                    {isExpanded && <RotatingIcon isActive={isEmailActive} />}
                   </Flex>
                 </Button>
-
               }
+              {activeSubTab === 'emails' && (
+                <VStack spacing={2} align="stretch" mt="3">
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportEmailsCSV}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar Arquivos CSV" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <BiExport />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <BiExport />
+                            <Text ml="2">Exportar CSV</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+                  {/*Exportar Produto em Arquivos*/}
+                  <Button
+                    className="adm-botao-sidemenu"
+                    variant="ghost"
+                    width="100%"
+                    onClick={MenuExportEmailsExcel}
+                    justifyContent="start"
+                  >
+                    <Flex justifyContent="space-between" width="100%" alignItems="center">
+                      <Box display="flex" alignItems="center">
+                        {!isExpanded ? (
+                          <Tooltip label="Exportar Arquivos em Excel" placement="right" hasArrow borderRadius={'8px'} backgroundColor={'var(--chakra-colors-red-600)'}>
+                            <span>
+                              <RiFileExcel2Line />
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <>
+                            <RiFileExcel2Line />
+                            <Text ml="2">Exportar XSLXl</Text>
+                          </>
+                        )}
+                      </Box>
+                    </Flex>
+                  </Button>
+
+                </VStack>
+              )}
             </VStack>
           </VStack>
           <Box textAlign="center" mb="10">

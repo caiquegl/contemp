@@ -1,4 +1,5 @@
 import { HtmlDefault, HtmlOrcamento } from "../../utils/htmlEmail";
+import { prisma } from '../../lib/prisma'
 
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
@@ -14,10 +15,30 @@ export default async (req: any, response: any) => {
         // { "to": [{ "email": body.id && body.id == 'vagas' ? 'rh@contemp.com.br' : 'vendas@contemp.com.br', name: 'contemp' }],
         {
           "to": [{ "email": body.id && body.id == 'vagas' ? 'rh@contemp.com.br' : 'vendas@contemp.com.br', name: 'contemp' }],
-          "cc": [{ "email": 'backup.contemp.digital@gmail.com', name: 'Kemelin' }],
+          "cc": [{ "email": 'backup.contemp.digital@gmail.com', name: 'Kemelin' },  body.resend_to ? { "email": body.resend_to, name: 'Reenviado'} : {}],
         }
       ]
     })
+
+    if(body.id && !body.resend) {
+      await prisma.emails.create({
+        data: {
+          type: body.id,
+          params: JSON.stringify(body)
+        }
+      })
+    }
+
+    if(body.resend) {
+      await prisma.emails.update({
+        where: {
+          id: body.id_resend
+        },
+        data: {
+          resend: new Date()
+        }
+      })
+    }
 
     return response.json({ status: true });
 

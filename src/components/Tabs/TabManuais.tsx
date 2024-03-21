@@ -465,7 +465,6 @@ const TabManuais: React.FC = () => {
           footer={null}
           title='Editar manual'
           destroyOnClose={true}
-
         >
           <Form
             key={selectItem?.id}

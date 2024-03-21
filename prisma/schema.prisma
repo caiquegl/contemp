@@ -133,17 +133,17 @@ model Users {
 }
 
 model Banners {
-  id         Int       @id @default(autoincrement())
-  url        String
-  type       String?
-  order      Int        @unique
-  title      String?
-  subtitle   String?
-  description   String?
-  redirect   String?
-  status   Boolean? @default(true)
-  created_at DateTime  @default(now())
-  updated_at DateTime? @default(now())
+  id          Int       @id @default(autoincrement())
+  url         String
+  type        String?
+  order       Int       @unique
+  title       String?
+  subtitle    String?
+  description String?
+  redirect    String?
+  status      Boolean?  @default(true)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @default(now())
 
   @@map("banners")
 }
@@ -151,10 +151,10 @@ model Banners {
 model Menus {
   id         Int       @id @default(autoincrement())
   url        String
-  order      Int        @unique
+  order      Int       @unique
   name       String?
-  picture       String?
-  status   Boolean? @default(true)
+  picture    String?
+  status     Boolean?  @default(true)
   created_at DateTime  @default(now())
   updated_at DateTime? @default(now())
 
@@ -162,15 +162,26 @@ model Menus {
 }
 
 model Cards {
-  id         Int       @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   icon        String
   title       String
-  description      String
-  redirect   String
-  order      Int        @unique
-  is_active   Boolean? @default(true)
-  created_at DateTime  @default(now())
-  updated_at DateTime? @default(now())
+  description String
+  redirect    String
+  order       Int       @unique
+  is_active   Boolean?  @default(true)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @default(now())
 
   @@map("cards")
+}
+
+model Emails {
+  id         Int       @id @default(autoincrement())
+  type       String
+  params     Json      @default("{}")
+  created_at DateTime  @default(now())
+  updated_at DateTime? @default(now())
+  resend     DateTime?
+
+  @@map("emails")
 }

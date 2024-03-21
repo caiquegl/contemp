@@ -1738,5 +1738,235 @@
     "source": "/category/test",
     "destination": "/category/testww",
     "permanent": true
+  },
+  {
+    "source": "/category/dissipadores_de_calor_",
+    "destination": "/category/dissipador_de_calor_",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_cabe%c3%87ote",
+    "destination": "/category/termopar_com_cabe%c3%87ote",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_cabo_compensado",
+    "destination": "/category/termopar_com_cabo_compensado",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_conector_compensado",
+    "destination": "/category/termopar_com_conector_compensado",
+    "permanent": true
+  },
+  {
+    "source": "/category/flex%c3%8dvel_com_cabo_compensado",
+    "destination": "/category/termopar_flex%c3%8dvel_com_cabo_compensado",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_cabo_de_sinal",
+    "destination": "/category/termorresist%c3%8ancia_com_cabo_de_sinal",
+    "permanent": true
+  },
+  {
+    "source": "/category/termorresistencias_com_cabe%c3%87ote",
+    "destination": "/category/termorresist%c3%8ancias_com_cabe%c3%87ote",
+    "permanent": true
+  },
+  {
+    "source": "/category/termorresist%c3%8ancias_com_cabe%c3%87ote",
+    "destination": "/category/termorresist%c3%8ancia_com_cabe%c3%87ote",
+    "permanent": true
+  },
+  {
+    "source": "/category/flex%c3%8dvel_com_cabo_de_sinal",
+    "destination": "/category/termorresist%c3%8ancia_flex%c3%8dvel_com_cabo_de_sinal",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_conector_3_fios",
+    "destination": "/category/termorresist%c3%8ancia_com_conector_3_fios",
+    "permanent": true
+  },
+  {
+    "source": "/category/haste_mineral",
+    "destination": "/category/termopar_com_cabe%c3%87ote_e_haste_mineral",
+    "permanent": true
+  },
+  {
+    "source": "/category/prote%c3%87%c3%83o_met%c3%81lica",
+    "destination": "/category/termopar_com_cabe%c3%87ote_e_haste_mineral_e_prote%c3%87%c3%83o_met%c3%81lica",
+    "permanent": true
+  },
+  {
+    "source": "/category/prote%c3%87%c3%83o_cer%c3%82mica",
+    "destination": "/category/termopar_com_cabe%c3%87ote_e_prote%c3%87%c3%83o_cer%c3%82mica",
+    "permanent": true
+  },
+  {
+    "source": "/category/po%c3%87o_de_prote%c3%87%c3%83o",
+    "destination": "/category/termopar_com_cabe%c3%87ote_e_po%c3%87o_de_prote%c3%87%c3%83o",
+    "permanent": true
+  },
+  {
+    "source": "/category/angular_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "destination": "/category/termopar_com_cabe%c3%87ote_e_angular_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "permanent": true
+  },
+  {
+    "source": "/category/termopar_com_cabe%c3%87ote_e_angular_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "destination": "/category/termopar_com_cabe%c3%87ote_angular_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "permanent": true
+  },
+  {
+    "source": "/category/termopar_com_cabe%c3%87ote_angular_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "destination": "/category/termopar_angular_com_cabe%c3%87ote_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "permanent": true
+  },
+  {
+    "source": "/category/haste_met%c3%81lica",
+    "destination": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica",
+    "permanent": true
+  },
+  {
+    "source": "/category/com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "destination": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica_e_com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "permanent": true
+  },
+  {
+    "source": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica_e_com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "destination": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica_com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "permanent": true
+  },
+  {
+    "source": "/category/rel%c3%a9s_ssr",
+    "destination": "/category/rel%c3%89s_ssr",
+    "permanent": true
+  },
+  {
+    "source": "/category/termorresistencias",
+    "destination": "/category/termorresist%c3%8ancias",
+    "permanent": true
+  },
+  {
+    "source": "/category/termopar_angular_com_cabe%c3%87ote_%e2%80%93_imers%c3%83o_banho%7c%7cmetal_fundido",
+    "destination": "/category/termopar_angular_com_cabe%c3%87ote_%e2%80%93_tratamento_t%c3%89rmico%7c%7cmetal_fundido",
+    "permanent": true
+  },
+  {
+    "source": "/category/termopar_angular_com_cabe%c3%87ote_%e2%80%93_tratamento_t%c3%89rmico%7c%7cmetal_fundido",
+    "destination": "/category/termopar_angular_com_cabe%c3%87ote_%e2%80%93_tratamento_t%c3%89rmico%7c%7cmetais_n%c3%83o_ferrosos",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smcl_-_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_haste_met%c3%a1lica",
+    "destination": "/produto/smcl_-_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_haste_met%c3%a1lica",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smcr_-_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_haste_met%c3%a1lica_e_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "destination": "/produto/smcr_-_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_haste_met%c3%a1lica_e_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smcl_-_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_haste_met%c3%a1lica_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "destination": "/produto/smcl_-_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_haste_met%c3%a1lica_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smcl_-_termoresist%c3%aancia_com_cabe%c3%a7ote,_haste_met%c3%a1lica_e_anel_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "destination": "/produto/smcl_-_termorresist%c3%aancia_com_cabe%c3%a7ote,_haste_met%c3%a1lica_e_anel_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/scpr_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_com_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "destination": "/produto/scpr_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_com_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/spcf_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_e_flangeado_para_fixa%c3%a7%c3%a3o_ao_processo",
+    "destination": "/produto/spcf_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_e_flangeado_para_fixa%c3%a7%c3%a3o_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/spsd_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_para_fixa%c3%a7%c3%a3o_ao_processo_por_solda",
+    "destination": "/produto/spsd_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_para_fixa%c3%a7%c3%a3o_ao_processo_por_solda",
+    "permanent": true
+  },
+  {
+    "source": "/produto/spsd_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_fixado_ao_processo_por_solda",
+    "destination": "/produto/spsd_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_fixado_ao_processo_por_solda",
+    "permanent": true
+  },
+  {
+    "source": "/produto/scpr_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o,_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_com_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "destination": "/produto/scpr_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o,_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_com_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/spcf_%e2%80%93_termoresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_e_flangeado_para_fixa%c3%a7%c3%a3o_ao_processo.",
+    "destination": "/produto/spcf_%e2%80%93_termorresist%c3%aancia_com_cabe%c3%a7ote_de_liga%c3%a7%c3%a3o,_niple_uni%c3%a3o_e_po%c3%a7o_de_prote%c3%a7%c3%a3o_usinado_e_flangeado_para_fixa%c3%a7%c3%a3o_ao_processo.",
+    "permanent": true
+  },
+  {
+    "source": "/produto/sctl_-__termoresist%c3%aancia_com_haste_inox_cravado_em_cabo_de_sinal_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "destination": "/produto/sctl_-__termorresist%c3%aancia_com_haste_inox_cravado_em_cabo_de_sinal_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "permanent": true
+  },
+  {
+    "source": "/produto/sctl_-_termoresist%c3%aancia_com_haste_inox_cravado_em_cabo_de_sinal,_mola_de_conforma%c3%a7%c3%a3o_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "destination": "/produto/sctl_-_termorresist%c3%aancia_com_haste_inox_cravado_em_cabo_de_sinal,_mola_de_conforma%c3%a7%c3%a3o_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smpr_-_termoresist%c3%aancia_com_haste_inox,_pote_selado_e_cabo_de_sinal",
+    "destination": "/produto/smpr_-_termorresist%c3%aancia_com_haste_inox,_pote_selado_e_cabo_de_sinal",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smrd_-_termoresist%c3%aancia_com_haste_inox_selada,_cabo_de_sinal_e_rosca_dupla_para_fixa%c3%a7%c3%a3o_ao_processo%7c%7cinstrumento",
+    "destination": "/produto/smrd_-_termorresist%c3%aancia_com_haste_inox_selada,_cabo_de_sinal_e_rosca_dupla_para_fixa%c3%a7%c3%a3o_ao_processo%7c%7cinstrumento",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smrp_-_termoresist%c3%aancia_com_haste_inox_selada,_mola_de_conforma%c3%a7%c3%a3o,_cabo_de_sinal_e_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "destination": "/produto/smrp_-_termorresist%c3%aancia_com_haste_inox_selada,_mola_de_conforma%c3%a7%c3%a3o,_cabo_de_sinal_e_rosca_de_fixa%c3%a7%c3%a3o_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smpr_-_termoresist%c3%aancia_com_haste_inox,_pote_selado,_mola_de_conforma%c3%a7%c3%a3o,_cabo_de_sinal_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "destination": "/produto/smpr_-_termorresist%c3%aancia_com_haste_inox,_pote_selado,_mola_de_conforma%c3%a7%c3%a3o,_cabo_de_sinal_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smpt_-_termoresist%c3%aancia_com_haste_inox,_pote_selado,_cabo_de_sinal_e_sapa_flex%c3%advel_inox",
+    "destination": "/produto/smpt_-_termorresist%c3%aancia_com_haste_inox,_pote_selado,_cabo_de_sinal_e_sapa_flex%c3%advel_inox",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smpt_-_termoresist%c3%aancia_com_haste_inox,_pote_selado,_cabo_de_sinal,_sapa_flex%c3%advel_inox_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "destination": "/produto/smpt_-_termorresist%c3%aancia_com_haste_inox,_pote_selado,_cabo_de_sinal,_sapa_flex%c3%advel_inox_e_bucim_de_fixa%c3%a7%c3%a3o_e_ajuste_ao_processo",
+    "permanent": true
+  },
+  {
+    "source": "/produto/smrc_-_termoresist%c3%aancia_com_haste_inox,_rosca_ao_instrumento_e_cabo_de_sinal",
+    "destination": "/produto/smrc_-_termorresist%c3%aancia_com_haste_inox,_rosca_ao_instrumento_e_cabo_de_sinal",
+    "permanent": true
+  },
+  {
+    "source": "/produto/fsba_-_termoresist%c3%aancia_flex%c3%advel_com_cabo_tran%c3%a7a_met%c3%a1lica,_mola_de_conforma%c3%a7%c3%a3o_e_baioneta_ajust%c3%a1vel_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "destination": "/produto/fsba_-_termorresist%c3%aancia_flex%c3%advel_com_cabo_tran%c3%a7a_met%c3%a1lica,_mola_de_conforma%c3%a7%c3%a3o_e_baioneta_ajust%c3%a1vel_%e2%80%93_at%c3%a9_300%c2%b0c",
+    "permanent": true
+  },
+  {
+    "source": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica",
+    "destination": "/category/termorresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica",
+    "permanent": true
+  },
+  {
+    "source": "/category/termoresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica_com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "destination": "/category/termorresist%c3%8ancia_com_cabe%c3%87ote_de_liga%c3%87%c3%83o_e_haste_met%c3%81lica_com_po%c3%87o_de_prote%c3%87%c3%83o",
+    "permanent": true
   }
 ]
