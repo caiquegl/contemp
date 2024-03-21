@@ -171,8 +171,6 @@ model Cards {
   is_active   Boolean?  @default(true)
   created_at  DateTime  @default(now())
   updated_at  DateTime? @default(now())
-<<<<<<< HEAD
-=======
 
   @@map("cards")
 }
@@ -184,7 +182,6 @@ model Emails {
   created_at DateTime  @default(now())
   updated_at DateTime? @default(now())
   resend     DateTime?
->>>>>>> 89b4162094546a9553627f5763565c746b0bab88
 
   @@map("emails")
 }
