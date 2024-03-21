@@ -144,7 +144,6 @@ const TabEmails: React.FC = () => {
         <Button
           className='botao-tabelaprodutos'
           fontWeight={'400'}
-          isExternal={true}
           onClick={() => {
             setSelectEmail(b)
             setModalEmailVisible(true)
