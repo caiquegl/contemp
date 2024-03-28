@@ -367,7 +367,7 @@ const TabEmails: React.FC = () => {
                   fontSize='1.15rem'
                   color='var(--gray-text)'
                   onClick={async () => {
-                    let newList = []
+                    let newList: any = []
 
                     listEmail.forEach((email: any) => {
                       if(email != item) newList.push(email)
