@@ -14,7 +14,8 @@ import {
   TabList,
   TabPanels,
   Tab,
-  TabPanel
+  TabPanel,
+  VStack
 } from '@chakra-ui/react'
 import { Table, message, Modal, Form, Input } from 'antd'
 import { SearchBar } from '../SearchBar'
@@ -27,7 +28,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import {IoIosRefresh} from 'react-icons/io'
 import {CiUser} from 'react-icons/ci'
 import InputsHome from '../ContainerHome/inputs'
-import { AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineDelete, AiOutlineUser, AiOutlineUserDelete } from 'react-icons/ai'
 import { HtmlDefault, HtmlOrcamento } from '../../utils/htmlEmail'
 
 const TabEmails: React.FC = () => {
@@ -43,8 +44,8 @@ const TabEmails: React.FC = () => {
   const [selectEmail, setSelectEmail] = useState<any>({})
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [modalEmailVisible, setModalEmailVisible] = useState<boolean>(false)
-
-
+  const [listEmail, setListEmail] = useState<any>([])
+  const [emailInput, setEmailInput] = useState<string>('')
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -343,27 +344,97 @@ const TabEmails: React.FC = () => {
           onCancel={() => {
             setModalVisible(false)
             setSelectEmail({})
+            setEmailInput('')
+            setListEmail([])
           }}
           onOk={() => {
+            setEmailInput('')
             setModalVisible(false)
             setSelectEmail({})
+            setListEmail([])
           }}
           footer={null}
           title='Editar e-mail'
           destroyOnClose={true}
         >
-          <Form
-            layout="horizontal"
-            form={form}
-            onFinish={updateEmail}
-          >
-            <Form.Item required label='Email' name="send_email" >
-              <Input />
-            </Form.Item>
-            <Button type='submit' backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
-              Reenviar
-            </Button>
-          </Form>
+          {listEmail.length > 0 && listEmail.map((item: any) => (
+            <VStack spacing="20px" w={"100%"}>
+              <HStack spacing='20px' mb="10px" w={"100%"}>
+                <Box >{item}</Box>
+                <Icon
+                  cursor='pointer'
+                  as={AiOutlineUserDelete}
+                  fontSize='1.15rem'
+                  color='var(--gray-text)'
+                  onClick={async () => {
+                    let newList = []
+
+                    listEmail.forEach((email: any) => {
+                      if(email != item) newList.push(email)
+                    })
+
+                    setListEmail([...newList])
+                  }}
+                />
+              </HStack>
+            </VStack>
+          ))}
+
+          <p>Email</p>
+          <HStack spacing='20px' mb="10px">
+            <Input
+              value={emailInput}
+              onChange={(evt :any) => setEmailInput(evt.target.value)}
+            />
+            <Icon
+              cursor='pointer'
+              as={AiOutlineUser}
+              fontSize='1.15rem'
+              color='var(--gray-text)'
+              onClick={async () => {
+                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(regex.test(emailInput)) {
+                  if(listEmail.includes(emailInput)) {
+                    toast({
+                      title: 'Erro',
+                      description: 'Email já inserido',
+                      status: 'error',
+                    })
+
+                    return
+                  }
+                  let list = listEmail
+                  list.push(emailInput)
+                  setListEmail([...list])
+                  setEmailInput('')
+                  return
+                }
+                toast({
+                  title: 'Erro',
+                  description: 'Insira um e-mail valido.',
+                  status: 'error',
+                })
+              }}
+            />
+          </HStack>
+          <Button onClick={async () => {
+            if(listEmail.length == 0) {
+              toast({
+                title: 'Erro',
+                description: 'Adicione ao menos um email',
+                status: 'error',
+              })
+              return
+            }
+            for await (const item of listEmail) {
+              await updateEmail({send_email: item})
+            }
+            setListEmail([])
+            setEmailInput('')
+            setModalVisible(false)
+          }} backgroundColor={'var(--chakra-colors-red-600)'} color={'white'} _hover={{ color: 'white', backgroundColor: '#242424', }}>
+            Reenviar
+          </Button>
         </Modal>
       }
 
